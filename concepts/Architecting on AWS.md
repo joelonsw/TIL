@@ -10,17 +10,21 @@
     - EBS -> Volume snapshot
   - Pay as you go 
   - 인터넷 기반: "VPC <- EC2"로 구성하자!
+
 - **AWS API**
   - REST API
   - COnsole (GUI)
   - CLI, SDK
   - CloudFormation
+
 - **리소스 식별**
   - ResourceId: EC2 에서 많이 사용 (i-xxxxxx, ami-xxxxxx)
   - ARN: Amazon Resource Name (IAM 정책 등에서 사용)
+
 - **Managed Service : AWS가 많은 부분 관리**
   1. Instance 기반 서비스: OS 깔아주고, 필요한 app 깔아주고, volume storage 설치하고 다 묶어서 리소스로 뚝딱 제공 (ex. RDS)
   2. Serverless 서비스: 대부분 공개가 되어있지 않음. 인프라가 어떻게 생겼는지 모르고 그냥 뚝딱 씀. 프로비져닝, 고가용성 -> API 기능만 쓰면 됨 (ex. S3, DynamoDB, Lambda) 
+
 - **Global Infra**
   - ![](../images/2022-07-20-aws-구성.png)
   - ![](../images/2022-07-20-aws-구성-2.png)
@@ -36,6 +40,7 @@
     - Global Accelerator
     - WAF
     - Shield
+
 - **AWS Well-Architected Tool**
   - 특정한 리소스를 얼만큼 어떻게 쓰고 싶은지 정하면 서비스 둑딱 보고서로써 정해줌
   - 보안/성능/...
@@ -236,29 +241,188 @@
   - 인스턴스에 따라 볼륨 여러개 붙일 수 있음
 
 ### 스토리지
-- Amazon Simple Storage Service (S3) 보안 및 버전 관리
-- 스토리지 클래스
-- 스토리지 수명 주기 및 암호화
-- 공유 파일 시스템
-- Amazon Elastic Block Store (Amazon EBS) 볼륨
-- 데이터 마이그레이션 도구
+- **AWS 데이터 빌딩 블록**
+  - 데이터 이동
+  - 데이터 보안 및 관리
+    - S3/EFS: 3개의 AZ에 걸쳐서 중복 저장됨
+
+- **스토리지**
+  - Block(EC2): EBS, 파일을 스토리지에 저장, ~16TB, EC2의 디스크
+  - File(EC2): EFS, FSx, 트리구조, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 파일을 공유해서
+  - Object(http, https): S3, S3 Glacier, 파일의 키/메타데이터 등을 오브젝트로 저장, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 정적 데이터
+    - AWS에서도 S3 많이 씀... 빅데이터, AMI 등등
+
+- **EBS**
+  - EBS + EC2 => AutoScaling
+
+- **S3**
+  - 버전 관리
+    - 동일한 버킷에 여러 객체 버전을 유지할 수 있음
+    - 객체를 이전 버전 또는 특정 버전으로 복원 가능
+    - 데이터 보존 또는 보호를 위해 S3 객체 잠금을 사용함
+    - 지워져도 soft delete
+  - 스토리지 클래스 for 비용 절감
+    - 저장용량에 따른 비용이 다 있어
+    - 액세스 비용도 있어 (API 호출에 따라 비용 발생)
+    - 수명 주기 정책도 도입할 수 있음
+  - S3 Glacier 아카이브 및 저장소
+    - 감사 아카이브
+    - 감사 저장소
+    - 저장소 잠금
+  - 이벤트 알림
+    1. API가 객체를 생성
+    2. 적절한 컨텐츠를 결정하기 위해 객체가 필터링 됨
+    3. 조정 분석을 위해 객체를 제출
+    4. 버킷에 객체를 추가함
+  - S3 멀티파트 업로드
+    - 개별 조각에서 객체를 재생성할 수 있도록, 조각조각 나누어서 객체 전달 & 저장
+  - 비용 요소
+    - 다음에 대해 사용한 만큼만 지불
+      - 다른 리전 또는 인터넷으로 전송
+    - 다음에 대해선 지불 필요 없음
+      - 동일 리전의 EC2, CloudFront로 전송
+
+- **EFS**
+  - 확장 가능하고 탄력적인 파일 시스템을 위해 EFS 선택
+  - NFSv4 프로토콜을 사용하여 연결
+  - EC2 인스턴스 전체의 파일 시스템에 동시에 액세스
+
+- **Snowball**
+  - Snow Family -> 우리 회사에 데이터 센터가 있는데, 이걸 AWS로 옮겨야 해. 
+    - 많은 데이터들을 옮겨올라면 오래 걸리겠지? 
+    - 디바이스가 데이터센터로 가는거야 연결 뚝딱 해서 다 전달해서 AWS 데이터 센터로 오는 것 => s3에 저장
+  - Snowcone
+  - Snowball
+  - Snowmobile
 
 ### 데이터베이스 서비스
-- AWS 데이터베이스 솔루션
-- Amazon Relational Database Service (RDS) 및 Amazon Aurora
-- Amazon DynamoDB
-- Amazon Redshift
-- 데이터베이스 캐싱
-- 데이터베이스 마이그레이션 도구
+- **AWS 데이터베이스 서비스**
+  - amazon redshift: 데이터웨어
+  - amazon elastiCache: 캐싱
+  - ![](../images/2022-07-21-sql-nosql.png)
+
+- **다중 AZ 배포**
+  - 다른 가용 영역의 대기 DB 인스턴스에 데이터를 복제
+  - 읽기 전용 시나리오에서는 사용되지 않음
+  - 기본 DB 인스턴스, 대기 DB 인스턴스
+
+- **읽기 전용 복제본**
+  - Read Replica를 적용하여 다음으로 복제 가능
+
+- **DynamoDB(NoSQL)**
+  - Serverless
+  - 3AZ에 걸쳐서 저장
+  - 완전관리형 NoSQL
+  - 임시 데이터 (온라인 장바구니 등)
+  - 테이블
+    - 어트리뷰트 K-V
+    - 복합 기본키: 파티션 키, 정렬 키
+      - 고르게 분포할 수 있는 파티션 키(PK)를 잡아주세요!
+    - 필수 키 값 액세스 패턴, 파티션 키가 데이터 분산을 결정, 정렬 키가 다양한 쿼리 기능을 제공
+    - Primary Key: 중복 x
+      - partition key
+  - 처리량: 서버리스다 보니 API 액세스별로 비용 발생
+  - 일관성 옵션
+    - 강력한 일관성: 읽기 용량 단위 1 사용
+    - 최종 일관성: 읽기 용량 단위 0.5 사용
+  - 일관성 보다는 성능에 초점을 맞추는 경우에 NoSQL을 쓰세요
+    - 글로벌 테이블 지원: 리전 간 복제를 자동화
+
+- **Aurora**
+  - 설치형 EC2 DB
+  - 스토리지는 3개의 가용영역에 분산된 수백개의 스토리지 노드에 스트라이프 됨
+  - 3개의 가용 영역에서 각각 2개의 사본을 유지함
+  - 각 오로라 디비 클러스터는 최대 15개의 오로라 복제본을 가질 수 있음
+  - 오로라 디비 클러스터
+    - 스토리지는 3개의 가용 영역에 분산된 수백개의 스토리지 노드에 스트라이프됨
+    - 3개의 가용 영역에서 각각 2개의 사본을 유지
+    - 각 오로라 디비 클러스터는 최대 15개의 오로라 복제본을 가질 수 있음
 
 ### 모니터링 및 스케일링
-- AWS CloudTrail
-- Amazon CloudWatch
-- VPC Flow Logs
-- 호출 이벤트
-- Elastic Load Balancing
-- 오토 스케일링
-- 실습: Amazon VPC에서 고가용성 구성
+- **아키텍처 모니터링 및 크기 조정**
+  - Auto Scaling 그룹
+  - ELB - Auto Scaling과 함께 쓴다
+
+- **Cloudwatch**
+  - 지표 및 로그를 거의 실시간으로 수집
+  - 모니터링 데이터를 한 위치에서 액세스
+  - 지표라고 하는 것을 쓴다 -> CPU 백분율, 읽기 처리량, 쓰기 처리량 -> 값들이 수집이 되어서 임계치를 설정할 수 있음 -> 임계치 미만으로는 경보 울림
+  - 지표와 경보!
+  - 로그 유형
+
+- **경보 구성 요소**
+  - 네임스페이스/지표/타임스탬프/측정기준
+  - AWS-EC2/CPUUtilization/dateTime/InstanceID
+
+- **CloudWatch Events 및 EventBridge**
+  - 메시지를 보내 환경에 대응
+  - 함수를 활성화하거나 작업을 시작
+  - 상태 정보를 캡쳐
+
+- **로드밸런서**
+  - 로드밸런서 
+    - 로드밸런서가 어디에 있느냐에 따라 크게 두가지 분류
+      - Internet Facing: Public Subnet
+      - Internal: Private Subnet
+    - 어떤 트래픽을 분산시켜주느냐에 따라서 써야할 로드밸런서가 달라짐
+      - ALB(L7), NLB(L4), GWLB(L3)
+  - (규칙)리스너 -- (규칙)리스너(규칙)
+
+- **ELB 기능**
+  - 자동으로 트래픽을 여러 대상에 분산
+  - 고가용성을 제공
+  - 보안기능을 통합
+  - 상태확인을 실행
+
+- **Auto Scaling**
+  - AWS Auto Scaling
+    - EC2, DynamoDB, Aurora 등 여러 서비스에 걸쳐 짧은 간격으로 여러 리소스에 대한 어플리케이션 스케일링 제공
+  - Amazon EC2 Auto Scaling
+    - Amazon EC2 Auto Scaling을 사용해 어플리케이션의 로드를 처리할 수 있는 적절한 수의 EC2 인스턴스를 유지할 수 있음
+  - 확장/축소
+    - 수직: Scale Up/Down
+    - 수평: Scale In/Out
+  - Auto Scaling 그룹
+    - 어디서, 얼마나 필요한가? 
+    - VPC 및 서브넷
+    - 로드 밸런서
+    - 정의
+      - 최소 인스턴스
+      - 최대 인스턴스
+      - 원하는 용량
+    - 예약 온디맨드
+  - 시작 템플릿(컴퓨팅 용량 등), 그룹 구성 요소(네트워크/min-max), 언제 얼마동안 필요한가
+  - 고려사항
+    - 여러 유형의 오토 스케일링을 결합할 수 있음
+    - 아키텍처에서 다른 유형의 스케일링이 필요할 수 있음
+    - 일부 아키텍처의 경우 둘 이상의 지표를 기준으로 스케일링 해야함
+    - 조기에 빠르게 스케일 아웃하고 시간이 지남에 따라 천천히 스케일 인
+    - Amazon EC2 Auto Scaling이 인스턴스를 시작/종료시 사용자 지정 작업을 자동화
+
+- **VPC**
+  - ![](../images/2022-07-21-aws-infra.png)
+  - Seoul Region
+    - VPC(10.0.0.0/16) => 기본 라우팅 테이블 dest-target
+      - Public Subnet => 서브넷마다 라우팅 테이블을 만들어주는 것을 추천 + 연결해주기
+        - public r.t
+        - 10.0.0.0/16 - local
+        - 0.0.0.0/0 - igw-id
+      - Private Subnet => 서브넷마다 라우팅 테이블을 만들어주는 것을 추천 + 연결해주기
+        - private r.t
+        - 10.0.0.0/16 - local
+        - 0.0.0.0/0 - nat-id
+  - VPC endpoint를 만들수도 있음
+  - On-premise와 소통하기 위해 On-premise는 CGW, VPC에는 VGW
+  - Transit Gateway
+    - VPC/VPN/Direct Connect 게이트웨이/Transit Gateway 피어링
+
+- **Route 53**
+  1. 도메인 이름을 IP주소로 확인
+  2. 도메인 이름을 등록 또는 이전
+  3. 대기 시간, 상태 확인 및 기타 기준에 따라 요청을 라우팅
+  - ![](../images/2022-07-21-route53.png)
+  - ALB: Round Robin
+  - NLB: Hash Algorithm
 
 ### 자동화
 - AWS CloudFormation (Infrastructure as Code -> JSON, YAML)
