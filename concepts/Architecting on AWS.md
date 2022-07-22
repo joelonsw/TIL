@@ -248,7 +248,7 @@
 
 - **스토리지**
   - Block(EC2): EBS, 파일을 스토리지에 저장, ~16TB, EC2의 디스크
-  - File(EC2): EFS, FSx, 트리구조, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 파일을 공유해서
+  - File(EC2): EFS, FSx, 트리구조, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 파일을 공유해서 저장
   - Object(http, https): S3, S3 Glacier, 파일의 키/메타데이터 등을 오브젝트로 저장, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 정적 데이터
     - AWS에서도 S3 많이 씀... 빅데이터, AMI 등등
 
@@ -295,19 +295,45 @@
   - Snowball
   - Snowmobile
 
+- **VPC 복습**
+  - ![](../images/2022-07-22-vpc.png)
+  - VPC Endpoint: S3 버킷에 대해 인터넷을 통해 접근하는 것이 아닌 aws 네트워크로 접근 가능
+    - NAT, 인터넷 게이트웨이 없어도 S3 접근이 가능함
+  - VPC를 만들어 우리의 "안전한" 서버를 구축해보자
+    - 인터넷 상에 EC2 만들어두면 공격당하기 딱 좋음
+    - VPC의 CIDR 지정 (10.0.0.0/16)
+    - 서브넷을 상세로 만들자!
+      - 라우팅 테이블에 기본적으로 10.0.0.0/16 만 매핑되어 있기에 VPC 내부에서만 통신 가능
+      - 따라서 public 서브넷으로 바꾸려면 인터넷 게이트웨이 정보를 매핑해주자
+        - 0.0.0.0/0 igw-id
+      - private 서브넷으로는 외부 못나가
+        - public 서브넷에 NAT 게이트웨이 생성
+        - private 서브넷에 해당 NAT 매핑
+        - 0.0.0.0/0 nat-id
+        - NAT는 가용영역 별로 이중화 시키는 것을 추천
+  - VPC Endpoint
+    - Gateway Endpoint: S3, DynamoDB => Route Table
+    - Interface Endpoint: S3 => ENI (Private IP)
+
+- **Transit Gateway**
+  - Route Table
+  - on-premise 트래픽 전송
+
 ### 데이터베이스 서비스
 - **AWS 데이터베이스 서비스**
   - amazon redshift: 데이터웨어
   - amazon elastiCache: 캐싱
   - ![](../images/2022-07-21-sql-nosql.png)
 
-- **다중 AZ 배포**
-  - 다른 가용 영역의 대기 DB 인스턴스에 데이터를 복제
-  - 읽기 전용 시나리오에서는 사용되지 않음
-  - 기본 DB 인스턴스, 대기 DB 인스턴스
-
-- **읽기 전용 복제본**
-  - Read Replica를 적용하여 다음으로 복제 가능
+- **RDS**
+  - 다중 AZ 배포
+    - 다른 가용 영역의 대기 DB 인스턴스에 데이터를 복제
+    - 읽기 전용 시나리오에서는 사용되지 않음
+    - 기본 DB 인스턴스, 대기 DB 인스턴스
+    - endpoint(write) - 동기
+    - endpoint(read) - 비동기
+  - 읽기 전용 복제본
+    - Read Replica를 적용하여 다음으로 복제 가능
 
 - **DynamoDB(NoSQL)**
   - Serverless
@@ -327,6 +353,7 @@
     - 최종 일관성: 읽기 용량 단위 0.5 사용
   - 일관성 보다는 성능에 초점을 맞추는 경우에 NoSQL을 쓰세요
     - 글로벌 테이블 지원: 리전 간 복제를 자동화
+  - 테이블이 key-value 속성으로 되어있음 -> 아이템이라고 칭함 (key-value)
 
 - **Aurora**
   - 설치형 EC2 DB
@@ -337,6 +364,9 @@
     - 스토리지는 3개의 가용 영역에 분산된 수백개의 스토리지 노드에 스트라이프됨
     - 3개의 가용 영역에서 각각 2개의 사본을 유지
     - 각 오로라 디비 클러스터는 최대 15개의 오로라 복제본을 가질 수 있음
+  - 하나의 클러스터에 대해...
+    - Instance -> primary/replica
+    - Endpoint -> writer/reader
 
 ### 모니터링 및 스케일링
 - **아키텍처 모니터링 및 크기 조정**
@@ -367,6 +397,10 @@
     - 어떤 트래픽을 분산시켜주느냐에 따라서 써야할 로드밸런서가 달라짐
       - ALB(L7), NLB(L4), GWLB(L3)
   - (규칙)리스너 -- (규칙)리스너(규칙)
+  - ALB(L7), NLB(L4), GWLB(L3), CLB(X)
+  - internet-facing, internet
+  - listener - protocol(port), 규칙
+  - target group - ec2, ecs/eks, on-premise
 
 - **ELB 기능**
   - 자동으로 트래픽을 여러 대상에 분산
@@ -425,56 +459,335 @@
   - NLB: Hash Algorithm
 
 ### 자동화
-- AWS CloudFormation (Infrastructure as Code -> JSON, YAML)
-- AWS Elastic Beanstalk
-- 스택 및 정책
-- AWS 솔루션 구현
-- AWS Cloud Development Kit (AWS CDK)
-- AWS Systems Manager
+- **배포 자동화(Infrastructure as Code)**
+  - AWS Elastic Beanstalk
+    - EC2 정도만 자동화 해줌, VPC/IAM 이런거는 못함
+    - 인프라를 프로비저닝하고 운영
+    - 사용자 대신 어플리케이션 스택을 관리
+    - 생성된 모든 것을 표시
+    - 어플리케이션을 자동으로 스케일 업 및 스케일 다운
+  - AWS CloudFormation
+    - 한땀한땀 만들자
+  - AWS Systems Manager
+    - patch를 쉽게 
+ 
+- **AWS CloudFormation** 
+  - Infrastructure as Code -> JSON, YAML
+  - IaC
+    - 아키텍처 템플릿 -> CloudFormation 엔진 -> 아키텍처 스택 -> VPC/Subnet/SG/EC2
+    - 스택 삭제시 이로 만들어진것도 모두 삭제
+    - 복제/재배포 및 용도 변경
+    - 인프라 및 어플리케이션에서 버전 관리 제어
+    - 드리프트를 탐지
+    - 장애 발생 시 서비스를 마지막 양호한 상태로 롤백
+  - 스택
+    - 하나의 유닛으로 관리할 수 있는 AWS리소스 모음
+    - 하나의 유닛으로 리소스 생성 및 삭제 가능
+    - 중첩 스택 및 교차 스택 지원
+  - 변경 세트
+    - 원래 스택 --(변경 세트 생성)--> 변경 세트 --(변경 세트 보기)--> 변경 세트 --(변경 세트 구현)--> CloudFormation
 
-### 컨테이너
-- 마이크로서비스
-- AWS X-Ray를 통한 모니터링
-- 컨테이너 개요
-- 마이크로서비스 및 컨테이너
-- AWS 컨테이너 서비스 (ECS, EKS)
+- **여러 템플릿 사용**
+  - 프론트: 웹 인터페이스, 관리자 인터페이스, 분석 대시보드
+  - 백엔드: 고객, 캠페인, 제품, 마케팅 자료, 분석
+  - 공유: 데이터베이스, 일반 모니터링 또는 경보, 서브넷, 보안 그룹
+  - 기본 네트워크: VPC, 인터넷 게이트웨이, VPN, NAT 게이트웨이
+  - 아이덴티티: IAM 사용자, 그룹, 역할
 
-### 네트워킹 2
-- VPC 엔드포인트
-- VPC 피어링
-- AWS Transit Gateway
-- 하이브리드 네트워킹
-- Amazon Route 53
-- 라우팅 옵션
+- **CDK(Cloud Development Kit)**
+  - 지원되는 언어를 사용하여 템플릿을 생성
+  - 자동 완성 및 인라인 문서를 지원
+  - 동일한 기본값 및 재사용 가능한 클래스
+  - 다양한 환경을 프로비저닝
+
+- **AWS Systems Manager**
+  - 똑같은 ec2 인스턴스 몇백대 만들었어,,, 근데 patch도 해야하고, 실행하거나 해야한단 말이지? 수동으로 하기 쉽지가 않아
+  - 각 ec2에 에이전트 만들어두고 적용
+  - 한꺼번에 처리하기 
 
 ### 서버리스
-- Amazon API Gateway
-- Amazon Simple Queue Service (Amazon SQS)
-- Amazon Simple Notification Service (Amazon SNS)
-- Amazon Kinesis
-- AWS Step Functions
-- Amazon MQ
+- **마이크로 서비스**
+  - 모놀리식의 문제
+    - 데베 하나 씀 => 하나의 모듈에서 바꿔버리면 딴 모듈 뇌절
+    - 배포주기 길어짐
+    - 각 기능 모두 같은 언어 필수
+  - 마이크로 서비스
+    - A 모듈을 만들때 가장 좋은 언어로 서비스-데베 뚝딱
+    - B 모듈을 만들때 가장 좋은 언어로 서비스-데베 뚝딱
+    - 따로따로 배포
+    - 같은 기능이 필요하다면 API 호출 뚝딱
+      - http 기반의 restapi
+      - api 게이트웨이 
+    - 배포주기가 짧아짐
+    - VM(EC2), Container(ECS/EKS), Serverless(Lambda)를 통해서 msa를 손쉽게 적용할 수 있음
+    - 실행환경
+      - App
+      - Runtime
+      - OS
+      - KVM
+    - 호출시 
+      - runtime
+      - memory -> cpu/network 비례
+      - timeout
+      - role
+  - 모놀리식 (3tier)
+    - user -> web->app->db
+  - msa
+    - user -> A->B->C->D->db
+
+- **ec2 s3 마이크로서비스**
+  - ![](../images/2022-07-22-ec2-se.png)
+  - EC2 App --(API with 인증/권한 IAM)--> S3
+
+- **솔루션**
+  - API Gateway
+  - Amazon SQS: 1:1 message 전달 polling
+  - Amazon SNS: 1:N message 자동 전달 (구독자)
+  - Kinesis
+  - Step Functions
+
+- **Amazon SNS**
+  - 구독자에게 알려준다
+    - Email
+    - SMS
+    - 모바일 푸시 알림
+    - http/https
+    - aws lambda
+    - amazon sqs
+    - kinesis data firehose
+  - 특성
+    - 게시된 단일 메시지
+    - 회수 옵션이 없음
+    - http 또는 https 요청
+    - 표준 또는 FIFO 주제
+
+- **Amazon Simple Queue Service**
+  - 비동기식 처리를 사용
+    - Loosely Coupled
+  - 작업 대기열
+  - 버퍼링 및 배치 작업
+  - 요청 오프로딩
+  - 오토 스케일링
+  - 긴폴링
+    - 전체 샘플링해서 max => 10개 대기
+
+- **Lambda (Serverless)**
+  - 직접 호출
+  - 예약
+  - 이벤트
+  - call => function 
+    - cloudwatch
+      - metrics
+      - logs
+    - x-ray
+      - trace
+      - runtime-7가지
+      - memory-> cpu, network비례
+      - timeout
+      - role+알파
+
+- **EC2 vs Lambda**
+  - EC2: 언제든지 비용이 발생 at Running status
+  - Lambda: S3, DynamoDB, SQS, SNS
+
+- **서버리스**
+  - 프로비저닝하거나 관리할 인프라가 없음
+  - 종량제 요금
+  - 내장된 보안, 고가용성 보장
+  - 람다, 파게이트, API Gateway, S3, DynamoDB, AUrora, Kinesis, Step Functions
+
+- **API Gateway**
+  - 통합 API 프론트엔드 생성
+  - 백엔드에 DDoS 보호 및 제한 기능 제공
+  - 백엔드에 대한 요청을 인증 및 권한 부여
+  - 서드 파티 개발자에 의해 api 사용을 조절, 측정 및 수익화
+  - 샘플 아키텍쳐
+    - POST /write => lambda1
+    - GET /list => lambda2
+    - DELETE / => lambda3
+    - makes serverless architecture
+
+- Amazon SNS 및 Amazon SQS
+  - Amazon SNS
+    - 메시지 지속성: 아니요
+    - 전송 메커니즘: 푸시
+    - 생산자 및 소비자: 게시자 및 구독자
+    - 배포 모델: 일대다
+  - Amazon SQS
+    - 메시지 지속성: 예
+    - 전송 메커니즘: 폴링
+    - 생산자 및 소비자: 
+    - 배포 모델: 일대일
+
+- **Kinesis**
+  - 실시간 데이터 수집 및 분석을 위한 서비스
+  - Amazon Kinesis Data Streams
+    - 분석을 위해 데이터 스트림을 수집 및 저장
+    - 생산자가 데이터 레코드를 스트림에 제출
+    - "샤드"가 시퀀스 지정된 실시간 데이터를 보관
+    - 소비자가 샤드에서 데이터를 읽어 처리
+    - 출력은 서비스를 사용하여 저장할 수 없음
+  - Amazon Kinesis Data Firehose
+    - 데이터 스트림을 AWS 데이터 스토어에 로드
+    - 데이터 생산자가 데이터를 전송
+    - AWS로 로드하기 전에 데이터를 일괄 처리하고 압축
+    - Kinesis Data Firehose가 대상에 씀
+    - 데이터 분석 및 비즈니스 인텔리전스
+  - Amazon Kinesis Data Analytics
+    - SQL 또는 Apache Flink로 데이터 스트림을 분석
+  - Amazon Kinesis Video Streams
+    - 분석을 위해 비디오 스트림을 수집 및 저장
+
+- **Step Functions**
+  - 시작 -> StartState(lambda#1) -> FinalState(lambda#2) -> 종료
+  - 실제 코드가 바뀌는게 아니라 실행 순서만 바꿔줌으로써 유연성 제공
+  - JSON 형태로 만들어 람다 연결
+
+### 컨테이너
+- **마이크로서비스**
+  - 해당하는 기능을 독립 서비스로 구성한 어플리케이션
+    - 자율 개발을 지원
+    - 전문화가 가능
+  - 마이크로서비스 아키텍팅
+    - 하나로 모든 것을 충족한다는 방식 따르지 않아! 언어, 인프라 각각 달라도 상관이 없어요!
+      - example.com/users -> Lambda
+      - example.com/topics -> EC2
+      - example.com/messages -> ECS
+  - 문제는...
+    - 어디서 문제가 발생했는지 찾기가 쉽지가 않아
+    - AWS X-Ray: 현대적 어플리케이션 분석 & 디버깅
+      - 데이터 수집
+      - 트레이스 기록
+      - 서비스 맵 확인
+      - 문제 분석
+
+- **컨테이너**
+  - 장점
+    - 반복 가능
+    - 독립적 환경
+    - VM보다 더 빠른 가동/중단 속도
+      - VM은 하드웨어 가상화 with hypervisor
+    - 이동성
+    - 확장성
+  - 컨테이너와 가상 머신
+    - 가상 머신은 격리되어 있지만 동일한 OS 및 바이너리/라이브러리를 공유하지 않음
+    - 컨테이너는 격리되어 있지만 OS를 공유하고 필요한 경우 바이너리/라이브러리를 공유
+
+- **Container**
+  - Container Image
+    - (App Code/Runtime/Config/Library) => Image로 만들어두고 => 이를 기반으로 컨테이너 만들기
+    - 여러개로 재사용 가능, 백업도 가능
+    - Dockerfile을 만들어 DockerCLI
+    - 이렇게 만든 이미지 DockerHub나 ECR에 업로드
+    - Qs) AMI/Snapshot은 aws가 관리하는 S3에 저장
+  - Container Image --(Docker CLI)--> Container--> EC2
+    - 여전히 EC2 쓰는것은 똑같아 배포 방식 뚝딱 다 만들어야해
+      - CPU/Memory/Network 다 필요하자나!
+    - 인프라 설정 싫어! 그러면 서버리스 써야겠지? => Fargate
+      - 컨테이너 전용 서버리스 서비스
+  - App Container - Log Container 인프라 설계
+    - 컨테이너 묶어서 관리하자! 오케스트레이션! ECS!
+      - ECS -> Task, k8s -> Pod 하고 EC2에 배치
+        - [App Container] [Log Container]
+  - EKS 
+    - EC2에 많은 사람들이 쿠버네티스 설치해서 쓰더라...
+    - 그럴거면 AWS가 관리포인트 줄어들게 해서 제공해줄게!
+
+- **Amazon ECR**
+  - 컨테이너 이미지를 저장해줌
+
+- **Amazon ECS**
+  - 컨테이너 만들어서 배포해줌
+  - EC2 만들거나 Fargate에서 컨테이너 시작
+
+- **쿠버네티스**
+  - 클러스터는 노드라고 하는 일련의 작업자 머신으로 컨테이너화된 어플리케이션 실행
+  - 컨트롤 플레인
+    - api 서버
+    - 스케줄러
+    - 컨트롤러 관리자
+    - etcd
+  - 데이터 플레인
+    - 작업자 노드
+      - 포드
+      - 컨테이너 런타임 엔진
+      - kubelet
+      - kube-proxy
+  - EKS => 쿠버네티스 
+
+- **AWS Fargate**
+  - VPC도 필요없어 다 관리해줘 aws가!
+
+- ![](../images/2022-07-22-computing.jpeg)
 
 ### 엣지 서비스
-- 엣지 기본 사항
-- Amazon CloudFront
-- AWS Global Accelerator
+- **엣지 서비스 아키텍처**
+  - 쉴드 스탠다드
+  - AWS WAF (L7)
+    - API 설정
+  - 엣지 서비스는 IP를 계속 변경시킨다
+  - DDoS 공격을 방어하는 서비스를 제공한다
+  - 온프레미스에 장비가 들어감
 
-### 백업 및 복구
-- 재해 복구 계획
-- AWS Elastic Disaster Recovery
-- AWS Backup
-- 복구 전략
-- 복구 모델
+- **AWS 엣지 정의**
+  - AWS 리전
+  - AWS 엣지 로케이션
+    - 410개 이상이 제공됨 => 늘어나는 속도가 매우 빠름
+  - AWS 아웃포스트
 
-### 캡스톤
-- 멀티티어 아키텍쳐
+- **Amazon CloudFront**
+  - 글로벌 컨텐츠 전송 네트워크
+  - 와프와 쉴드 통합
+  - 정적/동적 컨텐츠 캐싱
+  - 내장된 보안 기능
+  - 유료/무료 회원 구분해서 엔드포인트에서 어디로 라우팅 시킬지 지정할 수도 있음
 
-### 실습
-- AWS API를 사용한 EC2 인스턴스 배포 살펴보기
-- Amazon VPC 인프라 구축
-- Amazon VPC 인프라에 데이터베이스 계층 생성
-- Amazon VPC에서 고가용성 구성
-- 서버리스 아키텍처 구축
-- Amazon S3 오리진으로 CloudFront 배포 구성
-- AWS 멀티 티어 아키텍처 구축
+- **CloudFront 캐싱**
+  1. 요청이 최적의 엣지 로케이션으로 라우팅됨
+  2. 캐시되지 않은 콘텐츠가 오리진으로부터 검색
+  3. 오리진 컨텐츠가 캐싱을 위해 클라우드 프론트 엣지 로케이션으로 전송됨
+  4. 데이터가 사용자에게 전송
+
+- **CloudFront 구성**
+  - 오리진 선택
+    - s3 버킷
+    - elb 로드 밸런서
+    - 사용자 지정 오리진
+      - ec2 인스턴스
+      - 온프레미스 서버
+  - 배포 생성
+    - 캐시 동작 정의
+      - 경로 패턴
+      - 프로토콜 정책
+      - http 메서드
+      - 서명된 url
+      - 캐시 정책
+  - 선택 사항
+    - 함수 연결
+    - 와프 웹 acl 연결
+    - 사용자 지정 도메인 이름 추가
+
+- **CloudFront 구성 요소: 오리진**
+  - CloudFront
+    - S3 버킷
+    - 로드밸런서 => 캐싱도 안되는데 왜쓰냐면...
+      - CloudFront 만 인터넷에 개방되고 (쉴드가 내장되어 있어서 더 안전, l3/l4 디도스 방어 가능)
+      - 로드밸런서부터는 aws 네트워크
+      - 동적 컨텐츠를 저장해 캐싱은 안되지만, 보안상의 이유로 권장됩니다!
+    - 사용자 지정 오리진
+
+- **Global Accelerator**
+  - 어플리케이션을 이용하기 위해 수많은 네트워크를 거칠 수 있음
+  - 어플리케이션을 오가는 경로가 서로 다를 수 있음
+  - 각 홉이 성능에 영향을 미치며 위험을 초래함
+
+- **참고 자료**
+  - ![](../images/2022-07-22-cloudfront-acc.png)
+  - ![](../images/2022-07-22-shield.png)
+  - ![](../images/2022-07-22-waf.jpeg)
+
+- **DDoS 복원력이 뛰어난 아키텍처**
+  - ![](../images/2022-07-22-ddos.jpeg)
+
+- **Outposts 솔루션**
+  - Outposts를 사용하여 AWS를 사용
