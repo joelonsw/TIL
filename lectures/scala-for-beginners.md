@@ -1,6 +1,13 @@
 # Scala 2 for Beginners
 *참고: https://rockthejvm.com/courses/1462300*
 
+### Scala At Light Speed - 복습
+- [Basics](https://github.com/joelonsw/TIL/blob/master/2023-02/2023-02-28.md#basics)
+- [OOP](https://github.com/joelonsw/TIL/blob/master/2023-02/2023-02-28.md#object-oriented)
+- [FP](https://github.com/joelonsw/TIL/blob/master/2023-03/2023-03-02.md#functional-programming)
+- [Pattern Matching](https://github.com/joelonsw/TIL/blob/master/2023-03/2023-03-02.md#pattern-matching)
+- [Advanced](https://github.com/joelonsw/TIL/blob/master/2023-03/2023-03-03.md#advanced)
+
 ## The Absolute Basic
 ### Expressions
 - **개요**
@@ -118,4 +125,180 @@ println(raw"$escaped")
 * This is a
 *  newline
 * */
+```
+
+## OOP in Scala
+### OO Basics
+- **개요**
+  - constructor의 `val`을 붙여야 멤버변수로써 활용 가능
+  - 그냥 클래스 내부에서 `val`을 붙여도 멤버변수로 활용 가능
+  - multiple constructor 활용 가능 => 너무 많다면 default parameter가 대안이 될 수 있음
+  ```scala
+  class Person(name: String, val age: Int) {
+    val x = 2 // 멤버 변수로 활용 가능. 접근 가능
+    
+    // multiple constructor, default parameter도 대안이 될 수 있음
+    def this(name: String) = this(name, 0)
+    def this() = this("Joel", 25)
+  }
+  ```
+
+- **TIPS**
+  - 불변성을 고려하여 만들자! (상태 패턴이랑 비슷해보이기도 함!)
+  ````scala
+  class Counter(val count: Int) {
+    def inc = new Counter(count + 1)
+    def dec = new Counter(count - 1)
+  }
+  ````
+
+### Method Notations
+- **개요**
+  - 다양한 기호들이 메서드의 이름으로 사용될 수 있음 => 가독성 향상 가능
+  - prefix, infix, postfix 방식으로 메서드가 여기저기에 낄 수 있도록 syntatic sugar 제공
+  - 파라미터가 0개/1개라면 보다 유연하게 호출할 수 있음
+
+- **예시**
+  ```scala
+  class Person(val name: String, favoriteMovie: String) {
+    def likes(movie: String): Boolean = (movie == favoriteMovie)
+    def +(person: Person): String = this.name + " +++++ " + person.name
+    def unary_! : String = "supports prefix!" // unary_* 하되, 띄어쓰기 하고 : 붙이기
+    def isAlive: Boolean = true
+    def apply(): String = "My name is " + this.name
+  }
+  
+  val joel = new Person("Joel", "Shall we dance?")
+  
+  // 메서드가 호출될 때, 어떻게 정의되어 있는가에 따라 prefix, infix, postfix가 될 수 있음
+  println(!joel) // prefix
+  println(joel likes "Shall we dance?") // infix
+  println(joel isAlive) // postfix
+  ```
+
+### Scala Objects
+- **개요**
+  - 스칼라는 class-level functionality, 즉 자바의 static 변수가 없음 => object를 통해서 대신할 수 있음
+  - Scala Object는 싱글턴으로 기능함
+
+- **Companions**
+  - class와 object의 이름이 같으면, Companions라고 칭한다
+  ```scala
+  object Person {
+    // class-level functionality
+    val N_EYES = 2
+    def canFly: Boolean = false
+    def apply(mother: Person, father: Person): Person = new Person("Baby")
+  }
+  
+  class Person(val name: String) {
+    // instance-level functionality
+  }
+  ```
+
+### Abstract Class and Inheritance
+- **오버라이딩 방지**
+  1. final members
+  2. final classes
+  3. sealed classes
+
+- **trait**
+  - constructor에 파라미터 가지면 안댐
+  - 여러개의 trait 받아서 클래스 생성 가능
+
+### Anonymous Classes
+  ````scala
+  abstract class Animal {
+    def eat: Unit
+  }
+  
+  val funnyAnimal: Animal = new Animal {
+    override def eat: Unit = println("~~~")
+  }
+  ````
+
+### Generics
+- **개요**
+  - 자바의 제네릭과 비슷한 느낌이 많이 든다
+  - 다만 Covariance, Invariance, Contravariance 등의 컨셉이 자바와 다름
+  - 제네릭의 한정자 super와 extends 는 <: 등으로 상한/하한 표현 가능
+
+### Case Classes
+- **개요**
+  1. CC에서는 파라미터가 필드다
+  2. CC는 toString을 오버라이딩 해둔다
+  3. equals & hashCode가 필드가 같으면 같다
+  4. CC는 copy()를 보다 쉽게 지원 (새로운 인스턴스 생성)
+  5. CC는 companion object를 가진다. (apply() 가 호출되어 constructor 대체)
+  6. CC는 serializable
+  7. CC는 패턴 매칭에서도 자주 쓰임
+  ```scala
+  case class Person(name: String, age: Int)
+  
+  // 1. class parameters are fields
+  val jim = new Person("Jim", 34)
+  println(jim.name)                     // Jim
+  
+  // 2. sensible toString
+  println(jim)                          // Person(Jim,34)
+  
+  // 3. equals and hashCode
+  val jim2 = new Person("Jim", 34)
+  println(jim == jim2)                  // true
+  
+  // 4. handy copy method
+  val jim3 = him.copy(age = 45)
+  println(jim3)                         // Person(Jim,45)
+  println(jim == jim3)                  // false
+  
+  // 5. Case Class have companion objects
+  val thePerson = Person
+  val mary = Person("Mary", 23)
+  
+  // 6. CC are serializable
+  // 7. CC can be used in pattern matching
+  ```
+
+### Handling Exceptions
+- **Exception 던지기**
+  - `val aWeirdValue: String = throw new NullPointerException`
+
+- **Exception 잡기**
+  ```scala
+  def getInt(withExceptions: Boolean): Int =
+    if (withExceptions) throw new RuntimeException
+    else 50
+  
+  try {
+    getInt(true)
+  } catch {
+    case e: RuntimeException => println("Runtime Exception")
+  } finally {
+    println("finally")
+  }
+  ```
+
+- **Exception 정의하기**
+  - 자바와 비슷!
+  ```scala
+  class MyException extends Exception
+  val exception = new MyException
+  
+  throw exception
+  ```
+
+### Packaging and Imports
+- 자바와 비슷
+```scala
+import playground.{PrinceCharming, Cinderella => Princess}
+import java.util.Date
+import java.sql.{Date => SqlDate}
+
+object PackagingAndImports extends App {
+  val princess = new Princess // 임포트 해온 친구가 Cinderella 인데, 이를 Princess 이름으로 사용
+  
+  val date = new Date
+  val sqlDate = new SqlDate(2023, 3, 7)
+  
+}
 ```
