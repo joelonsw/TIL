@@ -195,6 +195,13 @@ println(raw"$escaped")
     // instance-level functionality
   }
   ```
+  
+- **Companions 왜 필요한데?**
+  1. Code Organizations: 오브젝트와 클래스에 필요한 코드를 그룹핑 시켜 이해하기 좋은 코드를 만들자
+  2. Convenience: 클래스를 생성하는 팩토리 메서드를 오브젝트에 넣자. `apply()` syntatic sugar 쓰면 더 좋고
+  3. Static Methods: 정적 메서드 사용하듯 사용할 수 있음. 간결하고 읽기 쉽게!
+  4. Implicit Conversions: 다른 이름과 대표값이 있을때 변환을 쓱 하는데 지원
+  5. Sharing state: 클래스가 공통적으로 공유하는 상태를 오브젝트에 만들자!
 
 ### Abstract Class and Inheritance
 - **오버라이딩 방지**
@@ -302,3 +309,243 @@ object PackagingAndImports extends App {
   
 }
 ```
+
+## FP in Scala
+### What's a Function?
+- **개요**
+  - JVM에서 함수를 일급 시민으로 쓸 수는 없을까?
+  - JVM은 OOP 기반으로 설계 되어있음 => 함수형을 JVM 위에서 구동시키기 위해서는 함수형을 OOP 위에 구현시키려는 노력이 필요했음
+
+- **Function_x**
+  - trait `Function_1` ~ `Function22` 까지 (1~22는 파라미터 갯수) 인스턴스화 시켜서 이를 사용토록
+  - 이를 람다식으로 표현할 수 있도록 Syntatic Sugar 제공
+  - 모든 스칼라의 Function은 JVM 위에서 동작한다는 것을 명심!
+
+### Anonymous Functions
+- **개요**
+  - 익명 클래스 처럼, 익명 함수를 만들어보자
+  - 그냥 trait, abstract class를 변수에서 new 인스턴스화로 박아버리듯, 함수도 그렇게 람다식으로 박아버리자
+  ```scala
+  val doubler: Int => Int = x => x * 2
+  val adder: (Int, Int) => Int = (x, y) => (x + y)
+  val justDoSth: () => Int = () => 3
+  
+  println(justDoSth) // 이러면 함수 자체를 출력
+  println(justDoSth()) // 함수 실행을 원한다면 ()를 써주세요!
+  ```
+
+- **Syntatic Sugar**
+  - `_`를 활용해 함수에서 넘겨받은 매개변수를 표현할 수 있다
+  ```scala
+  val niceIncrementer: Int => Int = _ + 1 // x => x + 1
+  val niceAdder: (Int, Int) => Int = _ + _ // (a, b) => a + b
+  ```
+
+### HOF and Curries
+- **Higher Order Function(HOF)**
+  - 함수를 파라미터로, 리턴값으로 쓰는 경우, 이를 HOF라고 부른다
+  - 함수 합성, 중첩 등이 가능해진다. 
+
+- **Curried Functions**
+  - 함수의 재사용성을 높이기 위해 함수 자체를 반환하는 함수
+  - *참고: https://itprogramming119.tistory.com/entry/Javascript-%EC%BB%A4%EB%A7%81Currying-%ED%95%A8%EC%88%98%EB%9E%80*
+  ```scala
+  val superAdder: Int => (Int => Int) = (x: Int) => (y: Int) => (x + y)
+  val addThree = superAdder(3)
+  println(addThree(10))
+  ```
+
+### Collections Overview
+- ![](../images/2023-03-09-immutable-collections.png)
+- ![](../images/2023-03-09-mutable-collections.png)
+
+### Sequences
+- **Seq**
+  ````scala
+  val aSequence = Seq(1, 2, 3, 4)
+  println(aSequence)
+  println(aSequence.reverse)
+  println(aSequence(2))
+  println(aSequence ++ Seq(5, 6, 7))
+  println(aSequence.sorted)
+  ````
+
+- **Ranges**
+  ```scala
+  val aRange: Seq[Int] = 1 to 10
+  aRange.foreach(println)
+  (1 to 10).foreach(println("Hello"))
+  ```
+
+- **List**
+  - Singly-Linked List
+  - O(1): head, tail, isEmpty
+  - o(n): 그 외 다수의 random access
+  - 앞 순서 변경에 강함
+  ```scala
+  val aList = List(1, 2, 3)
+  println(aList.mkString("-|-")) // 1-|-2-|-3
+  val prepend = 42 :: aList
+  val append = 30 +: aList :+ 100
+  val apple5 = List.fill(5)("apple")
+  ```
+
+- **Vector**
+  - 트리 기반의 데이터 구조
+  - 트리의 노드는 32개의 element까지 수용할 수 있다
+  - Vector는 효율적인 random access, tail operation 보장 *O(logN)*
+  - head insertion/deletion 느림
+  - 뒷 순서 변경에 강함
+
+- **Array**
+  - `Array.ofDim[T](n1, n2, ...)`
+  - multidimensional array of type T 생성
+  - `Array.ofDim[Int](3)`는 Int 타입의 3칸짜리 1차원 배열 `(0, 0, 0)`
+  - `Array.ofDim[String](3)`는 String 타입의 3칸짜리 1차원 배열 `(null, null, null)`
+  - 배열은 안의 요소 변경할 수 있음
+  ```scala
+  val numbers = Array(1, 2, 3, 4)
+  numbers(2) = 0
+  ```
+
+### Tuples & Maps
+- **Tuples**
+  ```scala
+  val aTuple = Tuple2(2, "helloScala")
+  println(aTuple._1)
+  println(aTuple.copy(_2 = "goodbye Java"))
+  println(aTuple.swap)
+  ```
+
+- **Maps**
+  ```scala
+  val aMap: Map[String, Int] = Map()
+  val aPhoneBook = Map(("Jim", 55), ("Joel" -> 25)).withDefaultValue(-1)
+  println(aPhoneBook)
+  println(aPhoneBook.contains("Joel"))
+  println(aPhoneBook.contains("JIII")) // 원래 에러 던지는데 withDefaultValue로 방어적 코드 작성
+  ```
+
+### map, filter, flatMap
+- **개요**
+  - list, array, set을 조작하는 HOF
+  - 스칼라 FP, 간결하고, 효율적인 코드 작성 도와줌
+
+- **map**
+  - 주어진 함수를 각 요소별로 수행시켜서, 기존 컬렉션을 새로운 같은 사이즈의 컬렉션으로 반환
+  - 여기서 새로운 컬렉션은 기존 컬렉션의 요소별 함수 수행 값
+  ```scala
+  def map[B](f: A => B): List[B]
+  
+  val numbers = List(1, 2, 3, 4, 5)
+  val doubledNumbers = numbers.map(n => n * 2)
+  println(doubledNumbers) // List(2, 4, 6, 8, 10)
+  ```
+
+- **filter**
+  - 기존 컬렉션에서 해당 predicate를 만족하는 새로운 컬렉션을 반환
+  ```scala
+  def filter(p: A => Boolean): List[A]
+  
+  val numbers = List(1, 2, 3, 4, 5)
+  val evenNumbers = numbers.filter(n => n % 2 == 0)
+  println(evenNumbers)
+  ```
+  
+- **flatMap**
+  - map과 비슷하나!
+  - 컬렉션을 반환하는 함수를 적용시키고, 이를 flattening 시켜 하나의 컬렉션으로 만들어버림
+  ```scala
+  def flatMap[B](f: A => List[B]): List[B]
+  
+  val words = List("Hello", "world")
+  val letters = words.flatMap(word => word.toList)
+  println(letters) // List(H, e, l, l, o, w, o, r, l, d)
+  ```
+
+### Options
+- **개요**
+  - 값을 가질수도, 가지지 않을수도 있는 컨테이너
+  - Null 값을 핸들링하기 위함이며, type-safe way한 방식으로 다루기 위함
+  - FP에서 성공할수도, 실패할수도 있는 계산을 수행할 때 많이 사용
+    - 실패 == null 이라는 공식에서 벗어나, Option 타입을 돌려주자
+    - Option
+      - 실패 == None
+      - 성공 == Some(value)
+  ```scala
+  object Option {
+    // ~~
+  }
+  
+  sealed abstract class Option[+A] extends IterableOnce[A] with Product with Serializable {
+    def get: A
+  }
+  
+  final case class Some[+A](value: A) extends Option[A] {
+    def get: A = value
+  }
+  
+  case object None extends Option[Nothing] {
+    def get: Nothing = throw new NoSuchElementException("None.get")
+  }
+  ```
+
+- **예시**
+  ````scala
+  def findItem(list: List[Int], target: Int): Option[Int] = {
+    val index = list.indexOf(target)
+    if (index == -1) None else Some(index)
+  }
+  
+  val result = findItem(List(1, 2, 3), 2)
+  result match {
+    case Some(index) => println(s"Item found at index $index")
+    case None => println("Item not found")
+  }
+  ````
+
+- **Option의 메서드**
+  - [orElse]: `if (isEmpty) alternative else this`
+  - [flatMap]: `if (isEmpty) None else f(this.get)`
+
+- **예시**
+  ```scala
+  val config: Map[String, String] = Map(
+    "host" -> "182.12.34.3",
+    "port" -> 80
+  )
+  
+  class Connection {
+    def connect = "Connected"
+  }
+  
+  object Connection {
+    val random = new Random(System.nanoTime())
+    
+    def apply(host: String, port: String): Option[Connection] =
+      if (random.nextBoolean()) Some(new Connection)
+      else None
+  }
+  
+  val host = config.get("host")
+  val port = config.get("port")
+  val connection = host.flatMap(h => port.flatMap(p => Connection.apply(h, p)))
+  ```
+
+### Try
+- **개요**
+  - 성공/실패에 대해 값을 가질 수 있도록 Try
+  ```scala
+  import scala.util.{Try, Success, Failure}
+  
+  def divide(dividend: Int, divisor: Int): Try[Int] = {
+    Try(dividend / divisor)
+  }
+  
+  val result = divide(10, 2)
+  
+  result match {
+    case Success(value) => println(s"The result is: ${value}")
+    case Failure(exception) => println(s"An exception occurred: ${exception}")
+  }
+  ```
