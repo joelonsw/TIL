@@ -156,3 +156,13 @@
      - `val logger = akka.event.Logging(context.system, this)`
   2. trait 상속
      - `with ActorLogging`
+
+## Actor 심화
+- **Ask Pattern ?**
+  - 하나의 응답값을 액터로 부터 받을 때 사용하기 좋음
+    - `val askFuture = actor ? Read("Joel")`
+  - 이후 받은 응답값을 Future 처리하듯 처리하는 로직 작성
+    - `askFuture.onComplete { ... }`
+  - Pipe를 활용하여 Future가 추후 처리된 후에 결과값을 누구에게 보낼지 효과적으로 작성 가능
+    - `askFuture.mapTo[String].pipeTo(actor)`
+  - Future 사용시, 굉장히 조심해서 mutable state나 method call 지양
