@@ -1,4 +1,6 @@
 ## 4장. 아키텍쳐
+![](../images/2024-06-09-mysql-architecture.jpeg)
+
 #### 개요 (MySQL 서버의 구성)
 - 머리 : MySQL 엔진
   - 요청된 SQL 문장 분석/최적화 등
