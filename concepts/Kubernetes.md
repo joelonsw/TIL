@@ -1183,3 +1183,42 @@
     ```
   - 기본 리소스 적용: `kubectl apply -k overlays/dev/`
   - YAML 생성 미리보기: `kubectl kustomize overlays/dev/`
+
+## Kubernetes Failure
+- **Application Failure**
+  1. 접근 가능한지 보기 (curl -X GET https://web-service)
+  2. `k describe service web-service`
+  3. `k get pods && k describe pod web`
+  4. `k logs web`
+
+- **Control Plane Failure**
+  1. `k logs kube-apiserver -n=kube-system`
+  2. `sudo journalctl -n kube-apiserver`
+     - journalctl로 systemd 로깅을 할 수 있음
+  3. static pod 확인
+     - /etc/kubernetes/manifest
+     - Kubelet, CoreDNS, Etcd, Kubernetes API Server, Kube Proxy, Controller Manager, Scheduler
+
+- **Worker Node Failure**
+  1. `k get nodes`
+  2. `k describe node worker-1`
+  3. check nodes -> online vs crash
+     - `top` | `df -h`
+  4. check kubelet
+     - `service kubelet status`
+     - `sudo journalctl -u kubelet`
+  5. check certs
+     - `openssl x509 -in /var/lib/kubelet/worker-1.crt -text`
+
+- **Networking**
+  1. Network Plugin (Weave Net/Flannel/Calico)
+  2. DNS: coreDNS 리소스
+     - Service Account
+     - Cluster-rules
+     - Cluster-rolebindings
+     - deployment
+     - configmap
+     - service
+  3. Kube-proxy
+     - nw 프록시 node 별로
+     - 노드의 nw rule 설정
