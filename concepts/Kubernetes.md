@@ -172,9 +172,12 @@
       type: LoadBalancer
     ```
  
-- **ExternalName**
+- **ExternalName**  
+*참고: https://velog.io/@rockwellvinca/kubernetes-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%85%B8%EC%B6%9C%EB%B2%95-Externalname*  
   - 쿠버네티스 내부에서 외부 도메인으로 트래픽 전달 (CNAME 이라고 생각)
-  - 내부 서비스에서 외부 서비스 접근할 때 사용
+  - 내부 서비스에서 외부 서비스에 도메인 이름을 통해 접근할 때 사용
+  - 내부 파드가 외부의 특정 FQDN에 쉽게 접근하기 위한 서비스
+    - FQDN: Fully Qualified Domain Name - 도메인 전체 이름 표기하는 방식
   - DNS 기반 라우팅 제공
   - 실제 트래픽은 쿠버 네트워크 벗어나 외부 서비스로 전송
   - ex) 
@@ -190,6 +193,23 @@
       type: ExternalName
       externalName: db.external-company.com
     ```
+  - 클러스터 내부의 파드가 외부 서비스에 접속할 때, 네트워크 트래픽 제어, 보안 정책 등으로 어려움이 있을 수 있음
+  - `ExternalName`을 활용함으로써, 클러스터 내부의 서비스에 접속하듯 외부 도메인에 접속할 수 있음
+  - ex)
+  ```yaml
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: ex-url-1
+    namespace: default
+  spec:
+    type: ExternalName
+    externalName: sysnet4admin.github.io
+  
+  # k exec net -it -- /bin/bash
+  # nslookup ex-url-1
+  # -> Name: sysnet4admin.github.io | Address: 185.199.108.153
+  ```
     
 - **Ingress**
   - 쿠버네티스 내부 서비스에 대한 HTTP/HTTPS 요청 관리하는 API Gateway
@@ -314,8 +334,6 @@
 - **Additional Scheduler**
   - 커스텀 스케줄러가 생성 가능하다. 
   - yaml에 `schedulerName: ~` 으로 지정할 수 있음
-    ) 
-
   
 ## Kubernetes Configuration
 - **Static Pods**
@@ -956,51 +974,91 @@
     # nginx-service   LoadBalancer   10.100.200.1    34.125.56.78      80:30201/TCP   5m
     ```
 
+## Gateway API
+*참고: https://themapisto.tistory.com/274*  
+*참고: https://www.anyflow.net/sw-engineer/kubernetes-gateway-api-1*
+- **API Gateway**
+  - 외부 클라이언트 (모바일 앱, 브라우저, 외부 API)와 백엔드 마이크로서비스/API 사이에 위치하는 특정 유형의 어플리케이션 수준 서비스
+  - 모든 클라이언트 요청에 대한 단일 진입점 역할 -> API 트래픽 관리 & 조율
+  - 트래픽 라우팅, 인증, 속도 제한, 캐싱, 부하 분산, 로깅, 모니터링 등 추가 기능
+  - 주요 사항
+    - API에 초점: 주로 API 호출과 관련된 트래픽 처리 (L7)
+    - API 요청관리: API 소비자를 위한 단일 진입점 역할 + API 경로에 따라 다양한 백엔드 서비스 프록시 가능
+    - 추가 기능: API 게이트웨이 보안, 트래픽 관리, 캐싱, 모니터링
+    - 쿠버에 국한 X
+
 - **Gateway API**
-  - 개요
-    - Ingress 보다 유연하고 강력한 트래픽 제어 기능 표준 API
-    - 클라우드 네이티브 환경에서 더 확장성 있게 동작
-    - 로드밸런서/게이트웨이/서비스 메시 등 다양한 네트워크 기능 통합
-    - Ingress는 HTTPS 만 처리가능하나, Gateway API는 TCP/gRPC 등 L4도 관리 가능
-  - Gateway API 주요 개념
-    1. GatewayClass (로드밸런서 타입 정의)
+  - Ingress를 대체하는 기능
+    - HTTP용으로 설계된 Ingress와 다르게, Gateway API는 TCP/UDP/TLS 등 여러 프로토콜 지원
+  - L7에서의 HTTP/HTTPS와 더불어 TCP/UDP 지원
+  - 기존의 Ingress에 기능 추가 + 역할 분리
+  - k8s Gateway API = ingress + API Gateway
+
+- **구성요소 (API Kinds)**
+  - GatewayClass: 게이트웨이 세트 공통된 설정 + 클래스 구현으로 관리
+  - Gateway: 클라우드 로드 밸런서와 같이, 인프라 트래픽 관리 설정
+  - HTTPRoute: HTTP 특정한 규칙 매핑하여 Service의 엔드포인트 리스너 역할
+
+- **리소스 별 역할 분배**
+  - ![](../images/2025-05-03-gateway-api.png)
+  - `GatewayClass`
+    - 인프라 제공자가 정의하는 클러스터 범위의 리소스
+    - 생성가능한 Gateway 설계도
     ```yaml
-    apiVersion: gateway.networking.k8s.io/v1
+    apiVersion: gateway.networking.k8s.io/v1beta1
     kind: GatewayClass
     metadata:
-      name: my-gateway-class
+      name: istio-gateway # Gateway resource에서 사용
     spec:
-      controllerName: example.com/gateway-controller
+      controllerName: "istio.io/gateway-controller" # istio의 gateway class 추가
     ```
-    2. Gateway (Ingress 역할 수행)
+  - `Gateway`
+    - `GatewayClass`의 설계도를 보고 실제 Gateway를 정의
     ```yaml
-    apiVersion: gateway.networking.k8s.io/v1
+    apiVersion: gateway.networking.k8s.io/v1beta1
     kind: Gateway
     metadata:
-      name: my-gateway
+      name: mygateway # HTTPRoute resource에서 사용할 이름
+      namespace: mysystem
     spec:
-      gatewayClassName: my-gateway-class
+      gatewayClassName: istio-gateway # GatewayClass resource의 name 참조
       listeners:
-      - protocol: HTTP
-        port: 80
+        - name: http-a
+          hostname: "a.example.com"
+          port: 80
+          protocol: HTTP
+        - name: https-b
+          hostname: "b.example.com"
+          port: 443
+          protocol: HTTPS
+          tls:
+            mode: Terminate
+            certificateRefs:
+              - name: mygateway-credential
     ```
-    3. HTTPRoute/TCPRoute (트래픽 라우팅 설정)
+  - `HTTPRoute`: HTTP request를 서비스로 routing 위한 규칙
     ```yaml
-    apiVersion: gateway.networking.k8s.io/v1
+    apiVersion: gateway.networking.k8s.io/v1beta1
     kind: HTTPRoute
     metadata:
-      name: my-route
+      name: httpbin
     spec:
       parentRefs:
-      - name: my-gateway
+      - name: mygateway # Gateway resource의 name 참조
+        namespace: mysystem
+      hostnames:
+      - "a.example.com"
       rules:
       - matches:
         - path:
-            type: Prefix
-            value: /api
+            type: PathPrefix
+            value: /status
+        - path:
+            type: PathPrefix
+            value: /delay
         backendRefs:
-        - name: my-backend-service
-          port: 8080
+        - name: httpbin
+          port: 8000
     ```
 
 ## Storage
@@ -1097,6 +1155,7 @@
     - etcd 노드를 짝수로 운영하면 낭비가 되니, 항상 홀수개로 운영하는 것이 일반적
 
 ## Helm
+*참고: https://www.youtube.com/watch?v=QlYgYcJ-GhA*  
 - **개요**
   - 쿠버 어플리케이션에 너무 많은 Yaml 파일이 작성되면
     - 환경 및 구성 관리가 어려움
@@ -1124,8 +1183,32 @@
    │   └── _helpers.tpl    # 템플릿 함수 정의
    └── charts/             # 다른 차트(의존성) 포함 가능
   ```
+  - 차트 만들기
+  ```
+  $ helm create mynginx
+  $ helm lint mynginx
+  $ helm install webserver ./mynginx
+  ```
 
+- **Helm Install**
+  ```
+  $ helm install webserver bitnami/nginx
+  $ helm install webserver --set service.type=NodePort bitnami/nginx
+  $ helm install webserver -f nginx-value.yaml bitnami/nginx
+  ```
+
+- **Helm Rolling Update & Rollback**
+  ```
+  # helm chart rolling update & rollback
+  $ helm upgrade --set image.repository=httpd --set image.tag=2.2.34-alpine webserver mynginx
+  $ helm rollback webserver 1 <- revision
+  ```
+- 
 - **Helm Release**
+  - 패키지화 하여 배포할 수 있다. (name-version.tgz)
+    - `$ helm package mynginx => mynginx-0.1.0.tgz`
+  - 배포하고자 하는 디렉토리에 index.yaml, name-version.tgz를 넣어 저장소에 푸시하자. 해당 저장소 링크를 helm repo add 로 추가하면 관리 가능.
+    - `$ helm repo index . => index.yaml 생성. 정보 확인 가능`
   - Chart를 기반으로 쿠버 클러스터에 실제 배포된 인스턴스
   - `helm install` 실행시, 차트 기반으로 쿠버 리소스 생성 => 이게 릴리즈
   - Helm은 배포된 릴리즈 추적/관리, 롤백 가능
