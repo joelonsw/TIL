@@ -3,8 +3,10 @@
 *참고: https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/*
 
 ## 쿠버네티스 아키텍쳐
+![](../images/2025-05-03-kubernetes-architecture.png)
 #### 공통
-- 모든 노드에서는 도커와 같은 컨테이너 엔진이 필요
+- **Container Runtime Engine**
+  - 모든 노드에서는 docker, rkt 등 컨테이너 엔진이 필요
 
 #### Master Node
 - 역할 - Manage / Plan / Schedule / Monitor
@@ -44,6 +46,7 @@
 - **kube-proxy**
   - 네트워크 통신 관리 역할
   - iptable/IPVS 통한 네트워크 트래픽 라우팅
+    - iptable을 통해서 서비스 forwarding
   - 클러스터 내/외부 서비스 접근을 위한 네트워크 규칙 설정
 
 ## Kubernetes Workload Resource
@@ -115,7 +118,7 @@
 - **ClusterIP**
   - 클러스터 내부에서만 접근 가능한 가상 IP 부여
   - 외부 접근 X
-  - `my-service.default.svc.cluster.local` 같은 내부 DNS 접근 가
+  - `my-service.default.svc.cluster.local` 같은 내부 DNS 접근 가능
   - ex. 클러스터 내부에서만 사용되는 마이크로서비스간 통신
     ```yaml
     apiVersion: v1
@@ -174,27 +177,15 @@
  
 - **ExternalName**  
 *참고: https://velog.io/@rockwellvinca/kubernetes-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%85%B8%EC%B6%9C%EB%B2%95-Externalname*  
-  - 쿠버네티스 내부에서 외부 도메인으로 트래픽 전달 (CNAME 이라고 생각)
-  - 내부 서비스에서 외부 서비스에 도메인 이름을 통해 접근할 때 사용
+  - 클러스터 내부의 파드가 외부 서비스에 접속할 때, 네트워크 트래픽 제어, 보안 정책 등으로 어려움이 있을 수 있음
+  - `ExternalName`을 활용함으로써, 클러스터 내부의 서비스에 접속하듯 외부 도메인에 접속할 수 있음
+  - 클러스터 내부 서비스에서 외부 서비스에 도메인 이름을 통해 접근할 때 사용 (DNS 기반 라우팅)
   - 내부 파드가 외부의 특정 FQDN에 쉽게 접근하기 위한 서비스
     - FQDN: Fully Qualified Domain Name - 도메인 전체 이름 표기하는 방식
-  - DNS 기반 라우팅 제공
   - 실제 트래픽은 쿠버 네트워크 벗어나 외부 서비스로 전송
-  - ex) 
     - 쿠버네티스 내부에서 외부 DB에 접근
     - 클러스터 내부에서 외부 API 서버 호출
     - 내부 DNS를 통해 외부 서비스로 트래픽 라우팅
-    ```yaml
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: external-db
-    spec: 
-      type: ExternalName
-      externalName: db.external-company.com
-    ```
-  - 클러스터 내부의 파드가 외부 서비스에 접속할 때, 네트워크 트래픽 제어, 보안 정책 등으로 어려움이 있을 수 있음
-  - `ExternalName`을 활용함으로써, 클러스터 내부의 서비스에 접속하듯 외부 도메인에 접속할 수 있음
   - ex)
   ```yaml
   apiVersion: v1
@@ -210,7 +201,7 @@
   # nslookup ex-url-1
   # -> Name: sysnet4admin.github.io | Address: 185.199.108.153
   ```
-    
+
 - **Ingress**
   - 쿠버네티스 내부 서비스에 대한 HTTP/HTTPS 요청 관리하는 API Gateway
   - 쿠버 클러스터 외부에서 들어오는 HTTP/HTTPS 요청을 내부 서비스로 라우팅하는 역할 수행
@@ -239,10 +230,29 @@
 
 ## Scheduling
 - **Taints & Tolerations**
+  - *참고: https://gngsn.tistory.com/282*
   - 특정 노드에서 특정 파드를 제한하거나 허용하는 메커니즘
-  - Taints: 노드에 적용하는 제한 규칙
-    - `kubectl taint nodes node1 env=production:NoSchedule`
-  - Toleration: 파드가 특정 노드의 제한을 무시하고 실행될 수 있도록 허용하는 설정
+  - Pod가 적절치 않은 노드에 스케줄링 되지 않는 것을 보장
+  - [Taints]: 노드에 적용하는 제한 규칙 (퇴치제)
+    - 특정 Node에 아무 Pod나 배치되지 않게 Taint 상태를 만들어줌
+    - 등록 = `kubectl taint nodes {node-name} {key}={value}:{taint-effect}`
+    - 제거 = `kubectl taint nodes {node-name} {key}={value}:{taint-effect}-`
+    - ex) `kubectl taint nodes node1 env=production:NoSchedule`
+      - NoSchedule: 일치하는 toleration이 없으면 node1에 스케줄하지 않는다
+    - Taint Effect)
+      - NoSchedule: Pod가 Node에 스케줄되지 않음. 기존 실행되던 Pod는 유지.
+      - PreferNoSchedule: Pod가 Node에 스케줄되지 않도록 최대한 노력. but 보장은 아님
+      - NoExecute: 새로운 Pod는 해당 Node에 위치되지 않으며, 만약 Node에 존재했던 Pod가 있다면 아래 조건에 따라 처리
+        - Tolerate 되지 않은 Pod => 바로 퇴출
+        - Tolerate 된 Pod, toleration spec에 tolerationSeconds가 지정 X => 영구적 바인딩
+        - Tolerate 된 Pod, toleration spec에 tolerationSeconds가 지정 O => 해당 시간 이후 퇴
+  - [Toleration]: 파드가 특정 노드의 제한을 무시하고 실행될 수 있도록 허용하는 설정 (내성)
+    - 지정하고자 하는 Pod에 Toleration 규칙을 달아 특정 Node에 접근할 수 있도록 만듦 
+    - Toleration 조건 (Taint Node에 할당될 수 있는 조건)
+      - 1. Key 동일할 것
+      - 2. Effect 동일할 것
+      - 3-1. Operator: "Equal" - value가 동일
+      - 3-2. Operator: "Exist" - value는 안 봄
     ```yaml
     apiVersion: v1
     kind: Pod
@@ -258,11 +268,30 @@
       - name: app
         image: my-app:latest
     ```
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+    name: production-pod
+    spec:
+    tolerations:
+    - key: "env"
+      operator: "Exists"
+      effect: "NoSchedule"
+      containers:
+    - name: app
+      image: my-app:latest
+    ```
+  - Master Node에는 초기 설정부터 자동 taint 설정되어 있음
+    - `> k describe node kind-control-plane -n kube-system | grep Taint`
+    - `Taints: node-role.kubernetes.io/master:NoSchedule`
 
 - **nodeSelector**
   - node Selector 조건 중 가장 간단. 
-  - pod에서 node labels를 통해서 지정
-  - 하지만, not ssd, ssd or hdd 이런 논리연산자 등의 사용은 어려움
+  - pod에서 타겟으로 삼고 싶은 노드가 가진 node labels 지정
+  - 하지만, not ssd, ssd or hdd 이런 논리 연산자 등의 사용은 어려움
+    - 딱 맞게 딱 지정해서 쓸 것!
+  - 노드 라벨 확인: `kubectl get node node01 --show-labels`
   - 예시)
     1. add label to node
        - `kubectl label nodes node01 disktype=ssd`
@@ -309,27 +338,27 @@
                   values:
                   - "true"
     ```
-- 선호 배치: `preferredDuringSchedulingIgnoredDuringExecution`
-  ```yaml
-  apiVersion: v1
-  kind: Pod
-  metadata:
-    name: gpu-pod-preferred
-  spec:
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 10
-            preference:
-              matchExpressions:
-                - key: gpu
-                  operator: In
-                  values:
-                    - "true"
-    containers:
-      - name: my-app
-        image: my-app:latest
-  ```
+  - 선호 배치: `preferredDuringSchedulingIgnoredDuringExecution`
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: gpu-pod-preferred
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 10
+              preference:
+                matchExpressions:
+                  - key: gpu
+                    operator: In
+                    values:
+                      - "true"
+      containers:
+        - name: my-app
+          image: my-app:latest
+    ```
   
 - **Additional Scheduler**
   - 커스텀 스케줄러가 생성 가능하다. 
@@ -367,42 +396,85 @@
   1. 환경변수, 명령줄인자, 설정파일 등 저장 가능
   2. Pod와 독립적으로 관리됨
   3. k-v 페어로, data 관리
-  - 예시)
-    - configMap
-    ```yaml
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: app-config
-    data:
-      APP_COLOR: blue
-      APP_MODE: prod
-    ```
-    - in Pods
-    ```yaml
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: simple-webapp
-      labels:
-        name: simple-webapp
-    spec:
-      containers:
-      - name: simple-webapp
-        image: simple-webapp
-        ports:
-        - containerPort: 8080
-      envFrom:
-        - configMapRef:
-            name: app-config
-    ```
+     - configMap)
+       ```yaml
+       apiVersion: v1
+       kind: ConfigMap
+       metadata:
+         name: app-config
+       data:
+         APP_COLOR: blue
+         APP_MODE: prod
+       ```
+     - pods)
+       ```yaml
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         name: simple-webapp
+         labels:
+           name: simple-webapp
+       spec:
+         containers:
+         - name: simple-webapp
+           image: simple-webapp
+           ports:
+           - containerPort: 8080
+         envFrom:
+           - configMapRef:
+               name: app-config
+       ```
 
 - **Secrets**
+  - *참고: https://binux.tistory.com/176*
   - yaml `kind: Secret` 으로 생성하면, k-v BASE64 인코딩해서 저장 (깃헙에 푸시하지마...)
     - helm secret, vault 등을 추천
-  - Secret 저장해도 etcd에는 그냥 plaintext로 보임 => etcd 암호화 가능하도록 만들자
-    - `--encryption-provider-config` 활성화 여부 체크
-    - encryption algorithm + key => yaml로 지정
+  - 시크릿 역시 타 쿠버 리소스와 마찬가지로 etcd에 저장됨
+    - Secret 저장해도 etcd에는 그냥 plaintext로 보임 => "etcd 암호화 가능하도록 만들자!"
+      - `--encryption-provider-config` 활성화 여부 체크
+      1. 정적 키 암호화
+        - Api Server에서 이를 바라보고 재시작되어야 함
+        ```
+        kind: EncryptionConfiguration
+        apiVersion: apiserver.config.k8s.io/v1
+        resources:
+        - resources:
+          - secrets
+          providers:
+          - aescbc:
+              keys:
+                - name: key1
+                  secret: ${ENCRYPTION_KEY_1}
+        ```
+      2. 봉투 암호화
+        - KMS(Key Management Service)와의 통합을 통해 Envelope encryption 가능
+        ```
+        kind: EncryptionConfiguration
+        apiVersion: apiserver.config.k8s.io/v1
+        resources:
+        - resources:
+          - secrets
+          providers:
+          - kms:
+              name: mykey
+              endpoint: http://127.0.0.1:8080
+              cacheSize: 100
+              timeout: 30
+        ```
+  - 유저에게 ClusterRoleBinding, ClusterRole을 함부로 주지 않을 것
+  - Secret은 Namespace 범위이기에, Secret이 존재하는 Namespace의 Pod에서만 사용 가능
+  - 사용 방법
+    1. 환경 변수 - 직접 yaml에 작성해 활용
+    2. 시크릿 볼륨 주입 - 직접 yaml에 작성해 활용
+    3. 쿠버네티스 API - 어플리케이션 실행 중 시크릿에 접근하는 방법
+       - kube-api-server와 통신하며 시크릿 검색, 이를 주입/사용에 대한 책임을 어플리케이션에게 위임
+  - Vault
+    - 쿠버와 통합 지원
+    - Mutating webhook 통해 Init Container, sidecar container 붙어 동작
+    - 파드의 파일시스템에 주입되어, 파드에서 실행하는 모든 컨테이너에서 사용 가능
+  - 시크릿 봉인 (Sealed Secret)
+    - 비대칭 암호화를 통해, gitops (yaml github으로 관리) 방식에서도 살아남도록
+    - 시크릿을 공개키로 암호화해 커밋해, 데이터 노출 우려 X
 
 - **logging/monitoring**
   - metrics server
@@ -452,7 +524,31 @@
 
 - **Lifecycle Management**
   - 라이프사이클 훅과 조정방법으로 수명주기 관리 가능
-  1. Pod Lifecycle Hooks: `preStop`, `postStart`
+  1. Pod Lifecycle
+     - `Pending` -> `Running` -> `Success` | `Failed`
+     - InitContainer
+       - Pod의 메인 컨테이너 실행 전 반드시 실행되어야 하는 준비 작업
+       - initContainer가 완료되어야 다음 InitConainer/MainContainer 실행
+     - Hooks
+       - `postStart`: 컨테이너가 생성된 직후 실행. ENTRYPOINT와 병렬 실행될 수 있음
+       - `preStart`: 컨테이너 종료되기 직전 실행되는 Hook. graceful shutdown을 위함
+       ```yaml
+       apiVersion: v1
+       kind: Pod
+       metadata:
+          name: joel
+       spec:
+          containers:
+          - name: joel-container
+            image: nginx
+            lifecycle:
+              postStart:
+                exec:
+                  command: ["/bin/sh", "-c", "echo Hello postStart"]   
+              preStop:
+                exec:
+                  command: ["/bin/sh", "-c", "nginx -s quit"]
+       ```
   2. Horizontal Pod Autoscaler (HPA): 파드 수 부하에 맞게 리소스 할당
   3. Rolling Back
      - 배포 중 문제가 발생하면 기존 버전 롤백 가능. 
@@ -621,6 +717,9 @@
     - 사용자의 역할 기반으로 리소스 접근 제어
     - 구성요소
       - Role: 특정 네임스페이스에서 권한 설정
+      - RoleBinding: 특정 사용자/그룹에게 롤 부여
+      - ClusterRole: 클러스터 전체에서 권한 설정
+      - ClusterRoleBinding: 클러스터 전체에서 ClusterRole 부여
       ```yaml
       kind: Role
       apiVersion: rbac.authorization.k8s.io/v1
@@ -632,12 +731,10 @@
         resources: ["pods"]
         verbs: ["get", "list"]
       ```
-      - ClusterRole: 클러스터 전체에서 권한 설정
-      - RoleBinding: 특정 사용자/그룹에게 롤 부여
-      - ClusterRoleBinding: 클러스터 전체에서 ClusterRole 부여
   - [ABAC Auth]
     - RBAC 보다 유연한, 정책 JSON 기반 파일로 권한 부여
     - 쿠버 API 서버 실행시 `--authorization-policy-file=policy.json` 옵션 필요
+    - RBAC 보다 어려워 잘 사용 X
     ```json
     {
       "apiVersion": "abac.authorization.kubernetes.io/v1beta",
@@ -650,7 +747,6 @@
       }
     }
     ```
-    - RBAC 보다 어려워 잘 사용 X
   - [Webhook Mode]
     - 외부 서비스에서 관리할 때 유용
     - 방식: 요청 API 서버로 인입 > API 서버가 Webhook 서버에 요청 전달 > Webhook 서버가 allow/deny
@@ -664,13 +760,15 @@
     ```
     
 - **Role-Based Access Control**
+  - *참고: https://kubernetes.io/docs/reference/access-authn-authz/rbac/*
+  - `rbac.authorization.k8s.io` 사용하여 API group 인가 결정할 수 있도록 보조
   - 쿠버네티스에서 사용자-리소스간 권한을 제어하는 핵심 메커니즘
-    - Role | 특정 네임스페이스 내에서 리소스에 대한 권한 정의
-    - RoleBinding | 특정 네임스페이스에서 Role을 사용자/그룹에 부여
-    - ClusterRole | 클러스터 전체에서 리소스에 대한 권한 정의
-    - ClusterRoleBinding | 클러스터 전체에서 ClusterRole을 사용자/그룹에 부여
+    - Role : 특정 네임스페이스 내에서 리소스에 대한 권한 정의
+    - RoleBinding : 특정 네임스페이스에서 Role을 사용자/그룹에 부여
+    - ClusterRole : 클러스터 전체에서 리소스에 대한 권한 정의
+    - ClusterRoleBinding : 클러스터 전체에서 ClusterRole을 사용자/그룹에 부여
   - [Role]
-    - 네임스페이스에서만 적용. 네임스페이스 내 리소스 접근 권한 정의
+    - **특정 namespace**에서만 적용. 네임스페이스 내 리소스 접근 권한 정의
     - `pods`, `services`, `deployments` 같은 리소스 접근 설정 가능
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
@@ -684,7 +782,7 @@
       verbs: ["get", "list", "watch"]
     ```
   - [RoleBinding]
-    - 특정 namespace에서 Role을 사용자/그룹/서비스 계정에 부여
+    - **특정 namespace**에서 Role을 사용자/그룹/서비스 계정에 부여
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
@@ -701,8 +799,11 @@
       apiGroup: rbac.authorization.k8s.io
     ``` 
   - [ClusterRole]
-    - 클러스터 전체에서 사용되는 Role
-    - 네임스페이스가 없는 리소스에 대한 권한 정의 (node, pv)
+    - **클러스터 전체**에서 사용되는 Role
+    - ClusterRole을 통해서
+      1. namespace 리소스의 특정 namespace에서의 grant
+      2. namespace 리소스의 전체 namespace에서의 grant
+      3. cluster-scope 리소스에 grant
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -731,13 +832,14 @@
     ```
 
 - **ServiceAccount**
+  - ServiceAccount는 파드가 쿠버네티스 API에 접근할 때 사용됨.
+    - kube-system 네임스페이스 외의 서비스 계정에는 최소 권한만 부여
+    - 각 Pod에 필요한 권한만 별도 Role/RoleBinding, ClusterRole/ClusterRoleBinding으로 부여하는 것이 안전
   - 쿠버네티스 Pod와 API 서버가 안전하게 상호작용할 수 있도록 인증 제공하는 계정
     - 기본 Pod에 Secret Mount 해서 kube-api 서버에 접근 가능하도록 할 수 있음
-    - metrics 서버가 pod로 띄워지면 필요할 수 있겠다
   - `User`와 다르게 `ServiceAccount`는 Pod 내부에서 실행되는 어플리케이션이 쿠버 API 호출할 수 있도록 도와줌
-  - 예시)
+  - 예시) Deployment -> ServiceAccount <- ClusterRoleBinding -> ClusterRole
     ```yaml
-    # ServiceAccount
     apiVersion: v1
     kind: ServiceAccount
     metadata:
@@ -745,7 +847,6 @@
       namespace: monitoring
     ```
     ```yaml
-    # ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -762,7 +863,6 @@
         verbs: ["get", "list", "watch"]
     ```
     ```yaml
-    # ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -792,7 +892,7 @@
           labels:
             app: prometheus
         spec:
-          serviceAccountName: prometheus  # ✅ ServiceAccount 적용
+          serviceAccountName: prometheus
           containers:
           - name: prometheus
             image: prom/prometheus
@@ -838,7 +938,7 @@
       - ex) 사무실에서 여러 컴퓨터 연결/인터넷 사용에는 스위치 사용
     - [Routing]
       - 네트워크 간의 패킷 전달 (2개 이상의 다른 네트워크 연결)
-      - 라우터는 IP주소를 기반으로 네트워크 간 패킷 전달
+      - 라우터는 IP 주소를 기반으로 네트워크 간 패킷 전달
       - Layer3(네트워크 계층) 에서 작동
       - ex) 인터넷에 연결된 여러 네트워크 간 데이터 전달 역할
     - [Gateway]
@@ -859,31 +959,62 @@
       - 물리적으로는 동일한 네트워크에 속하지만, 논리적으로는 다른 네트워크로 분리
   
   - 리눅스 호스트를 라우터로 사용하려면?
-    - IP 라우팅 활성화 + 네트워크 인터페이스간 트래픽 전달할 수 있는 구성
+    1. IP 라우팅 활성화 + 네트워크 인터페이스간 트래픽 전달할 수 있는 구성
       - `ip route` 명령 사용해 라우팅 테이블 수정
       - 호스트가 네트워크 간 데이터 중계할 수 있도록 설정
-    1. IP 포워딩 활성화
+    2. IP 포워딩 활성화
+      - 리눅스는 보안 때문에 기본적으로 패킷을 타 네트워크로 전달 X. 라우터로 쓰고 싶으면 기능을 키자
       - 다른 네트워크 간 데이터 전달 역할. 
       - 리눅스 호스트가 타 네트워크 간 패킷 전달 가능
-      - `echo 1 > /proc/sys/net/ipv4/ip_forward`
-    2. 라우팅 설정
+      - `echo 1 > /proc/sys/net/ipv4/ip_forward` => 리눅스가 다른 네트워크로 패킷 중개 가
+        - `/etc/sysctl.conf`에 `net.ipv4.ip_forward=1` 추가하고 `sysctl-p` 실행하면 영구적
+    3. 라우팅 설정
       - 어떤 트래픽이 어디로 가야하는지 설정
       - `ip route add` 명령을 통해 특정 네트워크로 향하는 라우트 추가 가능
       - ex) `192.168.2.0/24` 네트워크로 향하는 트래픽을 `192.168.1.1` 게이트웨이를 통해 전달하기
         - `ip route add 192.168.2.0/24 via 192.168.1.1`
-    3. 네트워크 인터페이스에 IP 할당
-      - 여러 네트워크에 연결되려면, 각 네트워크 인터페이스에 IP 주소 설정
-      - 리눅스 호스트가 라우터로 동작하려면 네트워크 인터페이스에 IP 주소 할당
-      - `eth0`에 `192.168.1.1` IP 할당
+    4. 네트워크 인터페이스에 IP 할당
+      - 리눅스가 여러 네트워크에 연결되려면, 각 네트워크 인터페이스(랜카드)에 IP 주소를 줘야함
       - `ip addr add 192.168.1.1/24 dev eth0`
+        - 내부 네트워크1 : `eth0` -> 192.168.1.1
       - `ip addr add 192.168.2.1/24 dev eth1`
-    4. 패킷 포워딩 규칙 설정
-      - 외부 네트워크(인터넷) 연결되기 위해선, 리눅스 서버가 내부 네트워크 사설 IP -> 공인 IP 변경해주는 NAT 필요
+        - 내부 네트워크2 : `eth1` -> 192.168.2.1
+      - 리눅스 머신이 두 네트워크에 동시 연결됨
+    5. 패킷 포워딩 규칙 설정
+      - 외부 네트워크(인터넷) 연결되기 위해선, 리눅스 서버가 내부 네트워크 **사설 IP -> 공인 IP 변경해주는 NAT 필요**
+      - 리눅스를 통해 내부 네트워크에서 인터넷 사용하고 싶을 때 필요한 설정
       - `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE`
         - eth1에 연결된 내부 네트워크 트래픽을 eth0의 공인 IP로 변경해 인터넷 나가게 함
+        - `POSTROUTING`: 나가기 직전에
+        - `eth0`: 나가는 인터페이스가 eth0라면,
+        - `MASQUERADE`: 출발 IP를 리눅스 자신의 IP로 바꿔서 내보내자
       - 해당 리눅스 서버가 인터넷에 연결된 다른 라우터 뒤에 있다면, 그 라우터를 기본 게이트웨이로 설정하자
       - ex. 인터넷 연결이 있는 라우터 IP 주소가 `192.168.1.1` 이라면, 리눅스 서버에 기본 게이트웨이는 다음과 같이 설정
         - `ip route add default via 192.168.1.1`
+    - [내부 PC] --(192.168.2.0/24)--[eth1:리눅스 라우터:eth0]--(192.168.1.0/24)--[공유기/인터넷]
+
+  - 리눅스 호스트 라우터 => 마지막 더 쉬운 설명 with GPT
+    1. 상황 셋업 (우리집)
+       - 컴퓨터 A: 192.168.2.100 (우리집 안방 컴퓨터)
+       - 컴퓨터 B: 192.168.2.101 (우리집 거실 컴퓨터)
+       - 리눅스 PC: 라우터 역할을 할 머신 (두 개의 랜선이 꽂힘)
+         - eth1: 192.168.2.1 (집안 네트워크 연결)
+         - eth0: 192.168.1.2 (인터넷 공유기 연결)
+       - 인터넷 공유기: 192.168.1.1
+    2. 리눅스가 '중간 다리' 역할을 하게 하자
+       - 리눅스에게 "넌 이제 라우터야. 중개해줘" 부탁
+       - `echo 1 > /proc/sys/net/ipv4/ip_forward`
+    3. 랜선 2개 꽂고, 각 랜카드에 주소 붙이기
+       - 리눅스는 두개의 네트워크에 연결. (집안, 인터넷)
+       - `ip addr add 192.168.2.1/24 dev eth1   # 집 안 쪽`
+       - `ip addr add 192.168.1.2/24 dev eth0   # 인터넷 쪽`
+    4. 집 안 컴퓨터에게 "인터넷 나갈땐 리눅스에게 물어봐" 설정
+       - 컴퓨터 A/B가 인터넷 쓰려면 리눅스를 통하도록, 리눅스를 GW로 설정하자
+       - `sudo ip addr 192.168.2.100/24 dev eth0`
+       - `sudo ip route add default via 192.168.2.1`
+    5. 리눅스 자신도 인터넷을 쓰자
+       - 어디로 나가야하지 -> 공유기(192.168.1.1)을 기본 게이트웨이로 지정
+       - `ip route add default via 192.168.1.1`
 
 - **Pod Networking**
   - 요구사항
