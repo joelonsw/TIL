@@ -108,12 +108,46 @@
             image: monitoring-agent
     ```
 
+## Kubernetes Pods
+- Dockerfile에 있는 `ENTRYPOINT`, `CMD`는 쿠버 Pod의 `command`, `args` 필드로 오버라이딩 가능
+
 ## Kubernetes Service & Ingress
 - **개요**
   - 여러개의 파드를 하나의 네트워크 엔드포인트 (고정 IP)로 묶어주는 역할
   - 파드가 동적으로 변해도 안정적인 네트워크 접근 제공
   - 로드밸런싱 가능
   - 내부/외부 트래픽 파드로 전달
+  - 관리할 파드를 지정하기 위해서는, Service selector에 정의한 라벨들을 Pod에서 **모두** 가지고 있어야 한다.
+    ```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: my-service
+    spec:
+      selector:
+        app: nginx
+        tier: frontend
+      ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 80
+    ```
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: nginx-pod
+      labels:
+        app: nginx
+        tier: frontend
+        env: prod
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+    ```
 
 - **ClusterIP**
   - 클러스터 내부에서만 접근 가능한 가상 IP 부여
@@ -286,6 +320,13 @@
     - `> k describe node kind-control-plane -n kube-system | grep Taint`
     - `Taints: node-role.kubernetes.io/master:NoSchedule`
 
+- **nodeName**
+  - Pod의 `spec.nodeName` 필드를 활용하면 해당 Pod가 직접 특정 노드에 할당되도록 지정 가능
+  - nodeSelector/nodeAffinity 보다 더 직접적. 
+  - 스케줄러가 개입 X => 지정한 노드에 바로 Pod 배치
+  - 해당 이름에 노드가 없으면 pending 상태로 유지
+  - `nodeName` >> `nodeSelector` || `nodeAffinity`
+
 - **nodeSelector**
   - node Selector 조건 중 가장 간단. 
   - pod에서 타겟으로 삼고 싶은 노드가 가진 node labels 지정
@@ -316,6 +357,7 @@
 
 - **nodeAffinity**
   - 특정 조건을 만족하는 노드에만 파드 배치하도록 강제 (nodeSelector의 확장)
+  - Pod에 직접 해당 조건을 쓰거나, Deployment의 Template에 해당 조건을 포함하자.
   - 강제 배치: `requiredDuringSchedulingIngnoredDuringExecution`
     ```yaml
     apiVersion: v1
@@ -337,6 +379,34 @@
                   operator: In
                   values:
                   - "true"
+    ```
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: blue
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: blue
+      template:
+        metadata:
+          labels:
+            app: blue   # spec.selector.matchLabels의 값과 일치할 것
+        spec:
+          containers:
+          - image: nginx
+            name: nginx
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: color
+                    operator: In
+                    values:
+                    - blue
     ```
   - 선호 배치: `preferredDuringSchedulingIgnoredDuringExecution`
     ```yaml
