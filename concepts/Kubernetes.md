@@ -109,7 +109,93 @@
     ```
 
 ## Kubernetes Pods
-- Dockerfile에 있는 `ENTRYPOINT`, `CMD`는 쿠버 Pod의 `command`, `args` 필드로 오버라이딩 가능
+- **Args**
+  - Dockerfile에 있는 `ENTRYPOINT`, `CMD`는 쿠버 Pod의 `command`, `args` 필드로 오버라이딩 가능
+
+- **Pod Priority, Preemption**
+  - *참고: https://malwareanalysis.tistory.com/653* 
+  - `kube-scheduler`가 더 이상 pod를 스케줄링하지 못할 경우, 우선 순위가 낮은 pod를 제거하고 새로운 pod를 스케줄링
+  - ex) Node에 용량이 꽉 찼는데, 우선순위 높은 pod가 생성 요청 -> 우선 순위 낮은 pod 종료/빈 자리에 pod 스케줄링
+    ```yaml
+    apiVersion: scheduling.k8s.io/v1
+    kind: PriorityClass
+    metadata:
+      name: test
+    value: -1
+    globalDefault: false
+    ```
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: dummy-pod
+      namespace: default
+    spec:
+      # ...
+      template:
+        spec:
+          priorityClassName: test
+          containers:
+          - name: busybox
+            image: busybox
+    ```
+  - 언제 사용하지?
+    - 대기 시간을 최소화하기 위해 우선순위가 낮은 pod 미리 생성하여 노드 추가하는 AWS 카펜터의 오버프로비저닝
+
+- **Multi-container pod**
+  - *참고: https://seongjin.me/kubernetes-multi-container-pod-design-patterns/*
+  - 하나의 Pod 안에 여러개의 Container가 있는 경우
+  - 필요에 따라 메인 프로세스에 도움을 줄 수 있는 보조적인 역할의 컨테이너를 더해서 운영
+  - 메인 프로세스를 네트워크/스토리지의 밀접한 공유가 필요한 다른 컨테이너와 함께 운영하고자 할 때
+  1. `Sidecar Pattern`
+     - 하나의 컨테이너는 하나의 책임만 가져야 한다
+     - 두 컨테이너는 하나의 파드에 떠있어 file system 공유
+     - ex) Log container(Sidecar), Webapp container(Main)
+  2. `Adapter Pattern`
+     - 특정 어플리케이션의 출력물 규격을 필요에 맞게 다듬는 용도
+     - 이질적인 어플리케이션으로부터 출력물의 상호 호환성을 만들어주는 용도
+     - ex) 오픈소스 어플리케이션 어떤건 포맷 `YYYY-MM-DD`, 어떤건 `DD/MM/YYYY`
+  3. `Ambassador Pattern`
+     - 파드 외부의 서비스에 대한 엑세스를 간소화하는 특수한 유형의 컨테이너
+     - ex) 메인 컨테이너의 네트워크를 전담하는 프록시 역할을 수행하는 컨테이너
+  - 예시) sidecar 컨테이너에서 동일한 웹앱의 log-volume 볼륨을 마운팅하여 filebeat로 전송하는 구조
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: app
+      namespace: elastic-stack
+      labels:
+        name: app
+    spec:
+      containers:
+      - name: app
+        image: kodekloud/event-simulator
+        volumeMounts:
+        - mountPath: /log
+          name: log-volume
+    
+      - name: sidecar
+        image: kodekloud/filebeat-configured
+        volumeMounts:
+        - mountPath: /var/log/event-simulator/
+          name: log-volume
+    
+      volumes:
+      - name: log-volume
+        hostPath:
+          path: /var/log/webapp
+          type: DirectoryOrCreate
+    ```
+
+- **Init Container**
+  - 파드의 메인 컨테이너 실행 전 초기화 역할을 담당하는 컨테이너
+  - 파드에 메인 프로세스 구동하는데 필요한 사전작업/조건 걸어두고, 완료된 뒤에 메인 프로세스 시작토록
+  - 일반 컨테이너와의 차이점
+    1. 모든 초기화 컨테이너는 의도된 작업 끝나면 반드시 종료될 것
+    2. 초기화 컨테이너는 생명주기 관련 옵션(lifecycle), probe 옵션 사용 X
+    3. 정상 종료되면 다음 컨테이너 순서 넘어감. 순차적 시작
+    4. 초기화 컨테이너 구동 실패시, 성공할때까지 컨테이너 계속 재시작.
 
 ## Kubernetes Service & Ingress
 - **개요**
@@ -627,8 +713,11 @@
        - `kubectl rollout undo deployment/my-app --to-revision=2`
 
 - **Horizontal Pod Autoscaling (HPA)**
+  - *참고: https://velog.io/@rockwellvinca/EKS-HPAHorizontal-Pod-Autoscaler%EC%99%80-VPAVertical-Pod-Autoscaler*
   - Vertical: CPU/Memory 더 많이 쓰자! 재구동이 필수
   - Horizontal: 서버 댓수 더 끌어와서 Load Balance
+    - Scale out/Scale in
+    - 동일한 파드가 복제되는 것, 수량 자체가 늘어나게
   - HPA: 쿠버에서 리소스 사용량 기반으로 자동으로 Pod 갯수를 조절
     - 주기적으로 메트릭 확인 -> 설정 기준 초과/미만 시 ReplicaSet의 Pod 갯수 조절
     - CPU 사용율, 메모리 사용율 기반 조정
@@ -658,6 +747,62 @@
           averageUtilization: 50
   ```
   - `kubectl get hpa`
+  - 동작 과정
+    1. `HPA Controller`가 메트릭 쿼리를 통해 메트릭 서버로부터 정보 수집
+    2. API 서버의 HPA는 `HPA Controller`에 수집된 정보 바탕 적절한 Replica 갯수 계산
+    3. `HPA Controller`가 적절한 Replicas 갯수 되도록 Deployment 업데이트
+    4. `Deployment Controller`가 ReplicaSet에게 적절한 갯수 되도록 업데이트
+    5. `Scheduler`와 `kubelet` 통해 실제 파드 수량 조절
+
+- **Vertical Pod Autoscaler**
+  - 파드의 리소스를 감시하여 파드의 리소스 부족한 경우, 파드 Restart하여 리소스 증가
+  - CPU/Memory 등의 스펙을 증가시키는 것 (Scale up/down)
+  - 동작 과정
+    1. `VPA Recommender`가 VPA 정보 읽어오고, 메트릭 서버로부터 파드 자원 사용량 수집
+    2. 해당 정보 기반으로 파드 권장 사용량(Pod Recommender) 정의 -> VPA에게 전달
+    3. `VPA Updater`가 VPA로 부터 파드 권장 사용량(Pod Recommender) 정보 가져옴
+    4. 파드와 정보 비교하여 업데이트할지 말지 결정
+    5. 파드의 수직 스케일링 필요하다고 판단되면, 파드 종료
+    6. Deployment를 통해 파드 재생성 프로세스
+    7. `VPA Admission Controller`가 파드 권장 사용량(Pod Recommender) 정보 가져와 파드에게 전달
+  - 예시)
+    ```yaml
+    apiVersion: autoscaling.k8s.io/v1
+    kind: VerticalPodAutoscaler
+    metadata:
+      name: flask-app
+    spec:
+      resourcePolicy:
+        containerPolicies:
+        - containerName: '*'
+          controlledResources:
+          - cpu
+          maxAllowed:
+            cpu: 1000m
+          minAllowed:
+            cpu: 100m
+      targetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: flask-app-4
+      updatePolicy:
+        updateMode: "Off"
+    status: ### VPA Recommender가 Metrics Server를 통해 리소스 사용량 분석, 바탕으로 추천 채워넣는 정보 ###
+      conditions:
+      - type: RecommendationProvided
+        status: "True"
+      recommendation:
+        containerRecommendations:
+        - containerName: flask-app-4
+          lowerBound:
+            cpu: 100m
+          target:
+            cpu: 627m
+          uncappedTarget: 
+            cpu: 627m
+          upperBound:
+            cpu: "1"
+    ```
 
 ## API Access Control
 - **Admission Controller**
@@ -969,6 +1114,29 @@
             ports:
             - containerPort: 9090
     ```
+
+- **Admission Controller**
+  - *참고: https://guide-to-devops.github.io/blog/Admission-Controller-%EC%86%8C%EA%B0%9C*
+  - *참고: https://coffeewhale.com/kubernetes/admission-control/2021/04/28/opa1/*
+  - ![](../images/2025-05-06-admission-controller.png)
+  - 쿠버의 접근 제어 3단계
+    - Authentication: 접속한 사람의 신분을 시스템이 인증
+    - Authorization: 누가 어떤 권한을 가지고 어떤 행동할 수 있는지 확인
+    - Admission Control: 인증과 권환확인 이후 추가 요청 내용 검증/변경
+  - k8s 클러스터에서 관리자가 정의한 정책(Policy)를 수행(Admission Control)하는 플러그인
+  - 보안성/제어성 측면에 보강이 됨
+  - 작동 방식
+    - Authentication/Authorization 과정을 먼저 거친 후 Admission Control이 수행
+    1. `Mutate`: 해당 요청에서 변경되어야 하는 부분을 알려주는 값을 k8s API 서버로 반환
+    2. `Validate`: 해당 요청이 정책에 부합하는지에 대해 true/false 값 k8s API 서버로 반환
+  - 사용법
+    - `--enable-admission-plugins={plugin_name}`
+    - Admission Webhook이 사용되며, Admission Controller가 Admission Control 요청 받고 특정 행위 수행하도록 도와줌
+  - 예시
+    - `LimitRange`, `ResourceQuota`를 통해 해당 사용자가 생성할 수 있는 Pod 크기 제한 등
+  - 웹훅
+    - `MutatingWebhook`: 사용자의 요청에 대해 관리자가 임의로 값을 변경. ServiceAccount, Resource 강제 변경 가능
+    - `ValidatingWebhook`: 요청에 대해서 관리자가 허용을 막는 작업.
 
 ## Network
 - **Network Policy**
