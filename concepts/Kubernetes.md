@@ -71,9 +71,10 @@
           app: my-app
       template:
         metadata:
-          name: myapp-pod
-      spec:
-        containers:
+          labels:
+            app: my-app # 위의 deployment에서 관리대상으로 지정한 label과 동일해야함. 그래야 pod를 관리함
+        spec:
+          containers:
           - name: nginx-container
             image: nginx
     ```
@@ -832,17 +833,23 @@
 ## Cluster Maintenance
 - **OS upgrade**
   - 기본 명령어
-  ```
-  > k drain node-1      # 특정 노드 내 작업들을 타 노드로 이관. 노드 끔
-  > k uncorden node-1   # 해당 노드 다시 스케줄링 대상으로 ON
-  > k corden node-2     # 새로운 pod가 스케줄링 되지 않도록 마킹
-  ```
+    ```
+    > k drain node-1      # 특정 노드 내 작업들을 타 노드로 이관. 노드 끔
+    > k drain node-1 --ignore-daemonset
+    > k uncordon node-1   # 해당 노드 다시 스케줄링 대상으로 ON
+    > k cordon node-2     # 새로운 pod가 스케줄링 되지 않도록 마킹
+    ```
   - drain 하는 시점에 Pod는 다음으로 관리되어야 함
     - ReplicationController
     - ReplicaSet
     - Job
     - DaemonSet
     - StatefulSet
+  - `kubectl drain`은 컨트롤러(ReplicaSet, Deployment, StatefulSet 등)에 의해 관리되지 않는 Pod, 즉 Standalone Pod를 기본적으로 삭제하지 않음
+    - 컨트롤러가 없어, 다시 생성할 수 없기 때문임. 
+    - 컨트롤러: 클러스터 상태 지속적으로 감시하여, Desired state를 유지해주는 자동화 도구
+      - Deployment, ReplicaSet, StatefulSet, DaemonSet, Job/CronJob
+    - Pod를 standalone으로 쓰지말고, 컨트롤러와 함께 쓰자!
 
 - **Cluster upgrade process**
   - 클러스터 최근 마이너 3버전 (ex. 1.11 ~ 1.13) 지원
