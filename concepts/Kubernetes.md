@@ -1472,13 +1472,25 @@
       path: /exported/data                  # NFS 서버의 경로
       server: 192.168.1.100                 # NFS 서버 주소
   ```
-  - Reclaim 정책
-    - Retain: PV 삭제되지 않고, 수동으로 클린업
-    - Recycle: PV 데이터 삭제하고 초기화하여 다시 사용
-    - Delete: PVC 삭제시, 바인딩된 PV도 삭제
+  - Reclaim 정책: `persistentVolumeReclaimPolicy`
+    - [Retain]
+      - PV 삭제되지 않고, 수동으로 클린업
+      - 실제 저장된 데이터는 그대로 남김
+      - k8s는 해당 볼륨을 다른 pvc에 자동 연결하지 않음 => 수동으로 데이터 확인 or 초기화 후 재사용
+    - [Delete]
+      - PVC 삭제시, 바인딩된 PV도 삭제
+      - 임시 저장소/테스트 용도에 적합
+    - [Recycle (deprecated)]
+      - PV 데이터 삭제하고 초기화하여 다시 사용
 
 - **Persistent Volume Claim**
   - pv는 어드민이 만든다. pvc는 유저가 하나의 pv와 1:1 관계
+  - pvc와 pv는 다음 조건이 서로 호환되면 쿠버에서 자동 바인딩!
+    - `storage`: pvc <= pv
+      - 이때, `requests.storage`는 최소한 이정도 필요해요로, 실제 바인딩 Capacity는 pv의 용량으로 산정됨
+    - `accessModes` pvc == pv
+    - `storageClassName`: 둘다 없거나, 같거나
+    - pvc 바인딩 되지 않음 & pv 사용중 아님
   - 동작 과정
     1. 관리자가 PV 생성해둠
     2. Pod가 PVC를 생성하여 필요한 스토리지 요청
@@ -1517,6 +1529,29 @@
         persistentVolumeClaim:
           claimName: my-pvc
     ```
+
+- **StorageClass**
+  - *참고: https://velog.io/@_zero_/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-StorageClass-%EA%B0%9C%EB%85%90-%EB%B0%8F-%EC%84%A4%EC%A0%95*
+  - pv로 사용할 볼륨을 수동으로 프로비저닝하는 불편함을 해결하고자, 자동으로 볼륨을 생성/할당하는 storageClass
+  - `volumeBindingMode`: 볼륨이 언제 바운딩 될지 시기 설정하는 옵션
+    - `Immediate`: PVC 생성시 즉시 바인딩. 의도치 않은 PVC 바인딩될 수 있음
+    - `WaitForFirstConsumer`: PVC 사용할 파드가 생성될때까지 바인딩 지연
+  - [`provisioner`](https://kubernetes.io/docs/concepts/storage/storage-classes/#provisioner): PV 생성할 스토리지 종류
+    - AzureFile 등
+    - `kubernetes.io/no-provisioner`: automatic provisioning 서포트 X
+  - `parameters`: provisioner가 동적으로 볼륨 생성시 필요한 옵션
+  ```yaml
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: demo-sc
+  volumeBindingMode: WaitForFirstConsumer
+  provisioner: kubernetes.io/aws-ebs
+  parameters:
+    type: io1
+    iopsPerGB: "10"
+    fsType: ext4
+  ```
 
 ## High Availability
 - **Control Plane**
