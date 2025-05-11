@@ -14,6 +14,14 @@
 - **ETCD cluster**
   - key-value 형식의 DB
   - 2379 포트에서 listening
+    - 클라이언트 요청용 (API 서버 등 컨트롤 플레인 구성 요소 여기에 연결)
+  - 2380 포트
+    - etcd간 p2p 통신용 (etcd 클러스터 구성시 사용)
+    - 클러스터가 혼자만으로 구성되어도 2380 포트에서 구동 가능
+    ```
+    controlplane /etc/cni/net.d ✖ netstat -anp | grep etcd | grep 2380
+    tcp        0      0 192.168.117.46:2380     0.0.0.0:*               LISTEN      3654/etcd
+    ```
 
 - **kube-scheduler**
   - 어떤 Pod가 어떤 Node에 들어갈지 결정 (실제 배치는 Kubelet에서 진행)
@@ -852,12 +860,29 @@
     - Pod를 standalone으로 쓰지말고, 컨트롤러와 함께 쓰자!
 
 - **Cluster upgrade process**
+  - *참고: https://v1-32.docs.kubernetes.io/ko/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/*
   - 클러스터 최근 마이너 3버전 (ex. 1.11 ~ 1.13) 지원
   - 업그레이드 추천은 마이너 하나씩 올리기
   - GCP는 클릭 몇번으로 업그레이드 가능
   - 직접: `> kubeadm upgrade plan`, `> kubeadm upgrade apply`
   - 마스터 부터 업그레이드 추천. 워커 노드에서 구동 중인 것들은 마스터 없이 그대로 유지됨
     - kubectl, scheduling, self-healing 등 마스터 관장 기능은 못쓰지만, 돌아가고 있는건 돌아감
+  - 패키지 매니저의 경로를 잘 변경해야 함. 
+    - `vim /etc/apt/sources.list.d/kubernetes.list`
+  - Kubeadm을 통해 업그레이드를 모두 진행하고, systemctl 명령어 구동
+    - `sudo systemctl daemon-reload`: 업그레이드로 변경된 systemd 설정을 다시 반영
+      - `systemd`: 리눅스에서 서비스와 프로세스를 관리하는 시스템
+      - `systemd`는 모든 서비스에 대해 `.service` 설정 파일을 메모리에 로딩해놓고 관리
+      - kubelet 실행은 systemd가 `.service` 파일로 관리됨 (ex. `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf`)
+        - kubelet 실행 명령어 예시 (/usr/bin/kubelet)
+          ```
+          Environment="KUBELET_KUBECONFIG_ARGS=--kubeconfig=/etc/kubernetes/kubelet.conf"
+          ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS ...
+          ```
+        - kubelet 업그레이드 했으나, systemd는 기존 바이너리 보고 있을꺼라, 업데이트된 바이너리로 구동하도록 daemon-reload 과정 필요
+    - `sudo systemctl restart kubelet`: 새 바이너리 설정 적용하여 다시 실행
+      - 버전 업그레이드 이후 새 바이너리나 설정 반영되도록 재시작 필요
+      - kubelet은 쿠버 노드 중에서 가장 핵심
 
 - **Backup and Restore Methods**
   - Backup 대상은 다음과 같음
@@ -1564,6 +1589,45 @@
     - 리더는 RAFT 알고리즘을 통해 선출
   - 데이터 일관성 유지를 위해 Quorom(N/2+1)을 만족하는 etcd 노드 수가 필요함
     - etcd 노드를 짝수로 운영하면 낭비가 되니, 항상 홀수개로 운영하는 것이 일반적
+  - etcd static pod 설정 돌아보기
+    ```
+    spec.containers.command:
+    - etcd
+    - --advertise-client-urls=https://192.168.58.136:2379           # 다른 컴포넌트에게 etcd 서버의 주소를 알려줄때 사용
+    - --cert-file=/etc/kubernetes/pki/etcd/server.crt               # etcd 서버의 tls 인증서 (클라이언트가 etcd 접속시 이걸로 암호화/인증)
+    - --key-file=/etc/kubernetes/pki/etcd/server.key                # etcd 서버의 tls 개인키
+    - --client-cert-auth=true                                       # etcd 접속시 인증서 있어야만 접속  
+    - --data-dir=/var/lib/etcd                                      # etcd 데이터 저장할 디렉토리
+    - --experimental-initial-corrupt-check=true                     # 데이터 손상여부 검사
+    - --experimental-watch-progress-notify-interval=5s              # etcd watch 5초마다 검사. 클라와 연결 끊기지 않게
+    - --initial-advertise-peer-urls=https://192.168.58.136:2380     # etcd 클러스터 내에서 다른 etcd 멤버들에게 이 주소로 접속하세요 알려주는 주소
+    - --initial-cluster=controlplane=https://192.168.58.136:2380    # 처음 클러스터 구성 시, 어떤 멤버가 있었는지 정의. (여기선 controlplane 노드 하나에서 클러스터 구축)
+    - --listen-client-urls=https://127.0.0.1:2379,https://192.168.58.136:2379     # etcd 서버가 실제 클라이언트의 요청을 듣는 접속 주소
+    - --listen-metrics-urls=http://127.0.0.1:2381
+    - --listen-peer-urls=https://192.168.58.136:2380
+    - --name=controlplane
+    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt            # etcd 간 노드 통신에 사용되는 TLS 설정
+    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key             # etcd 간 노드 통신에 사용되는 TLS 설정
+    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt        # etcd 간 노드 통신에 사용되는 TLS 설정
+    - --peer-client-cert-auth=true
+    - --snapshot-count=10000
+    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt             # 클라이언트 인증서의 서명 검증할 때 사용 (클라이언트의 인증서가 믿을만한 CA가 발급해준건가?)
+    ```
+
+- **ETCD backup & restore**
+  - *참고: https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/*
+  - static pod 설정 파일에 들어가서, 클라이언트로써 접속하기 위한 ssl 인증서 설정들을 참고하여 다음과 같이 작성
+  - backup
+    ```
+    ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+      -- cacert=<trusted-ca-file> --cert=<cert-file> --key=<key-file> \
+      snapshot save <backup-file-location>
+    ```
+  - restore
+    - data-dir-location으로 etcd를 복구하고, static-pod인 etcd가 해당 디렉토리에 volume 붙을 수 있도록 etcd.yaml 수정하여 재구동 필요
+    ```
+    ETCDCTL_API=3 etcdctl --data-dir <data-dir-location> snapshot restore snapshot.db
+    ```
 
 ## Helm
 *참고: https://www.youtube.com/watch?v=QlYgYcJ-GhA*  
@@ -1716,3 +1780,10 @@
   3. Kube-proxy
      - nw 프록시 node 별로
      - 노드의 nw rule 설정
+
+## kubeadm
+*참고: https://velog.io/@moonblue/kubeadm-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0*  
+- **개요**
+  - 설치형 쿠버네티스로서 서버간 클러스터링 환경 구성하고 관리하기 위한 공식 도구 중 하나
+  - 온프레미스 환경에 직접 설치하고 운용할 목적으로 만들어짐
+  - 
