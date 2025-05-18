@@ -653,6 +653,108 @@
     - 도커라면: `docker logs -f image`
     - 쿠버라면: `kubectl logs -f event-pod`
 
+## Security
+- **Certificate Signing Requests**
+  - *참고: https://mr-zero.tistory.com/579*
+  - 클러스터의 오브젝트/서비스에 접근하기 위해 유저에 대한 인증/인가를 위한 인증서 사용
+  - 인증서 생성하기 위한 작업의 일환으로 유저의 개인키에 대한 signing을 k8s의 CA에 요청시 CertificateSigningRequest API 사용
+  - 프로세스
+    - [create KEY] -> [create CSR] -> [API] -> [download CRT from api] -> [use CRT+KEY]
+    - CRT: CA가 csr을 보고 서명해서 발급해준 인증서
+  - 실습
+    1. key 생성: `openssl genrsa -out [name].key 2048`
+    2. csr 생성: `openssl req -new -key [name].key -out [name].csr`
+    3. csr base64 인코딩: `cat [name].csr | base64 -w 0`
+    4. CertificateSigningRequest 생성 및 요청 (apply)
+      ```yaml
+      apiVersion: certificates.k8s.io/v1
+      kind: CertificateSigningRequest
+      metadata:
+        name: [name]@internal.users
+      spec:
+        groups:
+          - system:authenticated
+        request: sdfjisdfjsdof3299j # base64 인코딩된 csr 값
+        signerName: kubernetes.io/kube-apiserver-client
+        usage:
+          - client auth
+      ```
+    5. CSR 승인: `k certificate approve [csr_name]`
+       - 거부는: `k certificate deny [csr_name]`
+    6. CSR로부터 CRT 생성: `k get csr [csr_name] -o yaml`
+  - `user`가 생성이 되었다는 것
+    - 쿠버네티스에서 `user`는 쿠버 클러스터 내부의 오브젝트로 생성되지 않음
+      - `kubeconfig` 파일에 정의된 인증 정보에 따라 존재하는 개념
+      - `kubectl`에서 `--as dev-user` 옵션을 사용하면, kubeconfig에 정의된 `dev-user`라는 사용자로 요청 보냄
+
+- **kubeconfig**
+  - *참고: https://nayoungs.tistory.com/entry/Kubernetes-Kubeconfig*
+  - k8s의 설정파일로, 클러스터에 대한 접근을 구성하는데 사용하는 파일
+  - `kubectl` 명령어로 apiserver에 접근할 때 사용할 인증 정보를 담음
+  - 구조
+    - `clusters`: 쿠버네티스 API 서버 정보(IP, 도메인)로, 여러 클러스터 명시 가능
+    - `users`: 쿠버네티스 API에 접속하기 위한 사용자 목록, 인증 방식에 따라 형태 다름
+    - `context`: user와 cluster 사이의 관계를 매핑한 것으로, 어떤 context 사용하느냐에 따라 cluster와 user가 결정
+      - context 기반으로 어떤 Cluster에 어떤 User가 인증을 통해 쿠버를 사용한다
+      - context에는 여러 종류 있을 수 있으며, 현재 사용하는 context를 current-context라고 함
+  - 위치: `~/.kube/config`
+    - `/etc/kubernetes/pki`에 인증서와 키가 존재
+    - `kubectl`은 항상 `~/.kube/config` 을 먼저 찾음
+    - 해당 디렉토리가 아니라면, `KUBECONFIG` 환경변수를 설정할 수 있음
+    - `--kubeconfig` 옵션을 사용하여 타 kubeconfig 파일 사용할 수 있음
+  - context 확인
+    - `k config use-context myadmin@mycluster`
+    - `k config current-context`
+
+- **쿠버네티스의 사용자들**
+  - *참고: https://jonnung.dev/kubernetes/2020/06/18/kubernetes-user-authorizations/*
+  - 쿠버네티스 설정 (kubeconfig)는 3가지 부분으로 구성됨
+    - clusters: 클러스터 명시. 쿠버네티스 API 서버 정보
+    - users: 쿠버API에 접속하기 위한 사용자 목록. 인증 방식에 따라 형태가 달라질 수 있음
+    - context: cluster 항목 - user 항목 중 하나씩 조합하여 만들어짐
+  - 쿠버의 Context에 명시된 User는 인증을 거쳐야 접근이 허용됨
+    - 인증 절차를 위해 활용하는 대표적인 방법은 `X.509 인증서`, `ServiceAccount 토큰`
+  - `X.509 인증서`
+    - 쿠버네티스 설치할 때 자동 생성
+    - 마스터 노드 서버에서 직접 kubectl 실행 시, kubectl 참조하는 kubeconfig 파일에 인증서 내용 들어있음
+    - `/etc/kubernetes/pki/ca.crt`를 루트 인증서로 하여 만들어진 하위 인증서임 
+  - `Service Account`
+    - 쿠버네티스 상에 존재하는 오브젝트, 네임스페이스마다 각각 정의 가능
+    - 각 네임스페이스에는 기본적으로 `default` 서비스 어카운트가 자동으로 생성됨
+      - 서비스 어카운트 만들면 JWT 토큰이 자동으로 함께 생성되어 쿠버 시크릿에 저장
+  - `User`
+    - 쿠버에는 User 개념은 있으나, 추상적인 의미
+    - 내부에 저장되는 데이터가 아닌 단순히 문자열로 식별할 수 있는 값으로 사용
+    - ex) `X.509 인증서` 활용 시...
+      - 인증서 만들 때 CN='joel' 이라면, 이 인증서를 통해 인증된 사용자는 쿠버 상에 User=joel로 지징가능
+  - `Group`
+    - User와 마찬가지로 추상적인 개념
+    - User와 마찬가지로 문자열 형태로 표현
+    - 쿠버에서 미리 정의해둔 그룹 `system:`으로 시작
+      - `system:unauthenticated`
+      - `system:authenticated`
+      - `system:serviceaccounts`
+      - `system:serviceaccounts:<네임스페이스이름>`
+  - RBAC
+    - 위의 쿠버 사용자 식별 개념 3가지 (SA, User, Group)은 인증으로써의 기능
+    - 쿠버 오브젝트 사용권한 검사, 인가는 RBAC을 통해 지정
+
+- **Service Accounts**
+  - pod 안에서 serviceAccount, serviceAccountName 정의할 수 있음
+  - 이를 통해 pod 안에서 쿠버 API를 접근하게 할 수 있음
+  - 기본으로 정의 안하면 default가 SA로 매핑되는데, 이는 타 리소스 접근에 한계가 있음
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: my-app
+    spec:
+      serviceAccountName: my-app-sa
+      containers:
+        - name: app
+          image: my-image
+    ```
+
 ## Application Lifecycle & Management
 - **Deployment Strategy**
   1. Rolling Update
@@ -1009,11 +1111,25 @@
 - **Role-Based Access Control**
   - *참고: https://kubernetes.io/docs/reference/access-authn-authz/rbac/*
   - `rbac.authorization.k8s.io` 사용하여 API group 인가 결정할 수 있도록 보조
+  - RBAC은 인가 프로세스만 판단함 -> 이 사람이 권한이 있는가? 
+    - 이 사람이 정상 사용자인가 인증은 딴 곳에서 진행
+  - 비유 (회사 건물에 들어간다고 생각)
+    - User: 사람
+    - Resource: 어디 들어가고 싶은가? (ex. pod, node, cm)
+    - Verbs: 무슨 권한이 필요한가? (ex. get, list, create, delete)
+    - RoleBinding/ClusterRoleBinding: 사람에게 출입증 발급한 현황
+    - Role/ClusterRole: 출입증에 적힌 권한의 목록
+  - 흐름 순서
+    1. User (혹은 ServiceAccount, Group) 이 존재
+    2. 어떤 Role / ClusterRole 에 권한 목록이 정의되어 있음
+    3. RoleBinding / ClusterRoleBinding 을 통해 누가 어떤 출입증을 (Role) 갖는지 봄
+    4. 쿠버는 위의 사항을 보고 판단
   - 쿠버네티스에서 사용자-리소스간 권한을 제어하는 핵심 메커니즘
     - Role : 특정 네임스페이스 내에서 리소스에 대한 권한 정의
     - RoleBinding : 특정 네임스페이스에서 Role을 사용자/그룹에 부여
     - ClusterRole : 클러스터 전체에서 리소스에 대한 권한 정의
     - ClusterRoleBinding : 클러스터 전체에서 ClusterRole을 사용자/그룹에 부여
+  - `kubectl auth can-i`: 인증이 아닌 RBAC 권한 검사 진행
   - [Role]
     - **특정 namespace**에서만 적용. 네임스페이스 내 리소스 접근 권한 정의
     - `pods`, `services`, `deployments` 같은 리소스 접근 설정 가능
