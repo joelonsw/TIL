@@ -755,6 +755,42 @@
           image: my-image
     ```
 
+- **Security Context**
+  - *참고: https://velog.io/@_zero_/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-SecurityContext-%EA%B0%9C%EB%85%90-%EB%B0%8F-%EC%84%A4%EC%A0%95*
+  - *참고: https://doitnow-man.tistory.com/entry/CKA-42-k8s-%EA%B0%81%EC%A2%85-%EB%B3%B4%EC%95%88-image*
+  - 개념
+    - 쿠버네티스는 컨테이너 실행 시, 기본 root 권한으로 실행
+    - root 권한에서의 컨테이너 실행 방지하기 위해 파드/컨테이너 단위로 실행시킬 PID를 지정
+  - 옵션
+    - `runAsUser`: 파드/컨테이너 실행시킬 PID 지정
+    - `runAsGroup`: 파드/컨테이서 실행시킬 GID 지정
+    - `fsGroup`: 볼륨 마운트 시 활용할 PID 지정
+    - `runAsNonRoot`: 컨테이너를 루트가 아닌 사용자로 실행할지 지정
+  - container security context
+    - container 수준에서 설정하면, 특정 컨테이너에 대한 보안 설정을 개별적으로 정의 가능
+    - container 우선 순위가 pod 보다 더 높음
+    - [capabilities 설정 가능](https://man7.org/linux/man-pages/man7/capabilities.7.html)
+      - ex) CAP_SYS_TIME, CAP_LAST_CAP 등...
+  - 적용
+    - ![](../images/2025-05-18-securityContext.png)
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: test
+    spec:
+      securityContext: # 파드 단위 적용
+        runAsUser: 1000
+      containers:
+        - name: demo
+          image: busybox:1.28
+          command: ["sh", "-c", "sleep 1h"]
+          securityContext:
+            runAsUser: 3000 # 컨테이너 단위 적용
+            capabilities:
+              add: ["NET_ADMIN", "SYS_TIME"]
+    ```
+
 ## Application Lifecycle & Management
 - **Deployment Strategy**
   1. Rolling Update
