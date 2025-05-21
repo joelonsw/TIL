@@ -790,6 +790,35 @@
             capabilities:
               add: ["NET_ADMIN", "SYS_TIME"]
     ```
+    
+- **Custom Resource, Custom Resource Definition**
+  - *참고: https://frozenpond.tistory.com/111*
+  - [Custom Resource Definition]
+    - Custom Resource를 etcd에 등록하기 위해서는 CRD 혹은 AA 이용이 필요
+    ```yaml
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      name: hello.extension.example.com
+    spec:
+      group: extension.example.com
+      version: v1
+      scope: Namespaced
+      names:
+        plural: hellos  # 진짜 복수형이여야 함
+        singular: hello
+        kind: Hello
+    ```
+  - [Custom Resource]
+    - 오브젝트를 직접 정의하여 사용. 소스코드 수정 없이 API를 확장해 사용할 수 있음
+    ```yaml
+    apiVersion: extension.example.com/v1
+    kind: Hello
+    metadata:
+      name: hello-sample
+    size: 3
+    ```    
+  - 리소스가 등록/변경 되었을 때 쿠버 클러스터에게 특정한 operation을 주고 싶다면 custom controller 사용해야 함
 
 ## Application Lifecycle & Management
 - **Deployment Strategy**
@@ -1437,6 +1466,7 @@
     5. 리눅스 자신도 인터넷을 쓰자
        - 어디로 나가야하지 -> 공유기(192.168.1.1)을 기본 게이트웨이로 지정
        - `ip route add default via 192.168.1.1`
+  - `ip route show default`: 패킷을 외부로 보낼때 어느 경로 사용하는지 결정. DNS 기본적으로 어디로 가는지도 결정
 
 - **Pod Networking**
   - 요구사항
@@ -1450,6 +1480,7 @@
     4. Bring up interface
 
 - **CNI**
+  - *참고: https://themapisto.tistory.com/267*
   - 컨테이너 네트워크 설정하고 관리하는 표준 인터페이스
   - 기능
     - IP 할당
@@ -1468,6 +1499,21 @@
     --cni-bin-dir=/opt/cni/bin \\
     --cni-conf-dir=/etc/cni/net.d \\
   ```
+  - 쿠버네티스 아키텍츠 네트워킹 원칙
+    1. 파드-파드 통신시 NAT 없이 통신 가능할 것
+    2. 노드 에이전트(kubelet, systemd)는 파드와 통신이 가능할 것
+    3. 호스트 네트워크를 사용하는 파드는 NAT 없이 파드와 통신이 가능할 것
+    4. 서비스 클러스터 IP 대역과 파드가 사용하는 IP 대역은 중복되지 않을 것
+  - 쿠버네티스 네트워킹 문제
+    1. 파드 내 컨테이너는 루프백 통신 가능해야 함
+    2. 파드간 통신 가능하게 해야함
+    3. 클러스터 내부에서 서비스 통한 통신 할 수 있어야 함
+    4. 클러스터 외부에서 서비스 통한 통신 할 수 있어야 함
+  - ![](../images/2025-05-20-flannel.png)
+    - `flannel.1`: flannel이 만든 오버레이 네트워크 (Pod간 통신을 위해 사용)
+    - `cni0`: 컨테이너들이 붙는 가상 브릿지 (컨테이너 네트워크 인터페이스)
+    - `vethXXXX`: 컨테이너와 호스트 사이를 잇는 가상 이더넷 쌍 (컨테이너용)
+    - `eth0`: 실제 물리적 또는 가상 머신의 NW 인터페이스 (외부와 통신)
 
 - **DNS**
   - coreDNS를 통한 DNS 관리
