@@ -1488,17 +1488,29 @@
     - Pod 간 네트워크 통신
     - 네트워크 정책 관리
   - CNI 플러그인: Calico/Flannel/Weave/Cilium
+  - CNI 바이너리 경로는 기본적으로 `/opt/cni/bin` 사용
+  - 현재 kubelet이 사용중인 container-runtime-endpoint 찾는 법
+    - `ps -aux | grep kubelet | grep --color container-runtime-endpoint`
+    ```
+    controlplane /etc/kubernetes/manifests ➜  ps -aux | grep kubelet | grep --color container-runtime-endpoint
+    root        4145  0.0  0.1 2931500 95824 ?       Ssl  12:59   0:12 /usr/bin/kubelet 
+    --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf 
+    --kubeconfig=/etc/kubernetes/kubelet.conf 
+    --config=/var/lib/kubelet/config.yaml 
+    --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock 
+    --pod-infra-container-image=registry.k8s.io/pause:3.10
+    ```
   - `kubelet.service`
-  ```
-  ExecStart=/usr/local/bin/kubelet \\
-    --config=/var/lib/kubelet/kubelet-config.yaml \\
-    --container-runtime=remote \\
-    --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \\
-    --kubeconfig=/var/lib/kubelet/kubeconfig  \\
-    --network-plugin=cni  \\ 
-    --cni-bin-dir=/opt/cni/bin \\
-    --cni-conf-dir=/etc/cni/net.d \\
-  ```
+    ```
+    ExecStart=/usr/local/bin/kubelet \\
+      --config=/var/lib/kubelet/kubelet-config.yaml \\
+      --container-runtime=remote \\
+      --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \\
+      --kubeconfig=/var/lib/kubelet/kubeconfig  \\
+      --network-plugin=cni  \\ 
+      --cni-bin-dir=/opt/cni/bin \\
+      --cni-conf-dir=/etc/cni/net.d \\
+    ```
   - 쿠버네티스 아키텍츠 네트워킹 원칙
     1. 파드-파드 통신시 NAT 없이 통신 가능할 것
     2. 노드 에이전트(kubelet, systemd)는 파드와 통신이 가능할 것
@@ -1543,6 +1555,32 @@
        - Ingress 내부 앞단에서 로드 밸런서 역할 수행가능
     5. 다양한 Ingress 컨트롤러
        - Nginx/Traefik/HAProxy/AWS ALB Ingress Controller/GCE Ingress Controller
+  - 예시
+    - `paths.backend` 는 HTTP 요청을 어디로 라우팅할지 정의한다. Ingress가 요청을 전달할 쿠버 서비스를 뜻함
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: ingress-test
+    spec:
+      rules:
+      - http:
+          paths:
+          - backend:
+              service:
+                name: test-1-service
+                port:
+                  number: 8080
+              path: /test1
+              pathType: Prefix
+          - backend:
+              service:
+                name: test-2-service
+                port:
+                  number: 8080
+              path: /test2
+              pathType: Prefix
+    ```
 
 - **LoadBalancer**
   - 개요
@@ -1587,21 +1625,54 @@
     - 쿠버에 국한 X
 
 - **Gateway API**
+  - *참고: https://somaz.tistory.com/403* 
   - Ingress를 대체하는 기능
     - HTTP용으로 설계된 Ingress와 다르게, Gateway API는 TCP/UDP/TLS 등 여러 프로토콜 지원
   - L7에서의 HTTP/HTTPS와 더불어 TCP/UDP 지원
   - 기존의 Ingress에 기능 추가 + 역할 분리
   - k8s Gateway API = ingress + API Gateway
+  - kubernetes에서 네트워크 트래픽을 외부로부터 클러스터 내부의 서비스로 안전하고 유연하게 전달하기 위한 새로운 표준 API 리소스 집합
+  - 전통적으로는 Ingress 리소스를 통해 HTTP/HTTPS 요청을 클러스터 내부로 라우팅했으나, Ingress의 기능확장 한계를 맞음
+    - L4, 멀티 프로토콜, 고급 라우팅 제어 어려움
+  - 이를 극복하고자 Gateway API
+
+- **Gateway API의 목적**
+  1. L4-L7 트래픽을 모두 지원하는 유연한 아키텍쳐
+  2. 멀티 테넌시 및 보안 분리 구조 지원
+  3. 컨트롤러 벤더 독립적인 표준화된 API
+  4. Cloud Provider, Service Mesh, API Gateway 등 다양한 환경에서 통합 가능
+  5. 선언적 구성(Helm/Kustomize)에 적합
 
 - **구성요소 (API Kinds)**
-  - GatewayClass: 게이트웨이 세트 공통된 설정 + 클래스 구현으로 관리
-  - Gateway: 클라우드 로드 밸런서와 같이, 인프라 트래픽 관리 설정
-  - HTTPRoute: HTTP 특정한 규칙 매핑하여 Service의 엔드포인트 리스너 역할
+  - GatewayClass: 게이트웨이 세트 공통된 설정 + 클래스 구현으로 관리. 인프라 제공자가 정의하는 Gateway 구현 클래스
+  - Gateway: 클라우드 로드 밸런서와 같이, 인프라 트래픽 관리 설정. 실제 L4/L7 트래픽 수신하는 리소스
+  - Route: 서비스로 트래픽을 라우팅하는 규칙
+    - HTTPRoute: HTTP 특정한 규칙 매핑하여 Service의 엔드포인트 리스너 역할
+    - TLSRoute, TCPRoute, GRPCRoute
+  - ReferencePolicy, BackendPolicy: 고급 권한과 정책 제어 리소스
+
+- **컨트롤러**
+  - 쿠버에서 컨트롤러: 리소스가 원하는 상태가 되도록 실제 반영되도록 자동 처리해주는 프로그램
+    - ex) Deployment Controller: Deployment yaml 보고 계속 확인 후 유지
+    - watch -> compare -> act
+    - 거의 deployment로 배포
+  - Gateway Controller
+    - 리소스는 단순히 구성정보
+    - 구성정보 읽고, 프록시 설정하거나, 네트워크 라우팅을 적용하는 실행 주체
+
+- **Gateway API vs Ingress**
+
+| 항목       | Gateway API                                  | Ingress    |
+|----------|----------------------------------------------|------------|
+| 지원 프로토콜  | HTTP, HTTPS, gRPC, TCP, TLS                  | HTTP/HTTPS |
+| 역할 분리    | GatewayClass/Gateway/Route 명확히 분리            | 없음         |
+| 멀티 테넌시   | AllowedRoutes로 네임스페이스/권한 범위 제어               | 제한적        |
+| 컨트롤러 독립성 | 컨트롤러 선택 가능 (NGINX, Istio, Envoy, GKE, AWS 등) | 대부분 Nginx  |
 
 - **리소스 별 역할 분배**
   - ![](../images/2025-05-03-gateway-api.png)
   - `GatewayClass`
-    - 인프라 제공자가 정의하는 클러스터 범위의 리소스
+    - 인프라 제공자가 정의하는 클러스터 범위의 리소스 (Cluster-Scoped)
     - 생성가능한 Gateway 설계도
     ```yaml
     apiVersion: gateway.networking.k8s.io/v1beta1
@@ -1634,6 +1705,9 @@
             mode: Terminate
             certificateRefs:
               - name: mygateway-credential
+          allowedRoutes:
+            namespaces:
+              from: Same
     ```
   - `HTTPRoute`: HTTP request를 서비스로 routing 위한 규칙
     ```yaml
