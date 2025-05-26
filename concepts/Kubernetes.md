@@ -1979,11 +1979,55 @@
   - MSA 환경에서 Helm Chart 적용
   - 쿠버에서 어플리케이션 배포/업그레이드/롤백
 
+- **Helm 명령어**
+  ```
+  # REVISION 히스토리 보기
+  helm history chart-name
+  
+  # helm 차트 대상 버전 전체 조회
+  helm search repo bitnami/nginx --versions
+  
+  # helm 차트 버전 업그레이드
+  helm upgrade chart-name bitnami/nginx --version 18.3.6
+  
+  # 3번 REVISION 으로 롤백
+  helm rollback chart-name 3
+  ```
+
 ## Kustomize
+*참고: https://tommypagy.tistory.com/362*  
+*참고: https://velog.io/@pullee/Kustomize%EB%A1%9C-K8S-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0*  
 - **개요**
   - 기존 YAML을 유지하면서, YAML overlay 방식으로 쿠버네티스 리소스를 커스터마이징 할 수 있도록 도와줌
   - 쿠버 기본 내장이라 설치없이 사용 가능
   - Helm은 템플릿 문법이 있어서 읽기 어려울 수 있지만, kustomize는 그냥 YAML
+  - Kustomize는 템플릿이 없는 방식으로, 구성 파일을 커스터마이징 하는데 도움이 됨
+  - Kustomize는 커스터마이징을 더 쉽게 구성하기 위해 제너레이터와 같은 여러 편리한 방법 제공
+  - Kustomize는 패치 사용하여 기존 표준 구성 파일 방해하지 않고 환경별 변경 사항 도입함
+
+- **구조**
+  ```
+  ~/someApp
+  ├── base
+  │   ├── deployment.yaml
+  │   ├── kustomization.yaml
+  │   └── service.yaml
+  └── overlays
+      ├── development
+      │   ├── cpu_count.yaml
+      │   ├── kustomization.yaml
+      │   └── replica_count.yaml
+      └── production
+          ├── cpu_count.yaml
+          ├── kustomization.yaml
+          └── replica_count.yaml
+  ```
+
+- **kustomize 명령어**
+```
+# 적용하기 (kustomization.yaml이 있는 디렉토리에서 적용)
+kubectl apply -k .
+```
 
 - **사용법**
   1. Kustomization.yaml
@@ -2013,6 +2057,181 @@
     ```
   - 기본 리소스 적용: `kubectl apply -k overlays/dev/`
   - YAML 생성 미리보기: `kubectl kustomize overlays/dev/`
+
+- **kustomize transformers**
+  - transformers: 기존 필드 변경을 설정
+  - built-in transformer: 내장 변환기. kustomize가 기본 제공. 그외는 커스텀
+    - `commonLabels`
+    - `commonAnnotations`
+    - `images`
+    - `namePrefix` / `nameSuffix`
+    - `patches`
+    - `vars`
+  - 예시)
+    ```yaml
+    apiVersion: kustomize.config.k8s.io/v1beta1
+    kind: Kustomization
+    resources:
+      - db/
+      - monitoring/
+      - nginx/
+    commonLabels:
+      sandbox: dev
+    images:
+      - name: postgres
+        newName: mysql
+    ```
+  - `commonLabels`
+    - kustomization 앱에 레이블을 주어진 값으로 변경
+    - kustomization으로 묶인 모든 리소스에 레이블을 추가할 때 사용됨
+  - `namePrefix`
+    - 모든 리소스 및 참조의 이름 앞에 값을 추가
+  - `commonAnnotations`
+    - 모든 리소스에 공통으로 주석(annotation)추가
+    ```yaml
+    apiVersion: kustomize.config.k8s.io/v1beta1
+    kind: Kustomization
+    resources:
+      - deployment.yaml
+      - service.yaml
+    commonAnnotations:
+      maintainer: "devops@mycompany.com"
+      team: "platform"
+    ```
+    - 각 deployment.yaml/service.yaml에 추가됨
+    ```yaml
+    metadata:
+      annotations:
+        maintainer: "devops@mycompany.com"
+        team: "platform"
+    ```
+
+- **kubernetes patch**
+  - 특정 리소스를 직접 수정하기 위한 수단
+    - overlay 안에서 사용되는 기술적인 방법
+    1. `patchesStrategicMerge`: 쿠버 리소스 구조 기준으로 병합. 일부 필드 명시 자동합침
+      ```yaml
+      patchesStrategicMerge:
+      - patch.yaml
+      ```
+      ```yaml
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: my-app
+      spec:
+        replicas: 5
+      ```
+    2. `patches` or `patchesJson6902`: 지정한 경로에 대해 명시적으로 JSON 스타일 패치 적용
+      ```yaml
+      patches:
+      - target:
+          group: apps
+          version: v1
+          kind: Deployment
+          name: my-app
+        path: patch-replicas.yaml
+      ```
+      ```yaml
+      - op: replace
+        path: /spc/replicas
+        value: 3
+      ```
+  - 기본적으로 `kustomization.yaml` 패치를 사용하면, 있던 내용이면 수정, 없으면 추가됨
+    ```yaml
+    apiVersion: kustomize.config.k8s.io/v1beta1
+    kind: Kustomization
+    resources:
+      - ../../base
+    patches:
+      - target:
+          kind: Deployment
+          name: my-app
+        patch: |-
+          - op: replace
+            path: /spec/replicas
+            value: 2
+    ```
+  - yaml을 별도로 지정하고, 이를 import 하여 패치로 사용하는 경우도 다수
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: api-deployment
+    spec:
+      template:
+        spec:
+          containers:
+            - name: memcached
+              image: memcached
+    ```
+    ```yaml
+    resources:
+      - mongo-depl.yaml
+      - api-depl.yaml
+      - mongo-service.yaml
+      - host-pv.yaml
+      - host-pvc.yaml
+  
+    patches:
+      - path: mongo-patch.yaml
+      - path: api-patch.yaml
+    ```
+  - 특정 컨테이너를 지우도록 패치하려면 `$patch: delete` 키워드 사용 필요
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: api-deployment
+    spec:
+      template:
+        spec:
+          containers:
+            - $patch: delete
+              name: memcached
+    ```
+
+- **kustomize overlay**
+  - 디렉토리 구조의 개념. `base` 재사용하여 환경별 설정 (dev/prod) 구조
+  - 환경에 맞춘 패치 조합!
+  ```
+  my-app/
+  ├── base/
+  │   ├── deployment.yaml
+  │   ├── kustomization.yaml
+  ├── overlays/
+  │   ├── dev/
+  │   │   ├── kustomization.yaml
+  │   │   └── patch.yaml
+  │   └── prod/
+  │       ├── kustomization.yaml
+  │       └── patch.yaml
+  
+  ```
+  - 배포는 각 overlay/{env}/kustomization.yaml에서 수행! 각 환경별 kustomization.yaml은 다음과 같이 작성할 수 있음
+  ```yaml
+  bases:
+    - ../../base
+  resources:
+    - redis-depl.yaml
+  patchesStrategicMerge:
+    - api-patch.yaml
+  ```
+  - overlay 환경 별로도, 각 `kustomization.yaml`에 patch 가능
+  ```yaml
+  bases:
+    - ../../base
+  commonLabels:
+    environment: QA
+  patches:
+    - target:
+        kind: Deployment
+        name: api-deployment
+      patch: |-
+        - op: replace
+          path: /spec/template/spec/containers/0/image
+          value: caddy
+  ```
 
 ## Kubernetes Failure
 - **Application Failure**
