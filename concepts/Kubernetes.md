@@ -2277,4 +2277,39 @@ kubectl apply -k .
 - **개요**
   - 설치형 쿠버네티스로서 서버간 클러스터링 환경 구성하고 관리하기 위한 공식 도구 중 하나
   - 온프레미스 환경에 직접 설치하고 운용할 목적으로 만들어짐
-  - 
+
+## systemd 기반 리눅스 관리 명령어
+- **systemd**
+  - 리눅스 OS에서 부팅/서비스 관리를 `systemd`로 하는 시스템
+  - PID 1번 프로세스
+  - 로그 수집 (journald) -> journalctl로 확인 가능
+  - 리소스 제한, 타이머 기능, 서비스 관리 등
+
+- **`systemctl`**
+  - systemd의 시작/정지/상태 확인 등 시스템 전체 동작 제어
+    - 서비스 시작/중지/재시작
+    - 서비스 상태 확인
+    - 부팅 시 자동 시작 설정
+    - 시스템 전체 상태 확인
+  - 명령어
+    - `systemctl start <serviceName>`: 서비스 시작
+    - `systemctl stop <serviceName>`: 서비스 중지
+    - `systemctl restart <serviceName>`: 서비스 재시작
+    - `systemctl status <serviceName>`: 서비스 현재 상태 보기
+    - `systemctl enable <serviceName>`: 부팅 시 자동시작 설정
+    - `systemctl disable <serviceName>`: 부팅 시 자동시작 해제
+    - `systemctl list-units --type=service`: 로드된 서비스 목록 보기
+    - `systemctl is-active <serviceName>`: 서비스가 활성 상태인지 확인
+    - `systemctl is-enabled <serviceName>`: 부팅 시 자동 시작 설정 여부 확인
+
+- **`journalctl`**
+  - 시스템 전반의 로그 확인
+  - 특정 서비스의 로그 확인
+  - 부팅 로그 확인
+  - 특정 시간, 우선 순위, 메시지 등 필터링
+  - 명령어
+    - `journalctl`: 전체 로그 출력
+    - `journalctl -u <serviceName>`: 특정 서비스의 로그 보기
+    - `journalctl -b`: 현재 부팅 이후의 로그 보기
+    - `journalctl -xe`: 최근 로그 중 에러 중심의 자세한 에러 로그
+    - `journalctl -f`: 실시간 로그 출력
