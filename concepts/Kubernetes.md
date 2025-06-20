@@ -2274,9 +2274,25 @@ kubectl apply -k .
 
 ## kubeadm
 *참고: https://velog.io/@moonblue/kubeadm-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0*  
+*참고: https://v1-32.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/*  
 - **개요**
   - 설치형 쿠버네티스로서 서버간 클러스터링 환경 구성하고 관리하기 위한 공식 도구 중 하나
   - 온프레미스 환경에 직접 설치하고 운용할 목적으로 만들어짐
+
+- **설치**
+  - `container runtime 설치`
+    - container를 pod에서 운용하기 위해서는, container runtime 필요
+    - runtime을 명시하지 않으면, kubeadm는 자동으로 설치된 container runtime을 감지 -> 없거나 여러개라면 에러
+    - containerd: unix://var/run/containerd/containerd.sock
+  - `kubeadm, kubelet, kubectl 설치` 
+    - `kubeadm`: 클러스터 부트스트랩 용도
+    - `kubelet`: 해당 머신에서 돌아가며, pod/container 관리 선장
+    - `kubectl`: 클러스터와 함께 소통 용도
+    - kubeadm이 자체적으로 kubelet/kubectl을 관리하지 않기 때문에, 각 버전이 호환되는 것 확인해야 함.
+
+- **Control Plane Node 설치**
+  1. ifconfig에서 eth0 ip 확인
+  2. `kubeadm init --apiserver-cert-extra-sans=controlplane --apiserver-advertise-address 192.168.122.143 --pod-network-cidr=172.17.0.0/16 --service-cidr=172.20.0.0/16`
 
 ## systemd 기반 리눅스 관리 명령어
 - **systemd**
@@ -2313,3 +2329,61 @@ kubectl apply -k .
     - `journalctl -b`: 현재 부팅 이후의 로그 보기
     - `journalctl -xe`: 최근 로그 중 에러 중심의 자세한 에러 로그
     - `journalctl -f`: 실시간 로그 출력
+
+## kubectl json/jsonpath
+- yaml과 마찬가지로, kubectl 반환값을 json 형식으로 받을 수 있음
+  - `k get nodes -o=json`
+  ```
+  controlplane ~ ✖ k get node -o=json
+  {
+      "apiVersion": "v1",
+      "items": [
+          {
+              "apiVersion": "v1",
+              "kind": "Node",
+              "metadata": {
+                  "annotations": {
+                      "flannel.alpha.coreos.com/backend-data": "{\"VNI\":1,\"VtepMAC\":\"7a:38:61:d4:b1:94\"}",
+                      "flannel.alpha.coreos.com/backend-type": "vxlan",
+                      "flannel.alpha.coreos.com/kube-subnet-manager": "true",
+                      "flannel.alpha.coreos.com/public-ip": "192.168.42.179",
+                      "kubeadm.alpha.kubernetes.io/cri-socket": "unix:///var/run/containerd/containerd.sock",
+                      "node.alpha.kubernetes.io/ttl": "0",
+                      "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+                  },
+                  "name": "node01",
+                  "creationTimestamp": "2025-06-03T00:11:59Z",
+                  "labels": {}
+              }
+          }
+      ]
+  }
+  ```
+- jsonpath
+  - `k get nodes -o=jsonpath='{.items[*].metadata.name}'`
+  ```
+  controlplane ~ ➜  k get nodes -o=jsonpath='{.items[*].metadata.name}'
+  controlplane node01
+  ```
+
+- sort-by 를 활용하여 k get 결과값을 정렬할 수 있음
+  - `k get pv --sort-by=.spec.capacity.storage`
+  ```
+  controlplane ~ ➜  k get pv --sort-by=.spec.capacity.storage
+  NAME       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+  pv-log-4   40Mi       RWX            Retain           Available                          <unset>                          27m
+  pv-log-1   100Mi      RWX            Retain           Available                          <unset>                          27m
+  pv-log-2   200Mi      RWX            Retain           Available                          <unset>                          27m
+  pv-log-3   300Mi      RWX            Retain           Available                          <unset>                          27m
+  ```
+
+- 커스텀 칼럼값을 활용하여 필요한 칼럼만 추출하여 쓸 수 있음. 
+  - `k get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage`
+  ```
+  controlplane ~ ➜  k get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage
+  NAME       CAPACITY
+  pv-log-4   40Mi
+  pv-log-1   100Mi
+  pv-log-2   200Mi
+  pv-log-3   300Mi
+  ```
