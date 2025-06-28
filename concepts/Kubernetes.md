@@ -2024,10 +2024,10 @@
   ```
 
 - **kustomize 명령어**
-```
-# 적용하기 (kustomization.yaml이 있는 디렉토리에서 적용)
-kubectl apply -k .
-```
+  ```
+  # 적용하기 (kustomization.yaml이 있는 디렉토리에서 적용)
+  kubectl apply -k .
+  ```
 
 - **사용법**
   1. Kustomization.yaml
