@@ -194,3 +194,154 @@
     $  helm repo update 
     $  helm upgrade kk-mock1 kk-mock1/nginx --version=18.1.15 -n=kk-ns
     ```
+
+### killer.sh (CKA-A)
+- **Q1. Contexts**
+  - kubeconfig file에서 context 정보 추출하여 저장하기
+    - `k --kubeconfig /config_path config get-contexts`: 컨텍스트 정보 추출
+    - `k --kubeconfig /config_path config get-contexts -o name`: 이름만 추출
+    - `k --kubeconfig /config_path config get-contexts -o name > /file_path`
+  - 현재 컨텍스트 보기
+    - `k --kubeconfig /config_path config current-context`
+  - client certificate 데이터 디코딩
+    - `k config view` 혹은, 실제 config 파일을 열어 `client-certificate-data` 추출
+    - `$ echo base64encodedcertificatedata | base64 -d > /answer`
+  - tips: 잘 모르겠으면 `k config -h`
+
+- **Q3. Statefulset scaledown**
+  - `pod`가 2개가 있다면, 이를 한개로 scale down
+  - 해당 과정에서, pod를 매니지하는 리소스를 찾아보자
+  - `k -n test-ns get deploy, ds, sts | grep targetName`
+  - `deployment`, `daemonset`, `statefulset`, `replicaset`을 총체적으로 검색
+    - `deployment`/`statefulset`/`replicaset`은 `kubernetes scale`로 갯수 조절 가능
+    - `daemonset`은 node마다 하나씩 pod가 배포되도록 설계되었기에 scale로 제어 불가능
+
+- **Q4. 가장 먼저 종료될 Pod 찾기**
+  - node의 cpu/memory가 한도에 다다랐을 때, 쿠버네티스는 요청된 것 보다 더 많은 리소스를 사용중인 pod를 찾을 것
+    - 특정 pod가 request/limit이 지정되어 있지 않다면, 요청보다 더 많이 쓰는 것으로 간주됨
+    - 따라서, Pod 중에서 resource request가 정의되어 있지 않은 것을 찾아야 함
+  - 방법1)
+    - `k describe pods | grep -A 3 -E 'Name|Requests'`: `-E`(extended) / `-A`: 매칭 결과
+    ```
+    controlplane ~ ✖ k describe pods | grep -E 'Name|Requests'
+    Name:             frontend
+    Namespace:        default
+        Requests:
+        ConfigMapName:           kube-root-ca.crt
+    Name:             test
+    Namespace:        default
+        ConfigMapName:           kube-root-ca.crt
+    ```
+  - 방법2)
+    - `k get pod -o jsonpath="{range .items[*]}{.metadata.name}{.spec.containers[*].resources}{'\n'}{end}"`
+    ```
+    frontend{"limits":{"cpu":"500m","memory":"128Mi"},"requests":{"cpu":"250m","memory":"64Mi"}}
+    test{}
+    ```
+
+- **Q5. kustomize 사용하기**
+  - base 폴더 하위에 kustomize로 사용할 것을 정의해두고, 각 환경별로 덮어쓰고/패치 하면서 사용할 수 있도록 한다. 
+  - `k kustomize <stage-name> | k apply -f -`
+  ```
+  $ controlplane ~/test5 ✖ ls
+  base  prod  staging
+  
+  
+  $ controlplane ~/test5/base ➜  ls
+  cm.yaml  hpa.yaml  sa.yaml  deployment.yaml  kustomization.yaml
+  
+  
+  $ controlplane ~/test5/base ➜  cat kustomization.yaml 
+  apiVersion: kustomize.config.k8s.io/v1beta1
+  kind: Kustomization
+  resources:
+    - deployment.yaml
+    - hpa.yaml
+    - cm.yaml
+    - sa.yaml
+  
+  
+  $ controlplane ~/test5/prod ➜  ls
+  api-gateway-deployment.yaml  api-gateway-hpa.yaml  kustomization.yaml
+  
+  
+  $ controlplane ~/test5/prod ➜  cat kustomization.yaml 
+  apiVersion: kustomize.config.k8s.io/v1beta1
+  kind: Kustomization
+  resources:
+    - ../base
+  namespace: api-gateway-prod
+  patches:
+    - target:
+        kind: Deployment
+        name: api-gateway
+      path: api-gateway-deployment.yaml
+    - target:
+        kind: HorizontalPodAutoscaler
+        name: api-gateway
+      path: api-gateway-hpa.yaml
+      
+  
+  $ controlplane ~/test5/prod ➜  cat api-gateway-deployment.yaml 
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: api-gateway
+    labels:
+      env: prod
+      
+  
+  $ controlplane ~/test5/prod ➜  cat api-gateway-hpa.yaml 
+  apiVersion: autoscaling/v2
+  kind: HorizontalPodAutoscaler
+  metadata:
+    name: api-gateway
+  spec:
+    maxReplicas: 6
+  ```
+
+- **Q7. Node/Pod Resource 사용량**
+  - metrics-server를 설치하여 top 명령어를 통해 Node/Pod 사용량을 기록할 수 있음
+  - *참고: https://velog.io/@nhj7804/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A414-error-Metrics-API-not-available*
+    1. metric-server 설치: `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
+  - `k top node`
+  - `k top pod --containers=true`
+  - 모르겠으면 -h 호출하자
+
+- **Q8. kubernetes 버전 업그레이드 + 클러스터 Join**
+  - *참고: https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/*
+  - 요구사항 1. node의 쿠버네티스 버전을 올린뒤
+    - `ssh node01`
+    - `apt update`
+    - `apt show kubectl -a | grep 1.32`
+    - `apt install kubectl=1.32.1-1.1 kubelet=1.32.1-1.1`
+    - `service kubelet restart`
+    - `service kubelet status`
+  - 요구사항 2. 쿠버 클러스터에 node를 합류시키세요
+    - `ssh controlplane`
+    - `kubeadm token create --print-join-command`
+    - `kubeadm token list`
+    - `ssh node01`
+    - `kubeadm join controlplane:6443 --token 6c70qp.34m4fi9q7l3bnucg --discovery-token-ca-cert-hash sha256:2092f9d0d5336377c4d626fa289909d15b4724fcb668e7ab7d441babe671a56c`
+    - `service kubelet status`
+
+- **Q9. Pod 안에서 쿠버네티스 API 호출하기**
+  - *참고: https://kubernetes.io/docs/tasks/run-application/access-api-from-pod/*
+  - service account credential을 활용하면 API 서버와 통신 가능
+  - 기본값으로 Pod는 service account와 연계되어 있으며, **해당 service account의 credential token은 filesystem tree 하위에 저장되어 있음**
+    - `/var/run/secrets/kubernetes.io/serviceaccount/token`
+    - 타 다른 값도 매핑되어 있음
+      - certificate bundle: `/var/run/secrets/kubernetes.io/serviceaccount/ca.crt`
+      - default namespace: `/var/run/secrets/kubernetes.io/serviceaccount/namespace`
+  - 이제 API 호출
+    - `k exec podName -it -- sh`
+    - `TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)`
+    - https 검사 ON
+      - `curl -k https://kubernetes.default`: `-k`는 insecure의 약자로, https 유효성 검증 끄고 요청
+      - `curl -k https://kubernetes.default/api/v1/secrets`
+      - `curl -k https://kubernetes.default/api/v1/secrets -H "Authorization: Bearer ${TOKEN}"`
+    - https 검사 OFF
+      - `CACERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt`
+      - `curl --cacert ${CACERT} https://kubernetes.default/api/v1/secrets -H "Authorization: Bearer ${TOKEN}"`
+  - 앞서서 kubectl로 검증도 가능!
+    - `kubectl auth can-i get secret --as system:serviceaccount:project-joel:secret-reader`
