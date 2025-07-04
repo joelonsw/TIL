@@ -345,3 +345,37 @@
       - `curl --cacert ${CACERT} https://kubernetes.default/api/v1/secrets -H "Authorization: Bearer ${TOKEN}"`
   - 앞서서 kubectl로 검증도 가능!
     - `kubectl auth can-i get secret --as system:serviceaccount:project-joel:secret-reader`
+
+- **Q12. PodAntiAffinity**
+  - `podAffinity`: 같은 노드에 붙어라
+    - 같은 노드에 떠있어야 통신도 빠르고 좋을 때
+    - 나랑 같은 라벨(`labelSelector`) 가진 Pod 있는 `topologyKey`에 나를 넣어줘!
+    - `labelSelector`: 누구를 같은 걸로 볼지
+    - `topologyKey`: 어떤 단위로 배치할지
+  - 예시)
+    ```yaml
+    spec:
+      affinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app: frontend
+          topologyKey: kubernetes.io/hostname
+    ```
+  - `podAntiAffinity`: 다른 노드로 떨어저라
+    - 분산하여 파드를 배치함으로써 노드 하나 죽었을 때 대비
+    - 나랑 같은 라벨(`labelSelector`)을 가진 Pod 있는 `topologyKey` 에는 가지 말 것!
+  - 예시)
+    - `id: very-important` 라벨을 가진 Pod를 이미 해당 노드가 가지고 있다면, 거기엔 배치하지 마!
+    - `labelSelector`: 누구를 같은 걸로 볼지
+    - `topologyKey`: 어떤 단위로 배치할지 (예시 hostname은 노드 단위)
+    ```yaml
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                id: very-important
+            topologyKey: kubernetes.io/hostname
+    ```
