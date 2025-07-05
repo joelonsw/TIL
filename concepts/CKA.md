@@ -379,3 +379,75 @@
                 id: very-important
             topologyKey: kubernetes.io/hostname
     ```
+    
+- **Q13. Gateway Api Ingress**
+  - http-header를 기반으로 routing 될 서비스를 구분할 수 있다. 
+  ```yaml
+  apiVersion: gateway.networking.k8s.io/v1
+  kind: HTTPRoute
+  metadata:
+    name: traffic-director
+    namespace: project-r500
+  spec:
+    parentRefs:
+      - name: main
+    hostnames:
+      - "r500.gateway"
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /desktop
+        backendRefs:
+          - name: web-desktop
+            port: 80
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /mobile
+        backendRefs:
+          - name: web-mobile
+            port: 80
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /auto
+            headers:  # 여기를 '- headers' 로 지칭한다면, path or headers로 잡힌다고 함. 둘 중 하나의 OR 조건이 아니라 AND 조건이라면 이렇게.
+              - type: Exact
+                name: user-agent
+                value: mobile
+        backendRefs:
+          - name: web-mobile
+            port: 80
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /auto
+        backendRefs:
+          - name: web-desktop
+            port: 80
+  ```
+
+- **Q14. kube-apiserver의 validation 날짜**
+  ```
+  controlplane /etc/kubernetes/manifests ➜  cat kube-apiserver.yaml | grep crt
+      - --client-ca-file=/etc/kubernetes/pki/ca.crt
+      - --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
+      - --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt
+      - --kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt
+      - --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt
+      - --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
+      - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt
+  ```
+  - 이제, tls-cert-file를 복호화해보자.
+    - `openssl x509 -noout -text -in /etc/kubernetes/pki/apiserver.crt`
+      - `-noout`: 내용을 꺼내지 말고, 본문만 설명
+      - `-text`: 사람이 읽을 수 있는 형식
+    - `openssl x509 -noout -text -in /etc/kubernetes/pki/apiserver.crt | grep Validity -A2`
+  - 또다른 방법으로는 `kubeadm` 사용
+    - `kubeadm certs check-expiration`: 언제 만료되는지 나옴
+    - `kubeadm certs renew apiserver`: apiserver 인증서 갱신 (실제로 만료날짜 변경됨)
+
+- **Q17. pod w. crictl**
+  - `crictl inspect CONTAINER_ID`를 인스펙션 가능
+  - `crictl logs CONTAINER_ID`를 통해 로깅 가능
