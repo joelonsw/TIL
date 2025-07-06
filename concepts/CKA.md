@@ -123,6 +123,11 @@
     - `k run test-client --image=busybox --rm -it -- /bin/sh`
     - `# telnet service-name 6379`
 
+- **Q7. NodePort 타입에서 port 의미**
+  1. `nodeIP:nodePort` 요청 인입
+  2. 해당 요청은 서비스가 `deployment:port`로 요청 포워딩
+  3. deployment가 해당 요청을 `pod:targetPort`로 요청 포워딩
+
 - **Q10. VPA**
   - vpa는 쿠버 기본 리소스가 아니라, CRD. 하지만 얼추 정형화되어 있는 CRD라 좀 중요한 건 외워두자.
   - CRD 정의 아래와 같이 Group: `autoscaling.k8s.io` , kind: `VerticalPodAutoscaler` 사용토록 권장
