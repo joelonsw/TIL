@@ -448,6 +448,116 @@
     - `kubeadm certs check-expiration`: 언제 만료되는지 나옴
     - `kubeadm certs renew apiserver`: apiserver 인증서 갱신 (실제로 만료날짜 변경됨)
 
+- **Q15. Network Policy**
+  - backend Pod 입장에서 생각하자. 
+    - backend Pod 입장에서 들어오는 것: Ingress
+    - backend Pod 입장에서 나가는 것: Egress
+  - 다음과 같이 networkPolicy 지정 (블럭하나 안에 있으면 AND, - 로 연결하면 OR 기억)
+  ```yaml
+  apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: np-backend
+    namespace: project-snake
+  spec:
+    podSelector:
+      matchLabels:
+        app: backend
+    policyTypes:
+      - Egress
+    egress:
+      - to:
+        - podSelector:
+            matchLabels:
+              app: db1
+        ports:
+        - protocol: TCP
+          port: 1111
+      - to:
+        - podSelector:
+            matchLabels:
+              app: db2
+        ports:
+        - protocol: TCP
+          port: 2222
+  ```
+
+- **Q16. CoreDNS 설정 업데이트**
+  - coredns는 kubeadm을 통해 설치될 때, configmap을 사용
+    - 백업을 위해서는 `k get cm coredns -n=kube-system > coredns_backup.yaml`
+    - 이런 느낌쓰
+    ```
+    controlplane ~ ➜  cat coredns_backup.yaml 
+    apiVersion: v1
+    data:
+      Corefile: |
+        .:53 {
+            errors
+            health {
+               lameduck 5s
+            }
+            ready
+            kubernetes cluster.local in-addr.arpa ip6.arpa {
+               pods insecure
+               fallthrough in-addr.arpa ip6.arpa
+               ttl 30
+            }
+            prometheus :9153
+            forward . /etc/resolv.conf {
+               max_concurrent 1000
+            }
+            cache 30
+            loop
+            reload
+            loadbalance
+        }
+    kind: ConfigMap
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/last-applied-configuration: |
+          {"apiVersion":"v1","data":{"Corefile":".:53 {\n    errors\n    health {\n       lameduck 5s\n    }\n    ready\n    kubernetes cluster.local in-addr.arpa ip6.arpa {\n       pods insecure\n       fallthrough in-addr.arpa ip6.arpa\n       ttl 30\n    }\n    prometheus :9153\n    forward . /etc/resolv.conf {\n       max_concurrent 1000\n    }\n    cache 30\n    loop\n    reload\n    loadbalance\n}\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"coredns","namespace":"kube-system"}}
+      creationTimestamp: "2025-07-06T02:10:57Z"
+      name: coredns
+      namespace: kube-system
+      resourceVersion: "401"
+      uid: cec78840-93d9-4154-827c-3ccd9295a5ff
+    ```
+    - 여기에서 dns로 찾을 도메인 추가하려면, 이 부분 추가 (custom-domain)
+    ```
+    kubernetes custom-domain cluster.local in-addr.arpa ip6.arpa {
+       pods insecure
+       fallthrough in-addr.arpa ip6.arpa
+       ttl 30
+    }
+    ```
+  - 이후 설정 변경해줬으면 deployment 재설정 하자
+    - `k rollout restart deployment coredns -n=kube-system`
+  - busybox pod 띄워서 nslookup 하면 동일한 service ClusterIP로 찾아
+    - `nslookup kubernetes.default.svc.custom-domain`
+    - `nslookup kubernetes.default.svc.cluster.local`
+
 - **Q17. pod w. crictl**
   - `crictl inspect CONTAINER_ID`를 인스펙션 가능
   - `crictl logs CONTAINER_ID`를 통해 로깅 가능
+
+- **Q19. Kube-proxy iptables**
+  - pod 생성, clusterIP로 svc 노출했을 때, 쿠버네티스에서 iptable 설정을 넣어 포워딩 하도록 설정 넣어줌!
+    - ClusterIP로 요청이 들어오면, 실제 Pod(IP:Port)로 포워딩!
+  - `iptables-save`를 통해 `iptables`에 설정된 규칙들을 한번에 출력. 방화벽 규칙 스냅샷 보여줌
+  ```
+  controlplane ~ ➜  iptables-save | grep p2-service
+  -A KUBE-SEP-QNZEQH5XBILEYQC6 -s 172.17.1.11/32 -m comment --comment "project-hamster/p2-service" -j KUBE-MARK-MASQ
+  -A KUBE-SEP-QNZEQH5XBILEYQC6 -p tcp -m comment --comment "project-hamster/p2-service" -m tcp -j DNAT --to-destination 172.17.1.11:80
+  -A KUBE-SERVICES -d 172.20.78.244/32 -p tcp -m comment --comment "project-hamster/p2-service cluster IP" -j KUBE-SVC-U5ZRKF27Y7YDAZTN
+  -A KUBE-SVC-U5ZRKF27Y7YDAZTN ! -s 172.17.0.0/16 -d 172.20.78.244/32 -p tcp -m comment --comment "project-hamster/p2-service cluster IP" -j KUBE-MARK-MASQ
+  -A KUBE-SVC-U5ZRKF27Y7YDAZTN -m comment --comment "project-hamster/p2-service -> 172.17.1.11:80" -j KUBE-SEP-QNZEQH5XBILEYQC6
+  ```
+
+- **Q20. service CIDR 변경하기**
+  - static pod의 `kube-apiserver`, `kube-controller-manager` 두 곳에서 `service-cluster-ip-range`를 변경해주자
+  1. `kube-apiserver`
+     - 클러스터 내에서 생성되는 Service 객체에 할당될 clusterIP를 해당 CIDR 범위에서 할당
+     - Service 리소스 생성시, apiserver가 이 범위에서 IP 할당!
+  2. `kube-controller-manager`
+     - Service에 대한 IP 할당 및 관련 리소스 관리 등 컨트롤러 동작에서 이 CIDR 참조
+     - apiserver와 동일해야 일관성있게 동작!
