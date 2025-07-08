@@ -59,3 +59,7 @@
 
 - **질문**
   - 각자 맡고 있는 모듈의 QPS를 한번 논리적으로 추론해볼까요?
+
+### 스터디
+- L1, L2, L3 캐시 - CPU 칩 안에 내장
+  - https://github.com/jinsusong/CS-Study/issues/22
