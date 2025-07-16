@@ -2,6 +2,7 @@
 *참고: https://learn.kodekloud.com/user/courses/udemy-labs-certified-kubernetes-administrator-with-practice-tests/module/22051647-8ef0-4f24-8551-caa14ec77d40/lesson/e57ddf3f-4325-4ba3-8a94-833762ec631b*  
 *참고: https://sunrise-min.tistory.com/entry/2025-CKA-%ED%95%A9%EA%B2%A9-%ED%9B%84%EA%B8%B0-%EC%9C%A0%ED%98%95-%EB%B3%80%EA%B2%BD-%EB%8C%80%EC%9D%91%EB%B2%95-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%AC%B8%EC%A0%9C-%EA%B2%BD%ED%97%98-%EA%B3%B5%EC%9C%A0?category=1104944*   
 *참고: https://sunrise-min.tistory.com/entry/2025-CKA-%EC%8B%9C%ED%97%98-%EC%A4%80%EB%B9%84-%ED%95%B5%EC%8B%AC-%EC%9A%94%EC%95%BD*  
+*참고: https://kubernetes.io/docs/reference/kubectl/quick-reference/*  
 
 ### CKA 준비 후기
 - crictl, journalctl을 사용하는 트러블 슈팅 문제 출제
@@ -566,3 +567,109 @@
   2. `kube-controller-manager`
      - Service에 대한 IP 할당 및 관련 리소스 관리 등 컨트롤러 동작에서 이 CIDR 참조
      - apiserver와 동일해야 일관성있게 동작!
+
+### Mock Exam 2
+- **Q1. DNS/FQDN(Full Qualified Domain Name)/Headless Service**
+  - 쿠버네티스 환경에서...!
+    1. Deployment가 클러스터 내부의 다양한 엔드포인트와 어떻게 통신하는가?
+    2. 정확한 FQDN을 아는가?
+  - ConfigMap에 FQDN을 넣는다면 svc/pod IP가 변해도, 항상 올바른 엔드포인트와 연결이 됨
+  - DNS의 가장 흔한 방법은 `SERVICE.NAMESPACE.svc.cluster.local`
+    - 이는 쿠버네티스의 IP 주소를 resolve
+  1. `DNS_1`: `default` namespace의 `kubernetes` 서비스 
+     ```
+     $ nslookup kubernentes.default.svc.cluster.local
+     Server:   10.96.0.10
+     Address:  10.96.0.10:53
+  
+     Name:     kubernetes.default.svc.cluster.local
+     Address:  10.96.0.1
+     ```
+  2. `DNS_2`: `lima-workload` namespace의 Headless Service `department` 
+     - Service에 매핑된 Pod가 2개라서 2개가 뜸
+     ```
+     $ nslookup department.lima-workload.svc.cluster.local
+     Server:   10.96.0.10
+     Address:  10.96.0.10:53
+  
+     Name:     department.lima-workload.svc.cluster.local
+     Address:  10.32.0.2
+     Name:     department.lima-workload.svc.cluster.local
+     Address:  10.32.0.9
+     ```
+  3. `DNS_3`: `lima-workload`의 `section100` pod. pod Ip 변경에도 동작할 것
+    - pod가 hostname, subdomain을 명시하면 DNS를 다음과 같이 찾을 수 있음
+    ```
+    $ nslookup section100.section.lima-workload.svc.cluster.local
+    Server:   10.96.0.10
+    Address:  10.96.0.10:53
+  
+    Name:     section100.section.lima-workload.svc.cluster.local
+    Address:  10.32.0.10
+    ```
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: section100
+      namespace: lima-workload
+    spec:
+      hostname: section100
+      subdomain: section  # subdomain을 서비스와 동일하게 설정
+      containers:
+        - image: httpd:2-alpine
+          name: pod
+    ```
+  4. `DNS_4`: `kube-system` namespace의 `1.2.3.4` IP를 가진 Pod
+    - 기본 pod를 찾는 dns는 다음과 같이 `IP.NAMESPACE>pod.cluster.local`
+    ```
+    $ nslookup 1-2-3-4.kube-system.pod.cluster.local
+    Server:   10.96.0.10
+    Address:  10.96.0.10:53
+    
+    Name:     1-2-3-4.kube-system.pod.cluster.local
+    Address:  1.2.3.4
+    ```
+
+- **Q3.**
+
+- **Q5. kubectl sorting**
+  - `metadata.creationTimestamp`로 정렬된 pod
+    - `kubectl get pod -A --sort-by=.metadata.creationTimestamp`
+  - `metadata.uid`로 정렬된 pod
+    - `kubectl get pod -A --sort-by=.metadata.uid`
+
+- **Q6. Kubelet 수정**
+  1. `ps aux | grep kubelet`: kubelet 프로세스가 있는지 검토
+  2. `systemctl kubelet status`: kubelet status 검토
+  3. `systemctl kubelet start`: 시작해보기
+    ```
+    root@cka1024:~# service kubelet status
+    ● kubelet.service - kubelet: The Kubernetes Node Agent
+         Loaded: loaded (/usr/lib/systemd/system/kubelet.service; enabled; preset: enabled)
+        Drop-In: /usr/lib/systemd/system/kubelet.service.d
+                 └─10-kubeadm.conf
+         Active: activating (auto-restart) (Result: exit-code) since Wed 2025-04-23 12:31:07 UTC; 2s ago
+           Docs: https://kubernetes.io/docs/
+        Process: 13014 ExecStart=/usr/local/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EX>
+       Main PID: 13014 (code=exited, status=203/EXEC)
+            CPU: 10ms
+    
+    Apr 23 12:31:07 cka1024 systemd[1]: kubelet.service: Failed with result 'exit-code'.
+    ```
+  4. Process 에러난 곳을 보면서, 이게 왜 에러인지 직접 해보기
+  5. `cat /var/log/syslog | grep kubelet` 혹은 `journalctl -u kubelet` 으로 시스템 로그 확인
+  6. `/usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf` 에서 시작 파일 고치자
+     - 참고: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/
+  7. `systemctl kubelet restart`
+
+- **Q7. Etcd**
+  - Qs) `etcd --version` 실행하기
+  - Ans) etcd는 컨트롤플레인 안의 pod로 실행되기 때문에, 해당 pod 안에서 해당 명령어를 날리자 
+    ```
+    $ k -n kube-system exec etcd-cka1234 -- etcd --version
+    etcd Version: 3.5.21
+    Git SHA: a17edfd
+    Go Version: go1.23.7
+    Go OS/Arch: linux/amd64
+    ```
