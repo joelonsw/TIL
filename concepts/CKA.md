@@ -673,3 +673,152 @@
     Go Version: go1.23.7
     Go OS/Arch: linux/amd64
     ```
+
+- **Q8. Controlplane Information**
+  - `/usr/lib/systemd` 하위에서 어떤 컴포넌트가 systemd 하위에서 관리되는지 볼 수 있음
+  ```
+  $ find /usr/lib/systemd | grep kube
+  /usr/lib/systemd/system/kubelet.service
+  /usr/lib/systemd/system/kubelet.service.d
+  /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
+  ```
+  
+- **Q9. Kill Scheduler, Manual Scheduling**
+  - Scheduler는 static-pod 이니, 해당 yaml을 옮겨두는 것만으로 Scheduler 죽일 수 있음. yaml 위치 원복하면 살아남
+    - `mv kube-scheduler.yaml ..`
+    - `mv ../kube-scheduler.yaml .`
+  - Scheduler가 죽어있어도, pod의 `spec.nodeName` 명시하면 노드에 할당 됨
+
+- **Q10. PV/PVC/StorageClass**
+  - Job에서 특정 StorageClass 기반의 PVC로 claim할 volume을 셋업하기
+  ```yaml
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: backup-pvc
+    namespace: project-bern
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 50Mi
+    storageClassName: local-backup  # 여기서 storageClass를 명시해야 알아서 pv 생성+매핑
+  ---
+  apiVersion: batch/v1
+  kind: Job
+  metadata:
+    name: backup
+    namespace: project-bern
+  spec:
+    backoffLimit: 0
+    template:
+      spec:
+        volumes:
+          - name: backup
+            persistentVolumeClaim:
+              claimName: backup-pvc
+        containers:
+          - name: test
+            image: nginx
+            volumeMounts:
+              - name: backup
+                mountPath: /backup
+        restartPolicy: Never
+  ```
+  
+- **Q11. Secret 생성하기**
+  - `user=user1`, `pass=1234` 로 secret 만들기
+  - `k -n secret create secret generic secret2 --from-literal=user=user1 --from-literal=pass=1234`
+
+- **Q12.특정 Pod를 Controlplane에만 할당하기**
+  - controlplane에만 할당될 수 있는 pod를 만들기
+  1. controlplane에 존재하는 taint 확인
+  ```
+  $ k describe node cka1234 | grep Taint -A1
+  Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+  Unschedulable:      false
+  ```
+  2. controlplane을 지정할 수 있는 label 확인
+  ```
+  $ k get node cka1234 --show-labels
+  LABELS
+  beta.kubernetes.io/arch=amd64,
+  beta.kubernetes.io/os=linux,
+  kubernetes.io/arch=amd64,
+  kubernetes.io/hostname=cka5248,
+  kubernetes.io/os=linux,
+  node-role.kubernetes.io/control-plane=,
+  node.kubernetes.io/exclude-from-external-load-balancers=
+  ```
+  3. nodeSelctor를 곁들여서 pod의 yaml을 작성
+  ```yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: pod1
+  spec:
+    containers:
+      - image: httpd:2-alpine
+        name: pod1-container
+        resources: {}
+    dnsPolicy: ClusterFirst
+    restartPolicy: Always
+    tolerations:  # Taints에 대한 Toleration
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+    nodeSelector: # node labels로 타겟 노드 지정 가능
+      node-role.kubernetes.io/control-plane: ""   # label에 value가 없어 key-only label을 지정!
+  ```
+
+- **Q13. volume을 공유하는 pod내 컨테이너들**
+  ```yaml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: multi-container-playground
+  spec:
+    volumes:
+    - name: pod-volume
+      emptyDir:
+        sizeLimit: 500Mi
+    containers:
+    - image: nginx:1-alpine
+      name: c1
+      env:
+      - name: MY_NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      volumeMounts:
+        - mountPath: /your/vol/path
+          name: pod-volume
+    - image: busybox:1
+      name: c2
+      command: ["sh", "-c", "while true; do date >> /your/vol/path/date.log; sleep 1; done"]
+      volumeMounts:
+        - mountPath: /your/vol/path
+          name: pod-volume
+    - image: busybox:1
+      name: c3
+      command: ["tail", "-f", "/your/vol/path/date.log"]
+      volumeMounts:
+        - mountPath: /your/vol/path
+          name: pod-volume
+  ```
+  
+- **Q14. 클러스터 정보 찾기**
+  - `Service CIDR`은?
+    - kube-apiserver의 `--service-cluster-ip-range`를 보자.
+    ```
+    $ cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep range
+    - --service-cluster-ip-range=172.20.0.0/16
+    ```
+  - `Network Plugin` 설정은 어디에?
+    - `/etc/cni/net.d`에 네트워크 설정이 있음
+    - `/etc/cni/net.d/10-flannel.conflist` 처럼 특정 파일이 있는지 보자
+
+- **Q15. Cluster Event Logging**
+  - `kubectl get events -A --sort-by=.metadata.creationTimestamp` 를 통해 전체 클러스터 이벤트 순차적으로 볼 수 있음
+  - 문제에서 pod를 죽이라고 하면, pod를 죽여라. (daemonset/replica)
+  - container가 죽어도, pod 정의되어 있으면, 쿠버가 container 만듦
