@@ -631,7 +631,38 @@
     Address:  1.2.3.4
     ```
 
-- **Q3.**
+- **Q3. kubectl client/server cert info**
+  - `node01`이 새롭게 `kubeadm` + `TLS bootstrapping` 으로 추가되었을 때, `Issuer`/`Extended Key Usage` 메모하기
+  1. kubelet Client Certificate은 무엇인가? (kube-apiserver로 나가는 커넥션)
+     - kubelet -> api-server
+     - `/var/lib/kubelet/pki/kubelet-client-current.pem`: kubelet이 클러스터에 client로 참여하기 위해 쓰는 인증서
+     - `.pem`은 단순히 base64 확장자일 뿐, `.crt`와 거의 같음
+  2. kubelet Server Certificate은 무엇인가? (kube-apiserver로 부터 들어오는 커넥션)
+     - `/var/lib/kubelet/pki/kubelet.crt`
+     - `CN=node01-ca@xxxx`: 와 같이 부트스트랩 후 kubelet이 직접 self-sign or CSR 처리
+  ```
+  $ ssh node01
+  
+  $ find /var/lib/kubelet/pki   # 이 안에 있는 모든 파일과 하위 디렉토리 찾아서 출력
+  /var/lib/kubelet/pki
+  /var/lib/kubelet/pki/kubelet.crt
+  /var/lib/kubelet/pki/kubelet.key
+  /var/lib/kubelet/pki/kubelet-client-current.pem
+  
+  $ openssl x509 -noout -text -in /var/lib/kubelet/pki/kubelet-client-current.pem | grep Issuer
+  Issuer: CN = kubernetest
+  
+  $ openssl x509 -noout -text -in /var/lib/kubelet/pki/kubelet-client-current.pem | grep "Extended key Usage
+  X509v3 Extended Key Usage:
+    TLS Web Client Authentication
+    
+  $ openssl x509 -noout -text -in /var/lib/kubelet/pki/kubelet.crt | grep Issuer
+  Issuer: CN = node01-ca@1752926864
+  
+  $ openssl x509 -noout -text -in /var/libe/kubelet/pki/kubelet.crt | grep "Extended Key Usage" -A1
+  X509v3 Extended Key Usage: 
+      TLS Web Server Authentication
+  ```
 
 - **Q5. kubectl sorting**
   - `metadata.creationTimestamp`로 정렬된 pod
@@ -822,3 +853,21 @@
   - `kubectl get events -A --sort-by=.metadata.creationTimestamp` 를 통해 전체 클러스터 이벤트 순차적으로 볼 수 있음
   - 문제에서 pod를 죽이라고 하면, pod를 죽여라. (daemonset/replica)
   - container가 죽어도, pod 정의되어 있으면, 쿠버가 container 만듦
+
+- **Q16. Namespace and Api Resources**
+  - 모든 namespaces 기반의 쿠버 리소스 이름 출력하기: `k api-resources --namespaced=true -o name`
+
+- **Q17. Operator, CRDs, RBAC, Kustomize**
+  - `k kustomize base`: base 디렉토리의 yaml 들을 봄으로써, 해당 kustomize에서 관리하는 리소스의 꼴을 볼 수 있음
+  - `k kustomize prod`: 실제로 prod 에서 사용할 yaml을 보자. 
+  - `rbac` 을 수정하기 위해서 kustomize의 rbac.yaml을 봐보자
+
+### 약점
+- helm, kustomize
+- rbac
+- csr
+- storage class
+
+### Tips
+- 차근차근 풀다보면, 잘 모르겠는 문제는 있어도, 손도 못데는 문제는 없을거야. 개념적인 부분은 한 번 씩은 다 봤어. 
+- 문제를 천천히 꼼꼼히 잘 읽자. 
