@@ -864,10 +864,21 @@
 
 ### 약점
 - helm, kustomize
-- rbac
 - csr
-- storage class
+- cni
+- node/pod affinity
+- dns
+- rbac
+- kubeconfig
+- storageClass
+- 설치
+- CRD
+- pod security admission
+- vpa
 
 ### Tips
 - 차근차근 풀다보면, 잘 모르겠는 문제는 있어도, 손도 못데는 문제는 없을거야. 개념적인 부분은 한 번 씩은 다 봤어. 
 - 문제를 천천히 꼼꼼히 잘 읽자. 
+- `echo "ENCODED_BASE64_PEM" | base64 --decode | openssl x509 -noout -text`
+- `kubectl auth can-i`
+- NetworkPolicy 필요하다: calico
