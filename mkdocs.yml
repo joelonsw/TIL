@@ -47,6 +47,9 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - toc:
       permalink: true
+  - sane_lists
+  - mdx_truly_sane_lists:
+      nested_indent: 2
 
 exclude_docs: |
   .git/
