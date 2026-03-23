@@ -1,0 +1,39 @@
+name: Deploy TIL to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create docs symlinks
+        run: |
+          mkdir -p docs
+          for item in */; do
+            dir="${item%/}"
+            case "$dir" in docs|site|.git|.idea|.claude|.github) continue;; esac
+            ln -s "../$dir" "docs/$dir"
+          done
+          for f in *.md; do
+            [ -f "$f" ] && ln -s "../$f" "docs/$f"
+          done
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force

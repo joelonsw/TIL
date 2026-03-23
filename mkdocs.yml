@@ -1,0 +1,57 @@
+site_name: Joel's TIL
+site_description: Today I Learned - 그 날 배운 것을 정리합니다
+site_url: https://joelonsw.github.io/TIL/
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: ko
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 다크 모드로 전환
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 라이트 모드로 전환
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+      lang:
+        - ko
+        - en
+  - awesome-pages:
+      collapse_single_pages: true
+      strict: false
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: true
+
+exclude_docs: |
+  .git/
+  .idea/
+  .claude/
+  .github/
+  site/
