@@ -22940,33 +22940,33 @@
 </ul>
 <h2 id="arraylist">ArrayList에 원소 추가요~<a class="headerlink" href="#arraylist" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>ArrayList에 원소를 추가하는건 O(1)일까?</p>
-</li>
-<li>
-<p>O(N)의 시간복잡도로 원소가 추가되는 경우가 있어</p>
-</li>
+<li>ArrayList에 원소를 추가하는건 O(1)일까?</li>
+</ul>
+<ul>
+<li>O(N)의 시간복잡도로 원소가 추가되는 경우가 있어<ul>
 <li>이때는 할당한 배열에 더 집어넣을 곳이 없는경우</li>
 <li>이때는 기존의 배열보다 2배의 사이즈로 배열 키워서 기존 원소 복붙</li>
 <li>이러면 O(N) 만큼의 시간이 듬</li>
-<li>
-<p>이때가 아니라면 O(1)이 맞음</p>
+<li>이때가 아니라면 O(1)이 맞음</li>
+</ul>
 </li>
-<li>
-<p>그러면 평균을 내보자고</p>
-</li>
+</ul>
+<ul>
+<li>그러면 평균을 내보자고<ul>
 <li>리사이징을 시키는 N개의 원소를 집어넣을때까지...</li>
 <li>O(1) + O(1) + O(1) + ... + O(N) 이라고 하면</li>
-<li>
-<p>((N-1) + N / N) 으로 평균시간을 퉁칠수 있겠지?</p>
-<ul>
+<li>((N-1) + N / N) 으로 평균시간을 퉁칠수 있겠지?<ul>
 <li>이러면 시간 복잡도 여전히 O(1)이 되시겠습니다!</li>
 </ul>
 </li>
-<li>
-<p><strong>StringBuilder</strong> 도 마찬가지야!</p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>StringBuilder</strong> 도 마찬가지야!<ul>
 <li>가변크기 배열을 이용해서 필요한 경우에만 문자열을 복사하도록 함!</li>
+</ul>
+</li>
 </ul>
 
 

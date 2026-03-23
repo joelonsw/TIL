@@ -22975,44 +22975,28 @@
 <h3 id="2021-07-28">2021-07-28<a class="headerlink" href="#2021-07-28" title="Permanent link">&para;</a></h3>
 <h2 id="flyway">코기 Flyway 특강<a class="headerlink" href="#flyway" title="Permanent link">&para;</a></h2>
 <ul>
-<li>DB 형상 관리 툴<ul>
-<li>DB 변경 관리하자 마치 Git 마냥</li>
-</ul>
-</li>
-<li>개발하다가 DB 스키마 바뀌면?<ol>
-<li>ddl-auto=create, update<ul>
-<li>create 하면 날리자나,,,</li>
-<li>update 하면 부족한 부분만 채우자너<ul>
-<li>씽크를 맞추기 위함</li>
-</ul>
-</li>
-<li>ex. member -&gt; user 이름바꿈<ul>
-<li>update로 하면 그냥 user 새로 파게되어요</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>각 배포환경 촤르르 쿼리 날리면서 돌아다니면서 적용</li>
-</ol>
-</li>
-<li>어찌 되는거지?<ul>
-<li>메타데이터 테이블을 만듦</li>
-<li>버전 추가하면서 거기에 맞게 db 변경</li>
-<li>이런걸 migration이라고 함</li>
-<li>변경 꼬리에 꼬리를 물고 진행</li>
-</ul>
-</li>
-<li>유의점<ul>
-<li>마이그레이션은 최신버전 보다 높은 경우에만 적용</li>
-<li>v1 -&gt; v2 사이에 v1.5 이딴거 불가능해!        </li>
-<li>변경 기록 테이블을 지우거나 변경 X</li>
-</ul>
-</li>
-<li>버전 관리<ul>
-<li>날짜를 기반으로 V20210227</li>
-<li>찐 버전 기반 V1, V2</li>
-</ul>
-</li>
+<li>DB 형상 관리 툴
+    - DB 변경 관리하자 마치 Git 마냥</li>
+<li>개발하다가 DB 스키마 바뀌면?
+    1. ddl-auto=create, update
+        - create 하면 날리자나,,,
+        - update 하면 부족한 부분만 채우자너
+            - 씽크를 맞추기 위함
+        - ex. member -&gt; user 이름바꿈
+            - update로 하면 그냥 user 새로 파게되어요
+    2. 각 배포환경 촤르르 쿼리 날리면서 돌아다니면서 적용</li>
+<li>어찌 되는거지?
+    - 메타데이터 테이블을 만듦
+    - 버전 추가하면서 거기에 맞게 db 변경
+    - 이런걸 migration이라고 함
+    - 변경 꼬리에 꼬리를 물고 진행</li>
+<li>유의점
+    - 마이그레이션은 최신버전 보다 높은 경우에만 적용
+    - v1 -&gt; v2 사이에 v1.5 이딴거 불가능해!      <br />
+    - 변경 기록 테이블을 지우거나 변경 X</li>
+<li>버전 관리
+    - 날짜를 기반으로 V20210227
+    - 찐 버전 기반 V1, V2</li>
 <li>classpath 커스텀
     <img alt="" src="../../image/2021-07-28-flyway-vendor.PNG" /></li>
 </ul>
@@ -23024,11 +23008,9 @@
 <ul>
 <li><em>참고 1: https://techblog.woowahan.com/2597/</em></li>
 <li><em>참고 2: https://subji.github.io/posts/2021/01/06/springrestdocsexample</em></li>
-<li>
-<p><strong>junit, MockMvc, asciiDoc의 환경</strong></p>
-<ul>
-<li>build.gradle
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>plugins {
+<li><strong>junit, MockMvc, asciiDoc의 환경</strong>
+    - build.gradle
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>plugins {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    id &quot;org.asciidoctor.convert&quot; version &quot;1.5.9.2&quot; // (1) AsciiDoc 파일 컨버팅 후 Build 폴더에 복사 위함
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>}
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -23048,48 +23030,34 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>}
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>ControllerTest 설정</strong></p>
 <ul>
-<li>mockMvc 객체 restDocs 쓸 수 있도록 설정해두기</li>
-<li><code>protected static OperationRequestPreprocessor getDocumentRequest()</code><ul>
-<li>OperationRequestPrepocessor 설정 해주기</li>
+<li><strong>ControllerTest 설정</strong>
+    - mockMvc 객체 restDocs 쓸 수 있도록 설정해두기
+    - <code>protected static OperationRequestPreprocessor getDocumentRequest()</code>
+        - OperationRequestPrepocessor 설정 해주기</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>찐 Controller 객체 테스트+문서화</strong>  </p>
 <ul>
-<li><code>@MockBean</code> 선언하여 mocking 할 서비스 객체 생성</li>
-<li>mocking 하여 예상 응답값 받기</li>
-<li>테스트 수행시 <code>./build/generated-snippets/</code> 하위에 지정한 문자열의 폴더에 스니펫 문서 작성됨<ul>
-<li>http-request.adoc</li>
-<li>http-response.adoc</li>
-<li>path-parameter.adoc</li>
-<li>request-fields.adoc</li>
-<li>response-fields.adoc 등</li>
+<li><strong>찐 Controller 객체 테스트+문서화</strong><br />
+    - <code>@MockBean</code> 선언하여 mocking 할 서비스 객체 생성
+    - mocking 하여 예상 응답값 받기
+    - 테스트 수행시 <code>./build/generated-snippets/</code> 하위에 지정한 문자열의 폴더에 스니펫 문서 작성됨
+        - http-request.adoc
+        - http-response.adoc
+        - path-parameter.adoc
+        - request-fields.adoc
+        - response-fields.adoc 등</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>필수값 여부</strong></p>
 <ul>
-<li>requestField에 .optional() 추가</li>
-<li>스티펫에는 없는 필드라서, 스니펫을 커스텀 할 것!<ul>
-<li>src/test/resources/org/springframework/restdocs/templates 경로에 <code>request-fields.snippet</code> 추가하기</li>
-<li>다량의 mustache 문법 함유</li>
+<li><strong>필수값 여부</strong>
+    - requestField에 .optional() 추가
+    - 스티펫에는 없는 필드라서, 스니펫을 커스텀 할 것!
+        - src/test/resources/org/springframework/restdocs/templates 경로에 <code>request-fields.snippet</code> 추가하기
+        - 다량의 mustache 문법 함유</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>스니펫을 조합해 문서 만들기</strong></p>
 <ul>
-<li>사용자 정의 .adoc 파일을 <code>src/main/docs/asciidocs</code>에 만들고 다음과 같이 생성
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>== Feed (피드)
+<li><strong>스니펫을 조합해 문서 만들기</strong>
+    - 사용자 정의 .adoc 파일을 <code>src/main/docs/asciidocs</code>에 만들고 다음과 같이 생성
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>== Feed (피드)
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>=== 피드 업로드
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -23102,30 +23070,24 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>==== Response
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>include::{snippets}/feed-create/http-response.adoc[]
-</code></pre></div></li>
-<li>이후 빌드하면 build/generated-snippets 밑에 기본 파일 생성<ul>
-<li>해당 snippet은 자동으로 .adoc과 연결</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 이후 빌드하면 build/generated-snippets 밑에 기본 파일 생성
+        - 해당 snippet은 자동으로 .adoc과 연결</li>
 </ul>
 <h2 id="webmvctest"><code>@WebMvcTest</code><a class="headerlink" href="#webmvctest" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.testing.spring-boot-applications.spring-mvc-tests</em></li>
 <li>HTTP 서버 없이 MVC 컨트롤러 테스트하기 쉬움</li>
-<li>Spring MVC 구조를 테스트하기 위해 다음과 같은 친구들만 받아옴<ul>
-<li><code>@Controller</code></li>
-<li><code>@ControllerAdvice</code></li>
-<li><code>@JsonComponent</code></li>
-<li><code>Converter</code></li>
-<li><code>GenericConverter</code></li>
-<li><code>Filter</code></li>
-<li><code>HandlerInterceptor</code></li>
-<li><code>WebMvcConfigurer</code></li>
-<li><code>HandlerMethodArgumentResolver</code></li>
-</ul>
-</li>
+<li>Spring MVC 구조를 테스트하기 위해 다음과 같은 친구들만 받아옴
+    - <code>@Controller</code>
+    - <code>@ControllerAdvice</code>
+    - <code>@JsonComponent</code>
+    - <code>Converter</code>
+    - <code>GenericConverter</code>
+    - <code>Filter</code>
+    - <code>HandlerInterceptor</code>
+    - <code>WebMvcConfigurer</code>
+    - <code>HandlerMethodArgumentResolver</code></li>
 <li>주로 하나의 컨트롤러를 테스트하기 위함 </li>
 <li><code>@MockBean</code>으로 필요한 친구 모킹</li>
 </ul>

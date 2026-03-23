@@ -22955,44 +22955,24 @@
 <ul>
 <li>참고 1: https://cheese10yun.github.io/checked-exception/</li>
 <li>참고 2: https://woowacourse.github.io/javable/post/2020-08-17-custom-exception/</li>
-<li>
-<p>참고 3: https://jamie95.tistory.com/entry/Java-StackTrace-%EC%9D%BD%EA%B8%B0</p>
-</li>
-<li>
-<p><strong>정의</strong></p>
+<li>참고 3: https://jamie95.tistory.com/entry/Java-StackTrace-%EC%9D%BD%EA%B8%B0</li>
+</ul>
 <ul>
-<li>프로그램이 실행 중 어떤 원인에 의해서 오작동을 하거나, 비정상적으로 종료되는 경우</li>
+<li><strong>정의</strong>
+    - 프로그램이 실행 중 어떤 원인에 의해서 오작동을 하거나, 비정상적으로 종료되는 경우</li>
 </ul>
-</li>
-<li>
-<p><strong>역사</strong></p>
 <ul>
-<li>
-<p>에러를 처리하는 두 가지 방법</p>
-<ol>
-<li>반환값으로 실패를 전달해, 호출처에서 반환값을 체크하여 에러 처리 진행 <em>(C언어 등)</em><ul>
-<li>반환값 확인을 잊어버리면 말짱 도루묵</li>
-<li>2번이 더 발전된 방식으로 채택</li>
-</ul>
-</li>
-<li>호출처에서 호출하기 전에 에러 처리 코드를 등록, 실패 시 에러 처리 코드로 점프 <em>(현재 예외 처리 방식)</em></li>
-</ol>
-</li>
-<li>
-<p>에러가 발생했을 떄 "점프할 장소를 사전에 등록"해두는 방법이 발전하여 예외 처리가 됨</p>
-<ul>
-<li>문제는 "짝을 이루는 처리"(lock/unlock, file open/close 등) 처리가 어려움</li>
-<li>함수가 어떤 예외 던질 지 확인이 힘듦</li>
-</ul>
-</li>
-<li>
-<p>Java를 포함, 대부분의 예외 처리는 예외가 호출처로 전파됨</p>
-<ul>
-<li>다만, 호출처에서 부르는 모든 함수에 대한 예외 상황을 검토해야해 설계에 단점이 될 수도</li>
-<li>또한, 처리가 귀찮음. try/catch 쪽수 많아짐... 다른 언어에서는 잘 안쓰임</li>
-</ul>
-</li>
-</ul>
+<li><strong>역사</strong>
+    - 에러를 처리하는 두 가지 방법
+        1. 반환값으로 실패를 전달해, 호출처에서 반환값을 체크하여 에러 처리 진행 <em>(C언어 등)</em>
+            - 반환값 확인을 잊어버리면 말짱 도루묵
+            - 2번이 더 발전된 방식으로 채택
+        2. 호출처에서 호출하기 전에 에러 처리 코드를 등록, 실패 시 에러 처리 코드로 점프 <em>(현재 예외 처리 방식)</em><p>- 에러가 발생했을 떄 "점프할 장소를 사전에 등록"해두는 방법이 발전하여 예외 처리가 됨
+      - 문제는 "짝을 이루는 처리"(lock/unlock, file open/close 등) 처리가 어려움
+      - 함수가 어떤 예외 던질 지 확인이 힘듦</p>
+<p>- Java를 포함, 대부분의 예외 처리는 예외가 호출처로 전파됨
+      - 다만, 호출처에서 부르는 모든 함수에 대한 예외 상황을 검토해야해 설계에 단점이 될 수도
+      - 또한, 처리가 귀찮음. try/catch 쪽수 많아짐... 다른 언어에서는 잘 안쓰임</p>
 </li>
 </ul>
 <p><img alt="exception" src="../../image/exception_2021_02_24.PNG" />
@@ -23003,321 +22983,191 @@
     - RuntimeException 클래스들: 프로그래머의 실수로 발생하는 예외
 </code></pre></div>
 <ul>
-<li>
-<p><strong>Checked Exception, Unchecked Exception</strong></p>
+<li><strong>Checked Exception, Unchecked Exception</strong>
+    - Checked Exception(Exception 상속)
+        - Compile Time Exception
+        - 컴파일 시점에 Exception에 대한 처리(try/catch)가 없다면 "컴파일 에러"
+        - Exception이 발생하는 메서드에서 "throws" 예약어를 활용해 Exception을 호출 메서드에게 필수 전달<p>- Unchecked Exception(RuntimeException 상속)
+      - Runtime Time Exception
+      - 컴파일 시점에 Exception을 catch하는 지 확인 안 함.
+      - Exception이 발생하는 메서드에서 "throws" 예약어를 활용해 Exception을 호출 메서드에게 필수 전달할 필요 X
+          - 하지만 해도 무방</p>
+</li>
+</ul>
 <ul>
-<li>
-<p>Checked Exception(Exception 상속)</p>
+<li><strong>Exception vs RuntimeException</strong>
+    - Exception
+        - 호출하는 메서드가 Exception을 활용해 무엇인가 의미 있는 작업을 할 수 있는 경우<p>- RuntimeException
+      - 호출하는 메서드가 Exception을 catch해 예외 상황 해결이 가능한 경우
+      - 문제를 해결할 수 없는 경우</p>
+</li>
+</ul>
 <ul>
-<li>Compile Time Exception</li>
-<li>컴파일 시점에 Exception에 대한 처리(try/catch)가 없다면 "컴파일 에러"</li>
-<li>Exception이 발생하는 메서드에서 "throws" 예약어를 활용해 Exception을 호출 메서드에게 필수 전달</li>
-</ul>
+<li><strong>기존 Exception vs Custom Exception</strong>
+    - 기존 Exception
+        1. 예외 메시지로도 충분히 의미 전달 가능
+        2. 표준 예외를 통해 가독성 향상
+        3. 일일히 예외 클래스 만들면, 커스텀 예외 너무 많아짐
+            - 해당 패키지와 클래스 관리
+            - 너무 많아진다면 메모리 문제까지!<p>- Custom Exception
+      1. 이름만으로도 정보 전달이 가능
+      2. 상세한 예외 정보를 제공할 수 있음
+      3. 예외에 대한 응집도 향상
+          - 예외에 필요한 메시지
+          - 전달할 정보의 데이터
+          - 데이터 가공 메서드 등을 한 곳에서 관리 가능
+      4. 예외 발생 후처리가 용이
+          - 정확히 어디서 터진 에러인지 알기 쉽다
+      5. 예외 생성 비용을 절감
+          - 오히려 안쓰는 stackTrace() 메서드 오버라이드
+              - fillInStackTrace() @Override
+          - 단순하게 메시지만 넘겨준다면, 해당 예외를 캐싱해두는 것도 방법!</p>
+<p>- Brown's Opinion
+      - 내 도메인에 한정된 exception은 직접 만들어도 좋다!</p>
 </li>
-<li>
-<p>Unchecked Exception(RuntimeException 상속)</p>
+</ul>
 <ul>
-<li>Runtime Time Exception</li>
-<li>컴파일 시점에 Exception을 catch하는 지 확인 안 함.</li>
-<li>Exception이 발생하는 메서드에서 "throws" 예약어를 활용해 Exception을 호출 메서드에게 필수 전달할 필요 X<ul>
-<li>하지만 해도 무방</li>
-</ul>
+<li><strong>용어</strong>
+    - finally: 예외의 발생여부에 상관없이 실행되어야할 코드를 포함시킴
+        - C++에는 finally가 없다! 접근하는 객체의 인스턴스를 만들어서 "소멸자"를 호출하는 방식으로 닫는다!<p>- throw: 프로그래머가 고의로 예외를 발생시키는 것</p>
+<p>- stackTrace: Application이 시작된 시점부터 프로그램 내에서 현재 실행 위치까지의 메서드 호출 목록
+      - 예외 발생시, JVM에 의해 자동 생성</p>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Exception vs RuntimeException</strong></p>
 <ul>
-<li>
-<p>Exception</p>
-<ul>
-<li>호출하는 메서드가 Exception을 활용해 무엇인가 의미 있는 작업을 할 수 있는 경우</li>
-</ul>
-</li>
-<li>
-<p>RuntimeException</p>
-<ul>
-<li>호출하는 메서드가 Exception을 catch해 예외 상황 해결이 가능한 경우</li>
-<li>문제를 해결할 수 없는 경우</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>기존 Exception vs Custom Exception</strong></p>
-<ul>
-<li>
-<p>기존 Exception</p>
-<ol>
-<li>예외 메시지로도 충분히 의미 전달 가능</li>
-<li>표준 예외를 통해 가독성 향상</li>
-<li>일일히 예외 클래스 만들면, 커스텀 예외 너무 많아짐<ul>
-<li>해당 패키지와 클래스 관리</li>
-<li>너무 많아진다면 메모리 문제까지!</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p>Custom Exception</p>
-<ol>
-<li>이름만으로도 정보 전달이 가능</li>
-<li>상세한 예외 정보를 제공할 수 있음</li>
-<li>예외에 대한 응집도 향상<ul>
-<li>예외에 필요한 메시지</li>
-<li>전달할 정보의 데이터</li>
-<li>데이터 가공 메서드 등을 한 곳에서 관리 가능</li>
-</ul>
-</li>
-<li>예외 발생 후처리가 용이<ul>
-<li>정확히 어디서 터진 에러인지 알기 쉽다</li>
-</ul>
-</li>
-<li>예외 생성 비용을 절감<ul>
-<li>오히려 안쓰는 stackTrace() 메서드 오버라이드<ul>
-<li>fillInStackTrace() @Override</li>
-</ul>
-</li>
-<li>단순하게 메시지만 넘겨준다면, 해당 예외를 캐싱해두는 것도 방법!</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p>Brown's Opinion</p>
-<ul>
-<li>내 도메인에 한정된 exception은 직접 만들어도 좋다!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>용어</strong></p>
-<ul>
-<li>
-<p>finally: 예외의 발생여부에 상관없이 실행되어야할 코드를 포함시킴</p>
-<ul>
-<li>C++에는 finally가 없다! 접근하는 객체의 인스턴스를 만들어서 "소멸자"를 호출하는 방식으로 닫는다!</li>
-</ul>
-</li>
-<li>
-<p>throw: 프로그래머가 고의로 예외를 발생시키는 것</p>
-</li>
-<li>
-<p>stackTrace: Application이 시작된 시점부터 프로그램 내에서 현재 실행 위치까지의 메서드 호출 목록</p>
-<ul>
-<li>예외 발생시, JVM에 의해 자동 생성</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>문법</strong></p>
-<ul>
-<li>
-<p>하나의 try 블럭 다음에는 여러 종류의 예외를 처리할 수 있도록 하나 이상의 catch 블럭을 둘 수 있다</p>
-<ul>
-<li>BUT! 이 중 발생한 예외의 종류와 일치하는 단 "한 개"의 catch 블럭만 수행된다!</li>
-</ul>
-</li>
-<li>
-<p>예외가 발생하면, 발생한 예외에 해당하는 클래스의 인스턴스가 만들어짐</p>
-<ul>
-<li>첫 번째 catch 부터 차근 차근 내려가며 instanceof 연산자 통한 검사!</li>
-</ul>
-</li>
-</ul>
+<li><strong>문법</strong>
+    - 하나의 try 블럭 다음에는 여러 종류의 예외를 처리할 수 있도록 하나 이상의 catch 블럭을 둘 수 있다
+        - BUT! 이 중 발생한 예외의 종류와 일치하는 단 "한 개"의 catch 블럭만 수행된다!<p>- 예외가 발생하면, 발생한 예외에 해당하는 클래스의 인스턴스가 만들어짐
+      - 첫 번째 catch 부터 차근 차근 내려가며 instanceof 연산자 통한 검사!</p>
 </li>
 </ul>
 <h2 id="1">로또 1차 피드백 정리<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>에러 메시지와 예외 처리 코드가 일치할 것</p>
-</li>
-<li>
-<p>매직 넘버를 제거할 때에는 적절한 네이밍이 필수!</p>
-</li>
-<li>
-<p>상수를 에러 메시지 생성에도 사용하자</p>
-</li>
-<li>
-<p>중복되는 의미를 가진 두 단어를 겹쳐 네이밍에 사용하지 말자</p>
+<li>에러 메시지와 예외 처리 코드가 일치할 것</li>
+</ul>
 <ul>
-<li>LOTTO_NUMBERS_SIZE(X) vs SIZE(O)</li>
+<li>매직 넘버를 제거할 때에는 적절한 네이밍이 필수!</li>
 </ul>
-</li>
-<li>
-<p>인스턴스 변수의 초기화는 하나의 생성자에서 하자</p>
-</li>
-<li>
-<p>스트림에 쓰일 람다를 공부해 봐라</p>
-</li>
-<li>
-<p>테스트 코드 작성 시, @DisplayName을 이용해 의미 전달을 했다면, 한글로 메서드 명 작성 X</p>
-</li>
-<li>
-<p>DTO의 장,단점?</p>
 <ul>
-<li>DTO: 계층 간 데이터 교환을 위한 객체<ul>
-<li>로직이 없는 순수한 데이터 객체로, Getter와 Setter를 주로 가짐</li>
+<li>상수를 에러 메시지 생성에도 사용하자</li>
 </ul>
-</li>
-<li>원격 호출은 항상 비싼 작업이니, 한 번 호출에 최대한 많은 것을 뽑아와야함</li>
-<li>Entity 클래스들 <em>(아마 domain에 속하는 클래스 인듯 하다)</em> 이 View영역 까지 넘어가서 사용된다?<ul>
-<li>Web MVC에서는 어색한 패턴</li>
-<li>Entity에 view를 위한 로직이 추가되어야 함</li>
-<li>영속화 상태란 걸 보장할 수 없음</li>
-<li>API 스펙과 Entity 사이에 의존성이 생김 <em>(뭔소리여 이건?)</em></li>
-<li>Entity 변경에 따른 사이드 이펙트 추적 불가</li>
-</ul>
-</li>
-<li>아하 그러니까, <ul>
-<li>영속화 상태라는 것을 보장할 수 있고 (Collections.unmodifiable), </li>
-<li>view만을 위한 로직이 추가 될 필요가 없다면 (가령 toString 같은 거), </li>
-<li>그러면 불변 객체를 통한 데이터 운반이 괜찮은 방법일수도!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>BigDecimal은 값 객체로, DTO 대신 사용이 가능하다 왜 그럴까?</p>
 <ul>
-<li>BigDeciaml은 불변 객체!</li>
-<li>따로 view만을 위한 로직을 추가할 필요도 없다</li>
-<li>그럼 그냥 써도 괜찮지 않을까?</li>
+<li>중복되는 의미를 가진 두 단어를 겹쳐 네이밍에 사용하지 말자
+    - LOTTO_NUMBERS_SIZE(X) vs SIZE(O)</li>
 </ul>
-</li>
-<li>
-<p>함수는 한 가지 일만 하도록 한다. </p>
-</li>
-<li>
-<p>굉장히 강하게 결합되어 있다면, 해당 클래스를 합치는 걸 고려해 볼 것</p>
-</li>
-<li>
-<p>"분리될 만큼의 책임"을 갖고 있는가 검토해 볼 것</p>
 <ul>
-<li>단지 값 보관의 용도라면, 분리가 의미가 없을 수도</li>
-<li>충분히 비즈니스 로직이 필요할 때, 즉 "역할"이 주어저야 할 때 객체로 분리시키는 게 맞음</li>
+<li>인스턴스 변수의 초기화는 하나의 생성자에서 하자</li>
 </ul>
-</li>
-<li>
-<p>사용자의 입력을 받을 때, 어느 곳에서 검증의 책임을 가질지 고민해볼 것</p>
 <ul>
-<li>입력을 파싱하는 책임은 view단이 어울림</li>
-<li>실제로 알맞은 값을 입력받았는지는 domain단이 어울림</li>
+<li>스트림에 쓰일 람다를 공부해 봐라</li>
 </ul>
-</li>
-<li>
-<p>읽는 순서대로 메서드를 배치하자</p>
-</li>
-<li>
-<p>정적 팩터리 메서드의 장점?</p>
 <ul>
-<li>장점<ol>
-<li>이름이 있으므로 생성자에 비해 가독성이 좋음</li>
-<li>호출할 때 마다 새로운 객체 생성할 필요 없음</li>
-<li>하위 자료형 객체 반환 가능</li>
-<li>형인자 자료형 만들 때 유용</li>
-</ol>
-</li>
-<li>해당 장점을 충분히 살릴 수 없다면 그냥 생성자 써라!</li>
+<li>테스트 코드 작성 시, @DisplayName을 이용해 의미 전달을 했다면, 한글로 메서드 명 작성 X</li>
 </ul>
-</li>
-<li>
-<p>Bool 변수 이름 제대로 짓기 연습</p>
 <ul>
-<li>참고: https://soojin.ro/blog/naming-boolean-variables</li>
-<li>is 용법<ul>
-<li>is + 명사: (무엇)인가?</li>
-<li>is + ~ing: ~를 하는 중인가?</li>
-<li>is + 형용사: 해당 특성이 있는가?</li>
+<li>DTO의 장,단점?
+    - DTO: 계층 간 데이터 교환을 위한 객체
+        - 로직이 없는 순수한 데이터 객체로, Getter와 Setter를 주로 가짐
+    - 원격 호출은 항상 비싼 작업이니, 한 번 호출에 최대한 많은 것을 뽑아와야함
+    - Entity 클래스들 <em>(아마 domain에 속하는 클래스 인듯 하다)</em> 이 View영역 까지 넘어가서 사용된다?
+        - Web MVC에서는 어색한 패턴
+        - Entity에 view를 위한 로직이 추가되어야 함
+        - 영속화 상태란 걸 보장할 수 없음
+        - API 스펙과 Entity 사이에 의존성이 생김 <em>(뭔소리여 이건?)</em>
+        - Entity 변경에 따른 사이드 이펙트 추적 불가
+    - 아하 그러니까, 
+        - 영속화 상태라는 것을 보장할 수 있고 (Collections.unmodifiable), 
+        - view만을 위한 로직이 추가 될 필요가 없다면 (가령 toString 같은 거), 
+        - 그러면 불변 객체를 통한 데이터 운반이 괜찮은 방법일수도!</li>
 </ul>
-</li>
-<li>can 용법<ul>
-<li>can + 동사원형: ~를 할 수 있는가?</li>
-</ul>
-</li>
-<li>has 용법<ul>
-<li>has + 명사: ~를 가지고 있는가?</li>
-</ul>
-</li>
-<li>동사원형 용법<ul>
-<li>3인칭 단수: </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Stream의 for-each VS for-loop</p>
 <ul>
-<li>참고: https://woowacourse.github.io/javable/post/2020-05-14-foreach-vs-forloop/</li>
-<li>자바에서 Stream은 컬렉션의 요소를 하나씩 참조해, "함수형 인터페이스"를 통해 "반복적인 작업의 처리"를 가능하게 해줌</li>
-<li>forEach()는 최종연산이라서, 안에 쓰는 람다식에 조건을 추가하는 건 뻘짓</li>
-<li>이펙티브 자바: forEach연산은 최종 연산 중 가장 기능이 적고 덜 스트림 적. 그냥 print 할 때만 써라</li>
-<li>forEach 내부에 로직이 하나라도 추가되면 동시성 보장 어려워짐, 가독성도 떨어짐<ul>
-<li>애초에 최종연산 같은 경우 로직을 수행하는 의도가 아님</li>
-<li>로직을 통한 데이터 가공은 중간연산에서 하는 게 맞음</li>
+<li>BigDecimal은 값 객체로, DTO 대신 사용이 가능하다 왜 그럴까?
+    - BigDeciaml은 불변 객체!
+    - 따로 view만을 위한 로직을 추가할 필요도 없다
+    - 그럼 그냥 써도 괜찮지 않을까?</li>
 </ul>
-</li>
+<ul>
+<li>함수는 한 가지 일만 하도록 한다. </li>
 </ul>
-</li>
+<ul>
+<li>굉장히 강하게 결합되어 있다면, 해당 클래스를 합치는 걸 고려해 볼 것</li>
+</ul>
+<ul>
+<li>"분리될 만큼의 책임"을 갖고 있는가 검토해 볼 것
+    - 단지 값 보관의 용도라면, 분리가 의미가 없을 수도
+    - 충분히 비즈니스 로직이 필요할 때, 즉 "역할"이 주어저야 할 때 객체로 분리시키는 게 맞음</li>
+</ul>
+<ul>
+<li>사용자의 입력을 받을 때, 어느 곳에서 검증의 책임을 가질지 고민해볼 것
+    - 입력을 파싱하는 책임은 view단이 어울림
+    - 실제로 알맞은 값을 입력받았는지는 domain단이 어울림</li>
+</ul>
+<ul>
+<li>읽는 순서대로 메서드를 배치하자</li>
+</ul>
+<ul>
+<li>정적 팩터리 메서드의 장점?
+    - 장점
+        1. 이름이 있으므로 생성자에 비해 가독성이 좋음
+        2. 호출할 때 마다 새로운 객체 생성할 필요 없음
+        3. 하위 자료형 객체 반환 가능
+        4. 형인자 자료형 만들 때 유용
+    - 해당 장점을 충분히 살릴 수 없다면 그냥 생성자 써라!</li>
+</ul>
+<ul>
+<li>Bool 변수 이름 제대로 짓기 연습
+    - 참고: https://soojin.ro/blog/naming-boolean-variables
+    - is 용법
+        - is + 명사: (무엇)인가?
+        - is + ~ing: ~를 하는 중인가?
+        - is + 형용사: 해당 특성이 있는가?
+    - can 용법
+        - can + 동사원형: ~를 할 수 있는가?
+    - has 용법
+        - has + 명사: ~를 가지고 있는가?
+    - 동사원형 용법
+        - 3인칭 단수: </li>
+</ul>
+<ul>
+<li>Stream의 for-each VS for-loop
+    - 참고: https://woowacourse.github.io/javable/post/2020-05-14-foreach-vs-forloop/
+    - 자바에서 Stream은 컬렉션의 요소를 하나씩 참조해, "함수형 인터페이스"를 통해 "반복적인 작업의 처리"를 가능하게 해줌
+    - forEach()는 최종연산이라서, 안에 쓰는 람다식에 조건을 추가하는 건 뻘짓
+    - 이펙티브 자바: forEach연산은 최종 연산 중 가장 기능이 적고 덜 스트림 적. 그냥 print 할 때만 써라
+    - forEach 내부에 로직이 하나라도 추가되면 동시성 보장 어려워짐, 가독성도 떨어짐
+        - 애초에 최종연산 같은 경우 로직을 수행하는 의도가 아님
+        - 로직을 통한 데이터 가공은 중간연산에서 하는 게 맞음</li>
 </ul>
 <h2 id="_1">리팩토링하며 궁금했던 것들 정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>Java의 scanner는 대체 무엇이며, 어디서 어떻게 써야하는가?</p>
+<li>Java의 scanner는 대체 무엇이며, 어디서 어떻게 써야하는가?
+    - Scanner 클래스의 특징
+        1. 기본적인 데이터 타입들을 Scanner의 메서도를 사용하여 입력받을 수 있다.
+            - String으로 입력받고 싶으면 nextLine(), int로 입력받고 싶다면 nextInt()를 사용하여 입력 받음
+        2. Scanner을 사용할 시 util 패키지 경로의 Scanner 클래스를 호출하자
+            - Scanner의 경우 java.util에 존재
+        3. 공백, 개행을 기준으로 읽음
+            - ('','\t','\r', '\n')을 기준으로 읽는다
+    - 나중에 꼭 읽어보기 1 : https://st-lab.tistory.com/41
+    - 나중에 꼭 읽어보기 2 : https://st-lab.tistory.com/92</li>
+</ul>
 <ul>
-<li>Scanner 클래스의 특징<ol>
-<li>기본적인 데이터 타입들을 Scanner의 메서도를 사용하여 입력받을 수 있다.<ul>
-<li>String으로 입력받고 싶으면 nextLine(), int로 입력받고 싶다면 nextInt()를 사용하여 입력 받음</li>
+<li>!!!!! Stream은 어떻게 돌아가는가?
+    - 스트림 생성 과정은 어떤가?<p>- 스트림의 장단점은 무엇인가?</p>
+<p>- 스트림의 오버헤드는 무엇이 있는가?</p>
+</li>
 </ul>
-</li>
-<li>Scanner을 사용할 시 util 패키지 경로의 Scanner 클래스를 호출하자<ul>
-<li>Scanner의 경우 java.util에 존재</li>
-</ul>
-</li>
-<li>공백, 개행을 기준으로 읽음<ul>
-<li>('','\t','\r', '\n')을 기준으로 읽는다</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>나중에 꼭 읽어보기 1 : https://st-lab.tistory.com/41</li>
-<li>나중에 꼭 읽어보기 2 : https://st-lab.tistory.com/92</li>
-</ul>
-</li>
-<li>
-<p>!!!!! Stream은 어떻게 돌아가는가?</p>
 <ul>
-<li>
-<p>스트림 생성 과정은 어떤가?</p>
-</li>
-<li>
-<p>스트림의 장단점은 무엇인가?</p>
-</li>
-<li>
-<p>스트림의 오버헤드는 무엇이 있는가?</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Collections.unmodifiable에 대한 고민</p>
-<ul>
-<li>
-<p>참조는 끊는가?</p>
-<p><img alt="unmod" src="../../image/unmodifiable_2021_02_25.PNG" />
-- 아니다. 원래 unmodifiable는 본래 참조를 들고 있다. 
-- 따라서 애초에 생성자로 넘어간 list에 원소를 추가하면, 같이 추가 된다
-- hashCode, equals를 오버라이딩 해놔서 본래 list와 unmodifiableList는 같다고 판단하게 됨</p>
-</li>
-<li>
-<p>CRUD 로직 중 어찌 R만 남겨놓는가</p>
-<p><img alt="unmod_exception" src="../../image/unmodifiable_exception_2021_02_25.PNG" />
-- 조회 기능(get, indexOf, lastIndexOf)을 제외한 모든 로직은 에러를 던진다</p>
-</li>
-</ul>
+<li>Collections.unmodifiable에 대한 고민
+    - 참조는 끊는가?<div class="highlight"><pre><span></span><code>  ![unmod](../image/unmodifiable_2021_02_25.PNG)
+  - 아니다. 원래 unmodifiable는 본래 참조를 들고 있다. 
+  - 따라서 애초에 생성자로 넘어간 list에 원소를 추가하면, 같이 추가 된다
+  - hashCode, equals를 오버라이딩 해놔서 본래 list와 unmodifiableList는 같다고 판단하게 됨
+</code></pre></div>
+<p>- CRUD 로직 중 어찌 R만 남겨놓는가</p>
+<div class="highlight"><pre><span></span><code>  ![unmod_exception](../image/unmodifiable_exception_2021_02_25.PNG)
+  - 조회 기능(get, indexOf, lastIndexOf)을 제외한 모든 로직은 에러를 던진다
+</code></pre></div>
 </li>
 </ul>
 

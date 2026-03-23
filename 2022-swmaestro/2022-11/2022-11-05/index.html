@@ -22935,12 +22935,10 @@
 <li><em>참고: https://incheol-jung.gitbook.io/docs/study/srping-in-action-5th/chap-16</em></li>
 <li><em>참고: https://sabarada.tistory.com/23</em></li>
 <li><em>참고: https://meetup.toast.com/posts/237</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>액추에이터는 스프링 부트 모니터링/메트릭과 같은 기능을 HTTP와 JMX 엔드포인트를 통해 제공</li>
 <li>실행중인 스프링 부트 어플리케이션의 정보를 API 형식으로 확인할 수 있게 해주는 기능</li>
-<li>
-<p>실행중인 어플리케이션의 내부를 볼 수 있게 하고, 어느 정도 까지는 어플리케이션의 작동 방법을 제어할 수 있게 도움</p>
-<ul>
+<li>실행중인 어플리케이션의 내부를 볼 수 있게 하고, 어느 정도 까지는 어플리케이션의 작동 방법을 제어할 수 있게 도움<ul>
 <li>어플리케이션 환경에서 사용할 수 있는 구성 속성들</li>
 <li>어플리케이션에 포함된 다양한 패키지 로깅 레벨</li>
 <li>어플리케이션이 사용중인 메모리</li>
@@ -22948,32 +22946,34 @@
 <li>어플리케이션의 헬스체크</li>
 </ul>
 </li>
-<li>
-<p><strong>설명</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>설명</strong><ul>
 <li>어플리케이션을 모니터링하고 관리하는 기능</li>
 <li>Actuator는 HTTP와 JMX를 통해 확인이 가능함</li>
-<li>
-<p>기능이 잘 돌아가는가? 지속적으로 모니터링, 서버를 재기동하거나 로그 정보를기 =&gt; 범어플리케이션 관점에서 처리해야 할 일이 많아</p>
+<li>기능이 잘 돌아가는가? 지속적으로 모니터링, 서버를 재기동하거나 로그 정보를기 =&gt; 범어플리케이션 관점에서 처리해야 할 일이 많아</li>
+</ul>
 </li>
-<li>
-<p><strong>주의점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>주의점</strong><ul>
 <li>정보가 메모리에 올라가서 활용되기에 영구 저장을 위해서는 DB/file 저장 고려해볼 것</li>
-<li>
-<p>시스템 조작할 수 있는 권한에 따라 접근제어를 철저하게 관리해야 함 =&gt; Spring Security와 같이 많이 이용</p>
+<li>시스템 조작할 수 있는 권한에 따라 접근제어를 철저하게 관리해야 함 =&gt; Spring Security와 같이 많이 이용</li>
+</ul>
 </li>
-<li>
-<p><strong>사용법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>사용법</strong><ol>
 <li>dependency 추가</li>
 <li>endpoint enable 설정</li>
-<li>
-<p>endpoint 노출</p>
+<li>endpoint 노출</li>
+</ol>
 </li>
-<li>
-<p><strong>적용 플랜</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>적용 플랜</strong><ul>
 <li>Spring Boot Actuator + Micrometer Registry 의존성 추가</li>
 <li>Spring Boot Actuator의 prometheus 엔드포인트 활성화<ul>
 <li>서비스가 한 개 이상의 인스턴스로 이루어져 있다면, 서비스 구분을 위한 common tag 추가</li>
@@ -23000,30 +23000,32 @@
 </li>
 <li>Grafana install &amp; run</li>
 </ul>
+</li>
+</ul>
 <h2 id="spring-actuator-springfox">Spring Actuator와 Springfox 충돌<a class="headerlink" href="#spring-actuator-springfox" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://middleearth.tistory.com/69</em></li>
-<li><strong>문제상황</strong></li>
+<li><strong>문제상황</strong><ul>
 <li>Swagger(Springfox) 와 Spring Actuator 충돌</li>
 <li>Swagger : 모든 endpoint에 대해 documentation 해주는 역할</li>
-<li>
-<p>Actuator : 몇몇 endpoint를 직접 생성해서 노출시켜주는 역할</p>
+<li>Actuator : 몇몇 endpoint를 직접 생성해서 노출시켜주는 역할</li>
+</ul>
 </li>
-<li>
-<p><strong>원인</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>원인</strong><ul>
 <li>Springfox는 SpringMVC가 Ant-based path matcher를 기본값으로 경로를 찾음</li>
-<li>
-<p>Spring MVC 2.6.x 부터 Ant-based path matcher =&gt; Path Pattern-based matcher </p>
+<li>Spring MVC 2.6.x 부터 Ant-based path matcher =&gt; Path Pattern-based matcher </li>
+</ul>
 </li>
-<li>
-<p><strong>해결</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>해결</strong><ul>
 <li>ant_path_matcher로 변경
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">spring.mvc.pathmatch.matching-strategy</span><span class="o">=</span><span class="s">ant_path_matcher</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">spring.mvc.pathmatch.matching-strategy</span><span class="o">=</span><span class="s">ant_path_matcher</span>
 </code></pre></div></li>
 <li>Swagger Endpoint 변경해서 쓰도록 설정
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Bean</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Bean</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">WebMvcEndpointHandlerMapping</span><span class="w"> </span><span class="nf">webEndpointServletHandlerMapping</span><span class="p">(</span><span class="n">WebEndpointsSupplier</span><span class="w"> </span><span class="n">webEndpointsSupplier</span><span class="p">,</span><span class="w"> </span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">      </span><span class="n">ServletEndpointsSupplier</span><span class="w"> </span><span class="n">servletEndpointsSupplier</span><span class="p">,</span><span class="w"> </span><span class="n">ControllerEndpointsSupplier</span><span class="w"> </span><span class="n">controllerEndpointsSupplier</span><span class="p">,</span><span class="w"> </span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="n">EndpointMediaTypes</span><span class="w"> </span><span class="n">endpointMediaTypes</span><span class="p">,</span><span class="w"> </span><span class="n">CorsEndpointProperties</span><span class="w"> </span><span class="n">corsProperties</span><span class="p">,</span><span class="w"> </span>
@@ -23045,6 +23047,8 @@
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">webEndpointProperties</span><span class="p">.</span><span class="na">getDiscovery</span><span class="p">().</span><span class="na">isEnabled</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">StringUtils</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="n">basePath</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ManagementPortType</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">environment</span><span class="p">).</span><span class="na">equals</span><span class="p">(</span><span class="n">ManagementPortType</span><span class="p">.</span><span class="na">DIFFERENT</span><span class="p">));</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

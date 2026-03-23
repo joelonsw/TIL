@@ -22958,21 +22958,21 @@
   - 데이터베이스와 같은 외부 리소스 관리하는 역할
   - Job/Step에서 외부 리소스 (ex. DB) 사용 시, TransactionManager를 사용하여 데이터 정합성 유지</p>
 <ul>
-<li><strong>Spring Batch의 Transaction 처리</strong></li>
+<li><strong>Spring Batch의 Transaction 처리</strong><ul>
 <li>Job/Step Transaction 처리를 위해 TransactionManager 사용<ul>
 <li>Spring의 PlatformTransactionManager 인터페이스 구현한 객체 사용</li>
 </ul>
 </li>
-<li>
-<p>처리 순서</p>
-<ol>
+<li>처리 순서<ol>
 <li>Spring Batch... Job 실행 전 JobRepository를 통해 JobExecution 생성</li>
 <li>JobExecution은 PlatformTranscationManager를 사용해 트랜잭션 처리</li>
 </ol>
 </li>
-<li>
-<p><strong>PlatformTransactionManager 구현체 종류/특징</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>PlatformTransactionManager 구현체 종류/특징</strong><ol>
 <li>DataSourceTransactionManager<ul>
 <li>DataSource를 이용한 트랜잭션 처리 위한 구현체</li>
 <li>JDBC 사용하는 경우</li>
@@ -22987,45 +22987,49 @@
 <li>EntityManagerFactory를 사용하다보니, EMF 생성시점에 DataSource를 미리 설정할 것</li>
 </ul>
 </li>
+</ol>
+</li>
 </ul>
 <h2 id="spring-batch-jpa-modifying">Spring Batch + JPA (<code>@Modifying</code>)<a class="headerlink" href="#spring-batch-jpa-modifying" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>삭제 쿼리에 <code>@Modifying</code>을 붙이는 이유?</strong>
 <em>참고: https://frogand.tistory.com/174</em></li>
-<li><strong>개요 (<code>@Modifying</code>)</strong></li>
+<li><strong>개요 (<code>@Modifying</code>)</strong><ul>
 <li><code>@Query</code>를 통해 작성된 INSERT/UPDATE/DELETE 쿼리에서 사용되는 어노테이션</li>
 <li>jpaRepository에서 제공하는 메서드/메서드 네이밍으로 만들어진 쿼리에는 적용 X</li>
 <li>주로 벌크 연산과 같이 이용됨</li>
 <li>JPA entity life-cycle 무시하고 실행됨</li>
 <li>JPA에서 변경감지에 대한 처리를 생략하고 효율적인 실행이 가능함</li>
-<li>
-<p><code>@Modifying</code> 안붙이면 SELECT 생성하는 쿼리인 줄로 알아! 읽기 전용 아니라고 알려줘야해!</p>
+<li><code>@Modifying</code> 안붙이면 SELECT 생성하는 쿼리인 줄로 알아! 읽기 전용 아니라고 알려줘야해!</li>
+</ul>
 </li>
-<li>
-<p><strong>example</strong></p>
-</li>
-<li>
-<p>모든 유저의 나이를 늘려보자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Transactional</span>
+</ul>
+<ul>
+<li><strong>example</strong><ul>
+<li>모든 유저의 나이를 늘려보자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Transactional</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Modifying</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;UPDATE User u SET u.age = u.age + 1&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">incrementAllUserAges</span><span class="p">();</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Bulk 연산</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Bulk 연산</strong><ul>
 <li>다건의 UPDATE, DELETE 연산을 하나의 쿼리로</li>
 <li>영속성 컨텍스트는 벌크 연산을 통한 데이터 변경에 대해 알 길이 없기 때문에, 영속성 컨텍스트 &lt;-&gt; DB 싱크 안맞는 경우 있음</li>
-<li>
-<p>따라서 <code>@Modifying</code>을 사용한다면 <code>clearAutomatically=true</code>로 설정해주자!</p>
+<li>따라서 <code>@Modifying</code>을 사용한다면 <code>clearAutomatically=true</code>로 설정해주자!</li>
+</ul>
 </li>
-<li>
-<p><strong>clearAutomatically</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>clearAutomatically</strong><ul>
 <li>기본은 false</li>
 <li><code>@Modifying</code> 직후 영속성 컨텍스트 1차 캐시 비워주기</li>
 <li></li>
+</ul>
+</li>
 </ul>
 <h2 id="spring-batch-insert-bulk-insert">Spring Batch + Insert (bulk insert)<a class="headerlink" href="#spring-batch-insert-bulk-insert" title="Permanent link">&para;</a></h2>
 <ul>

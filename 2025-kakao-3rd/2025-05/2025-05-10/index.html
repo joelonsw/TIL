@@ -22944,10 +22944,14 @@
 <li><code>lo</code>: 루프백 인터페이스 (자기 자신과 통신, 127.0.0;1)</li>
 <li><code>flannel.1</code>: flannel이 만든 오버레이 네트워크 (Pod간 통신을 위해 사용)</li>
 <li><code>vethXXXX</code>: 컨테이너와 호스트 사이를 잇는 가상 이더넷 쌍 (컨테이너용)</li>
-<li>containerd는 직접 브릿지를 만들지 않고, <code>CNI(Container Network Interface)</code>가 처리. </li>
+<li>containerd는 직접 브릿지를 만들지 않고, <code>CNI(Container Network Interface)</code>가 처리. <ul>
 <li>예시에서는 <code>flannel</code> 사용 중</li>
-<li>ControlPlane에서의 네트워크 구조</li>
+</ul>
+</li>
+<li>ControlPlane에서의 네트워크 구조<ul>
 <li><code>eth0 --- flannel.1 --- cni0 --- veth --- Pods</code></li>
+</ul>
+</li>
 </ul>
 
 

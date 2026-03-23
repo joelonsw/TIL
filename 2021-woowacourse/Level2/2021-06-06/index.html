@@ -22909,42 +22909,34 @@
 <h3 id="2021-06-06">2021-06-06<a class="headerlink" href="#2021-06-06" title="Permanent link">&para;</a></h3>
 <h2 id="_1">바이트코드<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Maven을 사용하여 빌드하기</strong></p>
-<ul>
-<li><em>참고 1: https://steven-life-1991.tistory.com/90</em></li>
-<li><em>참고 2: https://ojava.tistory.com/147</em></li>
-<li>Maven 다운받아서 환경 변수로 bin 추가</li>
-<li>pom.xml<ul>
-<li>import되는 jar 파일과 버전 정보, 패키징 되는 기준 값</li>
-<li>기본 구문과 추가 설정으로 나뉨</li>
-<li>Artifact: 프로젝트 생성시 생기는 필수 정보, 배포 방식/정보 포함</li>
-<li>properties: 자주 사용되는 정보 변수처럼 만들어 사용</li>
-<li>dependencies: 의존성 정의. 라이브러리 불러오기</li>
+<li><strong>Maven을 사용하여 빌드하기</strong>
+    - <em>참고 1: https://steven-life-1991.tistory.com/90</em>
+    - <em>참고 2: https://ojava.tistory.com/147</em>
+    - Maven 다운받아서 환경 변수로 bin 추가
+    - pom.xml
+        - import되는 jar 파일과 버전 정보, 패키징 되는 기준 값
+        - 기본 구문과 추가 설정으로 나뉨
+        - Artifact: 프로젝트 생성시 생기는 필수 정보, 배포 방식/정보 포함
+        - properties: 자주 사용되는 정보 변수처럼 만들어 사용
+        - dependencies: 의존성 정의. 라이브러리 불러오기</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>바이트 코드 조작</strong></p>
 <ul>
-<li>기존의 자바 소스 코드를 컴파일해서 생기는 클래스 파일<ul>
-<li>이 클래스 파일을 조작할 수 있음</li>
-<li>어차피 jvm은 클래스파일을 로드해 한줄씩 읽으며 실행하기에 클래스 파일이 조작되면 코드와 다른 결과가 기대됨</li>
-<li>다음과 같이 ByteBuddy 라이브러리 사용하여 코드를 작성할 수 있다<ul>
-<li>Moja 클래스의 pullout 메서드가 "ByteRabbit!"을 반환하도록 하고, 이를 File("C:~~") 위치에 저장하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<li><strong>바이트 코드 조작</strong>
+    - 기존의 자바 소스 코드를 컴파일해서 생기는 클래스 파일
+        - 이 클래스 파일을 조작할 수 있음
+        - 어차피 jvm은 클래스파일을 로드해 한줄씩 읽으며 실행하기에 클래스 파일이 조작되면 코드와 다른 결과가 기대됨
+        - 다음과 같이 ByteBuddy 라이브러리 사용하여 코드를 작성할 수 있다
+            - Moja 클래스의 pullout 메서드가 "ByteRabbit!"을 반환하도록 하고, 이를 File("C:~~") 위치에 저장하자
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ByteBuddy</span><span class="p">().</span><span class="na">redefine</span><span class="p">(</span><span class="n">Moja</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">            </span><span class="p">.</span><span class="na">method</span><span class="p">(</span><span class="n">named</span><span class="p">(</span><span class="s">&quot;pullout&quot;</span><span class="p">)).</span><span class="na">intercept</span><span class="p">(</span><span class="n">FixedValue</span><span class="p">.</span><span class="na">value</span><span class="p">(</span><span class="s">&quot;ByteRabbit!&quot;</span><span class="p">))</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">            </span><span class="p">.</span><span class="na">make</span><span class="p">().</span><span class="na">saveIn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;C:\\Users\\joel6\\Desktop\\the-java\\bytecode\\target\\classes&quot;</span><span class="p">));</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Moja</span><span class="p">().</span><span class="na">pullout</span><span class="p">());</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>new Moja().pullout(); <ul>
-<li>처음 실행하면, 클래스 파일이 이렇게 작성됨
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Moja</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+        - new Moja().pullout(); 
+            - 처음 실행하면, 클래스 파일이 이렇게 작성됨
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Moja</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Moja</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -22952,11 +22944,11 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>Moja 클래스가 로딩되는 시점이 redifine(Moja.class)인데, 이때 생성된 클래스 파일을 로드해서 사용</li>
-<li>new Moja().pullout() 에서 사용한 Moja 클래스는 이미 위에서 로딩된 클래스</li>
-<li>한 번 실행을 하고 나면, 바이트코드가 조작되어 클래스 파일이 다음과 같이 수정됨
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Moja</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+            - Moja 클래스가 로딩되는 시점이 redifine(Moja.class)인데, 이때 생성된 클래스 파일을 로드해서 사용
+            - new Moja().pullout() 에서 사용한 Moja 클래스는 이미 위에서 로딩된 클래스
+            - 한 번 실행을 하고 나면, 바이트코드가 조작되어 클래스 파일이 다음과 같이 수정됨
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Moja</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Moja</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -22964,49 +22956,35 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;ByteRabbit!&quot;</span><span class="p">;</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>이제 Main 실행하면 ByteRabbit! 출력</li>
+</code></pre></div>
+            - 이제 Main 실행하면 ByteRabbit! 출력
+        - 이게 결국 자바 코드상의 바이트 코드 조작이기 때문에, 한 번은 자바 코드를 실행해야 클래스 파일에 내용이 반영이 됨</li>
 </ul>
-</li>
-<li>이게 결국 자바 코드상의 바이트 코드 조작이기 때문에, 한 번은 자바 코드를 실행해야 클래스 파일에 내용이 반영이 됨</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>javaagent</strong></p>
 <ul>
-<li><em>참고 1: https://catsbi.oopy.io/6136946a-9139-4541-b2af-2af93bb634a5</em></li>
-<li>정의<ul>
-<li>JVM에서 동작하는 Java 어플리케이션으로, JVM의 다양한 이벤트를 전달 받거나, 정보 질의, 바이트코드 제어 등을 특정 API를 통해 수행</li>
-</ul>
-</li>
-<li>특징<ul>
-<li>Agent는 지정된 JVM의 실행 가능한 최초 진입점인 main 메서드 가로챌 수 있음</li>
-<li>지정된 JVM에서 실행</li>
-<li>지정된 JVM의 동일한 System Class Loader 내에서 로드</li>
-<li>지정된 JVM의 Security policy 및 Context 영향 받음</li>
-<li>실행시간에 동적으로 bytecode 조작 가능</li>
-</ul>
-</li>
-<li>사용 메서드<ul>
-<li>Agent의 단일 진입점 premain 메서드</li>
-<li>Instumentation 인터페이스로 바이트 코드를 포함한 추가적인 정보 수집 도구 활용 가능
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">premain</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">agentArgs</span><span class="p">,</span><span class="w"> </span><span class="n">Instrumentation</span><span class="w"> </span><span class="n">inst</span><span class="p">);</span>
+<li><strong>javaagent</strong>
+    - <em>참고 1: https://catsbi.oopy.io/6136946a-9139-4541-b2af-2af93bb634a5</em>
+    - 정의
+        - JVM에서 동작하는 Java 어플리케이션으로, JVM의 다양한 이벤트를 전달 받거나, 정보 질의, 바이트코드 제어 등을 특정 API를 통해 수행
+    - 특징
+        - Agent는 지정된 JVM의 실행 가능한 최초 진입점인 main 메서드 가로챌 수 있음
+        - 지정된 JVM에서 실행
+        - 지정된 JVM의 동일한 System Class Loader 내에서 로드
+        - 지정된 JVM의 Security policy 및 Context 영향 받음
+        - 실행시간에 동적으로 bytecode 조작 가능
+    - 사용 메서드
+        - Agent의 단일 진입점 premain 메서드
+        - Instumentation 인터페이스로 바이트 코드를 포함한 추가적인 정보 수집 도구 활용 가능
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">premain</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">agentArgs</span><span class="p">,</span><span class="w"> </span><span class="n">Instrumentation</span><span class="w"> </span><span class="n">inst</span><span class="p">);</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">premain</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">agentArgs</span><span class="p">)</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>사용하기<ul>
-<li>클래스로더가 "클래스를 읽어올 때", javaagent를 거쳐 "변경된 바이트코드를 읽어들여 사용"</li>
-<li>그러다보니까 위에서 살펴볼 땐 한 번 실행해서 java 소스 코드로 바이트코드 변경했자나?</li>
-<li>여기서는 javaagent를 통해 애초 런타임 와중에 클래스 로더에서 읽어올 때 코드를 조작하자나?</li>
-<li>한 번에 바로 조작이 가능하지</li>
-</ul>
-</li>
-<li>실습<ul>
-<li>다음과 같이 premain 메서드를 작성하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MagicianAgent</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - 사용하기
+        - 클래스로더가 "클래스를 읽어올 때", javaagent를 거쳐 "변경된 바이트코드를 읽어들여 사용"
+        - 그러다보니까 위에서 살펴볼 땐 한 번 실행해서 java 소스 코드로 바이트코드 변경했자나?
+        - 여기서는 javaagent를 통해 애초 런타임 와중에 클래스 로더에서 읽어올 때 코드를 조작하자나?
+        - 한 번에 바로 조작이 가능하지
+    - 실습
+        - 다음과 같이 premain 메서드를 작성하자
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MagicianAgent</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">premain</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">agentArgs</span><span class="p">,</span><span class="w"> </span><span class="n">Instrumentation</span><span class="w"> </span><span class="n">inst</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">AgentBuilder</span><span class="p">.</span><span class="na">Default</span><span class="p">()</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">                </span><span class="p">.</span><span class="na">type</span><span class="p">(</span><span class="n">ElementMatchers</span><span class="p">.</span><span class="na">any</span><span class="p">())</span>
@@ -23017,34 +22995,24 @@
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">                </span><span class="p">}).</span><span class="na">installOn</span><span class="p">(</span><span class="n">inst</span><span class="p">);</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>이렇게 작성한 코드를 실행 가능한 jar 파일로 만들자<ul>
-<li>아래 참조</li>
-</ul>
-</li>
-<li>이제 javaagent를 통해 JVM Options를 적용하자!<ul>
-<li><em>javaagent:C:\Users\joel6\Desktop\the-java\Magician\target\Magician-1.0-SNAPSHOT.jar</em></li>
-<li>요런 갬성으로다가 java 클래스 파일들을 실행할 때 VM options를 줄 수 있나보다!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ java -server -Xms8g -Xmx8g -XX:MaxMetaspaceSize=256m -XX:+CMSClassUnloadingEnabled -Dspring.profiles.active=prod -jar app.jar 
+</code></pre></div>
+        - 이렇게 작성한 코드를 실행 가능한 jar 파일로 만들자
+            - 아래 참조
+        - 이제 javaagent를 통해 JVM Options를 적용하자!
+            - <em>javaagent:C:\Users\joel6\Desktop\the-java\Magician\target\Magician-1.0-SNAPSHOT.jar</em>
+            - 요런 갬성으로다가 java 클래스 파일들을 실행할 때 VM options를 줄 수 있나보다!
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ java -server -Xms8g -Xmx8g -XX:MaxMetaspaceSize=256m -XX:+CMSClassUnloadingEnabled -Dspring.profiles.active=prod -jar app.jar 
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$ java -jar -Dspring.profiles.active=prod [jar파일명] 
-</code></pre></div></li>
+</code></pre></div>
+        - 이 친구들은 컴파일된 클래스 파일을 바꾸는 게 아님
+            - 클래스로더가 클래스를 "로딩"할 때 javaagent의 설정을 읽어들여 바이트코드를 변형하여 로드함</li>
 </ul>
-</li>
-<li>이 친구들은 컴파일된 클래스 파일을 바꾸는 게 아님<ul>
-<li>클래스로더가 클래스를 "로딩"할 때 javaagent의 설정을 읽어들여 바이트코드를 변형하여 로드함</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>실행 가능한 jar 파일 만들기</strong></p>
 <ul>
-<li><em>참고 1: https://boxfoxs.tistory.com/332</em></li>
-<li>pom.xml에서 premain-class에 대한 정보를 적어주자</li>
-<li>addClasspath 설정으로 class-path 요소들을 MANIFEST.MF 파일에 추가하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">&lt;plugin&gt;</span>
+<li><strong>실행 가능한 jar 파일 만들기</strong>
+    - <em>참고 1: https://boxfoxs.tistory.com/332</em>
+    - pom.xml에서 premain-class에 대한 정보를 적어주자
+    - addClasspath 설정으로 class-path 요소들을 MANIFEST.MF 파일에 추가하자
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">&lt;plugin&gt;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">&lt;version&gt;</span>3.1.2<span class="nt">&lt;/version&gt;</span>
@@ -23065,10 +23033,10 @@
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span><span class="nt">&lt;/archive&gt;</span>
 <a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="nt">&lt;/configuration&gt;</span>
 <a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="nt">&lt;/plugin&gt;</span>
-</code></pre></div></li>
-<li>mvn clean package 를 통해 빌드를 하면 "Magician-1.0-SNAPSHOT.jar"가 생성된 것을 볼 수 있음<ul>
-<li>Magician &gt; target &gt; Magician-1.0-SNAPSHOT.jar &gt; META-INF &gt; MANIFEST.MF 로 해당 jar 파일의 정보를 보자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Manifest-Version: 1.0
+</code></pre></div>
+    - mvn clean package 를 통해 빌드를 하면 "Magician-1.0-SNAPSHOT.jar"가 생성된 것을 볼 수 있음
+        - Magician &gt; target &gt; Magician-1.0-SNAPSHOT.jar &gt; META-INF &gt; MANIFEST.MF 로 해당 jar 파일의 정보를 보자
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Manifest-Version: 1.0
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>mode: development
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Premain-Class: MagicianAgent
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Can-Redefine-Classes: true
@@ -23080,32 +23048,20 @@
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>url:
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>바이트 코드 조작이 쓰이는 곳</strong></p>
 <ul>
-<li>프로그램 분석<ul>
-<li>디버깅</li>
-<li>코드 복잡도</li>
-</ul>
-</li>
-<li>클래스 파일 생성<ul>
-<li>프록시</li>
-<li>특정 API 호출 접근 제한</li>
-<li>JVM 기반 언어의 컴파일러</li>
-</ul>
-</li>
-<li>기타 소스코드 변경<ul>
-<li>프로파일러</li>
-<li>최적화</li>
-<li>로깅</li>
-</ul>
-</li>
-<li>스프링에서는 "Component Scan!"</li>
-</ul>
-</li>
+<li><strong>바이트 코드 조작이 쓰이는 곳</strong>
+    - 프로그램 분석
+        - 디버깅
+        - 코드 복잡도
+    - 클래스 파일 생성
+        - 프록시
+        - 특정 API 호출 접근 제한
+        - JVM 기반 언어의 컴파일러
+    - 기타 소스코드 변경
+        - 프로파일러
+        - 최적화
+        - 로깅
+    - 스프링에서는 "Component Scan!"</li>
 </ul>
 
 

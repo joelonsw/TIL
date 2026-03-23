@@ -22973,8 +22973,10 @@
 <li>로그 격리: 모든 로그 접근 가능</li>
 <li>설정 관리: 중앙 집중</li>
 <li>권한 필요: HostPath 권한</li>
-<li>멀티테넌시: 부적합</li>
+<li>멀티테넌시: 부적합<ul>
 <li>여러 팀이 같은 인프라를 공유하면서 서로 격리된 환경을 멀티테넌시라고 한다</li>
+</ul>
+</li>
 </ul>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────── Node ────────────────────────────────┐
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                                                                     │
@@ -23030,10 +23032,8 @@
 <li>로그 격리: 해당 Pod만</li>
 <li>설정 관리: 분산</li>
 <li>권한 필요: 최소 권한</li>
-<li>멀티테넌시: 적합<ul>
-<li>여러 팀이 같은 인프라를 공유하면서 서로 격리된 환경을 멀티테넌시라고 한다</li>
-</ul>
-</li>
+<li>멀티테넌시: 적합
+    - 여러 팀이 같은 인프라를 공유하면서 서로 격리된 환경을 멀티테넌시라고 한다</li>
 </ul>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>┌─────────────────────────────── Node ───────────────────────────────┐
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│                                                                    │

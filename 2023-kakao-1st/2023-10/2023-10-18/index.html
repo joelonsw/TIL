@@ -22938,7 +22938,7 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span><span class="w"> </span><span class="c1">// j is not defined</span>
 </code></pre></div></p>
 <ul>
-<li><strong>var말고 const, let을 주로 쓰라고 함</strong></li>
+<li><strong>var말고 const, let을 주로 쓰라고 함</strong><ol>
 <li>중복 선언<ul>
 <li>var는 중복 선언이 가능함</li>
 <li>let/const는 중복 선언 언어 차원에서 방지 시켜줌</li>
@@ -22949,28 +22949,28 @@
 <li>let/const: 블록레벨 스코프</li>
 </ul>
 </li>
-<li>
-<p>변수 호이스팅</p>
-<ul>
+<li>변수 호이스팅<ul>
 <li>변수 호이스팅 : 변수 선언문이 코드의 선두로 끌어올려진 것 처럼 동작하는 자바스크립트 고유의 특징...</li>
 <li>var는 당당하게 변수 호이스팅이 되는 반면, let은 <code>ReferenceError</code>가 나옴</li>
 </ul>
 </li>
-<li>
-<p><strong>변수 호이스팅</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>변수 호이스팅</strong><ul>
 <li>놀랍게도 js는 이딴 코드가 동작한다...</li>
-<li>
-<p><code>var num</code>이 코드의 선두로 끌어올려진 것 마냥 동작한다...
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined</span>
+<li><code>var num</code>이 코드의 선두로 끌어올려진 것 마냥 동작한다...
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span><span class="w"> </span><span class="c1">// 10</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">num</span><span class="p">;</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>let vs const</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>let vs const</strong><ul>
 <li>공통점<ol>
 <li>변수명 중복 선언 X</li>
 <li>블록 레벨 스코프</li>
@@ -22985,6 +22985,8 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nx">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// TypeError: Assignment to constant variable</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

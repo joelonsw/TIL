@@ -22915,31 +22915,33 @@
   - HTTP/1.1 요청 메시지 내에는 <code>Host</code> 헤더가 필수임
     - <code>Host</code> 누락시 400 (Bad Request) 반환</p>
 <ul>
-<li><strong><code>server_name</code></strong></li>
-<li>
-<p>가상 서버를 configure</p>
-<ul>
+<li><strong><code>server_name</code></strong><ul>
+<li>가상 서버를 configure<ul>
 <li>IP-based 가능하고, </li>
-<li>name-based 가능하다 (여기가 Http header "Host"로 동작)</li>
+<li>name-based 가능하다 (여기가 Http header "Host"로 동작)<ul>
 <li>"<code>*</code>"로 asterisk 처리도 가능</li>
 <li>"<code>~</code>"로 regex 처리도 가능</li>
 </ul>
 </li>
-<li>
-<p><strong>Name-based virtual servers Nginx가 요청 처리하는 법</strong></p>
+</ul>
 </li>
-<li>
-<p>어떤 서버로 요청 처리시킬지 결정</p>
+</ul>
+</li>
+</ul>
 <ul>
+<li><strong>Name-based virtual servers Nginx가 요청 처리하는 법</strong><ol>
+<li>어떤 서버로 요청 처리시킬지 결정<ul>
 <li><code>server_name</code>과 Http <code>Host</code> 헤더를 통해 어디로 라우팅 할지 결정</li>
 <li><code>default_server</code> 파라미터를 통해 어디로 기본적으로 매핑 시킬지 지정할 수 있어</li>
 </ul>
 </li>
-<li>
-<p><strong>Proxy로 동작중이라면...</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>Proxy로 동작중이라면...</strong><ul>
 <li>리버스 프록시로 구성된 nginx에서는 proxy_set_header 로 여러가지 헤더를 설정할 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:8080</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Real-IP</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span>
@@ -22949,6 +22951,8 @@
 </code></pre></div></li>
 <li>여기서 기본적으로 설정안한 헤더는 요청의 것을 그대로 넘김</li>
 <li>Host를 내맘대로 여기서 바꿔주면 proxy_pass 에서 요청받은 친구의 server_name과 Host가 일치하지 않으면 403 에러가 날 수 있어</li>
+</ul>
+</li>
 </ul>
 
 

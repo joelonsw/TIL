@@ -22914,34 +22914,36 @@
   - 채널을 구독한 수신자(클라이언트) 모두에게 메시지를 전송하는 것
   - 하나의 클라이언트가 메시지 Publish -&gt; 해당 Topic에 연결된 다수의 클라이언트가 메시지를 수신받음</p>
 <ul>
-<li><strong>사용처</strong></li>
-<li>
-<p>채팅, 푸시알림 등에 사용</p>
-<ul>
+<li><strong>사용처</strong><ul>
+<li>채팅, 푸시알림 등에 사용<ul>
 <li>특정 작업 반복 수행하는 작업자에게 비동기적으로 작업 보내 처리하도록 하거나</li>
 <li>로그인한 사용자에게 푸시 발송</li>
 </ul>
 </li>
-<li>
-<p><strong>Redis pub/sub 특징</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Redis pub/sub 특징</strong><ul>
 <li>단순한 구조</li>
 <li>메시지를 따로 보관하지도 않음</li>
 <li>subscribe 대상이 하나도 없는 상황에도 publish 해도 사라짐</li>
 <li>메시지 큐 처럼 수신 확인 X</li>
-<li>
-<p>In-memory 기반이라 굉장히 빠르게 메시지 받을 수 있음</p>
-<ul>
+<li>In-memory 기반이라 굉장히 빠르게 메시지 받을 수 있음<ul>
 <li>접속중인 클라에게 간단한 메시지 빠르게 보내고, 수신확인 필요 없을 때, 전송 보장 하지 않아도 되는 경우 괜찮다</li>
 </ul>
 </li>
-<li>
-<p><strong>Pub/Sub 명령어</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Pub/Sub 명령어</strong><ul>
 <li><code>subscribe [channel ...]</code> : 채널 구독해 메시지 수신 (여러개 동시 구독도 가능)</li>
 <li><code>publish channel message</code> : 메시지를 지정한 채널로 송신</li>
 <li><code>pubsub subcommand</code> : 서버에 등록된 채널이나 패턴 조회</li>
 <li><img alt="" src="../../images/2024-09-24-redis-pubsub.png" /></li>
+</ul>
+</li>
 </ul>
 
 

@@ -22998,46 +22998,34 @@
 <h2 id="transaction">Transaction 전파<a class="headerlink" href="#transaction" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://deveric.tistory.com/86</em></li>
-<li>
-<p><strong>Transaction 전파 설정</strong></p>
-<ul>
-<li>진행되고 있는 트랜잭션에서 다른 트랜잭션이 호출될 때 어떻게 처리할 지 정하는 것</li>
+<li><strong>Transaction 전파 설정</strong>
+    - 진행되고 있는 트랜잭션에서 다른 트랜잭션이 호출될 때 어떻게 처리할 지 정하는 것</li>
 </ul>
-</li>
-<li>
-<p><strong>전파 설정 옵션</strong></p>
 <ul>
-<li><code>@Transactional(propagation=여기)</code></li>
-<li>REQUIRED(기본설정): 부모 트랜잭션이 있다면 부모 트랜잭션으로 합류. 부모/자식 다같이 롤백-커밋</li>
-<li>REQUIRES_NEW: 무조건 새로운 트랜잭션 생성. 부모/자식 각자 롤백-커밋</li>
-<li>MANDATORY: 부모 트랜잭션에 합류. 없으면 예외</li>
-<li>NESTED: 자식은 중첩 트랜잭션. 중첩된 트랜잭션 내부 롤백하면 해당 중첩 트랜잭션 시작 시점까지로만 롤백</li>
-<li>NEVER: 트랜잭션 생성 X. 부모 트랜잭션 없으면 예외</li>
-<li>SUPPORTS: 부모 트랜잭션이 있다면 합류</li>
-</ul>
-</li>
+<li><strong>전파 설정 옵션</strong>
+    - <code>@Transactional(propagation=여기)</code>
+    - REQUIRED(기본설정): 부모 트랜잭션이 있다면 부모 트랜잭션으로 합류. 부모/자식 다같이 롤백-커밋
+    - REQUIRES_NEW: 무조건 새로운 트랜잭션 생성. 부모/자식 각자 롤백-커밋
+    - MANDATORY: 부모 트랜잭션에 합류. 없으면 예외
+    - NESTED: 자식은 중첩 트랜잭션. 중첩된 트랜잭션 내부 롤백하면 해당 중첩 트랜잭션 시작 시점까지로만 롤백
+    - NEVER: 트랜잭션 생성 X. 부모 트랜잭션 없으면 예외
+    - SUPPORTS: 부모 트랜잭션이 있다면 합류</li>
 </ul>
 <h2 id="baseentity">BaseEntity<a class="headerlink" href="#baseentity" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고1: https://eocoding.tistory.com/60</em></li>
 <li><em>참고2: https://ict-nroo.tistory.com/129</em></li>
 <li><em>참고3: https://velog.io/@aidenshin/%EC%97%94%ED%8B%B0%ED%8B%B0-%EC%9E%91%EC%84%B1-JPA-Auddit-%EC%A0%81%EC%9A%A9</em></li>
-<li>
-<p><strong><code>@MappedSuperclass</code>: 객체의 입장에서 공통 매핑 정보가 필요한 경우</strong></p>
-<ul>
-<li>반복되는 id, name</li>
-<li>부모 클래스에만 선언하고 속성만 상속받아 사용하자<ul>
-<li>DB는 다 컬럼 따로따로 알아서 잘 되어있어. 객체로써 안 써둘 뿐이야</li>
+<li><strong><code>@MappedSuperclass</code>: 객체의 입장에서 공통 매핑 정보가 필요한 경우</strong>
+    - 반복되는 id, name
+    - 부모 클래스에만 선언하고 속성만 상속받아 사용하자
+        - DB는 다 컬럼 따로따로 알아서 잘 되어있어. 객체로써 안 써둘 뿐이야</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Auddit(감사)</strong></p>
 <ul>
-<li>거의 모든 엔티티에 들어가는 필드들</li>
-<li>다음과 같이 Spring Audit 기능을 쓸라면 main 클래스에 <code>@EnableJpaAuditing</code>을 추가하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@EnableJpaAuditing</span>
+<li><strong>Auddit(감사)</strong>
+    - 거의 모든 엔티티에 들어가는 필드들
+    - 다음과 같이 Spring Audit 기능을 쓸라면 main 클래스에 <code>@EnableJpaAuditing</code>을 추가하자
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@EnableJpaAuditing</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@SpringBootApplication</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NoltoApplication</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23046,9 +23034,8 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>직접 생성해서 사용할 일 없으니 </strong>추상 클래스<strong>로 만들자</strong>
+<ul>
+<li><strong>직접 생성해서 사용할 일 없으니 </strong>추상 클래스<strong>로 만들자</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@MappedSuperclass</span><span class="w"> </span><span class="c1">//BaseEntity 상속한 엔티티들은 BaseEntity에 있는 멤버변수를 컬럼으로 인식</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@Getter</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nd">@EntityListeners</span><span class="p">(</span><span class="n">AuditingEntityListener</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">//Auditing 기능을 사용한다. (자동으로 값을 매핑 시키겠다)</span>
@@ -23062,100 +23049,67 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">modifiedDate</span><span class="p">;</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="_1">자기참조 테이블<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고1: https://needjarvis.tistory.com/498</em></li>
 <li><em>참고2: https://velog.io/@wltjs10645/%EC%9E%90%EA%B8%B0%EC%B0%B8%EC%A1%B0%ED%85%8C%EC%9D%B4%EB%B8%94</em></li>
-<li>
-<p><strong>자기참조관계</strong></p>
+<li><strong>자기참조관계</strong>
+    - 하나의 엔티티가 다른 엔티티가 아니니 자기 자신과 관계를 맺는 타입
+    - 동일 엔티티 타입 내에서 자기가 자기의 인스턴스를 참조하는 구조
+        - 조직을 표현할 때 유용
+    - 계층 구조를 나타내기
+        - 조직도와 게시판 Q&amp;A등</li>
+</ul>
 <ul>
-<li>하나의 엔티티가 다른 엔티티가 아니니 자기 자신과 관계를 맺는 타입</li>
-<li>동일 엔티티 타입 내에서 자기가 자기의 인스턴스를 참조하는 구조<ul>
-<li>조직을 표현할 때 유용</li>
-</ul>
-</li>
-<li>계층 구조를 나타내기<ul>
-<li>조직도와 게시판 Q&amp;A등</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>최상위 계층~최하위 계층까지 한 테이블에 데이터 저장</strong></p>
-<ul>
-<li>FK로 연결하지 않고, 하나의 테이블에서 본부/실/팀 데이터를 모두 관리<ul>
-<li>상위 계층의 id는 자기 참조 관계를 통해 나타냄
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>id | name          | parent_id
+<li><strong>최상위 계층~최하위 계층까지 한 테이블에 데이터 저장</strong>
+    - FK로 연결하지 않고, 하나의 테이블에서 본부/실/팀 데이터를 모두 관리
+        - 상위 계층의 id는 자기 참조 관계를 통해 나타냄
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>id | name          | parent_id
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>1  | 최상위 부서    | null
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>2  | 하위 부서 1    | 1
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>3  | 하위 부서 2    | 1
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>4  | 최하위 부서 1  | 2
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="jpa-n1">JPA N+1 문제<a class="headerlink" href="#jpa-n1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고1: https://blog.advenoh.pe.kr/database/JPA-N1-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95/</em></li>
 <li><em>참고2: https://jojoldu.tistory.com/165</em></li>
-<li>
-<p><strong>N+1 문제 발생 경우</strong></p>
+<li><strong>N+1 문제 발생 경우</strong>
+    - fetchType.EAGER + findAll()
+        - LAZY로 변경하여 진짜 찐으로 필요할 때 가져오자. 
+    - fetchType.LAZY + Loop으로 조회
+        - JPQL fetchJoin으로 한방 쿼리
+            - join 대상을 함께 조회하자!</li>
+</ul>
 <ul>
-<li>fetchType.EAGER + findAll()<ul>
-<li>LAZY로 변경하여 진짜 찐으로 필요할 때 가져오자. </li>
+<li><strong>FetchJoin 주의사항</strong>      <br />
+    - FetchJoin에 alias 별칭 사용 X
+    - 둘 이상 컬렉션 Fetch X
+    - paging API 사용 X
+    - InnerJoin을 사용하여 촤르르 조회</li>
 </ul>
-</li>
-<li>fetchType.LAZY + Loop으로 조회<ul>
-<li>JPQL fetchJoin으로 한방 쿼리<ul>
-<li>join 대상을 함께 조회하자!</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>FetchJoin 주의사항</strong>        </p>
 <ul>
-<li>FetchJoin에 alias 별칭 사용 X</li>
-<li>둘 이상 컬렉션 Fetch X</li>
-<li>paging API 사용 X</li>
-<li>InnerJoin을 사용하여 촤르르 조회</li>
-</ul>
-</li>
-<li>
-<p><strong>@EntityGraph</strong></p>
-<ul>
-<li>쿼리 손상없이 Eager/Lazy 필드를 정의하여 사용가능
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@EntityGraph</span><span class="p">(</span><span class="n">attributePaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;subjects&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">//쿼리 수행시 바로 가져올 필드명 (Eager 조회로 가져옴)</span>
+<li><strong>@EntityGraph</strong>
+    - 쿼리 손상없이 Eager/Lazy 필드를 정의하여 사용가능
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@EntityGraph</span><span class="p">(</span><span class="n">attributePaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;subjects&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">//쿼리 수행시 바로 가져올 필드명 (Eager 조회로 가져옴)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;select a from Academy a&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">Academy</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findALlEntityGraph</span><span class="p">();</span>
-</code></pre></div></li>
-<li>OuterJoin을 사용하여 촤르르 조회</li>
+</code></pre></div>
+    - OuterJoin을 사용하여 촤르르 조회</li>
 </ul>
-</li>
-<li>
-<p><strong>카테시안곱</strong></p>
 <ul>
-<li>From 절에 2개 이상의 Table이 있을 때 두 Table 사이에 유효 Join 조건을 적지 않았을 경우, <ul>
-<li>해당 테이블에 대한 모든 데이터를 전부 결합하여 Table에 존재하는 행 갯수를 곱한 만큼의 결과값이 반환됨</li>
+<li><strong>카테시안곱</strong>
+    - From 절에 2개 이상의 Table이 있을 때 두 Table 사이에 유효 Join 조건을 적지 않았을 경우, 
+        - 해당 테이블에 대한 모든 데이터를 전부 결합하여 Table에 존재하는 행 갯수를 곱한 만큼의 결과값이 반환됨
+    - WHERE 절에 기술하는 join 조건이 잘못 기술되었거나 아예 없는 경우</li>
 </ul>
-</li>
-<li>WHERE 절에 기술하는 join 조건이 잘못 기술되었거나 아예 없는 경우</li>
-</ul>
-</li>
-<li>
-<p><strong>카테시안곱 막기</strong></p>
 <ul>
-<li><code>@OneToMany</code> 필드를 Set으로 선언 (LinkedHashSet 추천)</li>
-<li>쿼리에서 distinct로 중복 제거</li>
-</ul>
-</li>
+<li><strong>카테시안곱 막기</strong>
+    - <code>@OneToMany</code> 필드를 Set으로 선언 (LinkedHashSet 추천)
+    - 쿼리에서 distinct로 중복 제거</li>
 </ul>
 <h2 id="joincolumn"><code>@JoinColumn</code><a class="headerlink" href="#joincolumn" title="Permanent link">&para;</a></h2>
 <ul>

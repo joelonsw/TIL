@@ -22913,81 +22913,59 @@
 <li><em>참고 2: https://blog.ycpark.net/entry/FOREIGN-KEY-%EC%99%80-CONSTRAINT-%EC%9D%98-%EC%82%AC%EC%9A%A9</em></li>
 <li><em>참고 3: https://xlffm3.github.io/database/constraint-cascade/</em></li>
 <li><em>참고 4: https://joont92.github.io/jpa/CascadeType-PERSIST%EB%A5%BC-%ED%95%A8%EB%B6%80%EB%A1%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/</em></li>
-<li>
-<p><strong>참조 무결성?</strong></p>
+<li><strong>참조 무결성?</strong>
+    - DB 모델에서 2개의 관련있는 관계 변수간의 일관성
+    - "주어진 속성 집합에 대해 한 관계에 나타나는 값이 다른 관계에서 특정 속성 집합에 대해서도 나타나도록 보장할 것"
+    - PK와 FK간의 관계가 항상 유지되도록 보장하는 것!
+    - 입력하는 자료에 대해 제약/규칙 정할 수 있음</li>
+</ul>
 <ul>
-<li>DB 모델에서 2개의 관련있는 관계 변수간의 일관성</li>
-<li>"주어진 속성 집합에 대해 한 관계에 나타나는 값이 다른 관계에서 특정 속성 집합에 대해서도 나타나도록 보장할 것"</li>
-<li>PK와 FK간의 관계가 항상 유지되도록 보장하는 것!</li>
-<li>입력하는 자료에 대해 제약/규칙 정할 수 있음</li>
+<li><strong>제약조건?</strong>
+    - 결점 없이 정확하고 유효한 데이터가 데이터베이스에 저장될 수 있도록 하기 위하여
+        - 제약조건을 건다 == 사용자가 원하는 데이터만 걸러내도록 조건을 만드는 것 
+    - NOT NULL
+    - UNIQUE
+    - PK
+    - FK
+    - CHECK: 기본연산자/비교연산자 등을 통해 조건 확인</li>
 </ul>
-</li>
-<li>
-<p><strong>제약조건?</strong></p>
 <ul>
-<li>결점 없이 정확하고 유효한 데이터가 데이터베이스에 저장될 수 있도록 하기 위하여<ul>
-<li>제약조건을 건다 == 사용자가 원하는 데이터만 걸러내도록 조건을 만드는 것 </li>
+<li><strong>DB에서 Cascade?</strong>
+    - 참조 무결성이 깨지는 것을 허용하면서 관련된 모든 값을 업데이트하거나 삭제!
+        - 참조 무결성이 깨지지 않도록 자동으로 값 생성하거나, 삭제하도록 도와줌
+    - CASCADE 옵션은 부모 테이블과 자식 테이블 간에 참조 설정
+    - 제약 조건을 활용하여 부모 테이블의 데이터가 삭제/변경 시 오류가 아닌 자식 테이블인 comments 테이블의 데이터에도 적용
+    - ON DELETE CASCADE
+    - ON UPDATE CASCADE
+    - 다른 테이블과 PK또는 FK로서의 관계가 여전히 존재한다면, PK가 존재하는 테이블을 맘대로 제거/비활성화 할 수 없다
+        - 부모 테이블 ~ 자식 테이블간의 참조 설정이 있다면, 부모 제약 조건 비활성화 &amp; 이를 참조중인 자식 테이블 제약 조건 비활성화 하기 위함</li>
 </ul>
-</li>
-<li>NOT NULL</li>
-<li>UNIQUE</li>
-<li>PK</li>
-<li>FK</li>
-<li>CHECK: 기본연산자/비교연산자 등을 통해 조건 확인</li>
-</ul>
-</li>
-<li>
-<p><strong>DB에서 Cascade?</strong></p>
 <ul>
-<li>참조 무결성이 깨지는 것을 허용하면서 관련된 모든 값을 업데이트하거나 삭제!<ul>
-<li>참조 무결성이 깨지지 않도록 자동으로 값 생성하거나, 삭제하도록 도와줌</li>
+<li><strong>JPA에서 Cascade?</strong>
+    - Cascade 옵션: "엔티티의 상태" 변화를 전파시키는 옵션
+        - OneToMany, ManyToOne으로 양방향 관계를 맺는 엔티티의 상태 변화 전이에 사용
+    - "엔티티의 상태"
+        1. Transient: 객체 생성하고, 값 줘도 JPA나 hibernate가 그 객체 암것도 모르는 상태
+        2. Persistent: 저장 하고나서 JPA가 관리하는 상태
+        3. Detached: JPA가 더 이상 관리 X
+        4. Removed: JPA가 관리하긴 하는데, 실제 commit 일어날떄 삭제됨
+    - CascadeType
+        - ALL: 상위 엔티티에서 하위 엔티티로 모든 작업을 전파
+        - PERSIST: 하위 엔티티까지 영속성 전달 (부모 저장시 자식도 저장)
+        - MERGE: 하위 엔티티까지 병합 작업 지속 (업데이트? ON UPDATE CASCADE 인가?)
+        - REMOVE: 하위 엔티티까지 제거 작업 지속 (ON DELETE CASCADE 인듯)
+        - REFRESH: DB로 부터 인스턴스 값을 다시 읽어오기
+        - DETACH: 영속성 컨텍스트에서 엔티티 제거</li>
 </ul>
-</li>
-<li>CASCADE 옵션은 부모 테이블과 자식 테이블 간에 참조 설정</li>
-<li>제약 조건을 활용하여 부모 테이블의 데이터가 삭제/변경 시 오류가 아닌 자식 테이블인 comments 테이블의 데이터에도 적용</li>
-<li>ON DELETE CASCADE</li>
-<li>ON UPDATE CASCADE</li>
-<li>다른 테이블과 PK또는 FK로서의 관계가 여전히 존재한다면, PK가 존재하는 테이블을 맘대로 제거/비활성화 할 수 없다<ul>
-<li>부모 테이블 ~ 자식 테이블간의 참조 설정이 있다면, 부모 제약 조건 비활성화 &amp; 이를 참조중인 자식 테이블 제약 조건 비활성화 하기 위함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JPA에서 Cascade?</strong></p>
 <ul>
-<li>Cascade 옵션: "엔티티의 상태" 변화를 전파시키는 옵션<ul>
-<li>OneToMany, ManyToOne으로 양방향 관계를 맺는 엔티티의 상태 변화 전이에 사용</li>
-</ul>
-</li>
-<li>"엔티티의 상태"<ol>
-<li>Transient: 객체 생성하고, 값 줘도 JPA나 hibernate가 그 객체 암것도 모르는 상태</li>
-<li>Persistent: 저장 하고나서 JPA가 관리하는 상태</li>
-<li>Detached: JPA가 더 이상 관리 X</li>
-<li>Removed: JPA가 관리하긴 하는데, 실제 commit 일어날떄 삭제됨</li>
-</ol>
-</li>
-<li>CascadeType<ul>
-<li>ALL: 상위 엔티티에서 하위 엔티티로 모든 작업을 전파</li>
-<li>PERSIST: 하위 엔티티까지 영속성 전달 (부모 저장시 자식도 저장)</li>
-<li>MERGE: 하위 엔티티까지 병합 작업 지속 (업데이트? ON UPDATE CASCADE 인가?)</li>
-<li>REMOVE: 하위 엔티티까지 제거 작업 지속 (ON DELETE CASCADE 인듯)</li>
-<li>REFRESH: DB로 부터 인스턴스 값을 다시 읽어오기</li>
-<li>DETACH: 영속성 컨텍스트에서 엔티티 제거</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>CascadeType.PERSIST</strong></p>
-<ul>
-<li>flush가 발생할 때 CascadeType.PERSIST가 있다면 자식에 연쇄적으로 persist operation 발생</li>
-<li>persist operation
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>- 만약 X가 새로운 엔티티라면, flush operation의 결과로 X는 데이터베이스에 트랜잭션 커밋 시점에 들어간다.
+<li><strong>CascadeType.PERSIST</strong>
+    - flush가 발생할 때 CascadeType.PERSIST가 있다면 자식에 연쇄적으로 persist operation 발생
+    - persist operation
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>- 만약 X가 새로운 엔티티라면, flush operation의 결과로 X는 데이터베이스에 트랜잭션 커밋 시점에 들어간다.
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>- 만약 X가 이미 존재하는 엔티티라면, persist operation에서 무시된다.
-</code></pre></div></li>
-<li>예상치 못한 동작 1
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">Member</span><span class="p">{</span>
+</code></pre></div>
+    - 예상치 못한 동작 1
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">Member</span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// ...</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">)</span>
@@ -23010,17 +22988,13 @@
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">        </span><span class="n">em</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>이 경우 flush시에 orderList에 남아있는 모든 order에 대해 persist 연산을 수행<ul>
-<li>delete 메서드가 안날라감</li>
-</ul>
-</li>
-<li>따라서 CascadeType.PERSIST를 사용하려면, 삭제하려는 order에 맞춰 orderList에서 요소 삭제하거나</li>
-<li>orphanRemoval = true를 줘서 삭제시 자동 delete 되게 해야함</li>
-</ul>
-</li>
-<li>예상치 못한 동작 2
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Entity</span>
+</code></pre></div>
+        - 이 경우 flush시에 orderList에 남아있는 모든 order에 대해 persist 연산을 수행
+            - delete 메서드가 안날라감
+        - 따라서 CascadeType.PERSIST를 사용하려면, 삭제하려는 order에 맞춰 orderList에서 요소 삭제하거나
+        - orphanRemoval = true를 줘서 삭제시 자동 delete 되게 해야함
+    - 예상치 못한 동작 2
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">class</span> <span class="nc">Member</span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="c1">// ...</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -23058,20 +23032,13 @@
 <a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="p">}</span>
 <a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>
 <a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="n">member</span><span class="p">.</span><span class="na">getOrders</span><span class="p">().</span><span class="na">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">// expecting delete operation</span>
-</code></pre></div><ul>
-<li>영속성 컨텍스트에 item의 order 요소들이 올라감<ul>
-<li>member의 orders를 비워 delete 연산을 수행하려해도, item의 orders 요소들이 남아있어 PERSIST 연산 수행됨<ul>
-<li>delete 씹힘!</li>
+</code></pre></div>
+        - 영속성 컨텍스트에 item의 order 요소들이 올라감
+            - member의 orders를 비워 delete 연산을 수행하려해도, item의 orders 요소들이 남아있어 PERSIST 연산 수행됨
+                - delete 씹힘!</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>CascadeType.MERGE</strong>
+<ul>
+<li><strong>CascadeType.MERGE</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">Member</span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">MERGE</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="w"> </span><span class="n">orderList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
@@ -23089,36 +23056,25 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">Order</span><span class="w"> </span><span class="n">order3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Order</span><span class="p">();</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="n">member</span><span class="p">.</span><span class="na">addOrder</span><span class="p">(</span><span class="n">order3</span><span class="p">);</span><span class="w"> </span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1">// order1, order2 insert 됨</span>
-</code></pre></div></p>
+</code></pre></div>
+    - CascadeType.MERGE는 flush랑 관련없다네...?
+    - em.merge 메서드에 전달한 엔티티까지만 연쇄적으로 merge가 된대
+        - DB에서 merge가 뭐야?</li>
+</ul>
 <ul>
-<li>CascadeType.MERGE는 flush랑 관련없다네...?</li>
-<li>em.merge 메서드에 전달한 엔티티까지만 연쇄적으로 merge가 된대<ul>
-<li>DB에서 merge가 뭐야?</li>
+<li><strong>DB에서 Merge?</strong>
+    - 조건에 따라서 데이터의 삽입/갱신/삭제 작업한번에</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>DB에서 Merge?</strong></p>
 <ul>
-<li>조건에 따라서 데이터의 삽입/갱신/삭제 작업한번에</li>
+<li><strong>hibernate?</strong>
+    - ORM 프레임워크
+    - 레드햇이 만든 ORM 프레임워크
+    - JPA 가이드라인의 구현체
+    - JPA 프로바이더임</li>
 </ul>
-</li>
-<li>
-<p><strong>hibernate?</strong></p>
 <ul>
-<li>ORM 프레임워크</li>
-<li>레드햇이 만든 ORM 프레임워크</li>
-<li>JPA 가이드라인의 구현체</li>
-<li>JPA 프로바이더임</li>
-</ul>
-</li>
-<li>
-<p><strong>JPA?</strong></p>
-<ul>
-<li>이건 그냥 구현체가 아니라 명세일뿐이야</li>
-</ul>
-</li>
+<li><strong>JPA?</strong>
+    - 이건 그냥 구현체가 아니라 명세일뿐이야</li>
 </ul>
 
 

@@ -23186,8 +23186,10 @@
 <h2 id="scala">Scala 기초 투어<a class="headerlink" href="#scala" title="Permanent link">&para;</a></h2>
 <h3 id="_1">추출 오브젝트 =&gt; 뭔소리지...?<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li><code>unapply</code> 메서드가 있는 object</li>
+</ul>
+</li>
 <li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Twice</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
@@ -23217,17 +23219,17 @@
 </ul>
 <h3 id="for">For문<a class="headerlink" href="#for" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>For문 다루는 방법 제공</li>
-<li>
-<p>약간 stream과 느낌이 비슷</p>
+<li>약간 stream과 느낌이 비슷</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예시</strong><ul>
 <li>for안의 if로 필터링</li>
 <li>yield로 매핑
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">userBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nc">User</span><span class="p">(</span><span class="s">&quot;Travis&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">),</span>
@@ -23244,7 +23246,7 @@
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="n">twentySomethings</span><span class="p">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">println</span><span class="p">)</span><span class="w"> </span><span class="c1">// Travis, Dennis</span>
 </code></pre></div></li>
 <li>중첩 포문 + generator 합쳐서 쇼부
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">       </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="k">yield</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span>
@@ -23255,7 +23257,7 @@
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>yield로 매핑 안하면 Unit으로 반환
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">       </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;(</span><span class="si">$</span><span class="n">i</span><span class="s">, </span><span class="si">$</span><span class="n">j</span><span class="s">)&quot;</span><span class="p">)</span>
@@ -23263,19 +23265,21 @@
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">foo</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="_2">제네릭 클래스<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Java의 제네릭과 비슷</li>
 <li>강타입언어에서 필요</li>
-<li>
-<p><code>A</code>를 주로 표시자로 씀</p>
+<li><code>A</code>를 주로 표시자로 씀</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예시</strong><ul>
 <li>자바랑 비슷하지?
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Stack</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Stack</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">elements</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nil</span><span class="w"> </span><span class="c1">// Nil == Empty List == List[Nothing]</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">push</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">elements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">elements</span>
@@ -23288,7 +23292,7 @@
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>서브 타입 쌉가능
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Fruit</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Banana</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Fruit</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -23304,14 +23308,15 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="variance">Variance<a class="headerlink" href="#variance" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>서브 타이핑 관계</li>
 <li>해당 Variance 중 선택 가능: covariant, contravariant, invariant (어노테이션 없음)</li>
-<li>
-<p>자바보다 훨씬 유연한 제네릭 Variance를 제공
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">Foo</span><span class="p">[</span><span class="o">+</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="c1">// covariant 공변</span>
+<li>자바보다 훨씬 유연한 제네릭 Variance를 제공
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">Foo</span><span class="p">[</span><span class="o">+</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="c1">// covariant 공변</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">Bar</span><span class="p">[</span><span class="o">-</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="c1">// contravariant</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="k">class</span><span class="w"> </span><span class="nc">Baz</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="c1">// invariant</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="err">``</span><span class="n">`</span>
@@ -23323,36 +23328,36 @@
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Animal</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Animal</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Invariance</strong></p>
-</li>
-<li>
-<p>타입 파라미터 기본적으로 스칼라에서 Invariant 함
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Box</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="kd">var</span><span class="w"> </span><span class="n">content</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span>
+</ul>
+<ul>
+<li><strong>Invariance</strong><ul>
+<li>타입 파라미터 기본적으로 스칼라에서 Invariant 함
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Box</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="kd">var</span><span class="w"> </span><span class="n">content</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">myCatBox</span><span class="p">:</span><span class="w"> </span><span class="nc">Box</span><span class="p">[</span><span class="nc">Cat</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Box</span><span class="p">[</span><span class="nc">Cat</span><span class="p">](</span><span class="nc">Cat</span><span class="p">(</span><span class="s">&quot;Felix&quot;</span><span class="p">))</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kd">val</span><span class="w"> </span><span class="n">myAnimalBox</span><span class="p">:</span><span class="w"> </span><span class="nc">Box</span><span class="p">[</span><span class="nc">Animal</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myCatBox</span><span class="w"> </span><span class="c1">// 컴파일 안 됨 Cat Box -&gt; Animal로 변경을 할 수 있어도 Cat Box 안에 Dog를 넣을 수 있는 가능성을 제공하게 됨</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kd">val</span><span class="w"> </span><span class="n">myAnimal</span><span class="p">:</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myAnimalBox</span><span class="p">.</span><span class="n">content</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Covariance</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Covariance</strong><ul>
 <li>type[+A]로 정의가 된다면...<ul>
 <li>type[부모] &lt;- type[자식] 이 성립이 됨</li>
 <li><strong>다만 출력에 대해서만 적용</strong>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ImmutableBox</span><span class="p">[</span><span class="o">+</span><span class="nc">A</span><span class="p">](</span><span class="kd">val</span><span class="w"> </span><span class="n">content</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ImmutableBox</span><span class="p">[</span><span class="o">+</span><span class="nc">A</span><span class="p">](</span><span class="kd">val</span><span class="w"> </span><span class="n">content</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">catBox</span><span class="p">:</span><span class="w"> </span><span class="nc">ImmutableBox</span><span class="p">[</span><span class="nc">Cat</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ImmutableBox</span><span class="p">[</span><span class="nc">Cat</span><span class="p">](</span><span class="nc">Cat</span><span class="p">(</span><span class="s">&quot;Felix&quot;</span><span class="p">))</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">animalBox</span><span class="p">:</span><span class="w"> </span><span class="nc">ImmutableBox</span><span class="p">[</span><span class="nc">Animal</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">catBox</span>
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>대표적으로 List가 Covariance
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">printAnimalNames</span><span class="p">(</span><span class="n">animals</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Animal</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
+<li>대표적으로 List가 Covariance
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">printAnimalNames</span><span class="p">(</span><span class="n">animals</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Animal</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="n">animals</span><span class="p">.</span><span class="n">foreach</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">animal</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">animal</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="p">}</span>
@@ -23365,15 +23370,16 @@
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="c1">// prints: Fido, Rex</span>
 <a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">printAnimalNames</span><span class="p">(</span><span class="n">dogs</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Contravariance</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Contravariance</strong><ul>
 <li><strong>이번엔 출력이 아니라 집어 넣는거에 초점을 맞춰보자</strong></li>
 <li>type[자식] &lt;- type[부모] 가 가능해져</li>
 <li>그러면 부모에서 투상화시켜 처리할 수 있는 로직을 자식에게 부여할 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Serializer</span><span class="p">[</span><span class="o">-</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Serializer</span><span class="p">[</span><span class="o">-</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">serialize</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">):</span><span class="w"> </span><span class="nc">String</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -23385,12 +23391,13 @@
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">catSerializer</span><span class="p">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">cat</span><span class="p">(</span><span class="s">&quot;Felix&quot;</span><span class="p">))</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="upper-type-bounds-lower-type-bounds">Upper Type Bounds &amp; Lower Type Bounds<a class="headerlink" href="#upper-type-bounds-lower-type-bounds" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Upper Type Bounds</strong></li>
-<li>
-<p>자바 제네릭 extends 와 비슷
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
+<li><strong>Upper Type Bounds</strong><ul>
+<li>자바 제네릭 extends 와 비슷
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">:</span><span class="w"> </span><span class="n">string</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
@@ -23415,13 +23422,14 @@
 <a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="kd">val</span><span class="w"> </span><span class="n">dogContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">PetContainer</span><span class="p">[</span><span class="nc">Dog</span><span class="p">](</span><span class="k">new</span><span class="w"> </span><span class="nc">Dog</span><span class="p">)</span>
 <a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="kd">val</span><span class="w"> </span><span class="n">catContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">PetContainer</span><span class="p">[</span><span class="nc">Cat</span><span class="p">](</span><span class="k">new</span><span class="w"> </span><span class="nc">Cat</span><span class="p">)</span>
 <a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="kd">val</span><span class="w"> </span><span class="n">lionContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">PetContainer</span><span class="p">[</span><span class="nc">Lion</span><span class="p">](</span><span class="k">new</span><span class="w"> </span><span class="nc">Lion</span><span class="p">)</span><span class="w"> </span><span class="c1">// 이딴거 안대! Animal 상속이여</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Lower Type Bounds</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Lower Type Bounds</strong><ul>
 <li>자바 제네릭 super 와 비슷
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Bird</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Bird</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AfricanSwallow</span><span class="p">()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Bird</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">EuropeanSwallow</span><span class="p">()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Bird</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
@@ -23436,12 +23444,16 @@
 <a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="kd">val</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">moreBirds</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">swallowsFromAntarctica</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="_3">내부 클래스<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>독특한 건 내부 클래스가 외부 클래스에 따라 별도의 타입으로 정의됨</li>
 <li>인스턴스에 한정된 개념<ul>
 <li>자바처럼 쓰려면 <code>외부클래스#내부클래스</code> 처럼 타입 정의하면 가능</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>예시</strong>
@@ -23531,15 +23543,16 @@
 </ul>
 <h3 id="_7">묵시적 파라미터<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>메서드에 파라미터 전달해 호출할 때,</li>
 <li>반복 전달하는 파라미터를 자동으로 전달</li>
 <li>타입에 따라 다양한 파라미터를 자동으로 전달</li>
-<li>
-<p><code>implicit</code> 키워드를 기반으로 생략되어있는 파라미터를 뚝딱 찾아서 전달 할 수 있음</p>
+<li><code>implicit</code> 키워드를 기반으로 생략되어있는 파라미터를 뚝딱 찾아서 전달 할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Monoid</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nc">A</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="nc">A</span><span class="p">):</span><span class="w"> </span><span class="nc">A</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">unit</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span>
@@ -23562,20 +23575,20 @@
 <a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="c1">// 컴파일러가 은근 슬쩍 implicit 지정된 놈으로 후루룩뚝딱 알려줌</span>
 <a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="n">println</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)))</span><span class="w"> </span><span class="c1">// 6</span>
 <a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="n">println</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">)))</span><span class="w"> </span><span class="c1">// abc</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="_8">묵시적 변환<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>타입 S -&gt; 타입 T로 자동 변환</li>
 <li>식의 타입이 S 인데, 기대타입이 T인 경우,</li>
 <li>S =&gt; T 형태의 함수가 implicit 값을 있는 걸 사용</li>
-<li>
-<p>스칼라가 몰래몰래 형 변환 필요할 때 쓱 해버림</p>
+<li>스칼라가 몰래몰래 형 변환 필요할 때 쓱 해버림</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">implicit</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">list2ordered</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">])</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="p">(</span><span class="k">implicit</span><span class="w"> </span><span class="n">elem2ordered</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Ordered</span><span class="p">[</span><span class="nc">A</span><span class="p">]):</span><span class="w"> </span><span class="nc">Ordered</span><span class="p">[</span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">that</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">]):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
@@ -23584,13 +23597,14 @@
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
 <a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="s">&quot;Hello World&quot;</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c1">// 이런것도 String =&gt; StringOps로 묵시적 변환해줌</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="_9">타입 추론<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ul>
-<li>컴파일러가 타입 때려 맞춰줌</li>
+<li>컴파일러가 타입 때려 맞춰줌<ul>
 <li>리턴할 친구가 너무 명확하면 타입 안써줘도 됨</li>
+</ul>
+</li>
 <li>동적 언어 마냥 그냥 쓸 수 있지만, 언어적 차원에서 엄한거 넘기면 컴파일 에러!</li>
 <li>너무 확정적인걸로 하면 변경하기 좀 어려울 수 있음
   <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">businessName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Connectable&quot;</span>

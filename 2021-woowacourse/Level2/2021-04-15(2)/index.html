@@ -22911,165 +22911,107 @@
 <ul>
 <li><em>참고 1: https://ko.wikipedia.org/wiki/%EC%8A%A4%ED%94%84%EB%A7%81_%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC</em></li>
 <li><em>참고 2: https://www.youtube.com/watch?v=xs44Ty_Kerk</em></li>
-<li>
-<p><em>참고 3: https://khj93.tistory.com/entry/Spring-Spring-Framework%EB%9E%80-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90-%ED%95%B5%EC%8B%AC-%EC%A0%95%EB%A6%AC</em></p>
-</li>
-<li>
-<p><strong>정의</strong></p>
+<li><em>참고 3: https://khj93.tistory.com/entry/Spring-Spring-Framework%EB%9E%80-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90-%ED%95%B5%EC%8B%AC-%EC%A0%95%EB%A6%AC</em></li>
+</ul>
 <ul>
-<li>자바 웹 프레임워크로 동적인 웹 사이트 개발에 사용</li>
-<li>엔터프라이즈급 애플리케이션을 개발하기 위한 모든 기능을 종합적으로 제공하는 경량화 된 솔루션</li>
-<li>Spring Framework는 경량 컨테이너로 자바 객체를 담고 직접 관리<ul>
-<li>객체의 생성/소멸/라이프사이클 관리</li>
-<li>Spring 컨테이너로 부터 필요한 객체를 가져와 사용 가능</li>
+<li><strong>정의</strong>
+    - 자바 웹 프레임워크로 동적인 웹 사이트 개발에 사용
+    - 엔터프라이즈급 애플리케이션을 개발하기 위한 모든 기능을 종합적으로 제공하는 경량화 된 솔루션
+    - Spring Framework는 경량 컨테이너로 자바 객체를 담고 직접 관리
+        - 객체의 생성/소멸/라이프사이클 관리
+        - Spring 컨테이너로 부터 필요한 객체를 가져와 사용 가능</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>특징</strong></p>
 <ul>
-<li>경량 컨테이너로서 자바 객체를 직접 관리<ul>
-<li>객체의 생성/소멸 라이프 사이클을 관리하며, 스프링으로부터 필요한 객체 얻어올 수 있음</li>
+<li><strong>특징</strong>
+    - 경량 컨테이너로서 자바 객체를 직접 관리
+        - 객체의 생성/소멸 라이프 사이클을 관리하며, 스프링으로부터 필요한 객체 얻어올 수 있음
+    - POJO 방식의 프레임워크
+    - IoC를 지원
+        - 컨트롤의 제어권이 사용자가 아니라, 스프링 프레임워크에게 있음
+        - 필요에 따라 스프링에서 사용자 코드를 호출
+    - DI를 지원
+        - 각각의 계층이나 서비스 간의 의존성이 존재한다면 프레임워크가 서로 연결해줌
+    - AOP를 지원
+        - 트랜잭션, 로깅, 보안을 분리하여 관리할 수 있음</li>
 </ul>
-</li>
-<li>POJO 방식의 프레임워크</li>
-<li>IoC를 지원<ul>
-<li>컨트롤의 제어권이 사용자가 아니라, 스프링 프레임워크에게 있음</li>
-<li>필요에 따라 스프링에서 사용자 코드를 호출</li>
-</ul>
-</li>
-<li>DI를 지원<ul>
-<li>각각의 계층이나 서비스 간의 의존성이 존재한다면 프레임워크가 서로 연결해줌</li>
-</ul>
-</li>
-<li>AOP를 지원<ul>
-<li>트랜잭션, 로깅, 보안을 분리하여 관리할 수 있음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>IoC</strong></p>
 <ul>
-<li>Inversion of Control의 약자<ul>
-<li>제어의 역전</li>
+<li><strong>IoC</strong>
+    - Inversion of Control의 약자
+        - 제어의 역전
+    - 지금까지는 사용자가 흐름을 제어
+        - 객체 생성 -&gt; 의존성 객체 생성 -&gt; 객체 내의 메서드 호출 작업
+    - IoC는 자신의 모든 권한을 위임
+        - 위임한 특별한 객체에 모든 것을 맡김
+        - 자신이 어디서 만들어지고, 어떻게 사용되는지 몰라
+    - IoC: 기존의 사용자가 모든 작업을 제어하던 것을 특별한 객체에 모든 것을 위임하여, 객체의 생성부터 생명주기 등 모든 객체에 대한 제어권이 넘어간 것!</li>
 </ul>
-</li>
-<li>지금까지는 사용자가 흐름을 제어<ul>
-<li>객체 생성 -&gt; 의존성 객체 생성 -&gt; 객체 내의 메서드 호출 작업</li>
-</ul>
-</li>
-<li>IoC는 자신의 모든 권한을 위임<ul>
-<li>위임한 특별한 객체에 모든 것을 맡김</li>
-<li>자신이 어디서 만들어지고, 어떻게 사용되는지 몰라</li>
-</ul>
-</li>
-<li>IoC: 기존의 사용자가 모든 작업을 제어하던 것을 특별한 객체에 모든 것을 위임하여, 객체의 생성부터 생명주기 등 모든 객체에 대한 제어권이 넘어간 것!</li>
-</ul>
-</li>
-<li>
-<p><strong>IoC의 구성 요소 DI, DL</strong></p>
 <ul>
-<li>DL<ul>
-<li>의존성 검색</li>
-<li>별도의 저장소에 Bean을 저장</li>
-<li>API 사용할 때 빈을 검색하는 방법</li>
+<li><strong>IoC의 구성 요소 DI, DL</strong>
+    - DL
+        - 의존성 검색
+        - 별도의 저장소에 Bean을 저장
+        - API 사용할 때 빈을 검색하는 방법
+    - DI
+        - 의존성 주입
+        - 객체가 서로 의존하는 관계가 되도록 의존성을 주입하는 것
+        - 객체가 다른 객체를 사용하고 있음을 나타냄
+        - 각 클래스 사이에 "필요로 하는 의존 관계를 빈 설정 정보를 바탕으로 컨테이너가 자동 연결"</li>
 </ul>
-</li>
-<li>DI<ul>
-<li>의존성 주입</li>
-<li>객체가 서로 의존하는 관계가 되도록 의존성을 주입하는 것</li>
-<li>객체가 다른 객체를 사용하고 있음을 나타냄</li>
-<li>각 클래스 사이에 "필요로 하는 의존 관계를 빈 설정 정보를 바탕으로 컨테이너가 자동 연결"</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>MVC</strong></p>
 <ul>
-<li>인터페이스와 비즈니스 로직을 분리하여 개발</li>
-<li>Model<ul>
-<li>데이터 처리 담당</li>
-<li>Service, DAO로 나뉨</li>
-<li>Service는 HTTP 통신 X, request/response 객체를 매개변수로 받지 않을 것</li>
+<li><strong>MVC</strong>
+    - 인터페이스와 비즈니스 로직을 분리하여 개발
+    - Model
+        - 데이터 처리 담당
+        - Service, DAO로 나뉨
+        - Service는 HTTP 통신 X, request/response 객체를 매개변수로 받지 않을 것
+    - View
+        - 사용자 UI 담당
+        - View는 자신이 요청을 보낼 Controller의 정보만 알고 있을 것
+        - Model의 정보 저장 X, Model,Controller의 구성요소 몰라야해
+    - Controller
+        - View에서 받은 요청 가공하여 Model(Service)에 전달
+        - Model에서 받은 결과를 가공하여 View로 전달
+        - Request Error, Model Error 처리</li>
 </ul>
-</li>
-<li>View<ul>
-<li>사용자 UI 담당</li>
-<li>View는 자신이 요청을 보낼 Controller의 정보만 알고 있을 것</li>
-<li>Model의 정보 저장 X, Model,Controller의 구성요소 몰라야해</li>
-</ul>
-</li>
-<li>Controller<ul>
-<li>View에서 받은 요청 가공하여 Model(Service)에 전달</li>
-<li>Model에서 받은 결과를 가공하여 View로 전달</li>
-<li>Request Error, Model Error 처리</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>스프링 구조</strong></p>
 <ul>
-<li>Spring Core<ul>
-<li>Spring Container</li>
-<li>Bean Factory Container</li>
-<li>IoC 패턴을 통해 객체 구성, 의존성 처리까지 모든 역할 수행</li>
+<li><strong>스프링 구조</strong>
+    - Spring Core
+        - Spring Container
+        - Bean Factory Container
+        - IoC 패턴을 통해 객체 구성, 의존성 처리까지 모든 역할 수행
+    - Spring DAO
+        - Database에 접근
+        - Spring JDBC
+        - 예외 처리 간편화
+    - Spring MVC
+        - 위에서 언급한 MVC 구조를 만들어줌</li>
 </ul>
-</li>
-<li>Spring DAO<ul>
-<li>Database에 접근</li>
-<li>Spring JDBC</li>
-<li>예외 처리 간편화</li>
-</ul>
-</li>
-<li>Spring MVC<ul>
-<li>위에서 언급한 MVC 구조를 만들어줌</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>스프링이란?</strong>    </p>
 <ul>
-<li>스프링 부트<ul>
-<li>스프링을 편리하게 사용할 수 있도록 지원, 최근에는 기본으로 사용</li>
-<li>단독으로 실행할 수 있는 스프링 애플리케이션을 쉽게 생성</li>
-<li>Tomcat 같은 웹 서버를 내장해 별도의 웹 서버를 설치해도 않아도 됨</li>
-<li>손쉬운 빌드 구성을 위한 starter 종속성 제공</li>
-<li>스프링과 외부 라이브러리 자동 구성<ul>
-<li>스프링 버전을 힘들게 잘 구성할 필요가 줄어듬</li>
-<li>외부 라이브러리 버전을 스프링이 뚝딱 테스트해서 구성함</li>
+<li><strong>스프링이란?</strong>  <br />
+    - 스프링 부트
+        - 스프링을 편리하게 사용할 수 있도록 지원, 최근에는 기본으로 사용
+        - 단독으로 실행할 수 있는 스프링 애플리케이션을 쉽게 생성
+        - Tomcat 같은 웹 서버를 내장해 별도의 웹 서버를 설치해도 않아도 됨
+        - 손쉬운 빌드 구성을 위한 starter 종속성 제공
+        - 스프링과 외부 라이브러리 자동 구성
+            - 스프링 버전을 힘들게 잘 구성할 필요가 줄어듬
+            - 외부 라이브러리 버전을 스프링이 뚝딱 테스트해서 구성함
+        - 메트릭, 상태 확인, 외부 구성 같은 프로덕션 준비 기능 제공
+        - 관례에 의한 간결한 설정
+    - 스프링 프레임워크
+        - 핵심 기술: 스프링 DI 컨테이너, AOP, 이벤트, 기타
+        - 웹 기술: 스프링 MVC, 스프링 WebFlux
+        - 데이터 접근 기술: 트랜잭션, JDBC, ORM 지원, XML 지원
+        - 기술 통합: 캐시, 이메일, 원격접근, 스케줄링
+        - 테스트: 스프링 기반 테스트 지원
+        - 언어: 코틀린, 그루비</li>
 </ul>
-</li>
-<li>메트릭, 상태 확인, 외부 구성 같은 프로덕션 준비 기능 제공</li>
-<li>관례에 의한 간결한 설정</li>
-</ul>
-</li>
-<li>스프링 프레임워크<ul>
-<li>핵심 기술: 스프링 DI 컨테이너, AOP, 이벤트, 기타</li>
-<li>웹 기술: 스프링 MVC, 스프링 WebFlux</li>
-<li>데이터 접근 기술: 트랜잭션, JDBC, ORM 지원, XML 지원</li>
-<li>기술 통합: 캐시, 이메일, 원격접근, 스케줄링</li>
-<li>테스트: 스프링 기반 테스트 지원</li>
-<li>언어: 코틀린, 그루비</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>왜 스프링을 만들었는가?</strong></p>
 <ul>
-<li>자바 기반의 프레임워크<ul>
-<li>자바는 객체 지향 언어!</li>
-</ul>
-</li>
-<li>스프링은 객체 지향 언어가 가진 강력한 특징을 살려내는 프레임워크!</li>
-<li>스프링은 "좋은 객체 지향" 애플리케이션을 개발할 수 있도록 도와주는 프레임워크!</li>
-</ul>
-</li>
+<li><strong>왜 스프링을 만들었는가?</strong>
+    - 자바 기반의 프레임워크
+        - 자바는 객체 지향 언어!
+    - 스프링은 객체 지향 언어가 가진 강력한 특징을 살려내는 프레임워크!
+    - 스프링은 "좋은 객체 지향" 애플리케이션을 개발할 수 있도록 도와주는 프레임워크!</li>
 </ul>
 
 

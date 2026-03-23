@@ -22942,19 +22942,17 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">}</span>
 </code></pre></div></p>
 <ul>
-<li><strong>2. 멀티쓰레드에서 생산자-소비자</strong></li>
+<li><strong>2. 멀티쓰레드에서 생산자-소비자</strong><ul>
 <li><img alt="" src="../../images/2023-06-20-mutli.png" /></li>
 <li>싱글쓰레드와 달라지는 점은...<ol>
 <li>Producer 쓰레드 따로, Consumer 쓰레드 따로. (내부에 루프를 가짐)</li>
 <li>전달 매개체 (보통 큐)가 생김</li>
 </ol>
 </li>
-<li>
-<p>Table 클래스에서 동시 접근을 막는 큐를 구현함 =&gt; 근데 멀티 쓰레드 프로그래밍이 꽤나 위험해 =&gt; 하이레벨에서 조작하자!</p>
-<ul>
+<li>Table 클래스에서 동시 접근을 막는 큐를 구현함 =&gt; 근데 멀티 쓰레드 프로그래밍이 꽤나 위험해 =&gt; 하이레벨에서 조작하자!<ul>
 <li>STM, Actor 등등의 등장</li>
 <li>java.util.concurrent를 사용하여 막자!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">Table</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Table</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ProducerThread</span><span class="p">(</span><span class="n">table</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
@@ -23035,13 +23033,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>3. 멀티쓰레드에서 생산자-소비자 (java.util.concurrent)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>3. 멀티쓰레드에서 생산자-소비자 (java.util.concurrent)</strong><ul>
 <li>BlockingQueue 라는 자료구조를 사용해 간단히 사용하고, 실수의 여지를 줄여보자!</li>
-<li>
-<p>상태 변경에 대한 책임 소재가 명확하지 않다는데...?
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Table</span><span class="w"> </span><span class="p">{</span>
+<li>상태 변경에 대한 책임 소재가 명확하지 않다는데...?
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Table</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">buffer</span><span class="p">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Table</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23057,50 +23056,49 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">take</span><span class="p">();</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>4. Actor</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>4. Actor</strong><ul>
 <li>'행동자'</li>
 <li>능동적으로 비동기 메시지를 처리하자!!!<ul>
 <li>살아 숨쉬는 살아있는 쓰레드 하나가 있음</li>
 </ul>
 </li>
 <li>비동기적으로 메시지 처리 가능 =&gt; 메시지를 담아둘 자신만의 큐 보유</li>
-<li>
-<p><strong>Actor == 객체 + Loop Thread + Queue</strong></p>
+<li><strong>Actor == 객체 + Loop Thread + Queue</strong></li>
+</ul>
 </li>
-<li>
-<p><strong>5. Reactor</strong></p>
-</li>
-<li>node.js의 기반패턴</li>
-<li>
-<p>Actor + EventHandler</p>
+</ul>
 <ul>
+<li><strong>5. Reactor</strong><ul>
+<li>node.js의 기반패턴</li>
+<li>Actor + EventHandler<ul>
 <li>Actor 안에 어떤 switch 문을 두고, 이벤트가 날라오면 알맞은 이벤트로 디스패칭</li>
 <li>단일 쓰레드로 이루어져 있기에, 이벤트 핸들러 하나가 병목이 된다면 성능 뇌절</li>
 </ul>
 </li>
-<li>
-<p><strong>6. Proactor</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>6. Proactor</strong><ul>
 <li>Reactor: 어떤 이벤트 날라옴 -&gt; 이벤트에 해당하는 행동 수행</li>
-<li>
-<p>Proactor: 먼저 행동 디스패치 -&gt; 행동에 따른 결과가 날라옴</p>
+<li>Proactor: 먼저 행동 디스패치 -&gt; 행동에 따른 결과가 날라옴</li>
+</ul>
 </li>
-<li>
-<p><strong>7. Actor 패턴으로 생산자-소비자 (Scala)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>7. Actor 패턴으로 생산자-소비자 (Scala)</strong><ul>
 <li>액터를 사용할 때, 특정 객체 및 값의 상태관리는 <strong>오직 하나의 액터</strong>에서 전담하도록 하자!<ul>
 <li>무엇인가를 수정하고 싶다면, 해당 액터에 메시지를 전달해주세요!</li>
 </ul>
 </li>
-<li>
-<p>액터의 흐름을 막지 마세요! (ex. Thread.sleep)</p>
-<ul>
+<li>액터의 흐름을 막지 마세요! (ex. Thread.sleep)<ul>
 <li>다른 전용 액터를 만들어 메시지를 보내고 받는게 이상적
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">actors</span><span class="p">.</span><span class="nc">Reactor</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">actors</span><span class="p">.</span><span class="nc">Reactor</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">object</span><span class="w"> </span><span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Stop</span><span class="p">()</span>
@@ -23164,8 +23162,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>8. Akka 생산자-소비자 (Scala)</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>8. Akka 생산자-소비자 (Scala)</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">HelloWorld</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ActorSystem</span><span class="p">(</span><span class="s">&quot;ProConSys&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">actorOf</span><span class="p">(</span><span class="nc">Props</span><span class="p">[</span><span class="nc">ConsumerActor</span><span class="p">])</span>
@@ -23190,13 +23191,12 @@
 <a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Integer</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;ID : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
 <a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Pub/Sub &amp; Producer/Consumer</strong>
-<em>참고: https://velog.io/@eenaa/PubSub-%EA%B3%BC-producerconsumer</em></p>
-</li>
-<li><strong>Pub/Sub</strong></li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Pub/Sub &amp; Producer/Consumer</strong>
+<em>참고: https://velog.io/@eenaa/PubSub-%EA%B3%BC-producerconsumer</em></li>
+<li><strong>Pub/Sub</strong><ul>
 <li>구독 모델로써...<ol>
 <li>데이터를 발행자(Publisher)가 특정 주제(Topic)에게 전송하고</li>
 <li>해당 주제(Topic)을 구독하는 구독자(Subscriber)들이 데이터를 수신</li>
@@ -23205,20 +23205,22 @@
 </li>
 <li>Subscriber가 Publisher의 데이터를 처리할 때 중복으로 처리하지 않도록 중복 처리할 것</li>
 <li>동작 방식<ul>
-<li>발행된 데이터는 topic을 구독중인 모든 Subscriber에게 복사가 된다</li>
+<li>발행된 데이터는 topic을 구독중인 모든 Subscriber에게 복사가 된다<ul>
 <li>각 Subscriber는 자신만의 독립적인 작업을 수행할 수 있으며, 서로 영향 X</li>
 </ul>
 </li>
-<li>
-<p>확장성</p>
-<ul>
+</ul>
+</li>
+<li>확장성<ul>
 <li>많은 Subscriber를 가질 수 있으며, 각 Subscriber는 독립적으로 작업 수행 가능</li>
 <li>Publisher는 데이터 전송만 해두 되기에, 구독자 수에 영향 받지 않음</li>
 </ul>
 </li>
-<li>
-<p><strong>Producer/Consumer</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Producer/Consumer</strong><ul>
 <li>구동 원리는...<ol>
 <li>생산자(Producer)가 데이터를 생성하고 큐(Queue)에 전송</li>
 <li>소비자(Consumer)는 큐(Queue)에서 데이터를 가져와 처리</li>
@@ -23229,6 +23231,8 @@
 <li>확장성<ul>
 <li>큐의 처리 능력에 따라 확장성이 결정됨</li>
 <li>큐가 병목될 수 있기에, 큐를 분산해 처리 능력 향상도 가능</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

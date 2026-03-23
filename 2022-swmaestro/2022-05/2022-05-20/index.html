@@ -22910,22 +22910,20 @@
 <h2 id="effective-java-item-1">Effective Java Item 1. 생성자 대신 정적 팩토리 메서드를 고려하라 완벽 공략 강의<a class="headerlink" href="#effective-java-item-1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.inflearn.com/course/%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C-%EC%9E%90%EB%B0%94-1/dashboard</em></li>
-<li><strong>완벽 공략 1. 열거 타입</strong></li>
+<li><strong>완벽 공략 1. 열거 타입</strong><ul>
 <li>들어갈 수 있는 값을 제한하여 Type Safety 보장</li>
 <li>해당 Enum 인스턴스는 딱 하나만 생기는 싱글턴<ul>
 <li>따라서 <code>==</code>로 동등비교 할 수 있음</li>
 </ul>
 </li>
-<li>
-<p>EnumSet, EnumMap</p>
+<li>EnumSet, EnumMap</li>
+</ul>
 </li>
-<li>
-<p><strong>완벽 공략 2. 플라이웨이트 패턴</strong></p>
-</li>
-<li>자주 사용되는 같은 객체를 묶어서 메모리 사용 줄이자</li>
-<li>
-<p>자주 변하는 속성과 변하지 않는 속성을 분리하고, 재사용하여 메모리 사용 줄이는 것</p>
+</ul>
 <ul>
+<li><strong>완벽 공략 2. 플라이웨이트 패턴</strong><ul>
+<li>자주 사용되는 같은 객체를 묶어서 메모리 사용 줄이자</li>
+<li>자주 변하는 속성과 변하지 않는 속성을 분리하고, 재사용하여 메모리 사용 줄이는 것<ul>
 <li>학교는 자주 안바뀐다면, 이런식으로 관리해보는것은 어떨까?
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">student</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
@@ -22940,9 +22938,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>완벽 공략 3. 인터페이스와 정적 메서드</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>완벽 공략 3. 인터페이스와 정적 메서드</strong><ul>
 <li>인터페이스 특 : 디폴트 메서드와 정적 메서드 가질 수 있음</li>
 <li>디폴트 메서드 (default method)<ul>
 <li>인터페이스에서 메서드 선언 뿐 아닌, 기본적인 구현체 까지 제공가능</li>
@@ -22950,28 +22950,30 @@
 <li>이거 상속받아 인스턴스와 시킨 객체가 default method 호출하여 로직 수행가능</li>
 </ul>
 </li>
-<li>
-<p>정적 메서드 (static method)</p>
-<ul>
+<li>정적 메서드 (static method)<ul>
 <li>자바 9 부터는 private static도 OK</li>
 </ul>
 </li>
-<li>
-<p><strong>완벽 공략 4. 서비스 제공자 프레임워크</strong></p>
+</ul>
 </li>
-<li>
-<p>주요 구성 요소</p>
+</ul>
 <ul>
+<li><strong>완벽 공략 4. 서비스 제공자 프레임워크</strong><ul>
+<li>주요 구성 요소<ul>
 <li>서비스 제공자 인터페이스 : 제공할 기능을 담은 인터페이스</li>
 <li>서비스 제공자(서비스 구현체) : 인터페이스를 구현한 <code>@Service</code> 붙은 서비스 클래스</li>
 <li>서비스 제공자 등록 API : <code>@Configuration</code>, <code>@Bean</code></li>
 <li>서비스 접근 API : <code>ApplicationContext</code>, <code>@Autowired</code></li>
 </ul>
 </li>
-<li>
-<p><strong>완벽 공략 5. 리플렉션</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>완벽 공략 5. 리플렉션</strong><ul>
 <li><em>참고: https://joel-dev.site/82</em></li>
+</ul>
+</li>
 </ul>
 
 

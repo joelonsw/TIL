@@ -22911,7 +22911,7 @@
 <ul>
 <li><em>참고: https://techblog.woowahan.com/2614/</em></li>
 <li><em>참고: https://techblog.woowahan.com/2644/</em></li>
-<li><strong>Tips</strong></li>
+<li><strong>Tips</strong><ul>
 <li>LocalDateTime의 변수명은 DateTime으로 지칭한다<ul>
 <li>ex) paymentDateTime</li>
 </ul>
@@ -22923,9 +22923,13 @@
 <li>테스트에서는 <code>@Transactional</code> 빼자<ul>
 <li>전파효과 때매 테스트 검증 어려울 수 있음</li>
 <li>영속성 컨텍스트의 dirty checking 기능 동작 x</li>
-<li>대신에...</li>
+<li>대신에...<ul>
 <li>LazyFetch =&gt; EagerFetch로 전환</li>
 <li>FetchJoin 사용하기</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

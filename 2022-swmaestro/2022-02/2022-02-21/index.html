@@ -22934,11 +22934,9 @@
 <li><em>참고: https://projectlombok.org/features/Builder</em></li>
 <li><em>참고: https://www.baeldung.com/lombok-builder</em></li>
 <li><em>참고: https://cheese10yun.github.io/lombok/</em></li>
-<li><strong><code>@Builder</code></strong></li>
+<li><strong><code>@Builder</code></strong><ul>
 <li>클래스 혹은 생성자에 붙일 수 있음</li>
-<li>
-<p>다음 7가지를 내부적으로 생성한다고 보면 됨</p>
-<ol>
+<li>다음 7가지를 내부적으로 생성한다고 보면 됨<ol>
 <li><code>FooBuilder</code>라는 inner static class "Builder"를 생성</li>
 <li>"Builder" 안에 non-static, non-final 필드를 만듦</li>
 <li>"Builder" 안에 no-args 생성자 만듦</li>
@@ -22948,19 +22946,21 @@
 <li>.builder() 를 호출하여 빌더 패턴 사용 시작</li>
 </ol>
 </li>
-<li>
-<p><strong>클래스에 빌더 쓰기</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>클래스에 빌더 쓰기</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Getter</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Builder</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Widget</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>롬복 팁</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>롬복 팁</strong><ol>
 <li><code>@Data</code> 쓰지 않기<ul>
 <li><code>@ToString</code>, <code>@EqualsAndHashCode</code>, <code>@Getter</code>, <code>@Setter</code>, <code>@RequiredArgsConstructor</code>를 한번에 사용하는 어노테이션</li>
 </ul>
@@ -22969,11 +22969,13 @@
 <li><code>@ToString</code>은 양방향 연관관계시 순환참조 발생</li>
 <li><code>@NoArgsConstructor</code>의 접근 권한을 최소화 할 것 <code>@NoArgsConstructor(access = AccessLevel.PROTECTED)</code></li>
 <li><code>@Builder</code> 사용시 매개변수</li>
+</ol>
+</li>
 </ul>
 <h2 id="entity">Entity 부모가 둘인 경우<a class="headerlink" href="#entity" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://velog.io/@woodyn1002/%EC%82%BD%EC%A7%88-%EB%A1%9C%EA%B7%B8-Hibernate%EC%97%90%EC%84%9C-%EB%B6%80%EB%AA%A8%EA%B0%80-%EB%91%98%EC%9D%B8-Entity%EC%9D%98-%ED%95%9C%EC%AA%BD-%EB%B6%80%EB%AA%A8%EB%A5%BC-%EC%A7%80%EC%9A%B0%EB%A9%B4-%EC%B0%B8%EC%A1%B0-%EB%AC%B4%EA%B2%B0%EC%84%B1-%EC%98%A4%EB%A5%98%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EB%AC%B8%EC%A0%9C</em></li>
-<li><strong>Cascade.ALL이나 Cascade.PERSIST</strong></li>
+<li><strong>Cascade.ALL이나 Cascade.PERSIST</strong><ol>
 <li>Partnership은 VentureCapital(Cascade.ALL) 과 Project(Cascade.REMOVE) 를 둘 다 부모로 가짐</li>
 <li>Project를 지우면 Partnership은 지워지며 Removed 상태가 전이됨</li>
 <li>flush 시 영속성 컨텍스트의 모든 엔티티들이 각각 Cascade.PERSIST 관계 맺고있는 Entity에게 영속성 전이 수행됨</li>
@@ -22982,6 +22984,8 @@
 <li>Project는 여전히 Removed 상태 : 쿼리나감</li>
 <li>DB 상의 Partnership 테이블은 각각 venture_capital_id 와 project_id 를 가지고 있다</li>
 <li>Partnership은 여전히 project_id를 참조하고 있기에, 참조 무결성 오류 발생</li>
+</ol>
+</li>
 </ul>
 
 

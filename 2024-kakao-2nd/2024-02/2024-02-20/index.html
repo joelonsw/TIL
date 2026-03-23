@@ -22915,22 +22915,14 @@
     - Spring Batch에서는 read/process/write의 프로세스를 하나의 트랜잭션으로 감싸고 있음
         - 이 트랜잭션은 Tasklet 안에서 시작/종료됨</p>
 <ul>
-<li>
-<p><strong>Tasklet에 <code>@Transactional</code> 선언시?</strong></p>
+<li><strong>Tasklet에 <code>@Transactional</code> 선언시?</strong>
+    - 스프링 배치 기본 트랜잭션 외부에 별도 트랜잭션이 위치함
+    - 스프링 배치에서 생성한 트랜잭션 : 시작 ~ 종료 시 어플리케이션 단에서 하나의 락으로 동기화
+        - 트랜잭션 시작 시 Lock 획득, 트랜잭션 종료 시 Lock 해제</li>
+</ul>
 <ul>
-<li>스프링 배치 기본 트랜잭션 외부에 별도 트랜잭션이 위치함</li>
-<li>스프링 배치에서 생성한 트랜잭션 : 시작 ~ 종료 시 어플리케이션 단에서 하나의 락으로 동기화<ul>
-<li>트랜잭션 시작 시 Lock 획득, 트랜잭션 종료 시 Lock 해제</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>스프링 배치에서는 <code>@Transactional</code>과 같은 외부 트랜잭션 선언이 원칙적으로 금지</strong></p>
-<ul>
-<li>Tasklet에서 선언한 <code>@Transactional</code> 트랜잭션을 스프링 배치의 기본 트랜잭션이 동일하게 Lock 획득 못해서 데드락 발생할 가능성 있음</li>
-</ul>
-</li>
+<li><strong>스프링 배치에서는 <code>@Transactional</code>과 같은 외부 트랜잭션 선언이 원칙적으로 금지</strong>
+    - Tasklet에서 선언한 <code>@Transactional</code> 트랜잭션을 스프링 배치의 기본 트랜잭션이 동일하게 Lock 획득 못해서 데드락 발생할 가능성 있음</li>
 </ul>
 
 

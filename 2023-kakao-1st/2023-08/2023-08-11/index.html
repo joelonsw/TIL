@@ -22958,24 +22958,24 @@
   - 개발자 도구 열어서 <code>location = "https://naver.com"</code> 치면 쓱 이동함
   - 이는 <code>location.href = "https://naver.com</code>과 같은 동작임</p>
 <ul>
-<li>
-<p><strong>이동</strong>
+<li><strong>이동</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">location</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="s2">&quot;https://naver.com&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://naver.com&quot;</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>현재 페이지 리로드</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>현재 페이지 리로드</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">location</span><span class="p">.</span><span class="nx">reload</span><span class="p">()</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Search</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Search</strong><ul>
 <li><code>location.search = data</code>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
 </code></pre></div><ul>
 <li>이러면 현재 페이지에서 ?hello가 붙은 url로 이동</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -22991,49 +22991,49 @@
     - 서브쿼리  |  가상의 테이블, SQL 구문 실행 중에만 존재          | 일시적, 물리적 저장 X
   - 이는 성능 관점에서 차이를 발생시킨다. </p>
 <ul>
-<li><strong>테이블</strong></li>
-<li>
-<p>DB에 저장되어있는 테이블을 가져오기 때문에 빠르고 큰 비용없이 접근 가능</p>
+<li><strong>테이블</strong><ul>
+<li>DB에 저장되어있는 테이블을 가져오기 때문에 빠르고 큰 비용없이 접근 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>뷰</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>뷰</strong><ul>
 <li>테이블에서 일부만을 가져와 가상 테이블(뷰)를 만든다</li>
 <li>장점: 테이블 중 필요한 데이터만 가상테이블로 저장해 관리가 편하고 SQL문이 간결해짐</li>
-<li>
-<p>단점: 독립적인 인덱스 가질 수 없음. SELECT 문에 구문이 실행되어 성능 문제 유발 가능</p>
+<li>단점: 독립적인 인덱스 가질 수 없음. SELECT 문에 구문이 실행되어 성능 문제 유발 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>서브쿼리</strong>
+</ul>
+<ul>
+<li><strong>서브쿼리</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">receipts</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>SQL문의 from 절에서 서브커리가 하나의 뷰 역할을 한다고 해서 인라인 뷰라는 이름을 붙이기도 함</li>
 <li>장점: SQL 구문 안에서 유연하게 또 다른 SQL문을 만들어 활용할 수 있음</li>
-<li>
-<p>단점: 연산 비용이 추가됨. <strong>최적화를 받을 수 없음</strong>. 쿼리가 복잡해짐</p>
+<li>단점: 연산 비용이 추가됨. <strong>최적화를 받을 수 없음</strong>. 쿼리가 복잡해짐</li>
+</ul>
 </li>
-<li>
-<p><strong>서브 쿼리 장/단점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>서브 쿼리 장/단점</strong><ul>
 <li>장점<ul>
 <li>쿼리 작성 편리함</li>
 <li>성능 관점에서 효율적인 쿼리 작성하기 위해서는 수고스럽지만 효율적인 방법을 생각해보자!</li>
 </ul>
 </li>
-<li>
-<p>단점</p>
-<ul>
-<li>서브쿼리 실체적인 데이터를 저장하고 있지 않아</li>
-<li>연산 비용 추가: 접근 시마다 SELECT 구문에 접근해 데이터 만들고 연산비용 증가</li>
-<li>최적화 못받음: 서브쿼리엔 메타정보 없어. 인덱스, 제약 다없어. PK도 없어. 옵티마이저 정보 못 얻어. 성능 저하</li>
-<li>쿼리가 복잡해짐: 쿼리 두개 읽는거랑 똑같아</li>
+<li>단점<ul>
+<li>서브쿼리 실체적인 데이터를 저장하고 있지 않아
+1. 연산 비용 추가: 접근 시마다 SELECT 구문에 접근해 데이터 만들고 연산비용 증가
+2. 최적화 못받음: 서브쿼리엔 메타정보 없어. 인덱스, 제약 다없어. PK도 없어. 옵티마이저 정보 못 얻어. 성능 저하
+3. 쿼리가 복잡해짐: 쿼리 두개 읽는거랑 똑같아</li>
 </ul>
 </li>
-<li>
-<p><strong>Then what?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Then what?</strong><ul>
 <li>성능 문제를 해결하기 위해 2가지를 고려할 것<ol>
 <li>불필요한 JOIN 연산 수행하지는 않았는지</li>
 <li>JOIN 시 불필요한 테이블 접근하지 않았는지</li>
@@ -23044,6 +23044,8 @@
 <li>내부적으로 복잡한 연산을 수행하거나 결과 크기가 큰 서브쿼리를 사용할 때 성능 리스크를 고려해야한다</li>
 <li>조인할 때는 조인 대상 레코드수를 최대한 줄이자. </li>
 </ul>
+</li>
+</ul>
 <h2 id="db">DB 파티셔닝<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://gmlwjd9405.github.io/2018/09/24/db-partitioning.html</em>
 - <strong>개요</strong>
@@ -23051,13 +23053,13 @@
   - DBMS에 너무 큰 테이블이 들어가면 용량/성능 측면에서 많은 이슈가 발생하고 파티션이라는 작은 단위로 나누어 파티셔닝 기법이 나타남
   - SW 적으로 데이터베이스 분산 처리하여 성능이 저하되는 것 방지</p>
 <ul>
-<li><strong>개념</strong></li>
-<li>
-<p>큰 테이블이나 인덱스를 관리하기 쉬운 파티션이라는 작은 단위의 물리적으로 분할 하는 것을 의미</p>
+<li><strong>개념</strong><ul>
+<li>큰 테이블이나 인덱스를 관리하기 쉬운 파티션이라는 작은 단위의 물리적으로 분할 하는 것을 의미</li>
+</ul>
 </li>
-<li>
-<p><strong>목적</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>목적</strong><ol>
 <li>성능<ul>
 <li>DML, Query 성능향상</li>
 <li>대용량 Data write 효율</li>
@@ -23071,46 +23073,56 @@
 <li>테이블 파티션 단위로 disk i/o 분산 =&gt; update 성능 향상</li>
 </ul>
 </li>
-<li>
-<p>관리 용이성</p>
+<li>관리 용이성</li>
+</ol>
 </li>
-<li>
-<p><strong>장단점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>장단점</strong><ul>
 <li>장점<ul>
-<li>관리적 측면</li>
+<li>관리적 측면<ul>
 <li>데이터 손실 가능성 줄어 데이터 가용성 향상</li>
 <li>파티션 별로 백업 및 복구 가능</li>
 <li>파티션 단위로 I/O 분산 가능해 update 향상</li>
-<li>성능적 측면</li>
+</ul>
+</li>
+<li>성능적 측면<ul>
 <li>데이터 검색시 필요한 부분만 탐색해 성능 증가</li>
 </ul>
 </li>
-<li>
-<p>단점</p>
-<ul>
+</ul>
+</li>
+<li>단점<ul>
 <li>테이블간 조인 비용 발생</li>
 <li>테이블과 인덱스를 꼭 같이 파티셔닝할 것</li>
 </ul>
 </li>
-<li>
-<p><strong>DB 파티셔닝 종류</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>DB 파티셔닝 종류</strong><ol>
 <li>수평 파티셔닝<ul>
 <li>샤딩과 같은 개념</li>
 <li>스키마를 복제하고 샤드키 기준으로 데이터 나눔</li>
-<li>장점</li>
+<li>장점<ul>
 <li>데이터 갯수 기준으로 파티셔닝</li>
 <li>데이터 갯수 작아지며 인덱스 갯수도 작아짐</li>
-<li>단점</li>
+</ul>
+</li>
+<li>단점<ul>
 <li>서버간의 연결과정 많음</li>
 <li>하나 서버 고장나면 무결성 깨짐</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>수직 파티셔닝<ul>
 <li>테이블의 일부 열을 빼내는 형태</li>
 <li>하나의 엔티티를 2개이상으로 분리하자</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 

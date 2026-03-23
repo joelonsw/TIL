@@ -22931,66 +22931,44 @@
 <h3 id="2021-08-23-1">2021-08-23 학습로그 데모데이 1<a class="headerlink" href="#2021-08-23-1" title="Permanent link">&para;</a></h3>
 <h2 id="jpa">JPA 기본<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>왜 필요한가?</strong></p>
+<li><strong>왜 필요한가?</strong>
+    - 객체를 관계형 DB에 저장하면서 발생하는 문제들
+        - SQL 중심의 개발로 변질
+        - 패러다임 불일치
+            - 상속 유무
+            - 연관 관계의 방향성
+                - 객체는 자유롭게 객체 그래프를 탐색할 수 있어야 함
+            - 데이터 타입 불일치
+    - SQL 쿼리문으로 DB를 조회해 오는 것의 단점
+        - 수정의 포인트들이 너무 많아짐
+        - 신뢰성이 떨어지는 Dao
+        - 반복적인 비슷한 쿼리문</li>
+</ul>
 <ul>
-<li>객체를 관계형 DB에 저장하면서 발생하는 문제들<ul>
-<li>SQL 중심의 개발로 변질</li>
-<li>패러다임 불일치<ul>
-<li>상속 유무</li>
-<li>연관 관계의 방향성<ul>
-<li>객체는 자유롭게 객체 그래프를 탐색할 수 있어야 함</li>
+<li><strong>장점</strong>
+    - 신뢰할 수 있는 Entity
+    - Collection을 사용하듯 DB에 저장 (객체지향적)
+    - JPA 성능 최적화 가능
+        - 1차 캐시, 쓰기 지연, 지연 로딩 등</li>
 </ul>
-</li>
-<li>데이터 타입 불일치</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>SQL 쿼리문으로 DB를 조회해 오는 것의 단점<ul>
-<li>수정의 포인트들이 너무 많아짐</li>
-<li>신뢰성이 떨어지는 Dao</li>
-<li>반복적인 비슷한 쿼리문</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>장점</strong></p>
 <ul>
-<li>신뢰할 수 있는 Entity</li>
-<li>Collection을 사용하듯 DB에 저장 (객체지향적)</li>
-<li>JPA 성능 최적화 가능<ul>
-<li>1차 캐시, 쓰기 지연, 지연 로딩 등</li>
+<li><strong>영속성 컨텍스트</strong>
+    - 엔티티를 영구 저장하는 환경
+    - 하나의 트랜잭션 당 하나의 엔티티 매니저
+    - 엔티티 매니저로 엔티티 저장/조회 시 영속성 컨텍스트에 엔티티 보관/관리 (이를 통해 JPA의 기능 사용가능)
+        - 1차 캐시
+        - 동일성 보장
+        - 쓰기 지연
+        - 변경 감지
+        - 지연 로딩</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>영속성 컨텍스트</strong></p>
 <ul>
-<li>엔티티를 영구 저장하는 환경</li>
-<li>하나의 트랜잭션 당 하나의 엔티티 매니저</li>
-<li>엔티티 매니저로 엔티티 저장/조회 시 영속성 컨텍스트에 엔티티 보관/관리 (이를 통해 JPA의 기능 사용가능)<ul>
-<li>1차 캐시</li>
-<li>동일성 보장</li>
-<li>쓰기 지연</li>
-<li>변경 감지</li>
-<li>지연 로딩</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>일대다 연관 관계</strong></p>
-<ul>
-<li>일대다 관계에서 "다" 쪽이 FK를 가짐</li>
-<li>"다" 쪽이 연관 관계의 주인(외래키 관리자)으로써, 외래키를 등록/수정/삭제 가능<ul>
-<li>외래키를 조작할 때에는 양쪽의 관계를 신경쓰면서 코드를 작성할 것!</li>
-</ul>
-</li>
-<li>일대다 + 양방향 매핑 예시
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
+<li><strong>일대다 연관 관계</strong>
+    - 일대다 관계에서 "다" 쪽이 FK를 가짐
+    - "다" 쪽이 연관 관계의 주인(외래키 관리자)으로써, 외래키를 등록/수정/삭제 가능
+        - 외래키를 조작할 때에는 양쪽의 관계를 신경쓰면서 코드를 작성할 것!
+    - 일대다 + 양방향 매핑 예시
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Station</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nd">@Id</span><span class="w"> </span><span class="nd">@GeneratedValue</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
@@ -23016,98 +22994,60 @@
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
 <ul>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-06-25.md</li>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-06-28.md</li>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-03.md</li>
-</ul>
-</li>
+<li><strong>링크</strong>
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-06-25.md
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-06-28.md
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-03.md</li>
 </ul>
 <h2 id="_1">깃 브랜치 전략<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>왜 필요한가?</strong></p>
+<li><strong>왜 필요한가?</strong>
+    - 하나의 브랜치로 관리하면 어디에서 에러가 터졌는지 추적이 힘듦
+    - 에러를 찾아도 그 이후 개발한 신규 기능 배포가 어려움</li>
+</ul>
 <ul>
-<li>하나의 브랜치로 관리하면 어디에서 에러가 터졌는지 추적이 힘듦</li>
-<li>에러를 찾아도 그 이후 개발한 신규 기능 배포가 어려움</li>
+<li><strong>놀토의 깃 브랜치 전략</strong>
+    - main: 실제 제품 배포 브랜치
+        - release에서 넘어온 커밋에 태그를 붙여 정식 출시
+    - release: 이번 출시 버전 준비를 위한 브랜치
+        - 출시하기로한 기능까지 개발이 완료되면, develop에서 파생
+        - 실제 배포 환경과 유사한 환경에서 QA 진행
+        - 버그 발견 시 hotfix를 활용하여 수정
+        - 태그 붙여 main에 머지
+    - develop: 다음 출시 버전 개발을 위한 브랜치
+        - feature 브랜치를 머지
+    - feature: 신규 기능 개발
+        - feature/backend/~, feature/frontend/~ 등으로 기능 개발
+    - hotfix: 에러 수정 브랜치
+        - release 브랜치의 QA 도중 에러 발생시 해당 브랜치에서 해결</li>
 </ul>
-</li>
-<li>
-<p><strong>놀토의 깃 브랜치 전략</strong></p>
 <ul>
-<li>main: 실제 제품 배포 브랜치<ul>
-<li>release에서 넘어온 커밋에 태그를 붙여 정식 출시</li>
+<li><strong>프로젝트를 진행하며 변경된 전략</strong>
+    - develop에도 실제 배포환경과 유사하게 인프라 구축을 했었음
+        - OAuth 및 최신 기능을 프론트단에서 사용하기 위함
+    - develop에서 본의아니게 QA가 진행됨
+        - 여기서 발생한 버그를 hotfix로 파서 머지시키는 일이 계속 발생함
+    - release의 의미가 조금 퇴색되었음
+        - 그냥 tag를 붙이는 용도 정도?</li>
 </ul>
-</li>
-<li>release: 이번 출시 버전 준비를 위한 브랜치<ul>
-<li>출시하기로한 기능까지 개발이 완료되면, develop에서 파생</li>
-<li>실제 배포 환경과 유사한 환경에서 QA 진행</li>
-<li>버그 발견 시 hotfix를 활용하여 수정</li>
-<li>태그 붙여 main에 머지</li>
-</ul>
-</li>
-<li>develop: 다음 출시 버전 개발을 위한 브랜치<ul>
-<li>feature 브랜치를 머지</li>
-</ul>
-</li>
-<li>feature: 신규 기능 개발<ul>
-<li>feature/backend/~, feature/frontend/~ 등으로 기능 개발</li>
-</ul>
-</li>
-<li>hotfix: 에러 수정 브랜치<ul>
-<li>release 브랜치의 QA 도중 에러 발생시 해당 브랜치에서 해결</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>프로젝트를 진행하며 변경된 전략</strong></p>
 <ul>
-<li>develop에도 실제 배포환경과 유사하게 인프라 구축을 했었음<ul>
-<li>OAuth 및 최신 기능을 프론트단에서 사용하기 위함</li>
+<li><strong>머지의 종류</strong>
+    - Merge
+        - 머지 과정에서 개발 시 남긴 커밋을 참조하는 하나의 커밋 생성하고 머지
+    - Squash and Merge
+        - 머지 과정에서 개발할 시 남긴 커밋을 합쳐 새로운 하나의 커밋으로 만듦
+        - "feature -&gt; develop" 개발에서 해당 머지를 사용
+        - Feature의 경우 기능개발이 끝나면 삭제하니, 커밋을 굳이 다 남길 필요가 없음
+    - Rebase and Merge
+        - 그 전까지 했던 작업 이후로 신규 커밋들을 붙임
+        - "develop -&gt; release -&gt; master" 개발에서 해당 머지를 사용
+        - 머지 과정에서 별도의 새로운 커밋을 생성하지 않아 좋음</li>
 </ul>
-</li>
-<li>develop에서 본의아니게 QA가 진행됨<ul>
-<li>여기서 발생한 버그를 hotfix로 파서 머지시키는 일이 계속 발생함</li>
-</ul>
-</li>
-<li>release의 의미가 조금 퇴색되었음<ul>
-<li>그냥 tag를 붙이는 용도 정도?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>머지의 종류</strong></p>
 <ul>
-<li>Merge<ul>
-<li>머지 과정에서 개발 시 남긴 커밋을 참조하는 하나의 커밋 생성하고 머지</li>
-</ul>
-</li>
-<li>Squash and Merge<ul>
-<li>머지 과정에서 개발할 시 남긴 커밋을 합쳐 새로운 하나의 커밋으로 만듦</li>
-<li>"feature -&gt; develop" 개발에서 해당 머지를 사용</li>
-<li>Feature의 경우 기능개발이 끝나면 삭제하니, 커밋을 굳이 다 남길 필요가 없음</li>
-</ul>
-</li>
-<li>Rebase and Merge<ul>
-<li>그 전까지 했던 작업 이후로 신규 커밋들을 붙임</li>
-<li>"develop -&gt; release -&gt; master" 개발에서 해당 머지를 사용</li>
-<li>머지 과정에서 별도의 새로운 커밋을 생성하지 않아 좋음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
-<ul>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-06.md</li>
-<li>https://meetup.toast.com/posts/122</li>
-</ul>
-</li>
+<li><strong>링크</strong>
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-06.md
+    - https://meetup.toast.com/posts/122</li>
 </ul>
 
 

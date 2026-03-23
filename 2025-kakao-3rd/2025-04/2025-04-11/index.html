@@ -22915,15 +22915,13 @@
   - Git 저장소의 어플리케이션 상태를 쿠버 클러스터와 동기화
   - 배포 전체 상태 &amp; 변화 과정 Git으로 추적 가능</p>
 <ul>
-<li><strong>Why ArgoCD?</strong></li>
+<li><strong>Why ArgoCD?</strong><ul>
 <li>Git 저장소 기록 == 쿠버 클러스터 상태</li>
 <li>대표적인 배포 방식: 이미지 빌드 -&gt; 컨테이너 레지스트리 업로드 -&gt; k8s 리소스 정의하고 적용<ul>
 <li>해당 방식으로는 변경 사항 시마다 새롭게 적용해야 함</li>
 </ul>
 </li>
-<li>
-<p>장점</p>
-<ol>
+<li>장점<ol>
 <li>Git == Kubernetes 효율적인 동기화</li>
 <li>간결/직관적인 설치/운영</li>
 <li>helm/kustomize 연동 좋음</li>
@@ -22931,22 +22929,26 @@
 <li>커뮤니티 업데이트</li>
 </ol>
 </li>
-<li>
-<p><strong>설치 및 운용 접근법</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>설치 및 운용 접근법</strong><ul>
 <li>kustomize 활용하여 ArgoCD 전체 상태를 명세화 하여 git에 저장</li>
-<li>
-<p>활용 사례</p>
-<ol>
-<li>일반적인 백엔드 배포</li>
+<li>활용 사례<ol>
+<li>일반적인 백엔드 배포<ul>
 <li>환경에 따라 다양한 설정값 변경하면서 배포 (이미지 태그, 자원 제약사항, 스케일링 옵션, 환경 변수 등)</li>
 <li>ArgoCD Application (배포의 기본 단위) 을 환경에 따라 한벌씩 만드는 방식 가능</li>
 <li>하나의 Application == 클러스터에 배포되어야 할 리소스 위치/배포 방법/목표 ns/클러스터 등 정보 담음</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p><strong>ArgoCD 장단점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ArgoCD 장단점</strong><ul>
 <li>장점<ul>
 <li>코드 == 클러스터 상태</li>
 <li>Argo CD를 통해 클러스터 상태 보여줌</li>
@@ -22954,9 +22956,13 @@
 </ul>
 </li>
 <li>단점<ul>
-<li>클러스터 전체 상태 완전히 선언적 만들기 어려움</li>
+<li>클러스터 전체 상태 완전히 선언적 만들기 어려움<ul>
 <li>ex. 어플리케이션 간 디펜던시 -&gt; ArgoCD 내에 배포순서 지정할 수 없어 문제 직접 해결</li>
 <li>그 전까지는 명령형 요소를 배포과정에 포함시키자</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -22977,17 +22983,19 @@
      - 빌드 파이프라인은 별도 구축 (빌드 파이프라인은 별도 구축해서 ArgoCD에 연동 필요)
    - git에 있는 쿠버 리소스 yaml 읽어서 argoCD가 동기화 하는구나</p>
 <ol>
-<li><strong>Sync</strong></li>
+<li><strong>Sync</strong><ul>
 <li>Refresh Period: 기본으로 3분에 한번씩 비교해서 동기화 (polling)</li>
 <li>Refresh: Manual/Auto</li>
-<li>
-<p>Self Healing (Auto): Git과 무조건 동일하게 보장. 누가 클러스터에 명령어 날려도 다시 복구</p>
+<li>Self Healing (Auto): Git과 무조건 동일하게 보장. 누가 클러스터에 명령어 날려도 다시 복구</li>
+</ul>
 </li>
-<li>
-<p><strong>모르는 용어</strong></p>
-</li>
-<li>쿠버네티스 crd: CustomResourceDefinition (https://kubernetes.io/ko/docs/concepts/extend-kubernetes/api-extension/custom-resources/)</li>
 </ol>
+<ul>
+<li><strong>모르는 용어</strong><ul>
+<li>쿠버네티스 crd: CustomResourceDefinition (https://kubernetes.io/ko/docs/concepts/extend-kubernetes/api-extension/custom-resources/)</li>
+</ul>
+</li>
+</ul>
 
 
 

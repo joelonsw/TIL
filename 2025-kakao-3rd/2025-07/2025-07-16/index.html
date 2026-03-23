@@ -22909,35 +22909,37 @@
 <h3 id="2025-07-16">2025-07-16<a class="headerlink" href="#2025-07-16" title="Permanent link">&para;</a></h3>
 <h2 id="k8s-headless-service">k8s Headless Service<a class="headerlink" href="#k8s-headless-service" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>Service가 Headless 하다는 것은, 해당 서비스가 ClusterIP를 가지지 않는다는 뜻</p>
-<ul>
+<li><strong>개요</strong><ul>
+<li>Service가 Headless 하다는 것은, 해당 서비스가 ClusterIP를 가지지 않는다는 뜻<ul>
 <li>일반적인 Service와 달리 가상 IP를 할당하지 않고, </li>
 <li>트래픽을 Pod로 라우팅할 때 로드 밸런싱이나 프록시 동작 없이 <strong>각 파드의 실제 IP</strong>로 직접 접근 가능토록</li>
 </ul>
 </li>
-<li>
-<p><strong>특징</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>특징</strong><ul>
 <li>clusterIP: None 으로 설정됨 <code>spec.clusterIP: None</code></li>
 <li>로드밸런싱이 동작하지 않음. headless 서비스는 분산 과정이 없다</li>
 <li>DNS 쿼리 수행 시, 서비스에 연결된 모든 파드의 IP 목록이 반환됨<ul>
 <li>일반 서비스는 ClusterIP 만 반환</li>
 </ul>
 </li>
-<li>
-<p>파드 개별 접근이 필요한 아키텍쳐에 적합</p>
-<ul>
+<li>파드 개별 접근이 필요한 아키텍쳐에 적합<ul>
 <li>StatefulSet, 분산 시스템</li>
 <li>파드가 고유하게 식별되어, 자신만의 IP/DNS로 접근 필요</li>
 </ul>
 </li>
-<li>
-<p><strong>사용 예시</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>사용 예시</strong><ul>
 <li>StatefulSet과 조합해 각 Pod가 고유한 DNS/IP로 접근 가능해야 할 때</li>
 <li>Cassandra, MongoDB, Kafka 같은 클러스터링된 DB에서 노드 간 직접 통신이 필요한 경우</li>
+</ul>
+</li>
 </ul>
 
 

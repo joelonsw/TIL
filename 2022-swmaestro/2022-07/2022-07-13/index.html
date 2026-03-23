@@ -22978,48 +22978,57 @@
 <li><em>참고 1: https://www.youtube.com/watch?v=kZdCS2CGtAE&amp;list=PLKqrwxupttYG4rxPEUfgUoz51tZMKEHpP</em></li>
 <li><em>참고 2: https://docs.klaytnapi.com/</em></li>
 <li><em>참고 3: https://docs.klaytnapi.com/tutorial/kip-17-api/kip17-api</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>JSON-RPC를 통해서 블록체인 접근</li>
-<li>
-<p>블록체인 모르는 사용자들에게 친화적으로 다가가게 하기 위함</p>
+<li>블록체인 모르는 사용자들에게 친화적으로 다가가게 하기 위함</li>
+</ul>
 </li>
-<li>
-<p><strong>KIP-17 API</strong></p>
-</li>
-<li>
-<p>NFT와 관련한 다양한 기능 제공</p>
+</ul>
 <ul>
+<li><strong>KIP-17 API</strong><ul>
+<li>NFT와 관련한 다양한 기능 제공<ul>
 <li>컨트랙트 배포/조회</li>
 <li>토큰 발행/전송/소각/조회</li>
 <li>토큰 전송 권한 부여/해제</li>
 <li>소유권 기록 조회</li>
 </ul>
 </li>
-<li>
-<p><strong>KAS 활용 장단점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>KAS 활용 장단점</strong><ul>
 <li>장) KAS 활용 시, 보다 간편하게 내 계정으로 등록된 NFT를 발행할 수 있고, 이를 조회해오고 관리할 수 있음</li>
 <li>단) KAS에 엄청 의존적여지게 된다는 것</li>
 </ul>
+</li>
+</ul>
 <h2 id="klaytn">백엔드 단에서 Klaytn 블록체인에 접근해야 하는 경우<a class="headerlink" href="#klaytn" title="Permanent link">&para;</a></h2>
 <ol>
-<li>아티스트의 NFT를 민팅해줘야 하는 경우</li>
+<li>아티스트의 NFT를 민팅해줘야 하는 경우<ul>
 <li>NFT 스마트 컨트랙트 발행하기</li>
 <li>TokenId 별로 Connectable 지갑으로 민팅</li>
-<li>NFT의 소유자를 불러와야 하는 경우</li>
+</ul>
+</li>
+<li>NFT의 소유자를 불러와야 하는 경우<ul>
 <li>NFT owner(tokenId) 함수 호출</li>
-<li>사용자가 NFT를 구매했을때 전송해줘야 함</li>
+</ul>
+</li>
+<li>사용자가 NFT를 구매했을때 전송해줘야 함<ul>
 <li>NFT transfer() 함수 호출</li>
-<li>사용자가 NFT를 사용했을때 boolean 값 변경?</li>
+</ul>
+</li>
+<li>사용자가 NFT를 사용했을때 boolean 값 변경?<ul>
 <li>NFT isUsed() 함수 호출</li>
+</ul>
+</li>
 </ol>
 <h2 id="caver-java">Caver-Java<a class="headerlink" href="#caver-java" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://ko.docs.klaytn.foundation/dapp/sdk/caver-java/getting-started#caver.contract</em></li>
-<li><strong>KLAY 전송하기</strong></li>
-<li>
-<p><code>keystore file</code>을 사용해 KLAY를 전송하는 간단한 KLAY 전송 트랜잭션
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendingKLAY</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<li><strong>KLAY 전송하기</strong><ul>
+<li><code>keystore file</code>을 사용해 KLAY를 전송하는 간단한 KLAY 전송 트랜잭션
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendingKLAY</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">Caver</span><span class="w"> </span><span class="n">caver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Caver</span><span class="p">(</span><span class="n">Caver</span><span class="p">.</span><span class="na">BAOBAB_URL</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1">// keystore json 파일을 읽음</span>
@@ -23057,15 +23066,14 @@
 <a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">    </span><span class="n">TransactionReceiptProcessor</span><span class="w"> </span><span class="n">transcationReceiptProcessor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PollingTransactionReceiptProcessor</span><span class="p">(</span><span class="n">caver</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span>
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">    </span><span class="n">TransactionReceipt</span><span class="p">.</span><span class="na">TransactionReceiptData</span><span class="w"> </span><span class="n">transactionReceipt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transactionReceiptProcessor</span><span class="p">.</span><span class="na">waitForTransactionReceipt</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getResult</span><span class="p">());</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Caver-java에 Keyrings 추가</strong></p>
-</li>
-<li>인메모리 지갑에 keyring 추가하여 쉽게 사용하기</li>
-<li>
-<p>keyring?</p>
+</ul>
 <ul>
+<li><strong>Caver-java에 Keyrings 추가</strong><ul>
+<li>인메모리 지갑에 keyring 추가하여 쉽게 사용하기</li>
+<li>keyring?<ul>
 <li>Klaytn 계정 주소와 개인키들이 들어있는 구조</li>
 <li>SingleKeyring: 주소 1개와 개인키 1개</li>
 <li>MultipleKeyring: 주소 1개와 여러 개인키</li>
@@ -23080,13 +23088,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>트랜잭션 전송하기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>트랜잭션 전송하기</strong><ul>
 <li>트랜잭션 서명하기</li>
-<li>
-<p>해당 예시는 caver.wallet 에 Keyring이 추가되었을 때의 경우
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Caver</span><span class="w"> </span><span class="n">caver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Caver</span><span class="p">(</span><span class="n">Caver</span><span class="p">.</span><span class="na">MAINNET_URL</span><span class="p">);</span>
+<li>해당 예시는 caver.wallet 에 Keyring이 추가되었을 때의 경우
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Caver</span><span class="w"> </span><span class="n">caver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Caver</span><span class="p">(</span><span class="n">Caver</span><span class="p">.</span><span class="na">MAINNET_URL</span><span class="p">);</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">SingleKeyring</span><span class="w"> </span><span class="n">keyring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">caver</span><span class="p">.</span><span class="na">wallet</span><span class="p">.</span><span class="na">keyring</span><span class="p">.</span><span class="na">createFromPrivateKey</span><span class="p">(</span><span class="s">&quot;privateKey&quot;</span><span class="p">);</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">caver</span><span class="p">.</span><span class="na">wallet</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">keyring</span><span class="p">);</span>
@@ -23101,11 +23110,12 @@
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">caver</span><span class="p">.</span><span class="na">wallet</span><span class="p">.</span><span class="na">sign</span><span class="p">(</span><span class="n">keyring</span><span class="p">.</span><span class="na">getAddress</span><span class="p">(),</span><span class="w"> </span><span class="n">valueTransfer</span><span class="p">);</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="n">String</span><span class="w"> </span><span class="n">rlpEncoded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valueTransfer</span><span class="p">.</span><span class="na">getRLPEncoding</span><span class="p">();</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>스마트 컨트랙트</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>스마트 컨트랙트</strong><ul>
 <li>caver.contract 패키지 내의 Contract 클래스 사용해 Klaytn의 스마트 컨트랙트와 상호작용</li>
 <li>스마트 컨트랙트의 모든 함수는 하위수준 ABI가 주어졌을 때 자동으로 변환되어 contract 인스턴스내에 저장</li>
 <li>스마트 컨트랙트 배포하기<ul>
@@ -23115,7 +23125,7 @@
 </ul>
 </li>
 <li>ABI와 바이트코드에서 contract 인스턴스를 만들 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ABIJson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;JSON&quot;</span><span class="p">;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ABIJson</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;JSON&quot;</span><span class="p">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createContractInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">Caver</span><span class="w"> </span><span class="n">caver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Caver</span><span class="p">(</span><span class="n">Caver</span><span class="p">.</span><span class="na">DEFAULT_URL</span><span class="p">);</span>
@@ -23125,35 +23135,39 @@
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="_1">스마트 컨트랙트<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>caver.contract</strong></li>
+<li><strong>caver.contract</strong><ul>
 <li>Contract 클래스를 사용해 Klaytn의 스마트 컨트랙트와 쉽게 상호작용 가능</li>
 <li>모든 함수는 하위 수준 ABI가 주어졌을 때 자동으로 변환되어 contract 인스턴스내에 저장</li>
-<li>
-<p>스마트 컨트랙트를 컴파일하면 바이트코드와 ABI를 얻을 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Binary:
+<li>스마트 컨트랙트를 컴파일하면 바이트코드와 ABI를 얻을 수 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Binary:
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>608060405234801561001057600080fd5b5061051f806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063693ec85e1461003b578063e942b5161461016f575b600080fd5b6100f46004803603602081101561005157600080fd5b810190808035906020019064010000000081111561006e57600080fd5b82018360208201111561008057600080fd5b803590602001918460018302840111640100000000831117156100a257600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192905050506102c1565b6040518080602001828103825283818151815260200191508051906020019080838360005b83811015610134578082015181840152602081019050610119565b50505050905090810190601f1680156101615780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6102bf6004803603604081101561018557600080fd5b81019080803590602001906401000000008111156101a257600080fd5b8201836020820111156101b457600080fd5b803590602001918460018302840111640100000000831117156101d657600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561023957600080fd5b82018360208201111561024b57600080fd5b8035906020019184600183028401116401000000008311171561026d57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192905050506103cc565b005b60606000826040518082805190602001908083835b602083106102f957805182526020820191506020810190506020830392506102d6565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390208054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103c05780601f10610395576101008083540402835291602001916103c0565b820191906000526020600020905b8154815290600101906020018083116103a357829003601f168201915b50505050509050919050565b806000836040518082805190602001908083835b6020831061040357805182526020820191506020810190506020830392506103e0565b6001836020036101000a0380198251168184511680821785525050505050509050019150509081526020016040518091039020908051906020019061044992919061044e565b505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061048f57805160ff19168380011785556104bd565b828001600101855582156104bd579182015b828111156104bc5782518255916020019190600101906104a1565b5b5090506104ca91906104ce565b5090565b6104f091905b808211156104ec5760008160009055506001016104d4565b5090565b9056fea165627a7a723058203ffebc792829e0434ecc495da1b53d24399cd7fff506a4fd03589861843e14990029
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Contract JSON ABI
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>[{&quot;constant&quot;:true,&quot;inputs&quot;:[{&quot;name&quot;:&quot;key&quot;,&quot;type&quot;:&quot;string&quot;}],&quot;name&quot;:&quot;get&quot;,&quot;outputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;string&quot;}],&quot;payable&quot;:false,&quot;stateMutability&quot;:&quot;view&quot;,&quot;type&quot;:&quot;function&quot;},{&quot;constant&quot;:false,&quot;inputs&quot;:[{&quot;name&quot;:&quot;key&quot;,&quot;type&quot;:&quot;string&quot;},{&quot;name&quot;:&quot;value&quot;,&quot;type&quot;:&quot;string&quot;}],&quot;name&quot;:&quot;set&quot;,&quot;outputs&quot;:[],&quot;payable&quot;:false,&quot;stateMutability&quot;:&quot;nonpayable&quot;,&quot;type&quot;:&quot;function&quot;}]
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ABI</strong></p>
-</li>
-<li><em>참고: https://velog.io/@younghwan/ABI</em></li>
-<li>
-<p>컨트랙트 함수와 매개변수를 JSON 형식으로 나타낸 리스트</p>
+</ul>
 <ul>
+<li><strong>ABI</strong><ul>
+<li><em>참고: https://velog.io/@younghwan/ABI</em></li>
+<li>컨트랙트 함수와 매개변수를 JSON 형식으로 나타낸 리스트<ul>
 <li>컨트랙트의 함수 이름과 매개변수들이 들어가있음</li>
 </ul>
 </li>
-<li>
-<p><strong>GAS</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>GAS</strong><ul>
 <li>네트워크 서비스를 사용하는데 지불하는 수수료의 개념</li>
 <li>스마트 계약을 체결할 때 지불하는 수수료</li>
 <li>네트워크 스팸 방지하고 네트워크 보안을 강화</li>
+</ul>
+</li>
 </ul>
 
 

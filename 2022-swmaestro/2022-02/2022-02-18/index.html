@@ -22909,41 +22909,39 @@
 <h3 id="2022-02-17">2022-02-17<a class="headerlink" href="#2022-02-17" title="Permanent link">&para;</a></h3>
 <h2 id="-">알고리즘 문제풀이 - 냅색 알고리즘<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>DP란?</strong></li>
+<li><strong>DP란?</strong><ul>
 <li>테이블로 기억하기 프로그래밍!</li>
 <li>더 좋은 방법으로 테이블을 갱신해나가자!</li>
-<li>
-<p>작은 문제들을 풀어두고 값을 저장해뒀다가 재사용하는 기법!</p>
+<li>작은 문제들을 풀어두고 값을 저장해뒀다가 재사용하는 기법!</li>
+</ul>
 </li>
-<li>
-<p><strong>DP의 일종!</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DP의 일종!</strong><ul>
 <li>DP 문제를 접근할 때에는 dy[i]를 만들어 특정 조건들을 기록하자!<ul>
 <li>ex. dy[i]: 금액 i를 만드는데 드는 최소 동전의 갯수</li>
 </ul>
 </li>
-<li>
-<p>기록을 더 해둠으로써 DFS <em>(O(2^n))</em> 로 풀던 것을 DP <em>(O(n^2))</em> 로 풀 수 있음!</p>
-</li>
-<li>
-<p><strong>동전 문제</strong></p>
-</li>
-<li>잔액을 거슬러줘야하는데 어떤 동전들로 거슬러줄래?</li>
-<li>DFS로 모든 경우의 수 따져서 푸는 법<ul>
-<li>"이걸 넣을까 말까"의 경우의 수 : O(2^n)</li>
+<li>기록을 더 해둠으로써 DFS <em>(O(2^n))</em> 로 풀던 것을 DP <em>(O(n^2))</em> 로 풀 수 있음!</li>
 </ul>
 </li>
-<li>
-<p>DP로 접근하는 방법</p>
+</ul>
 <ul>
+<li><strong>동전 문제</strong><ul>
+<li>잔액을 거슬러줘야하는데 어떤 동전들로 거슬러줄래?
+1. DFS로 모든 경우의 수 따져서 푸는 법<ul>
+<li>"이걸 넣을까 말까"의 경우의 수 : O(2^n)
+2. DP로 접근하는 방법</li>
 <li>dy[i]: i를 만드는데 드는 최소의 동전 갯수를 기록해두자!</li>
 <li>동전의 갯수 하나씩 돌면서 해당 i원을 만드는데 최소의 동전갯수를 구하기</li>
 <li>경우의 수 : O(n^2)</li>
 </ul>
 </li>
-<li>
-<p><strong>냅색 문제</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>냅색 문제</strong><ul>
 <li>결국 이중 for문으로 돌아야해<ul>
 <li>첫번째 for는 고려해야 할 조건 (동전의 갯수, 문제의 시간 등)</li>
 <li>두번째 for는 테이블 돌면서</li>
@@ -22952,6 +22950,8 @@
 <li>조건이 유한하다면 <strong>두 번째 for문 뒤 -&gt; 앞!</strong></li>
 <li>조건이 무한하다면 <strong>두 번째 for문 앞 -&gt; 뒤!</strong><ul>
 <li>j가 한문제만 풀게 하려면 뒤에서 부터 돌게 하라!</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

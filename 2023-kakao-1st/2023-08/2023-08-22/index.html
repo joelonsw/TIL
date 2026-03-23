@@ -22938,25 +22938,23 @@
   - 아이폰에서도 노치가 생겨서 안정적으로 컨텐츠가 보일 수 있는 Safe Area를 제공
   - <img alt="" src="../../images/2023-08-22-iphone-safe-area.png" /></p>
 <ul>
-<li><strong>문제점</strong></li>
+<li><strong>문제점</strong><ul>
 <li>좌/우/하단 영역의 경우 아이폰X와 그 외 디바이스에서 보이는게 다를 수 있음</li>
 <li>Safe Area밖의 마진 영역 노출</li>
-<li>
-<p>화면 하단 홈 인디케이터 영역과 레이아웃 겹침 현상</p>
+<li>화면 하단 홈 인디케이터 영역과 레이아웃 겹침 현상</li>
+</ul>
 </li>
-<li>
-<p><strong>해결1. 전체화면 적용하기</strong></p>
-</li>
-<li>
-<p><code>&lt;meta name='viewport' content='initial-scale=1, viewport-fit=cover'&gt;</code></p>
-</li>
-<li>
-<p><strong>해결2. 아이폰 env() 속성</strong></p>
-</li>
-<li>전체 화면 적용한 경우 노치 영역과 하단 인디케이터 영역까지 사용함 =&gt; <strong>컨텐츠가 짤리거나 겹쳐보일 수 있음</strong></li>
-<li>
-<p>아이폰X에서 사용가능한 CSS 속성인 env()를 통해 변수를 적용하자</p>
+</ul>
 <ul>
+<li><strong>해결1. 전체화면 적용하기</strong><ul>
+<li><code>&lt;meta name='viewport' content='initial-scale=1, viewport-fit=cover'&gt;</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>해결2. 아이폰 env() 속성</strong><ul>
+<li>전체 화면 적용한 경우 노치 영역과 하단 인디케이터 영역까지 사용함 =&gt; <strong>컨텐츠가 짤리거나 겹쳐보일 수 있음</strong></li>
+<li>아이폰X에서 사용가능한 CSS 속성인 env()를 통해 변수를 적용하자<ul>
 <li>env()는 아이폰X에서만 동작함
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>// iOS 11.0 버전
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>constant(safe-area-inset-top)
@@ -22971,41 +22969,47 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>env()</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>env()</strong><ul>
 <li>iOS 브라우저에서 제공하는 <code>safe-area-inset-*</code> 사양에 정의된 값을 사용하여 표시</li>
+</ul>
+</li>
 </ul>
 <h2 id="css">css 적용순서<a class="headerlink" href="#css" title="Permanent link">&para;</a></h2>
 <ol>
 <li>선언 순서: 마지막 선언이 앞선 선언보다 우선임. 마지막에 선언된 친구가 프로퍼티를 채갈 것</li>
-<li>Specificity: 같은 걸 바라본다면 Specificity가 높은게 우선. </li>
+<li>Specificity: 같은 걸 바라본다면 Specificity가 높은게 우선. <ul>
 <li>ID 셀렉터가 클래스 셀렉터보다 높은 우선순위</li>
 <li>ID selector &gt; class selector &gt; tag selector</li>
+</ul>
+</li>
 <li>Importance: <code>!important</code>를 줘서 오버라이딩 뚝딱</li>
-<li>Inheritance: 자식 요소가 부모 요소로부터 속성을 가져옴</li>
-<li>
-<p>자식은 부모꺼 명시 안하면 그대로 따름</p>
+<li>Inheritance: 자식 요소가 부모 요소로부터 속성을 가져옴<ul>
+<li>자식은 부모꺼 명시 안하면 그대로 따름</li>
+</ul>
 </li>
-<li>
-<p><strong>문제 상황</strong></p>
-</li>
+</ol>
+<ul>
+<li><strong>문제 상황</strong><ul>
 <li>요건 되는데
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">div</span><span class="p">.</span><span class="nc">content-article</span><span class="p">.</span><span class="nc">fixed-btm-padding</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">div</span><span class="p">.</span><span class="nc">content-article</span><span class="p">.</span><span class="nc">fixed-btm-padding</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="nf">constant</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">);</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="nf">env</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">);</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>요건 안됨
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">div</span><span class="p">.</span><span class="nc">content-article</span><span class="p">.</span><span class="nc">fixed-btm-padding</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">div</span><span class="p">.</span><span class="nc">content-article</span><span class="p">.</span><span class="nc">fixed-btm-padding</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="nf">constant</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">);</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="nf">env</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">);</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>이유<ul>
 <li>이는 CSS가 스타일을 프로세싱하는 방법에 따름</li>
-<li>첫번째를 보면 <code>padding-bottom: 78px</code>가 베이스 패딩을 딱 지정하고</li>
+<li>첫번째를 보면 <code>padding-bottom: 78px</code>가 베이스 패딩을 딱 지정하고<ul>
 <li>그다음에 constant, env로 지지고 볶음<ul>
 <li>constant가 있다면 계산하고</li>
 <li>constant가 없다면 calc(0 + 78px) =&gt; 78px</li>
@@ -23016,12 +23020,18 @@
 <li>env가 없다면 calc(0 + 78px) =&gt; 78px</li>
 </ul>
 </li>
-<li>두번째는</li>
+</ul>
+</li>
+<li>두번째는<ul>
 <li>constant가 없으면 78px로 계산이 그냥 되어버리고</li>
 <li>env 프로퍼티는 오버라이딩된 첫번째 친구때문에 계산될 기회가 없다는데...? (모르겠어)</li>
 </ul>
 </li>
-</ol>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 
 

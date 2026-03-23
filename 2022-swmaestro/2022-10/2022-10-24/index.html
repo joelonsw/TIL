@@ -23107,17 +23107,17 @@
 <h3 id="2022-10-24">2022-10-24<a class="headerlink" href="#2022-10-24" title="Permanent link">&para;</a></h3>
 <h2 id="spring-vs-springboot">Spring vs SpringBoot<a class="headerlink" href="#spring-vs-springboot" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>설명</strong></li>
+<li><strong>설명</strong><ul>
 <li>스프링 부트는 단지 실행만 하면 되는 스프링 기반의 어플리케이션을 쉽게 만들 수 있다</li>
-<li>
-<p>원래 스프링은... xml로 복잡하게 내용들을 다 작성해줘야해</p>
-<ul>
+<li>원래 스프링은... xml로 복잡하게 내용들을 다 작성해줘야해<ul>
 <li>모든 dependency 버전까지 하나하나 정확하게!</li>
 </ul>
 </li>
-<li>
-<p><strong>AutoConfiguration을 활용한 스프링 부트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>AutoConfiguration을 활용한 스프링 부트</strong><ul>
 <li>어플리케이션 개발에 필요한 모든 Dependency를 프레임워크에서 관리</li>
 <li>jar 파일이 클래스 패스에 있는 경우 스프링 부트는 Dispatcher Servlet으로 자동 구성</li>
 <li>스프링 부트는 미리 설정되어있는 starter 프로젝트를 제공</li>
@@ -23129,11 +23129,12 @@
 <li>spring-boot-starter-security</li>
 </ul>
 </li>
-<li>
-<p>xml 설정 없이 자바 코드를 통해 설정할 수 있음</p>
+<li>xml 설정 없이 자바 코드를 통해 설정할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong><code>@SpringBootApplication</code></strong>
+</ul>
+<ul>
+<li><strong><code>@SpringBootApplication</code></strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Target</span><span class="p">(</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nd">@Documented</span>
@@ -23144,8 +23145,7 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="nd">@Filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FilterType</span><span class="p">.</span><span class="na">CUSTOM</span><span class="p">,</span><span class="w"> </span><span class="n">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AutoConfigurationExcludeFilter</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">SpringBootApplication</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Target</span><span class="p">(</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
@@ -23174,18 +23174,20 @@
 </code></pre></div>
 <h2 id="springapplicationrun-applicationcontext">SpringApplication.run() =&gt; ApplicationContext 생성 및 구동<a class="headerlink" href="#springapplicationrun-applicationcontext" title="Permanent link">&para;</a></h2>
 <ol>
-<li>일단 psvm에서 본인의 클래스 class를 변수로 두고 정적 메서드로 실행을 시킨다 </li>
 <li>
-<p>SpringApplication : 자바 메인 메서드에서 부트스트랩 시켜 실행시킬 수 있는 클래스</p>
+<p>일단 psvm에서 본인의 클래스 class를 변수로 두고 정적 메서드로 실행을 시킨다 </p>
 <ul>
+<li>SpringApplication : 자바 메인 메서드에서 부트스트랩 시켜 실행시킬 수 있는 클래스<ul>
 <li>알맞은 ApplicationContext 객체를 생성</li>
 <li>CommandLinePropertySource를 통해 CommandLine에 있는 친구들 실행</li>
 <li>ApplicationContext를 리프레시 하고 모든 Singleton 빈들을 로딩하기</li>
 <li>모든 CommandLineRunner 빈들 실행
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">ConnectableApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -23197,12 +23199,11 @@
 </li>
 <li>
 <p>run() 메서드는 다음과 같음</p>
-</li>
+<ul>
 <li>ConfigurableApplicationContext 타입의 ApplicationContext 생성하는 과정!</li>
 <li>AnnotationConfigApplicationContext 타입이 대입되게 됨</li>
-<li>
-<p>refreshContext(context)를 통해 각각 구동에 필요한 빈들의 설정들이 적용되고 등록됨
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">ConfigurableApplicationContext</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li>refreshContext(context)를 통해 각각 구동에 필요한 빈들의 설정들이 적용되고 등록됨
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">ConfigurableApplicationContext</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">startTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">();</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">DefaultBootstrapContext</span><span class="w"> </span><span class="n">bootstrapContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createBootstrapContext</span><span class="p">();</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">ConfigurableApplicationContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
@@ -23240,7 +23241,8 @@
 <a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
 <a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
 <li>
 <p>createApplicationContext()은 기본으로 AnnotationConfigApplicationContext 방식으로 생성함
@@ -23254,7 +23256,7 @@
 </li>
 <li>
 <p>refreshContext(context)에서 다음 설정들이 다들 적용됨</p>
-</li>
+<ul>
 <li>Repository 레이어 초기화 진행<ul>
 <li>Redis, JPA 스캔하면서 설정한 모드에 따라 초기화</li>
 </ul>
@@ -23266,9 +23268,8 @@
 <li>히카리풀도 초기화 : 데이터베이스 연결하기</li>
 <li>JPAEntityManagerFactory도 초기화!</li>
 <li>OSIV도 설정 열어두고...</li>
-<li>
-<p>SecurityFilterChain도 등록해주고!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>14:04:44.891 [INFO ] [restartedMain] [o.s.d.r.c.RepositoryConfigurationDelegate] - Multiple Spring Data modules found, entering strict repository configuration mode
+<li>SecurityFilterChain도 등록해주고!
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>14:04:44.891 [INFO ] [restartedMain] [o.s.d.r.c.RepositoryConfigurationDelegate] - Multiple Spring Data modules found, entering strict repository configuration mode
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>14:04:44.896 [INFO ] [restartedMain] [o.s.d.r.c.RepositoryConfigurationDelegate] - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>14:04:45.157 [INFO ] [restartedMain] [o.s.d.r.c.RepositoryConfigurationDelegate] - Finished Spring Data repository scanning in 98 ms. Found 0 Redis repository interfaces.
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>14:04:50.067 [INFO ] [restartedMain] [o.s.d.r.c.RepositoryConfigurationDelegate] - Multiple Spring Data modules found, entering strict repository configuration mode
@@ -23299,7 +23300,8 @@
 <a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>14:06:37.304 [INFO ] [restartedMain] [o.s.s.web.DefaultSecurityFilterChain] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4f3eb020, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4eecf606, org.springframework.security.web.context.SecurityContextPersistenceFilter@3a6f3601, org.springframework.security.web.header.HeaderWriterFilter@62216031, org.springframework.security.web.authentication.logout.LogoutFilter@39257525, com.backend.connectable.security.custom.JwtAuthenticationFilter@7235c6ae, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1493436d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1afbaa27, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7d5440a4, org.springframework.security.web.session.SessionManagementFilter@9e89d5a, org.springframework.security.web.access.ExceptionTranslationFilter@742c305f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7214c6c8]
 <a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>14:06:46.967 [INFO ] [restartedMain] [o.a.coyote.http11.Http11NioProtocol] - Starting ProtocolHandler [&quot;http-nio-8080&quot;]
 <a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>14:06:47.144 [INFO ] [restartedMain] [o.s.b.w.e.tomcat.TomcatWebServer] - Tomcat started on port(s): 8080 (http) with context path &#39;&#39;
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
 <li>
 <p>다음과 같이 생성된 Context 반환
@@ -23593,10 +23595,9 @@
 </code></pre></div></p>
 </li>
 <li>
-<p>Thread에서 (아마 Main이겠죠?) run() 시켜버림</p>
-<ul>
-<li>Reflection Method invoke로 실행시켜버림! -&gt; 드디어 구동!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@Override</span>
+<p>Thread에서 (아마 Main이겠죠?) run() 시켜버림
+    - Reflection Method invoke로 실행시켜버림! -&gt; 드디어 구동!
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@Override</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">        </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">mainClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">mainClassName</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">getContextClassLoader</span><span class="p">());</span>
@@ -23608,8 +23609,7 @@
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">        </span><span class="n">getUncaughtExceptionHandler</span><span class="p">().</span><span class="na">uncaughtException</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
 <a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
+</code></pre></div></p>
 </li>
 </ol>
 <h2 id="_1">시큐리티 인가 과정 디버거와 함께<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -24139,27 +24139,35 @@
 <h2 id="transactional-readonly-true">Transactional Readonly True?<a class="headerlink" href="#transactional-readonly-true" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://willseungh0.tistory.com/75</em></li>
-<li><strong>성능 향상의 이유</strong></li>
+<li><strong>성능 향상의 이유</strong><ul>
 <li>강제로 플러시 호출하지 않으면 플러시 호출 안됨</li>
 <li>등록/수정/삭제 동작 안함</li>
 <li>영속성 컨텍스트 변경 감지 스냅샷 보관하지 않아 성능 향상</li>
+</ul>
+</li>
 </ul>
 <h2 id="_3">트랜잭션 수행 디버거와 함께<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h2 id="spring-cglib">Spring은 항상 CGLIB을 쓸까?<a class="headerlink" href="#spring-cglib" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://docs.spring.io/spring-framework/docs/3.0.0.M3/reference/html/ch08s06.html</em></li>
 <li><em>참고: https://stackoverflow.com/questions/68084650/why-does-spring-inject-some-of-my-dependencies-as-cglib-proxies-and-why-are-the</em></li>
-<li>Spring AOP는 JDK dynamic proxy 혹은 CGLIB 프록시를 통해 프록시를 생성한다. </li>
+<li>Spring AOP는 JDK dynamic proxy 혹은 CGLIB 프록시를 통해 프록시를 생성한다. <ul>
 <li>JDK dynamic proxy를 통해 프록시를 만들 수 있다면 이걸로 우선적으로 만드려 한다. </li>
 <li>타겟 객체가 하나의 인터페이스라도 구현하고 있다면, JDK dynamic proxy가 생성될 것</li>
 <li>만약 인터페이스로 구현을 해둔게 없다면 CGLIB으로 프록시화 할 것</li>
-<li>물론 CGLIB으로 싹다 프록시화 시킬 수 있음. 하지만 다음을 유념할 것</li>
+</ul>
+</li>
+<li>물론 CGLIB으로 싹다 프록시화 시킬 수 있음. 하지만 다음을 유념할 것<ul>
 <li>final은 재정의 할 수 없기에 AOP 도입 못함</li>
 <li>CGLIB 라이브러리가 꼭 필요합니다</li>
 <li>프록시 객체의 생성자는 2번 호출됨. 프록시화된 객체에 대한 서브클래스가 생성되는 과정에서 어쩔 수 없음<ul>
 <li>프록시화 된 객체는 2개가 각각 생성됨. </li>
-<li>JDK는 이게 2번 호출 안됨. </li>
+<li>JDK는 이게 2번 호출 안됨. <ul>
 <li>생성자에 로직 없으면 큰 문제 안됨</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

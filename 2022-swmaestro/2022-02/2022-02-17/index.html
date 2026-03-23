@@ -22931,38 +22931,40 @@
 <h3 id="2022-02-17">2022-02-17<a class="headerlink" href="#2022-02-17" title="Permanent link">&para;</a></h3>
 <h2 id="-">알고리즘 문제풀이 - 최소 스패닝 트리<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>트리는 Cycle이 없어야 함!</li>
 <li>최소 스패닝 트리는 간선의 가중치 합이 최소가 되도록 하는 트리!</li>
-<li>
-<p>최소 스패닝 트리가 되려면 간선은 (노드갯수 - 1)개 만큼 필요!</p>
+<li>최소 스패닝 트리가 되려면 간선은 (노드갯수 - 1)개 만큼 필요!</li>
+</ul>
 </li>
-<li>
-<p><strong>Kruskal Algorithm</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Kruskal Algorithm</strong><ul>
 <li>작은 간선 가중치로 정렬 후 하나씩 탐색</li>
-<li>
-<p>Union &amp; Find를 활용하여 Cycle이 생기는지 검사</p>
+<li>Union &amp; Find를 활용하여 Cycle이 생기는지 검사</li>
+</ul>
 </li>
-<li>
-<p><strong>Prim's Algorithm</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Prim's Algorithm</strong><ol>
 <li>간선 정보들을 연결 리스트로 그래프 만들 것!</li>
 <li>Check 배열을 통해 갔는지 안갔는지 기록해둘 것</li>
 <li>갈 수 있는 간선 중에 최소 간선을 PriorityQueue에 저장할 것!</li>
 <li>하나씩 뽑아 Check 되어있는지 확인할 것!</li>
+</ol>
+</li>
 </ul>
 <h2 id="-dp">알고리즘 문제풀이 - DP<a class="headerlink" href="#-dp" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>큰 문제를 작은 문제로 소형화</li>
 <li>앞의 답을 그 다음 답을 구하는데 활용</li>
-<li>
-<p>Bottom Up + Memoization</p>
+<li>Bottom Up + Memoization</li>
+</ul>
 </li>
-<li>
-<p><strong>최대 부분 증가수열(LIS)</strong>~</p>
-</li>
+</ul>
+<ul>
+<li><strong>최대 부분 증가수열(LIS)</strong>~<ul>
 <li>처음에는 해당 원소가 들어가는지, 들어가지 않는지를 검사하는 방식으로 재귀를 통해 풀었음 (DFS)<ul>
 <li>해당 방식은 O(2^n)으로 매우 비효율적
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">array</span><span class="p">;</span>
@@ -23022,6 +23024,8 @@
 <li>n이 1000이라면... <ul>
 <li>2^1000 = 10715086071862673209484250490600018105614048117055336074437503883703510511249361224931983788156958581275946729175531468251871452856923140435984577574698574803934567774824230985421074605062371141877954182153046474983581941267398767559165543946077062914571196477686542167660429831652624386837205668069376    </li>
 <li>1000^2 = 1000000</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

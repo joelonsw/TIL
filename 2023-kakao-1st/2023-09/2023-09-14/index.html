@@ -22931,14 +22931,14 @@
 <h3 id="2023-09-14">2023-09-14<a class="headerlink" href="#2023-09-14" title="Permanent link">&para;</a></h3>
 <h2 id="play-action">Play Action을 알아보자...<a class="headerlink" href="#play-action" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Action이란?</strong></li>
+<li><strong>Action이란?</strong><ul>
 <li>플레이 프레임워크에서 들어오는 HTTP 요청과 나가는 HTTP 응답을 다루는데 사용</li>
-<li>
-<p>라우터 ↔ Action ↔ Controller</p>
+<li>라우터 ↔ Action ↔ Controller</li>
+</ul>
 </li>
-<li>
-<p><strong>다음과 같은 역할을 할 수 있어요</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>다음과 같은 역할을 할 수 있어요</strong><ul>
 <li>[기본 구조]<ul>
 <li>요청 받고 응답 하는 구조
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">myAction</span><span class="p">:</span><span class="w"> </span><span class="nc">Action</span><span class="p">[</span><span class="nc">AnyContent</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
@@ -22953,16 +22953,20 @@
 </ul>
 </li>
 <li>[응답 뱉기]<ul>
-<li>Action 함수에는 어플리케이션 로직을 다룰 수 있도록 지원함</li>
+<li>Action 함수에는 어플리케이션 로직을 다룰 수 있도록 지원함<ul>
 <li>DB 쿼리하고, 요청 보낼거 보내고, validation 할거 하고...</li>
+</ul>
+</li>
 <li>Result 객체를 Http 응답으로 뱉는다</li>
 </ul>
 </li>
 <li>[Action 합성]<ul>
 <li>Action을 합성해 재사용할 수 있도록 플레이가 지원</li>
-<li>andThen 과 compose 를 통해서 합성할 수 있음</li>
+<li>andThen 과 compose 를 통해서 합성할 수 있음<ul>
 <li>이러면 여러개의 action을 수행하도록 지원함<ul>
 <li>인증/인가, 로깅, 요청 파싱 등</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -22982,35 +22986,37 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="play">Play에서 세션을 저장하기<a class="headerlink" href="#play" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>세션을 HTTP 요청에서 가져오기</strong></li>
-<li>
-<p><code>request.session.get(TOKEN_KEY).flatMap(e =&gt; Token.decode(e))</code></p>
-<ul>
+<li><strong>세션을 HTTP 요청에서 가져오기</strong><ul>
+<li><code>request.session.get(TOKEN_KEY).flatMap(e =&gt; Token.decode(e))</code><ul>
 <li>request는 RequestHeader 타입</li>
 </ul>
 </li>
-<li>
-<p><strong>토큰의 유효성 검사</strong></p>
+</ul>
 </li>
-<li>
-<p><code>t.isValid(토큰을 만든 요소들)</code></p>
+</ul>
+<ul>
+<li><strong>토큰의 유효성 검사</strong><ul>
+<li><code>t.isValid(토큰을 만든 요소들)</code></li>
+</ul>
 </li>
-<li>
-<p><strong>HTTP 응답에 세션 껴주기</strong></p>
-</li>
-<li>
-<p><code>(block: ReceiptUser =&gt; Future[Result])</code>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">block</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>HTTP 응답에 세션 껴주기</strong><ul>
+<li><code>(block: ReceiptUser =&gt; Future[Result])</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">block</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">addingToSession</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">tuple</span><span class="p">)(</span><span class="n">request</span><span class="p">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">result</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">})</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>복습 : 어떻게 세션은 같은 키 값으로 사용자마다 알맞는 세션을 가져올 수 있는가?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>복습 : 어떻게 세션은 같은 키 값으로 사용자마다 알맞는 세션을 가져올 수 있는가?</strong><ul>
 <li>Session cookie를 파싱해 Session 데이터를 만듦<ul>
 <li>요청의 세션 쿠키는 requset.RequestAttrKey.Session에 저장</li>
 </ul>
@@ -23018,6 +23024,8 @@
 <li>Session 자체가 Map<String, String></li>
 <li>.get(key) 하면 value 뱉음</li>
 <li>즉, 사용자별로 알맞은 Session을 만들수있고 (이것도 map이것지?), 해당 Session 역시 ("A" -&gt; Session) 이니 가능한 구조</li>
+</ul>
+</li>
 </ul>
 
 

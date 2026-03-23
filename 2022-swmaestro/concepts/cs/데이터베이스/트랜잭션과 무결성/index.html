@@ -22980,17 +22980,19 @@
 <p><em>참고: https://papimon.tistory.com/89</em></p>
 <h2 id="_2">트랜잭션<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>일관성 있고 신뢰할 수 있는 방식으로 독립적이게 처리되는 "작업 단위"</li>
+<li>일관성 있고 신뢰할 수 있는 방식으로 독립적이게 처리되는 "작업 단위"<ul>
 <li>예상치 못한 에러가 발생해도 데이터베이스를 신뢰성있는 상태로 만들 수 있도록 하는 "작업 단위"</li>
-<li>데이터베이스의 변화를 나타냄</li>
+</ul>
+</li>
+<li>데이터베이스의 변화를 나타냄<ul>
 <li>All or Nothing</li>
+</ul>
+</li>
 <li>Commit: 변경된 내용이 모두 영구적으로 저장되는 것</li>
-<li>
-<p>Rollback: 트랜잭션으로 처리한 하나의 묶음 과정을 일어나기 전으로 돌리는 일</p>
-</li>
-<li>
-<p><strong>ACID</strong></p>
-</li>
+<li>Rollback: 트랜잭션으로 처리한 하나의 묶음 과정을 일어나기 전으로 돌리는 일</li>
+</ul>
+<ul>
+<li><strong>ACID</strong><ul>
 <li>Atomicity - 원자성<ul>
 <li>트랜잭션 내의 모든 연산은 완벽하게 수행될 것</li>
 <li>어느 하나가 오류나면 전체 취소될 것</li>
@@ -22998,36 +23000,42 @@
 </ul>
 </li>
 <li>Consistency - 일관성<ul>
-<li>트랜잭션은 "허용된 규칙" 안에서만 데이터를 변경할 수 있음</li>
+<li>트랜잭션은 "허용된 규칙" 안에서만 데이터를 변경할 수 있음<ul>
 <li>허용된 규칙: PK/FK, Cascade, 트리거 등</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Isolation - 독립성<ul>
 <li>트랜잭션 수행 시 다른 트랜잭션의 연산 작업이 중간에 끼어들지 못하도록 방지하는 것</li>
 </ul>
 </li>
-<li>
-<p>Durability - 지속성</p>
-<ul>
+<li>Durability - 지속성<ul>
 <li>성공적으로 완료된 트랜잭션은 시스템이 고장나더라도 영구적으로 반영될 것</li>
 </ul>
 </li>
-<li>
-<p><strong>ACID를 고려하여 트랜잭션 범위 정하기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ACID를 고려하여 트랜잭션 범위 정하기</strong><ul>
 <li>Atomicity: 하나의 로직 내에서 변화가 필요한 모든 연산은 하나의 트랜잭션으로!</li>
 <li>Consistency: 데이터베이스에서 정의한 규칙 준수</li>
 <li>Isolation: 해당 작업 어느 수준까지 독립시킬 것인지 결정</li>
 <li>Durability: 트랜잭션의 기록을 SSD/HDD에 저장하는 것 (이건 벤더가 알아서)</li>
 </ul>
+</li>
+</ul>
 <h2 id="_3">스프링에서의 트랜잭션<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>@Transactional</code> : 선언적 트랜잭션 with AOP</li>
+<li><code>@Transactional</code> : 선언적 트랜잭션 with AOP<ul>
 <li>핵심 비즈니스 로직 안 건드리면서 트랜잭션 사용가능</li>
+</ul>
+</li>
 </ul>
 <h2 id="_4">트랜잭션 전파 설정<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>진행 중인 트랜잭션에서 다른 트랜잭션 호출 시, 어찌 처리할건지!</strong></li>
+<li><strong>진행 중인 트랜잭션에서 다른 트랜잭션 호출 시, 어찌 처리할건지!</strong><ul>
 <li>[REQUIRED(default)]<ul>
 <li>부모 트랜잭션 있다면 거기에 합류</li>
 <li>부모 트랜잭션 없다면 새로운 트랜잭션 생성</li>
@@ -23067,9 +23075,11 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="_5">트랜잭션 고립 수준<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>동시에 여러 트랜잭션 처리될 때, 트랜잭션끼리 얼마나 고립되어 있는지</strong></li>
+<li><strong>동시에 여러 트랜잭션 처리될 때, 트랜잭션끼리 얼마나 고립되어 있는지</strong><ul>
 <li>[DEFAULT(default)]<ul>
 <li>DB 벤더사의 고립 수준 정책 따름</li>
 <li>Oracle: READ_COMMITTED</li>
@@ -23085,42 +23095,52 @@
 </ul>
 </li>
 <li>[REPEATABLE_READ]<ul>
-<li>트랜잭션 1이 읽은 데이터에 대해 트랜잭션 1이 종료될 때 까지, 다른 트랜잭션에서 수정/삭제 허용 X</li>
+<li>트랜잭션 1이 읽은 데이터에 대해 트랜잭션 1이 종료될 때 까지, 다른 트랜잭션에서 수정/삭제 허용 X<ul>
 <li>데이터 삽입은 가능</li>
 </ul>
 </li>
-<li>
-<p>[SERIALIZABLE]</p>
-<ul>
+</ul>
+</li>
+<li>[SERIALIZABLE]<ul>
 <li>트랜잭션 1이 읽은 데이터에 대해 트랜잭션 1이 종료될 때 까지, 다른 트랜잭션에서 수정/삭제/삽입 허용 X</li>
 </ul>
 </li>
-<li>
-<p><strong>문제점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>문제점</strong><ul>
 <li>[READ_UNCOMMITTED] - 동시성 MAX | 격리성 MIN<ul>
 <li>팬텀 리드</li>
 <li>반복 가능하지 않은 조회</li>
-<li>더티 리드</li>
+<li>더티 리드<ul>
 <li>한 트랜잭션이 실행 중일 때 다른 트랜잭션에 의해 수정되었지만 커밋 되기도 전에 읽어버림</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>[READ_COMMITTED]<ul>
 <li>팬텀 리드</li>
-<li>반복 가능하지 않은 조회: 한 트랜잭션 내의 같은 행에 두 번 이상의 조회 발생했는데, 그 값이 다른 경우</li>
+<li>반복 가능하지 않은 조회: 한 트랜잭션 내의 같은 행에 두 번 이상의 조회 발생했는데, 그 값이 다른 경우<ul>
 <li>트랜잭션 A에서 보석 100개 가지고 있다고 조회</li>
 <li>트랜잭션 B에서 보석 1개 가지고 있다고 변경</li>
 <li>트랜잭션 A에서 보석 1개 가지고 있다고 조회</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>[REPEATABLE_READ] --- <strong>MySQL</strong><ul>
 <li>팬텀 리드: 한 트랜잭션 내에서 동일한 쿼리 보냈을 때 조회 결과가 다른 경우</li>
-<li>Repeatable-read는 트랜잭션1에서 읽은 데이터에 대해 트랜잭션2가 삽입할 수 있게 허용하잖아?</li>
+<li>Repeatable-read는 트랜잭션1에서 읽은 데이터에 대해 트랜잭션2가 삽입할 수 있게 허용하잖아?<ul>
 <li>그러다 보니까 트랜잭션2 나오기 전에 읽었던 데이터 != 트랜잭션 2 발생후 데이터가 될 수 있다는 것이지</li>
 <li>다른 행이 선택될 수도 있다~</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>[SERIALIZABLE] - 동시성 MIN | 격리성 MAX</li>
+</ul>
+</li>
 </ul>
 
 

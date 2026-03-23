@@ -22954,40 +22954,26 @@
 <h2 id="in">IN<a class="headerlink" href="#in" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://ojava.tistory.com/12</em></li>
-<li>
-<p><strong>WHERE 일치하기 원하는 칼럼명 IN (조건1, 조건2, 조건3)</strong></p>
+<li><strong>WHERE 일치하기 원하는 칼럼명 IN (조건1, 조건2, 조건3)</strong>
+    - IN 뒤로 나열한 조건들 중 일치하는 row를 가져옴
+        - 조건들은 OR로 검색
+        - 조건에 일치하는 모든 내용을 가져옴</li>
+</ul>
 <ul>
-<li>IN 뒤로 나열한 조건들 중 일치하는 row를 가져옴<ul>
-<li>조건들은 OR로 검색</li>
-<li>조건에 일치하는 모든 내용을 가져옴</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>WHERE 일치하지 않길 원하는 칼럼명 NOT IN(조건1, 조건2, 조건3)</strong></p>
-<ul>
-<li>일치하지 않길 원하는 칼럼명<ul>
-<li>조건1 이거나, 조건2 이거나, 조건3 이면 제외!</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>WHERE 일치하지 않길 원하는 칼럼명 NOT IN(조건1, 조건2, 조건3)</strong>
+    - 일치하지 않길 원하는 칼럼명
+        - 조건1 이거나, 조건2 이거나, 조건3 이면 제외!</li>
 </ul>
 <h2 id="jpa">JPA 뇌절<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://bebong.tistory.com/entry/JPA-Lazy-Evaluation-LazyInitializationException-could-not-initialize-proxy-%E2%80%93-no-Session</em></li>
-<li>
-<p><strong>could not initialize proxy - no Session</strong></p>
-<ul>
-<li>JPA Session?<ul>
-<li>JPA 영속성 컨텍스트가 유지되는 하나의 세션 (트랜잭션 시작 ~ 트랜잭션 끝)</li>
-</ul>
-</li>
-<li>Lazy Loading에서 Proxy 반환하고 트랜잭션 끝! 이 상태에서 get을 해올라고 하면 뇌절!<ul>
-<li>따라서 get까지 해오는 것을 하나의 Transaction으로 묶어줘야해!<ul>
-<li>기억나지? 토비의 스프링! 트랜잭션 Connection 하나에 저장소에 묶어놓고 그거만 쓰는거!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Transactional</span>
+<li><strong>could not initialize proxy - no Session</strong>
+    - JPA Session?
+        - JPA 영속성 컨텍스트가 유지되는 하나의 세션 (트랜잭션 시작 ~ 트랜잭션 끝)
+    - Lazy Loading에서 Proxy 반환하고 트랜잭션 끝! 이 상태에서 get을 해올라고 하면 뇌절!
+        - 따라서 get까지 해오는 것을 하나의 Transaction으로 묶어줘야해!
+            - 기억나지? 토비의 스프링! 트랜잭션 Connection 하나에 저장소에 묶어놓고 그거만 쓰는거!
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Transactional</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Feed</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findFeedUsingTech</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">techNames</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Tech</span><span class="o">&gt;</span><span class="w"> </span><span class="n">techs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">techRepository</span><span class="p">.</span><span class="na">findAllByNameIn</span><span class="p">(</span><span class="n">techNames</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">FeedTech</span><span class="o">&gt;</span><span class="w"> </span><span class="n">findFeedTech</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findFeedTechByTech</span><span class="p">(</span><span class="n">techs</span><span class="p">);</span>
@@ -23007,113 +22993,67 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>em.flush() &amp; em.clear()</strong>        </p>
 <ul>
-<li>em.flush()<ul>
-<li>엔티티를 관리하는 영속성 컨텍스트에 있는 내용을 DB에 반영하는 것<ul>
-<li>트랜잭션 커밋까지 DB에 엔티티 저장 않고 내부 쿼리 저장소에 INSERT SQL 모아둠</li>
-</ul>
-</li>
-<li>commit() 메서드 호출시 flush()가 호출되어지고, flush() 메서드에 의해 DB에 반영됨<ul>
-<li>"flush"는 영속성 컨텍스트의 내용을 DB에 반영하는 역할을 함<ul>
-<li>이때 쓰기 지연 SQL 저장소에 있는 SQL 쿼리가 DB로 보내짐</li>
-</ul>
-</li>
-<li>"commit" 이라면 DB에 영속성 컨텍스트 내용이 모두 저장된것이 확정되기에, 영속성 컨텍스트/1차 캐시 모두 파기</li>
-</ul>
-</li>
-<li>flush() 동작 과정<ol>
-<li>변경 감지 (Dirty Checking)</li>
-<li>수정된 Entity를 쓰기 지연 SQL 저장소에 등록</li>
-<li>쓰기 지연 SQL 저장소의 Query를 DB에 전송</li>
-<li>flush() 메서드 호출 후 commit() 호출</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>em.flush() &amp; em.clear()</strong>      <br />
+    - em.flush()
+        - 엔티티를 관리하는 영속성 컨텍스트에 있는 내용을 DB에 반영하는 것
+            - 트랜잭션 커밋까지 DB에 엔티티 저장 않고 내부 쿼리 저장소에 INSERT SQL 모아둠
+        - commit() 메서드 호출시 flush()가 호출되어지고, flush() 메서드에 의해 DB에 반영됨
+            - "flush"는 영속성 컨텍스트의 내용을 DB에 반영하는 역할을 함
+                - 이때 쓰기 지연 SQL 저장소에 있는 SQL 쿼리가 DB로 보내짐
+            - "commit" 이라면 DB에 영속성 컨텍스트 내용이 모두 저장된것이 확정되기에, 영속성 컨텍스트/1차 캐시 모두 파기
+        - flush() 동작 과정
+            1. 변경 감지 (Dirty Checking)
+            2. 수정된 Entity를 쓰기 지연 SQL 저장소에 등록
+            3. 쓰기 지연 SQL 저장소의 Query를 DB에 전송
+            4. flush() 메서드 호출 후 commit() 호출</li>
 </ul>
 <h2 id="_1">네트워크 보안<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>보안의 3요소</strong></p>
+<li><strong>보안의 3요소</strong>
+    - 기밀성: 인가 되지 않은 사용자가 정보 내용 모르게
+    - 무결성: 정보가 인가된 사용자에 의해서만 변경 가능
+    - 가용성: 정보에 대한 사용이 확실히</li>
+</ul>
 <ul>
-<li>기밀성: 인가 되지 않은 사용자가 정보 내용 모르게</li>
-<li>무결성: 정보가 인가된 사용자에 의해서만 변경 가능</li>
-<li>가용성: 정보에 대한 사용이 확실히</li>
+<li><strong>해커의 공격</strong>  <br />
+    - 스니핑
+        - 네트워크 패킷 캡쳐
+            - 기밀성 훼손
+    - 스푸핑
+        - 네트워크 패킷을 변조
+            - 무결성 훼손
+    - Dos
+        - 공격 대상의 자원을 소비시켜 서비스 마비</li>
 </ul>
-</li>
-<li>
-<p><strong>해커의 공격</strong>    </p>
 <ul>
-<li>스니핑<ul>
-<li>네트워크 패킷 캡쳐<ul>
-<li>기밀성 훼손</li>
+<li><strong>전송계층, 인터넷계층에서 쓰는 보안 프로토콜</strong>
+    - TLS
+    - IPSec
+        - AH, ESP</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>스푸핑<ul>
-<li>네트워크 패킷을 변조<ul>
-<li>무결성 훼손</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Dos<ul>
-<li>공격 대상의 자원을 소비시켜 서비스 마비</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>전송계층, 인터넷계층에서 쓰는 보안 프로토콜</strong></p>
 <ul>
-<li>TLS</li>
-<li>IPSec<ul>
-<li>AH, ESP</li>
+<li><strong>방화벽</strong>
+    - 트래픽 차단 및 필터링
+    - 접근 제어
+    - 외부 불법 침입 차단
+    - 내부 정보 유출 방지
+    - 수동적인 방어</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>방화벽</strong></p>
 <ul>
-<li>트래픽 차단 및 필터링</li>
-<li>접근 제어</li>
-<li>외부 불법 침입 차단</li>
-<li>내부 정보 유출 방지</li>
-<li>수동적인 방어</li>
+<li><strong>IDS, IPS</strong>
+    - 불법 침입 자동 대응 및 차단
+    - 방화벽과 함께 사용하면 효율적</li>
 </ul>
-</li>
-<li>
-<p><strong>IDS, IPS</strong></p>
 <ul>
-<li>불법 침입 자동 대응 및 차단</li>
-<li>방화벽과 함께 사용하면 효율적</li>
+<li><strong>VPN</strong>
+    <img alt="" src="../../image/2021-07-22-VPN.PNG" /></li>
 </ul>
-</li>
-<li>
-<p><strong>VPN</strong>
-    <img alt="" src="../../image/2021-07-22-VPN.PNG" /></p>
-</li>
-<li>
-<p><strong>망분리</strong></p>
 <ul>
-<li>논리적 망분리<ul>
-<li>PC기반 가상화</li>
-<li>서버기반 가상화</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>망분리</strong>
+    - 논리적 망분리
+        - PC기반 가상화
+        - 서버기반 가상화</li>
 </ul>
 
 

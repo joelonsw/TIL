@@ -22977,24 +22977,26 @@
 <ul>
 <li><em>참고: https://darkpgmr.tistory.com/110</em></li>
 <li><em>참고: http://matrix.skku.ac.kr/math4ai-intro/W12/</em></li>
-<li><strong>PCA란?</strong></li>
+<li><strong>PCA란?</strong><ul>
 <li>분포된 데이터들의 주성분을 찾아주는 방법</li>
 <li>데이터 하나하나에 대한 성분을 분석하는 것이 아닌, 여러 데이터들이 모여 하나의 분포를 이룰 때 분포의 주성분 분석<ul>
 <li>주성분 : 그 방향으로 데이터들의 분산이 가장 큰 방향벡터</li>
 </ul>
 </li>
-<li>
-<p>PCA는 데이터 하나하나에 대한 성분을 분석하는게 아니라, 여러 데이터들이 모여 하나의 분포를 이룰 때 분포의 주성분 분석하는 방법</p>
-<ul>
+<li>PCA는 데이터 하나하나에 대한 성분을 분석하는게 아니라, 여러 데이터들이 모여 하나의 분포를 이룰 때 분포의 주성분 분석하는 방법<ul>
 <li>ex. 타원형 분포를 나타내기 위한 e1, e2 벡터</li>
-<li><img alt="" src="../../images/2022-04-25-pca-1.png" /></li>
+<li><img alt="" src="../../images/2022-04-25-pca-1.png" /><ul>
 <li>e1 방향을 따라 데이터들의 분산이 가장 큼</li>
 <li>e1에 수직이면서 그 다음으로 데이터들의 분산이 가장 큰 방향이 e2</li>
 </ul>
 </li>
-<li>
-<p><strong>PCA 설명</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>PCA 설명</strong><ul>
 <li>가장 널리 사용되는 차원 축소 기법 중 하나</li>
 <li>원 데이터의 분포를 최대한 보존하면서 고차원 공간의 데이터를 저차원 공간으로 변환</li>
 <li>PCA는 기존의 변수를 조합해 서로 연관성이 없는 새로운 변수인 "주성분 (Principal Component)" 를 만들어 냄<ul>
@@ -23002,22 +23004,26 @@
 <li>두 번째 주성분인 PC2가 그 다음으로 원 데이터의 분포를 보존</li>
 </ul>
 </li>
-<li>
-<p>주성분을 구하기 위해서 새로운 축을 찾아야 함 =&gt; 이를 "주축" "주방향" 이라고 함</p>
-<ul>
-<li>첫 번째 축 찾기(PC1) : 원 데이터를 축 상에 정사영할 경우, 얻어진 데이터들의 분포가 가장 최대가 되도록 지정함</li>
+<li>주성분을 구하기 위해서 새로운 축을 찾아야 함 =&gt; 이를 "주축" "주방향" 이라고 함<ul>
+<li>첫 번째 축 찾기(PC1) : 원 데이터를 축 상에 정사영할 경우, 얻어진 데이터들의 분포가 가장 최대가 되도록 지정함<ul>
 <li><img alt="" src="../../images/2022-04-25-pca-2.png" /></li>
 <li>주어진 2차원 데이터를 첫 번째 축을 찾아 정사영한 그림</li>
 <li>이때 정사영 된 데이터가 PC1을 이루게 됨</li>
-<li>두 번째 축 찾기(PC2) : 얻어진 데이터들의 분포가 PC1 다음으로 가장 최대가 될 것</li>
+</ul>
+</li>
+<li>두 번째 축 찾기(PC2) : 얻어진 데이터들의 분포가 PC1 다음으로 가장 최대가 될 것<ul>
 <li>이 축 상에 정사영 할 경우, PC1 다음으로 최대</li>
 <li>PC1과 PC2는 서로 관계가 없도록 수직이 되어야 함</li>
 <li><img alt="" src="../../images/2022-04-25-pca-3.png" /></li>
 </ul>
 </li>
-<li>
-<p><strong>주성분 분석의 계산</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>주성분 분석의 계산</strong><ul>
 <li><img alt="" src="../../images/2022-04-25-pca-4.png" /></li>
 <li>X를 센터링하여 (확률변수의 평균을 조정하여), X~를 반들수 있음<ol>
 <li>X의 각 열의 평균 구함. 확률변수 xj의 평균은 xj~로 표기</li>
@@ -23025,36 +23031,42 @@
 </ol>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="pca">공분산 행렬의 의미와 PCA<a class="headerlink" href="#pca" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=jNwf-JUGWgg</em></li>
-<li><strong>공분산 행렬의 의미</strong></li>
+<li><strong>공분산 행렬의 의미</strong><ul>
 <li>데이터 구조적 의미 : 각 feature의 변동이 얼마나 닮았나?<ul>
 <li>행은 samples, 열은 features를 의미</li>
 <li>열의 <strong>평균값은 0</strong>이라고 가정. feature들의 평균값은 빼준 상태</li>
 <li><img alt="" src="../../images/2022-04-25-pca-5.png" /></li>
-<li>데이터 행렬 X를 이용해 공분산 행렬 구하기</li>
+<li>데이터 행렬 X를 이용해 공분산 행렬 구하기<ul>
 <li>닮은 정도를 보기 위해선 "내적"이 필요함</li>
 <li>그 과정은 다음과 같이 행렬의 곱으로 표현 가능</li>
 <li><img alt="" src="../../images/2022-04-25-pca-6.png" /></li>
 <li><img alt="" src="../../images/2022-04-25-pca-7.png" /></li>
-<li>(X^TX)ij 는 i번째 feature와 j번째 feature의 변동이 닮은 정도를 말해주고 있음</li>
+</ul>
+</li>
+<li>(X^TX)ij 는 i번째 feature와 j번째 feature의 변동이 닮은 정도를 말해주고 있음<ul>
 <li>함정은 sample의 수(n) 이 많아질 수록, 그 값이 커진다는 것</li>
 <li>이 문제를 방지하기 위해 값을 n으로 나누면 아래와 같은 결과 얻음</li>
 <li><img alt="" src="../../images/2022-04-25-pca-sigma.png" /></li>
 <li>즉 covariance matrix의 i번째 행과 j번째 행은 i번 feature와 j번 feature가 서로 함꼐 변하는 정도를 의미함.</li>
 </ul>
 </li>
-<li>
-<p>수학적 의미  </p>
-<ul>
+</ul>
+</li>
+<li>수학적 의미  <ul>
 <li>선형 변환! =&gt; 공분산 행렬은 feature 쌍이 서로 함께 변하는 정도를 의미</li>
 <li>normal distribution을 shearing 해주는 것</li>
 </ul>
 </li>
-<li>
-<p><strong>PCA</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>PCA</strong><ul>
 <li>공분산 행렬의 eigenvector 사용</li>
 <li>데이터의 구조를 잘 살려주면서 차원 감소하도록 지원</li>
 <li>2차원 평면 상의 산점도를 1차원의 Principal Axis Componenet(주축) 정사영시켜 차원 감소 가능!<ul>
@@ -23078,16 +23090,22 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="variance-covariance">분산(Variance) &amp; 공분산(Covariance)<a class="headerlink" href="#variance-covariance" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>분산</strong></li>
+<li><strong>분산</strong><ul>
 <li>"평균적인 편차"(표준편차)의 제곱</li>
 <li>Variance에 루트 씌워주면 표준편차</li>
 <li>모든 x의 값에 대해 x와의 평균 차이를 제곱해서 다~ 더한 다음에 x로 나눔 =&gt; 분산</li>
-<li><strong>공분산</strong></li>
+</ul>
+</li>
+<li><strong>공분산</strong><ul>
 <li>"두 변수간" 평균적인 편차의 곱</li>
 <li>0에 가까울수록 공동 변화량이 없는 것</li>
 <li>절대값이 클수록 공동 변화량이 큰 것</li>
+</ul>
+</li>
 </ul>
 <h2 id="eigenvalue-eigenvector">고유값(eigenvalue) &amp; 고유벡터(eigenvector)<a class="headerlink" href="#eigenvalue-eigenvector" title="Permanent link">&para;</a></h2>
 <ul>

@@ -22935,22 +22935,24 @@
   - Paint: 실제 스크린에 Layout 표시하고 업데이트
   - <img alt="" src="../../images/2026-03-23-ue-ule.png" /></p>
 <ul>
-<li><strong>useEffect</strong></li>
+<li><strong>useEffect</strong><ul>
 <li>Render와 Paint된 후에 실행</li>
 <li>비동기적으로 실행. DOM이 업데이트 된 후에 실행이 된다</li>
 <li>이벤트 루프의 태스크 큐에 콜백이 쌓이는 방식으로 동작 &gt; DOM 업데이트 후 실행!</li>
-<li>
-<p>useEffect 내부에 dom에 영향을 주는 코드가 있다면, 사용자 입장에서 <strong>화면의 깜빡임이 보임</strong></p>
+<li>useEffect 내부에 dom에 영향을 주는 코드가 있다면, 사용자 입장에서 <strong>화면의 깜빡임이 보임</strong></li>
+</ul>
 </li>
-<li>
-<p><strong>useLayoutEffect</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>useLayoutEffect</strong><ul>
 <li>컴포넌트들이 render된 후에 실행. 그 이후에 paint가 됨</li>
 <li>동기적으로 실행. DOM이 업데이트되기 전에 실행</li>
 <li>DOM이 업데이트되기 전에 실행</li>
 <li>Paint 되기전에 실행되기 때문에, dom을 조작하는 코드가 있더라도, 사용자는 <strong>깜빡임을 경험하지 않음</strong></li>
 <li>다만!<ul>
 <li>로직이 복잡할 경우 내부 코드가 모두 실행된 다음 painting을 하기 때문에, 성능에 영향이 있다면 X 쓰지말어!</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -22964,38 +22966,46 @@
        - <code>set</code> 함수를 통해 상태 업데이트하여 추가적인 렌더링 트리거
        - 컴포넌트의 상태 업데이트 하면 자동으로 렌더링 대기열에 추가</p>
 <ol>
-<li>React 컴포넌트 렌더링</li>
-<li>React는 컴포넌트를 호출하여 화면에 표시할 내용 파악</li>
 <li>
-<p>"렌더링" = React에서 컴포넌트를 호출하는 것</p>
+<p>React 컴포넌트 렌더링</p>
 <ul>
-<li>초기 렌더링) </li>
+<li>React는 컴포넌트를 호출하여 화면에 표시할 내용 파악</li>
+<li>"렌더링" = React에서 컴포넌트를 호출하는 것<ul>
+<li>초기 렌더링) <ul>
 <li>React는 루트 컴포넌트 호출</li>
-<li>이후 렌더링)</li>
+</ul>
+</li>
+<li>이후 렌더링)<ul>
 <li>React는 state 업데이트가 일어나 렌더링을 트리거한 컴포넌트 호출</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
 <p>React가 DOM에 변경 사항 커밋</p>
-</li>
+<ul>
 <li>컴포넌트가 렌더링한 후 React는 DOM을 수정</li>
 <li>초기 렌더링)<ul>
 <li>React는 <code>appendChild()</code> DOM API를 사용해 생성한 모든 DOM 노드를 화면에 표시</li>
 </ul>
 </li>
-<li>
-<p>리렌더링)</p>
-<ul>
+<li>리렌더링)<ul>
 <li>React는 필요한 최소한의 작업을 적용하여 DOM이 최신 렌더링 출력과 일치하도록 함</li>
 <li>렌더링 간 차이가 있는 경우에만 DOM을 변경</li>
 <li>딱 변경될 부분만 딱 변경!</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>
 <p>브라우저 페인트</p>
-</li>
+<ul>
 <li>렌더링이 완료 된 후, React가 DOM을 업데이트한 후 브라우저는 화면 다시 그림</li>
 <li>브라우저 렌더링 이라고 부르는데, 리액트에서는 페인팅이라고 부름</li>
+</ul>
+</li>
 </ol>
 
 

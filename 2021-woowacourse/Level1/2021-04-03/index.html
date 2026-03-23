@@ -22909,79 +22909,62 @@
 <h2 id="2021-04-03">2021-04-03<a class="headerlink" href="#2021-04-03" title="Permanent link">&para;</a></h2>
 <h2 id="_1">우분투 서버에 자바 프로그램 실행해보기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>자바 설치</strong></p>
+<li><strong>자바 설치</strong>
+    - 참고: https://jjeongil.tistory.com/959<br />
+    $ sudo apt update<br />
+    $ sudo apt install default-jdk  // jdk 11</li>
+</ul>
 <ul>
-<li>참고: https://jjeongil.tistory.com/959<br />
-$ sudo apt update<br />
-$ sudo apt install default-jdk  // jdk 11</li>
+<li><strong>도커 설치</strong>
+    - 참고: https://hiseon.me/linux/ubuntu/install-docker/
+    - docker-compose.yml 생성
+    <code>shell script
+    version: '3'
+    services:
+      local-db:
+        image: library/mysql:5.7
+        container_name: local-db
+        restart: always
+        ports:
+          - 13306:3306
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+          TZ: Asia/Seoul
+        volumes:
+          - ./db/mysql/data:/var/lib/mysql
+          - ./db/mysql/init:/docker-entrypoint-initdb.d</code></li>
 </ul>
-</li>
-<li>
-<p><strong>도커 설치</strong></p>
 <ul>
-<li>참고: https://hiseon.me/linux/ubuntu/install-docker/</li>
-<li>docker-compose.yml 생성
-```shell script
-version: '3'
-services:
-  local-db:
-    image: library/mysql:5.7
-    container_name: local-db
-    restart: always
-    ports:<ul>
-<li>13306:3306
-environment:
-  MYSQL_ROOT_PASSWORD: root
-  TZ: Asia/Seoul
-volumes:</li>
-<li>./db/mysql/data:/var/lib/mysql</li>
-<li>./db/mysql/init:/docker-entrypoint-initdb.d
-```</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>도커로 설치한(?) MySQL에 접근하기</strong></p>
-<ul>
-<li>참고: http://jmlim.github.io/docker/2019/07/30/docker-mysql-setup/
-$ sudo docker exec -it local-db bash
-root@ee51fb36e1ae:/# mysql -u root -p
--&gt; 패스워드 입력 후 mysql 서버 접속</li>
-</ul>
-<p>CREATE TABLE piece_position (<br />
-   team VARCHAR(5) NOT NULL,   <br />
-   piece VARCHAR(6) NOT NULL,   <br />
-   position VARCHAR(2) NOT NULL,   <br />
-   is_first_move boolean NOT NULL,
-   primary key (position) 
-);</p>
+<li><strong>도커로 설치한(?) MySQL에 접근하기</strong>
+    - 참고: http://jmlim.github.io/docker/2019/07/30/docker-mysql-setup/
+    $ sudo docker exec -it local-db bash
+    root@ee51fb36e1ae:/# mysql -u root -p
+    -&gt; 패스워드 입력 후 mysql 서버 접속<p>CREATE TABLE piece_position (<br />
+     team VARCHAR(5) NOT NULL,   <br />
+     piece VARCHAR(6) NOT NULL,   <br />
+     position VARCHAR(2) NOT NULL,   <br />
+     is_first_move boolean NOT NULL,
+     primary key (position) 
+  );</p>
 <p>CREATE TABLE chess_game (
-    current_turn_team VARCHAR(5) NOT NULL,
-    is_playing boolean NOT NULL
-);</p>
+      current_turn_team VARCHAR(5) NOT NULL,
+      is_playing boolean NOT NULL
+  );</p>
 </li>
-<li>
-<p><strong>하나의 브랜치만 가져오기</strong></p>
-<ul>
-<li>참고: https://www.slipp.net/questions/577</li>
 </ul>
-</li>
-<li>
-<p><strong>Gradle로 프로젝트 빌드</strong></p>
 <ul>
-<li>참고: https://codechacha.com/ko/building-java-with-gradle/</li>
+<li><strong>하나의 브랜치만 가져오기</strong>
+    - 참고: https://www.slipp.net/questions/577</li>
 </ul>
-</li>
-<li>
-<p>느낀점...</p>
 <ul>
-<li>결국 실패</li>
-<li>우분투에서 환경변수라..</li>
-<li>인텔리제이의 플레이 버튼에 길들여져 자바를 콘솔로 전혀 실행못한다는 것을 인지...ㅜ</li>
+<li><strong>Gradle로 프로젝트 빌드</strong>
+    - 참고: https://codechacha.com/ko/building-java-with-gradle/</li>
 </ul>
-</li>
+<ul>
+<li>느낀점...
+    - 결국 실패
+    - 우분투에서 환경변수라..
+    - 인텔리제이의 플레이 버튼에 길들여져 자바를 콘솔로 전혀 실행못한다는 것을 인지...ㅜ</li>
 </ul>
 
 

@@ -22954,10 +22954,8 @@
 <h2 id="uricomponentsbuilder">UriComponentsBuilder<a class="headerlink" href="#uricomponentsbuilder" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://blog.naver.com/PostView.naver?blogId=aservmz&amp;logNo=222322019981&amp;parentCategoryNo=&amp;categoryNo=&amp;viewDate=&amp;isShowPopularPosts=false&amp;from=postView</em></li>
-<li><strong>개요</strong></li>
-<li>
-<p>URI를 구성하는 Components를 효과적으로 다룰 수 있도록 하는 클래스</p>
-<ul>
+<li><strong>개요</strong><ul>
+<li>URI를 구성하는 Components를 효과적으로 다룰 수 있도록 하는 클래스<ul>
 <li>Scheme</li>
 <li>UserInfo</li>
 <li>Host</li>
@@ -22967,35 +22965,41 @@
 <li>Fragment</li>
 </ul>
 </li>
-<li>
-<p><strong>UriComponentsBuilder</strong></p>
+</ul>
 </li>
-<li>
-<p>UriComponents를 Build 하도록 도와줌</p>
+</ul>
+<ul>
+<li><strong>UriComponentsBuilder</strong><ul>
+<li>UriComponents를 Build 하도록 도와줌</li>
+</ul>
 </li>
-<li>
-<p><strong>ServletUriComponentsBuilder</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ServletUriComponentsBuilder</strong><ul>
 <li><strong>이전 요청의 URI를 재사용</strong> 하여 편리하게 URI를 사용하도록 함</li>
 <li>HttpServletRequest 객체의 정보를 이용해 URI를 구서함</li>
 <li>이전 요청에서의 URI에서 현재 필요한 정보를 뽑아내 유연하게 URI 설정 가능</li>
 </ul>
+</li>
+</ul>
 <h2 id="swagger-uri">Swagger에서 URI를 어플리케이션 구동 시점에 가져올 수는 없을까?<a class="headerlink" href="#swagger-uri" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>ServletUriComponentsBuilder.fromCurrentContextPath()</strong></li>
+<li><strong>ServletUriComponentsBuilder.fromCurrentContextPath()</strong><ul>
 <li>이전 요청에서 정보를 가져오는 특성상 구동 시점에서는 해당 메서드로 URI 정보를 가져올 수는 없음</li>
+</ul>
+</li>
 </ul>
 <h2 id="swagger-http-request-authorization-request">Swagger에서 Http Request의 Authorization이 필요한 경우에 대해서만 request를 넣어줄 수는 없을까?<a class="headerlink" href="#swagger-http-request-authorization-request" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>목표</strong></li>
-<li>
-<p>난 우선 프로덕션 코드에 영향을 주지 않고! SwaggerConfig에서만 코드를 작성하여 http Header가 필수인 api에 대해서만 http request를 넣어주고 싶음</p>
+<li><strong>목표</strong><ul>
+<li>난 우선 프로덕션 코드에 영향을 주지 않고! SwaggerConfig에서만 코드를 작성하여 http Header가 필수인 api에 대해서만 http request를 넣어주고 싶음</li>
+</ul>
 </li>
-<li>
-<p><strong>Reflection을 사용해서 http request가 필요한 handler(controller method)를 가져와보자</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Reflection을 사용해서 http request가 필요한 handler(controller method)를 가져와보자</strong><ul>
 <li>ApplicationContext를 주입받아서 Reflection을 사용하면 다음과 같이 인가가 필요한 메서드들을 가져올 수 있음 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RequestMappingInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getAuthenticationRequiredHandlers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RequestMappingInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getAuthenticationRequiredHandlers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RequestMappingInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">authorizationRequiredHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">RequestMappingHandlerMapping</span><span class="w"> </span><span class="n">requestMappingHandlerMapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">applicationContext</span>
@@ -23019,8 +23023,12 @@
 <li>아... 근데 진짜 이걸 swagger에 등록해주는게 어렵네<ul>
 <li>우선 swagger docket을 생성할 때는 globalparameter에 한해서만 설정해줄수있도록 하고 있음</li>
 <li>어노테이션 써서 아마 비즈니스코드에 넣는것을 권장하고 만들어서 그런것 같음</li>
-<li>후... predicate라는 걸 엄청쓰네 나 이거 잘 모름</li>
+<li>후... predicate라는 걸 엄청쓰네 나 이거 잘 모름<ul>
 <li>함수형을 써서 설정값을 런타임에 가져오는 형식인것같은데...?</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

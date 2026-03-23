@@ -22947,16 +22947,17 @@
     - JSON
     - Time series</p>
 <ul>
-<li><strong>Hashes</strong></li>
+<li><strong>Hashes</strong><ul>
 <li>field-value pairs<ul>
-<li>Hash Key -&gt; (KEY1)</li>
+<li>Hash Key -&gt; (KEY1)<ul>
 <li>Hash SubKey1 -&gt; (Field1)</li>
 <li>Hash SubKey2 -&gt; (Field2)</li>
 </ul>
 </li>
-<li>
-<p>예시
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; HSET bike:1 model Deimos brand Ergonom type &#39;Endure bikes&#39; price 4821
+</ul>
+</li>
+<li>예시
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; HSET bike:1 model Deimos brand Ergonom type &#39;Endure bikes&#39; price 4821
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>(integer) 4
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>&gt; HGET bike:1 model
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>&quot;Deimos&quot;
@@ -22975,22 +22976,21 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>1) &quot;Deimos&quot;
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>2) &quot;4821&quot;
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>3) (nil)
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>hget</strong></p>
-</li>
-<li>
-<p>입력한 해시 키 밑 지정한 필드값 가져옴. 없으면 nil 반환</p>
-</li>
-<li>
-<p><strong>hmget</strong></p>
-</li>
-<li>
-<p>해시에 저장된 특정 키에 따른 필드와 연관된 값들을 반환</p>
+</ul>
 <ul>
+<li><strong>hget</strong><ul>
+<li>입력한 해시 키 밑 지정한 필드값 가져옴. 없으면 nil 반환</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>hmget</strong><ul>
+<li>해시에 저장된 특정 키에 따른 필드와 연관된 값들을 반환<ul>
 <li>해시에 저장된 필드가 아니다 -&gt; nil 반환
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>redis &gt; HSET myhash field1 &quot;Hello&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>redis &gt; HSET myhash field1 &quot;Hello&quot;
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>(integer) 1
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>redis &gt; HSET myhash field2 &quot;World&quot;
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>(integer) 1
@@ -23002,10 +23002,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>hmset</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>hmset</strong><ul>
 <li>deprecated -&gt; hset으로 대체 가능! (위의 예시처럼)</li>
+</ul>
+</li>
 </ul>
 <h2 id="redis-pubsub">Redis pub/sub<a class="headerlink" href="#redis-pubsub" title="Permanent link">&para;</a></h2>
 

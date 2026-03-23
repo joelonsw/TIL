@@ -22953,78 +22953,56 @@
 <h3 id="2021-02-05">2021-02-05<a class="headerlink" href="#2021-02-05" title="Permanent link">&para;</a></h3>
 <h2 id="package-import"><strong>package &amp; import</strong><a class="headerlink" href="#package-import" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>package란?</strong></p>
+<li><strong>package란?</strong>
+    - 같이 보관하고 싶은 class들의 모음
+    - 소스 코드들을 묶어서 배포하고 재사용
+    - 구조 파악에도 용이
+    - package 명명 convention은 회사 도메인의 역순으로</li>
+</ul>
 <ul>
-<li>같이 보관하고 싶은 class들의 모음</li>
-<li>소스 코드들을 묶어서 배포하고 재사용</li>
-<li>구조 파악에도 용이</li>
-<li>package 명명 convention은 회사 도메인의 역순으로</li>
-</ul>
-</li>
-<li>
-<p><strong>빌드 도구란?</strong></p>
-<ul>
-<li>maven, gradle 같은 도구</li>
-<li>빌드 자동화를 통해 실행가능한 프로그램을 만드는 도구<ul>
-<li><em>빌드 자동화: 코드를 컴파일하여 binary 코드로 만들고, 테스트하고, 패키징함</em></li>
-</ul>
-</li>
-<li>소스 코드를 컴파일, 테스트, 정적분석 등을 통해 실행 가능한 애플리케이션으로 자동 생성</li>
-<li>계속해서 늘어나는 라이브러리에 자동 추가 및 관리</li>
-</ul>
-</li>
+<li><strong>빌드 도구란?</strong>
+    - maven, gradle 같은 도구
+    - 빌드 자동화를 통해 실행가능한 프로그램을 만드는 도구
+        - <em>빌드 자동화: 코드를 컴파일하여 binary 코드로 만들고, 테스트하고, 패키징함</em>
+    - 소스 코드를 컴파일, 테스트, 정적분석 등을 통해 실행 가능한 애플리케이션으로 자동 생성
+    - 계속해서 늘어나는 라이브러리에 자동 추가 및 관리</li>
 </ul>
 <h2 id="class-instance"><strong>class &amp; instance</strong><a class="headerlink" href="#class-instance" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>개념</strong></p>
-<ul>
-<li>클래스: 인스턴스 생성 틀, 자체 상태 X</li>
-<li>인스턴스: 클래스의 실체화, 자체 상태 O</li>
+<li><strong>개념</strong>
+    - 클래스: 인스턴스 생성 틀, 자체 상태 X
+    - 인스턴스: 클래스의 실체화, 자체 상태 O</li>
 </ul>
-</li>
-<li>
-<p><strong>static</strong></p>
 <ul>
-<li>인스턴스를 생성하지 않고 메서드와 필드에 접근하는 경우 static 키워드</li>
-<li><strong>private 생성자를 통해 명시적으로 클래스를 생성할 수 없도록 하자!</strong></li>
+<li><strong>static</strong>
+    - 인스턴스를 생성하지 않고 메서드와 필드에 접근하는 경우 static 키워드
+    - <strong>private 생성자를 통해 명시적으로 클래스를 생성할 수 없도록 하자!</strong></li>
 </ul>
-</li>
-<li>
-<p><strong>생성자</strong></p>
 <ul>
-<li>생성자의 리턴은 생략되어 있다</li>
-<li>생성자 내부에서 유효성 검사를 통해 예외처리 및 중복 로직을 구현할 수 있다</li>
-<li>생성자 chaining 을 통해 역할을 위임해주는 연습 해보기</li>
-</ul>
-</li>
+<li><strong>생성자</strong>
+    - 생성자의 리턴은 생략되어 있다
+    - 생성자 내부에서 유효성 검사를 통해 예외처리 및 중복 로직을 구현할 수 있다
+    - 생성자 chaining 을 통해 역할을 위임해주는 연습 해보기</li>
 </ul>
 <h2 id="tip"><strong>TIP</strong><a class="headerlink" href="#tip" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>디폴트 패키지는 외부에서 사용 불가능. 패키지명 명시해주자</strong></p>
-</li>
-<li>
-<p><strong>가장 좋은 패키지는 10개 이상의 클래스를 가지지 않는다</strong></p>
-</li>
-<li>
-<p><strong>값 vs 주소값</strong></p>
-<ul>
-<li>isEqualTo(): 값 비교</li>
-<li>isSameAs(): 주소값 비교</li>
+<li><strong>디폴트 패키지는 외부에서 사용 불가능. 패키지명 명시해주자</strong></li>
 </ul>
-</li>
-<li>
-<p><strong>keyword "new"</strong>
-    -무조건 새로운 인스턴스를 생성한다. 이는 곧 메모리 공간을 차지한다는 말</p>
-</li>
-<li>
-<p><strong>클래스는 객체 관리자</strong></p>
 <ul>
-<li>인스턴스의 관리자 역할도 수행할 수 있다</li>
+<li><strong>가장 좋은 패키지는 10개 이상의 클래스를 가지지 않는다</strong></li>
 </ul>
-</li>
+<ul>
+<li><strong>값 vs 주소값</strong>
+    - isEqualTo(): 값 비교
+    - isSameAs(): 주소값 비교</li>
+</ul>
+<ul>
+<li><strong>keyword "new"</strong>
+    -무조건 새로운 인스턴스를 생성한다. 이는 곧 메모리 공간을 차지한다는 말</li>
+</ul>
+<ul>
+<li><strong>클래스는 객체 관리자</strong>
+    - 인스턴스의 관리자 역할도 수행할 수 있다</li>
 </ul>
 
 

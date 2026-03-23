@@ -22932,84 +22932,58 @@
 <h2 id="refresh-token">refresh token<a class="headerlink" href="#refresh-token" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://pomo0703.tistory.com/208</em></li>
-<li>
-<p><strong>SSR의 필요성</strong></p>
+<li><strong>SSR의 필요성</strong>
+    - 느린 최초 페이지 진입 시간 (서버에서 그려서 주면 더 빨라)
+    - 검색 로봇이 페이지 크롤링 못함 
+        - 구글의 경우 CSR의 JS 해석해 검색 엔진 봇 넣어줌
+        - 네이버/다음엔 그런거 없음 =&gt; SSR 필요함!</li>
+</ul>
 <ul>
-<li>느린 최초 페이지 진입 시간 (서버에서 그려서 주면 더 빨라)</li>
-<li>검색 로봇이 페이지 크롤링 못함 <ul>
-<li>구글의 경우 CSR의 JS 해석해 검색 엔진 봇 넣어줌</li>
-<li>네이버/다음엔 그런거 없음 =&gt; SSR 필요함!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Refresh Token 도입</strong></p>
-<ul>
-<li>SSR 서버가 최초 메인 페이지 렌더링<ul>
-<li>로그인 상황이라면 로그인 된 페이지를 그려야하고, </li>
-<li>로그아웃 상황이라면 로그인 필요 페이지를 그려야함 </li>
-</ul>
-</li>
-<li>Refresh Token의 저장소<ul>
-<li>만료기간이 길다. 탈취 가능성 적은곳에 넣자</li>
-<li>일반적으로 쿠키에 저장</li>
-</ul>
-</li>
-<li>쿠키를 활용하는 SSR 로그인 과정<ol>
-<li>POST /login</li>
-<li>백엔드에서 cookie: refresh_token, body: { access_token : ~~~ }<ul>
-<li>redis에 [refresh_token : browserIP] 형식 저장</li>
-</ul>
-</li>
-<li>프론트에서 변수에 access_token 저장, 쿠키에 refresh_token 저장</li>
-<li>이제 access_token을 ssr 서버에 넘겨줌</li>
-<li>ssr 서버에서 로그인 html 그림</li>
-<li>프론트에서 로그인 html 렌더링</li>
-</ol>
-</li>
-<li>로그인 상태에서 새로고침?<ol>
-<li>쿠키의 refresh_token을 ssr 서버에 넘겨줌</li>
-<li>ssr 서버에서 백엔드 서버로 refresh_token과 browserIP 전달</li>
-<li>백엔드 서버에서 refresh_token과 access_token 재발급<ul>
-<li>만약 redis에 저장된 [refresh_token : browserIP] 가 다르다면 해당 엔트리 삭제</li>
-</ul>
-</li>
-<li>ssr 서버에서 access_token 발급 받은걸로 로그인 html 그림</li>
-<li>프론트에서 넘겨 받아 access_token 변수에 저장</li>
-</ol>
-</li>
-</ul>
-</li>
+<li><strong>Refresh Token 도입</strong>
+    - SSR 서버가 최초 메인 페이지 렌더링
+        - 로그인 상황이라면 로그인 된 페이지를 그려야하고, 
+        - 로그아웃 상황이라면 로그인 필요 페이지를 그려야함 
+    - Refresh Token의 저장소
+        - 만료기간이 길다. 탈취 가능성 적은곳에 넣자
+        - 일반적으로 쿠키에 저장
+    - 쿠키를 활용하는 SSR 로그인 과정
+        1. POST /login
+        2. 백엔드에서 cookie: refresh_token, body: { access_token : ~~~ }
+            - redis에 [refresh_token : browserIP] 형식 저장
+        3. 프론트에서 변수에 access_token 저장, 쿠키에 refresh_token 저장
+        4. 이제 access_token을 ssr 서버에 넘겨줌
+        5. ssr 서버에서 로그인 html 그림
+        6. 프론트에서 로그인 html 렌더링
+    - 로그인 상태에서 새로고침?
+        1. 쿠키의 refresh_token을 ssr 서버에 넘겨줌
+        2. ssr 서버에서 백엔드 서버로 refresh_token과 browserIP 전달
+        3. 백엔드 서버에서 refresh_token과 access_token 재발급
+            - 만약 redis에 저장된 [refresh_token : browserIP] 가 다르다면 해당 엔트리 삭제
+        4. ssr 서버에서 access_token 발급 받은걸로 로그인 html 그림
+        5. 프론트에서 넘겨 받아 access_token 변수에 저장</li>
 </ul>
 <h2 id="index">Index 생성, 보기<a class="headerlink" href="#index" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: http://tcpschool.com/mysql/mysql_index_create</em></li>
-<li>
-<p><strong>왜 필요한가?</strong></p>
-<ul>
-<li>테이블에서 원하는 데이터 빠르게 찾기 위함</li>
-<li>자주 사용되는 필드 값으로 만들어진 원본 테이블의 사본</li>
-<li>사용자가 직접 접근은 X, 검색과 질의에 대한 처리에서만 사용됨</li>
-<li>수정보단 검색이 자주 사용되는 테이블에서 사용하는 것이 좋음</li>
+<li><strong>왜 필요한가?</strong>
+    - 테이블에서 원하는 데이터 빠르게 찾기 위함
+    - 자주 사용되는 필드 값으로 만들어진 원본 테이블의 사본
+    - 사용자가 직접 접근은 X, 검색과 질의에 대한 처리에서만 사용됨
+    - 수정보단 검색이 자주 사용되는 테이블에서 사용하는 것이 좋음</li>
 </ul>
-</li>
-<li>
-<p><strong>인덱스 생성</strong></p>
 <ul>
-<li>그냥 인덱스 생성
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">인덱스이름</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">테이블이름</span><span class="w"> </span><span class="p">(</span><span class="n">필드이름1</span><span class="p">,</span><span class="w"> </span><span class="n">필드이름2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
-</code></pre></div></li>
-<li>UNIQUE 인덱스 생성 (중복을 허용하지 않는 인덱스
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">인덱스이름</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">테이블이름</span><span class="w"> </span><span class="p">(</span><span class="n">필드이름1</span><span class="p">,</span><span class="w"> </span><span class="n">필드이름2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
+<li><strong>인덱스 생성</strong>
+    - 그냥 인덱스 생성
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">인덱스이름</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">테이블이름</span><span class="w"> </span><span class="p">(</span><span class="n">필드이름1</span><span class="p">,</span><span class="w"> </span><span class="n">필드이름2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
+</code></pre></div>
+    - UNIQUE 인덱스 생성 (중복을 허용하지 않는 인덱스
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">인덱스이름</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">테이블이름</span><span class="w"> </span><span class="p">(</span><span class="n">필드이름1</span><span class="p">,</span><span class="w"> </span><span class="n">필드이름2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>인덱스 보기</strong>
+<ul>
+<li><strong>인덱스 보기</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SHOW</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">테이블이름</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

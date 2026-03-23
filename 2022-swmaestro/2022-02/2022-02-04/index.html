@@ -22909,33 +22909,35 @@
 <h3 id="2022-02-04">2022-02-04<a class="headerlink" href="#2022-02-04" title="Permanent link">&para;</a></h3>
 <h2 id="-hashmap-treeset">알고리즘 문제풀이 - HashMap, TreeSet<a class="headerlink" href="#-hashmap-treeset" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Map 초기화하며 원소를 넣는 경우</strong></li>
-<li>
-<p>존재 유무를 따져가며 if-else 하지 말고, getOrDefault(key, default) 로 가져오자!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Map</span><span class="o">&lt;</span><span class="n">Character</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<li><strong>Map 초기화하며 원소를 넣는 경우</strong><ul>
+<li>존재 유무를 따져가며 if-else 하지 말고, getOrDefault(key, default) 로 가져오자!
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Map</span><span class="o">&lt;</span><span class="n">Character</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">for</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">candidate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">vote</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">candidate</span><span class="p">,</span><span class="w"> </span><span class="n">vote</span><span class="p">.</span><span class="na">getOrDefault</span><span class="p">(</span><span class="n">candidate</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>자바에서 Map 비교</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>자바에서 Map 비교</strong><ul>
 <li>Java의 Map은 equals로 비교가 가능하다!</li>
-<li>
-<p><code>inputMap.equals(targetMap)</code> 하면 key-value 비교해서 뚝딱 알려줌</p>
+<li><code>inputMap.equals(targetMap)</code> 하면 key-value 비교해서 뚝딱 알려줌</li>
+</ul>
 </li>
-<li>
-<p><strong>TreeSet</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>TreeSet</strong><ul>
 <li>이진탐색트리</li>
 <li>정렬의 기능을 가진 Set
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TreeSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">reverseOrder</span><span class="p">());</span><span class="w">    </span><span class="c1">// 해당 방식으로 큰 놈 앞으로 오게 정렬 가능</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TreeSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">reverseOrder</span><span class="p">());</span><span class="w">    </span><span class="c1">// 해당 방식으로 큰 놈 앞으로 오게 정렬 가능</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">ts</span><span class="p">.</span><span class="na">first</span><span class="p">()</span><span class="w">          </span><span class="c1">// 앞에있는 놈</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">ts</span><span class="p">.</span><span class="na">last</span><span class="p">()</span><span class="w">           </span><span class="c1">// 뒤에있는놈</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">ts</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w">      </span><span class="c1">// 삭제</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">ts</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w">           </span><span class="c1">// 사이즈</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

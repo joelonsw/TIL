@@ -22976,44 +22976,26 @@
 <h2 id="_1">웹 서버는 왜 필요한가?<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=Zimhvf2B7Es</em></li>
-<li>웹 서버<ul>
-<li>HTML, CSS, JS, data, 이미지 등의 서버 역할을 해줌</li>
-<li>정적 웹을 서빙함</li>
-<li>PHP로 만든 간단한 동적 웹 서빙 가능</li>
-<li>WAS와의 중간 다리 역할을 함</li>
-<li>보안과 운영에 장점!</li>
-</ul>
-</li>
-<li>웹 서버의 기능 <em>(장점 및 쓰임새)</em><ol>
-<li>Reverse Proxy<ul>
-<li>클라이언트로부터 서버의 정보를 감춤<ul>
-<li>서버의 내부 구조를 가릴 수 있음<ul>
-<li>정적 리소스들이 어디에 위치해 있는지</li>
-<li>WAS가 어디에 배포되어 있는지, 몇 번 포트로 돌고 있는지 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>보안 측면에서 장점을 제공함!</li>
-</ul>
-</li>
-<li>Load Balancing<ul>
-<li>Client의 요청이 몰릴 때 분산해서 요청 처리하도록<ul>
-<li>하나의 WS에서 여러개의 WAS를 두도록 하여 지속성을 유지시킴</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Caching<ul>
-<li>자주 요청되는 서버의 자원을 캐싱해둬 빨리 전달할 수 있도록 하기 위함</li>
-</ul>
-</li>
-<li>서비스를 안정적으로, 안전하게 돌리기 위한 기타 기능<ul>
-<li>WAS health check</li>
-</ul>
-</li>
-</ol>
-</li>
+<li>웹 서버
+    - HTML, CSS, JS, data, 이미지 등의 서버 역할을 해줌
+    - 정적 웹을 서빙함
+    - PHP로 만든 간단한 동적 웹 서빙 가능
+    - WAS와의 중간 다리 역할을 함
+    - 보안과 운영에 장점!</li>
+<li>웹 서버의 기능 <em>(장점 및 쓰임새)</em>
+    1. Reverse Proxy
+        - 클라이언트로부터 서버의 정보를 감춤
+            - 서버의 내부 구조를 가릴 수 있음
+                - 정적 리소스들이 어디에 위치해 있는지
+                - WAS가 어디에 배포되어 있는지, 몇 번 포트로 돌고 있는지 
+        - 보안 측면에서 장점을 제공함!
+    2. Load Balancing
+        - Client의 요청이 몰릴 때 분산해서 요청 처리하도록
+            - 하나의 WS에서 여러개의 WAS를 두도록 하여 지속성을 유지시킴
+    3. Caching
+        - 자주 요청되는 서버의 자원을 캐싱해둬 빨리 전달할 수 있도록 하기 위함
+    4. 서비스를 안정적으로, 안전하게 돌리기 위한 기타 기능
+        - WAS health check</li>
 </ul>
 <h2 id="_2">웹 서버 종류<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23021,57 +23003,37 @@
 <li><em>참고 2: https://taetaetae.github.io/2018/06/27/apache-vs-nginx/</em></li>
 <li><em>참고 3: https://cntechsystems.tistory.com/24</em></li>
 <li><em>참고 4: https://youngmind.tistory.com/entry/Apache-vs-Nginx</em></li>
-<li>
-<p><strong>Apache</strong></p>
+<li><strong>Apache</strong>
+    - 다양하고 검증된 기능!
+    - MPM 방식으로 HTTP 요청 처리
+        - PreFork MPM <em>(다중 프로세스)</em>
+            - Client 요청에 대해 자식 "프로세스"를 생성하여 처리
+            - 자식 프로세스당 하나의 쓰레드 가짐
+            - 독립적인 프로세스로 돌아가기에 안정적 but 메모리 소모가 큼
+        - Worker MPM <em>(다중 쓰레드)</em>
+            - 각 프로세스의 쓰레드를 생성해 처리하는 구조
+            - 쓰레드 간의 메모리 공유 가능
+                - 각 쓰레드는 하나의 연결만을 부여받음
+        - 동시접속 요청이 들어오면 CPU와 메모리 사용이 증가... 대용량 요청에서 한계 </li>
+</ul>
 <ul>
-<li>다양하고 검증된 기능!</li>
-<li>MPM 방식으로 HTTP 요청 처리<ul>
-<li>PreFork MPM <em>(다중 프로세스)</em><ul>
-<li>Client 요청에 대해 자식 "프로세스"를 생성하여 처리</li>
-<li>자식 프로세스당 하나의 쓰레드 가짐</li>
-<li>독립적인 프로세스로 돌아가기에 안정적 but 메모리 소모가 큼</li>
-</ul>
-</li>
-<li>Worker MPM <em>(다중 쓰레드)</em><ul>
-<li>각 프로세스의 쓰레드를 생성해 처리하는 구조</li>
-<li>쓰레드 간의 메모리 공유 가능<ul>
-<li>각 쓰레드는 하나의 연결만을 부여받음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>동시접속 요청이 들어오면 CPU와 메모리 사용이 증가... 대용량 요청에서 한계 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Nginx</strong></p>
-<ul>
-<li>성능과 가벼움!</li>
-<li>Event Driven 방식<ul>
-<li>요청이 들어오면 어떤 동작 해야하는지만 알려주고 다른 요청 처리</li>
-<li>프로세스를 fork하거나 쓰레드 사용하지 않고, IO를 모두 Event Listener로 미룸<ul>
-<li>먼저 처리되는 것 부터 로직이 진행되도록 함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Nginx 특징<ul>
-<li>쓰레드를 많이 사용하지 않음<ul>
-<li>적은 수의 쓰레드로 효율적인 일처리</li>
-<li>쓰레드 당 메모리도 적게 사용</li>
-<li>System Resource 자체를 적게 쓰게됨</li>
-</ul>
-</li>
-<li>최소한의 리소스로 웹 서버의 아키텍쳐 개선위해 독립형 HTTP 서버 배치 가능</li>
-<li>정적 컨텐츠 처리가 탁월함<ul>
-<li>동적 처리를 별도로 담당하는 SW 스택과 연계하여 고성능 서비스 제공 가능</li>
-<li>따라서 프록시 서비스로도 많이 사용됨 <em>(nginx.conf의 location)</em></li>
-</ul>
-</li>
-<li>nginx.conf 예시
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>events {}
+<li><strong>Nginx</strong>
+    - 성능과 가벼움!
+    - Event Driven 방식
+        - 요청이 들어오면 어떤 동작 해야하는지만 알려주고 다른 요청 처리
+        - 프로세스를 fork하거나 쓰레드 사용하지 않고, IO를 모두 Event Listener로 미룸
+            - 먼저 처리되는 것 부터 로직이 진행되도록 함
+    - Nginx 특징
+        - 쓰레드를 많이 사용하지 않음
+            - 적은 수의 쓰레드로 효율적인 일처리
+            - 쓰레드 당 메모리도 적게 사용
+            - System Resource 자체를 적게 쓰게됨
+        - 최소한의 리소스로 웹 서버의 아키텍쳐 개선위해 독립형 HTTP 서버 배치 가능
+        - 정적 컨텐츠 처리가 탁월함
+            - 동적 처리를 별도로 담당하는 SW 스택과 연계하여 고성능 서비스 제공 가능
+            - 따라서 프록시 서비스로도 많이 사용됨 <em>(nginx.conf의 location)</em>
+        - nginx.conf 예시
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>events {}
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>http {       
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  upstream app {
@@ -23113,98 +23075,65 @@
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>}
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="was">WAS 종류<a class="headerlink" href="#was" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://velog.io/@kdhyo/Apache-Tomcat-%EB%91%98%EC%9D%B4-%EB%AC%B4%EC%8A%A8-%EC%B0%A8%EC%9D%B4%EC%A7%80</em></li>
-<li><strong>WAS</strong><ul>
-<li>동적 웹을 만들기 위해 DB 처리, 비즈니스 로직 처리</li>
-</ul>
-</li>
-<li><strong>Tomcat</strong><ul>
-<li>동적 사이트 전문 처리<ul>
-<li>사실 웹 서버들도 PHP로 만든 간단한 동적 웹 프로그래밍 가능</li>
-<li>하지만 무거운 요청이 들어오면 이걸로 넘겨줘야함</li>
-<li>JSP와 Servlet을 구동하기 위한 서블릿 컨테이너 역할<ul>
-<li>DB 연결, 다른 어플리케이션과 상호작용 가능</li>
-</ul>
-</li>
-<li>자바 서블릿을 실행시키고 JSP 코드가 포함되어 있는 웹 페이지를 만들어줌</li>
-</ul>
-</li>
-<li>서블릿 컨테이너?<ul>
-<li>서블릿<ul>
-<li>클라이언트의 요청을 받고, 처리하여 결과를 클라이언트에게 제공하는 자바 인터페이스</li>
-<li>java.servlet.package에 정의된 인터페이스로, 라이프 사이클을 위한 3가지 필수 메서드<ul>
-<li>init()</li>
-<li>service()</li>
-<li>destroy()</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>컨테이너<ul>
-<li>동적인 데이터를 가공하여 정적인 파일로 만들어주는 모듈</li>
-</ul>
-</li>
-<li>서블릿 컨테이너<ul>
-<li>서블릿들을 모아서 관리</li>
-<li>새로운 요청 들어올 때마다 새로운 스레드 생성</li>
-<li>작업 끝난 스레드 자동 제거</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>사용 방법<ul>
-<li>스프링으로 코딩한 웹앱 war로 빌드<ul>
-<li>이 안에 .class, jsp, 이미지, css, js 있음</li>
-</ul>
-</li>
-<li>Tomcat을 다운 받아, Tomcat의 특정 폴더에 war 파일 넣고 명령어 실행하면 스프링 서비스가 톰캣을 사용해서 돌게됨</li>
-</ul>
-</li>
-<li>요즘은 반대로 스프링을 톰캣이 들어있는 jar 파일로 빌드해서 배포하기도 함</li>
-</ul>
-</li>
+<li><strong>WAS</strong>
+    - 동적 웹을 만들기 위해 DB 처리, 비즈니스 로직 처리</li>
+<li><strong>Tomcat</strong>
+    - 동적 사이트 전문 처리
+        - 사실 웹 서버들도 PHP로 만든 간단한 동적 웹 프로그래밍 가능
+        - 하지만 무거운 요청이 들어오면 이걸로 넘겨줘야함
+        - JSP와 Servlet을 구동하기 위한 서블릿 컨테이너 역할
+            - DB 연결, 다른 어플리케이션과 상호작용 가능
+        - 자바 서블릿을 실행시키고 JSP 코드가 포함되어 있는 웹 페이지를 만들어줌
+    - 서블릿 컨테이너?
+        - 서블릿
+            - 클라이언트의 요청을 받고, 처리하여 결과를 클라이언트에게 제공하는 자바 인터페이스
+            - java.servlet.package에 정의된 인터페이스로, 라이프 사이클을 위한 3가지 필수 메서드
+                - init()
+                - service()
+                - destroy()
+        - 컨테이너
+            - 동적인 데이터를 가공하여 정적인 파일로 만들어주는 모듈
+        - 서블릿 컨테이너
+            - 서블릿들을 모아서 관리
+            - 새로운 요청 들어올 때마다 새로운 스레드 생성
+            - 작업 끝난 스레드 자동 제거
+    - 사용 방법
+        - 스프링으로 코딩한 웹앱 war로 빌드
+            - 이 안에 .class, jsp, 이미지, css, js 있음
+        - Tomcat을 다운 받아, Tomcat의 특정 폴더에 war 파일 넣고 명령어 실행하면 스프링 서비스가 톰캣을 사용해서 돌게됨
+    - 요즘은 반대로 스프링을 톰캣이 들어있는 jar 파일로 빌드해서 배포하기도 함</li>
 </ul>
 <h2 id="tomcat-servlet">Tomcat에 Servlet 띄워보기<a class="headerlink" href="#tomcat-servlet" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://programmerhoiit.tistory.com/2</em></li>
-<li><em>참고 2: http://june0313.github.io/2018/05/22/install-tomcat-on-ubuntu/</em></li>
-<li>
-<p>Tomcat을 우분투에 설치하기</p>
-<ul>
-<li>톰캣 홈페이지(http://tomcat.apache.org/) 에 방문하여 다운로드할 톰캣 URL 가져옴</li>
-<li>wget 명령어로 설치
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>wget<span class="w"> </span>https://mirror.navercorp.com/apache/tomcat/tomcat-10/v10.0.7/bin/apache-tomcat-10.0.7.tar.gz
-</code></pre></div></li>
-<li>이후 압축 풀기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tar<span class="w"> </span>-zvxf<span class="w"> </span>apache-tomcat-10.0.7.tar.gz
+<li><em>참고 2: http://june0313.github.io/2018/05/22/install-tomcat-on-ubuntu/</em>
+1. Tomcat을 우분투에 설치하기
+    - 톰캣 홈페이지(http://tomcat.apache.org/) 에 방문하여 다운로드할 톰캣 URL 가져옴
+    - wget 명령어로 설치
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>wget<span class="w"> </span>https://mirror.navercorp.com/apache/tomcat/tomcat-10/v10.0.7/bin/apache-tomcat-10.0.7.tar.gz
+</code></pre></div>
+    - 이후 압축 풀기
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tar<span class="w"> </span>-zvxf<span class="w"> </span>apache-tomcat-10.0.7.tar.gz
 </code></pre></div></li>
 </ul>
+<ol>
+<li>
+<p>Tomcat 실행/종료 해보기 
+    - apache-tomcat-10.0.7/bin의 startup.sh 로 톰캣 실행
+        - 기본적으로 8080 포트에 잡혀있음
+        - http://EC2-public-ip:8080 로 들어가면 톰캣 웰컴 페이지 나옴
+        <img alt="" src="../../image/2021-06-18-default-tomcat.PNG" />
+    - apache-tomcat-10.0.7/bin의 shutdown.sh로 톰캣 종료</p>
 </li>
 <li>
-<p>Tomcat 실행/종료 해보기 </p>
-<ul>
-<li>apache-tomcat-10.0.7/bin의 startup.sh 로 톰캣 실행<ul>
-<li>기본적으로 8080 포트에 잡혀있음</li>
-<li>http://EC2-public-ip:8080 로 들어가면 톰캣 웰컴 페이지 나옴
-<img alt="" src="../../image/2021-06-18-default-tomcat.PNG" /></li>
-</ul>
-</li>
-<li>apache-tomcat-10.0.7/bin의 shutdown.sh로 톰캣 종료</li>
-</ul>
-</li>
-<li>
-<p>HelloServlet.java 만들기</p>
-<ul>
-<li>apache-tomcat-10.0.7/webapps/ROOT/WEB-INF 으로 이동</li>
-<li>classes, src 디렉토리 만들어주기</li>
-<li>src 내부에 HelloServlet.java 만들어주기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<p>HelloServlet.java 만들기
+    - apache-tomcat-10.0.7/webapps/ROOT/WEB-INF 으로 이동
+    - classes, src 디렉토리 만들어주기
+    - src 내부에 HelloServlet.java 만들어주기
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
@@ -23231,28 +23160,22 @@
 <a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;destroy!&quot;</span><span class="p">);</span>
 <a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>필수적으로 정의해줘야 하는 init(), destroy()와 doGet()으로 Get메서드 오버라이딩 해준 것 볼 수 있다</li>
-</ul>
+</code></pre></div>
+    - 필수적으로 정의해줘야 하는 init(), destroy()와 doGet()으로 Get메서드 오버라이딩 해준 것 볼 수 있다</p>
 </li>
 <li>
-<p>HelloServlet.class 만들기</p>
-<ul>
-<li>이렇게 만들어 준 자바 소스 코드를 클래스 파일로 만들어주자<ul>
-<li>해당 클래스 파일은 apache-tomcat-10.0.7/webapps/ROOT/WEB-INF/classes에 저장해둘 것</li>
-</ul>
-</li>
-<li>톰캣의 servlet-api.jar가 컴파일할때 필요함! 다음과 같이 classpath 지정해주자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w"> </span>javac<span class="w"> </span>-d<span class="w"> </span>../classes<span class="w"> </span>HelloServlet.java<span class="w"> </span>-cp<span class="w"> </span>../../../../lib/servlet-api.jar
-</code></pre></div></li>
-<li>이제 apache-tomcat-10.0.7/webapps/ROOT/WEB-INF/classes에 "HelloServlet.class"가 생긴 것을 알 수 있음</li>
-</ul>
+<p>HelloServlet.class 만들기
+    - 이렇게 만들어 준 자바 소스 코드를 클래스 파일로 만들어주자
+        - 해당 클래스 파일은 apache-tomcat-10.0.7/webapps/ROOT/WEB-INF/classes에 저장해둘 것
+    - 톰캣의 servlet-api.jar가 컴파일할때 필요함! 다음과 같이 classpath 지정해주자
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w"> </span>javac<span class="w"> </span>-d<span class="w"> </span>../classes<span class="w"> </span>HelloServlet.java<span class="w"> </span>-cp<span class="w"> </span>../../../../lib/servlet-api.jar
+</code></pre></div>
+    - 이제 apache-tomcat-10.0.7/webapps/ROOT/WEB-INF/classes에 "HelloServlet.class"가 생긴 것을 알 수 있음</p>
 </li>
 <li>
-<p>web.xml에 HelloServlet 등록해주기</p>
-<ul>
-<li>apache-tomcat-10.0.7/webapps/ROOT/WEB-INF의 web.xml에서 서블릿을 등록해주면 됨
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<p>web.xml에 HelloServlet 등록해주기
+    - apache-tomcat-10.0.7/webapps/ROOT/WEB-INF의 web.xml에서 서블릿을 등록해주면 됨
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="cm">&lt;!--</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="cm"> Licensed to the Apache Software Foundation (ASF) under one or more</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="cm">  contributor license agreements.  See the NOTICE file distributed with</span>
@@ -23291,20 +23214,17 @@
 <a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">  </span><span class="nt">&lt;/servlet-mapping&gt;</span>
 <a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>
 <a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="nt">&lt;/web-app&gt;</span>
-</code></pre></div></li>
-<li>"servlet"에서 서블릿의 이름을 지정해주고, 서블릿의 클래스 파일을 지정해준듯?</li>
-<li>"servlet-mapping"에서 서블릿의 이름에 대응하는 url-pattern을 정의해준듯?</li>
-</ul>
+</code></pre></div>
+    - "servlet"에서 서블릿의 이름을 지정해주고, 서블릿의 클래스 파일을 지정해준듯?
+    - "servlet-mapping"에서 서블릿의 이름에 대응하는 url-pattern을 정의해준듯?</p>
 </li>
 <li>
-<p>이제 진짜 Tomcat 실행해보기 </p>
-<ul>
-<li>http://EC2-public-ip:8080/HelloServlet으로 들어가보자!
-<img alt="" src="../../image/2021-06-18-servlet-hello.PNG" /></li>
-<li>짜잔 잘 된다!!!!!</li>
-</ul>
+<p>이제 진짜 Tomcat 실행해보기 
+    - http://EC2-public-ip:8080/HelloServlet으로 들어가보자!
+    <img alt="" src="../../image/2021-06-18-servlet-hello.PNG" />
+    - 짜잔 잘 된다!!!!!</p>
 </li>
-</ul>
+</ol>
 
 
 

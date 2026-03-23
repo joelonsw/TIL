@@ -22934,46 +22934,32 @@
 <li><em>참고 1: https://java119.tistory.com/34</em></li>
 <li><em>참고 2: https://jeong-pro.tistory.com/186</em></li>
 <li><em>참고 3: https://www.baeldung.com/spring-scheduled-tasks</em></li>
-<li>
-<p><strong>개요</strong></p>
+<li><strong>개요</strong>
+    - 리눅스의 크론탭과 비슷한 기능
+    - 메서드 위에 <code>@Scheduled</code> 어노테이션 붙여주면 끝</li>
+</ul>
 <ul>
-<li>리눅스의 크론탭과 비슷한 기능</li>
-<li>메서드 위에 <code>@Scheduled</code> 어노테이션 붙여주면 끝</li>
+<li><strong>사용법</strong>
+    1. <code>@EnableScheduling</code> 을 main 메서드 있는 Application에 붙여두자!
+    2. 하위 패키지의 클래스에서 주기적으로 실행되어야할 메서드 위에 <code>@Scheduled</code> 어노테이션 붙이자 
+        - 해당 메서드는 void return 타입이여야함!
+        - 해당 메서드는 파라미터가 없어야함!</li>
 </ul>
-</li>
-<li>
-<p><strong>사용법</strong></p>
-<ol>
-<li><code>@EnableScheduling</code> 을 main 메서드 있는 Application에 붙여두자!</li>
-<li>하위 패키지의 클래스에서 주기적으로 실행되어야할 메서드 위에 <code>@Scheduled</code> 어노테이션 붙이자 <ul>
-<li>해당 메서드는 void return 타입이여야함!</li>
-<li>해당 메서드는 파라미터가 없어야함!</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>어노테이션 설정값</strong></p>
 <ul>
-<li>cron: "0/10 * * * * ?" 요런 갬성의 크론탭마냥 설정 가능<ul>
-<li>"초 분 시 일 월 주 (년)" 으로 표현</li>
-</ul>
-</li>
-<li>fixedDelay: 이전에 실행된 Task의 종료시간으로부터 정의된 시간 만큼 지난 후 Task 실행</li>
-<li>fixedRate: 이전에 실행된 Task의 시작시간으로 부터 정의된만큼 지난 후 Task 실행</li>
-</ul>
-</li>
+<li><strong>어노테이션 설정값</strong>
+    - cron: "0/10 * * * * ?" 요런 갬성의 크론탭마냥 설정 가능
+        - "초 분 시 일 월 주 (년)" 으로 표현
+    - fixedDelay: 이전에 실행된 Task의 종료시간으로부터 정의된 시간 만큼 지난 후 Task 실행
+    - fixedRate: 이전에 실행된 Task의 시작시간으로 부터 정의된만큼 지난 후 Task 실행</li>
 </ul>
 <h2 id="spring">Spring 이메일 보내기<a class="headerlink" href="#spring" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://victorydntmd.tistory.com/342</em></li>
-<li>
-<p><strong>과정</strong></p>
-<ol>
-<li>spring-boot-starter-mail 의존성 추가</li>
-<li>Gmail SMTP Server 설정해주기</li>
-<li>해당 설정 값을 application.yml에 작성해주기 (민감정보로 관리하기)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">spring</span><span class="p">:</span>
+<li><strong>과정</strong>
+    1. spring-boot-starter-mail 의존성 추가
+    2. Gmail SMTP Server 설정해주기
+    3. 해당 설정 값을 application.yml에 작성해주기 (민감정보로 관리하기)
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">spring</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">mail</span><span class="p">:</span><span class="w"> </span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smtp.gmail.com</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">587</span>
@@ -22986,14 +22972,12 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">            </span><span class="nt">starttls</span><span class="p">:</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">              </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div></li>
-</ol>
-</li>
-<li>
-<p><strong>SimpleMailMessage</strong></p>
+</ul>
 <ul>
-<li>간단한 텍스트 메일 발송하기</li>
-<li>JavaMailSender를 필드로 들고 있으면, JavaMailSenderImpl이 DI됨
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MailService</span><span class="w"> </span><span class="p">{</span>
+<li><strong>SimpleMailMessage</strong>
+    - 간단한 텍스트 메일 발송하기
+    - JavaMailSender를 필드로 들고 있으면, JavaMailSenderImpl이 DI됨
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MailService</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JavaMailSender</span><span class="w"> </span><span class="n">mailSender</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mailSend</span><span class="p">(</span><span class="n">MailDto</span><span class="w"> </span><span class="n">mailDto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23008,53 +22992,39 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>MimeMessageHelper</strong></p>
 <ul>
-<li>스프링의 헬퍼 통해 MIME을 포함한 메일을 발송할 수 있음</li>
-</ul>
-</li>
+<li><strong>MimeMessageHelper</strong>
+    - 스프링의 헬퍼 통해 MIME을 포함한 메일을 발송할 수 있음</li>
 </ul>
 <hr />
 <ul>
-<li><strong>MIME</strong><ul>
-<li><em>참고: https://ko.wikipedia.org/wiki/MIME</em></li>
-<li>전자 우편을 위한 인터넷 표준 포맷</li>
-<li>전자우편은 7비트 아스키 문자 사용하여 전송됨</li>
-<li>따라서 8비트 이상의 코드를 사용하는 문자나 이진 파일들은 MIME 포맷으로 변환되어 SMTP로 전송<ul>
-<li>실질적으로 SMTP로 전송되는 대부분의 이메일은 MIME 형식</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>MIME</strong>
+    - <em>참고: https://ko.wikipedia.org/wiki/MIME</em>
+    - 전자 우편을 위한 인터넷 표준 포맷
+    - 전자우편은 7비트 아스키 문자 사용하여 전송됨
+    - 따라서 8비트 이상의 코드를 사용하는 문자나 이진 파일들은 MIME 포맷으로 변환되어 SMTP로 전송
+        - 실질적으로 SMTP로 전송되는 대부분의 이메일은 MIME 형식</li>
 </ul>
 <hr />
 <ul>
 <li><em>참고 2: https://www.baeldung.com/spring-email</em></li>
-<li>
-<p><strong>Spring Boot에서 메일 보내기</strong></p>
-<ul>
-<li>다른 디펜던시 굳이 필요없는듯?</li>
+<li><strong>Spring Boot에서 메일 보내기</strong>
+    - 다른 디펜던시 굳이 필요없는듯?</li>
 </ul>
-</li>
-<li>
-<p><strong>Mail Server Properties</strong></p>
-<ol>
-<li>MailSender (interface) : 탑 레벨 인터페이스로, 간단한 이메일 전송 담당</li>
-<li>JavaMailSender (interface) : MailSender의 서브 인터페이스. MIME 메시지를 지원하고, 주로 MimeMessageHelper 클래스가 MimeMessage 생성할 때 쓰임. </li>
-<li>JavaMailSenderImpl (class) : JavaMailSender의 구현체. MimeMessage와 SimpleMailMessage 지원</li>
-<li>SimpleMailMessage (class) : simple mail message 보내는 구현체 (제목과 텍스트 정도)</li>
-<li>MimeMessagePreparator (interface) : MIME message 준비의 콜백을 제공</li>
-<li>MimeMessageHelper (class) : Mime message 생성의 헬퍼 클래스. 이미지, html 등을 첨부할 수 있게해줌</li>
-</ol>
-</li>
-<li>
-<p><strong>Spring Mail Server Properties</strong></p>
 <ul>
-<li>SMTP 서버는 JavaMailSenderImpl 로 생성될 수 있음</li>
-<li>스프링 부트에서는 spring.mail 환경변수들로 구성할 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">spring.mail.host</span><span class="o">=</span><span class="s">smtp.gmail.com</span>
+<li><strong>Mail Server Properties</strong>
+    1. MailSender (interface) : 탑 레벨 인터페이스로, 간단한 이메일 전송 담당
+    2. JavaMailSender (interface) : MailSender의 서브 인터페이스. MIME 메시지를 지원하고, 주로 MimeMessageHelper 클래스가 MimeMessage 생성할 때 쓰임. 
+    3. JavaMailSenderImpl (class) : JavaMailSender의 구현체. MimeMessage와 SimpleMailMessage 지원
+    4. SimpleMailMessage (class) : simple mail message 보내는 구현체 (제목과 텍스트 정도)
+    5. MimeMessagePreparator (interface) : MIME message 준비의 콜백을 제공
+    6. MimeMessageHelper (class) : Mime message 생성의 헬퍼 클래스. 이미지, html 등을 첨부할 수 있게해줌</li>
+</ul>
+<ul>
+<li><strong>Spring Mail Server Properties</strong>
+    - SMTP 서버는 JavaMailSenderImpl 로 생성될 수 있음
+    - 스프링 부트에서는 spring.mail 환경변수들로 구성할 수 있음
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">spring.mail.host</span><span class="o">=</span><span class="s">smtp.gmail.com</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">spring.mail.port</span><span class="o">=</span><span class="s">587</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">spring.mail.username</span><span class="o">=</span><span class="s">&lt;login user to smtp server&gt;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="na">spring.mail.password</span><span class="o">=</span><span class="s">&lt;login password to smtp server&gt;</span>
@@ -23062,22 +23032,14 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="na">spring.mail.properties.mail.smtp.starttls.enable</span><span class="o">=</span><span class="s">true</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>Email 보내기</strong></p>
 <ul>
-<li>JavaMailSender가 메일 보낼 수 있게 할 수 있음</li>
-<li>[Simple Email 보내기]<ul>
-<li>from 주소는 필수가 아니지만, 많은 SMTP 서버에서 없다면 reject 될 것</li>
-</ul>
-</li>
-<li>[Sending Emails With Attachments]<ul>
-<li>JavaMail 라이브러리의 Mime multipart message를 써야할 수도</li>
-<li>Spring JavaMail 메시징을 지원하는 클래스 있음 (org.springframework.mail.javamail.MimeMessageHelper)</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Email 보내기</strong>
+    - JavaMailSender가 메일 보낼 수 있게 할 수 있음
+    - [Simple Email 보내기]
+        - from 주소는 필수가 아니지만, 많은 SMTP 서버에서 없다면 reject 될 것
+    - [Sending Emails With Attachments]
+        - JavaMail 라이브러리의 Mime multipart message를 써야할 수도
+        - Spring JavaMail 메시징을 지원하는 클래스 있음 (org.springframework.mail.javamail.MimeMessageHelper)</li>
 </ul>
 
 

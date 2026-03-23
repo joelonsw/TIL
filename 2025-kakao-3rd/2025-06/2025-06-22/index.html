@@ -22943,21 +22943,21 @@
     - 사용 목적
   - CSR은 비공개키로 서명되어 있음. </p>
 <ul>
-<li><strong>흐름</strong></li>
+<li><strong>흐름</strong><ol>
 <li>서버에서 개인키/공개키 생성</li>
 <li>CSR 생성 (공개키 + 정보포함, 개인키로 서명)</li>
 <li>CA에서 CSR 받고 정보확인하여 인증서에 서명</li>
-<li>
-<p>서버가 서명된 인증서 받음</p>
+<li>서버가 서명된 인증서 받음</li>
+</ol>
 </li>
-<li>
-<p><strong>실습</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>실습</strong><ol>
 <li>개인키 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ openssl genrsa -out myuser.key 2048
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ openssl genrsa -out myuser.key 2048
 </code></pre></div></li>
 <li>CSR 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ openssl req -new -key myuser.key -out myuser.csr
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ openssl req -new -key myuser.key -out myuser.csr
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>You are about to be asked to enter information that will be incorporated
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>into your certificate request.
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>What you are about to enter is what is called a Distinguished Name or a DN.
@@ -22981,11 +22981,11 @@
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>An optional company name []:joelonsw
 </code></pre></div></li>
 <li>생성한 CSR 파일 base64 인코딩
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ cat myuser.csr | base64 | tr -d &quot;\n&quot;
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ cat myuser.csr | base64 | tr -d &quot;\n&quot;
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0...
 </code></pre></div></li>
 <li>kubernetes에서 CertificateSigningRequest Manifest 작성, apply
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>apiVersion: certificates.k8s.io/v1
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>apiVersion: certificates.k8s.io/v1
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kind: CertificateSigningRequest
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>metadata:
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    name: myuser
@@ -22997,7 +22997,7 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    - client auth
 </code></pre></div></li>
 <li>인증서 서명 요청 승인
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ kubectl get csr
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ kubectl get csr
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>$ kubectl certificate approve myuser
 </code></pre></div></li>
 <li>Role 생성 및 Role 바인딩<ul>
@@ -23026,25 +23026,29 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>테스트
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ kubectl auth can-i create pods --as=myuser -n=namespace
-</code></pre></div></p>
+<li>테스트
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ kubectl auth can-i create pods --as=myuser -n=namespace
+</code></pre></div></li>
+</ol>
 </li>
-<li>
-<p><strong>파일 <code>.csr</code> vs 쿠버 오브젝트 CSR</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>파일 <code>.csr</code> vs 쿠버 오브젝트 CSR</strong><ul>
 <li><code>.csr</code>: openssl 에서 쓰는 PKI 인증서 신청 파일</li>
 <li><code>CertificateSigningRequest</code>: 쿠버에서 CSR을 리소스로 만든 것</li>
+</ul>
+</li>
 </ul>
 <h2 id="k8s-dns">k8s DNS<a class="headerlink" href="#k8s-dns" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/</em><br />
 - <strong>Service</strong>
   - <code>my-svc.my-namespace-svc.cluster-domain.example</code>: 서비스의 ClusterIP 주소</p>
 <ul>
-<li><strong>Pod</strong></li>
+<li><strong>Pod</strong><ul>
 <li><code>172-17-0-3.default.pod.cluster.local</code></li>
 <li>nslookup에는 이걸 사용해도 됨: <code>172-17-0-3.default</code></li>
+</ul>
+</li>
 </ul>
 
 

@@ -22959,20 +22959,18 @@
   - <code>Future</code>의 결과를 액터의 메일박스로 배송
   - pipeTo를 통해 Future가 완료되면, 그 결과가 <code>self ! ...</code> 처럼 자신에게 메시지로 도착</p>
 <ul>
-<li><strong>장점</strong></li>
+<li><strong>장점</strong><ul>
 <li>캡슐화(상태를 가진 액터를 다루는 방식) 깨지지 않음. pipeTo를 쓰면 thread-safe</li>
 <li>Try[Something]을 액터의 메시지로 변경해야 함</li>
-<li>
-<p>참고로! onComplete의 경우, Actor의 메일박스를 통해 처리되는 것이 아닌, 쓰레드 풀에서 쓰레드 하나 줍줍해서 콜백으로 처리되는 것 (메일박스 우회)</p>
+<li>참고로! onComplete의 경우, Actor의 메일박스를 통해 처리되는 것이 아닌, 쓰레드 풀에서 쓰레드 하나 줍줍해서 콜백으로 처리되는 것 (메일박스 우회)</li>
+</ul>
 </li>
-<li>
-<p><strong>안티 패턴 예시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>안티 패턴 예시</strong><ul>
 <li>액터는 한번에 하나의 메시지만 처리하는 철학!</li>
 <li>var nPhoneCalls 같은 thread-non-safe 한 변수처럼 생긴 친구도 lock 없이 안전한 사용 가능</li>
-<li>
-<p>하지만, future의 onComplete는 Actor의 Mailbox를 거치지 않음</p>
-<ul>
+<li>하지만, future의 onComplete는 Actor의 Mailbox를 거치지 않음<ul>
 <li>그냥 별도 쓰레드풀 (executionContext)에 있는 임의의 스레드에 의해 실행됨</li>
 <li>이러면 <code>nPhoneCalls += 1</code> RaceCondition이 발생해버려...
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">PhoneCallProtocol</span>
@@ -23001,8 +22999,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>좋은 패턴 예시</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>좋은 패턴 예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">phoneCallInitiatorV2</span><span class="p">:</span><span class="w"> </span><span class="nc">Behavior</span><span class="p">[</span><span class="nc">PhoneCallProtocol</span><span class="p">]</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nc">Behaviors</span><span class="p">.</span><span class="n">setup</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">nPhoneCalls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
@@ -23032,8 +23033,7 @@
 <a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">                </span><span class="nc">Behaviors</span><span class="p">.</span><span class="n">same</span>
 <a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="akka-retry">Akka Retry<a class="headerlink" href="#akka-retry" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://doc.akka.io/libraries/akka-core/current/futures.html</em>
@@ -23053,7 +23053,7 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
 </code></pre></div></p>
 <ul>
-<li><strong>언제 retry?</strong></li>
+<li><strong>언제 retry?</strong><ul>
 <li>operation이 반환하는 Future가 "Failed" 인 경우!</li>
 <li><code>Future[WSResponse]</code>가 성공적으로 500 에러를 받으면 -&gt; 이건 성공이야</li>
 <li><code>Future.failed</code>이라 함은...<ul>
@@ -23098,6 +23098,8 @@
 <a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

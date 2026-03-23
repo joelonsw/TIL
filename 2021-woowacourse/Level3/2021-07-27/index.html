@@ -22910,24 +22910,17 @@
 <h2 id="logging-profile">Logging과 Profile 전략<a class="headerlink" href="#logging-profile" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://meetup.toast.com/posts/149</em></li>
-<li>
-<p><strong>Logback 확장</strong></p>
+<li><strong>Logback 확장</strong>
+    - 기존의 logback에서는 웹 앱 가동하면 클래스패쓰에서 logback.xml을 검색해 로그백 초기화
+    - 스프링 부트에서는 스프링 구동되고 읽기 때문에 logback-spring.xml 사용해서 가져올 수 있음
+        - 덕분에 application.xml 가져올 수 있어 굿</li>
+</ul>
 <ul>
-<li>기존의 logback에서는 웹 앱 가동하면 클래스패쓰에서 logback.xml을 검색해 로그백 초기화</li>
-<li>스프링 부트에서는 스프링 구동되고 읽기 때문에 logback-spring.xml 사용해서 가져올 수 있음<ul>
-<li>덕분에 application.xml 가져올 수 있어 굿</li>
+<li><strong>Logger 등록과 level 설정</strong>
+    - 스프링부트는 yml에서 logger와 level 설정 가능</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Logger 등록과 level 설정</strong></p>
 <ul>
-<li>스프링부트는 yml에서 logger와 level 설정 가능</li>
-</ul>
-</li>
-<li>
-<p><strong>base.xml</strong>
+<li><strong>base.xml</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;included&gt;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">resource=</span><span class="s">&quot;org/springframework/boot/logging/logback/defaults.xml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;LOG_FILE&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}&quot;</span><span class="nt">/&gt;</span>
@@ -22938,32 +22931,23 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="nt">&lt;appender-ref</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;FILE&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">&lt;/root&gt;</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nt">&lt;/included&gt;</span>
-</code></pre></div></p>
+</code></pre></div>
+    - <code>&lt;include ~~defaults.xml/&gt;</code> : console log pattern, file log pattern의 기본값 정의됨, tomcat/hibernate의 모듈 log level 설정
+    - <code>&lt;property ~~&gt;</code> : application.yml의 설정 읽어옴
+    - <code>&lt;include ~~/console-appender.xml&gt;</code> : console appender 설정 읽어옴
+    - <code>&lt;include ~~/file-appender.xml&gt;</code> : file appender 설정 읽어옴</li>
+</ul>
 <ul>
-<li><code>&lt;include ~~defaults.xml/&gt;</code> : console log pattern, file log pattern의 기본값 정의됨, tomcat/hibernate의 모듈 log level 설정</li>
-<li><code>&lt;property ~~&gt;</code> : application.yml의 설정 읽어옴</li>
-<li><code>&lt;include ~~/console-appender.xml&gt;</code> : console appender 설정 읽어옴</li>
-<li><code>&lt;include ~~/file-appender.xml&gt;</code> : file appender 설정 읽어옴</li>
+<li><strong>application.yml의 프로퍼티 가져오기</strong>
+    - 원격의 로그 서버로 로그 보내기 가능
+        - 로그 서버의 주소를 application.yml에서 설정하자
+            - logserver.host: http://logserver.com</li>
 </ul>
-</li>
-<li>
-<p><strong>application.yml의 프로퍼티 가져오기</strong></p>
 <ul>
-<li>원격의 로그 서버로 로그 보내기 가능<ul>
-<li>로그 서버의 주소를 application.yml에서 설정하자<ul>
-<li>logserver.host: http://logserver.com</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Profile별 환경 설정</strong></p>
-<ul>
-<li><code>spring.profiles.active</code>에서 지정한 프로파일에 따라 조건 추가 가능</li>
-<li>로깅 기능을 나누어 프로파일에서 조합하여 사용해보자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;springProfile</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;console-logging&quot;</span><span class="nt">&gt;</span>
+<li><strong>Profile별 환경 설정</strong>
+    - <code>spring.profiles.active</code>에서 지정한 프로파일에 따라 조건 추가 가능
+    - 로깅 기능을 나누어 프로파일에서 조합하여 사용해보자
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;springProfile</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;console-logging&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;CONSOLE&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;...&quot;</span><span class="nt">&gt;&lt;/appender&gt;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">&lt;/springProfile&gt;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -22988,22 +22972,18 @@
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">&lt;appender-ref</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;REMOTE_LOG_SERVER&quot;</span><span class="nt">/&gt;</span>
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">  </span><span class="nt">&lt;/springProfile&gt;</span>
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="nt">&lt;/root&gt;</span>
-</code></pre></div></li>
-<li>조합을 뚝딱하여 배포환경에 맞게 필요한 설정 갖다 쓰자<ul>
-<li>spring.profiles.include
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="l l-Scalar l-Scalar-Plain">application-dev.yml</span>
+</code></pre></div>
+    - 조합을 뚝딱하여 배포환경에 맞게 필요한 설정 갖다 쓰자
+        - spring.profiles.include
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="l l-Scalar l-Scalar-Plain">application-dev.yml</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.profiles.include</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">console-logging</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="l l-Scalar l-Scalar-Plain">application-alpha.yml</span>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="l l-Scalar l-Scalar-Plain">application-alpha.yml</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.profiles.include</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file-logging</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="l l-Scalar l-Scalar-Plain">application-beta.yml</span>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="l l-Scalar l-Scalar-Plain">application-beta.yml</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.profiles.include</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file-logging,remote-logging</span>
 </code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
 

@@ -22934,44 +22934,32 @@
 <li><em>참고 1: https://www.youtube.com/watch?v=H6lpFRpyl14</em></li>
 <li><em>참고 2: https://coding-start.tistory.com/208</em></li>
 <li><em>참고 3: https://opentutorials.org/course/228/4894</em></li>
-<li><strong>https가 필요한 이유?</strong><ul>
-<li>http의 약점<ul>
-<li>http만 가지고는 도청이 너무 쉬움. 중요한 내용 그대로 노출됨</li>
-<li>통신 상대 확인 안하기에, 위장이 가능</li>
-<li>완전성 증명 X, 변조 가능</li>
-</ul>
-</li>
-<li>다음과 같은 기능이 필요하기에 http+ssl 도입<ol>
-<li>다른 사람들이 네트워크를 통해 전송한 내용을 훔쳐보더라도 못 알아 듣게 하기 위해</li>
-<li>클라이언트 입장에서 접속한 사이트가 믿을 만한 곳인지를 보장하기 위해</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><strong>https?</strong><ul>
-<li>ssl이라는 보안 프로토콜 위에서 동작하는 http </li>
-<li>[SSL(Secure Socket Layer)]<ul>
-<li>인터넷 상에서 데이터를 안전하게 전송하기 위한 인터넷 암호화 통신 프로토콜</li>
-<li>SMTP, Telnet에서도 사용가능</li>
-<li>응용 계층과 전송 계층 사이에서 동작하는 독립적인 프로토콜<ul>
-<li><em>참고: https://security.stackexchange.com/questions/19681/where-does-ssl-encryption-take-place</em></li>
-<li>HTTP 통신을 하는 소켓 부분을 SSL/TLS 프로토콜로 대체</li>
-<li>HTTPS는 직접 TCP와 통신하지 않고, SSL과 통신하게 됨</li>
-</ul>
-</li>
-<li>응용 계층의 http 프로토콜에서 사용자의 데이터 받고, "전송계층으로 캡슐화 되기 이전"에 SSL 프로토콜에 의해 사용자의 데이터 암호화</li>
-<li>서버에서는 전송계층에서 세그먼트 받아 ssl 계층에서 데이터 복호화 한 후 응용계층에 보냄</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>대칭키 방식 vs 비대칭키 방식</strong><ul>
-<li>대칭키<ul>
-<li>수신과 송신에 같은 암호화-복호화 적용</li>
-<li>둘이 같은 키를 가지고 있기에 이를 통해 암호화-복호화 가능</li>
-<li>하지만 같은 키를 "누군가 한 번" 한쪽에서 다른쪽에게 넘겨줘야 하기에 보안상 문제가 있음</li>
-<li>openssl을 통한 실습
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># tiltext.txt를 tiltext.bin으로 암호화 (이때 대칭키를 직접 입력해줌)</span>
+<li><strong>https가 필요한 이유?</strong>
+    - http의 약점
+        - http만 가지고는 도청이 너무 쉬움. 중요한 내용 그대로 노출됨
+        - 통신 상대 확인 안하기에, 위장이 가능
+        - 완전성 증명 X, 변조 가능
+    - 다음과 같은 기능이 필요하기에 http+ssl 도입
+        1. 다른 사람들이 네트워크를 통해 전송한 내용을 훔쳐보더라도 못 알아 듣게 하기 위해
+        2. 클라이언트 입장에서 접속한 사이트가 믿을 만한 곳인지를 보장하기 위해</li>
+<li><strong>https?</strong>
+    - ssl이라는 보안 프로토콜 위에서 동작하는 http 
+    - [SSL(Secure Socket Layer)]
+        - 인터넷 상에서 데이터를 안전하게 전송하기 위한 인터넷 암호화 통신 프로토콜
+        - SMTP, Telnet에서도 사용가능
+        - 응용 계층과 전송 계층 사이에서 동작하는 독립적인 프로토콜
+            - <em>참고: https://security.stackexchange.com/questions/19681/where-does-ssl-encryption-take-place</em>
+            - HTTP 통신을 하는 소켓 부분을 SSL/TLS 프로토콜로 대체
+            - HTTPS는 직접 TCP와 통신하지 않고, SSL과 통신하게 됨
+        - 응용 계층의 http 프로토콜에서 사용자의 데이터 받고, "전송계층으로 캡슐화 되기 이전"에 SSL 프로토콜에 의해 사용자의 데이터 암호화
+        - 서버에서는 전송계층에서 세그먼트 받아 ssl 계층에서 데이터 복호화 한 후 응용계층에 보냄</li>
+<li><strong>대칭키 방식 vs 비대칭키 방식</strong>
+    - 대칭키
+        - 수신과 송신에 같은 암호화-복호화 적용
+        - 둘이 같은 키를 가지고 있기에 이를 통해 암호화-복호화 가능
+        - 하지만 같은 키를 "누군가 한 번" 한쪽에서 다른쪽에게 넘겨줘야 하기에 보안상 문제가 있음
+        - openssl을 통한 실습
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># tiltext.txt를 tiltext.bin으로 암호화 (이때 대칭키를 직접 입력해줌)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$<span class="w"> </span>openssl<span class="w"> </span>enc<span class="w"> </span>-e<span class="w"> </span>-des3<span class="w"> </span>-salt<span class="w"> </span>-in<span class="w"> </span>tiltext.txt<span class="w"> </span>-out<span class="w"> </span>tiltext.bin
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>enter<span class="w"> </span>des-ede3-cbc<span class="w"> </span>encryption<span class="w"> </span>password:<span class="w"> </span>대칭키
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Verifying<span class="w"> </span>-<span class="w"> </span>enter<span class="w"> </span>des-ede3-cbc<span class="w"> </span>encryption<span class="w"> </span>password:<span class="w"> </span>대칭키
@@ -22979,25 +22967,19 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1">#tiltext.bin을 decryptedtiltext.txt로 복호화 (이때 대칭키 입력해줘야함)</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>$<span class="w"> </span>openssl<span class="w"> </span>enc<span class="w"> </span>-d<span class="w"> </span>-des3<span class="w"> </span>-in<span class="w"> </span>tiltext.bin<span class="w"> </span>-out<span class="w"> </span>decryptedtiltext.txt<span class="p">;</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>enter<span class="w"> </span>des-ede3-cbc<span class="w"> </span>decryption<span class="w"> </span>password:<span class="w"> </span>대칭키
-</code></pre></div></li>
-</ul>
-</li>
-<li>비대칭키<ul>
-<li>공개키와 개인키로 구성</li>
-<li>공개키는 그냥 누구나 볼 수 있도록 대중에 공개</li>
-<li>다음과 같은 방식으로 네트워크를 통해 전송할 내용을 암호/복호화 가능<ul>
-<li>Text --공개키로 암호화--&gt; 암호화 된 Text --개인키로 복호화--&gt; Text</li>
-<li>Text --개인키로 암호화--&gt; 암호화 된 Text --공개키로 복호화--&gt; Text</li>
-</ul>
-</li>
-<li>다음과 같은 방식으로 믿을만한 사이트인지 판별<ul>
-<li>Client가 Server에 사이트 요청</li>
-<li>Server의 개인키로 암호화 된 내용 Client에게 전송</li>
-<li>Client는 공개키로 Server의 내용을 복호화해서 볼 수 있음</li>
-</ul>
-</li>
-<li>openssl을 통한 실습
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 개인키 생성</span>
+</code></pre></div>
+    - 비대칭키
+        - 공개키와 개인키로 구성
+        - 공개키는 그냥 누구나 볼 수 있도록 대중에 공개
+        - 다음과 같은 방식으로 네트워크를 통해 전송할 내용을 암호/복호화 가능
+            - Text --공개키로 암호화--&gt; 암호화 된 Text --개인키로 복호화--&gt; Text
+            - Text --개인키로 암호화--&gt; 암호화 된 Text --공개키로 복호화--&gt; Text
+        - 다음과 같은 방식으로 믿을만한 사이트인지 판별
+            - Client가 Server에 사이트 요청
+            - Server의 개인키로 암호화 된 내용 Client에게 전송
+            - Client는 공개키로 Server의 내용을 복호화해서 볼 수 있음
+        - openssl을 통한 실습
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 개인키 생성</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$<span class="w"> </span>openssl<span class="w"> </span>genrsa<span class="w"> </span>-out<span class="w"> </span>privatetil.pem<span class="w"> </span><span class="m">1024</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Generating<span class="w"> </span>RSA<span class="w"> </span>private<span class="w"> </span>key,<span class="w"> </span><span class="m">1024</span><span class="w"> </span>bit<span class="w"> </span>long<span class="w"> </span>modulus<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="w"> </span>primes<span class="o">)</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>.........................+++++
@@ -23043,75 +23025,51 @@
 <a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>$<span class="s2"> cat decrypted.txt</span>
 <a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="s2">tiltil</span>
 </code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>SSL</strong><ul>
-<li>CA라는 SSL 공인 인증 기관이 있음. 여기서 SSL 발급 및 관리</li>
-<li>브라우저는 CA들의 목록을 가지고 있음</li>
-</ul>
-</li>
-<li><strong>https 인증 과정</strong><ol>
-<li>Client는 "ClientRandomData"를 만들어 Server에게 전송</li>
-<li>Server는 "ServerRandomData"를 만들어 "CA의 개인키로 암호화 된 SSL 인증서"와 함께 Client에게 전송</li>
-<li>Client는 Server로 부터 받은 "CA의 개인키로 암호화 된 SSL 인증서"를 CA의 공개키로 복호화 함</li>
-<li>복호화한 SSL 인증서에는 "Server의 공개키"가 있음</li>
-<li>Client는 "ClientRandomData + ServerRandomData"를 묶어 Client와 Server 사이의 "대칭키"를 생성함</li>
-<li>Client는 "대칭키"를 "Server의 공개키"로 암호화하여 Server에게 전송</li>
-<li>Server는 이를 "Server의 개인키로" 복호화 하여 Client가 만든 "대칭키"를 확인</li>
-<li>앞으로 둘 간의 통신에서 해당 대칭키를 사용</li>
-<li>데이터 전송이 끝난 후, 대칭키 폐지!</li>
-</ol>
-</li>
-<li><strong>와이어샤크로 살펴보기</strong><ul>
-<li><img alt="" src="../../image/2021-06-16-https-on.PNG" /><ul>
-<li><em>참고: https://ask.wireshark.org/question/2745/why-wireshark-is-not-showing-http-or-https-packets-in-the-view/</em></li>
-<li>https 패킷 같은 건 없나봐...?</li>
-<li>https == http over tls<ul>
-<li>와이어샤크로 암호화된 컨텐츠를 해부할 수 없어 </li>
-<li>따라서 가장 높은 Layer의 패킷은 TLS의 패킷임</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><img alt="" src="../../image/2021-06-16-http-only.PNG" /><ul>
-<li>3-way-handshake를 통한 TCP 연결 수립 확인</li>
-<li>클라이언트 측 HTTP 요청</li>
-<li>서버 측 TCP로 ACK(확인했다) 응답</li>
-<li>서버 측 HTTP로 요청한 자료 전달</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>SSL</strong>
+    - CA라는 SSL 공인 인증 기관이 있음. 여기서 SSL 발급 및 관리
+    - 브라우저는 CA들의 목록을 가지고 있음</li>
+<li><strong>https 인증 과정</strong>
+    1. Client는 "ClientRandomData"를 만들어 Server에게 전송
+    2. Server는 "ServerRandomData"를 만들어 "CA의 개인키로 암호화 된 SSL 인증서"와 함께 Client에게 전송
+    3. Client는 Server로 부터 받은 "CA의 개인키로 암호화 된 SSL 인증서"를 CA의 공개키로 복호화 함
+    4. 복호화한 SSL 인증서에는 "Server의 공개키"가 있음
+    5. Client는 "ClientRandomData + ServerRandomData"를 묶어 Client와 Server 사이의 "대칭키"를 생성함
+    6. Client는 "대칭키"를 "Server의 공개키"로 암호화하여 Server에게 전송
+    7. Server는 이를 "Server의 개인키로" 복호화 하여 Client가 만든 "대칭키"를 확인
+    8. 앞으로 둘 간의 통신에서 해당 대칭키를 사용
+    9. 데이터 전송이 끝난 후, 대칭키 폐지!</li>
+<li><strong>와이어샤크로 살펴보기</strong>
+    - <img alt="" src="../../image/2021-06-16-https-on.PNG" />
+        - <em>참고: https://ask.wireshark.org/question/2745/why-wireshark-is-not-showing-http-or-https-packets-in-the-view/</em>
+        - https 패킷 같은 건 없나봐...?
+        - https == http over tls
+            - 와이어샤크로 암호화된 컨텐츠를 해부할 수 없어 
+            - 따라서 가장 높은 Layer의 패킷은 TLS의 패킷임
+    - <img alt="" src="../../image/2021-06-16-http-only.PNG" />
+        - 3-way-handshake를 통한 TCP 연결 수립 확인
+        - 클라이언트 측 HTTP 요청
+        - 서버 측 TCP로 ACK(확인했다) 응답
+        - 서버 측 HTTP로 요청한 자료 전달</li>
 </ul>
 <h2 id="tcpudp">TCP/UDP<a class="headerlink" href="#tcpudp" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=ikDVGYp5dhg</em></li>
-<li><strong>Transport Layer</strong><ul>
-<li>신뢰성: 데이터를 순차적, 안정적으로 전달</li>
-<li>전송: 포트 번호에 해당하는 프로세스에 데이터를 전달</li>
-</ul>
-</li>
-<li><strong>TCP</strong><ul>
-<li>신뢰성 있는 데이터 통신을 가능하게 해주는 프로토콜</li>
-<li>Connection 연결을 통한 양방향 통신</li>
-<li>데이터의 순차 전송 보장</li>
-<li>특징<ul>
-<li>Flow Controll (흐름 제어)</li>
-<li>Congestion Controll (혼잡 제어)</li>
-<li>Error Detection (오류 감지)</li>
-</ul>
-</li>
-<li>Application Layer에서 내려온 정보를 잘라 TCP Segment로 바꿈<ul>
-<li>조금 짤라 앞에 TCP Header 붙임</li>
-</ul>
-</li>
-<li>3-way-handshake로 연결 수립</li>
-<li>연결 수립 후 패킷 전송, 성공 전달 시 ACK, 유실 시 재전송</li>
-<li>4-way-handshake로 빠이빠이</li>
-</ul>
-</li>
+<li><strong>Transport Layer</strong>
+    - 신뢰성: 데이터를 순차적, 안정적으로 전달
+    - 전송: 포트 번호에 해당하는 프로세스에 데이터를 전달</li>
+<li><strong>TCP</strong>
+    - 신뢰성 있는 데이터 통신을 가능하게 해주는 프로토콜
+    - Connection 연결을 통한 양방향 통신
+    - 데이터의 순차 전송 보장
+    - 특징
+        - Flow Controll (흐름 제어)
+        - Congestion Controll (혼잡 제어)
+        - Error Detection (오류 감지)
+    - Application Layer에서 내려온 정보를 잘라 TCP Segment로 바꿈
+        - 조금 짤라 앞에 TCP Header 붙임
+    - 3-way-handshake로 연결 수립
+    - 연결 수립 후 패킷 전송, 성공 전달 시 ACK, 유실 시 재전송
+    - 4-way-handshake로 빠이빠이</li>
 </ul>
 
 

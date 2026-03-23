@@ -23011,11 +23011,13 @@
 <h2 id="ch8-url">대규모 시스템 설계 기초 ch8. URL 단축기 설계<a class="headerlink" href="#ch8-url" title="Permanent link">&para;</a></h2>
 <h3 id="1">1단계. 문제 이해 및 설계 범위 확정<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>모호함을 줄이고 요구사항을 알아내기 위해 소통할 것</li>
+<li>모호함을 줄이고 요구사항을 알아내기 위해 소통할 것<ol>
 <li>URL 단축: 주어진 긴 URL을 훨씬 짧게 줄일 것</li>
 <li>URL 리디렉션: 축약된 URL로 HTTP 요청이 오면 원래 URL로 안내</li>
 <li>높은 가용성, 규모 확장성, 장애 감내 필수</li>
-<li>개략적 추정</li>
+</ol>
+</li>
+<li>개략적 추정<ul>
 <li>쓰기 연산: 매일 1억개의 단축 URL 생성</li>
 <li>초당 쓰기 연산: 1억/24/3600 = 1,160</li>
 <li>읽기 연산: 쓰기 연산의 10배로 산정. 초당 11,600</li>
@@ -23023,28 +23025,36 @@
 <li>축악 전 URL 평균 길이 100</li>
 <li>10년 동안 필요한 저장 용량은 3650억 * 100 바이트 = 36.5TB</li>
 </ul>
+</li>
+</ul>
 <h3 id="2">2단계. 개략적 설계안 제시 및 동의 구하기<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>서버 부하를 줄이는 것이 중요하다면 <code>301 Permanent Moved</code>, 데이터 분석이 중요하다면 <code>302 Found</code>를 쓰는게 유리</li>
-<li>URL 단축은 해시 함수를 대응하여 변환할 것</li>
+<li>URL 단축은 해시 함수를 대응하여 변환할 것<ul>
 <li>입력으로 주어지는 URL이 다르다면 해시값도 다를 것</li>
 <li>계산된 해시값은 원래 URL로 복원될 수 있어야 함</li>
 </ul>
+</li>
+</ul>
 <h3 id="3">3단계. 상세 설계<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ul>
-<li>hashValue로 사용가능한 값은 [0-9,a-z,A-Z] 총 62자.</li>
-<li>62^n &gt;= 3650억 인 n의 최솟값을 찾으면 몇자리의 hashValue로 타겟이였던 3650억개의 url 해시값을 가져갈 수 있는지 추정할 수 있음</li>
-<li>해시 충돌 후 해소</li>
+<li>hashValue로 사용가능한 값은 [0-9,a-z,A-Z] 총 62자.<ul>
+<li>62^n &gt;= 3650억 인 n의 최솟값을 찾으면 몇자리의 hashValue로 타겟이였던 3650억개의 url 해시값을 가져갈 수 있는지 추정할 수 있음
+1. 해시 충돌 후 해소</li>
 <li>잘 알려진 해시 함수 (CRC32, MD5, SHA-1)</li>
 <li>이건 근데 결과 해시값이 길어서 처음 7자만 사용하는 방식을 생각해볼 수 있음. 하지만 이는 충돌로 이어짐</li>
-<li>이럴때 블룸필터를 사용하여 특정 원소가 있는지 검사하는 것도 좋은 방법</li>
-<li>base-62 변환</li>
+<li>이럴때 블룸필터를 사용하여 특정 원소가 있는지 검사하는 것도 좋은 방법
+2. base-62 변환</li>
 <li>특정 숫자를 62진법으로 변환. (위의 hashValue가 62개니까)</li>
 <li>그러면, 확실히 줄어든 길이로 url을 설계할 수 있음. </li>
 <li>다만, 어떤 값을 62진법화 할지는 고민<ul>
 <li>id PK일수도 있지만, 이는 쉽게 알아내 보안상 우려도 있음</li>
-<li>id 생성기 사용도 가능</li>
+<li>id 생성기 사용도 가능<ul>
 <li>전역적으로 유일성이 보장되는 것이여야 함. snowflake 등 앞선 장에서 다룬 내용 참조</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23058,18 +23068,20 @@
 </ul>
 <h3 id="_1">스터디<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>301 리디렉션</li>
+<li>301 리디렉션<ul>
 <li>페이지 랭크 전달: 기존 페이지의 SEO 가치가 새 페이지로 완전히 이전</li>
 <li>인덱싱: 검색엔진이 새 URL을 색인하고 기존 URL은 제거</li>
-<li>
-<p>링크 주스: 외부 링크의 권한이 새 페이지로 전달</p>
+<li>링크 주스: 외부 링크의 권한이 새 페이지로 전달</li>
+</ul>
 </li>
-<li>
-<p>302 리디렉션</p>
-</li>
+</ul>
+<ul>
+<li>302 리디렉션<ul>
 <li>페이지 랭크 유지: 원본 URL이 SEO 가치를 계속 보유</li>
 <li>인덱싱: 검색엔진이 원본 URL을 계속 색인</li>
 <li>링크 주스: 일시적이므로 권한 전달이 제한적</li>
+</ul>
+</li>
 </ul>
 
 

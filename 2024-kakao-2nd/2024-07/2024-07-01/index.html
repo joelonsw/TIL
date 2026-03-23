@@ -22934,8 +22934,7 @@
 - <strong>개요</strong>
   - <code>ngx_http_geo_module</code> 클라이언트 IP 주소에 따라 변수를 생성함</p>
 <ul>
-<li>
-<p><strong>예시</strong>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>geo $allowed_ip {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    default        0;
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    127.0.0.1      1;
@@ -22950,21 +22949,20 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    }
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    return 404;
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>}
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>설명</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>설명</strong><ul>
 <li>기본적으로 <code>$remote_addr</code>에서 IP 주소를 가져와서 비교</li>
 <li>만약 다른 변수에서 추출하고 싶다면 하기처럼도 가능
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>geo $arg_remote_addr $geo {
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>geo $arg_remote_addr $geo {
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    ...;
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>}
 </code></pre></div></li>
 <li>변수가 알맞은 ip가 아니라면, "255.255.255.255"로 간주됨</li>
 <li>변수로는 ip, CIDR, range가 사용 가능.</li>
 <li>geo가 아마 지역기반으로 쓰라고 해서 이렇게 만들어진듯.
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>geo $country {
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>geo $country {
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    ranges;
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    default                   ZZ;
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    127.0.0.0-127.0.0.0       US;
@@ -22975,13 +22973,14 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>}
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="nginx-map">Nginx map 모듈<a class="headerlink" href="#nginx-map" title="Permanent link">&para;</a></h2>
 <p><em>참고: http://nginx.org/en/docs/http/ngx_http_map_module.html</em>
 - <strong>개요</strong>
   - <code>ngx_http_map_module</code> 변수를 다른 변수로 매핑함</p>
 <ul>
-<li>
-<p><strong>예시</strong>
+<li><strong>예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>map $http_host $name {
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    hostnames;
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
@@ -22999,21 +22998,24 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    default       0;
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    &quot;~Opera Mini&quot; 1;
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>}
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>설명</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>설명</strong><ul>
 <li>source -&gt; resulting values</li>
 <li>source는 String/Regex 중 하나<ul>
 <li>String은 case 상관없이 매칭</li>
-<li>Regex는 ~로 시작하며, case-sensitive함</li>
+<li>Regex는 ~로 시작하며, case-sensitive함<ul>
 <li>"~*"로 case-insensitive 하게 구현할 수는 있음</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>default 값을 줄 수 있음</li>
 <li>source가 하나 이상의 값과 매칭이 된다면, 첫번째 꺼를 채택해서 처리</li>
 <li>HashMap의 버킷사이즈는 프로세서의 캐시 라인 사이즈로 지정</li>
+</ul>
+</li>
 </ul>
 
 

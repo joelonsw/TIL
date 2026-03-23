@@ -23000,23 +23000,24 @@
 <p><em>참고: https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0/dashboard</em></p>
 <h2 id="_1">인프링 시큐리티 일반 로그<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>모든 주소가 막힌다</strong></li>
+<li><strong>모든 주소가 막힌다</strong><ul>
 <li>스프링 시큐리티를 쓴다면 기본적으로 모든 주소가 막혀 인증이 필요해짐</li>
 <li>localhost:8080/login</li>
-<li>
-<p>최초 아이디: user, 비밀번호: 스프링 뜰 때 비밀번호</p>
+<li>최초 아이디: user, 비밀번호: 스프링 뜰 때 비밀번호</li>
+</ul>
 </li>
-<li>
-<p><strong>인증을 완료하면 그제서야 Controller API 호출 가능</strong></p>
-</li>
-<li>
-<p>GET: /login =&gt; 이거 만들어도 스프링 시큐리티가 낚아챔</p>
+</ul>
 <ul>
+<li><strong>인증을 완료하면 그제서야 Controller API 호출 가능</strong><ul>
+<li>GET: /login =&gt; 이거 만들어도 스프링 시큐리티가 낚아챔<ul>
 <li><code>SecurityConfig</code> 파일 만들면 login Controller로 흘러들어감</li>
 </ul>
 </li>
-<li>
-<p><strong>SecurityConfig Bean 정의하기</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>SecurityConfig Bean 정의하기</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@EnableWebSecurity</span><span class="w"> </span><span class="c1">// 스프링 시큐리티 필터가 스프링 필터체인에 등록됨</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">WebSecurityConfigurerAdapter</span><span class="w"> </span><span class="p">{</span>
@@ -23037,10 +23038,10 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">                </span><span class="p">.</span><span class="na">loginPage</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>패스워드 인코딩</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>패스워드 인코딩</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@EnableWebSecurity</span><span class="w"> </span><span class="c1">// 스프링 시큐리티 필터가 스프링 필터체인에 등록됨</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">WebSecurityConfigurerAdapter</span><span class="w"> </span><span class="p">{</span>
@@ -23049,10 +23050,10 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BCryptPasswordEncoder</span><span class="p">();</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>시큐리티 로그인</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>시큐리티 로그인</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@EnableWebSecurity</span><span class="w"> </span><span class="c1">// 스프링 시큐리티 필터가 스프링 필터체인에 등록됨</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nd">@EnableGlobalMethodSecurity</span><span class="p">(</span><span class="n">securedEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// @Secured 어노테이션 활성화! Controller에서 @Secured(&quot;ROLE_ADMIN&quot;)</span>
@@ -23077,8 +23078,7 @@
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">                </span><span class="p">.</span><span class="na">defaultSuccessUrl</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">);</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>시큐리티 /login 주소 요청이 오면 낚아채서 로그인을 진행시킴</li>
 <li>로그인을 진행이 완료가 되면 시큐리티 session을 만들어줍니다</li>
 <li>오브젝트 =&gt; Authentication 타입 객체 =&gt; Authentication 안에 User 정보가 있어야 함<ul>
@@ -23086,7 +23086,7 @@
 </ul>
 </li>
 <li>SecuritySession =&gt; Authentication =&gt; UserDetails 타입이여야 함
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// PrincipalDetails를 UserDetails에 넣을 수 있</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// PrincipalDetails를 UserDetails에 넣을 수 있</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PrincipalDetails</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserDetails</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -23120,7 +23120,7 @@
 <a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>자, 이번엔 authentication 객체는 어떻게 만드는가?
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 시큐리티 설정에서 loginProcessingUrl(&quot;/login&quot;);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 시큐리티 설정에서 loginProcessingUrl(&quot;/login&quot;);</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">// login 요청이 오면 자동으로 UserDetailsService 타입으로 IoC 되어있는 loadUserByUsername 함수 실행</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nd">@Service</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PrincipalDetailsService</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserDetailService</span><span class="w"> </span><span class="p">{</span>
@@ -23140,10 +23140,11 @@
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="oauth">인프런 스프링 시큐리티 OAuth<a class="headerlink" href="#oauth" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>시큐리티 OAuth</strong>
+<li><strong>시큐리티 OAuth</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nd">@EnableWebSecurity</span><span class="w"> </span><span class="c1">// 스프링 시큐리티 필터가 스프링 필터체인에 등록됨</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nd">@EnableGlobalMethodSecurity</span><span class="p">(</span><span class="n">securedEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// @Secured 어노테이션 활성화! Controller에서 @Secured(&quot;ROLE_ADMIN&quot;)</span>
@@ -23208,33 +23209,38 @@
 <a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;OAuth 세션 정보 확인&quot;</span><span class="p">;</span>
 <a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>정리</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>정리</strong><ul>
 <li>스프링 시큐리티는 자신만의 세션을 들고 있어</li>
 <li>여기 안에 들어갈 수 있는 타입은 Authentication 객체 밖에 없음<ul>
 <li>이걸 DI 할 수 있음</li>
-<li>해당 객체는 두가지 타입이 있음</li>
+<li>해당 객체는 두가지 타입이 있음<ul>
 <li>UserDetails : 일반 로그인</li>
 <li>OAuth2User : OAuth 로그인</li>
+</ul>
+</li>
 <li>요게 들어가 있어야 로그인 처리가 되는 거임 </li>
 </ul>
 </li>
 <li>필요할 때 꺼내써야 하는데 일반 로그인, OAuth 로그인 둘 다 지원해야하는데...?<ul>
-<li>따라서 추상화를 시키자!</li>
+<li>따라서 추상화를 시키자!<ul>
 <li>UserDetails와 OAuth2User 두 가지를 모두 상속받은 것
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Data</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Data</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PrincipalDetails</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserDetails</span><span class="p">,</span><span class="w"> </span><span class="n">OAuth2User</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="jwt">JWT를 위한 네트워크 지식<a class="headerlink" href="#jwt" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>TCP</strong></li>
+<li><strong>TCP</strong><ul>
 <li>통신 OSI 7계층<ul>
 <li>응용 : 롤 프로그램</li>
 <li>프레젠테이션 : 암호화, 압축</li>
@@ -23246,62 +23252,69 @@
 </ul>
 </li>
 <li>TCP (신뢰성 있는 통신) =&gt; 컴퓨터가 이해가능</li>
-<li>
-<p>UDP (전화, 동영상) =&gt; 사람이 이해가능</p>
-</li>
-<li>
-<p><strong>CIA</strong></p>
-</li>
-<li>
-<p>A나라 ---(문서)---&gt; B나라</p>
-<ul>
-<li>C나라가 문서 가로챌수도!</li>
-<li>CIA =&gt; C: Confidentiality, I: Integrity, A: Availability</li>
-<li>문서 암호화 but 몇가지 문제!</li>
-<li>열쇠 전달 문제</li>
-<li>문서가 누구로부터 왔는가?</li>
+<li>UDP (전화, 동영상) =&gt; 사람이 이해가능</li>
 </ul>
 </li>
-<li>
-<p><strong>RSA</strong></p>
+</ul>
+<ul>
+<li><strong>CIA</strong><ul>
+<li>A나라 ---(문서)---&gt; B나라<ul>
+<li>C나라가 문서 가로챌수도!</li>
+<li>CIA =&gt; C: Confidentiality, I: Integrity, A: Availability</li>
+<li>문서 암호화 but 몇가지 문제!<ol>
+<li>열쇠 전달 문제</li>
+<li>문서가 누구로부터 왔는가?</li>
+</ol>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>RSA</strong><ul>
 <li>Public Key : 공개키</li>
 <li>Private Key : 개인키</li>
-<li>
-<p>A ------A개인키(B공개키(사랑해))------&gt; B</p>
-<ol>
+<li>A ------A개인키(B공개키(사랑해))------&gt; B<ol>
 <li>B가 문서를 받으면 </li>
 <li>A의 공개키로 열어본다</li>
 <li>B의 개인키로 열어본다</li>
 </ol>
 </li>
-<li>
-<p><strong>RFC</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>RFC</strong><ul>
 <li>내부망끼리 통신하기 위해 약속된 규칙이 필요했음<ul>
-<li>이게 RFC</li>
+<li>이게 RFC<ul>
 <li>이게 쭉쭉쭉쭉 RFC 문서화되니까 HTTP 프로토콜이 되었음</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h3 id="jwt_1">JWT<a class="headerlink" href="#jwt_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>JWT?</strong></li>
+<li><strong>JWT?</strong><ul>
 <li>JSON 객체로 안전하게 전송하기 위한 개방형 표준<ul>
 <li>서명된 토큰에 중점을 둔 것</li>
 </ul>
 </li>
 <li>Base64로 인코딩/디코딩 가능</li>
-<li>
-<p>구조</p>
-<ul>
+<li>구조<ul>
 <li>header</li>
 <li>payload (claim: iss, exp, sub, aud 등)</li>
 <li>signature</li>
 </ul>
 </li>
-<li>
-<p><strong>JWT with Spring</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>JWT with Spring</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nd">@EnableWebSecurity</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nd">@RequiredArgsConstructor</span>
@@ -23343,10 +23356,10 @@
 <a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CorsFilter</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
 <a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Filter 만들기</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Filter 만들기</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter1</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23444,10 +23457,10 @@
 <a id="__codelineno-8-95" name="__codelineno-8-95" href="#__codelineno-8-95"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-8-96" name="__codelineno-8-96" href="#__codelineno-8-96"></a><span class="p">}</span>
 <a id="__codelineno-8-97" name="__codelineno-8-97" href="#__codelineno-8-97"></a><span class="c1">// 요 상황이라면 필터3=&gt;필터2=&gt;필터1 순서 출력</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>필터에서 Authorization 뽑아 토큰 검증</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>필터에서 Authorization 뽑아 토큰 검증</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter1</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23469,19 +23482,17 @@
 <a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>JWT 로그인 만들어보기</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>JWT 로그인 만들어보기</strong><ul>
 <li>유저네임, 패스워드 =&gt; 로그인 정상</li>
 <li>서버쪽 세션ID 생성, 클라이언트 쿠키 세션 ID를 응답</li>
 <li>요청할 대마다 쿠키값 세션ID를 항상 들고 서버쪽으로 요청하기 때문에, 서버는 세션 ID가 유효한지 판단하여 유효하면 인증이 필요한 페이지로 접근</li>
 <li>유저네임, 패스워드 로그인 정상</li>
 <li>JWT 토큰 생성하여 클라이언트에 응답</li>
 <li>요청시마다 JWT 토큰을 가지고 요청</li>
-<li>
-<p>서버가 JWT 토큰 유효한지 판단 (TODO)
+<li>서버가 JWT 토큰 유효한지 판단 (TODO)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PrincipalDetails</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserDetails</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">;</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
@@ -23585,10 +23596,12 @@
 <a id="__codelineno-10-101" name="__codelineno-10-101" href="#__codelineno-10-101"></a><span class="w">            </span><span class="p">.</span><span class="na">anyRequest</span><span class="p">().</span><span class="na">permitAll</span><span class="p">();</span>
 <a id="__codelineno-10-102" name="__codelineno-10-102" href="#__codelineno-10-102"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-10-103" name="__codelineno-10-103" href="#__codelineno-10-103"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>JWT 토큰을 기반으로 개인정보 접근 수락하도록</strong>
+</ul>
+<ul>
+<li><strong>JWT 토큰을 기반으로 개인정보 접근 수락하도록</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// 시큐리티가 filter 가지고 있는데 그 필터중에 BasicAuthenticationFilter가 있음</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">// 권한이나 인증이 필요한 특정 주소를 요청했을 때 해당 필터를 필히 탐</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1">// 만약에 권한이 인증이 필요한 주소가 아니라면 이 필터 안탐</span>
@@ -23624,8 +23637,7 @@
 <a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

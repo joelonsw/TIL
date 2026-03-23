@@ -22993,49 +22993,53 @@
 <p><em>참고: https://anthropic.skilljar.com/claude-with-the-anthropic-api/</em></p>
 <h3 id="accessing-claude-with-the-api">Accessing Claude with the API<a class="headerlink" href="#accessing-claude-with-the-api" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Accessing the API</strong></li>
+<li><strong>Accessing the API</strong><ol>
 <li>Request to Server<ul>
 <li>Client에서 직접 API 호출하지 말고, 서버 통해서 호출하세요</li>
 </ul>
 </li>
 <li>Request to Anthropic API<ul>
-<li>앤트로픽 SDK 등을 활용해서 요청하세요</li>
+<li>앤트로픽 SDK 등을 활용해서 요청하세요<ul>
 <li>API Key, Model, Message, Max Token 파라미터로 전달</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>Model Processing<ul>
-<li>Text Generation Process</li>
+<li>Text Generation Process<ul>
 <li>Tokenization</li>
 <li>Embedding: list of numbers</li>
 <li>Contextualization: Embedding 기반으로 확률 계산</li>
 <li>Generation: 높은 확률로 그 다음 단어 뭐가 나올지 Output Layer</li>
 </ul>
 </li>
-<li>
-<p>Response to Server</p>
-<ul>
+</ul>
+</li>
+<li>Response to Server<ul>
 <li>Message, Usage, Stop Reason을 반환</li>
 </ul>
 </li>
-<li>
-<p><strong>API context</strong></p>
+</ol>
 </li>
-<li>
-<p>context를 유지하기 위해서는 코드에서 수동으로 메시지를 저장해야한다. follow-up question 하기 위해서는 준 메시지 다 필요해</p>
-</li>
-<li>
-<p><strong>System Prompt</strong></p>
-</li>
-<li>Style/Tone을 조정하여 클로드의 답변 조정</li>
-<li>
-<p>ex) 수학 튜터 역할을 맡기고 싶다면</p>
+</ul>
 <ul>
+<li><strong>API context</strong><ul>
+<li>context를 유지하기 위해서는 코드에서 수동으로 메시지를 저장해야한다. follow-up question 하기 위해서는 준 메시지 다 필요해</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>System Prompt</strong><ul>
+<li>Style/Tone을 조정하여 클로드의 답변 조정</li>
+<li>ex) 수학 튜터 역할을 맡기고 싶다면<ul>
 <li>you are a patient math tutor. Do not directly answer a student's questions. Guide them to a solution step by step.</li>
 </ul>
 </li>
-<li>
-<p><strong>Temperature</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Temperature</strong><ul>
 <li>Each token being selected -&gt; 그 다음 단어 선택될 확률</li>
 <li>temperature (0~1 사이 값) 으로 어떤 토큰을 선택할지 조절할 수 있음<ul>
 <li>확률의 분포를 조정한다</li>
@@ -23043,19 +23047,19 @@
 <li><code>1</code>: 확률의 분포가 고만고만해짐</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2025-08-03-temperature.png" /></p>
+<li><img alt="" src="../../images/2025-08-03-temperature.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>Model Output 조정</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Model Output 조정</strong><ul>
 <li>assistant 메시지에 특정한 문장을 넣어, 마치 모델이 이미 해당 답변을 제공한것 처럼 조작해 모델의 답변 선호도를 조절할 수 있음</li>
-<li>
-<p><code>stop_sequence</code>를 통해서 특정 문자열이 나오면 멈추도록 제어 가능</p>
+<li><code>stop_sequence</code>를 통해서 특정 문자열이 나오면 멈추도록 제어 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Structured data</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Structured data</strong><ul>
 <li>딱 구조화된 응답을 받고 싶다면, 위의 assistant + stop_sequence를 응용할 수 있음</li>
 <li><code>add_assistant_message(messages, "```json")</code><ul>
 <li>클로드가 생각하기에 어머! 나 벌써 json 마크다운 응답 시작했구나? 그냥 json부터 뱉어야지</li>
@@ -23067,20 +23071,22 @@
 </li>
 <li>이렇게 많은 형식을 구조화하여 출력 가능</li>
 </ul>
+</li>
+</ul>
 <h3 id="prompt-evaluation">Prompt Evaluation<a class="headerlink" href="#prompt-evaluation" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Prompt Engineering: improve prompt</li>
 <li>Prompt Evaluation: Getting objective metric that prompt is effective</li>
-<li>
-<p>측정 가능한 것이 뭔지 먼저 알고 (Evaluation), 최적화 (Engineering) 로 나아가자</p>
-<ul>
+<li>측정 가능한 것이 뭔지 먼저 알고 (Evaluation), 최적화 (Engineering) 로 나아가자<ul>
 <li>Evaluation Pipeline을 태워서 해당 프롬프트를 점수화하고, 반복하자</li>
 </ul>
 </li>
-<li>
-<p><strong>Evaluation Workflow</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Evaluation Workflow</strong><ul>
 <li>다양한 방식이 있음. 많은 오픈소스 워크 플로우가 있음</li>
 <li>workflow가 어떻게 동작하는지 알고, 대단한 규모가 필요한 일은 아님</li>
 <li>방식<ol>
@@ -23091,12 +23097,12 @@
 <li>Change Prompt and Repeat</li>
 </ol>
 </li>
-<li>
-<p><img alt="" src="../../images/2025-08-03-Evaluation.png" /></p>
+<li><img alt="" src="../../images/2025-08-03-Evaluation.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>Evaluation Criteria</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Evaluation Criteria</strong><ul>
 <li>Format: 어떤 형식만을 반환해야할지 검증</li>
 <li>Valid Syntax: Python/JSON/Regex가 문법이 맞는지?<ul>
 <li>Code로 직접 검증 가능</li>
@@ -23107,39 +23113,45 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="prompt-engineering">Prompt Engineering<a class="headerlink" href="#prompt-engineering" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Being clear and direct</strong></li>
-<li>
-<p>prompt의 첫번째 줄이 가장 중요. 굉장히 clear/direct 해야해. </p>
-<ul>
-<li>clear: 명확히 원하는 것을 얘기할 것. 모델이 해야할일을 명확히 줄 것</li>
+<li><strong>Being clear and direct</strong><ul>
+<li>prompt의 첫번째 줄이 가장 중요. 굉장히 clear/direct 해야해. <ul>
+<li>clear: 명확히 원하는 것을 얘기할 것. 모델이 해야할일을 명확히 줄 것<ul>
 <li>ex) Write 3 paragraphs about how solar panel works</li>
-<li>direct: 질문하지 말고 명령할 것. 확실한 액션 동사를 사용할 것. (ex. Write, create, generate)</li>
+</ul>
+</li>
+<li>direct: 질문하지 말고 명령할 것. 확실한 액션 동사를 사용할 것. (ex. Write, create, generate)<ul>
 <li>ex) Identify 3 countries that use geothermal energy. Include generation stats for each</li>
 </ul>
 </li>
-<li>
-<p><strong>Be specific</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Be specific</strong><ul>
 <li>모델에게 무엇을 원하는지 명확한 가이드라인을 주세요. </li>
 <li>명확한 절차를 모델에게 제공하여 방황을 줄여주세요. </li>
-<li>
-<p>가이드라인 타입 : 혼합해서도 쓰임. 상용에서 많이 쓰이는 프롬프트</p>
-<ol>
-<li>결과물이 갖춰야할 퀄리티를 제공하기</li>
+<li>가이드라인 타입 : 혼합해서도 쓰임. 상용에서 많이 쓰이는 프롬프트<ol>
+<li>결과물이 갖춰야할 퀄리티를 제공하기<ul>
 <li>대다수의 경우 이렇게 만족해야할 퀄리티를 제공하는 것이 유용
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Write a short story about a character who discovers a hidden talent. 
+ <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Write a short story about a character who discovers a hidden talent. 
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Guidelines: 
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>1. Keep the story under 1,000 words
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2. Include a clear action that reveals the character&#39;s talent
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>3. Include at least one supporting character
 </code></pre></div></li>
-<li>모델이 지켜야할 절차를 제공하기</li>
+</ul>
+</li>
+<li>모델이 지켜야할 절차를 제공하기<ul>
 <li>complex problem, force claude to get wider view. </li>
 <li>즉각적으로 고려하기 어려운 것이 있다면 알려주세요. 
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Write a short story about a character who discovers a hidden talent. 
+ <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Write a short story about a character who discovers a hidden talent. 
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Guidelines: 
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>1. Brainstorm 3 talents that would create dramatic tension
@@ -23147,31 +23159,35 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>3. Outline a pivotal scene that reveals the talent
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>4. Brainstorm 3 supporting characters types that could increase the impact of this discovery
 </code></pre></div></li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p><strong>Structure with XML tags</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Structure with XML tags</strong><ul>
 <li>claude에게 지시사항과 분석하려는 데이터를 구분하여 넣어줄 수 있도록, 가라 태그라도 괜찮으니 구분해주세요.</li>
 <li>asis)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Debug my code
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Debug my code
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>println(&quot;Hello World&quot;)
 </code></pre></div></li>
-<li>
-<p>tobe)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Debug my code
+<li>tobe)
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Debug my code
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>&lt;my_code&gt;
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>println(&quot;Hello World&quot;)
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>&lt;/my_code&gt;
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Providing Examples</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Providing Examples</strong><ul>
 <li>One-shot/Few-shot 기법</li>
 <li>Make SUPER CLEAR for claude to get what I really mean. 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Categorize the sentiment of the below tweet:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Categorize the sentiment of the below tweet:
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&lt;input_tweet&gt;
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Yeah, sure. that was the best movie I&#39;ve ever seen since &#39;Plan 9 from Outer space&#39;
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>&lt;/input_tweet&gt;
@@ -23198,24 +23214,25 @@
 <li>프롬프트 채점기를 통해서 10점을 받은 친구가 있을거야. 그러면 그걸 one-shot/few-shot으로 활용하여 이거랑 비슷하게 출력하도록 하면 좋겠지?!</li>
 <li>추가로 왜 이게 좋은 점수를 받았는지까지 곁들여주세요. 그러면 클로드가 더 감을 잡기 좋아요. </li>
 </ul>
+</li>
+</ul>
 <h3 id="tool-use-with-claude">Tool use with Claude<a class="headerlink" href="#tool-use-with-claude" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Tool functions &amp; Tool schemas</strong></li>
+<li><strong>Tool functions &amp; Tool schemas</strong><ul>
 <li>약간 function calling과 비슷한 느낌.</li>
 <li>Json Schema로 클로드에게 function을 쓰는 법을 알려줌<ul>
 <li>필드: <code>name</code>, <code>description</code>, <code>input_schema</code></li>
 <li>3-4줄 정도로 description을 알려줌.</li>
 </ul>
 </li>
-<li>
-<p>특정 사용하고자 하는 함수를 클로드에게 Tool use with Claude를 넣고 가장 좋은 JSON 스펙 작성해달라고 요청</p>
+<li>특정 사용하고자 하는 함수를 클로드에게 Tool use with Claude를 넣고 가장 좋은 JSON 스펙 작성해달라고 요청</li>
+</ul>
 </li>
-<li>
-<p><strong>Handling message blocks</strong></p>
-</li>
-<li>
-<p><code>TextBlock</code>과 <code>ToolUseBlock</code>을 assistant가 답해준다. 이를 기록해둬야함. 
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+</ul>
+<ul>
+<li><strong>Handling message blocks</strong><ul>
+<li><code>TextBlock</code>과 <code>ToolUseBlock</code>을 assistant가 답해준다. 이를 기록해둬야함. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the exact time, formatted as HH:MM:SS?&quot;</span>
@@ -23227,40 +23244,41 @@
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>  <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>  <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">get_current_datetime_schema</span><span class="p">],</span>
 <a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Sending tool results</strong></p>
-</li>
-<li>
-<p>Tool function을 실행하고 나면, <code>ToolResultBlock</code>을 반환</p>
+</ul>
 <ul>
+<li><strong>Sending tool results</strong><ul>
+<li>Tool function을 실행하고 나면, <code>ToolResultBlock</code>을 반환<ul>
 <li>해당 블록은 user message 클로드에게 무슨일이 해당 툴 시작할 때 있었는지 알려줌</li>
 <li><code>tool_use_id</code> : ToolResult와 ToolUseBlock과의 묶음</li>
 <li><code>content</code></li>
 <li><code>is_error</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Multi-turn conversations with tools</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Multi-turn conversations with tools</strong><ul>
 <li>여러개의 함수를 넘겨, 멀티 턴제 프롬프트 구축 가. </li>
-<li>
-<p>While 문 같은거 사용해서 계속해서 추가하도록 가능.</p>
+<li>While 문 같은거 사용해서 계속해서 추가하도록 가능.</li>
+</ul>
 </li>
-<li>
-<p><strong>Implementing multiple turns</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Implementing multiple turns</strong><ul>
 <li>클로드가 언제 tool을 그만 쓸지 어떻게 알 수 있지? </li>
-<li>
-<p>assistant_message의 <code>stop_reason</code>이 tool_use가 아니라면, 고만!</p>
+<li>assistant_message의 <code>stop_reason</code>이 tool_use가 아니라면, 고만!</li>
+</ul>
 </li>
-<li>
-<p><strong>The web search tool</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>The web search tool</strong><ul>
 <li>Claude에 내장되어 있는 툴!</li>
 <li>Claude에서 알아서 web_search를 할 수 있도록 지원해줌. 
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">web_search_schema</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">web_search_schema</span> <span class="o">=</span> <span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;web_search_20250305&quot;</span><span class="p">,</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;web_search&quot;</span><span class="p">,</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="s2">&quot;max_uses&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -23276,6 +23294,8 @@
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">response</span> <span class="o">=</span> <span class="n">chat</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">web_search_schema</span><span class="p">])</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">response</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

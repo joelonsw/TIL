@@ -22932,16 +22932,17 @@
 <h2 id="classic-tdd-vs-mockist-tdd">Classic TDD vs Mockist TDD<a class="headerlink" href="#classic-tdd-vs-mockist-tdd" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=n01foM9tsRo</em></li>
-<li><strong>Test Double</strong></li>
+<li><strong>Test Double</strong><ul>
 <li>Dummy</li>
 <li>Fake</li>
 <li>Mock: 호출될 것으로 예상되는 메서드에 대해서 반환하는 값의 사양과 결과값을 코딩해두는 것</li>
 <li>Spy</li>
-<li>
-<p>Stub</p>
+<li>Stub</li>
+</ul>
 </li>
-<li>
-<p><strong>두 테스트의 차이를 생각해봅시다?</strong>
+</ul>
+<ul>
+<li><strong>두 테스트의 차이를 생각해봅시다?</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// given</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Order</span><span class="p">(</span><span class="n">bread</span><span class="p">,</span><span class="w"> </span><span class="n">jam</span><span class="p">,</span><span class="w"> </span><span class="n">milk</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">WareHouse</span><span class="w"> </span><span class="n">wareHouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WareHouse</span><span class="p">(</span><span class="n">bread</span><span class="p">,</span><span class="w"> </span><span class="n">jam</span><span class="p">,</span><span class="w"> </span><span class="n">milk</span><span class="p">,</span><span class="w"> </span><span class="n">apple</span><span class="p">);</span>
@@ -22965,11 +22966,10 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">// then</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">verify</span><span class="p">(</span><span class="n">mockWareHouse</span><span class="p">).</span><span class="na">hasInventory</span><span class="p">(</span><span class="n">bread</span><span class="p">,</span><span class="w"> </span><span class="n">jam</span><span class="p">,</span><span class="w"> </span><span class="n">milk</span><span class="p">);</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">verify</span><span class="p">(</span><span class="n">mockWareHouse</span><span class="p">).</span><span class="na">remove</span><span class="p">(</span><span class="n">brea</span><span class="p">,</span><span class="w"> </span><span class="n">jam</span><span class="p">,</span><span class="w"> </span><span class="n">milk</span><span class="p">);</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>단위란?</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>단위란?</strong><ul>
 <li>단위 테스트의 공통적 특징<ul>
 <li>Low-Level</li>
 <li>일반적인 도구 사용</li>
@@ -22978,12 +22978,12 @@
 </li>
 <li>한 메서드를 단위로, 한 클래스를 단위로, 한 기능을 단위로 볼 수도 있음</li>
 <li>Double을 사용하여 실제 의존 클래스로 부터 격리된 테스트 : Solitary Tests =&gt; Mockist</li>
-<li>
-<p>Double을 사용하지 않은 테스트: Sociable Tests =&gt; Classicist</p>
+<li>Double을 사용하지 않은 테스트: Sociable Tests =&gt; Classicist</li>
+</ul>
 </li>
-<li>
-<p><strong>Classicist vs Mockist</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Classicist vs Mockist</strong><ul>
 <li>XP (Extreme Programming)<ul>
 <li>Pair Programming</li>
 <li>TDD </li>
@@ -22996,40 +22996,40 @@
 <li>State Based Testing</li>
 </ul>
 </li>
-<li>
-<p>Mockist</p>
-<ul>
+<li>Mockist<ul>
 <li>White-Box Testing</li>
 <li>Outside-In</li>
 <li>Interaction Testing</li>
 </ul>
 </li>
-<li>
-<p><strong>단어 정리</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>단어 정리</strong><ul>
 <li>SUT(System Under Test): 테스트 대상 클래스</li>
-<li>
-<p>협력객체: SUT가 의존하는 클래스</p>
+<li>협력객체: SUT가 의존하는 클래스</li>
+</ul>
 </li>
-<li>
-<p><strong>상태 검증 &amp; 행위 검증</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>상태 검증 &amp; 행위 검증</strong><ul>
 <li>상태 검증<ul>
 <li>Classicist가 주로 사용</li>
 <li>검증을 위해 테스트하여 객체 내부의 상태를 검증</li>
 </ul>
 </li>
-<li>
-<p>행위 검증</p>
-<ul>
+<li>행위 검증<ul>
 <li>Mockist가 주로 사용</li>
 <li>verify를 통해 협력 당한 호출 메서드가 호출되었는지</li>
 <li>특정 행동이 이루어졌는지를 검증하는 행위 검증</li>
 </ul>
 </li>
-<li>
-<p><strong>Fixture &amp; Mock</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Fixture &amp; Mock</strong><ul>
 <li>배달 -&gt; 주문 -&gt; 창고</li>
 <li>Fixture<ul>
 <li>픽스쳐를 사용하게 되면 앞에 사전에 준비해야할 것이 많다.
@@ -23049,9 +23049,7 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>Mock</p>
-<ul>
+<li>Mock<ul>
 <li>직접적인 협력을 맺고 있는 메서드만 미리 설정해주면 됨
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// given</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">Order</span><span class="w"> </span><span class="n">mockOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mock</span><span class="p">(</span><span class="n">Order</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
@@ -23066,92 +23064,98 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>비결정적인 테스트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>비결정적인 테스트</strong><ul>
 <li>결제 시스템에서와 같이 외부의 신용카드 정보와 결제 시스템을 활용하는 상황에서는 어떻게 테스트를 해야할까? (테스트하기 어려운 상황)</li>
 <li>시나리오</li>
 <li>배달 =&gt; 주문 =&gt; 창고
-        =&gt; 결제</li>
-<li>
-<p>테스트하기 어려운 상황에서도 테스트 더블의 종류와 상관없이 활용할 수 있다. </p>
-<ul>
+      =&gt; 결제</li>
+<li>테스트하기 어려운 상황에서도 테스트 더블의 종류와 상관없이 활용할 수 있다. <ul>
 <li>객체간의 협력 관계에서 테스트하기 어려운 부분이 있다면 클래시스트라도 테스트 더블 사용가능</li>
 <li>외부 API써도 안정적이라면 더블 없이도 가능</li>
 </ul>
 </li>
-<li>
-<p><strong>구현 테스트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>구현 테스트</strong><ul>
 <li>Mock을 사용해 테스트를 작성하게 된다면, Mock 테스트는 구현에 묶기게 됨</li>
 <li>테스트가 구현에 영향 받아 구현 바뀌면 테스트가 깨짐</li>
 <li>Classicist<ul>
 <li>구현의 변경 생기더라도 테스트 깨지지 않음</li>
 </ul>
 </li>
-<li>
-<p>Mockist</p>
-<ul>
+<li>Mockist<ul>
 <li>구현의 변경이 생기면 테스트가 깨짐</li>
 <li>구현 바뀔때마다 테스트 깨지면 현타옴</li>
 </ul>
 </li>
-<li>
-<p><strong>Test Isolation</strong></p>
+</ul>
 </li>
-<li>
-<p>Mockist는 Mock을 단위들 간에 테스트 격리를 이룰수 있다는 점을 강조</p>
+</ul>
+<ul>
+<li><strong>Test Isolation</strong><ul>
+<li>Mockist는 Mock을 단위들 간에 테스트 격리를 이룰수 있다는 점을 강조</li>
+</ul>
 </li>
-<li>
-<p><strong>Inside-Out &amp; Outside-In</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Inside-Out &amp; Outside-In</strong><ul>
 <li>Inside-Out<ul>
 <li>Classicist</li>
 <li>도메인 테스트에서 출발</li>
 <li>개발 내부에서 시작해 외부로 나아가는 형식</li>
-<li>장점</li>
+<li>장점<ol>
 <li>리팩토링 단계에서 디자인이 도출됨</li>
 <li>TDD에서 빠른 피드백이 가능</li>
 <li>오버엔지니어링을 피하기 쉬움</li>
 <li>시스템 전반에 대한 오나전한 이해없이 시작 가능</li>
 <li>초보자가 선택하기 좋음</li>
 <li>객체간의 협력이 어색하거나 public api가 잘못 설계될 수 있음</li>
+</ol>
+</li>
 </ul>
 </li>
-<li>
-<p>Outside-In</p>
-<ul>
+<li>Outside-In<ul>
 <li>Mockist</li>
 <li>인수테스트로 출발</li>
 <li>구현보다는 객체들의 상호작용에 중점</li>
 <li>바깥부터 안짝으로 들어가는 감성</li>
-<li>장점</li>
+<li>장점<ol>
 <li>Test Red 단계에서 디자인이 도출됨</li>
 <li>협력 객체의 public api가 자연스레 도출됨</li>
 <li>객체들간의 구현보다는 행위에 집중할 수 있음</li>
 <li>객체지향적인 코드 작성이 가능함</li>
 <li>설계에 대한 기초적인 지식이 필요해 숙련도가 필요</li>
 <li>오버 엔지니어링으로 이어질 수 있음</li>
+</ol>
+</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-07-24-classicist-mockist.png" /></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><img alt="" src="../../images/2022-07-24-classicist-mockist.png" /></li>
 </ul>
 <h2 id="spring">Spring 테스트 전략<a class="headerlink" href="#spring" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://cheese10yun.github.io/spring-guide-test-1/</em></li>
 <li><em>참고: https://github.com/HomoEfficio/dev-tips/blob/master/Spring-Boot-%EB%A0%88%EC%9D%B4%EC%96%B4%EB%B3%84-%ED%85%8C%EC%8A%A4%ED%8A%B8.md</em></li>
-<li><strong>테스트 전략별 어노테이션</strong></li>
+<li><strong>테스트 전략별 어노테이션</strong><ul>
 <li><code>@SpringBootTest</code> : 통합 테스트, 전체 | Bean 전체</li>
 <li><code>@WebMvcTest</code> : 단위 테스트, MVC 테스트 | MVC 관련된 Bean</li>
 <li><code>@DataJpaTest</code> : 단위 테스트, JPA 테스트 | JPA 관련된 Bean</li>
-<li>
-<p>None: 단위 테스트, Service 테스트, POJO, 도메인 테스트</p>
+<li>None: 단위 테스트, Service 테스트, POJO, 도메인 테스트</li>
+</ul>
 </li>
-<li>
-<p><strong>통합 테스트</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>통합 테스트</strong><ul>
 <li>장점<ul>
 <li>모든 Bean을 올리고 테스트 진행하기에 쉽게 테스트 가능</li>
 <li>모든 Bean을 올리고 테스트 진행하기에 운영환경과 가장 유사한 테스트 가능</li>
@@ -23164,9 +23168,7 @@
 <li>외부 API 콜 같은 Rollback 처리 안되는 테스트 진행이 어려움</li>
 </ul>
 </li>
-<li>
-<p>코드</p>
-<ul>
+<li>코드<ul>
 <li><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@RunWith</span><span class="p">(</span><span class="n">SpringRunner</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nd">@SpringBootTest</span><span class="p">(</span><span class="n">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ApiApp</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nd">@AutoConfigureMockMvc</span>
@@ -23183,9 +23185,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>서비스 테스트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>서비스 테스트</strong><ul>
 <li>장점<ul>
 <li>진행하고자 하는 테스트에만 집중할 수 있음</li>
 <li>테스트 진행시 중요 관점 아닌 것들은 Mocking 처리하여 외부 의존성 줄일 수 있음</li>
@@ -23194,6 +23198,8 @@
 </li>
 <li>단점<ul>
 <li>의존성 있는 객체를 Mocking하기에 문제가 완결된 테스트 X</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

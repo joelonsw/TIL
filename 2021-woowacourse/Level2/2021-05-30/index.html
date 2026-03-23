@@ -22909,8 +22909,7 @@
 <h3 id="2021-05-30">2021-05-30<a class="headerlink" href="#2021-05-30" title="Permanent link">&para;</a></h3>
 <h2 id="jdbctemplatequeryforlist">jdbcTemplate.queryForList()<a class="headerlink" href="#jdbctemplatequeryforlist" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>오늘의 문제 상황</strong>
+<li><strong>오늘의 문제 상황</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Line</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findIncludingStation</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">stationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;select L.id as line_id, L.name as line_name, L.color as line_color, L.extra_fare as line_extra_fare, &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">            </span><span class="s">&quot;S.id as section_id, S.distance as section_distance, &quot;</span><span class="w"> </span><span class="o">+</span>
@@ -22927,48 +22926,38 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">queryForList</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="p">{</span><span class="n">stationId</span><span class="p">},</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="p">{</span><span class="n">stationId</span><span class="p">});</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mapLines</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
-</code></pre></div></p>
-<ul>
-<li>다음과 같이 코드를 작성해놓고, H2로 돌아가는 스프링 부트 테스트 코드 다 통과 시키고 룰루랄라 서버에 배포</li>
-<li>근데 서버에서 계속 해당 jdbcTemplate.queryForList()의 결과를 "[]" 빈 List로 반환함</li>
-<li>어라...? H2에서는 이게 하나도 안터지던 테스트였는데?</li>
-<li>어라? H2를 기본으로 하고 로컬에서 서버 키고 PostMan으로 보내보면 결과 잘 반환하는데?</li>
-<li>근데 서버에 올려서 mysql로 하면 안된다? 왜..지??</li>
+</code></pre></div>
+    - 다음과 같이 코드를 작성해놓고, H2로 돌아가는 스프링 부트 테스트 코드 다 통과 시키고 룰루랄라 서버에 배포
+    - 근데 서버에서 계속 해당 jdbcTemplate.queryForList()의 결과를 "[]" 빈 List로 반환함
+    - 어라...? H2에서는 이게 하나도 안터지던 테스트였는데?
+    - 어라? H2를 기본으로 하고 로컬에서 서버 키고 PostMan으로 보내보면 결과 잘 반환하는데?
+    - 근데 서버에 올려서 mysql로 하면 안된다? 왜..지??</li>
 </ul>
-</li>
-<li>
-<p><strong>queryForList()를 좀 봐보자</strong>
+<ul>
+<li><strong>queryForList()를 좀 봐보자</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Override</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">queryForList</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">Object</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">DataAccessException</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">getColumnMapRowMapper</span><span class="p">());</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+    - queryForList 메서드는 jdbcTemplate 클래스 안에 있음
+    - Object... 로 가변인자로 받고있음
+        - !!!!!!!!!!!!!!뇌절 포인트!!!!!!!!!!!!!!
+        - 내가 지금 Object... 에 건네준 방식은 [[stationId], [stationId]]의 형태임
+        - 이게 어떤 결과를 초래하냐면
+            - <strong>H2 Database 쓰는경우</strong>
+            - <img alt="" src="../../image/2021-05-30-H2-doubleNewObj.png" />
+            - H2에 날릴 쿼리를 이렇게 작성하게함
+            - 쿼리의 끝부분을 다시보면...
+                -  where SECTION.up_station_id = ? or SECTION.down_station_id = ?) {1: [1], 2: [1]}
+                - 이렇게 생겼음!
+                - 물음표에 [1] 이런게 들어가는건 좋은 쿼리가 아님
+                - 이 쿼리가 웹 화면 h2-console에서는 터지거든?
+                - <img alt="" src="../../image/2021-05-30-h2-doubleNewObj-console.PNG" />
+                - 근데 왜 프로그램에서 정상 동작하는지는 진짜 아직도 모르겠음;;;;;</li>
+</ul>
 <ul>
-<li>queryForList 메서드는 jdbcTemplate 클래스 안에 있음</li>
-<li>Object... 로 가변인자로 받고있음<ul>
-<li>!!!!!!!!!!!!!!뇌절 포인트!!!!!!!!!!!!!!</li>
-<li>내가 지금 Object... 에 건네준 방식은 [[stationId], [stationId]]의 형태임</li>
-<li>이게 어떤 결과를 초래하냐면<ul>
-<li><strong>H2 Database 쓰는경우</strong></li>
-<li><img alt="" src="../../image/2021-05-30-H2-doubleNewObj.png" /></li>
-<li>H2에 날릴 쿼리를 이렇게 작성하게함</li>
-<li>쿼리의 끝부분을 다시보면...<ul>
-<li>where SECTION.up_station_id = ? or SECTION.down_station_id = ?) {1: [1], 2: [1]}</li>
-<li>이렇게 생겼음!</li>
-<li>물음표에 [1] 이런게 들어가는건 좋은 쿼리가 아님</li>
-<li>이 쿼리가 웹 화면 h2-console에서는 터지거든?</li>
-<li><img alt="" src="../../image/2021-05-30-h2-doubleNewObj-console.PNG" /></li>
-<li>근데 왜 프로그램에서 정상 동작하는지는 진짜 아직도 모르겠음;;;;;</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>그래서 다음과 같이 바꿔야해</strong>
+<li><strong>그래서 다음과 같이 바꿔야해</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Line</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findIncludingStation</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">stationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;select L.id as line_id, L.name as line_name, L.color as line_color, L.extra_fare as line_extra_fare, &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">            </span><span class="s">&quot;S.id as section_id, S.distance as section_distance, &quot;</span><span class="w"> </span><span class="o">+</span>
@@ -22988,29 +22977,20 @@
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">queryForList</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="n">stationId</span><span class="p">,</span><span class="w"> </span><span class="n">stationId</span><span class="p">);</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mapLines</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+    - 이제 queryForList()의 Object...에 넘겨줄 인자가 [stationId, stationId] 로 스무스해진 것을 알 수 있어
+    - 이게 곧 다음과 같은 쿼리를 H2에서 날리게 해줘
+    - <img alt="" src="../../image/2021-05-30-H2-SingleNewObj.png" />
+    - 쿼리의 끝부분을 다시보면...
+        -  where SECTION.up_station_id = ? or SECTION.down_station_id = ?) {1: 1, 2: 1}
+    - 해당 쿼리는 심지어 웹 콘솔에서도 뚝딱 원하는 결과를 반환해
+        - <img alt="" src="../../image/2021-05-30-h2-singleNewObj-console.PNG" /></li>
+</ul>
 <ul>
-<li>이제 queryForList()의 Object...에 넘겨줄 인자가 [stationId, stationId] 로 스무스해진 것을 알 수 있어</li>
-<li>이게 곧 다음과 같은 쿼리를 H2에서 날리게 해줘</li>
-<li><img alt="" src="../../image/2021-05-30-H2-SingleNewObj.png" /></li>
-<li>쿼리의 끝부분을 다시보면...<ul>
-<li>where SECTION.up_station_id = ? or SECTION.down_station_id = ?) {1: 1, 2: 1}</li>
-</ul>
-</li>
-<li>해당 쿼리는 심지어 웹 콘솔에서도 뚝딱 원하는 결과를 반환해<ul>
-<li><img alt="" src="../../image/2021-05-30-h2-singleNewObj-console.PNG" /></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>mysql에서는?</strong></p>
-<ul>
-<li><img alt="" src="../../image/2021-05-30-mysql-question.png" /></li>
-<li>여기는 쿼리를 좀 이상하게 날리네...</li>
-<li>DataSource 이런것과도 연관이 있지 않을까 싶어</li>
-</ul>
-</li>
+<li><strong>mysql에서는?</strong>
+    - <img alt="" src="../../image/2021-05-30-mysql-question.png" />
+    - 여기는 쿼리를 좀 이상하게 날리네...
+    - DataSource 이런것과도 연관이 있지 않을까 싶어</li>
 </ul>
 
 

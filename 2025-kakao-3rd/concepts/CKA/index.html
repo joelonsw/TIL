@@ -23065,48 +23065,46 @@
 </ul>
 <h3 id="_1">필요한 쿠버네티스 설치<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>deb 패키지 설치</strong></li>
+<li><strong>deb 패키지 설치</strong><ul>
 <li><code>cri-docker</code>: 쿠버네티스에서 도커 엔진을 컨타임으로 사용할 수 있게 해주는 어댑터</li>
-<li>
-<p>cri를 직접적으로 지원하지 않는 도커를 위해, <code>cri-dockerd</code>로 설치
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># 패키지 설치
+<li>cri를 직접적으로 지원하지 않는 도커를 위해, <code>cri-dockerd</code>로 설치
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># 패키지 설치
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ dpkg -i ~/cri-dockerd_0.3.9.3-0.ubuntu-focal_amd.deb
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># 서비스 활성화 및 상태 확인
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>$ sudo systemctl enable --now cri-docker  
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>$ sudo systemctl status cri-docker
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong><code>/etc/sysctl.d/k8s.conf</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>/etc/sysctl.d/k8s.conf</code></strong><ul>
 <li>리눅스 커널 파라미터를 영구적으로 설정하는 파일</li>
 <li>해당 파일에 쿠버네티스 클러스터 운영에 필요한 네트워크 커널 파라미터 명시해두면, 시스템 부팅시 자동적용</li>
-<li>
-<p>주요 설정</p>
-<ul>
+<li>주요 설정<ul>
 <li><code>net.ipv4.ip_forward = 1</code> : 리눅스 커널이 IP 포워딩 허용. 컨테이너/노드 간 네트워크 통신 가능해짐</li>
 <li><code>net.bridge.bridge-nf-call-iptables = 1</code> : 브릿지 네트워크를 통해 전달되는 패킷도 iptables에서 필터링 할 수 있음</li>
 <li><code>net.bridge.bridge-nf-call-ip6tables = 1</code> : IPv6 패킷도 마찬가지로 ip6tables에서 필터링 가능
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ cat &lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ cat &lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>net.ipv4.ip_forward = 1
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>EOF
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>CNI - Calico</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>CNI - Calico</strong><ul>
 <li>CNI: 컨테이너 런타임 &lt;-&gt; 네트워크 플러그인 상호작용 표준화 인터페이스<ul>
 <li>kubelet이 파드 생성 시, CNI 플러그인을 호출하여 네트워크 구성 자동화</li>
 </ul>
 </li>
-<li>
-<p>문제의 조건에 따라 설치할 CNI가 달라짐</p>
-<ul>
+<li>문제의 조건에 따라 설치할 CNI가 달라짐<ul>
 <li>NetworkPolicy를 지원해야 한다는 문제가 있다면, Calico를 설치하자. </li>
 <li>Flannel 기본모드는 NetworkPolicy 지원 X
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># calico는 create로 설치
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># calico는 create로 설치
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>$ k create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a># 테스트 (command 안써도 -- 뒤로 도커의 기본 Entrypoint로 동작)
@@ -23119,24 +23117,25 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>CNI - Flannel</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>CNI - Flannel</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># flannel은 apply로 설치
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>$ k apply -f &lt;https://github.com/flannel-io/flannel/releases/download/v0.26.1/kube-flannel.yml
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a># 확인
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>$ k get po -n kube-flannel
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="mock-exam-1">Mock Exam 1<a class="headerlink" href="#mock-exam-1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Q1. Multi-Container Pod</strong></li>
+<li><strong>Q1. Multi-Container Pod</strong><ul>
 <li>env에서 <code>valueFrom.fieldRef.fieldPath</code> 를 통해 해당 pod에 사용될 변수를 지정할 수 있음</li>
 <li>shell script에서 <code>while true; do ~; done</code> 패턴을 통해 무한 루프 안에서 뭔가를 지정할 수 있음. </li>
-<li>
-<p>두 개의 서로 다른 container에서 임의의 공간을 같이 공유하기 위해서는 pod 자체의 volume을 활용하여 나누어 사용 가능.
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>두 개의 서로 다른 container에서 임의의 공간을 같이 공유하기 위해서는 pod 자체의 volume을 활용하여 나누어 사용 가능.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mc-pod</span>
@@ -23166,14 +23165,13 @@
 <a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-vol</span>
 <a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">    </span><span class="nt">emptyDir</span><span class="p">:</span>
 <a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="w">      </span><span class="nt">sizeLimit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1Gi</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q2. cri-docker 설치</strong></p>
-</li>
-<li>
-<p>CRI-Dockerd: 쿠버네티스에서 Docker를 사용할 수 있게 해주는 중간 다리</p>
+</ul>
 <ul>
+<li><strong>Q2. cri-docker 설치</strong><ul>
+<li>CRI-Dockerd: 쿠버네티스에서 Docker를 사용할 수 있게 해주는 중간 다리<ul>
 <li>쿠버에서 컨테이너 실행하려면 CRI라는 표준 인터페이스 필요</li>
 <li>하지만 Docker에서는 CRI 직접 지원하지 않음. </li>
 <li>CRI-Dockerd =&gt; 쿠버네티스에서 Docker를 사용할 수 있도록 해주는 플러그인
@@ -23185,35 +23183,37 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Q4. expose로 간단하게 service 구성</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q4. expose로 간단하게 service 구성</strong><ul>
 <li>expose 명령어로 pod/deployment에 대해 자동으로 Service를 생성할 수 있음</li>
 <li>expose도 결국 service 간단히 생성하는 명령어<ul>
 <li><code>k expose pod messaging --port=6379 --target-port=6379 --name=messaging-service</code></li>
 </ul>
 </li>
-<li>
-<p>쿠버에서 clusterIp가 잘 붙는지 보기 위해서는...</p>
-<ul>
+<li>쿠버에서 clusterIp가 잘 붙는지 보기 위해서는...<ul>
 <li><code>k run test-client --image=busybox --rm -it -- /bin/sh</code></li>
 <li><code># telnet service-name 6379</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Q7. NodePort 타입에서 port 의미</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q7. NodePort 타입에서 port 의미</strong><ol>
 <li><code>nodeIP:nodePort</code> 요청 인입</li>
 <li>해당 요청은 서비스가 <code>deployment:port</code>로 요청 포워딩</li>
-<li>
-<p>deployment가 해당 요청을 <code>pod:targetPort</code>로 요청 포워딩</p>
+<li>deployment가 해당 요청을 <code>pod:targetPort</code>로 요청 포워딩</li>
+</ol>
 </li>
-<li>
-<p><strong>Q10. VPA</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q10. VPA</strong><ul>
 <li>vpa는 쿠버 기본 리소스가 아니라, CRD. 하지만 얼추 정형화되어 있는 CRD라 좀 중요한 건 외워두자.</li>
 <li>CRD 정의 아래와 같이 Group: <code>autoscaling.k8s.io</code> , kind: <code>VerticalPodAutoscaler</code> 사용토록 권장
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>controlplane ~ ➜  k describe crd verticalpodautoscalers.autoscaling.k8s.io
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>controlplane ~ ➜  k describe crd verticalpodautoscalers.autoscaling.k8s.io
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Name:         verticalpodautoscalers.autoscaling.k8s.io
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Namespace:    
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Labels:       &lt;none&gt;
@@ -23257,9 +23257,8 @@
 <a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>      Type:       date
 <a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>    Name:         v1
 </code></pre></div></li>
-<li>
-<p>yaml의 기본 골자는 조금 외워두자.
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>controlplane ~ ➜  cat webapp-vpa.yaml 
+<li>yaml의 기본 골자는 조금 외워두자.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>controlplane ~ ➜  cat webapp-vpa.yaml 
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>apiVersion: autoscaling.k8s.io/v1
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>kind: VerticalPodAutoscaler
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>metadata:
@@ -23271,20 +23270,23 @@
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    name: kkapp-deploy
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>  updatePolicy:
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    updateMode: &quot;Auto&quot;
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q12. helm upgrade</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q12. helm upgrade</strong><ul>
 <li>namespace를 명령어 끝마다 명시해줘야해!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$  helm list -n=kk-ns
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$  helm list -n=kk-ns
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>$  helm repo update 
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>$  helm upgrade kk-mock1 kk-mock1/nginx --version=18.1.15 -n=kk-ns
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="killersh-cka-a">killer.sh (CKA-A)<a class="headerlink" href="#killersh-cka-a" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Q1. Contexts</strong></li>
+<li><strong>Q1. Contexts</strong><ul>
 <li>kubeconfig file에서 context 정보 추출하여 저장하기<ul>
 <li><code>k --kubeconfig /config_path config get-contexts</code>: 컨텍스트 정보 추출</li>
 <li><code>k --kubeconfig /config_path config get-contexts -o name</code>: 이름만 추출</li>
@@ -23300,25 +23302,25 @@
 <li><code>$ echo base64encodedcertificatedata | base64 -d &gt; /answer</code></li>
 </ul>
 </li>
-<li>
-<p>tips: 잘 모르겠으면 <code>k config -h</code></p>
+<li>tips: 잘 모르겠으면 <code>k config -h</code></li>
+</ul>
 </li>
-<li>
-<p><strong>Q3. Statefulset scaledown</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q3. Statefulset scaledown</strong><ul>
 <li><code>pod</code>가 2개가 있다면, 이를 한개로 scale down</li>
 <li>해당 과정에서, pod를 매니지하는 리소스를 찾아보자</li>
 <li><code>k -n test-ns get deploy, ds, sts | grep targetName</code></li>
-<li>
-<p><code>deployment</code>, <code>daemonset</code>, <code>statefulset</code>, <code>replicaset</code>을 총체적으로 검색</p>
-<ul>
+<li><code>deployment</code>, <code>daemonset</code>, <code>statefulset</code>, <code>replicaset</code>을 총체적으로 검색<ul>
 <li><code>deployment</code>/<code>statefulset</code>/<code>replicaset</code>은 <code>kubernetes scale</code>로 갯수 조절 가능</li>
 <li><code>daemonset</code>은 node마다 하나씩 pod가 배포되도록 설계되었기에 scale로 제어 불가능</li>
 </ul>
 </li>
-<li>
-<p><strong>Q4. 가장 먼저 종료될 Pod 찾기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q4. 가장 먼저 종료될 Pod 찾기</strong><ul>
 <li>node의 cpu/memory가 한도에 다다랐을 때, 쿠버네티스는 요청된 것 보다 더 많은 리소스를 사용중인 pod를 찾을 것<ul>
 <li>특정 pod가 request/limit이 지정되어 있지 않다면, 요청보다 더 많이 쓰는 것으로 간주됨</li>
 <li>따라서, Pod 중에서 resource request가 정의되어 있지 않은 것을 찾아야 함</li>
@@ -23337,22 +23339,21 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>방법2)</p>
-<ul>
+<li>방법2)<ul>
 <li><code>k get pod -o jsonpath="{range .items[*]}{.metadata.name}{.spec.containers[*].resources}{'\n'}{end}"</code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>frontend{&quot;limits&quot;:{&quot;cpu&quot;:&quot;500m&quot;,&quot;memory&quot;:&quot;128Mi&quot;},&quot;requests&quot;:{&quot;cpu&quot;:&quot;250m&quot;,&quot;memory&quot;:&quot;64Mi&quot;}}
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>test{}
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Q5. kustomize 사용하기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q5. kustomize 사용하기</strong><ul>
 <li>base 폴더 하위에 kustomize로 사용할 것을 정의해두고, 각 환경별로 덮어쓰고/패치 하면서 사용할 수 있도록 한다. </li>
-<li>
-<p><code>k kustomize &lt;stage-name&gt; | k apply -f -</code>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ controlplane ~/test5 ✖ ls
+<li><code>k kustomize &lt;stage-name&gt; | k apply -f -</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ controlplane ~/test5 ✖ ls
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>base  prod  staging
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -23407,11 +23408,12 @@
 <a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>  name: api-gateway
 <a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>spec:
 <a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>  maxReplicas: 6
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q7. Node/Pod Resource 사용량</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q7. Node/Pod Resource 사용량</strong><ul>
 <li>metrics-server를 설치하여 top 명령어를 통해 Node/Pod 사용량을 기록할 수 있음</li>
 <li><em>참고: https://velog.io/@nhj7804/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A414-error-Metrics-API-not-available</em><ol>
 <li>metric-server 설치: <code>kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</code></li>
@@ -23419,12 +23421,12 @@
 </li>
 <li><code>k top node</code></li>
 <li><code>k top pod --containers=true</code></li>
-<li>
-<p>모르겠으면 -h 호출하자</p>
+<li>모르겠으면 -h 호출하자</li>
+</ul>
 </li>
-<li>
-<p><strong>Q8. kubernetes 버전 업그레이드 + 클러스터 Join</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q8. kubernetes 버전 업그레이드 + 클러스터 Join</strong><ul>
 <li><em>참고: https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/</em></li>
 <li>요구사항 1. node의 쿠버네티스 버전을 올린뒤<ul>
 <li><code>ssh node01</code></li>
@@ -23435,9 +23437,7 @@
 <li><code>service kubelet status</code></li>
 </ul>
 </li>
-<li>
-<p>요구사항 2. 쿠버 클러스터에 node를 합류시키세요</p>
-<ul>
+<li>요구사항 2. 쿠버 클러스터에 node를 합류시키세요<ul>
 <li><code>ssh controlplane</code></li>
 <li><code>kubeadm token create --print-join-command</code></li>
 <li><code>kubeadm token list</code></li>
@@ -23446,39 +23446,47 @@
 <li><code>service kubelet status</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Q9. Pod 안에서 쿠버네티스 API 호출하기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q9. Pod 안에서 쿠버네티스 API 호출하기</strong><ul>
 <li><em>참고: https://kubernetes.io/docs/tasks/run-application/access-api-from-pod/</em></li>
 <li>service account credential을 활용하면 API 서버와 통신 가능</li>
 <li>기본값으로 Pod는 service account와 연계되어 있으며, <strong>해당 service account의 credential token은 filesystem tree 하위에 저장되어 있음</strong><ul>
 <li><code>/var/run/secrets/kubernetes.io/serviceaccount/token</code></li>
-<li>타 다른 값도 매핑되어 있음</li>
+<li>타 다른 값도 매핑되어 있음<ul>
 <li>certificate bundle: <code>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt</code></li>
 <li>default namespace: <code>/var/run/secrets/kubernetes.io/serviceaccount/namespace</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>이제 API 호출<ul>
 <li><code>k exec podName -it -- sh</code></li>
 <li><code>TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)</code></li>
-<li>https 검사 ON</li>
+<li>https 검사 ON<ul>
 <li><code>curl -k https://kubernetes.default</code>: <code>-k</code>는 insecure의 약자로, https 유효성 검증 끄고 요청</li>
 <li><code>curl -k https://kubernetes.default/api/v1/secrets</code></li>
 <li><code>curl -k https://kubernetes.default/api/v1/secrets -H "Authorization: Bearer ${TOKEN}"</code></li>
-<li>https 검사 OFF</li>
+</ul>
+</li>
+<li>https 검사 OFF<ul>
 <li><code>CACERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt</code></li>
 <li><code>curl --cacert ${CACERT} https://kubernetes.default/api/v1/secrets -H "Authorization: Bearer ${TOKEN}"</code></li>
 </ul>
 </li>
-<li>
-<p>앞서서 kubectl로 검증도 가능!</p>
-<ul>
+</ul>
+</li>
+<li>앞서서 kubectl로 검증도 가능!<ul>
 <li><code>kubectl auth can-i get secret --as system:serviceaccount:project-joel:secret-reader</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Q12. PodAntiAffinity</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q12. PodAntiAffinity</strong><ul>
 <li><code>podAffinity</code>: 같은 노드에 붙어라<ul>
 <li>같은 노드에 떠있어야 통신도 빠르고 좋을 때</li>
 <li>나랑 같은 라벨(<code>labelSelector</code>) 가진 Pod 있는 <code>topologyKey</code>에 나를 넣어줘!</li>
@@ -23487,7 +23495,7 @@
 </ul>
 </li>
 <li>예시)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">spec</span><span class="p">:</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">spec</span><span class="p">:</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">affinity</span><span class="p">:</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">labelSelector</span><span class="p">:</span>
@@ -23500,9 +23508,7 @@
 <li>나랑 같은 라벨(<code>labelSelector</code>)을 가진 Pod 있는 <code>topologyKey</code> 에는 가지 말 것!</li>
 </ul>
 </li>
-<li>
-<p>예시)</p>
-<ul>
+<li>예시)<ul>
 <li><code>id: very-important</code> 라벨을 가진 Pod를 이미 해당 노드가 가지고 있다면, 거기엔 배치하지 마!</li>
 <li><code>labelSelector</code>: 누구를 같은 걸로 볼지</li>
 <li><code>topologyKey</code>: 어떤 단위로 배치할지 (예시 hostname은 노드 단위)
@@ -23517,12 +23523,13 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Q13. Gateway Api Ingress</strong></p>
+</ul>
 </li>
-<li>
-<p>http-header를 기반으로 routing 될 서비스를 구분할 수 있다. 
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
+</ul>
+<ul>
+<li><strong>Q13. Gateway Api Ingress</strong><ul>
+<li>http-header를 기반으로 routing 될 서비스를 구분할 수 있다. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPRoute</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traffic-director</span>
@@ -23565,10 +23572,12 @@
 <a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a><span class="w">      </span><span class="nt">backendRefs</span><span class="p">:</span>
 <a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web-desktop</span>
 <a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q14. kube-apiserver의 validation 날짜</strong>
+</ul>
+<ul>
+<li><strong>Q14. kube-apiserver의 validation 날짜</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>controlplane /etc/kubernetes/manifests ➜  cat kube-apiserver.yaml | grep crt
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    - --client-ca-file=/etc/kubernetes/pki/ca.crt
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    - --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
@@ -23577,33 +23586,33 @@
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    - --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    - --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
 <a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>이제, tls-cert-file를 복호화해보자.<ul>
-<li><code>openssl x509 -noout -text -in /etc/kubernetes/pki/apiserver.crt</code></li>
+<li><code>openssl x509 -noout -text -in /etc/kubernetes/pki/apiserver.crt</code><ul>
 <li><code>-noout</code>: 내용을 꺼내지 말고, 본문만 설명</li>
 <li><code>-text</code>: 사람이 읽을 수 있는 형식</li>
+</ul>
+</li>
 <li><code>openssl x509 -noout -text -in /etc/kubernetes/pki/apiserver.crt | grep Validity -A2</code></li>
 </ul>
 </li>
-<li>
-<p>또다른 방법으로는 <code>kubeadm</code> 사용</p>
-<ul>
+<li>또다른 방법으로는 <code>kubeadm</code> 사용<ul>
 <li><code>kubeadm certs check-expiration</code>: 언제 만료되는지 나옴</li>
 <li><code>kubeadm certs renew apiserver</code>: apiserver 인증서 갱신 (실제로 만료날짜 변경됨)</li>
 </ul>
 </li>
-<li>
-<p><strong>Q15. Network Policy</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q15. Network Policy</strong><ul>
 <li>backend Pod 입장에서 생각하자. <ul>
 <li>backend Pod 입장에서 들어오는 것: Ingress</li>
 <li>backend Pod 입장에서 나가는 것: Egress</li>
 </ul>
 </li>
-<li>
-<p>다음과 같이 networkPolicy 지정 (블럭하나 안에 있으면 AND, - 로 연결하면 OR 기억)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<li>다음과 같이 networkPolicy 지정 (블럭하나 안에 있으면 AND, - 로 연결하면 OR 기억)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np-backend</span>
@@ -23629,11 +23638,12 @@
 <a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
 <a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
 <a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a><span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2222</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q16. CoreDNS 설정 업데이트</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q16. CoreDNS 설정 업데이트</strong><ul>
 <li>coredns는 kubeadm을 통해 설치될 때, configmap을 사용<ul>
 <li>백업을 위해서는 <code>k get cm coredns -n=kube-system &gt; coredns_backup.yaml</code></li>
 <li>이런 느낌쓰
@@ -23685,55 +23695,55 @@
 <li><code>k rollout restart deployment coredns -n=kube-system</code></li>
 </ul>
 </li>
-<li>
-<p>busybox pod 띄워서 nslookup 하면 동일한 service ClusterIP로 찾아</p>
-<ul>
+<li>busybox pod 띄워서 nslookup 하면 동일한 service ClusterIP로 찾아<ul>
 <li><code>nslookup kubernetes.default.svc.custom-domain</code></li>
 <li><code>nslookup kubernetes.default.svc.cluster.local</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Q17. pod w. crictl</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q17. pod w. crictl</strong><ul>
 <li><code>crictl inspect CONTAINER_ID</code>를 인스펙션 가능</li>
-<li>
-<p><code>crictl logs CONTAINER_ID</code>를 통해 로깅 가능</p>
+<li><code>crictl logs CONTAINER_ID</code>를 통해 로깅 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Q19. Kube-proxy iptables</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q19. Kube-proxy iptables</strong><ul>
 <li>pod 생성, clusterIP로 svc 노출했을 때, 쿠버네티스에서 iptable 설정을 넣어 포워딩 하도록 설정 넣어줌!<ul>
 <li>ClusterIP로 요청이 들어오면, 실제 Pod(IP:Port)로 포워딩!</li>
 </ul>
 </li>
-<li>
-<p><code>iptables-save</code>를 통해 <code>iptables</code>에 설정된 규칙들을 한번에 출력. 방화벽 규칙 스냅샷 보여줌
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>controlplane ~ ➜  iptables-save | grep p2-service
+<li><code>iptables-save</code>를 통해 <code>iptables</code>에 설정된 규칙들을 한번에 출력. 방화벽 규칙 스냅샷 보여줌
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>controlplane ~ ➜  iptables-save | grep p2-service
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>-A KUBE-SEP-QNZEQH5XBILEYQC6 -s 172.17.1.11/32 -m comment --comment &quot;project-hamster/p2-service&quot; -j KUBE-MARK-MASQ
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>-A KUBE-SEP-QNZEQH5XBILEYQC6 -p tcp -m comment --comment &quot;project-hamster/p2-service&quot; -m tcp -j DNAT --to-destination 172.17.1.11:80
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>-A KUBE-SERVICES -d 172.20.78.244/32 -p tcp -m comment --comment &quot;project-hamster/p2-service cluster IP&quot; -j KUBE-SVC-U5ZRKF27Y7YDAZTN
 <a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>-A KUBE-SVC-U5ZRKF27Y7YDAZTN ! -s 172.17.0.0/16 -d 172.20.78.244/32 -p tcp -m comment --comment &quot;project-hamster/p2-service cluster IP&quot; -j KUBE-MARK-MASQ
 <a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>-A KUBE-SVC-U5ZRKF27Y7YDAZTN -m comment --comment &quot;project-hamster/p2-service -&gt; 172.17.1.11:80&quot; -j KUBE-SEP-QNZEQH5XBILEYQC6
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Q20. service CIDR 변경하기</strong></p>
-</li>
-<li>static pod의 <code>kube-apiserver</code>, <code>kube-controller-manager</code> 두 곳에서 <code>service-cluster-ip-range</code>를 변경해주자</li>
-<li><code>kube-apiserver</code><ul>
-<li>클러스터 내에서 생성되는 Service 객체에 할당될 clusterIP를 해당 CIDR 범위에서 할당</li>
-<li>Service 리소스 생성시, apiserver가 이 범위에서 IP 할당!</li>
+</code></pre></div></li>
 </ul>
 </li>
-<li><code>kube-controller-manager</code><ul>
+</ul>
+<ul>
+<li><strong>Q20. service CIDR 변경하기</strong><ul>
+<li>static pod의 <code>kube-apiserver</code>, <code>kube-controller-manager</code> 두 곳에서 <code>service-cluster-ip-range</code>를 변경해주자
+1. <code>kube-apiserver</code><ul>
+<li>클러스터 내에서 생성되는 Service 객체에 할당될 clusterIP를 해당 CIDR 범위에서 할당</li>
+<li>Service 리소스 생성시, apiserver가 이 범위에서 IP 할당!
+2. <code>kube-controller-manager</code></li>
 <li>Service에 대한 IP 할당 및 관련 리소스 관리 등 컨트롤러 동작에서 이 CIDR 참조</li>
 <li>apiserver와 동일해야 일관성있게 동작!</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="mock-exam-2">Mock Exam 2<a class="headerlink" href="#mock-exam-2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Q1. DNS/FQDN(Full Qualified Domain Name)/Headless Service</strong></li>
+<li><strong>Q1. DNS/FQDN(Full Qualified Domain Name)/Headless Service</strong><ul>
 <li>쿠버네티스 환경에서...!<ol>
 <li>Deployment가 클러스터 내부의 다양한 엔드포인트와 어떻게 통신하는가?</li>
 <li>정확한 FQDN을 아는가?</li>
@@ -23741,18 +23751,16 @@
 </li>
 <li>ConfigMap에 FQDN을 넣는다면 svc/pod IP가 변해도, 항상 올바른 엔드포인트와 연결이 됨</li>
 <li>DNS의 가장 흔한 방법은 <code>SERVICE.NAMESPACE.svc.cluster.local</code><ul>
-<li>이는 쿠버네티스의 IP 주소를 resolve</li>
-</ul>
-</li>
-<li><code>DNS_1</code>: <code>default</code> namespace의 <code>kubernetes</code> 서비스 
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>$ nslookup kubernentes.default.svc.cluster.local
+<li>이는 쿠버네티스의 IP 주소를 resolve
+1. <code>DNS_1</code>: <code>default</code> namespace의 <code>kubernetes</code> 서비스 
+ <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>$ nslookup kubernentes.default.svc.cluster.local
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Server:   10.96.0.10
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Address:  10.96.0.10:53
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
 <a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>Name:     kubernetes.default.svc.cluster.local
 <a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>Address:  10.96.0.1
-</code></pre></div></li>
-<li><code>DNS_2</code>: <code>lima-workload</code> namespace의 Headless Service <code>department</code> <ul>
+</code></pre></div>
+2. <code>DNS_2</code>: <code>lima-workload</code> namespace의 Headless Service <code>department</code> </li>
 <li>Service에 매핑된 Pod가 2개라서 2개가 뜸
  <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>$ nslookup department.lima-workload.svc.cluster.local
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Server:   10.96.0.10
@@ -23762,10 +23770,8 @@
 <a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>Address:  10.32.0.2
 <a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>Name:     department.lima-workload.svc.cluster.local
 <a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>Address:  10.32.0.9
-</code></pre></div></li>
-</ul>
-</li>
-<li><code>DNS_3</code>: <code>lima-workload</code>의 <code>section100</code> pod. pod Ip 변경에도 동작할 것<ul>
+</code></pre></div>
+3. <code>DNS_3</code>: <code>lima-workload</code>의 <code>section100</code> pod. pod Ip 변경에도 동작할 것</li>
 <li>pod가 hostname, subdomain을 명시하면 DNS를 다음과 같이 찾을 수 있음
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$ nslookup section100.section.lima-workload.svc.cluster.local
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>Server:   10.96.0.10
@@ -23785,12 +23791,8 @@
 <a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
 <a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">httpd:2-alpine</span>
 <a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>
-<p><code>DNS_4</code>: <code>kube-system</code> namespace의 <code>1.2.3.4</code> IP를 가진 Pod</p>
-<ul>
+</code></pre></div>
+4. <code>DNS_4</code>: <code>kube-system</code> namespace의 <code>1.2.3.4</code> IP를 가진 Pod</li>
 <li>기본 pod를 찾는 dns는 다음과 같이 <code>IP.NAMESPACE&gt;pod.cluster.local</code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>$ nslookup 1-2-3-4.kube-system.pod.cluster.local
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>Server:   10.96.0.10
@@ -23801,22 +23803,20 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Q3. kubectl client/server cert info</strong></p>
-</li>
-<li><code>node01</code>이 새롭게 <code>kubeadm</code> + <code>TLS bootstrapping</code> 으로 추가되었을 때, <code>Issuer</code>/<code>Extended Key Usage</code> 메모하기</li>
-<li>kubelet Client Certificate은 무엇인가? (kube-apiserver로 나가는 커넥션)<ul>
-<li>kubelet -&gt; api-server</li>
-<li><code>/var/lib/kubelet/pki/kubelet-client-current.pem</code>: kubelet이 클러스터에 client로 참여하기 위해 쓰는 인증서</li>
-<li><code>.pem</code>은 단순히 base64 확장자일 뿐, <code>.crt</code>와 거의 같음</li>
 </ul>
 </li>
-<li>
-<p>kubelet Server Certificate은 무엇인가? (kube-apiserver로 부터 들어오는 커넥션)</p>
+</ul>
 <ul>
+<li><strong>Q3. kubectl client/server cert info</strong><ul>
+<li><code>node01</code>이 새롭게 <code>kubeadm</code> + <code>TLS bootstrapping</code> 으로 추가되었을 때, <code>Issuer</code>/<code>Extended Key Usage</code> 메모하기
+1. kubelet Client Certificate은 무엇인가? (kube-apiserver로 나가는 커넥션)<ul>
+<li>kubelet -&gt; api-server</li>
+<li><code>/var/lib/kubelet/pki/kubelet-client-current.pem</code>: kubelet이 클러스터에 client로 참여하기 위해 쓰는 인증서</li>
+<li><code>.pem</code>은 단순히 base64 확장자일 뿐, <code>.crt</code>와 거의 같음
+2. kubelet Server Certificate은 무엇인가? (kube-apiserver로 부터 들어오는 커넥션)</li>
 <li><code>/var/lib/kubelet/pki/kubelet.crt</code></li>
 <li><code>CN=node01-ca@xxxx</code>: 와 같이 부트스트랩 후 kubelet이 직접 self-sign or CSR 처리
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>$ ssh node01
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>$ ssh node01
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>$ find /var/lib/kubelet/pki   # 이 안에 있는 모든 파일과 하위 디렉토리 찾아서 출력
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>/var/lib/kubelet/pki
@@ -23840,26 +23840,28 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Q5. kubectl sorting</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q5. kubectl sorting</strong><ul>
 <li><code>metadata.creationTimestamp</code>로 정렬된 pod<ul>
 <li><code>kubectl get pod -A --sort-by=.metadata.creationTimestamp</code></li>
 </ul>
 </li>
-<li>
-<p><code>metadata.uid</code>로 정렬된 pod</p>
-<ul>
+<li><code>metadata.uid</code>로 정렬된 pod<ul>
 <li><code>kubectl get pod -A --sort-by=.metadata.uid</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Q6. Kubelet 수정</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q6. Kubelet 수정</strong><ol>
 <li><code>ps aux | grep kubelet</code>: kubelet 프로세스가 있는지 검토</li>
 <li><code>systemctl kubelet status</code>: kubelet status 검토</li>
 <li><code>systemctl kubelet start</code>: 시작해보기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>root@cka1024:~# service kubelet status
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>root@cka1024:~# service kubelet status
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>● kubelet.service - kubelet: The Kubernetes Node Agent
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>     Loaded: loaded (/usr/lib/systemd/system/kubelet.service; enabled; preset: enabled)
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>    Drop-In: /usr/lib/systemd/system/kubelet.service.d
@@ -23878,50 +23880,49 @@
 <li>참고: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/</li>
 </ul>
 </li>
-<li>
-<p><code>systemctl kubelet restart</code></p>
+<li><code>systemctl kubelet restart</code></li>
+</ol>
 </li>
-<li>
-<p><strong>Q7. Etcd</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q7. Etcd</strong><ul>
 <li>Qs) <code>etcd --version</code> 실행하기</li>
-<li>
-<p>Ans) etcd는 컨트롤플레인 안의 pod로 실행되기 때문에, 해당 pod 안에서 해당 명령어를 날리자 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>$ k -n kube-system exec etcd-cka1234 -- etcd --version
+<li>Ans) etcd는 컨트롤플레인 안의 pod로 실행되기 때문에, 해당 pod 안에서 해당 명령어를 날리자 
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>$ k -n kube-system exec etcd-cka1234 -- etcd --version
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>etcd Version: 3.5.21
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>Git SHA: a17edfd
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>Go Version: go1.23.7
 <a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>Go OS/Arch: linux/amd64
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q8. Controlplane Information</strong></p>
-</li>
-<li>
-<p><code>/usr/lib/systemd</code> 하위에서 어떤 컴포넌트가 systemd 하위에서 관리되는지 볼 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>$ find /usr/lib/systemd | grep kube
+</ul>
+<ul>
+<li><strong>Q8. Controlplane Information</strong><ul>
+<li><code>/usr/lib/systemd</code> 하위에서 어떤 컴포넌트가 systemd 하위에서 관리되는지 볼 수 있음
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>$ find /usr/lib/systemd | grep kube
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>/usr/lib/systemd/system/kubelet.service
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>/usr/lib/systemd/system/kubelet.service.d
 <a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>/usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q9. Kill Scheduler, Manual Scheduling</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q9. Kill Scheduler, Manual Scheduling</strong><ul>
 <li>Scheduler는 static-pod 이니, 해당 yaml을 옮겨두는 것만으로 Scheduler 죽일 수 있음. yaml 위치 원복하면 살아남<ul>
 <li><code>mv kube-scheduler.yaml ..</code></li>
 <li><code>mv ../kube-scheduler.yaml .</code></li>
 </ul>
 </li>
-<li>
-<p>Scheduler가 죽어있어도, pod의 <code>spec.nodeName</code> 명시하면 노드에 할당 됨</p>
+<li>Scheduler가 죽어있어도, pod의 <code>spec.nodeName</code> 명시하면 노드에 할당 됨</li>
+</ul>
 </li>
-<li>
-<p><strong>Q10. PV/PVC/StorageClass</strong></p>
-</li>
-<li>
-<p>Job에서 특정 StorageClass 기반의 PVC로 claim할 volume을 셋업하기
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</ul>
+<ul>
+<li><strong>Q10. PV/PVC/StorageClass</strong><ul>
+<li>Job에서 특정 StorageClass 기반의 PVC로 claim할 volume을 셋업하기
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolumeClaim</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backup-pvc</span>
@@ -23954,26 +23955,27 @@
 <a id="__codelineno-29-31" name="__codelineno-29-31" href="#__codelineno-29-31"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backup</span>
 <a id="__codelineno-29-32" name="__codelineno-29-32" href="#__codelineno-29-32"></a><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/backup</span>
 <a id="__codelineno-29-33" name="__codelineno-29-33" href="#__codelineno-29-33"></a><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q11. Secret 생성하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q11. Secret 생성하기</strong><ul>
 <li><code>user=user1</code>, <code>pass=1234</code> 로 secret 만들기</li>
-<li>
-<p><code>k -n secret create secret generic secret2 --from-literal=user=user1 --from-literal=pass=1234</code></p>
+<li><code>k -n secret create secret generic secret2 --from-literal=user=user1 --from-literal=pass=1234</code></li>
+</ul>
 </li>
-<li>
-<p><strong>Q12.특정 Pod를 Controlplane에만 할당하기</strong></p>
-</li>
-<li>controlplane에만 할당될 수 있는 pod를 만들기</li>
-<li>controlplane에 존재하는 taint 확인
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>$ k describe node cka1234 | grep Taint -A1
+</ul>
+<ul>
+<li><strong>Q12.특정 Pod를 Controlplane에만 할당하기</strong><ul>
+<li>controlplane에만 할당될 수 있는 pod를 만들기
+1. controlplane에 존재하는 taint 확인
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>$ k describe node cka1234 | grep Taint -A1
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>Taints:             node-role.kubernetes.io/control-plane:NoSchedule
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>Unschedulable:      false
-</code></pre></div></li>
-<li>controlplane을 지정할 수 있는 label 확인
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>$ k get node cka1234 --show-labels
+</code></pre></div>
+2. controlplane을 지정할 수 있는 label 확인
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>$ k get node cka1234 --show-labels
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>LABELS
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>beta.kubernetes.io/arch=amd64,
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>beta.kubernetes.io/os=linux,
@@ -23982,10 +23984,9 @@
 <a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>kubernetes.io/os=linux,
 <a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>node-role.kubernetes.io/control-plane=,
 <a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>node.kubernetes.io/exclude-from-external-load-balancers=
-</code></pre></div></li>
-<li>
-<p>nodeSelctor를 곁들여서 pod의 yaml을 작성
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</code></pre></div>
+3. nodeSelctor를 곁들여서 pod의 yaml을 작성
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod1</span>
@@ -24001,10 +24002,12 @@
 <a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a><span class="w">      </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node-role.kubernetes.io/control-plane</span>
 <a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w"> </span><span class="c1"># node labels로 타겟 노드 지정 가능</span>
 <a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a><span class="w">    </span><span class="nt">node-role.kubernetes.io/control-plane</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w">   </span><span class="c1"># label에 value가 없어 key-only label을 지정!</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Q13. volume을 공유하는 pod내 컨테이너들</strong>
+</ul>
+<ul>
+<li><strong>Q13. volume을 공유하는 pod내 컨테이너들</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -24037,11 +24040,10 @@
 <a id="__codelineno-33-30" name="__codelineno-33-30" href="#__codelineno-33-30"></a><span class="w">    </span><span class="nt">volumeMounts</span><span class="p">:</span>
 <a id="__codelineno-33-31" name="__codelineno-33-31" href="#__codelineno-33-31"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/your/vol/path</span>
 <a id="__codelineno-33-32" name="__codelineno-33-32" href="#__codelineno-33-32"></a><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod-volume</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Q14. 클러스터 정보 찾기</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Q14. 클러스터 정보 찾기</strong><ul>
 <li><code>Service CIDR</code>은?<ul>
 <li>kube-apiserver의 <code>--service-cluster-ip-range</code>를 보자.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>$ cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep range
@@ -24049,33 +24051,35 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><code>Network Plugin</code> 설정은 어디에?</p>
-<ul>
+<li><code>Network Plugin</code> 설정은 어디에?<ul>
 <li><code>/etc/cni/net.d</code>에 네트워크 설정이 있음</li>
 <li><code>/etc/cni/net.d/10-flannel.conflist</code> 처럼 특정 파일이 있는지 보자</li>
 </ul>
 </li>
-<li>
-<p><strong>Q15. Cluster Event Logging</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Q15. Cluster Event Logging</strong><ul>
 <li><code>kubectl get events -A --sort-by=.metadata.creationTimestamp</code> 를 통해 전체 클러스터 이벤트 순차적으로 볼 수 있음</li>
 <li>문제에서 pod를 죽이라고 하면, pod를 죽여라. (daemonset/replica)</li>
-<li>
-<p>container가 죽어도, pod 정의되어 있으면, 쿠버가 container 만듦</p>
+<li>container가 죽어도, pod 정의되어 있으면, 쿠버가 container 만듦</li>
+</ul>
 </li>
-<li>
-<p><strong>Q16. Namespace and Api Resources</strong></p>
+</ul>
+<ul>
+<li><strong>Q16. Namespace and Api Resources</strong><ul>
+<li>모든 namespaces 기반의 쿠버 리소스 이름 출력하기: <code>k api-resources --namespaced=true -o name</code></li>
+</ul>
 </li>
-<li>
-<p>모든 namespaces 기반의 쿠버 리소스 이름 출력하기: <code>k api-resources --namespaced=true -o name</code></p>
-</li>
-<li>
-<p><strong>Q17. Operator, CRDs, RBAC, Kustomize</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Q17. Operator, CRDs, RBAC, Kustomize</strong><ul>
 <li><code>k kustomize base</code>: base 디렉토리의 yaml 들을 봄으로써, 해당 kustomize에서 관리하는 리소스의 꼴을 볼 수 있음</li>
 <li><code>k kustomize prod</code>: 실제로 prod 에서 사용할 yaml을 보자. </li>
 <li><code>rbac</code> 을 수정하기 위해서 kustomize의 rbac.yaml을 봐보자</li>
+</ul>
+</li>
 </ul>
 <h3 id="_2">약점<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>

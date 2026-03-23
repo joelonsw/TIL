@@ -17203,18 +17203,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#binbash" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        !/bin/bash
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="!/bin/bash">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#ssh" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -17222,11 +17210,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -23004,18 +22987,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#binbash" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        !/bin/bash
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="!/bin/bash">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#ssh" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -23023,11 +22994,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -23048,58 +23014,50 @@
 
 
 
+  <h1>2021 09 30</h1>
+
 <h3 id="2021-09-30">2021-09-30<a class="headerlink" href="#2021-09-30" title="Permanent link">&para;</a></h3>
 <h2 id="mysql">MySQL 구조<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>데이터를 저장하는 표 (table)<ul>
-<li>표가 많아짐에 따라 디렉토리마냥 관리하는 필요성이 대두</li>
-</ul>
-</li>
+<li>데이터를 저장하는 표 (table)
+    - 표가 많아짐에 따라 디렉토리마냥 관리하는 필요성이 대두</li>
 <li>연관된 표들을 그룹핑해서 데이터베이스/스키마 (database)를 만듦</li>
-<li>스키마들을 저장해두는 데이터베이스 서버 (database server)<ul>
-<li>우리가 설치한 프로그램은 기본적으로 데이터베이스 서버</li>
-</ul>
-</li>
+<li>스키마들을 저장해두는 데이터베이스 서버 (database server)
+    - 우리가 설치한 프로그램은 기본적으로 데이터베이스 서버</li>
 </ul>
 <h2 id="mycnf">my.cnf 설정<a class="headerlink" href="#mycnf" title="Permanent link">&para;</a></h2>
 <ul>
-<li>MariaDB 설정 파일 구조<ul>
-<li><img alt="" src="../../image/2021-09-30-mariadb-%EA%B5%AC%EC%A1%B0.png" /></li>
-<li><code>/etc/my.cnf</code>: MariaDB의 주 설정 파일. /etc/my.cnf.d/ 폴더의 파일들을 include</li>
-<li><code>/etc/my.cnf.d</code>: 이 폴더안에 모든 .cnf 파일들이 실제 설정 파일들. 이 파일들이 my.cnf에 include됨</li>
-<li><code>/etc/my.cnf.d/server.cnf</code>: 실질적인 서버 설정파일. 서버의 charset</li>
-<li><code>/etc/my.cnf.d/mysql-clients.cnf</code>: mysql, mysqldump 같은 client app들을 위한 설정 파일</li>
-</ul>
-</li>
+<li>MariaDB 설정 파일 구조
+    - <img alt="" src="../../image/2021-09-30-mariadb-%EA%B5%AC%EC%A1%B0.png" />
+    - <code>/etc/my.cnf</code>: MariaDB의 주 설정 파일. /etc/my.cnf.d/ 폴더의 파일들을 include
+    - <code>/etc/my.cnf.d</code>: 이 폴더안에 모든 .cnf 파일들이 실제 설정 파일들. 이 파일들이 my.cnf에 include됨
+    - <code>/etc/my.cnf.d/server.cnf</code>: 실질적인 서버 설정파일. 서버의 charset
+    - <code>/etc/my.cnf.d/mysql-clients.cnf</code>: mysql, mysqldump 같은 client app들을 위한 설정 파일</li>
 </ul>
 <h2 id="_1">내 삽질<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>my.cnf에 빈로그 추가하려다가 restart 하니까 아예 구동이 안되더라<ul>
-<li>시작 못했으니까 여기저기 참고해보라고 알려줌</li>
-<li>난 그냥 /var/log/mysql/error.log에서 뭔 일 인지 알아봄
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2021-09-30  0:28:04 140266459028608 [ERROR] mysqld: File &#39;/home/ubuntu/database_backup/binlog/bin.index&#39; not found (Errcode: 13 &quot;Permission denied&quot;)
+<li>my.cnf에 빈로그 추가하려다가 restart 하니까 아예 구동이 안되더라
+    - 시작 못했으니까 여기저기 참고해보라고 알려줌
+    - 난 그냥 /var/log/mysql/error.log에서 뭔 일 인지 알아봄
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2021-09-30  0:28:04 140266459028608 [ERROR] mysqld: File &#39;/home/ubuntu/database_backup/binlog/bin.index&#39; not found (Errcode: 13 &quot;Permission denied&quot;)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>2021-09-30  0:28:04 140266459028608 [ERROR] Aborting
 </code></pre></div></li>
-</ul>
-</li>
-<li>뭐 퍼미션이 안되는 구나. 우선 재구동 시키자 하고 빈로그 옵션 지우고 restart<ul>
-<li>어라 근데 안되네? </li>
-<li>이번에는 다음과 같은 에러로그 /var/log/mysql/error.log
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>2021-09-30  2:05:01 139824495119488 [ERROR] /usr/sbin/mysqld: unknown option &#39;--...&#39;
+<li>뭐 퍼미션이 안되는 구나. 우선 재구동 시키자 하고 빈로그 옵션 지우고 restart
+    - 어라 근데 안되네? 
+    - 이번에는 다음과 같은 에러로그 /var/log/mysql/error.log
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>2021-09-30  2:05:01 139824495119488 [ERROR] /usr/sbin/mysqld: unknown option &#39;--...&#39;
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2021-09-30  2:05:01 139824495119488 [ERROR] Aborting
 </code></pre></div></li>
-</ul>
-</li>
-<li>쉣,,, 뭔일이다냐<ul>
-<li>문제는 저기 ... 보이지 중간에</li>
-<li>이게 옵션마냥 읽혀서 mysql 데몬을 띄울라는데 "--..." 옵션 이런거 없으니까 화를 낸 듯
-```shell script
-ubuntu@ip-192-168-1-46:/etc$ cat my.cnf
-[mysqld]
-...
-character-set-server = utf8
-collation-server = utf8_general_ci
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>- 이거 지워주니까 재구동 됨
+<li>쉣,,, 뭔일이다냐
+    - 문제는 저기 ... 보이지 중간에
+    - 이게 옵션마냥 읽혀서 mysql 데몬을 띄울라는데 "--..." 옵션 이런거 없으니까 화를 낸 듯
+    ```shell script
+    ubuntu@ip-192-168-1-46:/etc$ cat my.cnf
+    [mysqld]
+    ...
+    character-set-server = utf8
+    collation-server = utf8_general_ci
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>- 이거 지워주니까 재구동 됨
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>```shell script
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>ubuntu@ip-192-168-1-46:/etc$ cat my.cnf
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>[mysqld]
@@ -23107,18 +23065,14 @@ collation-server = utf8_general_ci
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>collation-server = utf8_general_ci
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="binlog">제발 binlog 설정 좀 키자<a class="headerlink" href="#binlog" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><em>참고: https://systemv.tistory.com/52</em></p>
-</li>
-<li>
-<p>우선 binlog 꺼진거 알겠지?</p>
-<ul>
-<li><img alt="" src="../../image/2021-09-30-binlog-off.PNG" /></li>
+<li><em>참고: https://systemv.tistory.com/52</em></li>
 </ul>
+<ol>
+<li>
+<p>우선 binlog 꺼진거 알겠지?
+    - <img alt="" src="../../image/2021-09-30-binlog-off.PNG" /></p>
 </li>
 <li>
 <p>my.cnf에 log_bin 설정 넣어주자
@@ -23126,95 +23080,73 @@ collation-server = utf8_general_ci
     ubuntu@ip-192-168-1-46:/etc$ cat my.cnf
     [mysqld]</p>
 <p>log-bin=easy-deploy-binlog
-binlog_cache_size=2M
-max_binlog_size=512M
-expire_logs_days=3
-character-set-server = utf8
-collation-server = utf8_general_ci
-```</p>
+  binlog_cache_size=2M
+  max_binlog_size=512M
+  expire_logs_days=3
+  character-set-server = utf8
+  collation-server = utf8_general_ci
+  ```</p>
 </li>
 <li>
-<p>드디어 켜진 binlog</p>
-<ul>
-<li><img alt="" src="../../image/2021-09-30-binlog-on.PNG" /></li>
-</ul>
+<p>드디어 켜진 binlog
+    - <img alt="" src="../../image/2021-09-30-binlog-on.PNG" /></p>
 </li>
 <li>
-<p>그럼 binlog가 어디에 저장되는거임?</p>
-<ul>
-<li><em>참고: https://systemv.tistory.com/52</em></li>
-<li><em>참고: https://hyorock.tistory.com/94</em></li>
-<li><em>참고: https://riorio.tistory.com/86</em></li>
-<li>my.cnf에 log-bin에서 디렉토리 지정하면 된대 원래...<ul>
-<li>/home/ubuntu/database-backup/binlog/"bin.index" 이렇게 index 파일 생성해주면 된다는데 </li>
-<li>근데 왜이렇게 권한 설정때매 막히냐</li>
-</ul>
+<p>그럼 binlog가 어디에 저장되는거임?
+    - <em>참고: https://systemv.tistory.com/52</em>
+    - <em>참고: https://hyorock.tistory.com/94</em>
+    - <em>참고: https://riorio.tistory.com/86</em>
+    - my.cnf에 log-bin에서 디렉토리 지정하면 된대 원래...
+        - /home/ubuntu/database-backup/binlog/"bin.index" 이렇게 index 파일 생성해주면 된다는데 
+        - 근데 왜이렇게 권한 설정때매 막히냐
+    - 따라서 기본 설정으로 위와 같이 <code>log-bin=easy-deploy-binlog</code> binlog로 쓰일 파일 이름만 써주면 기본 디렉토리에 저장됨
+        - 기본은 /var/lib/mysql에 저장됨
+        - <img alt="" src="../../image/2021-09-30-binlog-recorded.PNG" />
+        - 이렇게 저장되긴 했는데 참,,, 아쉽네</p>
 </li>
-<li>따라서 기본 설정으로 위와 같이 <code>log-bin=easy-deploy-binlog</code> binlog로 쓰일 파일 이름만 써주면 기본 디렉토리에 저장됨<ul>
-<li>기본은 /var/lib/mysql에 저장됨</li>
-<li><img alt="" src="../../image/2021-09-30-binlog-recorded.PNG" /></li>
-<li>이렇게 저장되긴 했는데 참,,, 아쉽네</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</ol>
 <h2 id="full-backup">Full Backup 원격 전송 타임<a class="headerlink" href="#full-backup" title="Permanent link">&para;</a></h2>
 <ol>
 <li>백업용 EC2 하나 파자</li>
-<li>본래 DB EC2 --ssh--&gt; 백업용 EC2<ul>
-<li>본래 DB EC2에서 키 생성
-<code>shell script
-$ ssh-keygen -t rsa
-$ cat ~/.ssh/id_rsa.pub</code></li>
-</ul>
-</li>
+<li>본래 DB EC2 --ssh--&gt; 백업용 EC2
+    - 본래 DB EC2에서 키 생성
+    <code>shell script
+    $ ssh-keygen -t rsa
+    $ cat ~/.ssh/id_rsa.pub</code></li>
 <li>백업용 EC2에 만든 공개키 등록
     <code>shell script
     $ vi ~/.ssh/authorized_keys</code></li>
-<li>이제 본래 DB EC2에서 백업용 EC2로 ssh 접속해봐<ul>
-<li>Client: DB EC2 </li>
-<li>Server: 백업용 EC2<ul>
-<li>DB EC2: "어이! 백업 EC2! 나 private key 있는데 니 갖고 있는(내가 준) public key랑 대칭해서 맞는지 확인좀해봐라야"
-<code>shell script
-$ ssh ubuntu@백업용_EC2_IP</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>ssh를 통해 본래 EC2 --&gt; 백업 EC2 통로 뚫어준 건, ssh 프로토콜을 활용하는 scp를 통한 파일 전송할라고</p>
-<ul>
-<li>자 scp로 백업 EC2에 파일 전송해주는 과정 추가해주자!
-```shell script
-ubuntu@ip-192-168-1-46:~/database_backup/script$ cat full-backup.sh</li>
-</ul>
-<h1 id="binbash">!/bin/bash<a class="headerlink" href="#binbash" title="Permanent link">&para;</a></h1>
-<p>DATE=$(date +%Y%m%d)
-BACKUP_DIR=/home/ubuntu/database_backup/backup/
-sudo mysqldump -uroot -proot --all-databases &gt; $BACKUP_DIR"full-backup_"$DATE.sql
-cd $BACKUP_DIR
-scp "full-backup_"$DATE.sql ubuntu@192.168.2.179:/home/ubuntu/full-backup</p>
+<li>이제 본래 DB EC2에서 백업용 EC2로 ssh 접속해봐
+    - Client: DB EC2 
+    - Server: 백업용 EC2
+        - DB EC2: "어이! 백업 EC2! 나 private key 있는데 니 갖고 있는(내가 준) public key랑 대칭해서 맞는지 확인좀해봐라야"
+    <code>shell script
+    $ ssh ubuntu@백업용_EC2_IP</code></li>
+<li>ssh를 통해 본래 EC2 --&gt; 백업 EC2 통로 뚫어준 건, ssh 프로토콜을 활용하는 scp를 통한 파일 전송할라고
+    - 자 scp로 백업 EC2에 파일 전송해주는 과정 추가해주자!
+    ```shell script
+    ubuntu@ip-192-168-1-46:~/database_backup/script$ cat full-backup.sh
+    #!/bin/bash<p>DATE=$(date +%Y%m%d)
+  BACKUP_DIR=/home/ubuntu/database_backup/backup/
+  sudo mysqldump -uroot -proot --all-databases &gt; $BACKUP_DIR"full-backup_"$DATE.sql
+  cd $BACKUP_DIR
+  scp "full-backup_"$DATE.sql ubuntu@192.168.2.179:/home/ubuntu/full-backup</p>
 <p>find $BACKUP_DIR -ctime +3 -exec rm -f {} \;
-ubuntu@ip-192-168-1-46:~/database_backup/script$
-<code>6. 백업 EC2에 full-backup된 파일 두둥등장</code>shell script
-ubuntu@ip-192-168-2-179:~/full-backup$ ls
-full-backup_20210930.sql
-```</p>
+  ubuntu@ip-192-168-1-46:~/database_backup/script$
+  <code>6. 백업 EC2에 full-backup된 파일 두둥등장</code>shell script
+  ubuntu@ip-192-168-2-179:~/full-backup$ ls
+  full-backup_20210930.sql
+  ```</p>
 </li>
 </ol>
 <h2 id="ssh">SSH<a class="headerlink" href="#ssh" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://opentutorials.org/module/432/3742</em></li>
-<li><strong>SSH Key가 동작하는 방식</strong><ul>
-<li>SSH Client: Private Key 보유</li>
-<li>SSH Server: Public Key 보유</li>
-<li>Client -&gt; Server<ul>
-<li>Client: 나 이제 private key를 가지고 server에 접속할거야! Server야 니가 대조해서 알맞으면 나좀 들여보내줘봐~</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>SSH Key가 동작하는 방식</strong>
+    - SSH Client: Private Key 보유
+    - SSH Server: Public Key 보유
+    - Client -&gt; Server
+        - Client: 나 이제 private key를 가지고 server에 접속할거야! Server야 니가 대조해서 알맞으면 나좀 들여보내줘봐~</li>
 </ul>
 
 

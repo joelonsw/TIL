@@ -22933,7 +22933,7 @@
 <ul>
 <li><em>참고: https://leedakyeong.tistory.com/entry/%EA%B5%B0%EC%A7%91%EA%B3%BC-%EB%B6%84%EB%A5%98%EC%9D%98-%EC%B0%A8%EC%9D%B4-difference-of-clustering-and-classification</em></li>
 <li><em>참고: https://process-mining.tistory.com/98</em></li>
-<li><strong>Clustering(군집)</strong></li>
+<li><strong>Clustering(군집)</strong><ul>
 <li>데이터 간의 유사도를 정의하고, 그 "유사도에 가까운 것부터 순서대로 합쳐"가는 방법</li>
 <li>unsupervised learning의 한 종류<ul>
 <li>군집의 수, 속성이 안 알려진 경우에 사용</li>
@@ -22941,61 +22941,75 @@
 </ul>
 </li>
 <li>어떤 군집에 들어갈까 예측 X =&gt; 그냥 이렇게 나눠질수도 있구나~ 정도</li>
-<li>
-<p>군집은 애초에 라벨이 없기에, <strong>순수 데이터상의 특징으로 유사도를 정의</strong>하여 그룹을 만든다</p>
+<li>군집은 애초에 라벨이 없기에, <strong>순수 데이터상의 특징으로 유사도를 정의</strong>하여 그룹을 만든다</li>
+</ul>
 </li>
-<li>
-<p><strong>Classification(분류)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Classification(분류)</strong><ul>
 <li>기존에 존재하는 데이터의 카테고리 관계를 파악하고, 새롭게 관측된 데이터의 카테고리를 스스로 판별하는 과정</li>
 <li>supervised learning의 한 종류</li>
-<li>
-<p>각 개체가 <strong>어떤 그룹에 들어갈까</strong> 예측하는 기법</p>
+<li>각 개체가 <strong>어떤 그룹에 들어갈까</strong> 예측하는 기법</li>
+</ul>
 </li>
-<li>
-<p><strong>Clustering vs Classification</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Clustering vs Classification</strong><ul>
 <li>군집<ul>
 <li>각 개체의 범주가 군집의 정보를 모르는 경우</li>
 <li>카테고리(라벨)이 없는 경우</li>
 <li>데이터 자체의 특성에 대해 알고 싶은 경우</li>
 </ul>
 </li>
-<li>
-<p>분류</p>
-<ul>
+<li>분류<ul>
 <li>새로운 데이터의 그룹을 예측하기 위해</li>
 </ul>
 </li>
-<li>
-<p><strong>Supervised Learning vs Unsupervised Learning</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Supervised Learning vs Unsupervised Learning</strong><ul>
 <li>Supervised Learning<ul>
-<li>맞춰야 하는 값이 있는 것 (예/아니요/지표 등)</li>
+<li>맞춰야 하는 값이 있는 것 (예/아니요/지표 등)<ul>
 <li>ex 1. 어떤 학생이 대학원에 합격할지 여부 판단</li>
 <li>ex 2. 저 사람이 독신으로 살지 결혼할지</li>
 <li>ex 3. 지금 집값 7억인데, 내년에 얼마 될 것 같아?</li>
-<li>Classification(분류)</li>
+</ul>
+</li>
+<li>Classification(분류)<ul>
 <li>예측할 값이 Categorical 한 경우<ul>
 <li>Binary Classification: 예/아니요</li>
 <li>Multi-class Classification: 여러가지 값이 될 수 있음</li>
 </ul>
 </li>
 <li>SVM, Logistic Regression 등</li>
-<li>Regression(회귀)</li>
+</ul>
+</li>
+<li>Regression(회귀)<ul>
 <li>예측할 값이 Continuous 한 경우</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>Unsupervised Learning<ul>
-<li>맞춰야 하는 값이 없는 것</li>
+<li>맞춰야 하는 값이 없는 것<ul>
 <li>label 없이 이들의 특성을 종합적으로 파악해서 묶는 과정</li>
 <li>label이 없는 것에 대한 문제 해결</li>
-<li>Clustering(군집)</li>
+</ul>
+</li>
+<li>Clustering(군집)<ul>
 <li>비슷한 것을 묶는 과정</li>
 <li>K-means, DBSCAN, SOM 등</li>
-<li>Association Rule(연관 규칙)</li>
+</ul>
+</li>
+<li>Association Rule(연관 규칙)<ul>
 <li>어떤 사건이 얼마나 자주 함께 발생하는가</li>
 <li>서로 얼마나 연관되어 있는가</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23003,28 +23017,32 @@
 <ul>
 <li><em>참고: https://kjwan4435.tistory.com/85</em></li>
 <li><em><strong>참고: https://casa-de-feel.tistory.com/19</strong></em></li>
-<li><strong>차원 축소</strong></li>
+<li><strong>차원 축소</strong><ul>
 <li>매우 많은 피쳐로 구성된 다차원의 데이터 세트의 차원을 축소해 새로운 차원의 데이터 세트 생성</li>
 <li>피처 선택과 피처 추출로 나눌 수 있음<ul>
 <li>피처 선택: 특정 피처에 종속성이 강한 불필요한 피쳐 제거</li>
 <li>피처 추출: 기존 피처를 저차원의 중요 피처로 압축해서 추출</li>
 </ul>
 </li>
-<li>
-<p>단순히 데이터를 압축하는 것이 아닌, 차원 축소를 통해 데이터를 더 잘 설명할 수 있도록 하는 것</p>
+<li>단순히 데이터를 압축하는 것이 아닌, 차원 축소를 통해 데이터를 더 잘 설명할 수 있도록 하는 것</li>
+</ul>
 </li>
-<li>
-<p><strong>PCA</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>PCA</strong><ul>
 <li>Unsupervised Learning의 일종</li>
 <li>여러 변수 간에 존재하는 상관관계를 통해 주성분을 추출 =&gt; 이로써 차원 추출</li>
 <li>데이터를 축에 사영했을 때 가장 높은 분산을 가지는 데이터의 축을 찾아 그 축으로 차원 축소<ul>
 <li><img alt="" src="../../images/2022-05-26-pca.png" /></li>
-<li>사영 시 분산이 크다 == 원래 데이터의 분포를 잘 설명할 수 있다. </li>
+<li>사영 시 분산이 크다 == 원래 데이터의 분포를 잘 설명할 수 있다. <ul>
 <li>정보의 손실 최소화</li>
-<li>이렇게 찾은 주축을 첫번째 축, 이에 직각이 되는 벡터를 두번쩨 측으로 선정</li>
+</ul>
+</li>
+<li>이렇게 찾은 주축을 첫번째 축, 이에 직각이 되는 벡터를 두번쩨 측으로 선정<ul>
 <li>직교하는 축에는 첫번째 축에 겹친놈들이 절때 똑같은 곳에 사영될 수 없음<ul>
 <li>이렇게 찾은 축들에 원본 데이터 투영하면 벡터 축의 갯수만큼 원본 데이터가 차원 축소</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23036,17 +23054,17 @@
 <li>PC Score: 각각의 PC에 대해 재생성된 observation data</li>
 </ul>
 </li>
-<li>
-<p>특징</p>
-<ul>
+<li>특징<ul>
 <li>Assumption: 독립 변수들 사이에 관계가 linear하다고 가정</li>
 <li>Objective Function: X^(T)X</li>
 <li>Parameters: best fitting line parameter 찾기</li>
 </ul>
 </li>
-<li>
-<p><strong>LDA</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>LDA</strong><ul>
 <li>Supervised Learning<ul>
 <li>Classification과 Dimensional Reduction 까지 동시에 사용하는 알고리즘</li>
 <li>Classification시 클래스 내의 분산 최소로, 클래스끼리의 분산은 최대로!</li>
@@ -23058,21 +23076,25 @@
 <li>클래스 간 분산을 최대화, 클래스 내부 분산은 최대한 작게</li>
 </ul>
 </li>
-<li>
-<p>특징</p>
-<ul>
+<li>특징<ul>
 <li>Assumption: 조건적으로 정규 분포 따름</li>
-<li>Objective Function: mean separability/scatter within class</li>
+<li>Objective Function: mean separability/scatter within class<ul>
 <li>mean separability: 클래스 간의 차이가 얼만큼 나는가?</li>
 <li>scatter within class: 클래스 내에 분산이 얼마정도인가? </li>
 </ul>
 </li>
-<li>
-<p><strong>PCA vs LDA</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>PCA vs LDA</strong><ul>
 <li>데이터 클래스의 분산 차이 &lt;&lt; 데이터 클래스의 평균 차이 =&gt; LDA &gt;&gt; PCA</li>
 <li>데이터 클래스의 분산 차이 &gt;&gt; 데이터 클래스의 평균 차이 =&gt; PCA &lt;&lt; LDA</li>
 <li>PCA는 입력 데이터의 분산이 가장 큰 축을 찾고, LDA는 입력 데이터의 결정 값 클래스를 최대한 분리할 수 있는 축을 찾음</li>
+</ul>
+</li>
 </ul>
 
 

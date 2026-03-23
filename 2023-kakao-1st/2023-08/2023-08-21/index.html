@@ -23001,37 +23001,37 @@
   - <code>Sentry.capture()</code> 를 통해 확인하고 싶은 부분만 메서드로 선언해서 보는 방식
   - 전역적으로 센트리를 적용하고자 했음</p>
 <ul>
-<li><strong>Sentry 공홈에서 추천하는 적용방식 4가지</strong></li>
-<li><em>참고: https://docs.sentry.io/platforms/java/configuration/</em></li>
-<li><code>sentry.properties</code>: <code>dsn={dsn}</code></li>
-<li>시스템 환경변수 적용</li>
-<li>자바 시스템 프로퍼티에 적용: <code>java -Dsentry.dsn={clientKey} -jar app.jar</code></li>
-<li>
-<p>코드상으로 적용</p>
+<li><strong>Sentry 공홈에서 추천하는 적용방식 4가지</strong><ul>
+<li><em>참고: https://docs.sentry.io/platforms/java/configuration/</em>
+1. <code>sentry.properties</code>: <code>dsn={dsn}</code>
+2. 시스템 환경변수 적용
+3. 자바 시스템 프로퍼티에 적용: <code>java -Dsentry.dsn={clientKey} -jar app.jar</code>
+4. 코드상으로 적용</li>
+</ul>
 </li>
-<li>
-<p><strong>자바 시스템 프로퍼티 vs 시스템 환경변수</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>자바 시스템 프로퍼티 vs 시스템 환경변수</strong><ul>
 <li>자바 시스템 프로퍼티: 자바 커맨드 라인에 의해 세팅<ul>
 <li>이를 사용하는 프로세스에서만 해당 변수에 접근 가능</li>
 <li><code>-Dpropertyname=value</code></li>
 </ul>
 </li>
-<li>
-<p>시스템 환경변수: OS에 세팅. 모든 프로세스에서 접근 가능</p>
-<ul>
+<li>시스템 환경변수: OS에 세팅. 모든 프로세스에서 접근 가능<ul>
 <li>런타임에 세팅되지 않음</li>
 </ul>
 </li>
-<li>
-<p><strong>해보기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>해보기</strong><ul>
 <li>gradle에 디펜던스 넣기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>compile &#39;io.sentry:sentry-logback:1.7.30&#39;
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>compile &#39;io.sentry:sentry-logback:1.7.30&#39;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>compile &#39;io.sentry:sentry-spring-boot-starter:1.7.30&#39;
 </code></pre></div></li>
 <li>logback-spring.xml에 추가하기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">&lt;configuration&gt;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Console&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="nt">&lt;encoder&gt;</span>
@@ -23055,6 +23055,8 @@
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nt">&lt;/configuration&gt;</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="sdk">SDK<a class="headerlink" href="#sdk" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://doozi0316.tistory.com/entry/SDK-API%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%B0%A8%EC%9D%B4%EC%A0%90</em>
 <em>참고: https://reinvite.tistory.com/116</em>
@@ -23070,7 +23072,7 @@
     - JDK: 자바 개발자를 대상으로 한 오라클에서 제공하는 도구
     - Andriod SDK: 안드로이드용 앱 개발을 위한 도구</p>
 <ul>
-<li><strong>SDK vs API</strong></li>
+<li><strong>SDK vs API</strong><ul>
 <li>SDK: 망치, 팬치, 니퍼 등이 들어있는 하나의 공구박스<ul>
 <li>"좋아요 기능 만들기 위해 필요한 재료 다 드립니다. 원하는 대로 만들어보쇼"</li>
 </ul>
@@ -23081,6 +23083,8 @@
 </li>
 <li>SDK는 API의 한계를 넘어서서 독자적으로 원하는 개발 가능<ul>
 <li>SDK &gt;&gt; API</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23096,24 +23100,26 @@
     - DB가 순차적으로 or 병렬적으로 시행되기에
   - 해결방법은 로깅을 보완하여 level, trace 뚝딱</p>
 <ul>
-<li><strong>TraceID</strong></li>
+<li><strong>TraceID</strong><ul>
 <li>logback-common.xml 에 kamon.TraceIDConverter 로 traceID를 기록한다</li>
 <li>메인 빌딩 블록은 <code>Span</code>으로 간주</li>
-<li>
-<p><code>Span</code></p>
-<ul>
+<li><code>Span</code><ul>
 <li>하나의 오퍼레이션으로 충분한 정보를 가져 어떠한 트레이스가 어디에 속해있는지를 알 수 있게 지원한다. </li>
-<li>하나의 Request에 대해 온전하게 파악할 수 있는 Span을 만들어보자 </li>
+<li>하나의 Request에 대해 온전하게 파악할 수 있는 Span을 만들어보자 <ul>
 <li>하나의 Request는 복합적으로 구성 가능</li>
 <li><img alt="" src="../../images/2023-08-21-kamon-span.png" /></li>
 <li><code>val span = Kamon.spanBuilder("find-users").start()</code> =&gt; <code>span.finish()</code></li>
 </ul>
 </li>
-<li>
-<p><strong>logback</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>logback</strong><ul>
 <li><code>logback.xml</code>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">&lt;configuration</span><span class="w"> </span><span class="na">scan=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">debug=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&lt;conversionRule</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">          </span><span class="na">conversionWord=</span><span class="s">&quot;traceID&quot;</span>
@@ -23136,7 +23142,7 @@
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="nt">&lt;/configuration&gt;</span>
 </code></pre></div></li>
 <li>Trace and Span Identifier: TraceID랑 SpanID를 뚝딱 기록해두자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&lt;configuration</span><span class="w"> </span><span class="na">scan=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">debug=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&lt;configuration</span><span class="w"> </span><span class="na">scan=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">debug=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="cm">&lt;!-- all conversion rules from above --&gt;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;STDOUT&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span><span class="nt">&gt;</span>
@@ -23151,6 +23157,8 @@
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="nt">&lt;/configuration&gt;</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="slf4j-vs-log4j-vs-logback-vs-log4j2">slf4j vs log4j vs logback vs log4j2<a class="headerlink" href="#slf4j-vs-log4j-vs-logback-vs-log4j2" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://shplab.tistory.com/entry/log4j-vs-logback-vs-log4j2</em>
 <em>참고: https://stackify.com/compare-java-logging-frameworks/</em>
@@ -23160,84 +23168,104 @@
   3. 다른 배포 환경/상황에 맞는 로깅을 남길 수 있을 것
   - 다행히도 2/3 번에 대한 이슈는 로깅 프레임워크가 최대한 해결해준다!</p>
 <ul>
-<li><strong>slf4j</strong></li>
+<li><strong>slf4j</strong><ul>
 <li>Simple logging facade for Java</li>
-<li>
-<p>자체적인 로깅 프레임워크 X =&gt; 그저 logger 추상체!</p>
-<ul>
+<li>자체적인 로깅 프레임워크 X =&gt; 그저 logger 추상체!<ul>
 <li>logback, log4j2와 같은 로깅 프레임워크의 인터페이스</li>
 <li>코드 일정하게 유지하면서 뚝딱 다른 구현체로의 전환 지원</li>
 </ul>
 </li>
-<li>
-<p><strong>log4j</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>log4j</strong><ul>
 <li>오래된 로깅 아파치 자바 기반 로깅 프레임워크</li>
 <li>xml, properties 로 구성 가능</li>
 <li>2015년 부터 deprecated</li>
-<li>
-<p>로그 레벨로 appender와 logger 정의</p>
+<li>로그 레벨로 appender와 logger 정의</li>
+</ul>
 </li>
-<li>
-<p><strong>logback</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>logback</strong><ul>
 <li>log4j 이후 출시된 널리 사용되는 자바 로깅 프레임워크</li>
 <li>slf4j의 구현체로 동작하며, SpringBoot의 경우 이게 spring-boot-starter-logging의 기본으로 채택</li>
 <li>향상된 정책 및 기능으로 로그 레벨 변경등에 대해 서버 재시작 없는 자동 리로딩 지원</li>
-<li>
-<p>3가지 파트 구성</p>
-<ul>
+<li>3가지 파트 구성<ul>
 <li>logback-core: 로깅 프레임워크의 핵심 기능 제공</li>
 <li>logback-classic: 추가 기능 제공</li>
 <li>logback-access: HTTP 액세스 로그 작성하도록 서블릿 컨테이너와 통합</li>
 </ul>
 </li>
-<li>
-<p><strong>log4j2</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>log4j2</strong><ul>
 <li>logback 처럼 필터링과 자동 리로딩 지원</li>
 <li>MultiThread 환경에서 Async Logger의 경우 다른 로깅 프레임워크보다 처리량이 훨씬 많고 대기시간 짤븡ㅁ</li>
 <li>Lazy evaluation 지원함</li>
 </ul>
+</li>
+</ul>
 <h2 id="play-servlet-container-with-gpt">Play는 Servlet Container를 쓰는가? (with GPT)<a class="headerlink" href="#play-servlet-container-with-gpt" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>답변</strong></li>
+<li><strong>답변</strong><ul>
 <li>아니. 플레이는 서블릿 컨테이너 안써.</li>
-<li>
-<p>자체적으로 고유한 빌트인 HTTP request를 쓴단다 (for async + non-blocking)</p>
-<ul>
-<li>1.x 버전에서는 Netty를 썼어</li>
+<li>자체적으로 고유한 빌트인 HTTP request를 쓴단다 (for async + non-blocking)<ul>
+<li>1.x 버전에서는 Netty를 썼어<ul>
 <li>비동기, 이벤트 드리븐 프레임워크라 많은 병렬처리가 가능했어</li>
-<li>2.x 버전에서는 여전히 Netty를 쓰는데</li>
+</ul>
+</li>
+<li>2.x 버전에서는 여전히 Netty를 쓰는데<ul>
 <li>Akka HTTP의 개념도 가져왔어. </li>
 <li>개발자들이 선택할 수 있게 되었어</li>
 </ul>
 </li>
-<li>
-<p><strong>Netty</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Netty</strong><ul>
 <li>하이 퍼포먼스, 비동기, 이벤트 드리븐 프레임워크</li>
 <li>확장가능, 효율적인 네트워크 어플리케이션</li>
 <li>Netty가 HTTP 요청 플레이가 핸들링할 수 있도록 도와줘<ol>
-<li>Event Loop &amp; Channel</li>
+<li>Event Loop &amp; Channel<ul>
 <li>넌블러킹 방식으로 들어오는 커넥션은 채널로 연결</li>
 <li>이벤트 루프가 채널 관리</li>
-<li>Channel Pipeline</li>
+</ul>
+</li>
+<li>Channel Pipeline<ul>
 <li>채널 파이프라인을 통해 데이터가 파이프라인을 통해 간다</li>
 <li>태스크 수행(디코딩, 어플리케이션 로직, 인코딩)을 파이프라인 안에서 한다</li>
-<li>HTTP Request Handling</li>
+</ul>
+</li>
+<li>HTTP Request Handling<ul>
 <li>채널 파이프라인에서 1차적으로 HTTP 메세지 파싱, 헤더 파싱, 컨텐츠 파싱, 알맞은 응답 만들어주도록 대기</li>
-<li>Play Framework Integration</li>
+</ul>
+</li>
+<li>Play Framework Integration<ul>
 <li>플레이는 네티와 결합하기 위해, 자체적 채널 파이프라인을 제공</li>
 <li>이 핸들러는 인입되는 요청에 따라 알맞은 컨트롤러와 액션을 태우도록 플레이에서 작성됨</li>
 <li>플레이는 비동기 넌블럭킹 방식으로 네티와 궁합이 찰떡</li>
-<li>Asynchronous Execution</li>
+</ul>
+</li>
+<li>Asynchronous Execution<ul>
 <li>이벤트 인입된게 시간 걸리는 거라면 (DB 쿼리, 외부 API 호출) =&gt; 핸들러는 워크를 다른 쓰레드에게 위임할 수 있어</li>
 <li>이벤트 루프는 그 사이 다른 이벤트를 받아서 처리하도록 지원</li>
-<li>Non-Blocking I/O</li>
+</ul>
+</li>
+<li>Non-Blocking I/O<ul>
 <li>Netty는 non-blocking I/O를 통해 read/write 과정에서 쓰레드 블럭 안함</li>
 <li>데이터가 딱 준비댓을때만 뚝딱 쓰레드에 알려줘서 효율적으로</li>
+</ul>
+</li>
 </ol>
+</li>
+</ul>
 </li>
 </ul>
 

@@ -22915,11 +22915,9 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nc">Future</span><span class="p">(</span><span class="n">publish</span><span class="p">(</span><span class="n">session</span><span class="p">))</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>다음과 같이 대상 세션을 MQ에 publish 하는 로직</li>
-<li>병렬적으로 많은 세션이 동시에 publish 될 수 있도록 하는 것이 목적. (최대 5000건 까지 sessions로 들어옴)</li>
-</ul>
-</li>
+</code></pre></div>
+    - 다음과 같이 대상 세션을 MQ에 publish 하는 로직
+    - 병렬적으로 많은 세션이 동시에 publish 될 수 있도록 하는 것이 목적. (최대 5000건 까지 sessions로 들어옴)</li>
 </ul>
 <p><strong>1. 기본 쓰레드 풀 사용시 처리할 세션이 많을 수록 응답이 왜 늦게오지?</strong>
    - 원래 publishAsync는 fire-and-forget 방식으로 구현해두어, API 응답은 먼저 와야 함. 백그라운드에서 알아서 MQ publish

@@ -22954,21 +22954,23 @@
 </code></pre></div></p>
 <h2 id="scala-inner-case-class">Scala inner case class를 반환할 때 발생할 수 있는 문제<a class="headerlink" href="#scala-inner-case-class" title="Permanent link">&para;</a></h2>
 <ul>
-<li>[Layer 구조]</li>
+<li>[Layer 구조]<ul>
 <li>Controller</li>
 <li>WebService</li>
-<li>
-<p>Service</p>
-<ul>
+<li>Service<ul>
 <li>inner case class X</li>
 </ul>
 </li>
-<li>
-<p>각각이 DI를 기본적으로 하게 되면, 파라미터는 클래스 내부에서만 사용한 매개변수로 처리되어 외부 접근 X</p>
+</ul>
 </li>
-<li>Controller에서 X를 반환하게 하려면</li>
+</ul>
+<ul>
+<li>각각이 DI를 기본적으로 하게 되면, 파라미터는 클래스 내부에서만 사용한 매개변수로 처리되어 외부 접근 X</li>
+<li>Controller에서 X를 반환하게 하려면<ul>
 <li><code>WebService @Inject()(val service: Service)</code> 와 같이 val로 public하게 해당 인스턴스 접근을 열어주거나</li>
 <li>X 자체를 Service 밖으로 빼내기</li>
+</ul>
+</li>
 </ul>
 
 

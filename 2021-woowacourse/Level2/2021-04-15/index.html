@@ -22976,18 +22976,10 @@
 <h2 id="spring-simple">Spring 흐름 배우기 (simple)<a class="headerlink" href="#spring-simple" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://github.com/next-step/spring-learning-test/tree/simple</em></li>
-<li>
-<p><strong>요청/응답 흐름</strong></p>
-<ul>
-<li>
-<p>client &lt;--&gt; Spring MVC</p>
-<ul>
-<li>클라이언트로 부터 받은 요청과 응답은 Spring MVC 모듈을 통해 처리</li>
-</ul>
-</li>
-<li>
-<p>예시
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@RestController</span><span class="w"> </span><span class="c1">//클라이언트의 요청을 처리해줄 클래스에요!</span>
+<li><strong>요청/응답 흐름</strong>
+    - client &lt;--&gt; Spring MVC
+        - 클라이언트로 부터 받은 요청과 응답은 Spring MVC 모듈을 통해 처리<p>- 예시
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@RestController</span><span class="w"> </span><span class="c1">//클라이언트의 요청을 처리해줄 클래스에요!</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloController</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/hello&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">//&quot;/hello&quot;요청이 오면 저에게 알려주세요!</span>
@@ -22995,211 +22987,199 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li><strong>DB 접근 흐름도</strong></li>
-<li>Spring JDBC &lt;--&gt; DB<ul>
-<li>DB에 대한 접근은 Spring JDBC로 처리</li>
-</ul>
-</li>
-<li>Controller에서 DAO 사용하기<ul>
-<li>HelloDao 객체를 Controller에서 직접 생성 X</li>
-<li>"스프링 컨테이너"로 관리하기 위해 Controller에 DAO를 의존성 주입<ul>
-<li>생성자 주입을 통해 주입</li>
-</ul>
+</code></pre></div>
+- <strong>DB 접근 흐름도</strong>
+  - Spring JDBC &lt;--&gt; DB
+      - DB에 대한 접근은 Spring JDBC로 처리
+  - Controller에서 DAO 사용하기
+      - HelloDao 객체를 Controller에서 직접 생성 X
+      - "스프링 컨테이너"로 관리하기 위해 Controller에 DAO를 의존성 주입
+          - 생성자 주입을 통해 주입</p>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>그러면 Spring Core가 Controller에 대한 것인가?</p>
-</li>
+<ul>
+<li>그러면 Spring Core가 Controller에 대한 것인가?</li>
 <li>생성도 안 한거 같은데 어찌 주입된거지?</li>
 <li>스프링 컨테이너는 또 뭐야?</li>
 </ul>
 <h2 id="spring-mvc">Spring MVC 학습 테스트<a class="headerlink" href="#spring-mvc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://github.com/next-step/spring-learning-test/tree/mvc</em></li>
-<li>
-<p><strong>mapping</strong></p>
-<ul>
-<li>"요청을 메서드에 연결"</li>
-<li>
-<p>HttpMethod
-    ```java
-   @RestController //클라이언트의 요청을 처리해줄 클래스에요!
-   @RequestMapping("/http-method/users") //저는 해당 URL로의 요청을 처리해줘요!
-   //근데 이 어노테이션은, URL, HTTP 메서드, request param, header, media type에 따라 요청을 처리해주기도 해요!
-   public class HttpMethodController {</p>
-<p>@PostMapping //RequestMapping의 변형이에요! 저는 Post 방식을 받아들여요!
-   public ResponseEntity createUser(@RequestBody User user) {
-       Long id = 1L;
-       return ResponseEntity.created(URI.create("/users/" + id)).build();
-   }</p>
-<p>@GetMapping //RequestMapping의 변형이에요! 저는 Get 방식을 받아들여요!
-   public ResponseEntity<List\<User>> showUser() {
-       List<User> users = Arrays.asList(
-               new User("이름", "email"),
-               new User("이름", "email")
-       );
-       return ResponseEntity.ok().body(users);
-   }
-       }
-       ```
-    2. MediaType
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@RestController</span><span class="w"> </span><span class="c1">//클라이언트의 요청을 처리해줄 클래스에요!</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/media-type/users&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">//저는 해당 URL로의 요청을 처리해줘요!</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MediaTypeController</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1">//저는 Post 방식으로 들어온 JSON을 받아들여요!</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="c1">//해당 속성을 통해 사용자가 Request Body에 담는 타입을 제한할 수 있어요!</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="c1">//Client가 Post방식으로 요청을 보낼 때, JSON 타입으로 요청을 보내야 정상 실행될거에요!</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">consumes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="w"> </span><span class="nf">createUser</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">created</span><span class="p">(</span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;/users/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">)).</span><span class="na">build</span><span class="p">();</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="c1">//저는 Get방식으로 요청이 들어오면, JSON 형식으로 데이터를 만들어 반환해요!</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="c1">//Client가 http 요청에 Accept헤더에 JSON을 받는다고 명시를 한다면, 저는 실행될 것이에요!</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="c1">//JSON 형식을 받는다고 클라이언트가 요청했으니, JSON을 만들어 뚝딱 반환하는 제가 실행됩니다. </span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">showUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;이름&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">),</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;이름&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="p">);</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="n">users</span><span class="p">);</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="c1">//저는 Get방식으로 요청이 들어오면, HTML 형식으로 데이터를 만들어 반환해요!</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="c1">//Client가 http 요청에 Accept헤더에 HTML을 받는다고 명시를 한다면, 저는 실행될 것이에요!</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="c1">//HTML 형식을 받는다고 클라이언트가 요청했으니, HTML을 만들어 뚝딱 반환하는 제가 실행됩니다. </span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">TEXT_HTML_VALUE</span><span class="p">)</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">userPage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;user page&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="p">}</span>
+<li><strong>mapping</strong>
+    - "요청을 메서드에 연결"
+    1. HttpMethod
+        ```java
+       @RestController //클라이언트의 요청을 처리해줄 클래스에요!
+       @RequestMapping("/http-method/users") //저는 해당 URL로의 요청을 처리해줘요!
+       //근데 이 어노테이션은, URL, HTTP 메서드, request param, header, media type에 따라 요청을 처리해주기도 해요!
+       public class HttpMethodController {<div class="highlight"><pre><span></span><code>     @PostMapping //RequestMapping의 변형이에요! 저는 Post 방식을 받아들여요!
+     public ResponseEntity createUser(@RequestBody User user) {
+         Long id = 1L;
+         return ResponseEntity.created(URI.create(&quot;/users/&quot; + id)).build();
+     }
+
+     @GetMapping //RequestMapping의 변형이에요! 저는 Get 방식을 받아들여요!
+     public ResponseEntity&lt;List&lt;User&gt;&gt; showUser() {
+         List&lt;User&gt; users = Arrays.asList(
+                 new User(&quot;이름&quot;, &quot;email&quot;),
+                 new User(&quot;이름&quot;, &quot;email&quot;)
+         );
+         return ResponseEntity.ok().body(users);
+     }
+ }
+ ```
 </code></pre></div>
-    3. ParamHeader
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@RestController</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param-header/message&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamHeaderController</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">()</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">message</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="c1">//만일 Get 요청이 지정한 param으로 들어온다면, 즉 쿼리스트링(?name=hello)으로 들어온다면 이걸 실행해 주세요!</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;name=hello&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">messageForParam</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="c1">//만일 Get 요청이 header로 들어온다면, better=hi로 들어온다면 이걸 실행해줘요!</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;better=hi&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">messageForHeader</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="s">&quot;hi&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">}</span>
-</code></pre></div>
-    4. UriPattern
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">//URI의 패턴을 정규표현식+정해진 문법으로 지정할 수 있음!</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@RestController</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/uri-pattern&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UriPatternController</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;users/{id}&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pathVariable</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;이름&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="c1">//하나의 영문자가 들어온다면 실행해주세요!</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;patterns/?&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pattern</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="s">&quot;pattern&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="c1">//뒤에 무엇이 붙은다면 이걸 실행해주세요!</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;patterns/**&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">patternStars</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="s">&quot;pattern-multi&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="p">}</span>
-</code></pre></div>
+<p>2. MediaType
+      <code>java
+      @RestController //클라이언트의 요청을 처리해줄 클래스에요!
+      @RequestMapping("/media-type/users") //저는 해당 URL로의 요청을 처리해줘요!
+      public class MediaTypeController {
+          //저는 Post 방식으로 들어온 JSON을 받아들여요!
+          //해당 속성을 통해 사용자가 Request Body에 담는 타입을 제한할 수 있어요!
+          //Client가 Post방식으로 요청을 보낼 때, JSON 타입으로 요청을 보내야 정상 실행될거에요!
+          @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+          public ResponseEntity createUser(@RequestBody User user) {
+              Long id = 1L;
+              return ResponseEntity.created(URI.create("/users/" + id)).build();
+          }
+          //저는 Get방식으로 요청이 들어오면, JSON 형식으로 데이터를 만들어 반환해요!
+          //Client가 http 요청에 Accept헤더에 JSON을 받는다고 명시를 한다면, 저는 실행될 것이에요!
+          //JSON 형식을 받는다고 클라이언트가 요청했으니, JSON을 만들어 뚝딱 반환하는 제가 실행됩니다. 
+          @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+          public ResponseEntity&lt;List&lt;User&gt;&gt; showUser() {
+              List&lt;User&gt; users = Arrays.asList(
+                      new User("이름", "email"),
+                      new User("이름", "email")
+              );
+              return ResponseEntity.ok().body(users);
+          }
+          //저는 Get방식으로 요청이 들어오면, HTML 형식으로 데이터를 만들어 반환해요!
+          //Client가 http 요청에 Accept헤더에 HTML을 받는다고 명시를 한다면, 저는 실행될 것이에요!
+          //HTML 형식을 받는다고 클라이언트가 요청했으니, HTML을 만들어 뚝딱 반환하는 제가 실행됩니다. 
+          @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
+          public String userPage() {
+              return "user page";
+          }
+      }</code>
+  3. ParamHeader
+      <code>java
+      @RestController
+      @RequestMapping("/param-header/message")
+      public class ParamHeaderController {
+
+          @GetMapping()
+          public ResponseEntity&lt;String&gt; message() {
+              return ResponseEntity.ok().body("message");
+          }
+          //만일 Get 요청이 지정한 param으로 들어온다면, 즉 쿼리스트링(?name=hello)으로 들어온다면 이걸 실행해 주세요!
+          @GetMapping(params = "name=hello")
+          public ResponseEntity&lt;String&gt; messageForParam() {
+              return ResponseEntity.ok().body("hello");
+          }
+          //만일 Get 요청이 header로 들어온다면, better=hi로 들어온다면 이걸 실행해줘요!
+          @GetMapping(headers = "better=hi")
+          public ResponseEntity&lt;String&gt; messageForHeader() {
+              return ResponseEntity.ok().body("hi");
+          }
+      }</code>
+  4. UriPattern
+      <code>java
+      //URI의 패턴을 정규표현식+정해진 문법으로 지정할 수 있음!
+      @RestController
+      @RequestMapping("/uri-pattern")
+      public class UriPatternController {
+
+          @GetMapping(path = "users/{id}")
+          public ResponseEntity&lt;User&gt; pathVariable(@PathVariable Long id) {
+              User user = new User(id, "이름", "email");
+              return ResponseEntity.ok().body(user);
+          }
+          //하나의 영문자가 들어온다면 실행해주세요!
+          @GetMapping("patterns/?")
+          public ResponseEntity&lt;String&gt; pattern() {
+              return ResponseEntity.ok().body("pattern");
+          }
+          //뒤에 무엇이 붙은다면 이걸 실행해주세요!
+          @GetMapping("patterns/**")
+          public ResponseEntity&lt;String&gt; patternStars() {
+              return ResponseEntity.ok().body("pattern-multi");
+          }
+      }</code>
 - <strong>handler</strong>
-    - "요청을 처리하는 부분"
-    1. MethodArgument
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@RestController</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/method-argument&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MethodArgumentController</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="c1">//파라미터로 넘어온 친구가, 즉 쿼리스트링으로 넘어온 친구가 ?name=*** 형식이라면,</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="c1">//***를 userName에 저장해주세요!</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">requestParam</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">userName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">),</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">userName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="p">);</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="n">users</span><span class="p">);</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/users/body&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="c1">//RequestBody 어노테이션을 통해서, request body로 들어온 친구를 역직렬화해서 객체로 만들수 있어요!</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="w"> </span><span class="nf">requestBody</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">newUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="mi">1L</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getEmail</span><span class="p">());</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">created</span><span class="p">(</span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;/users/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newUser</span><span class="p">.</span><span class="na">getId</span><span class="p">())).</span><span class="na">body</span><span class="p">(</span><span class="n">newUser</span><span class="p">);</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="p">}</span>
-</code></pre></div>
-    2. ReturnValue
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@RestController</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/return-value&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReturnValueController</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/message&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="c1">//Client가 .accept(MediaType.TEXT_HTML_VALUE)라고 했다면, RequestBody를 통해</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="c1">//&lt;html&gt;</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="c1">//  &lt;body&gt;message&lt;/body&gt;</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="c1">//&lt;/html&gt;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="c1">//를 반환!</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nd">@ResponseBody</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">string</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;message&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="c1">//Client가 .accept(MediaType.APPLICATION_JSON_VALUE)라고 했다면, RequestBody를 통해</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="c1">//{</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="c1">//    &quot;id&quot;: null,</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="c1">//    &quot;name&quot;: &quot;name&quot;,</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="c1">//    &quot;email&quot;: &quot;email&quot;</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="c1">//}</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">    </span><span class="c1">//를 반환!</span>
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="nd">@ResponseBody</span>
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">responseBodyForUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">);</span>
-<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>
-<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">    </span><span class="c1">//ResponseEntity를 통해서 return value를 full response로 변경! (HTTP 헤더등을 포함)</span>
-<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">    </span><span class="c1">//ResponseBody와 비슷하지만, status와 header를 추가할 수 있음</span>
-<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">    </span><span class="c1">//참고: https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-ann-responseentity</span>
-<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/users/{id}&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="w"> </span><span class="nf">responseEntity</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">));</span>
-<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
-<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/members&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="w"> </span><span class="nf">responseEntityFor400</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">badRequest</span><span class="p">().</span><span class="na">build</span><span class="p">();</span>
-<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="p">}</span>
-</code></pre></div></p>
+  - "요청을 처리하는 부분"
+  1. MethodArgument
+      <code>java
+      @RestController
+      @RequestMapping("/method-argument")
+      public class MethodArgumentController {
+
+          @GetMapping("/users")
+          //파라미터로 넘어온 친구가, 즉 쿼리스트링으로 넘어온 친구가 ?name=*** 형식이라면,
+          //***를 userName에 저장해주세요!
+          public ResponseEntity&lt;List&lt;User&gt;&gt; requestParam(@RequestParam("name") String userName) {
+              List&lt;User&gt; users = Arrays.asList(
+                      new User(userName, "email"),
+                      new User(userName, "email")
+              );
+              return ResponseEntity.ok().body(users);
+          }
+
+          @PostMapping("/users/body")
+          //RequestBody 어노테이션을 통해서, request body로 들어온 친구를 역직렬화해서 객체로 만들수 있어요!
+          public ResponseEntity requestBody(@RequestBody User user) {
+              User newUser = new User(1L, user.getName(), user.getEmail());
+              return ResponseEntity.created(URI.create("/users/" + newUser.getId())).body(newUser);
+          }
+      }</code>
+  2. ReturnValue
+      <code>java
+      @RestController
+      @RequestMapping("/return-value")
+      public class ReturnValueController {
+
+          @GetMapping("/message")
+          //Client가 .accept(MediaType.TEXT_HTML_VALUE)라고 했다면, RequestBody를 통해
+          //&lt;html&gt;
+          //  &lt;body&gt;message&lt;/body&gt;
+          //&lt;/html&gt;
+          //를 반환!
+          @ResponseBody
+          public String string() {
+              return "message";
+          }
+
+          @GetMapping("/users")
+          //Client가 .accept(MediaType.APPLICATION_JSON_VALUE)라고 했다면, RequestBody를 통해
+          //{
+          //    "id": null,
+          //    "name": "name",
+          //    "email": "email"
+          //}
+          //를 반환!
+          @ResponseBody
+          public User responseBodyForUser() {
+              return new User("name", "email");
+          }
+
+          //ResponseEntity를 통해서 return value를 full response로 변경! (HTTP 헤더등을 포함)
+          //ResponseBody와 비슷하지만, status와 header를 추가할 수 있음
+          //참고: https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-ann-responseentity
+          @GetMapping("/users/{id}")
+          public ResponseEntity responseEntity(@PathVariable Long id) {
+              return ResponseEntity.ok(new User("name", "email"));
+          }
+
+          @GetMapping("/members")
+          public ResponseEntity responseEntityFor400() {
+              return ResponseEntity.badRequest().build();
+          }
+      }</code></p>
 </li>
 </ul>
-</li>
-<li>
-<p><strong>exception</strong></p>
 <ul>
-<li>"요청에 대한 예외처리"
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@RestController</span>
+<li><strong>exception</strong>
+    - "요청에 대한 예외처리"
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@RestController</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/exceptions&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExceptionsController</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="c1">//해당 Exception이 발생하면 이걸 던져주세요!</span>
@@ -23218,15 +23198,11 @@
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="spring-jdbc">Spring JDBC 학습 테스트<a class="headerlink" href="#spring-jdbc" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><em>참고: https://github.com/next-step/spring-learning-test/tree/jdbc</em></p>
-<ol>
-<li>NamedParamDAO
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@Repository</span>
+<li><em>참고: https://github.com/next-step/spring-learning-test/tree/jdbc</em>
+    1. NamedParamDAO
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@Repository</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NamedParamDAO</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">NamedParameterJdbcTemplate</span><span class="w"> </span><span class="n">namedParameterJdbcTemplate</span><span class="p">;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
@@ -23254,9 +23230,9 @@
 <a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">namedParameterJdbcTemplate</span><span class="p">.</span><span class="na">queryForObject</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="n">namedParameters</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>QueryingDAO
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nd">@Repository</span>
+</code></pre></div>
+    2. QueryingDAO
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nd">@Repository</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">QueryingDAO</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
@@ -23289,9 +23265,9 @@
 <a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="n">actorRowMapper</span><span class="p">,</span><span class="w"> </span><span class="n">firstName</span><span class="p">);</span>
 <a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>UpdatingDAO
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@Repository</span>
+</code></pre></div>
+    3. UpdatingDAO
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@Repository</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UpdatingDAO</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
@@ -23314,9 +23290,9 @@
 <a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">jdbcTemplate</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
 <a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>SimpleInsertDAO
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nd">@Repository</span>
+</code></pre></div>
+    4. SimpleInsertDAO
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nd">@Repository</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleInsertDao</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SimpleJdbcInsert</span><span class="w"> </span><span class="n">insertActor</span><span class="p">;</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
@@ -23349,14 +23325,12 @@
 <a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="p">}</span>
 </code></pre></div></li>
-</ol>
-</li>
-<li>
-<p>@Autowired는 뭐야?</p>
-</li>
-<li>
-<p>JdbcTemplate VS NamedParameterJdbcTemplate</p>
-</li>
+</ul>
+<ul>
+<li>@Autowired는 뭐야?</li>
+</ul>
+<ul>
+<li>JdbcTemplate VS NamedParameterJdbcTemplate</li>
 <li>queryForObject VS query VS update</li>
 <li>RowMapper란?</li>
 <li>executeAndReturnKey?</li>
@@ -23364,22 +23338,16 @@
 </ul>
 <h2 id="spring-core">Spring Core 학습 테스트<a class="headerlink" href="#spring-core" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고: https://github.com/next-step/spring-learning-test/tree/core</em><ol>
-<li>DI<ul>
-<li>생성자 주입</li>
-<li>필드 주입</li>
-<li>Setter 주입</li>
-</ul>
-</li>
-<li>스프링 빈으로 등록하기<ul>
-<li>@Component</li>
-<li>@Repository</li>
-<li>@Controller</li>
-<li>@Service</li>
-</ul>
-</li>
-</ol>
-</li>
+<li><em>참고: https://github.com/next-step/spring-learning-test/tree/core</em>
+    1. DI
+        - 생성자 주입
+        - 필드 주입
+        - Setter 주입
+    2. 스프링 빈으로 등록하기
+        - @Component
+        - @Repository
+        - @Controller
+        - @Service</li>
 </ul>
 
 

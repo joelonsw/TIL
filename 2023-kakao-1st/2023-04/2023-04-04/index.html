@@ -22909,23 +22909,24 @@
 <h3 id="2023-04-04">2023-04-04<a class="headerlink" href="#2023-04-04" title="Permanent link">&para;</a></h3>
 <h2 id="scala-macwire">Scala macwire<a class="headerlink" href="#scala-macwire" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>macwire</strong></li>
+<li><strong>macwire</strong><ul>
 <li>스칼라 macro를 활용하여 간단하게 dependency를 관리할 수 있또록 도와줌</li>
-<li>
-<p>wire 메서드 자체는 객체를 생성하고, DI를 자동적으로 수행할 수 있도록 도와주는 역할을 수행</p>
+<li>wire 메서드 자체는 객체를 생성하고, DI를 자동적으로 수행할 수 있도록 도와주는 역할을 수행</li>
+</ul>
 </li>
-<li>
-<p><strong>wire</strong>
+</ul>
+<ul>
+<li><strong>wire</strong>
     ```scala
-    package com.softwaremill</p>
-<p>import scala.language.experimental.macros</p>
+    package com.softwaremill<p>import scala.language.experimental.macros</p>
 <p>package object macwire {
-    def wire[T]: T = macro MacwireMacros.wire_impl[T]
-}
-   ```</p>
+      def wire[T]: T = macro MacwireMacros.wire_impl[T]
+  }
+ ```</p>
 </li>
-<li>
-<p><strong>ApplicationLoader</strong>
+</ul>
+<ul>
+<li><strong>ApplicationLoader</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ApplicationLoader</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">GuiceApplicationLoader</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nd">@Singleton</span>
@@ -22939,8 +22940,7 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

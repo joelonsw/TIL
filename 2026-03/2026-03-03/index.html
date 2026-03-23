@@ -22918,37 +22918,43 @@
   - AI 엔진 자체가 아니라 엔진을 잘 활용하는 설계 기술이 성능을 좌우한다
   - 모델 성능이 수렴하면서, 동일한 모델을 어떻게 감싸고 제어하느냐가 AI 에이전트 비즈니스의 성패 좌우!</p>
 <ul>
-<li><strong>OpenAI</strong></li>
+<li><strong>OpenAI</strong><ul>
 <li>코드를 작성하는 것보다, 코덱스 에이전트가 안정적으로 작업할 수 있는 피드백 루프 구축이 목표</li>
 <li>코드 작성 =&gt; 문서, 의존성 규칙, 린터, 테스트 인프라, 관측 체계에 집중 투자<ul>
 <li>라인 단위 코드리뷰에는 별로 투자하지 않음</li>
 </ul>
 </li>
-<li>
-<p>문법/구현 =&gt; 아키텍처 설계, 명세 작성, 피드백 루프 설계로 이동 중</p>
+<li>문법/구현 =&gt; 아키텍처 설계, 명세 작성, 피드백 루프 설계로 이동 중</li>
+</ul>
 </li>
-<li>
-<p><strong>SW Engineering 미래 견해</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>SW Engineering 미래 견해</strong><ul>
 <li>아키텍처, 기술부채, 확장성, 모듈성에 깊이 신경 씀</li>
-<li>
-<p>새로운 기능 추가가 쉽도록 에너지를 투자하는 것</p>
+<li>새로운 기능 추가가 쉽도록 에너지를 투자하는 것</li>
+</ul>
 </li>
-<li>
-<p><strong>실제 시스템 구성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>실제 시스템 구성</strong><ol>
 <li>스펙 기반 워크플로우<ul>
 <li>AI와의 대화를 통해 "매우 구체적이고 상세한 스펙"을 먼저 작성</li>
 <li>요구사항 ID를 통한 제품 스펙 ~ 실행 계획까지 추적 가능하도록 구조화</li>
-<li>검증 방식이 명시된 수용 기준 포함</li>
+<li>검증 방식이 명시된 수용 기준 포함<ul>
 <li>TEST, BROWSER:DOM, curl/bash</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>AI Coding Toolkit<ul>
 <li>프롬프트, 스킬, 훅, 스크립트로 구성된 툴킷이 에이전트의 작업 방식 제약. </li>
-<li>에이전트 지침 == 인프라</li>
+<li>에이전트 지침 == 인프라<ul>
 <li><code>AGENTS.md</code>: 보수적 수정, 기존 인터페이스 유지, TDD 준수, 추측 금지, git 히스토리 override 금지</li>
 </ul>
+</li>
+</ul>
+</li>
+</ol>
 </li>
 </ul>
 

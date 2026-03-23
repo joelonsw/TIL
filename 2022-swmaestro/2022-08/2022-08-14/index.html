@@ -22913,33 +22913,34 @@
 <li><em>참고: https://www.baeldung.com/jpa-join-column</em></li>
 <li><em>참고: https://www.baeldung.com/jpa-joincolumn-vs-mappedby</em></li>
 <li><em>참고: https://kok202.tistory.com/138</em></li>
-<li><strong>JoinColumn</strong></li>
+<li><strong>JoinColumn</strong><ul>
 <li>해당 어노테이션은 Team 테이블이 Member 테이블과 1:N 관계라고 알려주는게 목적이 아님</li>
 <li><code>@JoinColumn</code>을 통해 "team_id"라고 부여했으면 그냥 Member 테이블에 "team_id"라는 칼럼이 생성되는 것</li>
 <li>JPA는 선택적으로 referencedColumnName을 통해 타 엔티티의 연관관계를 매핑해줄 칼럼을 지정할 수 있음<ul>
 <li>이걸 생략하면 자동으로 대상 테이블의 pk값으로 지정됨</li>
 </ul>
 </li>
-<li>
-<p>개요</p>
-<ul>
+<li>개요<ul>
 <li>일대다/다대일 관계에서 "다" 쪽에서 FK를 들고 있음</li>
 <li><code>@JoinColumn</code>은 실 매핑을 정의함</li>
 </ul>
 </li>
-<li>
-<p><strong>mappedBy</strong></p>
+</ul>
 </li>
-<li>
-<p>개요</p>
+</ul>
 <ul>
+<li><strong>mappedBy</strong><ul>
+<li>개요<ul>
 <li>이런 다대일 연관관계를 양방향으로 만들기 위해서는, 참조하는 측을 정의해야함</li>
 <li>mappedBy 속성으로 해당 기능을 만들어 줄 수 있음</li>
 <li>mappedBy의 값은 owning-side의 연관관계 매핑의 속성임</li>
 </ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>예시</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Getter</span><span class="w"> </span><span class="nd">@Setter</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nd">@NoArgsConstructor</span><span class="p">(</span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AccessLevel</span><span class="p">.</span><span class="na">PROTECTED</span><span class="p">)</span>
@@ -22994,8 +22995,7 @@
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

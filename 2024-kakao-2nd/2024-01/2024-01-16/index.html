@@ -22958,7 +22958,7 @@
   - 팩토리 메서드 패턴: 클래스의 인스턴스를 만드는 일을 서브 클래스에게 만드는 것
   - 추상 팩토리 패턴: 인터페이스를 이용하여 서로 연관된, 또는 의존하는 객체를 구상 클래스 지정 없이 생성</p>
 <ul>
-<li><strong>팩토리 메서드 패턴 예시</strong></li>
+<li><strong>팩토리 메서드 패턴 예시</strong><ul>
 <li>피자를 만드는 피자가게 예시</li>
 <li>등장 클래스 <ul>
 <li>Pizza</li>
@@ -22966,35 +22966,39 @@
 </ul>
 </li>
 <li><img alt="" src="../../images/2024-01-16-factory-method-pattern.png" /></li>
-<li>
-<p>특징</p>
-<ul>
+<li>특징<ul>
 <li>팩토리 메서드 패턴</li>
 </ul>
 </li>
-<li>
-<p><strong>팩토리 메서드 패턴 설명</strong></p>
+</ul>
 </li>
-<li>
-<p>객체 생성을 공장 클래스로 캡슐화... 대신 생성하도록 하는 생성 디자인 패턴</p>
+</ul>
 <ul>
+<li><strong>팩토리 메서드 패턴 설명</strong><ul>
+<li>객체 생성을 공장 클래스로 캡슐화... 대신 생성하도록 하는 생성 디자인 패턴<ul>
 <li><code>new</code> 연산자 말고, </li>
-<li>제품 객체 도맡아 생성하는 공장 클래스 만들고</li>
+<li>제품 객체 도맡아 생성하는 공장 클래스 만들고<ul>
 <li>이를 상속하는 서브 공장 클래스의 메서드에서 여러 제품 객체 생성의 책임을 가짐</li>
 </ul>
 </li>
-<li>
-<p><strong>팩토리 메서드 패턴 구조</strong></p>
-</li>
-<li><img alt="" src="../../images/2024-01-16-fmp2.png" /></li>
-<li>Creator: 최상위 공장 클래스. 팩토리 메서드 추상화해 서브 클래스가 구현할 수 있도록<ul>
-<li>객체 생성 처리 메서드(someOperation): 객체 생성에 관한 전처리, 후처리를 템플릿화한 메서드</li>
-<li>팩토리 메서드(createProduct): 서브 공장 클래스에서 재정의할 객체 생성 추상 메서드</li>
 </ul>
 </li>
-<li>ConcreteCreator: 각 서브 공장 클래스. 이에 맞는 제품 객체 반환하도록 생성 추상 메서드 재정의</li>
-<li>Product: 제품 구현체의 추상화</li>
-<li>ConcreteProduct: 제품 구현체</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>팩토리 메서드 패턴 구조</strong><ul>
+<li><img alt="" src="../../images/2024-01-16-fmp2.png" />
+1. Creator: 최상위 공장 클래스. 팩토리 메서드 추상화해 서브 클래스가 구현할 수 있도록<ul>
+<li>객체 생성 처리 메서드(someOperation): 객체 생성에 관한 전처리, 후처리를 템플릿화한 메서드</li>
+<li>팩토리 메서드(createProduct): 서브 공장 클래스에서 재정의할 객체 생성 추상 메서드
+2. ConcreteCreator: 각 서브 공장 클래스. 이에 맞는 제품 객체 반환하도록 생성 추상 메서드 재정의
+3. Product: 제품 구현체의 추상화
+4. ConcreteProduct: 제품 구현체</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="js-package-manager-task-runner-module-bundler">JS 진영 Package Manager, Task Runner, Module Bundler<a class="headerlink" href="#js-package-manager-task-runner-module-bundler" title="Permanent link">&para;</a></h2>
 <p><strong>[Package Manager]</strong><br />
@@ -23017,35 +23021,36 @@
   - JS Task 기반 빌드 툴
   - Node.js 기반의 패키지 </p>
 <ul>
-<li><strong>프로젝트 생성</strong></li>
+<li><strong>프로젝트 생성</strong><ul>
 <li><code>package.json</code><ul>
 <li>프로젝트 정보/버전/설치된 js 패키지 등 전반적인 내용 관리</li>
 </ul>
 </li>
-<li>
-<p><code>gruntfile.js</code></p>
-<ul>
+<li><code>gruntfile.js</code><ul>
 <li>어떤 패키지를 어떤 옵션으로 언제 실행할 것인가에 대한 기록</li>
 <li>명령어: <code>grunt</code>, <code>grunt serve</code>, <code>grunt build</code></li>
 </ul>
 </li>
-<li>
-<p><strong>설치</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>설치</strong><ul>
 <li>Grunt 설치<ul>
 <li>로컬 프로젝트에 설치하는 개념</li>
 <li><code>-g</code> 옵션 없음</li>
 <li><code>npm install grunt --save-dev</code></li>
 </ul>
 </li>
-<li>
-<p>Grunt로 사용할 다양한 패키지 설치</p>
-<ul>
+<li>Grunt로 사용할 다양한 패키지 설치<ul>
 <li>Grunt가 명령을 내릴 다양한 패키지들의 설치 필요 (플러그인)</li>
 </ul>
 </li>
-<li>
-<p><strong>gruntfile.js의 구조와 사용법</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>gruntfile.js의 구조와 사용법</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// 1. 프로젝트의 구성</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
@@ -23064,26 +23069,19 @@
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="c1">// 3. 실행 명령어 (명령창에서 grunt 명령으로 실행)</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;uglify&#39;</span><span class="p">]);</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">};</span>
-</code></pre></div></p>
-<ol>
-<li>프로젝트 구성</li>
-<li>외부에서 실행할 수 있게 되어있음</li>
-<li>이에 따라 <code>node.js</code> 명령어창에서 명령어로 cli 실행 가능해짐]</li>
-<li>Task(플러그인) 를 하나하나 명시하고 구성을 정의<ul>
-<li>파일 참조, 처리, 처리 결과물 저장 등</li>
-</ul>
-</li>
-<li>사용한 플러그인 로딩</li>
-<li>플러그인 불러옴</li>
-<li>실행 명령어</li>
-<li>플러그인을 순서대로 실행시키는 명령어 뭉치 작성</li>
-<li>순서대로 실행됨<ul>
-<li><code>grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);</code></li>
-<li>concat -&gt; uglify -&gt; cssmin</li>
-</ul>
-</li>
-</ol>
-</li>
+</code></pre></div>
+    1. 프로젝트 구성
+       - 외부에서 실행할 수 있게 되어있음
+       - 이에 따라 <code>node.js</code> 명령어창에서 명령어로 cli 실행 가능해짐]
+       - Task(플러그인) 를 하나하나 명시하고 구성을 정의
+         - 파일 참조, 처리, 처리 결과물 저장 등
+    2. 사용한 플러그인 로딩
+       - 플러그인 불러옴
+    3. 실행 명령어
+       - 플러그인을 순서대로 실행시키는 명령어 뭉치 작성
+       - 순서대로 실행됨
+         - <code>grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);</code>
+         - concat -&gt; uglify -&gt; cssmin</li>
 </ul>
 
 

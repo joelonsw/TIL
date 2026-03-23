@@ -23032,120 +23032,78 @@
 <h2 id="2">토비의 스프링 2단원<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <h4 id="_1">핵심 내용<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <ul>
-<li>
-<p>객체 지향 기술과 더불어 다른 하나의 도구로 스프링이 강조하고 가치를 두는 것은 "테스트"</p>
-</li>
-<li>
-<p><strong>기존 테스트 + 수동 테스트의 문제점</strong></p>
+<li>객체 지향 기술과 더불어 다른 하나의 도구로 스프링이 강조하고 가치를 두는 것은 "테스트"</li>
+</ul>
 <ul>
-<li>1단원에서 작성한 테스트는 main() 메서드를 통해 테스트를 수행함... 단점이 많음<ul>
-<li>수동 확인 작업 필요</li>
-<li>실행 작업 번거로움</li>
-<li>제어권을 직접 가진다는 것이 프레임워크의 컨셉에 안어울림</li>
+<li><strong>기존 테스트 + 수동 테스트의 문제점</strong>
+    - 1단원에서 작성한 테스트는 main() 메서드를 통해 테스트를 수행함... 단점이 많음
+        - 수동 확인 작업 필요
+        - 실행 작업 번거로움
+        - 제어권을 직접 가진다는 것이 프레임워크의 컨셉에 안어울림
+    - 웹 화면을 통한 테스트는 값 입력 -&gt; 기능 수행 -&gt; 결과 확인... 너무 번거로움
+        - 모든 레이어 다 만들어야 테스트 가능하다는 단점</li>
 </ul>
-</li>
-<li>웹 화면을 통한 테스트는 값 입력 -&gt; 기능 수행 -&gt; 결과 확인... 너무 번거로움<ul>
-<li>모든 레이어 다 만들어야 테스트 가능하다는 단점</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>단위 테스트 + 자동 테스트</strong></p>
 <ul>
-<li>테스트하고자 하는 대상이 명확하다면, 그 대상에만 집중하여 테스트하는 것이 바람직하다<ul>
-<li>작은 단위의 코드에 대한 테스트를 "단위 테스트"라고 한다<ul>
-<li>단위 테스트는 항상 일관성 있는 결과가 보장 되어야 함<ul>
-<li>DB에 남아 있는 데이터와 외부 환경에 영향 받지 않아야 함</li>
-<li>테스트 실행 순서 바뀌어도 동일한 결과여야 함</li>
+<li><strong>단위 테스트 + 자동 테스트</strong>
+    - 테스트하고자 하는 대상이 명확하다면, 그 대상에만 집중하여 테스트하는 것이 바람직하다
+        - 작은 단위의 코드에 대한 테스트를 "단위 테스트"라고 한다
+            - 단위 테스트는 항상 일관성 있는 결과가 보장 되어야 함
+                - DB에 남아 있는 데이터와 외부 환경에 영향 받지 않아야 함
+                - 테스트 실행 순서 바뀌어도 동일한 결과여야 함
+    - 테스트는 자동으로 수행되도록 코드로 만드는 것이 중요하다
+        - 어떤 개발자는 모든 클래스가 스스로 테스트 하는 main() 메서드를 가지고 있어야 한다고 주장
+        - 어찌되었든, 코드가 만들어져 자동으로 수행될 수 있어야 하는 것은 매우 중요!
+        - 자동 테스트는 자주 반복하기 용이함</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>테스트는 자동으로 수행되도록 코드로 만드는 것이 중요하다<ul>
-<li>어떤 개발자는 모든 클래스가 스스로 테스트 하는 main() 메서드를 가지고 있어야 한다고 주장</li>
-<li>어찌되었든, 코드가 만들어져 자동으로 수행될 수 있어야 하는 것은 매우 중요!</li>
-<li>자동 테스트는 자주 반복하기 용이함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>테스트의 장점</strong></p>
 <ul>
-<li>단순 무식한 방법으로 정상 동작하는 코드 만들고, 테스트를 통해 점진적 리팩토링 가능</li>
-<li>최종적으로 모든 테스트가 성공하면, 새로 추가한 기능도 정상적으로 동작하고 기존 기능에 영향 안 줌 확인 가능    </li>
-<li>"항상 네거티브 테스트를 먼저 만들 것"<ul>
-<li>성공할 거 알고 짠 테스트는 무의미</li>
+<li><strong>테스트의 장점</strong>
+    - 단순 무식한 방법으로 정상 동작하는 코드 만들고, 테스트를 통해 점진적 리팩토링 가능
+    - 최종적으로 모든 테스트가 성공하면, 새로 추가한 기능도 정상적으로 동작하고 기존 기능에 영향 안 줌 확인 가능  <br />
+    - "항상 네거티브 테스트를 먼저 만들 것"
+        - 성공할 거 알고 짠 테스트는 무의미</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>TDD</strong></p>
 <ul>
-<li>선 테스트, 후 프로덕션</li>
-<li>테스트를 빼먹지 않고 꼼꼼하게 만들 수 있음</li>
-<li>테스트 ~ 프로덕션 작성 시간 Short</li>
-<li>테스트 덕에 오류 빨리 잡아내서 개발 속도 Fast</li>
+<li><strong>TDD</strong>
+    - 선 테스트, 후 프로덕션
+    - 테스트를 빼먹지 않고 꼼꼼하게 만들 수 있음
+    - 테스트 ~ 프로덕션 작성 시간 Short
+    - 테스트 덕에 오류 빨리 잡아내서 개발 속도 Fast</li>
 </ul>
-</li>
-<li>
-<p><strong>Junit</strong></p>
 <ul>
-<li>테스트 수행 방식<ol>
-<li>@Test + public void 형의 테스트 메서드 찾기</li>
-<li>테스트 클래스 "오브젝트 생성"</li>
-<li>@Before 붙은 메서드 실행</li>
-<li>@Test 붙은 메서드 실행</li>
-<li>@After 붙은 메서드 실행</li>
-</ol>
-</li>
-<li>각각의 테스트 메서드 실행할 때마다 테스트 클래스의 오브젝트 새로 만든다!<ul>
-<li>한 번 만들어진 테스트 클래스의 오브젝트는 하나의 테스트 메서드 사용하고 난 후 버려짐</li>
-<li>각 테스트가 서로 영향 주지 않고 독립적으로 실행함을 보장하려고 이렇게 설계</li>
+<li><strong>Junit</strong>
+    - 테스트 수행 방식
+        1. @Test + public void 형의 테스트 메서드 찾기
+        2. 테스트 클래스 "오브젝트 생성"
+        3. @Before 붙은 메서드 실행
+        4. @Test 붙은 메서드 실행
+        5. @After 붙은 메서드 실행
+    - 각각의 테스트 메서드 실행할 때마다 테스트 클래스의 오브젝트 새로 만든다!
+        - 한 번 만들어진 테스트 클래스의 오브젝트는 하나의 테스트 메서드 사용하고 난 후 버려짐
+        - 각 테스트가 서로 영향 주지 않고 독립적으로 실행함을 보장하려고 이렇게 설계</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>테스트를 위한 애플리케이션 컨텍스트 관리</strong></p>
 <ul>
-<li>애플리케이션 컨텍스트는 생성에 많은 시간이 소모됨<ul>
-<li>원칙적으론 매 테스트 마다 새로 생성해야 하지만, 이를 공유하는 경우도 있음</li>
-</ul>
-</li>
-<li>테스트에서 사용할 설정파일을 지정해두고, @Autowired를 통해 주입시킬 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@RunWith</span><span class="p">(</span><span class="n">SpringJUnit4ClassRunner</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<li><strong>테스트를 위한 애플리케이션 컨텍스트 관리</strong>
+    - 애플리케이션 컨텍스트는 생성에 많은 시간이 소모됨
+        - 원칙적으론 매 테스트 마다 새로 생성해야 하지만, 이를 공유하는 경우도 있음
+    - 테스트에서 사용할 설정파일을 지정해두고, @Autowired를 통해 주입시킬 수 있음
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@RunWith</span><span class="p">(</span><span class="n">SpringJUnit4ClassRunner</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@ContextConfiguration</span><span class="p">(</span><span class="n">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DaoFactory</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserDaoTest</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nd">@Autowired</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserDao</span><span class="w"> </span><span class="n">dao</span><span class="p">;</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>테스트에서도 인터페이스를 사용해 애플리케이션 코드와 느슨하게 연결해두자</li>
-<li>@DirtiesContext<ul>
-<li>스프링의 테스트 컨텍스트 프레임워크에게 해당 클래스의 테스트에서 애플리케이션 컨텍스트의 상태 변경한다는 것을 알려줌</li>
-<li>해당 어노테이션이 붙으면 애플리케이션 컨텍스트 공유를 허용하지 않음<ul>
-<li>따라서 뒤에 테스트 영향 X</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>테스트 방법 선택 시 고려할 사항<ol>
-<li>스프링 컨테이너 없이 테스트 가능하다면 그렇게 하자</li>
-<li>테스트에서 애플리케이션 컨텍스트 사용한다면 테스트 전용 설정 파일을 만들어두자</li>
-<li>예외 적인 의존 관계를 강제로 구성해야 한다면... <ul>
-<li>컨텍스트에서 DI 받은 오브젝트에 다시 테스트 코드로 수동 DI 해서 테스트하도록 하자</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 테스트에서도 인터페이스를 사용해 애플리케이션 코드와 느슨하게 연결해두자
+    - @DirtiesContext
+        - 스프링의 테스트 컨텍스트 프레임워크에게 해당 클래스의 테스트에서 애플리케이션 컨텍스트의 상태 변경한다는 것을 알려줌
+        - 해당 어노테이션이 붙으면 애플리케이션 컨텍스트 공유를 허용하지 않음
+            - 따라서 뒤에 테스트 영향 X
+    - 테스트 방법 선택 시 고려할 사항
+        1. 스프링 컨테이너 없이 테스트 가능하다면 그렇게 하자
+        2. 테스트에서 애플리케이션 컨텍스트 사용한다면 테스트 전용 설정 파일을 만들어두자
+        3. 예외 적인 의존 관계를 강제로 구성해야 한다면... 
+            - 컨텍스트에서 DI 받은 오브젝트에 다시 테스트 코드로 수동 DI 해서 테스트하도록 하자</li>
 </ul>
 <h4 id="_2">추가 공부 부분<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
@@ -23155,50 +23113,36 @@
 <h2 id="_3">방화벽?<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://ko.wikipedia.org/wiki/%EB%B0%A9%ED%99%94%EB%B2%BD_(%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%82%B9)</em></li>
-<li><strong>정의</strong><ul>
-<li>미리 정의된 보안 규칙에 기반한, 들어오고 나가는 네트워크 트래픽을 모니터링하고 제어하는 NW 보안 시스템</li>
-<li>신뢰할 수 있는 내부 네트워크 &amp; 신뢰할 수 없는 외부 네트워크간의 장벽을 구성</li>
-<li>외부로부터 내부망을 보호하기 위한 NW 구성요소의 하나<ul>
-<li>외부의 불법 침입으로부터 내부의 정보 자산을 보호</li>
-<li>외부로 부터 불법 정보 유입을 차단하기 위함</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>정의</strong>
+    - 미리 정의된 보안 규칙에 기반한, 들어오고 나가는 네트워크 트래픽을 모니터링하고 제어하는 NW 보안 시스템
+    - 신뢰할 수 있는 내부 네트워크 &amp; 신뢰할 수 없는 외부 네트워크간의 장벽을 구성
+    - 외부로부터 내부망을 보호하기 위한 NW 구성요소의 하나
+        - 외부의 불법 침입으로부터 내부의 정보 자산을 보호
+        - 외부로 부터 불법 정보 유입을 차단하기 위함</li>
 </ul>
 <h2 id="dirtiescontext">@DirtiesContext?<a class="headerlink" href="#dirtiescontext" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://shortstories.gitbooks.io/studybook/content/dirtiescontext.html</em></li>
 <li><em>참고 2: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/annotation/DirtiesContext.html</em></li>
-<li>
-<p><strong>공식문서</strong></p>
+<li><strong>공식문서</strong>
+    - @DirtiesContext는 테스트가 더럽혀졌다는 뜻이니 context cache에서 사라저야 함을 의미
+    - 테스트가 context를 변경시킬 경우 사용한다
+        - singleton bean을 변경
+        - embedded db를 변경
+    - 차후 테스트는 새로운 context로 진행</li>
+</ul>
 <ul>
-<li>@DirtiesContext는 테스트가 더럽혀졌다는 뜻이니 context cache에서 사라저야 함을 의미</li>
-<li>테스트가 context를 변경시킬 경우 사용한다<ul>
-<li>singleton bean을 변경</li>
-<li>embedded db를 변경</li>
+<li><strong>정의 &amp; 필요성</strong>
+    - @DirtiesContext를 통해 테스트를 수행 전, 수행 후, "각 테스트마다 context를 재생성"하도록 지시할 수 있음!
+    - 단독으로 잘 돌던 테스트가 한번에 돌리면 뇌절
+    - Spring test에서 다 같은 context를 사용해서 그런 걸 수도!
+        - 각 Context를 생성하는 것이 아니라, 기존의 Context를 재활용
+    - 앞선 테스트에서 특정 Bean의 속성을 바꾸고, 제거하고, 추가해서 이후 테스트에 영향</li>
 </ul>
-</li>
-<li>차후 테스트는 새로운 context로 진행</li>
-</ul>
-</li>
-<li>
-<p><strong>정의 &amp; 필요성</strong></p>
 <ul>
-<li>@DirtiesContext를 통해 테스트를 수행 전, 수행 후, "각 테스트마다 context를 재생성"하도록 지시할 수 있음!</li>
-<li>단독으로 잘 돌던 테스트가 한번에 돌리면 뇌절</li>
-<li>Spring test에서 다 같은 context를 사용해서 그런 걸 수도!<ul>
-<li>각 Context를 생성하는 것이 아니라, 기존의 Context를 재활용</li>
-</ul>
-</li>
-<li>앞선 테스트에서 특정 Bean의 속성을 바꾸고, 제거하고, 추가해서 이후 테스트에 영향</li>
-</ul>
-</li>
-<li>
-<p><strong>사용법</strong></p>
-<ul>
-<li>메서드나 클래스 레벨에 어노테이션 붙여 동작
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// 클래스 레벨</span>
+<li><strong>사용법</strong>
+    - 메서드나 클래스 레벨에 어노테이션 붙여 동작
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// 클래스 레벨</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BEFORE_CLASS</span><span class="p">)</span><span class="w"> </span><span class="c1">//클래스의 테스트 시작하기 전 context 재생성</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nd">@DirtiesContext</span><span class="w"> </span><span class="c1">//클래스의 테스트 모두 끝난 다음 context 재생성</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BEFORE_EACH_TEST_METHOD</span><span class="p">)</span><span class="w"> </span><span class="c1">// 클래스의 모든 테스트 케이스마다 시작하기 이전에 context 재생성</span>
@@ -23209,75 +23153,51 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nd">@DirtiesContext</span><span class="w"> </span><span class="c1">// 특정 케이스 시작한 이후 context 재생성</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>궁금증</strong></p>
 <ul>
-<li>지금 그래서 테스트 코드를 돌리면 어플리케이션 컨텍스트(빈 팩토리)가 몇 개 생긴다는거야?</li>
-<li>스프링 부트 테스트는 뭐지?</li>
-</ul>
-</li>
+<li><strong>궁금증</strong>
+    - 지금 그래서 테스트 코드를 돌리면 어플리케이션 컨텍스트(빈 팩토리)가 몇 개 생긴다는거야?
+    - 스프링 부트 테스트는 뭐지?</li>
 </ul>
 <h2 id="springboottest">@SpringBootTest?<a class="headerlink" href="#springboottest" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://meetup.toast.com/posts/124</em></li>
-<li>
-<p><strong>필요성</strong></p>
+<li><strong>필요성</strong>
+    - Spring Boot 애플리케이션을 테스트하기 위해 많은 기능 제공
+    - 테스트 모듈은 다음이 존재
+        - spring-boot-test
+            - Junit, AssertJ, Hamcrest, SpringTest &amp; SpringBootTest, Mockito, JSONassert, JsonPath 등
+        - spring-boot-test-autoconfigure</li>
+</ul>
 <ul>
-<li>Spring Boot 애플리케이션을 테스트하기 위해 많은 기능 제공</li>
-<li>테스트 모듈은 다음이 존재<ul>
-<li>spring-boot-test<ul>
-<li>Junit, AssertJ, Hamcrest, SpringTest &amp; SpringBootTest, Mockito, JSONassert, JsonPath 등</li>
+<li><strong>@SpringBootTest</strong>
+    - 테스트에 사용할 ApplicationContext를 쉽게 생성/조작
+    - 기존 Spring-test의 @ContextConfiguration의 발전판
+    - 웹 환경 테스트 가능
+        - MOCK, RANDOM_PORT, DEFINED_PORT, NONE
+        - TestRestTemplate... client-side의 웹 통합 테스트 지원
+            - RestTemplate의 테스트 버전
+    - 특정 빈 Mock 가능
+    - 테스트에 사용할 빈 쉽게 생성</li>
 </ul>
-</li>
-<li>spring-boot-test-autoconfigure</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>@SpringBootTest</strong></p>
 <ul>
-<li>테스트에 사용할 ApplicationContext를 쉽게 생성/조작</li>
-<li>기존 Spring-test의 @ContextConfiguration의 발전판</li>
-<li>웹 환경 테스트 가능<ul>
-<li>MOCK, RANDOM_PORT, DEFINED_PORT, NONE</li>
-<li>TestRestTemplate... client-side의 웹 통합 테스트 지원<ul>
-<li>RestTemplate의 테스트 버전</li>
+<li><strong>@JsonTest</strong>
+    - ObjectMapper와 @JsonComponent빈을 포함한 Jackson의 테스트를 위한 모듈 자동 설정</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>특정 빈 Mock 가능</li>
-<li>테스트에 사용할 빈 쉽게 생성</li>
-</ul>
-</li>
-<li>
-<p><strong>@JsonTest</strong></p>
 <ul>
-<li>ObjectMapper와 @JsonComponent빈을 포함한 Jackson의 테스트를 위한 모듈 자동 설정</li>
+<li><strong>@WebMvcTest</strong>
+    - server-side의 API 테스트
+    - MockMvc 관련 설정 자동 수행</li>
 </ul>
-</li>
-<li>
-<p><strong>@WebMvcTest</strong></p>
 <ul>
-<li>server-side의 API 테스트</li>
-<li>MockMvc 관련 설정 자동 수행</li>
+<li><strong>@JdbcTest</strong>
+    - 순수 JDBC 테스트
+    - in-memory embedded db 설정</li>
 </ul>
-</li>
-<li>
-<p><strong>@JdbcTest</strong></p>
 <ul>
-<li>순수 JDBC 테스트</li>
-<li>in-memory embedded db 설정</li>
-</ul>
-</li>
-<li>
-<p><strong>내가 했던 게 뭐였냐면</strong></p>
-<ul>
-<li>우선 DirtiesContext를 보면 클래스의 모든 테스트 케이스가 시작하기 이전에 Context를 새로 생성하네<ul>
-<li>이래서 오래 걸렸구나
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DirtiesContext</span><span class="p">.</span><span class="na">ClassMode</span><span class="p">.</span><span class="na">BEFORE_EACH_TEST_METHOD</span><span class="p">)</span>
+<li><strong>내가 했던 게 뭐였냐면</strong>
+    - 우선 DirtiesContext를 보면 클래스의 모든 테스트 케이스가 시작하기 이전에 Context를 새로 생성하네
+        - 이래서 오래 걸렸구나
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DirtiesContext</span><span class="p">.</span><span class="na">ClassMode</span><span class="p">.</span><span class="na">BEFORE_EACH_TEST_METHOD</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@SpringBootTest</span><span class="p">(</span><span class="n">webEnvironment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SpringBootTest</span><span class="p">.</span><span class="na">WebEnvironment</span><span class="p">.</span><span class="na">RANDOM_PORT</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AcceptanceTest</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nd">@LocalServerPort</span>
@@ -23289,10 +23209,6 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
 

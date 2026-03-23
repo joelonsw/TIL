@@ -22931,48 +22931,36 @@
 <h3 id="2022-01-17">2022-01-17<a class="headerlink" href="#2022-01-17" title="Permanent link">&para;</a></h3>
 <h2 id="_1">이미지 서버 만들기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>리팩터링 방향</strong></p>
+<li><strong>리팩터링 방향</strong>
+    - S3에 의존적이던 이미지 서버... 이제 이미지는 그냥 인스턴스에서 저장을 해둬야함
+    - 나는 이미지를 그냥 서버에서 저장하는 방식을 채택할 것임
+        - /home/ubuntu/images</li>
+</ul>
 <ul>
-<li>S3에 의존적이던 이미지 서버... 이제 이미지는 그냥 인스턴스에서 저장을 해둬야함</li>
-<li>나는 이미지를 그냥 서버에서 저장하는 방식을 채택할 것임<ul>
-<li>/home/ubuntu/images</li>
+<li><strong>문제 상황</strong>
+    - https://dksykemwl00pf.cloudfront.net/d4e36ba9d63348ff8d0aefa8c403d9f6.png 였던 것을
+    - https://nolto.kro.kr/images/d4e36ba9d63348ff8d0aefa8c403d9f6.png 으로 변경해야 함
+    - 피드에 올릴 이미지 + 유저 프로필 이미지까지 다음과 같은 방향으로 변경해야 함</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>문제 상황</strong></p>
 <ul>
-<li>https://dksykemwl00pf.cloudfront.net/d4e36ba9d63348ff8d0aefa8c403d9f6.png 였던 것을</li>
-<li>https://nolto.kro.kr/images/d4e36ba9d63348ff8d0aefa8c403d9f6.png 으로 변경해야 함</li>
-<li>피드에 올릴 이미지 + 유저 프로필 이미지까지 다음과 같은 방향으로 변경해야 함</li>
-</ul>
-</li>
-<li>
-<p><strong>해결 절차</strong></p>
-<ol>
-<li>DB에 저장된 dksy~ 를 한꺼번에 nolto.kro.kr로 변경 시켜야 함</li>
-<li>이미지를 모두 서버에 저장해둬야 함</li>
-<li>서버에 저장된 이미지를 불러올 수 있는 API를 만들어야 함</li>
-<li>이미지를 서버에 저장할 수 있는 Repository를 구현해야 함</li>
-</ol>
-</li>
+<li><strong>해결 절차</strong>
+    1. DB에 저장된 dksy~ 를 한꺼번에 nolto.kro.kr로 변경 시켜야 함
+    2. 이미지를 모두 서버에 저장해둬야 함
+    3. 서버에 저장된 이미지를 불러올 수 있는 API를 만들어야 함
+    4. 이미지를 서버에 저장할 수 있는 Repository를 구현해야 함</li>
 </ul>
 <h2 id="spring-mvc">Spring MVC로 이미지 전달하기<a class="headerlink" href="#spring-mvc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/spring-controller-return-image-file</em></li>
-<li><strong><code>@ResponseBody</code> 사용`</strong><ul>
-<li>곧바로 HTTP ResponseBody에 Image를 담아 반환하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/image&quot;</span><span class="p">)</span>
+<li><strong><code>@ResponseBody</code> 사용`</strong>
+    - 곧바로 HTTP ResponseBody에 Image를 담아 반환하자
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/image&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="nd">@ResponseBody</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">getImage</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getClass</span><span class="p">()</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="p">.</span><span class="na">getResourceAsStream</span><span class="p">(</span><span class="s">&quot;/com/baeldung/produceimage/image.jpg&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">IOUtils</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

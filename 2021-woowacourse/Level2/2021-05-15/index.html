@@ -23063,39 +23063,29 @@
 <h3 id="2021-05-15">2021-05-15<a class="headerlink" href="#2021-05-15" title="Permanent link">&para;</a></h3>
 <h2 id="3">지하철 노선도 3단계 피드백<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Controller의 역할은 무엇인가?</strong></p>
+<li><strong>Controller의 역할은 무엇인가?</strong>
+    - 들어온 input 값에 대한 검증은 Controller에서 해도 되는 걸까?</li>
+</ul>
 <ul>
-<li>들어온 input 값에 대한 검증은 Controller에서 해도 되는 걸까?</li>
+<li><strong>조건 검증과 실제 행위를 각각의 메서드로 분리해라</strong></li>
 </ul>
-</li>
-<li>
-<p><strong>조건 검증과 실제 행위를 각각의 메서드로 분리해라</strong></p>
-</li>
-<li>
-<p><strong>Service에서 Dao를 호출하는 메서드는 범용적인 이름으로!</strong></p>
-</li>
-<li>
-<p><strong>Service에서 조회 -&gt; 로직 순서로 작성해야 가독성이 좋음</strong></p>
-</li>
-<li>
-<p><strong>Service가 Service를 참조해도 괜찮다</strong> </p>
 <ul>
-<li>하지만 무분별한 사용은 금지<ul>
-<li>서로 참조하면 안 됨</li>
+<li><strong>Service에서 Dao를 호출하는 메서드는 범용적인 이름으로!</strong></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Dao는 하나의 테이블과 대응되는 것이 좋다</strong></p>
 <ul>
-<li>하나의 도메인을 하나의 Dao로 온전히 만들 수 없다면...</li>
-<li>하나의 도메인을 만드는 Repository를 두고 그 안에 필요한 Dao를 배치하는 것은 어떨까?</li>
-<li>Repository VS Dao 공부하기</li>
-<li>Repo이름은 SecionRepo인데 station만 반환할때도 있네...</li>
+<li><strong>Service에서 조회 -&gt; 로직 순서로 작성해야 가독성이 좋음</strong></li>
 </ul>
-</li>
+<ul>
+<li><strong>Service가 Service를 참조해도 괜찮다</strong> 
+    - 하지만 무분별한 사용은 금지
+        - 서로 참조하면 안 됨</li>
+</ul>
+<ul>
+<li><strong>Dao는 하나의 테이블과 대응되는 것이 좋다</strong>
+    - 하나의 도메인을 하나의 Dao로 온전히 만들 수 없다면...
+    - 하나의 도메인을 만드는 Repository를 두고 그 안에 필요한 Dao를 배치하는 것은 어떨까?
+    - Repository VS Dao 공부하기
+    - Repo이름은 SecionRepo인데 station만 반환할때도 있네...</li>
 </ul>
 <h2 id="web-layer-architecture">Web Layer Architecture<a class="headerlink" href="#web-layer-architecture" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23103,117 +23093,83 @@
 <li><em>참고 2: https://www.petrikainulainen.net/software-development/design/understanding-spring-web-application-architecture-the-classic-way/</em></li>
 <li><em>참고 3: https://lifelife7777.tistory.com/100</em></li>
 <li><img alt="" src="../../image/webLayer-2021-05-16.png" /></li>
-<li>
-<p><strong>Web Layer / Presentation Layer</strong></p>
+<li><strong>Web Layer / Presentation Layer</strong>
+    - 사용자의 요청을 똑바로 받고, 응답을 똑바로 해주는 책임
+    - 다른 레이어에서 발생한 예외들도 처리해주는 책임
+        - 아마 그래서 ControllerAdvice를 사용한 것이 아닐지..!
+    - 인가를 통해 권한 없는 사용자들을 1차로 걸러야함
+    - @Controller를 사용</li>
+</ul>
 <ul>
-<li>사용자의 요청을 똑바로 받고, 응답을 똑바로 해주는 책임</li>
-<li>다른 레이어에서 발생한 예외들도 처리해주는 책임<ul>
-<li>아마 그래서 ControllerAdvice를 사용한 것이 아닐지..!</li>
+<li><strong>Service Layer / Business Layer</strong>
+    - 어플리케이션과 인프라 서비스 포함
+        - 애플리케이션 비즈니스 로직 처리와 도메인 모델의 적합성 검증 
+    - 트랜잭션 관리
+    - Presentation &lt;-&gt; Data Access, 두 계층 사이를 연결하며, 두 계층이 직접적으로 통신 않도록 함
+    - @Service를 사용</li>
 </ul>
-</li>
-<li>인가를 통해 권한 없는 사용자들을 1차로 걸러야함</li>
-<li>@Controller를 사용</li>
-</ul>
-</li>
-<li>
-<p><strong>Service Layer / Business Layer</strong></p>
 <ul>
-<li>어플리케이션과 인프라 서비스 포함<ul>
-<li>애플리케이션 비즈니스 로직 처리와 도메인 모델의 적합성 검증 </li>
-</ul>
-</li>
-<li>트랜잭션 관리</li>
-<li>Presentation &lt;-&gt; Data Access, 두 계층 사이를 연결하며, 두 계층이 직접적으로 통신 않도록 함</li>
-<li>@Service를 사용</li>
-</ul>
-</li>
-<li>
-<p><strong>Repository Layer / Data Access Layer</strong></p>
-<ul>
-<li>Data 저장소와의 소통 책임</li>
-<li>DB에 데이터를 CRUD</li>
-</ul>
-</li>
+<li><strong>Repository Layer / Data Access Layer</strong>
+    - Data 저장소와의 소통 책임
+    - DB에 데이터를 CRUD</li>
 </ul>
 <h2 id="repository-vs-dao">Repository vs Dao<a class="headerlink" href="#repository-vs-dao" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: http://egloos.zum.com/aeternum/v/1160846</em></li>
 <li><em>참고 2: https://www.baeldung.com/java-dao-vs-repository</em></li>
-<li>
-<p><strong>Dao의 등장</strong></p>
+<li><strong>Dao의 등장</strong>
+    - 기존 EJB에서 도메인 레이어를 Session Bean으로 나타냄
+        - 여기 내부로 퍼시스턴스 로직이 침투함
+        - 도메인 ~ 퍼시스턴스 레이어 로직이 불분명해지면서...
+    - 퍼시스턴스 로직의 명확한 분리와 캡슐화, 도메인 레이어에 객체지향적 인터페이스 필요해져서 Dao 탄생
+    - 하부에 퍼시스턴스 메커니즘이 DB라는 사실 숨기려고 하지 않음
+    - DB의 CRUD 쿼리와 1:1 매칭되는 오퍼레이션 제공
+    - 퍼시스턴스 레이어의 일부
+    - DB Table 중심</li>
+</ul>
 <ul>
-<li>기존 EJB에서 도메인 레이어를 Session Bean으로 나타냄<ul>
-<li>여기 내부로 퍼시스턴스 로직이 침투함</li>
-<li>도메인 ~ 퍼시스턴스 레이어 로직이 불분명해지면서...</li>
+<li><strong>Dao Pattern</strong>
+    - Data persistence의 추상화로써, Table 중심
+    - Dao는 DB table에 대응</li>
 </ul>
-</li>
-<li>퍼시스턴스 로직의 명확한 분리와 캡슐화, 도메인 레이어에 객체지향적 인터페이스 필요해져서 Dao 탄생</li>
-<li>하부에 퍼시스턴스 메커니즘이 DB라는 사실 숨기려고 하지 않음</li>
-<li>DB의 CRUD 쿼리와 1:1 매칭되는 오퍼레이션 제공</li>
-<li>퍼시스턴스 레이어의 일부</li>
-<li>DB Table 중심</li>
-</ul>
-</li>
-<li>
-<p><strong>Dao Pattern</strong></p>
 <ul>
-<li>Data persistence의 추상화로써, Table 중심</li>
-<li>Dao는 DB table에 대응</li>
+<li><strong>Repository의 등장</strong>
+    - DDD의 기본 빌딩 블록 중 하나
+    - 도메인 레이어에 객체 지향적인 "컬렉션 단위 인터페이스" 제공
+    - 도메인 레이어의 일부
+    - Domain 중심</li>
 </ul>
-</li>
-<li>
-<p><strong>Repository의 등장</strong></p>
 <ul>
-<li>DDD의 기본 빌딩 블록 중 하나</li>
-<li>도메인 레이어에 객체 지향적인 "컬렉션 단위 인터페이스" 제공</li>
-<li>도메인 레이어의 일부</li>
-<li>Domain 중심</li>
+<li><strong>Repository Pattern</strong>
+    - 도메인과 데이터 매핑 계층을 중재하여 컬렉션과 같은 도메인 객체에 접근 방법을 제공
+    - Dao보다 살짝 더 높은 레벨에서... 비즈니스 로직에 더 가까이 대응됨
+    - 따라서 Repository가 Dao를 사용해 데이터를 질의해오고, 도메인을 생성할 수 있음</li>
 </ul>
-</li>
-<li>
-<p><strong>Repository Pattern</strong></p>
 <ul>
-<li>도메인과 데이터 매핑 계층을 중재하여 컬렉션과 같은 도메인 객체에 접근 방법을 제공</li>
-<li>Dao보다 살짝 더 높은 레벨에서... 비즈니스 로직에 더 가까이 대응됨</li>
-<li>따라서 Repository가 Dao를 사용해 데이터를 질의해오고, 도메인을 생성할 수 있음</li>
-</ul>
-</li>
-<li>
-<p><strong>Dao vs Repository</strong></p>
-<ul>
-<li>Dao의 오퍼레이션이 Repository의 오퍼레이션 보다 세밀<ul>
-<li>결과적으로, Repository에서 제공하는 하나의 오퍼레이션이 Dao의 여러 오버레이션에 매핑됨</li>
-</ul>
-</li>
-<li>Repository는 도메인 모델링 단계에서 하나의 개념 단위로 묶인 AGGREGATE를 도출하는 과정에서 식별<ul>
-<li>Repository는 도메인 규칙에 영향을 받는다!</li>
-</ul>
-</li>
-<li>Dao는 Table Data Gateway 패턴에 따라 DB 테이블 별로 생성되는 것이 일반적</li>
-<li>Dao는 데이터 저장의 추상화, Repository는 객체 컬렉션의 추상화</li>
-<li>Dao는 저장소에 가까운 낮은 레벨 개념, Repository는 도메인 객체에 가까운 높은 개념</li>
-<li>Dao는 데이터 매핑/접근하여 쿼리를 캡슐화, Repository는 도메인-Dao의 중간으로 사용할 도메인 객체를 준비해줌</li>
-<li>Dao는 Repository를 통해 구성 X, Repository는 Dao로 구성 O</li>
-</ul>
-</li>
+<li><strong>Dao vs Repository</strong>
+    - Dao의 오퍼레이션이 Repository의 오퍼레이션 보다 세밀
+        - 결과적으로, Repository에서 제공하는 하나의 오퍼레이션이 Dao의 여러 오버레이션에 매핑됨
+    - Repository는 도메인 모델링 단계에서 하나의 개념 단위로 묶인 AGGREGATE를 도출하는 과정에서 식별
+        - Repository는 도메인 규칙에 영향을 받는다!
+    - Dao는 Table Data Gateway 패턴에 따라 DB 테이블 별로 생성되는 것이 일반적
+    - Dao는 데이터 저장의 추상화, Repository는 객체 컬렉션의 추상화
+    - Dao는 저장소에 가까운 낮은 레벨 개념, Repository는 도메인 객체에 가까운 높은 개념
+    - Dao는 데이터 매핑/접근하여 쿼리를 캡슐화, Repository는 도메인-Dao의 중간으로 사용할 도메인 객체를 준비해줌
+    - Dao는 Repository를 통해 구성 X, Repository는 Dao로 구성 O</li>
 </ul>
 <h2 id="jdbctemplate">JdbcTemplate?<a class="headerlink" href="#jdbctemplate" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://atoz-develop.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-JDBC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-JdbcTemplate</em></li>
 <li><em>참고 2: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html</em></li>
-<li>
-<p><strong>공식문서</strong></p>
-<ul>
-<li>JDBC 사용을 간소화하고 자주 발생하는 에러를 피하게 해줌</li>
-<li>SQL 쿼리를 실행하여 org.springframework.dao에 있는 정보로 업데이트 해줌</li>
-<li>DataSource의 레퍼런스를 사용하여 구현</li>
+<li><strong>공식문서</strong>
+    - JDBC 사용을 간소화하고 자주 발생하는 에러를 피하게 해줌
+    - SQL 쿼리를 실행하여 org.springframework.dao에 있는 정보로 업데이트 해줌
+    - DataSource의 레퍼런스를 사용하여 구현</li>
 </ul>
-</li>
-<li>
-<p><strong>필요성</strong></p>
 <ul>
-<li>JdbcTemplate 클래스로 손쉽게 DB와 연동!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Configuration</span>
+<li><strong>필요성</strong>
+    - JdbcTemplate 클래스로 손쉽게 DB와 연동!
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@ComponentScan</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BeanConfigClass</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1">// DataSource</span>
@@ -23239,46 +23195,36 @@
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="nd">@Autowired</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">db</span><span class="p">;</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>SpringBoot에서는 안 보이던데?<ul>
-<li>@SpringBootApplication으로 @EnableAutoConfiguration을 설정해줌</li>
+</code></pre></div>
+    - SpringBoot에서는 안 보이던데?
+        - @SpringBootApplication으로 @EnableAutoConfiguration을 설정해줌</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>사용법</strong></p>
 <ul>
-<li>Insert: JdbcTemplate.update();</li>
-<li>Select: JdbcTemplate.query();</li>
-<li>Update: JdbcTemplate.update();</li>
-<li>Delete: JdbcTemplate.update();</li>
-</ul>
-</li>
+<li><strong>사용법</strong>
+    - Insert: JdbcTemplate.update();
+    - Select: JdbcTemplate.query();
+    - Update: JdbcTemplate.update();
+    - Delete: JdbcTemplate.update();</li>
 </ul>
 <h2 id="datasource">DataSource?<a class="headerlink" href="#datasource" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://deepweller.tistory.com/6</em></li>
 <li><em>참고 2: https://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html</em></li>
-<li>
-<p><strong>공식문서</strong></p>
-<ul>
-<li>물리적 데이터 소스와의 connection을 만들어주는 팩토리 객체</li>
-<li>Driver Vendor에 따라 구현 방식 달라짐<ol>
-<li>Basic Implementation: 스탠다드 Connection 객체 생성</li>
-<li>Connection Pooling Implementation: 자동으로 Connection Pooling에 참여하는 객체 생성</li>
-<li>Distributed Transaction Implementation: 분산 트랜잭션을 위해 사용하며, 거의 Connection Pooling 제공</li>
-</ol>
-</li>
-<li>H2, MySql, HikariCP 등등이 있네</li>
-<li>jwp-chess 같은 경우...
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.driver-class-name=com.mysql.jdbc.Driver</span>
+<li><strong>공식문서</strong>
+    - 물리적 데이터 소스와의 connection을 만들어주는 팩토리 객체
+    - Driver Vendor에 따라 구현 방식 달라짐
+        1. Basic Implementation: 스탠다드 Connection 객체 생성
+        2. Connection Pooling Implementation: 자동으로 Connection Pooling에 참여하는 객체 생성
+        3. Distributed Transaction Implementation: 분산 트랜잭션을 위해 사용하며, 거의 Connection Pooling 제공
+    - H2, MySql, HikariCP 등등이 있네
+    - jwp-chess 같은 경우...
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.driver-class-name=com.mysql.jdbc.Driver</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.url=jdbc:mysql://localhost:13306/chess_db?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.username=root</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.password=root</span>
-</code></pre></div></li>
-<li>atdd-subway-map 같은 경우...
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">spring</span><span class="p">:</span>
+</code></pre></div>
+    - atdd-subway-map 같은 경우...
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">spring</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w"> </span><span class="c1"># datasource 설정</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">driver-class-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.h2.Driver</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:h2:mem:testdb</span>
@@ -23289,223 +23235,137 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">     </span><span class="c1"># h2 console 설정</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>필요성</strong></p>
 <ul>
-<li>순수 jdbc로 DB 접근시, DB 접근마다 connection 맺고 끊는 작업함<ul>
-<li>connection "맺고 끊는" 작업을 줄이려고, connection pool에 connection 쟁여둠</li>
-<li>spring boot의 내장 WAS(Tomcat)에서 connection pool 제공</li>
+<li><strong>필요성</strong>
+    - 순수 jdbc로 DB 접근시, DB 접근마다 connection 맺고 끊는 작업함
+        - connection "맺고 끊는" 작업을 줄이려고, connection pool에 connection 쟁여둠
+        - spring boot의 내장 WAS(Tomcat)에서 connection pool 제공</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Spring Boot에서?</strong></p>
 <ul>
-<li>Spring boot starter를 dependency 추가하면 Datasource 관리 구현체 제공</li>
-<li>@EnableAutoConfiguration을 통해 DataSource와 JdbcTemplate에 대한 Bean 별도 등록X<ul>
-<li>@SpringBootApplication내에 @EnableAutoConfiguration을 포함</li>
-<li>resources/application.properties에서 설정 가능
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.url=</span><span class="w"> </span><span class="c1"># JDBC URL of the database.</span>
+<li><strong>Spring Boot에서?</strong>
+    - Spring boot starter를 dependency 추가하면 Datasource 관리 구현체 제공
+    - @EnableAutoConfiguration을 통해 DataSource와 JdbcTemplate에 대한 Bean 별도 등록X
+        - @SpringBootApplication내에 @EnableAutoConfiguration을 포함
+        - resources/application.properties에서 설정 가능
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.url=</span><span class="w"> </span><span class="c1"># JDBC URL of the database.</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.username=</span><span class="w"> </span><span class="c1"># Login username of the database.</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.password=</span><span class="w"> </span><span class="c1"># Login password of the database.</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.driver-class-name=</span><span class="w"> </span><span class="c1"># Fully qualified name of the JDBC driver.</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="spring-vs-spring-boot">Spring vs Spring Boot<a class="headerlink" href="#spring-vs-spring-boot" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Spring 생태계</strong></p>
+<li><strong>Spring 생태계</strong>
+    - Spring이란, Spring Framework / Spring Boot / Spring Data 등등 여러 프로젝트의 모음
+    - Spring은 프로젝트 별로 하위 모듈을 가지고 있음
+        - Spring Framework 하위엔...
+            - Spring JDBC
+            - Spring Web MVC
+            - Spring Web
+            - Spring AOP</li>
+</ul>
 <ul>
-<li>Spring이란, Spring Framework / Spring Boot / Spring Data 등등 여러 프로젝트의 모음</li>
-<li>Spring은 프로젝트 별로 하위 모듈을 가지고 있음<ul>
-<li>Spring Framework 하위엔...<ul>
-<li>Spring JDBC</li>
-<li>Spring Web MVC</li>
-<li>Spring Web</li>
-<li>Spring AOP</li>
+<li><strong>Spring Framework?</strong>
+    - Spring Framework는 어떤 종류의 배포 플랫폼에서도 최신 자바 기반 "기업용 애플리케이션"을 위한 종합적인 프로그래밍 및 구성 모델 제공
+    - Spring Framework는 "객체 지향"의 특징 잘 살려서, "핵심 비즈니스 로직 구현"에만 집중토록하는 프레임워크
+        - DI, IoC로 "객체 지향"
+    - 비즈니스 로직과 엔터프라이즈 기술을 분리</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Spring Framework?</strong></p>
 <ul>
-<li>Spring Framework는 어떤 종류의 배포 플랫폼에서도 최신 자바 기반 "기업용 애플리케이션"을 위한 종합적인 프로그래밍 및 구성 모델 제공</li>
-<li>Spring Framework는 "객체 지향"의 특징 잘 살려서, "핵심 비즈니스 로직 구현"에만 집중토록하는 프레임워크<ul>
-<li>DI, IoC로 "객체 지향"</li>
+<li><strong>Spring Boot?</strong>
+    - Spring Boot는 독립적/운영할 수 있는 수준의 "Spring 기반 애플리케이션 쉽게" 만들어줌
+    - 최소한의 설정으로 Spring 플랫폼과 서드파티 라이브러리 사용가능
+    - 뭐가 개선하고 싶었는가?
+        - 설정이 절반... 설정 복잡해졌어!
+    - Spring Boot는 약간의 설정만으로 Spring 애플리케이션 만들게 해줘
+        - Spring Boot도 그냥 Spring 프로젝트 중 하나
+        - Spring Framework를 쉽게 사용하게 해주는 도구지, 별개 사용은 아님
+    - USER ~ Spring Boot ~ Spring</li>
 </ul>
-</li>
-<li>비즈니스 로직과 엔터프라이즈 기술을 분리</li>
-</ul>
-</li>
-<li>
-<p><strong>Spring Boot?</strong></p>
 <ul>
-<li>Spring Boot는 독립적/운영할 수 있는 수준의 "Spring 기반 애플리케이션 쉽게" 만들어줌</li>
-<li>최소한의 설정으로 Spring 플랫폼과 서드파티 라이브러리 사용가능</li>
-<li>뭐가 개선하고 싶었는가?<ul>
-<li>설정이 절반... 설정 복잡해졌어!</li>
-</ul>
-</li>
-<li>Spring Boot는 약간의 설정만으로 Spring 애플리케이션 만들게 해줘<ul>
-<li>Spring Boot도 그냥 Spring 프로젝트 중 하나</li>
-<li>Spring Framework를 쉽게 사용하게 해주는 도구지, 별개 사용은 아님</li>
-</ul>
-</li>
-<li>USER ~ Spring Boot ~ Spring</li>
-</ul>
-</li>
-<li>
-<p><strong>Spring Boot를 사용하면 달라지는 점?</strong></p>
-<ol>
-<li>의존성 관리<ul>
-<li>기존 Spring... <ul>
-<li>개발에 필요한 의존성 다 다운받았어야 함 + 버전도 명시해야하고</li>
-<li>모듈간의 의존성 + 버전 충돌 == 뇌절</li>
-</ul>
-</li>
-<li>Spring Boot...<ul>
-<li>spring-boot-starter: 자주 사용하게 되는 모듈간의 의존성 버전 조합 제공</li>
-<li>spring-boot-starter-parent: spring-boot-starter의 버전 관리<ul>
-<li><em>현재 스프링 부트 버전과 가장 잘맞는 놈으로 버전 세팅</em></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>자동 설정<ul>
-<li>@EnableAutoConfiguration<ul>
-<li>기존 Spring...<ul>
-<li>많은 환경 설정 (DataSource, View)</li>
-<li>XML or Java Code로 다 설정해줘야 함</li>
-</ul>
-</li>
-<li>Spring Boot...<ul>
-<li>의존성 + application.yml로 끝!</li>
-<li>@SpringBootApplication 내부에서<ul>
-<li>@SpringBootConfiguration: Spring Boot의 설정, 스프링의 설정, 스프링 제공 테스트 시 필요</li>
-<li>@EnableAutoConfiguration: 자동 설정 담당 getAutoConfiguration() 실행... spring.factories에 자동 설정 등록된 놈 가져옴</li>
-<li>@ComponentScan: Bean 등록</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>내장 WAS<ul>
-<li>Embedded WAS<ul>
-<li>기존 Spring...<ol>
-<li>애플리케이션 WAR 패키징</li>
-<li>WAS 설치</li>
-<li>WAS에 WAR 올리기</li>
-</ol>
-</li>
-<li>Spring Boot...<ul>
-<li>WAS가 미리 내장</li>
-<li>웹 어플리케이션을 WAR가 아닌 JAR로  패키징<ul>
-<li>물론 WAR로 배포 + WAS 매핑 가능</li>
-</ul>
-</li>
-<li>의존성으로 Tomcat, jetty, undertow로 변경 가능</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>모니터링<ul>
-<li>Actuator<ul>
-<li>Spring Boot 모듈 중 하나인 "Actuator"는 애플리케이션 관리 및 모니터링 제공</li>
-<li>모니터링 기능 엔드포인트로 만들어서 제공</li>
-<li>보안 신경써야함!</li>
-<li>영구 데이터 저장소에 저장해야 안날라감</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
+<li><strong>Spring Boot를 사용하면 달라지는 점?</strong>
+    1. 의존성 관리
+        - 기존 Spring... 
+            - 개발에 필요한 의존성 다 다운받았어야 함 + 버전도 명시해야하고
+            - 모듈간의 의존성 + 버전 충돌 == 뇌절
+        - Spring Boot...
+            - spring-boot-starter: 자주 사용하게 되는 모듈간의 의존성 버전 조합 제공
+            - spring-boot-starter-parent: spring-boot-starter의 버전 관리
+                - <em>현재 스프링 부트 버전과 가장 잘맞는 놈으로 버전 세팅</em>
+    2. 자동 설정
+        - @EnableAutoConfiguration
+            - 기존 Spring...
+                - 많은 환경 설정 (DataSource, View)
+                - XML or Java Code로 다 설정해줘야 함
+            - Spring Boot...
+                - 의존성 + application.yml로 끝!
+                - @SpringBootApplication 내부에서
+                    - @SpringBootConfiguration: Spring Boot의 설정, 스프링의 설정, 스프링 제공 테스트 시 필요
+                    - @EnableAutoConfiguration: 자동 설정 담당 getAutoConfiguration() 실행... spring.factories에 자동 설정 등록된 놈 가져옴
+                    - @ComponentScan: Bean 등록
+    3. 내장 WAS
+        - Embedded WAS
+            - 기존 Spring...
+                1. 애플리케이션 WAR 패키징
+                2. WAS 설치
+                3. WAS에 WAR 올리기
+            - Spring Boot...
+                - WAS가 미리 내장
+                - 웹 어플리케이션을 WAR가 아닌 JAR로  패키징
+                    - 물론 WAR로 배포 + WAS 매핑 가능
+                - 의존성으로 Tomcat, jetty, undertow로 변경 가능
+    4. 모니터링
+        - Actuator
+            - Spring Boot 모듈 중 하나인 "Actuator"는 애플리케이션 관리 및 모니터링 제공
+            - 모니터링 기능 엔드포인트로 만들어서 제공
+            - 보안 신경써야함!
+            - 영구 데이터 저장소에 저장해야 안날라감</li>
 </ul>
 <h2 id="configuration">@Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Java Config</strong></p>
+<li><strong>Java Config</strong>
+    - 필요성
+        - 프로젝트 환경 설정파일을 자바 코드로 작성!
+        - 기존 XML은 디버깅도 힘들고 복잡
+    - 사용법
+        - 환경 설정 하는 클래스는 @Configuration을 붙이자
+        - @Bean을 붙여서 등록하고자 하는 스프링 빈을 정의하자
+        - @ComponentScan을 통해 @Controller/@Service/@Repository/@Component 붙은 클래스 컨테이너 등록
+        - @Autowired를 통해 주입 대상이 되는 bean을 컨테이너에 찾아 주입</li>
+</ul>
 <ul>
-<li>필요성<ul>
-<li>프로젝트 환경 설정파일을 자바 코드로 작성!</li>
-<li>기존 XML은 디버깅도 힘들고 복잡</li>
+<li><strong>Configuration</strong>
+    - <em>참고 1: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html</em>
+    - @Bean을 사용하는 클래스에서는 @Configuration을 붙여 Bean을 등록하고자 함을 명시해야함
+        - @Bean과 @Configuration은 세트메뉴!
+        - @Bean을 사용하는 클래스에는 반드시 @Configuration을 통해 해당 클래스에서 Bean을 등록하고자 함 명시해야함
+    - 하나 혹은 그 이상의 @Bean메서드가 스프링 컨테이너에서 런타임에 처리되어야 함을 나타냄</li>
 </ul>
-</li>
-<li>사용법<ul>
-<li>환경 설정 하는 클래스는 @Configuration을 붙이자</li>
-<li>@Bean을 붙여서 등록하고자 하는 스프링 빈을 정의하자</li>
-<li>@ComponentScan을 통해 @Controller/@Service/@Repository/@Component 붙은 클래스 컨테이너 등록</li>
-<li>@Autowired를 통해 주입 대상이 되는 bean을 컨테이너에 찾아 주입</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Configuration</strong></p>
 <ul>
-<li><em>참고 1: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html</em></li>
-<li>@Bean을 사용하는 클래스에서는 @Configuration을 붙여 Bean을 등록하고자 함을 명시해야함<ul>
-<li>@Bean과 @Configuration은 세트메뉴!</li>
-<li>@Bean을 사용하는 클래스에는 반드시 @Configuration을 통해 해당 클래스에서 Bean을 등록하고자 함 명시해야함</li>
-</ul>
-</li>
-<li>하나 혹은 그 이상의 @Bean메서드가 스프링 컨테이너에서 런타임에 처리되어야 함을 나타냄</li>
-</ul>
-</li>
-<li>
-<p><strong>SpringBoot에서는 안보이던데?</strong></p>
-<ul>
-<li><em>참고 1: https://stackoverflow.com/questions/56910260/what-is-the-difference-between-springbootconfiguration-vs-configuration</em></li>
-<li><em>참고 2: https://velog.io/@adam2/SpringBoot-%EC%9E%90%EB%8F%99-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95AutoConfiguration</em></li>
-<li>@Configuration은 @SpringBootConfiguration소속<ul>
-<li>@SpringBootApplication &gt;&gt; @SpringBootConfiguration &gt;&gt; @Configuration</li>
-</ul>
-</li>
-<li>AutoConfiguration 까보자<ul>
-<li>자동 환경 설정</li>
-<li>스프링 부트에서는 @EnableAutoConfiguration 또는 @SpringBootApplication 둘 중 하나만 사용해도 자동 설정 OK</li>
-<li>@SpringBootApplication 내부 로직에서는 다음을 래핑해놓음<ul>
-<li>@SpringBootConfiguration: @Configuration의 스프링 부트 대체자</li>
-<li>@EnableAutoConfiguration: 클래스 경로에 지정된 내용 기반으로 설정 자동화</li>
-<li>@ComponentScan: 기본적으로 해당 어노테이션이 붙은 패키지가 루트 경로</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>SpringBoot에서는 안보이던데?</strong>
+    - <em>참고 1: https://stackoverflow.com/questions/56910260/what-is-the-difference-between-springbootconfiguration-vs-configuration</em>
+    - <em>참고 2: https://velog.io/@adam2/SpringBoot-%EC%9E%90%EB%8F%99-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95AutoConfiguration</em>
+    - @Configuration은 @SpringBootConfiguration소속
+        - @SpringBootApplication &gt;&gt; @SpringBootConfiguration &gt;&gt; @Configuration
+    - AutoConfiguration 까보자
+        - 자동 환경 설정
+        - 스프링 부트에서는 @EnableAutoConfiguration 또는 @SpringBootApplication 둘 중 하나만 사용해도 자동 설정 OK
+        - @SpringBootApplication 내부 로직에서는 다음을 래핑해놓음
+            - @SpringBootConfiguration: @Configuration의 스프링 부트 대체자
+            - @EnableAutoConfiguration: 클래스 경로에 지정된 내용 기반으로 설정 자동화
+            - @ComponentScan: 기본적으로 해당 어노테이션이 붙은 패키지가 루트 경로</li>
 </ul>
 <h2 id="_1">정규표현식<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://coding-factory.tistory.com/529</em></li>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>특정한 규칙을 가진 문자열의 집합을 표현하기 위해 쓰이는 형식 언어</li>
+<li><strong>정의</strong>
+    - 특정한 규칙을 가진 문자열의 집합을 표현하기 위해 쓰이는 형식 언어</li>
 </ul>
-</li>
-<li>
-<p><strong>Pattern 클래스</strong></p>
 <ul>
-<li>matches() 정적 메서드를 통해 검증하기<ul>
-<li>첫 인자는 정규표현식, 두 번째 인자는 검증 대상 문자열
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.regex.Pattern</span><span class="p">;</span>
+<li><strong>Pattern 클래스</strong>
+    - matches() 정적 메서드를 통해 검증하기
+        - 첫 인자는 정규표현식, 두 번째 인자는 검증 대상 문자열
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.regex.Pattern</span><span class="p">;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RegexExample</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
@@ -23519,11 +23379,8 @@
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>정규표현식 문법</strong>
+<ul>
+<li><strong>정규표현식 문법</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>^  : 문자열 시작  
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$  : 문자열 종료
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>.  : 임의의 한 문자
@@ -23547,8 +23404,7 @@
 <a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>\W : 알파벳이나 숫자 빼고
 <a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>\d : 숫자 [0-9]와 동일
 <a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>\D : 숫자를 제외한 모든 문자
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

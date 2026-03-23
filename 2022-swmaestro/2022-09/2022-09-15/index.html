@@ -22933,55 +22933,59 @@
 <ul>
 <li><em>참고: https://www.devglan.com/online-tools/jasypt-online-encryption-decryption</em></li>
 <li><em>참고: https://katastrophe.tistory.com/162</em></li>
-<li><strong>Jasypt</strong></li>
+<li><strong>Jasypt</strong><ul>
 <li>민감정보를 암호화 해주는 모듈</li>
-<li>
-<p>민감정보 암호화 한 뒤에 환경변수로 복호화 키를 설정하여 접속할 수 있음</p>
+<li>민감정보 암호화 한 뒤에 환경변수로 복호화 키를 설정하여 접속할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>사용법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>사용법</strong><ul>
 <li>key를 이용해 복호화 수행 =&gt; Two Way Encryption</li>
 <li>암호화 키 &amp; 복호화 키</li>
-<li>
-<p>EncryptedString은 Encrypt를 수행할 때 마다 매번 다른 EncryptedString 나옴</p>
+<li>EncryptedString은 Encrypt를 수행할 때 마다 매번 다른 EncryptedString 나옴</li>
+</ul>
 </li>
-<li>
-<p><strong>Spring 사용법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Spring 사용법</strong><ul>
 <li>ulisesbocchio-jasypt</li>
 <li>아... 환경변수로 암호화 키를 추가해야 하는구나 흐음...</li>
 <li>configuration =&gt; config.setPassword(System.getenv("JASYPT_PASSWORD"));</li>
+</ul>
+</li>
 </ul>
 <h2 id="submodule">로컬 민감정보 관리 (Submodule)<a class="headerlink" href="#submodule" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=TAe4uZqYt6c</em></li>
 <li><em>참고: https://kukim.tistory.com/150</em></li>
 <li><em>참고: https://kukim.tistory.com/151</em></li>
-<li><strong>개요</strong></li>
-<li>
-<p>저장소 안에 다른 저장소를 저장하는 기능</p>
+<li><strong>개요</strong><ul>
+<li>저장소 안에 다른 저장소를 저장하는 기능</li>
+</ul>
 </li>
-<li>
-<p><strong>사용법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>사용법</strong><ol>
 <li>private repo 만들고, 설정 파일 넣기</li>
 <li>public repo에 private repo submodule화</li>
 <li>프로젝트 배포시 submodule의 설정 파일 /src/main/resources 로 복사하여 사용</li>
-<li>
-<p>CI에서 활용시, private repo clone 할 수 있도록 Github key 필요</p>
+<li>CI에서 활용시, private repo clone 할 수 있도록 Github key 필요</li>
+</ol>
 </li>
-<li>
-<p><strong>프로젝트 빌드/배포시 submodule =&gt; /src/main/resources</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>프로젝트 빌드/배포시 submodule =&gt; /src/main/resources</strong><ul>
 <li>build.gradle에 task를 추가하여 build/deploy시 명령 추가</li>
 <li>서브 모듈의 내용을 복사하자!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>task copyGitSubmodule(type: Copy) {
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>task copyGitSubmodule(type: Copy) {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    from &#39;./config&#39;
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    include &#39;*.yml&#39;
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    into &#39;./src/main/resources&#39;
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>}
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

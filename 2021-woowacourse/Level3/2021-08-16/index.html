@@ -22911,117 +22911,78 @@
 <ul>
 <li><em>참고 1: https://www.youtube.com/watch?v=aX9c7z9l_u8</em></li>
 <li><em>참고 2: https://www.youtube.com/watch?v=ImvYNlF_saE</em></li>
-<li>
-<p><strong>DB에서의 트랜잭션</strong></p>
+<li><strong>DB에서의 트랜잭션</strong>
+    - Transaction: 더 이상 나눌수 없는 가장 작은 하나의 단위
+        - 하나의 명령 실행시, DB가 온전히 그 명령을 실행해 주는 것
+    - 사용자가 데이터베이스에 대한 완전성을 신뢰할 수 있도록
+    - DB에서는 기본적으로 트랜잭션 관리 위한 설정이 있어
+        - 명령 끝마칠때 까지 수행내역을 로그로 저장해둬
+            - Redo Log
+            - Undo Log
+    - 여러 명령을 하나의 트랜잭션으로 묶고 싶다면?
+    - 트랜잭션의 성질
+        - 원자성: 성공하면 싹다, 아니면 다 돌려! (롤백/커밋)
+        - 일관성: DB 상태, DB 계층관계, 칼럼 속성 등 항상 일관되게 유지하는 것
+        - 지속성: 영원히 DB에 내용이 저장되어야해
+        - 독립성: 딴거 끼어들 수 없어!
+            - 트랜잭션은 격리 수준 설정을 통한 독립성을 보장해!
+    - DB에 작업 요청들어오고, 모든 작업 독립성 보장해 하나씩 순차진행하면, CPU는 응답 대기 시간 너무 길어져</li>
+</ul>
 <ul>
-<li>Transaction: 더 이상 나눌수 없는 가장 작은 하나의 단위<ul>
-<li>하나의 명령 실행시, DB가 온전히 그 명령을 실행해 주는 것</li>
-</ul>
-</li>
-<li>사용자가 데이터베이스에 대한 완전성을 신뢰할 수 있도록</li>
-<li>DB에서는 기본적으로 트랜잭션 관리 위한 설정이 있어<ul>
-<li>명령 끝마칠때 까지 수행내역을 로그로 저장해둬<ul>
-<li>Redo Log</li>
-<li>Undo Log</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>여러 명령을 하나의 트랜잭션으로 묶고 싶다면?</li>
-<li>트랜잭션의 성질<ul>
-<li>원자성: 성공하면 싹다, 아니면 다 돌려! (롤백/커밋)</li>
-<li>일관성: DB 상태, DB 계층관계, 칼럼 속성 등 항상 일관되게 유지하는 것</li>
-<li>지속성: 영원히 DB에 내용이 저장되어야해</li>
-<li>독립성: 딴거 끼어들 수 없어!<ul>
-<li>트랜잭션은 격리 수준 설정을 통한 독립성을 보장해!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>DB에 작업 요청들어오고, 모든 작업 독립성 보장해 하나씩 순차진행하면, CPU는 응답 대기 시간 너무 길어져</li>
-</ul>
-</li>
-<li>
-<p><strong>스프링에서의 트랜잭션</strong></p>
-<ul>
-<li><code>PlatformTransactionManager</code>를 통해 다양한 DataSource에 맞는 트랜잭션 권리 지원
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">PlatformTransactionManger</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">TransactionManger</span><span class="w"> </span><span class="p">{</span>
+<li><strong>스프링에서의 트랜잭션</strong>
+    - <code>PlatformTransactionManager</code>를 통해 다양한 DataSource에 맞는 트랜잭션 권리 지원
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">PlatformTransactionManger</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">TransactionManger</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">TransactionStatus</span><span class="w"> </span><span class="nf">getTransaction</span><span class="p">(</span><span class="n">TransactionDefinition</span><span class="w"> </span><span class="n">definition</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">commit</span><span class="p">(</span><span class="n">TransactionStatus</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">rollback</span><span class="p">(</span><span class="n">TransactionStatus</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>commit~rollback 사이가 경계 설정</li>
+</code></pre></div>
+        - commit~rollback 사이가 경계 설정
+    - 구현체: DataSourceTransactionManager(JDBC), JpaTransactionManager(JPA), JtaTransactionManager(하나 이상 DB)
+    - AOP를 이용한 선언적 트랜잭션
+        - tx namespace
+            - transaction 매니저 빈설정
+        - 어노테이션
+            - 메서드, 클래스, 인터페이스
+    - 트랜잭션 어노테이션
+        - propagation : 전파 레벨 설정
+            - required
+            - supports
+            - mandatory
+            - requires_new
+            - not_supported
+            - never
+            - nested
+        - isolation : 트랜잭션 격리 수준 (동시 여러 트랜잭션 시작시, 트랜잭션 작업 내용을 다른 트랜잭션에게 보여줄지 말지... 동시에 많은 트랜잭션 진행하면서 문제가 안생기게 할라고)
+            - DEFAULT: DB가 쓰는 놈으로 따른다 (거의 READ_COMMITTED)
+            - READ_UNCOMMITED: 아직 커밋 안된 데이터 다른 트랜잭션이 읽을 수 있음
+            - READ_COMMITTED: 커밋되지 않은 정보 읽을 수 없음!
+            - REPEATABLE_READ: 하나의 트랜잭션이 읽은 로우를 다른 트랜잭션이 수정할 수 없게!
+            - SERIALIZABLE: 동시 같은 테이블 접근 X
+        - timeout : 초로 시간 제한
+        - readOnly: 해당 트랜잭션에서는 CUD 멈춰! (JPA 더티체킹 무시)
+        - rollbackFor: 해당 체크예외를 롤백 대상으로 삼기
+        - noRollbackFor: 해당 체크예외 발생해도 그냥 커밋해부려!</li>
 </ul>
-</li>
-<li>구현체: DataSourceTransactionManager(JDBC), JpaTransactionManager(JPA), JtaTransactionManager(하나 이상 DB)</li>
-<li>AOP를 이용한 선언적 트랜잭션<ul>
-<li>tx namespace<ul>
-<li>transaction 매니저 빈설정</li>
-</ul>
-</li>
-<li>어노테이션<ul>
-<li>메서드, 클래스, 인터페이스</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>트랜잭션 어노테이션<ul>
-<li>propagation : 전파 레벨 설정<ul>
-<li>required</li>
-<li>supports</li>
-<li>mandatory</li>
-<li>requires_new</li>
-<li>not_supported</li>
-<li>never</li>
-<li>nested</li>
-</ul>
-</li>
-<li>isolation : 트랜잭션 격리 수준 (동시 여러 트랜잭션 시작시, 트랜잭션 작업 내용을 다른 트랜잭션에게 보여줄지 말지... 동시에 많은 트랜잭션 진행하면서 문제가 안생기게 할라고)<ul>
-<li>DEFAULT: DB가 쓰는 놈으로 따른다 (거의 READ_COMMITTED)</li>
-<li>READ_UNCOMMITED: 아직 커밋 안된 데이터 다른 트랜잭션이 읽을 수 있음</li>
-<li>READ_COMMITTED: 커밋되지 않은 정보 읽을 수 없음!</li>
-<li>REPEATABLE_READ: 하나의 트랜잭션이 읽은 로우를 다른 트랜잭션이 수정할 수 없게!</li>
-<li>SERIALIZABLE: 동시 같은 테이블 접근 X</li>
-</ul>
-</li>
-<li>timeout : 초로 시간 제한</li>
-<li>readOnly: 해당 트랜잭션에서는 CUD 멈춰! (JPA 더티체킹 무시)</li>
-<li>rollbackFor: 해당 체크예외를 롤백 대상으로 삼기</li>
-<li>noRollbackFor: 해당 체크예외 발생해도 그냥 커밋해부려!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>트랜잭션은 어떻게 동작하는가?</strong>
+<ul>
+<li><strong>트랜잭션은 어떻게 동작하는가?</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">BEGIN</span><span class="w"> </span><span class="n">TRAN</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="o">~~~</span><span class="err">쿼리들</span><span class="o">~~~</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">COMMIT</span><span class="w"> </span><span class="n">TRAN</span>
-</code></pre></div></p>
+</code></pre></div>
+    - <img alt="" src="../../image/2021-08-16-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98.PNG" />
+    - 로그 캐시
+        - Redo 로그: 변경 후 값 기록
+            - 예상치 못한 예외 (OS단 등) 데이터를 다시 일관성있게 만들어주고 Undo 필요없는거 복구
+        - Undo 로그: 변경 전 값 기록
+            - Rollback 발생하면 Undo 로그 역순으로 따라가면서 원복
+    - 동시 접근 허용시
+        - Lock을 통해 트랜잭션 시작되면 끝날때까지 점유함
+        - <img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC1.PNG" />
+        - <img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC2.PNG" /></li>
+</ul>
 <ul>
-<li><img alt="" src="../../image/2021-08-16-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98.PNG" /></li>
-<li>로그 캐시<ul>
-<li>Redo 로그: 변경 후 값 기록<ul>
-<li>예상치 못한 예외 (OS단 등) 데이터를 다시 일관성있게 만들어주고 Undo 필요없는거 복구</li>
-</ul>
-</li>
-<li>Undo 로그: 변경 전 값 기록<ul>
-<li>Rollback 발생하면 Undo 로그 역순으로 따라가면서 원복</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>동시 접근 허용시<ul>
-<li>Lock을 통해 트랜잭션 시작되면 끝날때까지 점유함</li>
-<li><img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC1.PNG" /></li>
-<li><img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC2.PNG" /></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>전파 설정 활용 예시</strong>
+<li><strong>전파 설정 활용 예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Component</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@AllArgsConstructor</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NotificationEventHandler</span><span class="w"> </span><span class="p">{</span>
@@ -23061,8 +23022,7 @@
 <a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

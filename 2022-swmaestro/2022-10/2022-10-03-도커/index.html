@@ -23019,20 +23019,18 @@
 <h3 id="2022-10-03">2022-10-03 도커 멘토링<a class="headerlink" href="#2022-10-03" title="Permanent link">&para;</a></h3>
 <h2 id="docker">Docker 기초<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>윈도우 -&gt; HyperV -&gt; Ubuntu(WSL) -&gt; Docker</p>
-</li>
-<li>
-<p><strong>Images</strong></p>
-</li>
+<li>윈도우 -&gt; HyperV -&gt; Ubuntu(WSL) -&gt; Docker</li>
+</ul>
+<ul>
+<li><strong>Images</strong><ul>
 <li>불변임 변경 불가</li>
 <li>readOnly</li>
-<li>
-<p>layer를 하나씩 </p>
+<li>layer를 하나씩 </li>
+</ul>
 </li>
-<li>
-<p><strong>캐시 삭제</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>캐시 삭제</strong><ul>
 <li>apt repo cache 남는게 일반적 (약 35MB)</li>
 <li>따라서 DockerFile에서 불필요한 내용을 삭제하도록 할 수 있음 <ul>
 <li>논리적으로 삭제</li>
@@ -23045,12 +23043,12 @@
 <li>기존 명령어를 그대로 쓴다면 그 이미지 위에다가 덮어씌움</li>
 </ul>
 </li>
-<li>
-<p>따라서 새로운 이미지 만들 때만 캐시를 날려줄 거야. </p>
+<li>따라서 새로운 이미지 만들 때만 캐시를 날려줄 거야. </li>
+</ul>
 </li>
-<li>
-<p><strong>기초 명령어</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>기초 명령어</strong><ul>
 <li>docker run &lt;image&gt;:&lt;tag&gt;</li>
 <li>docker run -d (백그라운드 데몬)<ul>
 <li>-p (publish: 포트바인딩)</li>
@@ -23060,31 +23058,34 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="docker_1">Docker 심화<a class="headerlink" href="#docker_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>컨테이너 환경에서 바이너리 파일 X</strong></li>
+<li><strong>컨테이너 환경에서 바이너리 파일 X</strong><ul>
 <li>바이너리 파일 같은거 OS 따라 다르겠지? </li>
-<li>
-<p>그러면 이런거 컨테이너에 넣지마</p>
+<li>그러면 이런거 컨테이너에 넣지마</li>
+</ul>
 </li>
+</ul>
+<ul>
 <li>
 <p><strong>멀티 스테이지로 빌드</strong></p>
-</li>
+<ul>
 <li>Golang 같은 경우 나온 빌드 파일을 패키지에 직접 넣는게 뇌절의 지름길<ul>
 <li>플랫폼 독립적이지 않기 때문</li>
 </ul>
 </li>
-<li>
-<p>이렇게 하면 플랫폼에 종속적으로 그냥 돌려서 뚝딱 =&gt; 이미지 커짐
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">golang:alpine</span><span class="w"> </span>
+<li>이렇게 하면 플랫폼에 종속적으로 그냥 돌려서 뚝딱 =&gt; 이미지 커짐
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">golang:alpine</span><span class="w"> </span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">ADD</span><span class="w"> </span>.<span class="w"> </span>.
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">RUN</span><span class="w"> </span>go<span class="w"> </span>build<span class="w"> </span>main.go
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>CMD<span class="o">[</span><span class="s2">&quot;./main&quot;</span><span class="o">]</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>아래와 같이 하면 도커 이미지 매우 작게할 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># Build Stage - intermediate image (as를 붙인 임시 참조)</span>
+</code></pre></div></li>
+</ul>
+<ul>
+<li>아래와 같이 하면 도커 이미지 매우 작게할 수 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># Build Stage - intermediate image (as를 붙인 임시 참조)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">golang:alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">ADD</span><span class="w"> </span>.<span class="w"> </span>.
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">RUN</span><span class="w"> </span>go<span class="w"> </span>build<span class="w"> </span>main.go
@@ -23093,13 +23094,14 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/go/main<span class="w"> </span>.<span class="w"> </span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>CMD<span class="o">[</span><span class="s2">&quot;./main&quot;</span><span class="o">]</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>빌드 자체도 원래 스크립트 안에서 해주고, 이미지 용량에선 빼주자!</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>빌드 자체도 원래 스크립트 안에서 해주고, 이미지 용량에선 빼주자!</strong><ul>
 <li><em>참고: https://github.com/lovehyun/tutorial-docker/blob/master/6.java/Dockerfile.v4</em>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># First stage: complete build environment</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># First stage: complete build environment</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">maven:3.5.0-jdk-8-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c"># add pom.xml and source code</span>
@@ -23119,6 +23121,8 @@
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;java&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;my-app-1.0-SNAPSHOT.jar&quot;</span><span class="p">]</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="docker-compose">docker-compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23160,9 +23164,11 @@
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="nt">volumes</span><span class="p">:</span>
 <a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">  </span><span class="nt">my-db2</span><span class="p">:</span>
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>docker-compose up : 생성하여 구동</li>
 <li>docker-compose down : 죽임</li>
+</ul>
+</li>
 </ul>
 <h2 id="_1">이미지 사이즈<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>

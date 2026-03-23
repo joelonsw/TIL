@@ -22909,8 +22909,7 @@
 <h3 id="2023-04-17">2023-04-17<a class="headerlink" href="#2023-04-17" title="Permanent link">&para;</a></h3>
 <h2 id="slick-join">Slick Join<a class="headerlink" href="#slick-join" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>예시 테이블</strong>
+<li><strong>예시 테이블</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">PersonTable</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span><span class="w"> </span><span class="nc">Tag</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Table</span><span class="p">[</span><span class="nc">Person</span><span class="p">](</span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;person&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -22935,40 +22934,43 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">street</span><span class="p">,</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">zip</span><span class="p">,</span><span class="w"> </span><span class="n">personId</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nc">Address</span><span class="p">.</span><span class="n">tupled</span><span class="p">,</span><span class="w"> </span><span class="nc">Address</span><span class="p">.</span><span class="n">unapply</span><span class="p">)</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Join 해보자</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Join 해보자</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">TableQuery</span><span class="p">[</span><span class="nc">PersonTable</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="nc">TableQuery</span><span class="p">[</span><span class="nc">AddressTable</span><span class="p">]).</span><span class="n">on</span><span class="p">(</span><span class="n">_id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">_</span><span class="p">.</span><span class="n">personId</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">street</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">city</span><span class="p">)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>왜 for-comprehension을 쓰는거지?</strong></p>
-</li>
-<li>concise and readable 하기 위해서 임</li>
-<li>
-<p><code>(p, a) &lt;- TableQuery[PersonTable].join(TableQuery[AddressTable]).on(_id === _.personId)</code></p>
+</code></pre></div></li>
+</ul>
 <ul>
-<li>여기서... </li>
+<li><strong>왜 for-comprehension을 쓰는거지?</strong><ul>
+<li>concise and readable 하기 위해서 임</li>
+<li><code>(p, a) &lt;- TableQuery[PersonTable].join(TableQuery[AddressTable]).on(_id === _.personId)</code><ul>
+<li>여기서... <ul>
 <li>p = PersonTable</li>
 <li>a = AddressTable</li>
-<li>yield...</li>
+</ul>
+</li>
+<li>yield...<ul>
 <li>열심히 조인해서 어떤 튜플 가져올지?!<ul>
 <li>(p.name, a.street, a.city)</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>join 해서 결국 가져올 칼럼 깔끔하게 쓸 수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>Pagination은?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Pagination은?</strong><ul>
 <li>단일 테이블에 대해서 페이지네이션
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pageNumber</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pageSize</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -22976,7 +22978,7 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div></li>
 <li>join 하고 난 뒤 페이지네이션
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pageNumber</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pageSize</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
@@ -22989,6 +22991,8 @@
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

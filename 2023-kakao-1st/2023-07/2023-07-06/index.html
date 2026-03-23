@@ -22964,16 +22964,18 @@
   - 컴포넌트가 실행/업데이트/제거시 이런 이벤트들이 발생
   - 근데 클래스기반 컴포넌트랑 함수형 기반 컴포넌트랑 생명주기가 조금 다르다네?</p>
 <ul>
-<li><strong>클래스 기반 컴포넌트 생명주기</strong></li>
+<li><strong>클래스 기반 컴포넌트 생명주기</strong><ul>
 <li><img alt="" src="../../images/2023-07-06-react-lifecycle.jpeg" /> </li>
 <li>[Mount]<ul>
 <li>컴포넌트가 처음 실행될 때</li>
 <li>컴포넌트 시작시 context, defaultProps, state 저장</li>
 <li>componentWillMount 메서드 호출</li>
 <li>render를 통해 컴포넌트를 DOM에 부착</li>
-<li>componentDidMount 메서드 호출</li>
+<li>componentDidMount 메서드 호출<ul>
 <li>여기서 DOM에 접근 가능</li>
 <li>Ajax 요청, setTimeout, setInterval 등이 가능</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>[Props Update]<ul>
@@ -22992,16 +22994,16 @@
 <li>동일하게 shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate</li>
 </ul>
 </li>
-<li>
-<p>[Unmount]</p>
-<ul>
+<li>[Unmount]<ul>
 <li>컴포넌트 제거</li>
 <li>componentWillUnmount</li>
 </ul>
 </li>
-<li>
-<p><strong>함수형 기반 생명주기 - UseEffect 쓰자!</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>함수형 기반 생명주기 - UseEffect 쓰자!</strong><ul>
 <li>클래스는 커포넌트에 생명주기가 맞춰져있었어</li>
 <li>리액트 17 부터는 componentWillMount, componentWillUpdate, componentWillReceiveProps 라이프사이클 없어짐!</li>
 <li>함수형은 <strong>특정 데이터</strong>에 대해서 라이프사이클이 진행된다!</li>
@@ -23015,7 +23017,7 @@
 </ul>
 </li>
 <li>[componentWillUnmount 까지 포함하기 - 마운트 끝날때 이거 호출해주세요]
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hidden changed&quot;</span><span class="p">);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hidden will change&quot;</span><span class="p">)</span>
@@ -23023,7 +23025,7 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">hidden</span><span class="p">])</span>
 </code></pre></div></li>
 <li>[빈배열을 넣어 마운트 될 때, 언마운트 될 때 한번씩!]
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;mount&quot;</span><span class="p">);</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;unmount&quot;</span><span class="p">)</span>
@@ -23031,10 +23033,12 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">},</span><span class="w"> </span><span class="p">[])</span>
 </code></pre></div></li>
 <li>[리렌더링 될 때마다 한번씩! - 빈배열도 넣지마~]
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;mount&quot;</span><span class="p">);</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">})</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="_1">브라우저 캐시<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://toss.tech/article/smart-web-service-cache</em>
@@ -23048,7 +23052,7 @@
   - 자원을 언제 캐시할 지, 얼마나 오래 캐시할지 웹 브라우저에 지시
   - 웹 프록시, 오래된 브라우저, 충돌 캐싱 정책 등을 고려해야 함</p>
 <ul>
-<li><strong>Cache-Control</strong></li>
+<li><strong>Cache-Control</strong><ul>
 <li>No-cache<ul>
 <li>브라우저가 즉시 캐시를 참조하지 않고, 서버에 대해 컨텐츠 유효성을 검사하도록 지시</li>
 <li>Fresh의 경우 캐시에서 제공</li>
@@ -23068,17 +23072,17 @@
 <li>중간 프록시 등이 아닌 브라우저에서만 캐시 가능</li>
 </ul>
 </li>
-<li>
-<p>Max-age</p>
-<ul>
+<li>Max-age<ul>
 <li>클라이언트가 클라이언트 유효성을 다시 확인해야 브라우저 캐시에 콘텐츠를 남겨 둘 수 있는 최대 시간</li>
 <li>Expires와 달리 컨텐츠가 캐시된 시간의 상대값을 초 단위로 정의</li>
 <li>만료 날짜가 아니라는군...</li>
 </ul>
 </li>
-<li>
-<p><strong>웹 캐시의 종류</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>웹 캐시의 종류</strong><ol>
 <li>브라우저 캐시<ul>
 <li>브라우저, HTTP 요청을 하는 ClientApplication 내부 디스크에 캐시</li>
 <li>Cache된 Resource를 공유하지 않는 한 개인에 한정된 Cache</li>
@@ -23097,6 +23101,8 @@
 <li>Encryption, SSL 등</li>
 <li>무한대의 클라이언트 상대하는 하나의 웹서버 컨텐츠</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 

@@ -22910,45 +22910,44 @@
 <h2 id="threadlocal">ThreadLocal<a class="headerlink" href="#threadlocal" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://madplay.github.io/post/java-threadlocal</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>쓰레드 단위로 로컬 변수를 사용할 수 있음 =&gt; 마치 전역 변수처럼 여러 메서드에서 활용 가능</li>
-<li>
-<p>큰 부작용이 발생할 수 있기에, 다른 쓰레드와 변수가 공유되지 않도록 주의할 것!</p>
+<li>큰 부작용이 발생할 수 있기에, 다른 쓰레드와 변수가 공유되지 않도록 주의할 것!</li>
+</ul>
 </li>
-<li>
-<p><strong>ThreadLocalMap</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ThreadLocalMap</strong><ul>
 <li>외부에서 접근 가능한 메서드 X</li>
 <li>내부적으로 해시테이블 정보를 가짐</li>
-<li>
-<p>WeakReference 확장하여 ThreadLocal 객체를 Key로 사용하는 Entry 클래스
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadLocal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<li>WeakReference 확장하여 ThreadLocal 객체를 Key로 사용하는 Entry 클래스
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadLocal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadLocalMap</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Entry</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Thread</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Thread</strong><ul>
 <li>Thread 클래스는 ThreadLocalMap 타입 멤버 필드로 가지고 있음</li>
-<li>
-<p>특정 스레드의 정보를 ThreadLocal에서 직접 호출할 수 있도록 함
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Thread</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+<li>특정 스레드의 정보를 ThreadLocal에서 직접 호출할 수 있도록 함
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Thread</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">ThreadLocal</span><span class="p">.</span><span class="na">ThreadLocalMap</span><span class="w"> </span><span class="n">threadLocals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ThreadLocal</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ThreadLocal</strong><ul>
 <li>set: 쓰레드 로컬에 값 저장</li>
-<li>
-<p>get: 쓰레드 로컬에서 값 가져오기
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li>get: 쓰레드 로컬에서 값 가져오기
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">();</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">ThreadLocalMap</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getMap</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">map</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -22978,20 +22977,23 @@
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="kt">void</span><span class="w"> </span><span class="nf">createMap</span><span class="p">(</span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">firstValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="na">threadLocals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ThreadLocalMap</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">firstValue</span><span class="p">);</span><span class="w">    </span>
 <a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>주의할 사안</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>주의할 사안</strong><ul>
 <li>ThreadPool에서는 쓰레드를 재사용하기 때문에, ThreadLocal 값을 제거해줘야함!</li>
-<li>
-<p>제거 안해주면 재사용 된 쓰레드가 ThreadLocal 값을 부여잡고 있을 수 있음!</p>
+<li>제거 안해주면 재사용 된 쓰레드가 ThreadLocal 값을 부여잡고 있을 수 있음!</li>
+</ul>
 </li>
-<li>
-<p><strong>ThreadLocal의 활용</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ThreadLocal의 활용</strong><ul>
 <li>클라이언트 요청에 대해서 각각의 스레드에서 처리할 때나, 쓰레드 독립적으로 처리해야하는 데이터와 같이 "인증 관련 처리"에서도 활용 가능</li>
 <li>대표적인 사용처는 Spring Security의 <code>SecurityContext</code>, <code>SecurityContextHolder</code></li>
+</ul>
+</li>
 </ul>
 
 

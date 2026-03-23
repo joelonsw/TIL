@@ -7349,6 +7349,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#-virtual-dom-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Virtual DOM에서 컴포넌트 변화 감지 시 효율적으로 비교할 수 있도록 컴포넌트 내부는 하나의 DOM 트리 구조로 이루어져야함
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -22887,6 +22898,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#-virtual-dom-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        - Virtual DOM에서 컴포넌트 변화 감지 시 효율적으로 비교할 수 있도록 컴포넌트 내부는 하나의 DOM 트리 구조로 이루어져야함
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -22915,37 +22937,36 @@
   - 결과적으로 도출되는 DOM이랑은 상관이 없음
   - <code>&lt;Fragment /&gt;</code>를 줄여서 <code>&lt;&gt;&lt;/&gt;</code> 를 쓰는 경우가 허다</p>
 <ul>
-<li><strong>Props</strong></li>
+<li><strong>Props</strong><ul>
 <li>optional <code>key</code></li>
-<li>
-<p>key를 Fragement에 전달하기 위해서는 <code>&lt;&gt;&lt;/&gt;</code> 못써</p>
+<li>key를 Fragement에 전달하기 위해서는 <code>&lt;&gt;&lt;/&gt;</code> 못써</li>
+</ul>
 </li>
-<li>
-<p><strong>Usage</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Usage</strong><ul>
 <li>여러개의 컴포넌트를 같이 쓸 때 사용<ul>
 <li>하나의 컴포넌트만 리턴할 수 있는 리액트 특성상 필요</li>
 </ul>
 </li>
-<li>
-<p>레이아웃, 스타일에 영향 X</p>
+<li>레이아웃, 스타일에 영향 X</li>
+</ul>
 </li>
-<li>
-<p><strong>React.Fragment &amp; Fragment</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>React.Fragment &amp; Fragment</strong><ul>
 <li><code>&lt;Fragment&gt;</code>: JSX 단축 구문으로 사용</li>
 <li><code>&lt;React.Fragment&gt;</code>: 완전한 형태의 React 요소<ul>
 <li>위 둘은 기능적으로 완전히 동일</li>
 </ul>
 </li>
-<li>
-<p>컴포넌트가 렌더링 될 때 실제 DOM에는 나타나지 않고, 여러 요소를 그룹화하는 역할을 수행</p>
+<li>컴포넌트가 렌더링 될 때 실제 DOM에는 나타나지 않고, 여러 요소를 그룹화하는 역할을 수행</li>
+</ul>
 </li>
-<li>
-<p><strong>리액트 컴포넌트에서 요소 여러개를 하나로 감싸는 이유</strong></p>
+</ul>
+<ul>
+<li><strong>리액트 컴포넌트에서 요소 여러개를 하나로 감싸는 이유</strong><h2 id="-virtual-dom-dom">- Virtual DOM에서 컴포넌트 변화 감지 시 효율적으로 비교할 수 있도록 <strong>컴포넌트 내부는 하나의 DOM 트리 구조로 이루어져야함</strong><a class="headerlink" href="#-virtual-dom-dom" title="Permanent link">&para;</a></h2>
 </li>
-<li>Virtual DOM에서 컴포넌트 변화 감지 시 효율적으로 비교할 수 있도록 <strong>컴포넌트 내부는 하나의 DOM 트리 구조로 이루어져야함</strong></li>
-<li></li>
 </ul>
 
 

@@ -22909,24 +22909,22 @@
 <h3 id="2025-08-12">2025-08-12<a class="headerlink" href="#2025-08-12" title="Permanent link">&para;</a></h3>
 <h2 id="_1">헥사고날 아키텍쳐<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>소프트웨어의 핵심 비즈니스 로직을 외부 환경 (UI/DB/외부 API)로 부터 <strong>완전히 분리 + 보호</strong> 하는 것이 목표</li>
-<li>
-<p>Port and Adapters Architecture</p>
+<li>Port and Adapters Architecture</li>
+</ul>
 </li>
-<li>
-<p><strong>헥사고날 아키텍처</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>헥사고날 아키텍처</strong><ul>
 <li>내부/외부 2개의 영역으로 나눔<ul>
 <li>내부) 시스템의 가장 중요한 부분. 순수 비즈니스 로직/정책 담음. 외부 세계의 어떤 기술에도 의존하지 않음</li>
 <li>외부) UI, DB, 파일시스템, 서드파티 API 등 어플리케이션과 상호작용</li>
 </ul>
 </li>
-<li>
-<p>둘을 port-adapter에서 연결</p>
-<ul>
+<li>둘을 port-adapter에서 연결<ul>
 <li>port) 내부 코어 영역에 정의된 인터페이스. 내부 비즈니스 로직이 외부와 소통하기 위한 규약/창구</li>
-<li>adapter) 외부 기술이 포트라는 규격에 맞게 실제로 구현한 코드. </li>
+<li>adapter) 외부 기술이 포트라는 규격에 맞게 실제로 구현한 코드. <ul>
 <li>inbound adapter) 외부의 요청을 받아 내부 코어 호출<ul>
 <li>ex. 웹 컨트롤러, MQ 리스너</li>
 </ul>
@@ -22937,30 +22935,36 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>필요한 이유</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>필요한 이유</strong><ul>
 <li>전통적인 계층 아키텍쳐는 상위 계층이 하위 계층에 직접 의존. </li>
 <li><strong>비즈니스 로직이 특정 기술에 종속됨</strong><ul>
 <li>DB를 MySQL -&gt; PostgreSQL</li>
 <li>웹프레임워크를 Spring -&gt; Play 변경시 대대적 수정 필요</li>
 </ul>
 </li>
-<li>
-<p>헥사고날은 DIP 적용</p>
-<ul>
+<li>헥사고날은 DIP 적용<ul>
 <li>비즈니스 로직을 구체적인 기술에 의존하지 말고, 추상적인 포트에만 의존 (인터페이스)</li>
 <li>실제 기술 구현체인 어댑터가 이 포트를 구현</li>
 <li>어플리케이션의 핵심 가치 비즈니스로직을 외부의 기술의 변화로 부터 보호</li>
 </ul>
 </li>
-<li>
-<p><strong>장점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>장점</strong><ol>
 <li>높은 테스트 용이성: 비즈니스 로직이 특정 DB/프레임워크에 종속되지 않음. 모킹+어댑터로 핵심로직 빠르게 테스트 가능</li>
 <li>유연성/확장성: 외부기술 쉽게 교체/추가 가능</li>
 <li>기술 종속성 탈피: 어플리케이션 핵심 자산인 비즈니스 로직이 특정 프레임워크나 DB 기술 수명주기로 부터 자유로움</li>
 <li>유지보수 용이: 역할/책임 명확한 분리. 비즈니스 로직에만 집중하세요</li>
+</ol>
+</li>
 </ul>
 
 

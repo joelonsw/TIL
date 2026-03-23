@@ -22967,16 +22967,16 @@
 <ul>
 <li><em>참고: https://github.com/redis/redis</em></li>
 <li><em>참고: https://ko.quish.tv/redis-vs-mysql-benchmarks</em></li>
-<li><strong>왜 필요한데?</strong></li>
+<li><strong>왜 필요한데?</strong><ul>
 <li>DB, 캐시 및 메시지 브로커로 사용되는 오픈소스</li>
 <li>인메모리 데이터 구조 저장소</li>
 <li>Key-Value 형식으로 저장</li>
-<li>
-<p>110000 SET/second, 81000 GET/second 수행 가능 =&gt; 초고속</p>
+<li>110000 SET/second, 81000 GET/second 수행 가능 =&gt; 초고속</li>
+</ul>
 </li>
-<li>
-<p><strong>vs MySQL</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>vs MySQL</strong><ul>
 <li>레디스는 만료기간을 지원한다.</li>
 <li>레디스는 데이터 저장에 별도 테이블을 만들 필요 없다</li>
 <li>MySQL은 Lock 범위가 Table<ul>
@@ -22984,22 +22984,22 @@
 <li>따라서 수정이 일어나는 경우 요청이 대기해야 함 </li>
 </ul>
 </li>
-<li>
-<p>레디스는 단일 쓰레드를 사용해 분산 잠금 필요 X</p>
+<li>레디스는 단일 쓰레드를 사용해 분산 잠금 필요 X</li>
+</ul>
 </li>
-<li>
-<p><strong>RDB 보다 얼마나 빠른데?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>RDB 보다 얼마나 빠른데?</strong><ul>
 <li><em>참고: https://dzone.com/articles/redis-vs-mysql-benchmarks</em></li>
-<li>
-<p>요청이 많이 늘수록, 레디스를 붙인 mysql이 성능 훨씬 좋아짐</p>
+<li>요청이 많이 늘수록, 레디스를 붙인 mysql이 성능 훨씬 좋아짐</li>
+</ul>
 </li>
-<li>
-<p><strong>Redis Datatype</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Redis Datatype</strong><ul>
 <li><em>참고: https://redis.io/docs/data-types/</em></li>
 <li>[Strings]
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; SET user:1 salvatore
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; SET user:1 salvatore
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>OK
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>&gt; GET user:1
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>&quot;salvatore&quot;
@@ -23042,43 +23042,52 @@
 <li>[Geospatial indexes]</li>
 <li>[Bitmaps]</li>
 <li>[Bitfields]</li>
-<li>
-<p>[HyperLogLog]</p>
+<li>[HyperLogLog]</li>
+</ul>
 </li>
-<li>
-<p><strong>레디스는 해시충돌을 어떻게 해결하지?</strong></p>
+</ul>
+<ul>
+<li><strong>레디스는 해시충돌을 어떻게 해결하지?</strong><ul>
+<li><em>참고: https://intrepidgeeks.com/tutorial/hash-collision-and-progressive-rehash-source-analysis-in-redis</em></li>
+</ul>
 </li>
-<li>
-<p><em>참고: https://intrepidgeeks.com/tutorial/hash-collision-and-progressive-rehash-source-analysis-in-redis</em></p>
-</li>
-<li>
-<p><strong>A little internal on Redis hash table implementation</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>A little internal on Redis hash table implementation</strong><ul>
 <li><em>참고: https://kousiknath.medium.com/a-little-internal-on-redis-key-value-storage-implementation-fdf96bac7453</em></li>
 <li>레디스는 메모리를 써서 높은 속도를 보장</li>
 <li>싱글쓰레드로 동작함</li>
 <li>레디스가 String을 저장하던, set을 저장하던, hash를 저장하던 모든건 다 hash table 안에 저장됨</li>
 <li>데이터 구조 살펴보기<ul>
-<li>dict</li>
+<li>dict<ul>
 <li>dictht ht[2]</li>
-<li>dictht </li>
+</ul>
+</li>
+<li>dictht <ul>
 <li>hashtable</li>
-<li>dictEntry</li>
+</ul>
+</li>
+<li>dictEntry<ul>
 <li>링크드리스트 key-value </li>
 </ul>
 </li>
+</ul>
+</li>
 <li>초기 dictht 해시테이블 사이즈 4 =&gt; 리사이즈는 다음과 같을 때<ol>
-<li>total_elements / total_buckets = 1 &amp;&amp; dict_resize = true</li>
+<li>total_elements / total_buckets = 1 &amp;&amp; dict_resize = true<ul>
 <li>리해싱 최대한 피하려고함</li>
+</ul>
+</li>
 <li>total_elements / total_buckets &gt; 5</li>
 </ol>
 </li>
 <li>단일 쓰레드 redis 입장에서 해시 테이블 크기 조정 및 리해싱을 block 되지 않는 방식으로 동작시켜야해</li>
 </ul>
+</li>
+</ul>
 <h3 id="connectable-redis">Connectable에서 사용한 Redis<a class="headerlink" href="#connectable-redis" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>정필이 코드</strong>
+<li><strong>정필이 코드</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@RequiredArgsConstructor</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@Service</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisUtil</span><span class="w"> </span><span class="p">{</span>
@@ -23115,10 +23124,10 @@
 <a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">validateAuthKey</span><span class="p">(</span><span class="n">generatedKey</span><span class="p">,</span><span class="w"> </span><span class="n">authKey</span><span class="p">);</span>
 <a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>내 코드</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>내 코드</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Getter</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@RedisHash</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UserTicketEntrance&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">timeToLive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserTicketEntrance</span><span class="w"> </span><span class="p">{</span>
@@ -23148,45 +23157,48 @@
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">        </span><span class="n">userTicketEntranceRedisRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">userTicketEntrance</span><span class="p">);</span>
 <a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="springboot-redis">SpringBoot에서 Redis 사용하기<a class="headerlink" href="#springboot-redis" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>참고: https://kkambi.tistory.com/139</em></li>
-<li><strong>StringRedisTemplate/RedisTemplate</strong></li>
+<li><strong>StringRedisTemplate/RedisTemplate</strong><ul>
 <li>key-value를 조작하여 객체를 직접 설정</li>
 <li><code>@Autowired</code> StringRedisTemplate</li>
-<li>
-<p>opsForValue() = ValueOperations&lt;K,V&gt;</p>
-<ul>
+<li>opsForValue() = ValueOperations&lt;K,V&gt;<ul>
 <li>보통 &lt;String, String&gt;
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ValueOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="err">\</span><span class="o">&gt;</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ValueOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="err">\</span><span class="o">&gt;</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">();</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">values</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;joel&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>CrudRepository</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>CrudRepository</strong><ul>
 <li>Spring Data JPA를 활용해 객체를 relation으로 매핑하는 것과 유사</li>
 <li>Entity 역할의 클래스 생성<ul>
-<li><code>@RedisHash</code> 도메인 클래스에 생성</li>
+<li><code>@RedisHash</code> 도메인 클래스에 생성<ul>
 <li>KEY: 특정 해시값</li>
 <li>VALUE : 클래스 인스턴스</li>
+</ul>
+</li>
 <li><code>@Id</code> ID 필드</li>
 </ul>
 </li>
-<li>
-<p>CrudRepository 상속받는 Interface 생성</p>
-<ul>
+<li>CrudRepository 상속받는 Interface 생성<ul>
 <li>이후 JPA Repository 처럼 사용 가능</li>
 </ul>
 </li>
-<li>
-<p><strong><code>@RedisHash</code> 저장 방법</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong><code>@RedisHash</code> 저장 방법</strong><ul>
 <li>HashMap&lt;<code>@RedisHash 이름</code>, HashMap&lt;<code>@Id</code>, 엔티티&gt;&gt;</li>
+</ul>
+</li>
 </ul>
 
 

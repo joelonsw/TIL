@@ -22918,22 +22918,22 @@
   - 이후 Consumer는 메모리에서 메시지를 하나씩 꺼내서 처리함
   - prefetch 값에 따라 성능 차이가 크기에, 어플리케이션에 맞게 조정할 것</p>
 <ul>
-<li><strong>Prefetch 값으로 인해 일어날 수 있는 상황</strong></li>
+<li><strong>Prefetch 값으로 인해 일어날 수 있는 상황</strong><ul>
 <li>메시지 500개 가정</li>
 <li>consumer1/consumer2 두개가 붙어있고 각기 250개씩</li>
 <li>consumer3 250짜리 추가했는데, 정작 메시지 다 consumer1/2가 가져가서 갈게 없음</li>
 <li>각기 170개로 설정했으면 나을 뻔 했다~</li>
-<li>
-<p>추천값</p>
-<ul>
+<li>추천값<ul>
 <li>메시지 처리속도 빠름 | 하나의 큐에 적은 consumer =&gt; prefetch HIGH</li>
 <li>메시지 처리속도 빠름 | 하나의 큐에 많은 consumer =&gt; prefetch MIDDLE</li>
 <li>메시지 처리 속도 느림 =&gt; prefetch 1</li>
 </ul>
 </li>
-<li>
-<p><strong>Spring Cloud?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Spring Cloud?</strong><ul>
 <li>MSA 구축에 필요한 라이브러리 집합</li>
 <li>외부 시스템에 연결할 수 있는 어플리케이션 신속하게 구축하는 MSA 프레임워크<ul>
 <li>메시지 기반 마이크로 서비스 구현</li>
@@ -22944,8 +22944,12 @@
 <li>메시징을 통한 구성 포함해 MSA 적용</li>
 <li>어플리케이션 책임을 이벤트 중심적 사고와 분리</li>
 <li>비즈니스 로직을 메시지 브로커에 포팅 (ex. RabbitMQ, Kafka)</li>
-<li>Project Reactor Flux, Kafka Streams API 사용한 어플리케이션 바인딩 시나리오</li>
+<li>Project Reactor Flux, Kafka Streams API 사용한 어플리케이션 바인딩 시나리오<ul>
 <li>데이터가 도착할 때마다 지속적으로 처리되도록 구축</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

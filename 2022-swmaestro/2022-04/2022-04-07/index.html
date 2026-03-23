@@ -22931,9 +22931,9 @@
 <h3 id="2022-04-07">2022-04-07<a class="headerlink" href="#2022-04-07" title="Permanent link">&para;</a></h3>
 <h2 id="dovemetric-airtable-api">Dovemetric (Airtable) Api 호출<a class="headerlink" href="#dovemetric-airtable-api" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>요청 URL</strong></li>
+<li><strong>요청 URL</strong><ul>
 <li>되게 신기? 하게도 쿼리스트링에 바로 JSON 느낌나는 친구들을 한 바닥 넣어뒀음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://airtable.com/v0.3/application/apppcI0nClUwo3GCb/read
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://airtable.com/v0.3/application/apppcI0nClUwo3GCb/read
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>?stringifiedObjectParams={
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;includeDataForTableIds&quot;:[&quot;tbllShMbhc5jooPRb&quot;],
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &quot;includeDataForViewIds&quot;:[&quot;viwymTshkJuerbyeT&quot;],
@@ -22960,9 +22960,8 @@
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    &quot;signature&quot;:&quot;efdff063ac6ebc4d0947704b43d9d2ee09b5a695f2900eb696dfee41e91364a6&quot;
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>}
 </code></pre></div></li>
-<li>
-<p>근데 여기에 airtable 에서 호출한 척 Header 까지 넣어줘야 401 Unauthorized를 벗어날 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Host: airtable.com
+<li>근데 여기에 airtable 에서 호출한 척 Header 까지 넣어줘야 401 Unauthorized를 벗어날 수 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Host: airtable.com
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>x-airtable-application-id: apppcI0nClUwo3GCb
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>x-airtable-inter-service-client: webClient
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>x-airtable-page-load-id: pglYshRJ38dSEq9iP
@@ -22970,10 +22969,12 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>X-Requested-With: XMLHttpRequest
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>x-time-zone: Asia/Seoul
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>x-user-locale: ko-KR
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>최근 30일 Fundraising 으로 가보자!</strong>
+</ul>
+<ul>
+<li><strong>최근 30일 Fundraising 으로 가보자!</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>https://airtable.com/v0.3/view/viwjy9DFTjiMn0oY1/readData
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>?stringifiedObjectParams={}
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&amp;requestId=reqVPJoQ3uIz7KUeT
@@ -22997,33 +22998,32 @@
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    &quot;expires&quot;:&quot;2022-04-28T00:00:00.000Z&quot;,
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    &quot;signature&quot;:&quot;efdff063ac6ebc4d0947704b43d9d2ee09b5a695f2900eb696dfee41e91364a6&quot;
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>}
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Get 요청에 JSON을 쿼리 스트링으로 넘기네...?</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Get 요청에 JSON을 쿼리 스트링으로 넘기네...?</strong></li>
 </ul>
 <h2 id="json-parameter">JSON Parameter를 인코딩해서 넘겨주면 에러나!<a class="headerlink" href="#json-parameter" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>문제 상황</strong></li>
+<li><strong>문제 상황</strong><ul>
 <li>처음에 JSON을 쿼리스트링으로 가진걸 Encoding 된 상태로 String 변수에 박아둠
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://airtable.com/v0.3/application/apppcI0nClUwo3GCb/read?stringifiedObjectParams=%7B%22includeDataForTableIds%22%3A%5B%22tbllShMbhc5jooPRb%22%5D%2C%22includeDataForViewIds%22%3A%5B%22viwymTshkJuerbyeT%22%5D%2C%22shouldIncludeSchemaChecksum%22%3Atrue%7D&amp;requestId=reqy9kjnQp9VdVlKF&amp;accessPolicy=%7B%22allowedActions%22%3A%5B%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%22%2C%22action%22%3A%22readForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readDataForRowCards%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readRowOrder%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22getMetadataForPrinting%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readDataForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22createBoxDocumentSession%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22createDocumentPreviewSession%22%7D%5D%2C%22shareId%22%3A%22shrP7uEmnxbv7dUEV%22%2C%22applicationId%22%3A%22apppcI0nClUwo3GCb%22%2C%22generationNumber%22%3A0%2C%22expires%22%3A%222022-04-28T00%3A00%3A00.000Z%22%2C%22signature%22%3A%22efdff063ac6ebc4d0947704b43d9d2ee09b5a695f2900eb696dfee41e91364a6%22%7D&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://airtable.com/v0.3/application/apppcI0nClUwo3GCb/read?stringifiedObjectParams=%7B%22includeDataForTableIds%22%3A%5B%22tbllShMbhc5jooPRb%22%5D%2C%22includeDataForViewIds%22%3A%5B%22viwymTshkJuerbyeT%22%5D%2C%22shouldIncludeSchemaChecksum%22%3Atrue%7D&amp;requestId=reqy9kjnQp9VdVlKF&amp;accessPolicy=%7B%22allowedActions%22%3A%5B%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%22%2C%22action%22%3A%22readForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readDataForRowCards%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readRowOrder%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22getMetadataForPrinting%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22readDataForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22createBoxDocumentSession%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apppcI0nClUwo3GCb%20*%22%2C%22action%22%3A%22createDocumentPreviewSession%22%7D%5D%2C%22shareId%22%3A%22shrP7uEmnxbv7dUEV%22%2C%22applicationId%22%3A%22apppcI0nClUwo3GCb%22%2C%22generationNumber%22%3A0%2C%22expires%22%3A%222022-04-28T00%3A00%3A00.000Z%22%2C%22signature%22%3A%22efdff063ac6ebc4d0947704b43d9d2ee09b5a695f2900eb696dfee41e91364a6%22%7D&quot;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>RestTemplate에 URL 그대로 넘기면 Encoding이 일어남</li>
 <li>이미 Encoding 된 String 값이 "또" Encoding이 일어남</li>
-<li>
-<p>그러면 제대로 요청이 안보내짐</p>
-<ul>
+<li>그러면 제대로 요청이 안보내짐<ul>
 <li>이게 문제였는데 HttpHeader만 한 세시간 정도 지지고 볶았음...</li>
 </ul>
 </li>
-<li>
-<p><strong>해결 방법</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>해결 방법</strong><ul>
 <li><em>참고 1: http://www.chrispad.com/2019/04/disable-encoding-url-using-resttemplate.html</em></li>
 <li><em>참고 2: https://github.com/heowc/programming-study/issues/66</em></li>
 <li>RestTemplate에 Disable Encoding URL 설정 넣어주기
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">DefaultUriBuilderFactory</span><span class="w"> </span><span class="n">defaultUriBuilderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultUriBuilderFactory</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">DefaultUriBuilderFactory</span><span class="w"> </span><span class="n">defaultUriBuilderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultUriBuilderFactory</span><span class="p">();</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">defaultUriBuilderFactory</span><span class="p">.</span><span class="na">setEncodingMode</span><span class="p">(</span><span class="n">DefaultUriBuilderFactory</span><span class="p">.</span><span class="na">EncodingMode</span><span class="p">.</span><span class="na">NONE</span><span class="p">);</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RestTemplate</span><span class="p">();</span>
@@ -23038,6 +23038,8 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">uriString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uriComponents</span><span class="p">.</span><span class="na">toUriString</span><span class="p">();</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

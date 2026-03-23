@@ -22955,11 +22955,13 @@
   - 기본적으로 ExecutionContext는 ForkJoinPool
     - <code>Runtime.availableProcessors()</code> 호출해 CPU 코어수 기준 스레드 생성</p>
 <ul>
-<li><strong>매개변수 전달/힙 메모리</strong></li>
+<li><strong>매개변수 전달/힙 메모리</strong><ul>
 <li>JVM에서 모든 쓰레드가 힙 영역 공유. </li>
 <li>매개변수 객체들은 다 heap에 저장되어 참조할 수 있고, 값들은 복사되어 전달</li>
 <li>이렇다보니, 불변 객체를 쓰는게 함수형 패러다임에 좋겠죠?<ul>
 <li>상태를 딱히 유지하기엔 여기저기 쓰레드에서 건들 수 있을테니</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

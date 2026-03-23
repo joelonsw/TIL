@@ -22910,7 +22910,7 @@
 <h2 id="rabbitmq-dlxdlq">RabbitMQ DLX/DLQ<a class="headerlink" href="#rabbitmq-dlxdlq" title="Permanent link">&para;</a></h2>
 <ul>
 <li>https://devssul.tistory.com/30</li>
-<li><strong>메시지 손실</strong></li>
+<li><strong>메시지 손실</strong><ul>
 <li>RabiitMQ 재시작 시 DLX/DLQ의 메시지 손실 되지 않는 구성을 알아보자<ul>
 <li>DLX (Dead Letter Exchange)</li>
 <li>DLQ (Dead Letter Queue)</li>
@@ -22919,35 +22919,39 @@
 <li>방법<ul>
 <li>Exchange/Queue 설정의 Durability 값이 true 여야 함.</li>
 <li>Auto delete 값이 false인지 확인</li>
-<li>메모리를 발송할 때 메시지의 Delivery Mode가 2인지 확인</li>
+<li>메모리를 발송할 때 메시지의 Delivery Mode가 2인지 확인<ul>
 <li>1 =&gt; 메모리 저장 (손실 O)</li>
 <li>2 =&gt; 디스크 저장 (손실 X)</li>
 </ul>
 </li>
-<li>
-<p>Exchange/Queue</p>
-<ul>
+</ul>
+</li>
+<li>Exchange/Queue<ul>
 <li>Exchange/Queue의 구성은 기본적으로 메모리에 저장. </li>
 <li>RabiitMQ 서버 재시작하면 메모리가 초기화 되기에 Exchange/Queue 구성 사라짐. </li>
-<li>해당 설정을 줘서 메모리 아닌 디스크로 큐 인입된 내용 저장하도록 하자. 그러면 재시작해도 안 사라짐.</li>
+<li>해당 설정을 줘서 메모리 아닌 디스크로 큐 인입된 내용 저장하도록 하자. 그러면 재시작해도 안 사라짐.<ul>
 <li>Durability: true</li>
 <li>Auto Delete: false</li>
 </ul>
 </li>
-<li>
-<p><strong>DLX/DLQ</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>DLX/DLQ</strong><ul>
 <li>프로세스 오류 유연하게 처리하기 위함</li>
 <li>프로세스에서 오류/예외 발생 =&gt; 메시지 재처리 필요 (reject) =&gt; 다시 원래 Queue로 돌아감 =&gt; 재처리할 메시지 + 신규 메시지 혼합 =&gt; 처리 효율성 low</li>
-<li>
-<p>DLX/DLQ를 구성함으로써 reject 된 메시지를 원래 Queue로 돌리지 않고 DLX/DLQ로 보낼 수 있음</p>
-<ul>
+<li>DLX/DLQ를 구성함으로써 reject 된 메시지를 원래 Queue로 돌리지 않고 DLX/DLQ로 보낼 수 있음<ul>
 <li>이러면 재처리 / 신규 메시지 분리됨으로써 메시지 처리 효율성 up!</li>
 </ul>
 </li>
-<li>
-<p><strong>RabbitMQ에서 Queue &amp; Exchange</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>RabbitMQ에서 Queue &amp; Exchange</strong><ul>
 <li>Exchange<ul>
 <li>메시지 받아서 어떤 큐로 보내지? 결정하는 역할</li>
 <li>Producer 메시지를 Queue가 아닌 Exchange로 보냄</li>
@@ -22973,6 +22977,8 @@
 <li>Fanout: 바인딩된 모든 큐로 메시지 복사/전달</li>
 <li>Topic: 라우팅 키 패턴 매칭 이용해 큐 전달</li>
 <li>Headers: 메시지 헤더 속성 기준 큐 전달</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

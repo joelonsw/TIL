@@ -23023,11 +23023,9 @@
   - DOM은 싹 다 글로벌임
     - document.queryS</p>
 <ul>
-<li><strong>Virtual DOM</strong></li>
+<li><strong>Virtual DOM</strong><ul>
 <li>virtual DOM은 메모리에 있고, 진짜 DOM과 싱크를 맞추고 있음</li>
-<li>
-<p>리액트의 경우</p>
-<ol>
+<li>리액트의 경우<ol>
 <li>진짜 DOM을 JS로 컴파일해 Virtual DOM (vDOM) 만듦</li>
 <li>vDOM은 자기를 복사해 Virtual DOM 2(vDOM2)를 만듦</li>
 <li>업데이트가 일어나면 vDOM2에 먼저 반영</li>
@@ -23035,9 +23033,11 @@
 <li>리액트가 진짜 DOM이 변경되어야 한다고 판단하면 딱 업데이트 쳐줘야할 DOM만 변경해줌</li>
 </ol>
 </li>
-<li>
-<p><strong>Shadow DOM</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Shadow DOM</strong><ul>
 <li>숨겨진 DOM 트리인데, 진짜 DOM 트리에 착붙</li>
 <li>이건 진짜 오로지 shadow DOM만이 혼자 컨트롤함 (https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)</li>
 <li>video 태그 같은 건데... 이게 그냥 video 태그인데 사실 그 안에 플레이버튼, 시간 표시, 음량 조절, 등등 별에별게 다 있자나?<ul>
@@ -23049,20 +23049,22 @@
 <li><img alt="" src="../../images/2023-11-22-no-shadow-dom.png" /></li>
 <li><img alt="" src="../../images/2023-11-22-shadow-dom.png" /></li>
 </ul>
+</li>
+</ul>
 <h2 id="virtual-dom">Virtual DOM<a class="headerlink" href="#virtual-dom" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://www.youtube.com/watch?v=PN_WmsgbQCo</em></p>
 <h4 id="1">1. 브라우저의 동작<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>브라우저 렌더링 과정</strong></li>
+<li><strong>브라우저 렌더링 과정</strong><ol>
 <li>DOM tree 생성 : 렌더 엔진이 HTML을 파싱해 DOM 노드로 이루어진 트리 생성</li>
 <li>render tree 생성 : css 파일과 inline 스타일을 파싱, DOM + CSSOM = 렌더 트리 생성</li>
 <li>Layout(reflow) : 각 노드들의 스크린에서의 좌표에 따라 위치 결정</li>
-<li>
-<p>Paint(repaint) : 실제 화면에 그리기</p>
+<li>Paint(repaint) : 실제 화면에 그리기</li>
+</ol>
 </li>
-<li>
-<p><strong>DOM 조작의 비효율성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DOM 조작의 비효율성</strong><ul>
 <li>다만! 특정 인터렉션으로 인해 DOM이 변화가 생기면 2번. render tree 생성부터 다시!!!<ul>
 <li>인스타에서 좋아요 누름</li>
 <li>배민 장바구니에서 메뉴 삭제</li>
@@ -23070,22 +23072,24 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h4 id="2-virtual-dom">2. Virtual DOM의 등장<a class="headerlink" href="#2-virtual-dom" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Virtual DOM의 등장</strong> </li>
+<li><strong>Virtual DOM의 등장</strong> <ul>
 <li>실제 DOM과 같은 속성을 가지고 있으나 (class, id 등)</li>
 <li>실제 DOM과 같은 API를 가지고 있진 않음 (getElementById, createElement 등)</li>
-<li>
-<p>데이터 변경 시...</p>
-<ul>
+<li>데이터 변경 시...<ul>
 <li>전체 UI는 Virtual DOM에 렌더링</li>
 <li>Virtual DOM에 있던 내용과 업데이트 후 내용을 비교해서 실제 DOM에 적용 (위에 vDom, vDom2 비교해서 바뀐거만 착붙 얘기하는 듯)</li>
 <li>전체 실제 DOM을 바꾸지 않고 필요한 부분의 UI 업데이트 뚝딱</li>
 </ul>
 </li>
-<li>
-<p><strong>Virtual DOM의 동작 원리</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Virtual DOM의 동작 원리</strong><ul>
 <li>사실 DOM 처럼 생겼는데, js object에 불과해<ul>
 <li>요렇게 생겼다고 생각했던 html은 사실
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;items&quot;</span><span class="p">&gt;</span>
@@ -23115,12 +23119,14 @@
 <li>모든 변화 한번에 묶어서 한큐에 뚝딱 적용</li>
 <li><strong>Virtual DOM: DOM fragment의 변화를 묶어서 적용한 다음, 기존 DOM에 던져주는 과정</strong></li>
 </ul>
+</li>
+</ul>
 <h4 id="3-react-virtual-dom">3. React의 Virtual DOM<a class="headerlink" href="#3-react-virtual-dom" title="Permanent link">&para;</a></h4>
 <ul>
 <li>리액트에게 Virtual DOM이란... "UI의 가상적인 표현을 메모리에 저장하고, ReactDOM과 같은 라이브러리에 의해 실제 DOM과 동기화"</li>
-<li><strong>JSX &amp; React의 Virtual DOM</strong></li>
+<li><strong>JSX &amp; React의 Virtual DOM</strong><ul>
 <li>js 확장 문법으로 html 처럼 생겼지만 js object 작성의 또다른 방법
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">component</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">component</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="s">&#39;kakao&#39;</span><span class="p">&gt;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">          </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="o">!</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
@@ -23136,7 +23142,7 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Hello!&quot;</span><span class="p">))</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">}</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// 요것도 내부적으로 결국</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// 요것도 내부적으로 결국</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;div&#39;</span><span class="p">,</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nx">props</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
@@ -23148,13 +23154,15 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>리액트가 <code>ReactDOM.render(element, document.getElementById('kakao'))</code> 이렇게 꽂아줄 때 변경됨!</p>
+<li>리액트가 <code>ReactDOM.render(element, document.getElementById('kakao'))</code> 이렇게 꽂아줄 때 변경됨!</li>
+</ul>
 </li>
-<li>
-<p><strong>diffing 알고리즘</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>diffing 알고리즘</strong><ul>
 <li>virtual DOM이 업데이트되면, React는 virtual DOM을 업데이트 이전의 vDOM 스냅샷과 비교하여 정확히 어떤 vDOM이 바뀌었는지 검사</li>
+</ul>
+</li>
 </ul>
 
 

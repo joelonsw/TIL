@@ -22931,208 +22931,122 @@
 <h3 id="2021-05-06">2021-05-06<a class="headerlink" href="#2021-05-06" title="Permanent link">&para;</a></h3>
 <h2 id="_1">테코톡<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>스프링으로 서블릿을 다룬다는 것</strong></p>
-<ol>
-<li>서블릿이란<ul>
-<li>정적인 페이지만 리턴<ul>
-<li>프로그램 붙여 동적인 페이지 생성</li>
+<li><strong>스프링으로 서블릿을 다룬다는 것</strong>
+    1. 서블릿이란
+        - 정적인 페이지만 리턴
+            - 프로그램 붙여 동적인 페이지 생성
+    2. 서블릿 컨테이너와 서블릿 동작 방식
+        - Servlet Req/Resp 객체 생성
+        - 설정 파일 참고해서 매핑할 Servlet 확인
+        - Servlet Container에 스레드 생성, res/req를 인자로 서비스 실행
+        - 서블릿 컨테이너: 서블릿 생명 주기 관리
+    3. 프론트 컨트롤러 패턴
+        - Dispatcher Servlet: 서블릿 하나 두고 모든 요청 처리 <em>(공통 로직 추출)</em>
+    4. Dispatcher Servlet 요청 처리 과정
+        - Handler Mapping <em>(요청 처리 핸들러 검색)</em> &lt;-&gt; Dispatcher Servlet &amp; Handler Adapter &lt;-&gt; View Resolver
+    5. 스프링 컨테이너 맛보기
+        - 개발자로써 핸들러에만 집중할 수 있도록 함
+    - Root application 컨텍스트 &amp; Servlet 컨텍스트</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>서블릿 컨테이너와 서블릿 동작 방식<ul>
-<li>Servlet Req/Resp 객체 생성</li>
-<li>설정 파일 참고해서 매핑할 Servlet 확인</li>
-<li>Servlet Container에 스레드 생성, res/req를 인자로 서비스 실행</li>
-<li>서블릿 컨테이너: 서블릿 생명 주기 관리</li>
-</ul>
-</li>
-<li>프론트 컨트롤러 패턴<ul>
-<li>Dispatcher Servlet: 서블릿 하나 두고 모든 요청 처리 <em>(공통 로직 추출)</em></li>
-</ul>
-</li>
-<li>Dispatcher Servlet 요청 처리 과정<ul>
-<li>Handler Mapping <em>(요청 처리 핸들러 검색)</em> &lt;-&gt; Dispatcher Servlet &amp; Handler Adapter &lt;-&gt; View Resolver</li>
-</ul>
-</li>
-<li>스프링 컨테이너 맛보기<ul>
-<li>개발자로써 핸들러에만 집중할 수 있도록 함</li>
-</ul>
-</li>
-<li>Root application 컨텍스트 &amp; Servlet 컨텍스트</li>
-</ol>
-</li>
-<li>
-<p><strong>스프링 VS 스프링부트</strong></p>
-<ol>
-<li>Spring 생태계<ul>
-<li>Spring Framework, Spring boot, Spring data 등 여러 프로젝트의 모음</li>
-<li>Spring은 프로젝트 별로 하위 모듈을 가지고 있음</li>
-<li>Spring Framework<ul>
-<li>Spring WebMVC</li>
-<li>Spring JDBC</li>
-<li>Spring Core</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Spring Framework?<ul>
-<li>정의: 자바 기반 기업용 애플리케이션</li>
-<li>애플리케이션 수준의 인프라 지원<ul>
-<li>비즈니스 로직에 집중</li>
-</ul>
-</li>
-<li>비즈니스 로직 (DI, IoC) &lt;-&gt; 엔터프라이즈 기술 분리<ul>
-<li>기본 설정 잘하면 스프링 관련 코드 신경 안써도 됨</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Spring Boot?<ul>
-<li>Spring 애플리케이션 쉽게 만들 수 있음</li>
-<li>What makes spring framework uncomfty<ul>
-<li>개발자가 처리해야 할 설정 증가</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Spring Boot는 약간의 설정만으로 Spring 애플리케이션 만듦</li>
-<li>Spring Boot는 Spring Framework 쉽게 사용하게 해주는 도구</li>
-<li>Spring Boot 쓰면 달라지는 점?<ul>
-<li>의존성 관리<ul>
-<li>모듈의 의존성 버전 명시해줬는데... -&gt; spring-boot-starter<ul>
-<li>spring-boot-starter-parent로 버전 관리</li>
-</ul>
-</li>
-<li>spring-boot-starter: 관련 있는 모듈의 모음 제공</li>
-<li>spring-boot-starter-parent: 버전관리</li>
-</ul>
-</li>
-<li>자동 설정  <ul>
-<li>기존 Spring 많은 환경 설정 필요</li>
-<li>DB 설정 등이 많이 간편해짐 (Spring Boot가 해줌)</li>
-<li>@SpringBootApplication<ul>
-<li>@SpringBootConfiguration</li>
-<li>@EnableAutoConfiguration (자동 설정 지원)</li>
-<li>@ComponentScan (Bean 등록)      </li>
-</ul>
-</li>
-<li>Classpath에 jar 등록 시 spring.factories에 있는 관련 설정 실행</li>
-<li>@Conditional 조건에 따라 빈 등록</li>
-</ul>
-</li>
-<li>내장 WAS<ul>
-<li>절차<ul>
-<li>WAR 패키징</li>
-<li>WAS 설치</li>
-<li>WAS에 WAR 파일 올리기    </li>
-</ul>
-</li>
-<li>Spring Boot에는 WAS가 내장되어 있음<ul>
-<li>자동설정이 넣어줌</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>모니터링<ul>
-<li>Actuator를 사용하여 모니터링 가능<ul>
-<li>EndPoint로 미리 만들어서 제공</li>
-<li>/health</li>
-<li>/metrics/{name}</li>
-<li>/beans</li>
-<li>/loggers/{name}</li>
-</ul>
-</li>
-<li>Actuator에는 민감한 정보도 다수<ul>
-<li>Spring Security를 통해 보안 신경써주자</li>
-<li>메모리에 저장하기에 영구 저장소 저장 고려하자</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
+<ul>
+<li><strong>스프링 VS 스프링부트</strong>
+    1. Spring 생태계
+        - Spring Framework, Spring boot, Spring data 등 여러 프로젝트의 모음
+        - Spring은 프로젝트 별로 하위 모듈을 가지고 있음
+        - Spring Framework
+            - Spring WebMVC
+            - Spring JDBC
+            - Spring Core
+    2. Spring Framework?
+        - 정의: 자바 기반 기업용 애플리케이션
+        - 애플리케이션 수준의 인프라 지원
+            - 비즈니스 로직에 집중
+        - 비즈니스 로직 (DI, IoC) &lt;-&gt; 엔터프라이즈 기술 분리
+            - 기본 설정 잘하면 스프링 관련 코드 신경 안써도 됨
+    3. Spring Boot?
+        - Spring 애플리케이션 쉽게 만들 수 있음
+        - What makes spring framework uncomfty
+            - 개발자가 처리해야 할 설정 증가
+       - Spring Boot는 약간의 설정만으로 Spring 애플리케이션 만듦
+       - Spring Boot는 Spring Framework 쉽게 사용하게 해주는 도구
+    4. Spring Boot 쓰면 달라지는 점?
+        - 의존성 관리
+            - 모듈의 의존성 버전 명시해줬는데... -&gt; spring-boot-starter
+                - spring-boot-starter-parent로 버전 관리
+            - spring-boot-starter: 관련 있는 모듈의 모음 제공
+            - spring-boot-starter-parent: 버전관리
+        - 자동 설정<br />
+            - 기존 Spring 많은 환경 설정 필요
+            - DB 설정 등이 많이 간편해짐 (Spring Boot가 해줌)
+            - @SpringBootApplication
+                - @SpringBootConfiguration
+                - @EnableAutoConfiguration (자동 설정 지원)
+                - @ComponentScan (Bean 등록)    <br />
+            - Classpath에 jar 등록 시 spring.factories에 있는 관련 설정 실행
+            - @Conditional 조건에 따라 빈 등록
+        - 내장 WAS
+            - 절차
+                - WAR 패키징
+                - WAS 설치
+                - WAS에 WAR 파일 올리기  <br />
+            - Spring Boot에는 WAS가 내장되어 있음
+                - 자동설정이 넣어줌
+        - 모니터링
+            - Actuator를 사용하여 모니터링 가능
+                - EndPoint로 미리 만들어서 제공
+                - /health
+                - /metrics/{name}
+                - /beans
+                - /loggers/{name}
+            - Actuator에는 민감한 정보도 다수
+                - Spring Security를 통해 보안 신경써주자
+                - 메모리에 저장하기에 영구 저장소 저장 고려하자</li>
 </ul>
 <h2 id="vs">서블릿 VS 스프링<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Servlet: 웹 애플리케이션을 만들 때 필요한 인터페이스</li>
-<li>Spring Web MVC: 스프링 프레임워크에 있는 모듈로써, MVC 패턴을 사용한 웹 서비스 구축에 사용<ul>
-<li>얘는 서블릿 사용!</li>
-</ul>
-</li>
-<li>정적 데이터만 사용하던 Web Server<ul>
-<li>사용자에 따라 다른 처리를 못해주는 정적 파일 제공</li>
-<li>Client &lt;--&gt; Server(아파치) &lt;--&gt; CGI 구현체(C/PHP)<ul>
-<li>CGI는 요청 들어올 때 마다 프로세스를 생성</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>동적 데이터 처리하던 CGI<ul>
-<li>문제1. 프로세스에서 쓰레드로 변경하자</li>
-<li>문제2. 여러 인스턴스에서 싱글톤으로 변경하자</li>
-<li>서블릿 탄생</li>
-</ul>
-</li>
-<li>WAS 탄생<ul>
-<li>Web Server: 정적 데이터 처리</li>
-<li>WAS: 동적 데이터 처리</li>
-</ul>
-</li>
-<li>서블릿<ul>
-<li>init: 생성 담당</li>
-<li>service: 실제 기능이 수행됨 (HTTP method에 따른 doGet()/doPost()/doPut()등 실행)</li>
-<li>destroy: Servlet Instance 소멸</li>
-<li>각 메서드는 Servlet Container(Tomcat)이 호출</li>
-<li>싱글톤이라 메모리 공유</li>
-<li>지역변수는 쓰레드 별로 분포</li>
-</ul>
-</li>
-<li>Web.xml(설정파일)<ul>
-<li>WAS에게 Servlet 객체 - URL mapping 정보 알려줌</li>
-</ul>
-</li>
-<li>Spring Web MVC<ul>
-<li>Dispatcher Servlet으로 사용<ul>
-<li>모든 요청 들어오면 Dispatcher Servlet으로 요청 감</li>
-</ul>
-</li>
-<li>Handler 매핑을 통해 요청에 따라 적절한 Controller 찾아줌<ul>
-<li>스프링에서 제공<ul>
-<li>BeanNameHandlerMapping: Bean이름과 URL 매핑</li>
-<li>ControllerClassNameHandlerMapping: </li>
-<li>SimpleUrlHandlerMapping: 
-= DefaultAnnotationHandlerMapping: @RequestMapping("경로")</li>
-</ul>
-</li>
-<li>서블릿을 등록하면 서블릿이 사용할 설정 파일이 자동으로 등록됨</li>
-</ul>
-</li>
-<li>이거 없으면...<ul>
-<li>URL 마다 서블릿 생성해서 Web.xml로 서블릿 관리</li>
-<li>Servlet은 DispatcherServlet 한 개로 처리할 수 있음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>웹 서버 VS 애플리케이션 서버 VS 서블릿 컨테이너<ul>
-<li>웹 서버<ul>
-<li>정적인 페이지 제공하는 서버</li>
-</ul>
-</li>
-<li>애플리케이션 서버<ul>
-<li>서버 사이드 코드를 이용해 동적인 컨텐츠 만드는 서버</li>
-</ul>
-</li>
-<li>서블릿 컨테이너 (웹 컨테이너 || 서블릿 엔진)<ul>
-<li>톰캣, 제티</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>Spring Web MVC: 스프링 프레임워크에 있는 모듈로써, MVC 패턴을 사용한 웹 서비스 구축에 사용
+    - 얘는 서블릿 사용!</li>
+<li>정적 데이터만 사용하던 Web Server
+    - 사용자에 따라 다른 처리를 못해주는 정적 파일 제공
+    - Client &lt;--&gt; Server(아파치) &lt;--&gt; CGI 구현체(C/PHP)
+        - CGI는 요청 들어올 때 마다 프로세스를 생성</li>
+<li>동적 데이터 처리하던 CGI
+    - 문제1. 프로세스에서 쓰레드로 변경하자
+    - 문제2. 여러 인스턴스에서 싱글톤으로 변경하자
+    - 서블릿 탄생</li>
+<li>WAS 탄생
+    - Web Server: 정적 데이터 처리
+    - WAS: 동적 데이터 처리</li>
+<li>서블릿
+    - init: 생성 담당
+    - service: 실제 기능이 수행됨 (HTTP method에 따른 doGet()/doPost()/doPut()등 실행)
+    - destroy: Servlet Instance 소멸
+    - 각 메서드는 Servlet Container(Tomcat)이 호출
+    - 싱글톤이라 메모리 공유
+    - 지역변수는 쓰레드 별로 분포</li>
+<li>Web.xml(설정파일)
+    - WAS에게 Servlet 객체 - URL mapping 정보 알려줌</li>
+<li>Spring Web MVC
+    - Dispatcher Servlet으로 사용
+        - 모든 요청 들어오면 Dispatcher Servlet으로 요청 감
+    - Handler 매핑을 통해 요청에 따라 적절한 Controller 찾아줌
+        - 스프링에서 제공
+            - BeanNameHandlerMapping: Bean이름과 URL 매핑
+            - ControllerClassNameHandlerMapping: 
+            - SimpleUrlHandlerMapping: 
+            = DefaultAnnotationHandlerMapping: @RequestMapping("경로")
+        - 서블릿을 등록하면 서블릿이 사용할 설정 파일이 자동으로 등록됨
+    - 이거 없으면...
+        - URL 마다 서블릿 생성해서 Web.xml로 서블릿 관리
+        - Servlet은 DispatcherServlet 한 개로 처리할 수 있음</li>
+<li>웹 서버 VS 애플리케이션 서버 VS 서블릿 컨테이너
+    - 웹 서버
+        - 정적인 페이지 제공하는 서버
+    - 애플리케이션 서버
+        - 서버 사이드 코드를 이용해 동적인 컨텐츠 만드는 서버
+    - 서블릿 컨테이너 (웹 컨테이너 || 서블릿 엔진)
+        - 톰캣, 제티</li>
 </ul>
 
 

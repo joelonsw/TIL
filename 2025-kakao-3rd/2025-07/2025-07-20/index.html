@@ -22931,32 +22931,36 @@
 <h3 id="2025-07-20">2025-07-20<a class="headerlink" href="#2025-07-20" title="Permanent link">&para;</a></h3>
 <h2 id="k8s-nodeaffinity-podaffinity">k8s nodeAffinity, podAffinity<a class="headerlink" href="#k8s-nodeaffinity-podaffinity" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>nodeAffinity</strong></li>
+<li><strong>nodeAffinity</strong><ul>
 <li>pod가 "어떤 노드에 배치"될지 제어</li>
-<li>
-<p><code>spec.affinity.nodeAffinity</code></p>
+<li><code>spec.affinity.nodeAffinity</code></li>
+</ul>
 </li>
-<li>
-<p><strong>podAffinity</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>podAffinity</strong><ul>
 <li>pod를 "다른 pod의 존재 여부 및 위치"를 기준으로 스케줄링</li>
 <li><code>spec.affinity.podAffinity</code>: 백엔드와 데이터베이스 같은 노드에 배치 (지연 최소화)</li>
 <li><code>spec.affinity.podAntiAffinity</code>: 같은 App의 복수 Pod를 타 노드에 분산 (장애 대비)</li>
 </ul>
+</li>
+</ul>
 <h2 id="k8s-rollout-restart">k8s rollout restart<a class="headerlink" href="#k8s-rollout-restart" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>rollout restart</code></strong></li>
+<li><strong><code>rollout restart</code></strong><ul>
 <li>Deployment, DaemonSet, StatefulSet 등 컨트롤러가 관리하는 리소스에 대해서 지원되는 무중단 롤링 재시작 명령어</li>
 <li>지정한 리소스에 속한 모든 Pod 순차적으로 새로 띄움</li>
-<li>
-<p>강제로 새로고침 (re-deploy) 하는 역할</p>
+<li>강제로 새로고침 (re-deploy) 하는 역할</li>
+</ul>
 </li>
-<li>
-<p><strong>언제쓰는지?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>언제쓰는지?</strong><ul>
 <li>configmap, secret 변경시</li>
 <li>pod의 일시적인 문제 해결</li>
 <li>전체 서비스 재배포</li>
+</ul>
+</li>
 </ul>
 
 

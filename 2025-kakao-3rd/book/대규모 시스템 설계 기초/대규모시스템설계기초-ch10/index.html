@@ -22989,24 +22989,26 @@
 <h2 id="ch10">대규모 시스템 설계 기초 ch10. 알림 시스템 설계<a class="headerlink" href="#ch10" title="Permanent link">&para;</a></h2>
 <h3 id="1">1단계. 문제 이해 및 설계 범위 확정<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>적절한 질문을 통해 요구사항이 무엇인지 지원자가 알아낼 것</li>
+<li>적절한 질문을 통해 요구사항이 무엇인지 지원자가 알아낼 것<ul>
 <li>어떤 종류의 알림을 지원?</li>
 <li>real-time? soft-real-time?</li>
 <li>지원할 단말기?</li>
 <li>하루 몇건의 알림을 보낼수있어야 하는가?</li>
 </ul>
+</li>
+</ul>
 <h3 id="2">2단계. 개략적 설계안 제시 및 동의 구하기<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>단말기별 푸시 시스템</strong></li>
+<li><strong>단말기별 푸시 시스템</strong><ul>
 <li>iOS: APNS</li>
 <li>Android: FCM</li>
 <li>SMS: SMS 서비스 (twilio, nexmo)</li>
-<li>
-<p>이메일: 이메일 서비스(sendgrid, mailchimp)</p>
+<li>이메일: 이메일 서비스(sendgrid, mailchimp)</li>
+</ul>
 </li>
-<li>
-<p><strong>개략적 설계안</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>개략적 설계안</strong><ul>
 <li>확장성: 쉽게 새로운 서비스를 통합하거나 기존 서비스를 제거할 수 있어야 한다<ul>
 <li>FCM은 중국에서는 사용할 수 없음. </li>
 <li>추상화를 잘 해둬야 할 듯</li>
@@ -23020,24 +23022,26 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="3">3단계. 상세 설계<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>안정성</strong></li>
+<li><strong>안정성</strong><ul>
 <li>데이터 소실 방지<ul>
 <li>알림이 소실되면 안된다</li>
 <li>알림데이터를 데이터베이스에 보관하고, 재시도 메커니즘을 구현할 것</li>
 </ul>
 </li>
-<li>
-<p>알림 중복 전송 방지</p>
-<ul>
+<li>알림 중복 전송 방지<ul>
 <li>분산 시스템의 특성상 가끔은 같은 알림이 중복되어 전송되기도 함</li>
 <li>빈도를 줄이기 위해 중복을 탐지하는 메커니즘 도입</li>
 </ul>
 </li>
-<li>
-<p><strong>추가로 필요한 컴포넌트 및 고려사항</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>추가로 필요한 컴포넌트 및 고려사항</strong><ul>
 <li>알림 템플릿<ul>
 <li>템플릿을 만들어 특정한 변수만 변경하여 메시지를 생성하도록 템플릿화</li>
 <li>ex. 알림톡 템플릿</li>
@@ -23070,6 +23074,8 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                |
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                -------&gt; 알림 수신 거부 설정
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

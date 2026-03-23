@@ -22975,21 +22975,17 @@
 <h3 id="2021-10-10">2021-10-10<a class="headerlink" href="#2021-10-10" title="Permanent link">&para;</a></h3>
 <h2 id="vuejs">vuejs<a class="headerlink" href="#vuejs" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>이미지 꽂아 넣기</strong></p>
-<ul>
-<li>style: background-image: url() 로 꽂아넣기</li>
-<li>vue에서는 style 속성 데이터 바인딩을 object 형식으로 할 수 있음
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">:style</span><span class="o">=</span><span class="s">&quot;{ fontSize : &#39;20px&#39;, marginTop : &#39;10px&#39;, backgroundImage : &#39;url(경로)&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<li><strong>이미지 꽂아 넣기</strong>
+    - style: background-image: url() 로 꽂아넣기
+    - vue에서는 style 속성 데이터 바인딩을 object 형식으로 할 수 있음
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">:style</span><span class="o">=</span><span class="s">&quot;{ fontSize : &#39;20px&#39;, marginTop : &#39;10px&#39;, backgroundImage : &#39;url(경로)&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>axios 활용</strong></p>
-<ol>
-<li>설치: npm install axios</li>
-<li>axios로 요청
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span><span class="p">;</span>
+<ul>
+<li><strong>axios 활용</strong>
+    1. 설치: npm install axios
+    2. axios로 요청
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;서버URL&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="w"> </span><span class="nx">결과</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">   </span><span class="nx">요청</span><span class="w"> </span><span class="nx">성공</span><span class="w"> </span><span class="nx">시</span><span class="w"> </span><span class="nx">실행할</span><span class="w"> </span><span class="nx">코드</span><span class="o">~</span>
@@ -22997,36 +22993,28 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">   </span><span class="nx">요청</span><span class="w"> </span><span class="nx">실패</span><span class="w"> </span><span class="nx">시</span><span class="w"> </span><span class="nx">실행할</span><span class="w"> </span><span class="nx">코드</span><span class="o">~</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">})</span>
 </code></pre></div></li>
-</ol>
-</li>
-<li>
-<p><strong>라우터 vs 탭</strong></p>
-<ul>
-<li>탭의 상태를 저장해두고, 상태에 따라 보여줄 컴포넌트를 다르게</li>
-<li>다른 페이지가 필요하면 vue-router, 간단한 UI들은 탭으로 만들어도 ㄱㅊ</li>
 </ul>
-</li>
-<li>
-<p><strong>slot 문법</strong></p>
 <ul>
-<li>props로 부모-&gt;자식 데이터 전송과 또다른 것</li>
-<li>자식은 <code>&lt;slot&gt;&lt;/slot&gt;</code> 이라는 태그로 데이터가 꽂힐 곳 정해둠</li>
-<li>부모는 <code>&lt;자식컴포넌트&gt;데이터&lt;/자식컴포넌트&gt;</code> 이렇게 사이에 데이터 작성해서 보냄</li>
-<li>등록은 안해도 되지만, 딱 보내서 보여줘야할떄만 쓰는게 좋아보임</li>
+<li><strong>라우터 vs 탭</strong>
+    - 탭의 상태를 저장해두고, 상태에 따라 보여줄 컴포넌트를 다르게
+    - 다른 페이지가 필요하면 vue-router, 간단한 UI들은 탭으로 만들어도 ㄱㅊ</li>
 </ul>
-</li>
-<li>
-<p><strong>mitt 라이브러리</strong></p>
-<ol>
-<li>설치: npm install mitt</li>
-<li>mitt 사용법: this.emitter.emit('이벤트명작명', '데이터)</li>
-</ol>
-</li>
-<li>
-<p><strong>상태관리 Vuex</strong></p>
-<ol>
-<li>src 안에 store.js 만들고 코드 작성
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createStore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vuex&#39;</span>
+<ul>
+<li><strong>slot 문법</strong>
+    - props로 부모-&gt;자식 데이터 전송과 또다른 것
+    - 자식은 <code>&lt;slot&gt;&lt;/slot&gt;</code> 이라는 태그로 데이터가 꽂힐 곳 정해둠
+    - 부모는 <code>&lt;자식컴포넌트&gt;데이터&lt;/자식컴포넌트&gt;</code> 이렇게 사이에 데이터 작성해서 보냄
+    - 등록은 안해도 되지만, 딱 보내서 보여줘야할떄만 쓰는게 좋아보임</li>
+</ul>
+<ul>
+<li><strong>mitt 라이브러리</strong>
+    1. 설치: npm install mitt
+    2. mitt 사용법: this.emitter.emit('이벤트명작명', '데이터)</li>
+</ul>
+<ul>
+<li><strong>상태관리 Vuex</strong>
+    1. src 안에 store.js 만들고 코드 작성
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createStore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vuex&#39;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createStore</span><span class="p">({</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nx">state</span><span class="p">(){</span>
@@ -23037,21 +23025,19 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">})</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">store</span>
-</code></pre></div></li>
-<li>store.js를 main.js에 등록
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./store.js&#39;</span>
+</code></pre></div>
+    2. store.js를 main.js에 등록
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./store.js&#39;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">store</span><span class="p">).</span><span class="nx">mount</span><span class="p">(</span><span class="s1">&#39;#app&#39;</span><span class="p">)</span>
-</code></pre></div></li>
-<li>[mutations]<ul>
-<li>vuex 안의 state는 mutations 항목에서 데이터 수정방법 정의하고 변경한다</li>
-<li>mutations 안에 함수를 정의해두자</li>
-<li>순수하게 state 변경되는 로직만 넣자</li>
-<li>ajax는 actions에서 처리</li>
-</ul>
-</li>
-<li>[actions]<ul>
-<li>ajax는 여기서 처리하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">actions</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - [mutations]
+        - vuex 안의 state는 mutations 항목에서 데이터 수정방법 정의하고 변경한다
+        - mutations 안에 함수를 정의해두자
+        - 순수하게 state 변경되는 로직만 넣자
+        - ajax는 actions에서 처리
+    - [actions]
+        - ajax는 여기서 처리하자
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">actions</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">getDataFromServer</span><span class="p">(</span><span class="nx">context</span><span class="p">){</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(()=&gt;{</span><span class="w"> </span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nx">context</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="s1">&#39;mutations함수명&#39;</span><span class="p">)</span><span class="w"> </span>
@@ -23060,15 +23046,11 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>Computed</strong></p>
 <ul>
-<li>약간 static block 느낌 </li>
-<li>미리 계산 결과를 저장해둬서 데이터바인딩으로 가져다 쓸 수 있음
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">computed</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<li><strong>Computed</strong>
+    - 약간 static block 느낌 
+    - 미리 계산 결과를 저장해둬서 데이터바인딩으로 가져다 쓸 수 있음
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">computed</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nx">now2</span><span class="p">(){</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">()</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="p">}</span>
@@ -23080,12 +23062,10 @@
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>mapState, mapMutations, mapActions</strong>    </p>
 <ul>
-<li>vuex에 관리되고 있는 state, mutations, actions 들을 컴포넌트에서 편하게 등록하고, 데이터 바인드 가져다 쓸 수 있음
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">mapState</span><span class="p">,</span><span class="w"> </span><span class="nx">mapMutations</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vuex&#39;</span>
+<li><strong>mapState, mapMutations, mapActions</strong>  <br />
+    - vuex에 관리되고 있는 state, mutations, actions 들을 컴포넌트에서 편하게 등록하고, 데이터 바인드 가져다 쓸 수 있음
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">mapState</span><span class="p">,</span><span class="w"> </span><span class="nx">mapMutations</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vuex&#39;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nx">computed</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="p">...</span><span class="nx">mapState</span><span class="p">([</span><span class="s1">&#39;state이름1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;state이름2&#39;</span><span class="p">]),</span>
@@ -23093,21 +23073,17 @@
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>PWA로 웹앱 만들기</strong>    </p>
-<ol>
-<li>pwa 라이브러리 설치: vue add pwa</li>
-<li>service-worker.js(오프라인 사용을 위한 정적 리소스 캐싱), manifest.json(앱의 이름/아이콘/테마색 등 설정)이 생성</li>
-</ol>
-</li>
+<ul>
+<li><strong>PWA로 웹앱 만들기</strong>  <br />
+    1. pwa 라이브러리 설치: vue add pwa
+    2. service-worker.js(오프라인 사용을 위한 정적 리소스 캐싱), manifest.json(앱의 이름/아이콘/테마색 등 설정)이 생성</li>
 </ul>
 <h2 id="db">DB 서버 튜닝<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>메모리 튜닝</strong><ul>
-<li>[Thread]<ul>
-<li>MySQL 커넥션마다 하나의 쓰레드 생성하여 요청 처리. 쓰레드 메모리 할당/해제가 비용 큼
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">MariaDB</span><span class="w"> </span><span class="err">[</span><span class="p">(</span><span class="k">none</span><span class="p">)</span><span class="err">]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SHOW</span><span class="w"> </span><span class="k">STATUS</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%THREAD%&#39;</span><span class="p">;</span>
+<li><strong>메모리 튜닝</strong>
+    - [Thread]
+        - MySQL 커넥션마다 하나의 쓰레드 생성하여 요청 처리. 쓰레드 메모리 할당/해제가 비용 큼
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">MariaDB</span><span class="w"> </span><span class="err">[</span><span class="p">(</span><span class="k">none</span><span class="p">)</span><span class="err">]</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SHOW</span><span class="w"> </span><span class="k">STATUS</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%THREAD%&#39;</span><span class="p">;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="o">+------------------------------------------+--------+</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">|</span><span class="w"> </span><span class="n">Variable_name</span><span class="w">                            </span><span class="o">|</span><span class="w"> </span><span class="k">Value</span><span class="w">  </span><span class="o">|</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="o">+------------------------------------------+--------+</span>
@@ -23126,122 +23102,72 @@
 <a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="o">|</span><span class="w"> </span><span class="n">wsrep_thread_count</span><span class="w">                       </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="w">      </span><span class="o">|</span>
 <a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="o">+------------------------------------------+--------+</span>
 <a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="mi">13</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="p">(</span><span class="mf">0.00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>[caching]<ul>
-<li>내부적으로 mysqld에서 하나만 확보되는 "Global Buffer"와 Thread 별로 확보되는 "Thread Buffer"</li>
-<li>Thread Buffer에 메모리 많이 할당하면 성능 Up<ul>
-<li>하지만 Connection이 갑자기 늘어나면 메모리 부족해서 swap 발생</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>[커넥션 튜닝]<ul>
-<li>connect_timeout: MySQL이 클라이언트로부터 접속 요청을 받는 경우 몇 초까지 기다릴지</li>
-<li>interactive_timeout: <code>mysql&gt;</code>과 같은 콘솔이나 터미널 유지시간</li>
-<li>wait_timeout: 접속한 후 쿼리가 들어올 때까지 기다리는 시간. </li>
-<li>max_connections: 서버가 허용하는 최대한의 커넥션 수</li>
-<li>back_log: 얼마만큼의 커넥션을 큐에 보관할지에 대한 설정값</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - [caching]
+        - 내부적으로 mysqld에서 하나만 확보되는 "Global Buffer"와 Thread 별로 확보되는 "Thread Buffer"
+        - Thread Buffer에 메모리 많이 할당하면 성능 Up
+            - 하지만 Connection이 갑자기 늘어나면 메모리 부족해서 swap 발생
+    - [커넥션 튜닝]
+        - connect_timeout: MySQL이 클라이언트로부터 접속 요청을 받는 경우 몇 초까지 기다릴지
+        - interactive_timeout: <code>mysql&gt;</code>과 같은 콘솔이나 터미널 유지시간
+        - wait_timeout: 접속한 후 쿼리가 들어올 때까지 기다리는 시간. 
+        - max_connections: 서버가 허용하는 최대한의 커넥션 수
+        - back_log: 얼마만큼의 커넥션을 큐에 보관할지에 대한 설정값</li>
 </ul>
 <h2 id="_1">실행 계획과 인덱스<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>[튜닝 절차]</strong></p>
-<ol>
-<li>일단 조회<ul>
-<li>의도한 결과가 맞니?</li>
-<li>조회 건수, fetch time/duration time 등 확인</li>
+<li><strong>[튜닝 절차]</strong>
+    1. 일단 조회
+        - 의도한 결과가 맞니?
+        - 조회 건수, fetch time/duration time 등 확인
+    2. 개선 대상 파악
+        - 실행계획 확인
+        - 조건절 컬럼, 조인/서브쿼리 구조, 정렬 등 확인
+        - 인덱스 현황 파악
+    3. 개선</li>
 </ul>
-</li>
-<li>개선 대상 파악<ul>
-<li>실행계획 확인</li>
-<li>조건절 컬럼, 조인/서브쿼리 구조, 정렬 등 확인</li>
-<li>인덱스 현황 파악</li>
-</ul>
-</li>
-<li>개선</li>
-</ol>
-</li>
-<li>
-<p><strong>[실행 계획]</strong></p>
 <ul>
-<li><code>EXPLAIN SELECT * FROM  'subway'.'programmer';</code></li>
+<li><strong>[실행 계획]</strong>
+    - <code>EXPLAIN SELECT * FROM  'subway'.'programmer';</code></li>
 </ul>
-</li>
-<li>
-<p><strong>[인덱스]</strong></p>
 <ul>
-<li>생성: <code>CREATE INDEX 'idx_user_id' ON 'subway'.'programmer'</code></li>
-<li>삭제: <code>DROP INDEX 'idx_user_id' ON 'subway'.'programmer'</code></li>
-<li>Index Full Scan: 리프 블록 전체 스캔 (인덱스 풀 스캔)</li>
-<li>Index Unique Scan: where '=' 조건으로 검색</li>
-</ul>
-</li>
+<li><strong>[인덱스]</strong>
+    - 생성: <code>CREATE INDEX 'idx_user_id' ON 'subway'.'programmer'</code>
+    - 삭제: <code>DROP INDEX 'idx_user_id' ON 'subway'.'programmer'</code>
+    - Index Full Scan: 리프 블록 전체 스캔 (인덱스 풀 스캔)
+    - Index Unique Scan: where '=' 조건으로 검색</li>
 </ul>
 <h2 id="_2">쿼리 튜닝하기<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>[인덱스]</strong></p>
-<ul>
-<li>
-<p><strong>인덱스 칼럼 가공 X</strong></p>
-<ul>
-<li>아래처럼 사원번호에 Substring 이딴거 걸어놓으면 인덱스 혜택 못받아<ul>
-<li>LIKE '%??' 이딴것도 힘들겠지?</li>
-<li>WHERE char_column = 10 이렇게 데이터타입 다른것도 인덱스 못쓰겠지?</li>
-<li>&lt;&gt;, NOT IN, NOT BETWEEN 이런것도 인덱스 혜택 못받겠지?
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">EXPLAIN</span><span class="w"> </span>
+<li><strong>[인덱스]</strong>
+    - <strong>인덱스 칼럼 가공 X</strong>
+        - 아래처럼 사원번호에 Substring 이딴거 걸어놓으면 인덱스 혜택 못받아
+            - LIKE '%??' 이딴것도 힘들겠지?
+            - WHERE char_column = 10 이렇게 데이터타입 다른것도 인덱스 못쓰겠지?
+            - &lt;&gt;, NOT IN, NOT BETWEEN 이런것도 인덱스 혜택 못받겠지?
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">EXPLAIN</span><span class="w"> </span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">사원</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="nf">SUBSTRING</span><span class="p">(</span><span class="n">사원번호</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1100</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="nf">LENGTH</span><span class="p">(</span><span class="n">사원번호</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
-</code></pre></div></li>
-</ul>
+</code></pre></div><p>- <strong>인덱스 순서 고려</strong>
+      - 인덱스 걸려있는데 order by 하면 연산 일어나지도 않아 (개꿀)
+      - where 절로 자주 조회하는 컬럼을 앞에 두세요</p>
+<p>- <strong>인덱스를 제대로 사용하는지 확인</strong>
+      - 인덱스 스캔과정에서 얻은 정보를 잘 활용중인지 확인!</p>
+<p>- <strong>복합 인덱스시 범위 검색 컬럼을 뒤에 둘 것</strong>
+      - 범위는 뒤에 인덱스로 걸어!</p>
 </li>
 </ul>
-</li>
-<li>
-<p><strong>인덱스 순서 고려</strong></p>
 <ul>
-<li>인덱스 걸려있는데 order by 하면 연산 일어나지도 않아 (개꿀)</li>
-<li>where 절로 자주 조회하는 컬럼을 앞에 두세요</li>
-</ul>
-</li>
-<li>
-<p><strong>인덱스를 제대로 사용하는지 확인</strong></p>
-<ul>
-<li>인덱스 스캔과정에서 얻은 정보를 잘 활용중인지 확인!</li>
-</ul>
-</li>
-<li>
-<p><strong>복합 인덱스시 범위 검색 컬럼을 뒤에 둘 것</strong></p>
-<ul>
-<li>범위는 뒤에 인덱스로 걸어!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>[조인문]</strong></p>
-<ul>
-<li><strong>조인 연결 key들은 양쪽 다 인덱스를 가지고 있자</strong></li>
-<li><strong>데이터가 적은 테이블을 랜덤액세스 할 것</strong><ul>
-<li>드라이빙 테이블 데이터가 주로 적은게 좋다</li>
-</ul>
-</li>
-<li><strong>모수 테이블 크기를 줄이자</strong><ul>
-<li>FROM 서브쿼리를 활용</li>
-<li>Join 하는 대상 테이블을 줄여버릴 생각을 해보자!</li>
-</ul>
-</li>
-<li><strong>서브쿼리 보다는 조인문이 성능이 좋다</strong></li>
-</ul>
-</li>
+<li><strong>[조인문]</strong>
+    - <strong>조인 연결 key들은 양쪽 다 인덱스를 가지고 있자</strong>
+    - <strong>데이터가 적은 테이블을 랜덤액세스 할 것</strong>
+        - 드라이빙 테이블 데이터가 주로 적은게 좋다
+    - <strong>모수 테이블 크기를 줄이자</strong>
+        - FROM 서브쿼리를 활용
+        - Join 하는 대상 테이블을 줄여버릴 생각을 해보자!
+    - <strong>서브쿼리 보다는 조인문이 성능이 좋다</strong></li>
 </ul>
 
 

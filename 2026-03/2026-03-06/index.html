@@ -22907,36 +22907,40 @@
 <h3 id="2026-03-06">2026-03-06<a class="headerlink" href="#2026-03-06" title="Permanent link">&para;</a></h3>
 <h2 id="rabbitmq">RabbitMQ 네트워크 순단<a class="headerlink" href="#rabbitmq" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>RabbitMQ &lt;-&gt; Consumer 연결 끊어지며 <code>ShutdownSignalException</code> 발생</li>
-<li>
-<p>MQ에서 받아서 처리하는 로직들의 철회</p>
+<li>MQ에서 받아서 처리하는 로직들의 철회</li>
+</ul>
 </li>
-<li>
-<p><strong>원인</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>원인</strong><ol>
 <li>LB OS 업그레이드를 통한 네트워크 순단</li>
 <li>Heartbeat (Consumer -&gt; MQ)를 30초 간격으로 보내는데, 누락</li>
-<li>
-<p>MQ 서버는 Consumer가 죽었다고 판단하여 연결 끊음</p>
+<li>MQ 서버는 Consumer가 죽었다고 판단하여 연결 끊음</li>
+</ol>
 </li>
-<li>
-<p><strong>복구</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>복구</strong><ul>
 <li>Consumer는 즉시 MQ에 Reconnect. 이후 들어온 메시지는 정상 컨슈밍</li>
-<li>
-<p>다만, 네트워크 끊어지던 찰나의 순간 Consumer가 처리중이던 메시지들은 Unacked로 남음</p>
+<li>다만, 네트워크 끊어지던 찰나의 순간 Consumer가 처리중이던 메시지들은 Unacked로 남음</li>
+</ul>
 </li>
-<li>
-<p><strong>Consumer 서버 재시작</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Consumer 서버 재시작</strong><ul>
 <li>Unacked 메시지 정리하기 위함<ol>
 <li>커넥션 완전 종료: Consumer 재시작하면 어설프게 남은 좀비 커넥션 확실히 끊어짐</li>
 <li>Requeue: MQ는 Consumer가 완전 죽었음 인지하고, Unacked 메시지를 다시 Ready로 돌려둠</li>
-<li>재처리: Consumer가 새롭게 재처리</li>
+<li>재처리: Consumer가 새롭게 재처리<ul>
 <li>다만, 재처리를 한다는 것은, Consuming 로직은 그대로 처리했으나 ACK만 못보낸 것이 대상</li>
 <li>따라서 이중 처리가 됨 =&gt; 두 번 처리되어도 똑같은 결과가 나오도록 멱등성을 보장할 것</li>
+</ul>
+</li>
 </ol>
+</li>
+</ul>
 </li>
 </ul>
 

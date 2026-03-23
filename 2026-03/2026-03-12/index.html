@@ -22907,27 +22907,27 @@
 <h3 id="2026-03-12">2026-03-12<a class="headerlink" href="#2026-03-12" title="Permanent link">&para;</a></h3>
 <h2 id="es">ES 저장용량 개념<a class="headerlink" href="#es" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>인덱스 &amp; 샤드</strong></li>
+<li><strong>인덱스 &amp; 샤드</strong><ul>
 <li>Index: 데이터를 모아두는 하나의 카테고리 (테이블)</li>
 <li>Primary Shard: 해당 Index의 데이터를 하나의 저장소에 다 담을 수 없어서 여러개의 저장소에 나누어 담는데, 원본 저장소 하나하나를 프라이머리 샤드라고 지칭</li>
 <li>Replica Shard: Shard 하나를 분실할것을 대비해 복사본을 만들어두는 백업 샤드</li>
-<li>
-<p>다만 키바나 설정에서 인덱스 - <code>Primaries</code>/<code>Replicas</code>)</p>
-<ul>
+<li>다만 키바나 설정에서 인덱스 - <code>Primaries</code>/<code>Replicas</code>)<ul>
 <li><code>Primaries</code>: 8</li>
 <li><code>Replicas</code>: 1</li>
 <li>이렇게 작성되어 있으면, 각 Replica가 한개라는 것이 아닌, 각 Primary Shard에 해당 하는 Replica가 한개씩 있다는 것. </li>
 </ul>
 </li>
-<li>
-<p><strong>Shard는 논리적인 단위다</strong></p>
+</ul>
 </li>
-<li>
-<p>물리 서버가 몇대가 있던지, 인덱스 템플릿에서 Primary Shard를 8대로 설정하면 인덱스 데이터를 8개로 찢어서 물리 서버에 고루 저장</p>
+</ul>
+<ul>
+<li><strong>Shard는 논리적인 단위다</strong><ul>
+<li>물리 서버가 몇대가 있던지, 인덱스 템플릿에서 Primary Shard를 8대로 설정하면 인덱스 데이터를 8개로 찢어서 물리 서버에 고루 저장</li>
+</ul>
 </li>
-<li>
-<p><strong>디스크 사용률 산정 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>디스크 사용률 산정 방법</strong><ul>
 <li>Watermark)<ul>
 <li>ES는 디스크가 꽉 차서 서버가 죽는 것을 막기 위해 스스로 방어선을 치고 있음</li>
 <li>Low Watermark(85%): 더 이상 해당 노드에 새로운 샤드를 배정하지 않음</li>
@@ -22945,6 +22945,8 @@
 </li>
 <li>Replica와 OS 공간)<ul>
 <li>순수 데이터의 2배 가량 산정하고, OS에게 15~20% 여유공간 주자</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

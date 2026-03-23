@@ -22922,24 +22922,24 @@
 </li>
 <li>
 <p>NULL값 처리에 대한 오해 가능성</p>
-</li>
+<ul>
 <li>MySQL에서는 'UNIQUE + NULL' 허용함</li>
-<li>
-<p><strong>UNIQUE KEY가 걸린 칼럼 여러개에 NULL 값을 허용함</strong> (MySQL 고유동작)</p>
+<li><strong>UNIQUE KEY가 걸린 칼럼 여러개에 NULL 값을 허용함</strong> (MySQL 고유동작)</li>
+</ul>
 </li>
 <li>
 <p>복합 유니크 키의 복잡성</p>
-</li>
+<ul>
 <li>여러 칼럼을 묶어 UNIQUE KEY로 설정 가능 -&gt; 성능/사용상의 복잡성이 단순 단일 컬럼보다 더 큼<ul>
 <li>컬럼 중 하나를 변경 시, UNIQUE 위반 가능성도 커짐</li>
 </ul>
 </li>
-<li>
-<p>복합 인덱스를 제대로 활용할 수 있도록 쿼리를 잘 짜야함</p>
+<li>복합 인덱스를 제대로 활용할 수 있도록 쿼리를 잘 짜야함</li>
+</ul>
 </li>
-<li>
-<p><strong>Tips</strong></p>
-</li>
+</ol>
+<ul>
+<li><strong>Tips</strong><ul>
 <li>Unique Index라고 타 Index 보다 성능이 좋은 것은 아님. (그저 unique는 제약 사항)</li>
 <li>MySQL의 인덱스의 끝에 PK 컬럼이 추가됨 (클러스터링 인덱스)<ul>
 <li>따라서 많은 키(복합키)로 PK 구성하는 것은 불리할 수 있음</li>
@@ -22960,13 +22960,17 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">hire_date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">first_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Joel&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">last_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Jo&#39;</span>
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>해당 경우 <code>first_name = 'Joel'</code>인 모든 레코드가 잠기게 된다</li>
 <li>심지어 idx_first_name도 없다면, 테이블 풀 스캔 하면서 Update 함 -&gt; 테이블의 모든 레코드 잠김</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>MySQL의 Group By는 기본적으로 그룹핑 컬럼 순서대로 정렬</li>
-</ol>
+</ul>
+</li>
+</ul>
 
 
 

@@ -22911,46 +22911,34 @@
 <ul>
 <li><em>참고 1: https://jink1982.tistory.com/182</em></li>
 <li><em>참고 2: https://velog.io/@godkimchichi/Java-14-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-Socket</em></li>
-<li>
-<p><strong>ServerSocket</strong></p>
+<li><strong>ServerSocket</strong>
+    - 서버 프로그램에서 사용하는 소켓
+    - 포트를 통해 연결 요청이 오기를 대기
+    - 요청이 오면 클라이언트와 연결 맺고, 해당 클라이언트와 통신하는 새 소켓 생성
+    - 새로 만들어진 소켓으로 클라이언트 소켓과 데이터 주고 받음</li>
+</ul>
 <ul>
-<li>서버 프로그램에서 사용하는 소켓</li>
-<li>포트를 통해 연결 요청이 오기를 대기</li>
-<li>요청이 오면 클라이언트와 연결 맺고, 해당 클라이언트와 통신하는 새 소켓 생성</li>
-<li>새로 만들어진 소켓으로 클라이언트 소켓과 데이터 주고 받음</li>
+<li><strong>Socket</strong>
+    - 서버 프로그램으로 연결 요청
+    - 데이터 전송 담당</li>
 </ul>
-</li>
-<li>
-<p><strong>Socket</strong></p>
 <ul>
-<li>서버 프로그램으로 연결 요청</li>
-<li>데이터 전송 담당</li>
+<li><strong>ServerSocket &amp; Socket</strong>
+    - ServerSocket과 Socket은 동기(블로킹) 방식
+    - 서버 실행하는 main 스레드가 입출력 작업을 담당하게 되면 입출력이 완료될 때까지 다른 작업 할 수 없는 상태
+        - "accept(), connect(), read(), write()"의 경우 별도 작업 쓰레드 생성해서 병렬 처리하자
+    - 쓰레드 풀을 활용해서 클라이언트 폭증으로 인한 과도한 스레드 방지!</li>
 </ul>
-</li>
-<li>
-<p><strong>ServerSocket &amp; Socket</strong></p>
 <ul>
-<li>ServerSocket과 Socket은 동기(블로킹) 방식</li>
-<li>서버 실행하는 main 스레드가 입출력 작업을 담당하게 되면 입출력이 완료될 때까지 다른 작업 할 수 없는 상태<ul>
-<li>"accept(), connect(), read(), write()"의 경우 별도 작업 쓰레드 생성해서 병렬 처리하자</li>
-</ul>
-</li>
-<li>쓰레드 풀을 활용해서 클라이언트 폭증으로 인한 과도한 스레드 방지!</li>
-</ul>
-</li>
-<li>
-<p><strong>소켓 송수신 과정(TCP/IP)</strong></p>
-<ol>
-<li>서버: 클라이언트의 요청 받기 위한 준비 (ServerSocket)</li>
-<li>클라이언트: 서버에 접속 요청 (Socket)</li>
-<li>서버: 클라이언트의 요청 받아들임 (accept)</li>
-<li>클라이언트: 서버에 메세지 보냄 (BufferedWriter)</li>
-<li>서버: 클라이언트가 보낸 데이터 출력 (BufferedReader)</li>
-<li>서버: 클라이언트에 메세지를 보냄 (BufferedWriter)</li>
-<li>클라이언트: 서버가 보낸 메시지 출력 (BUfferedReader)</li>
-<li>클라이언트/서버: 종료 (close)</li>
-</ol>
-</li>
+<li><strong>소켓 송수신 과정(TCP/IP)</strong>
+    1. 서버: 클라이언트의 요청 받기 위한 준비 (ServerSocket)
+    2. 클라이언트: 서버에 접속 요청 (Socket)
+    3. 서버: 클라이언트의 요청 받아들임 (accept)
+    4. 클라이언트: 서버에 메세지 보냄 (BufferedWriter)
+    5. 서버: 클라이언트가 보낸 데이터 출력 (BufferedReader)
+    6. 서버: 클라이언트에 메세지를 보냄 (BufferedWriter)
+    7. 클라이언트: 서버가 보낸 메시지 출력 (BUfferedReader)
+    8. 클라이언트/서버: 종료 (close)</li>
 </ul>
 
 

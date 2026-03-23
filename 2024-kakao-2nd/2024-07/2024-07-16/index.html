@@ -23097,28 +23097,30 @@
   - 자바 ExecutorService
     - Executor의 서브 인터페이스로, 라이프사이클 관리 + Future + Callable 이용해 리턴값 받기 추가됨</p>
 <ul>
-<li><strong>스칼라 ExecutorContext</strong></li>
+<li><strong>스칼라 ExecutorContext</strong><ol>
 <li><code>scala.concurrent.ExecutionContext</code>는 자바 Executor와 비슷한 기능을 제공<ul>
 <li>주로 implicit 매개변수로 사용</li>
-<li>2개의 추상 메서드</li>
+<li>2개의 추상 메서드<ul>
 <li><code>execute</code></li>
 <li><code>reportFailure</code></li>
 </ul>
 </li>
+</ul>
+</li>
 <li><code>ExecutionContext</code>에는 Java Executor/ExecutorService에서 ExecutionContext 객체를 만들기 위한 몇가지 메서드가 추가된 companion 객체 있음 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fromExecutor</span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="nc">Executor</span><span class="p">,</span><span class="w"> </span><span class="n">reporter</span><span class="p">:</span><span class="w"> </span><span class="nc">Throwable</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Unit</span><span class="p">):</span><span class="w"> </span><span class="nc">ExecutionContextExecutor</span><span class="w"> </span><span class="o">=</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fromExecutor</span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="nc">Executor</span><span class="p">,</span><span class="w"> </span><span class="n">reporter</span><span class="p">:</span><span class="w"> </span><span class="nc">Throwable</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Unit</span><span class="p">):</span><span class="w"> </span><span class="nc">ExecutionContextExecutor</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">impl</span><span class="p">.</span><span class="nc">ExecutionContextImpl</span><span class="p">.</span><span class="n">fromExecutor</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">reporter</span><span class="p">)</span>
 </code></pre></div></li>
-<li>
-<p><code>ExecutionContext</code>의 companion 객체는 내부적으로 <strong>ForkJoinPool</strong> 사용하는 <strong>global</strong>이라는 실행 컨텍스트 포함!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="nc">Implicits</span><span class="p">.</span><span class="n">global</span>
-</code></pre></div></p>
+<li><code>ExecutionContext</code>의 companion 객체는 내부적으로 <strong>ForkJoinPool</strong> 사용하는 <strong>global</strong>이라는 실행 컨텍스트 포함!
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="nc">Implicits</span><span class="p">.</span><span class="n">global</span>
+</code></pre></div></li>
+</ol>
 </li>
-<li>
-<p><strong>Thread -&gt; Java ExecutorService -&gt; Java ForkJoinPool -&gt; Scala ExecutorContext</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Thread -&gt; Java ExecutorService -&gt; Java ForkJoinPool -&gt; Scala ExecutorContext</strong><ol>
 <li>기본 쓰레드 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Thread</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Thread</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">}</span>
@@ -23127,7 +23129,7 @@
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">hello</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
 </code></pre></div></li>
 <li>Java ExecutorService 사용
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">net</span><span class="p">.{</span><span class="nc">Socket</span><span class="p">,</span><span class="w"> </span><span class="nc">ServerSocket</span><span class="p">}</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">net</span><span class="p">.{</span><span class="nc">Socket</span><span class="p">,</span><span class="w"> </span><span class="nc">ServerSocket</span><span class="p">}</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">util</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.{</span><span class="nc">ExecutorService</span><span class="p">,</span><span class="w"> </span><span class="nc">Executors</span><span class="p">}</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">util</span><span class="p">.</span><span class="nc">Date</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -23159,7 +23161,7 @@
 <a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">NetworkService</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)).</span><span class="n">run</span>
 </code></pre></div></li>
 <li>Java ForkJoinPool
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">concurrent</span><span class="p">.</span><span class="nc">ForkJoinPool</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">executor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
@@ -23167,7 +23169,7 @@
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">})</span>
 </code></pre></div></li>
 <li>Scala ExecutorContext.global
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">ec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">global</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">ec</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
@@ -23175,13 +23177,15 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">})</span>
 </code></pre></div></li>
 <li>ExecutorContext 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">ec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">fromExecutorService</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">forkjoin</span><span class="p">.</span><span class="nc">ForkJoinPool</span><span class="p">)</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">ec</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello ec!&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">})</span>
 </code></pre></div></li>
+</ol>
+</li>
 </ul>
 <h2 id="future-scalajava">Future - Scala/Java<a class="headerlink" href="#future-scalajava" title="Permanent link">&para;</a></h2>
 <h4 id="java-future">Java Future<a class="headerlink" href="#java-future" title="Permanent link">&para;</a></h4>
@@ -23234,14 +23238,14 @@
   - <code>trait Future[T]</code>
   - 실제 T 타입의 객체를 리턴받기 원함</p>
 <ul>
-<li><strong>Future 계산</strong></li>
+<li><strong>Future 계산</strong><ul>
 <li><code>def apply[T](b :=&gt; T)(implicit e: ExecutionContext): Future[T]</code></li>
-<li>
-<p>실제 계산을 수행하는 함수를 매개변수로 넣어줌</p>
+<li>실제 계산을 수행하는 함수를 매개변수로 넣어줌</li>
+</ul>
 </li>
-<li>
-<p><strong>Future란</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Future란</strong><ul>
 <li>퓨쳐: 있을지 없을지 모르는 비동기 계산 결과</li>
 <li>ExecutionContext가 있어야 퓨처가 동작 (Executor/ExecutorService로 부터 구현가능)</li>
 <li><strong>global</strong> 이라는 스칼라 빌트인 ExecutionContext가 있음 (ForkJoinPool 사용)<ul>
@@ -23250,23 +23254,19 @@
 </li>
 <li>함수형 합성이 가능함. map, flatMap, Future.sequence(), for-comprehension, recover, andThen 등등,,,</li>
 </ul>
+</li>
+</ul>
 <h2 id="forkjoinpool">쓰레드풀과 ForkJoinPool<a class="headerlink" href="#forkjoinpool" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://hamait.tistory.com/612</em></p>
 <h4 id="_1">쓰레드풀<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Java5 에서는 쓰레드풀 만들어주기 시작 (미리 만들어서 쓰레드 큐에 넣어두자~)</li>
-<li><code>newScheduledThreadPool(int corePoolSize)</code><ul>
-<li>1분에 한번씩 임무를 수행시키기 위함</li>
-</ul>
-</li>
-<li><code>newFixedThreadPool(int nThreads)</code><ul>
-<li>풀장에 고정적으로 쓰레드를 몇개 둘것인가?</li>
-</ul>
-</li>
-<li><code>newCachedThreadPool()</code><ul>
-<li>유기적으로 쓰레드의 숫자가 증감</li>
-</ul>
-</li>
+<li>Java5 에서는 쓰레드풀 만들어주기 시작 (미리 만들어서 쓰레드 큐에 넣어두자~)
+1. <code>newScheduledThreadPool(int corePoolSize)</code>
+    - 1분에 한번씩 임무를 수행시키기 위함
+2. <code>newFixedThreadPool(int nThreads)</code>
+    - 풀장에 고정적으로 쓰레드를 몇개 둘것인가?
+3. <code>newCachedThreadPool()</code>
+    - 유기적으로 쓰레드의 숫자가 증감</li>
 </ul>
 <h4 id="forkjoinpool_1">ForkJoinPool<a class="headerlink" href="#forkjoinpool_1" title="Permanent link">&para;</a></h4>
 <ul>
@@ -23274,8 +23274,10 @@
 <li><img alt="" src="../../images/2024-07-16%20forkjoinpool.png" /></li>
 <li>일을 작은 업무로 나누어 배분 -&gt; 일을 한 후에 일을 취함</li>
 <li><img alt="" src="../../images/2024-07-16%20forkjoinpoolThread.png" /></li>
-<li>놀지 않기 위해 각각의 쓰레드가 큐를 가지고 있고 서로의 업무를 훔쳐오기도 함</li>
+<li>놀지 않기 위해 각각의 쓰레드가 큐를 가지고 있고 서로의 업무를 훔쳐오기도 함<ul>
 <li>멍청하게 노는 쓰레드 방지</li>
+</ul>
+</li>
 </ul>
 
 

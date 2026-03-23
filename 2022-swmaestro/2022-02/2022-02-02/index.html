@@ -22955,13 +22955,13 @@
 <ul>
 <li><em>참고 1: https://ojava.tistory.com/64</em></li>
 <li><em>참고 2: https://devvkkid.tistory.com/223</em></li>
-<li><strong>문제 상황</strong></li>
-<li>
-<p>놀토 Toy Project 전체 조회시 Broken Pipe 에러 다수 발생</p>
+<li><strong>문제 상황</strong><ul>
+<li>놀토 Toy Project 전체 조회시 Broken Pipe 에러 다수 발생</li>
+</ul>
 </li>
-<li>
-<p><strong>원인</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>원인</strong><ol>
 <li>이미 닫힌 Connection을 사용하려고 하는 경우<ul>
 <li>FileInputStream, BufferedOutputStream 등 여닫는 구조의 Connection이 닫혔는데 사용시도하는 경우</li>
 </ul>
@@ -22971,52 +22971,58 @@
 <li>연결이 끊겨 최초 요청한 작업 정보가 없어져 응답할 대상이 없어진 경우</li>
 </ul>
 </li>
-<li>
-<p>잦은 입출력이 원인</p>
-<ul>
+<li>잦은 입출력이 원인<ul>
 <li>요청 처리가 끝나기도 전에 새로고침/등록 버튼을 연속으로 눌러 재요청 여러번 보내는 경우</li>
-<li>브라우저 &lt;-&gt; 서버 연결... 이때 accept 된 소켓을 HttpThread로 넘김</li>
+<li>브라우저 &lt;-&gt; 서버 연결... 이때 accept 된 소켓을 HttpThread로 넘김<ul>
 <li>해당 소켓이 ThreadPool에 들어오고 HttpThread로 수행</li>
 </ul>
 </li>
-<li>
-<p><strong>해결책</strong></p>
+</ul>
 </li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>해결책</strong><ol>
 <li>클라이언트가 Request에 대한 Response를 무조건 기다리도록</li>
 <li>Exception을 무시할 것</li>
 <li>중복 요청 확인 후 Block</li>
 <li>Timeout 값을 늘리기</li>
-<li>
-<p>가용 쓰레드 늘리기</p>
+<li>가용 쓰레드 늘리기</li>
+</ol>
 </li>
-<li>
-<p><strong>시도1. 가용 쓰레드 늘리기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>시도1. 가용 쓰레드 늘리기</strong><ul>
 <li><img alt="" src="../../images/2022-02-02-tomcat-thread-50.png" /></li>
-<li>
-<p>Connection reset by peer 란 에러가 나오네...?</p>
+<li>Connection reset by peer 란 에러가 나오네...?</li>
+</ul>
 </li>
-<li>
-<p><strong>시도2. SpringBoot Connection time 늘리기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>시도2. SpringBoot Connection time 늘리기</strong><ul>
 <li>아.. 이것도 안되네...</li>
+</ul>
+</li>
 </ul>
 <h2 id="connection-reset-by-peer">Connection reset by peer<a class="headerlink" href="#connection-reset-by-peer" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://devlog.changhee.me/posts/2%EC%9D%BC%EA%B0%84_%EC%94%A8%EB%A6%84%ED%96%88%EB%8D%98_Connection_reset_by_peer/</em></li>
-<li><strong>원인</strong></li>
+<li><strong>원인</strong><ul>
 <li>원격 서버에서 Connection을 reset</li>
 <li>종료된 커넥션을 재사용하려고 함</li>
 <li>클라이언트에서 정지 버튼 누르거나, 브라우저 종료하거나, 다른 화면으로 이동하는 등의 이유</li>
 <li>Connection에서 Timeout 발생</li>
 <li>메모리 부족</li>
-<li>
-<p>소켓 고갈</p>
+<li>소켓 고갈</li>
+</ul>
 </li>
-<li>
-<p><strong>해당 블로그 필자의 해결</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>해당 블로그 필자의 해결</strong><ul>
 <li>Nginx의 문제: Nginx 설정은 한번 설정해두면 간과하기 쉬움 이를 확인해볼것</li>
+</ul>
+</li>
 </ul>
 <h2 id="nginx">도커 Nginx에서 정적 파일 서빙하기<a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h2>
 <ul>

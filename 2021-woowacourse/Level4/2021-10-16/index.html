@@ -22909,40 +22909,26 @@
 <h3 id="2021-10-16">2021-10-16<a class="headerlink" href="#2021-10-16" title="Permanent link">&para;</a></h3>
 <h2 id="cu-sql">CU SQL 강의<a class="headerlink" href="#cu-sql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>인덱스를 걸어놨다고 꼭 Range Scan 하는 것 아님</strong></p>
-<ul>
-<li>mysql에는 mysql engine과 storage engine이 있음<ul>
-<li>storage engine에서 filter, mysql engine에서 filter가 효율적인지 판단
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">subway</span><span class="p">.</span><span class="n">programmer</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="c1"># Range Scan</span>
+<li><strong>인덱스를 걸어놨다고 꼭 Range Scan 하는 것 아님</strong>
+    - mysql에는 mysql engine과 storage engine이 있음
+        - storage engine에서 filter, mysql engine에서 filter가 효율적인지 판단
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">subway</span><span class="p">.</span><span class="n">programmer</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="c1"># Range Scan</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">subway</span><span class="p">.</span><span class="n">programmer</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="c1"># Full Scan =&gt; 다 읽어와서 나중에 where절 필터 하는게 비용이 덜하겠다 싶다</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Index는 범위 탐색을 지원</strong></p>
 <ul>
-<li><code>SELECT * FROM subway.programmer WHERE id = 10</code> 라면 10짜리 하나만 읽을것 같은데 1.2 개의 Row를 읽음<ul>
-<li>만약 id가 인덱스만 있지 않고, unique를 걸어뒀다면 바로 single row로 반환 받았을 것</li>
+<li><strong>Index는 범위 탐색을 지원</strong>
+    - <code>SELECT * FROM subway.programmer WHERE id = 10</code> 라면 10짜리 하나만 읽을것 같은데 1.2 개의 Row를 읽음
+        - 만약 id가 인덱스만 있지 않고, unique를 걸어뒀다면 바로 single row로 반환 받았을 것
+    - 인덱스는 정렬을 이미 해둔거자나? 
+        - 인덱스를 잘 활용한다면 order by, group by 같은 소팅 연산을 생략할 수 있어</li>
 </ul>
-</li>
-<li>인덱스는 정렬을 이미 해둔거자나? <ul>
-<li>인덱스를 잘 활용한다면 order by, group by 같은 소팅 연산을 생략할 수 있어</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>테이블 액세스를 최소화하는 것?</strong></p>
 <ul>
-<li><code>SELECT * FROM emp WHERE deptno = 30 AND sal &gt;= 2000</code> 의 경우</li>
-<li><img alt="" src="../../image/2021-10-16-%EC%9D%B8%EB%8D%B1%EC%8A%A4-%EC%A1%B0%ED%9A%8C-%EC%B5%9C%EC%86%8C%ED%99%94.PNG" /></li>
-<li>deptno에 대해서만 인덱스 걸었다면, sal을 검사하기 위해 6번의 테이블 IO</li>
-<li>deptno, sal에 대해서 복합 인덱스 걸었다면, 조건을 만족하는 하나의 칼럼에 대해 1번 테이블 IO</li>
-</ul>
-</li>
+<li><strong>테이블 액세스를 최소화하는 것?</strong>
+    - <code>SELECT * FROM emp WHERE deptno = 30 AND sal &gt;= 2000</code> 의 경우
+    - <img alt="" src="../../image/2021-10-16-%EC%9D%B8%EB%8D%B1%EC%8A%A4-%EC%A1%B0%ED%9A%8C-%EC%B5%9C%EC%86%8C%ED%99%94.PNG" />
+    - deptno에 대해서만 인덱스 걸었다면, sal을 검사하기 위해 6번의 테이블 IO
+    - deptno, sal에 대해서 복합 인덱스 걸었다면, 조건을 만족하는 하나의 칼럼에 대해 1번 테이블 IO</li>
 </ul>
 
 

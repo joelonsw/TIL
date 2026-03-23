@@ -22922,162 +22922,152 @@
     - 한곳에서 메트릭 영향 주는 것 관리하기
     - public endpoint/internal operation 한눈에 모니터링</p>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>JVM 위의 모니터링 툴킷</li>
 <li>metrics 기록, trace request, 분산 시스템에서 propagate context 가능<ol>
-<li>메트릭 Core APIs <ul>
-<li><code>kamon-core</code></li>
-<li>Metrics API: 몇가지의 instrument 타입 제공. 메트릭 기록 (counter, gauges, histogram, timers, range samplers)</li>
-</ul>
-</li>
-<li>tracing/context propagation<ul>
-<li>Tracing API: create, correlate, represent operation 분산 시스템</li>
-<li>Context API: 임의의 특정 request 데이터를 thread-process에 전파</li>
-</ul>
-</li>
-<li>automatic instrumentation modules<ul>
-<li>core 직접 쓰지 않고, 통합</li>
-<li><code>kamon-akka</code>, <code>kamon-akka-remote</code><ul>
-<li>actor/router/dispatcher</li>
-<li>actor group metrics/distributed message tracing/context propagation (local/cluster) </li>
-</ul>
-</li>
-<li><code>kamon-akka-http</code>, <code>kamon-play</code><ul>
-<li>자동 context propagation &amp; distributed tracing (서버-클라이언트 모두)</li>
-<li>Akka HTTP, Play Framework</li>
-</ul>
-</li>
-<li><code>kamon-jdbc</code><ul>
-<li>hook all JDBC Calls</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>reporting modules</li>
+<li>메트릭 Core APIs 
+    - <code>kamon-core</code>
+    - Metrics API: 몇가지의 instrument 타입 제공. 메트릭 기록 (counter, gauges, histogram, timers, range samplers)</li>
+<li>tracing/context propagation
+    - Tracing API: create, correlate, represent operation 분산 시스템
+    - Context API: 임의의 특정 request 데이터를 thread-process에 전파</li>
+<li>automatic instrumentation modules
+    - core 직접 쓰지 않고, 통합
+      - <code>kamon-akka</code>, <code>kamon-akka-remote</code>
+        - actor/router/dispatcher
+        - actor group metrics/distributed message tracing/context propagation (local/cluster) 
+      - <code>kamon-akka-http</code>, <code>kamon-play</code>
+        - 자동 context propagation &amp; distributed tracing (서버-클라이언트 모두)
+        - Akka HTTP, Play Framework
+      - <code>kamon-jdbc</code>
+        - hook all JDBC Calls</li>
+<li>reporting modules<ul>
 <li>리포터 모듈은 모니터링 시스템에 수집한 데이터 공개/전송</li>
 <li><code>Kamon.addReporter(...)</code></li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p>서비스 코드는 Kamon API와 소통</p>
+<li>서비스 코드는 Kamon API와 소통</li>
+</ul>
 </li>
-<li>
-<p><strong>Reporters</strong></p>
-</li>
-<li>periodic snapshot of telemetry data</li>
-<li>Combined Reporters<ul>
+</ul>
+<ul>
+<li><strong>Reporters</strong><ul>
+<li>periodic snapshot of telemetry data
+1. Combined Reporters<ul>
 <li>Kamon APM: HTTP API로 Kamon APM에 데이터 전송</li>
 <li>Datadog: 3개의 별도 리포터로 보냄</li>
-<li>New Relic</li>
-</ul>
-</li>
-<li>Metrics Only<ul>
+<li>New Relic
+2. Metrics Only</li>
 <li>Prometheus: 프로메테우스 exposition format으로 endpoint 긁어서 보여줌</li>
-<li>InfluxDB: InfluxDB에 line protocol로 보냄</li>
-</ul>
-</li>
-<li>
-<p>Spans Only</p>
-<ul>
+<li>InfluxDB: InfluxDB에 line protocol로 보냄
+3. Spans Only</li>
 <li>Zipkin: span 전송 to Zipkin using V2 API</li>
 <li>Jaeger: span 전송 to Jaeger's Collector</li>
 </ul>
 </li>
-<li>
-<p><strong>InfluxDB Reporter</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>InfluxDB Reporter</strong><ul>
 <li><code>kamon-influxdb</code></li>
 <li>고가용성 스토리지</li>
 <li>operation monitoring, application metrics, real-time analytics</li>
 <li><code>libraryDepedencies += "io.kamon" %% "kamon-influxdb" %% "2.5.9"</code></li>
-<li>
-<p>모든 메트릭 데이터를 http를 통해 influxDB에게 보냄. </p>
-<ul>
+<li>모든 메트릭 데이터를 http를 통해 influxDB에게 보냄. <ul>
 <li>Kamon Metric 이름은 influxDB's "measurement-name"</li>
 <li>Counter -&gt; <code>count</code></li>
 <li>Gauges -&gt; <code>value</code></li>
 <li>Histogram/Range -&gt; <code>count</code>, <code>sum</code>, <code>min</code>, <code>max</code>, <code>pXX</code> (퍼센틸)</li>
 </ul>
 </li>
-<li>
-<p><strong>Play에 Kamon 설치</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/play-framework/</em></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Play에 Kamon 설치</strong><br />
+<em>참고: https://kamon.io/docs/latest/instrumentation/play-framework/</em><ul>
 <li><code>kamon-play-2.5</code></li>
 <li>Context Propagation &amp; Distributed tracing</li>
-<li>
-<p>Client/Server HTTP Request Span은 자동으로 생성/전파, HTTP metric (<code>span.processing-time</code>)도 생성</p>
+<li>Client/Server HTTP Request Span은 자동으로 생성/전파, HTTP metric (<code>span.processing-time</code>)도 생성</li>
+</ul>
 </li>
-<li>
-<p><strong>Kamon-Akka</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/akka/</em></p>
-</li>
+</ul>
+<ul>
+<li><strong>Kamon-Akka</strong><br />
+<em>참고: https://kamon.io/docs/latest/instrumentation/akka/</em><ul>
 <li><code>kamon-akka-2.4</code></li>
 <li>메트릭 수집: 액터 시스템, 액터, 라우터, 디스패터, 액터그룹, 리모팅/클러스터 컴포넌트</li>
 <li>메시지 트레이싱: span을 만들어 선택된 시스템 내 액터에서 process</li>
 <li>Context Propagation: actor message local-remote actor 전파</li>
-<li>
-<p>Ask Pattern Timeout Warning: 애스크 타임아웃에 대한 경고</p>
+<li>Ask Pattern Timeout Warning: 애스크 타임아웃에 대한 경고</li>
+</ul>
 </li>
-<li>
-<p><strong>Kamon-Scala-Future</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/futures/</em></p>
-</li>
+</ul>
+<ul>
+<li><strong>Kamon-Scala-Future</strong><br />
+<em>참고: https://kamon.io/docs/latest/instrumentation/futures/</em><ul>
 <li><code>kamon-scala-future</code></li>
 <li>같은 Context를 Future 생성/map/flatMap 등에 적용되도 사용하도록</li>
 <li>body of future가 <code>ExecutionContext</code> 내에서 돌아갈때, Kamon이 Context 캡쳐해서 이를 내부에서 사용할 수 있음. </li>
-<li>
-<p>Kamon.span
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">kamon</span><span class="p">.</span><span class="nc">Kamon</span><span class="p">.</span><span class="n">span</span>
+<li>Kamon.span
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">kamon</span><span class="p">.</span><span class="nc">Kamon</span><span class="p">.</span><span class="n">span</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">span</span><span class="p">(</span><span class="s">&quot;myOperationName&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="c1">// 여기에 작업을 수행합니다.</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div></p>
-<ul>
-<li>주요 기능</li>
+</code></pre></div><ul>
+<li>주요 기능<ul>
 <li>Span 생성: 코드 블록을 감싸고 그 안의 작업을 하나의 Span으로 만듭니다.</li>
 <li>자동 시작 및 종료: Span은 블록이 시작될 때 자동으로 시작되고, 블록이 끝나면 자동으로 종료됩니다.</li>
 <li>예외 처리: 블록 내에서 발생한 예외는 Span에 자동으로 기록됩니다.</li>
 <li>Context 저장: 생성된 Span은 현재 Context에 저장되어, 다른 Span과 연결될 수 있습니다.</li>
 </ul>
 </li>
-<li>
-<p><strong>Kamon-executors</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/executors/</em></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Kamon-executors</strong><br />
+<em>참고: https://kamon.io/docs/latest/instrumentation/executors/</em><ul>
 <li><code>kamon-executors</code></li>
 <li>ExecutorService (ThreadPoolExecutor/ForkJoinPool) 에서 발생한 메트릭 수집</li>
 <li>Option: Tracking time in queue</li>
-<li>
-<p>Collected Metrics</p>
-<ul>
+<li>Collected Metrics<ul>
 <li><code>executor.threads.min</code></li>
 <li><code>executor.threads.max</code></li>
 <li><code>executor.task.submitted</code></li>
 <li><code>executor.parallelism</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Kamon-logback</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/logback/</em></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Kamon-logback</strong><br />
+<em>참고: https://kamon.io/docs/latest/instrumentation/logback/</em><ul>
 <li><code>kamon-logback</code></li>
 <li>AsyncAppender 사용함에도 Context 보존</li>
-<li>
-<p>4개의 컨버터를 활용해 Context Information 도와줌</p>
-<ol>
+<li>4개의 컨버터를 활용해 Context Information 도와줌<ol>
 <li>TraceIDConverter: 현재 trace identifier를 내보냄, 없음 <code>undefined</code></li>
 <li>SpanIDConverter: 현재 span identifier를 내보냄, 없음 <code>undefined</code></li>
 <li>ContextTagConverter: 특정한 Context tag 내보냄. </li>
 <li>ContextEntryConverter: specified Context entry 내보냄</li>
 </ol>
 </li>
-<li>
-<p><strong>Kamon-elasticsearch</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/elasticsearch/</em></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Kamon-elasticsearch</strong><br />
+<em>참고: https://kamon.io/docs/latest/instrumentation/elasticsearch/</em><ul>
 <li>자동으로 span 생성해 Java Rest Client 보조</li>
+</ul>
+</li>
 </ul>
 
 

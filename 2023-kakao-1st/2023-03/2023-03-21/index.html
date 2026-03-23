@@ -22909,8 +22909,7 @@
 <h3 id="2023-03-21">2023-03-21<a class="headerlink" href="#2023-03-21" title="Permanent link">&para;</a></h3>
 <h2 id="_1">비동기 리팩터링<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>기존 코드</strong>
+<li><strong>기존 코드</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Controller</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">sendMessge</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="p">(</span><span class="n">parse</span><span class="p">.</span><span class="n">json</span><span class="p">[</span><span class="nc">MessageRequest</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">messageRequest</span><span class="p">:</span><span class="w"> </span><span class="nc">MessageRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="n">body</span>
@@ -22931,21 +22930,19 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="n">httpClient</span><span class="p">.</span><span class="n">post</span><span class="p">[</span><span class="nc">AlimtalkRequest</span><span class="p">,</span><span class="w"> </span><span class="nc">AlimtalkResponse</span><span class="p">](</span><span class="nc">URL</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">)</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="n">messageHistoryDao</span><span class="p">.</span><span class="n">saveMessageHistory</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">)</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>비동기 ON</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>비동기 ON</strong><ul>
 <li>Future와 Action.async를 통한 리팩터링</li>
-<li>
-<p>Future의 다양한 api를 활용해 지지고 볶을 것
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Controller</span>
+<li>Future의 다양한 api를 활용해 지지고 볶을 것
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Controller</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">sendMessage</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="p">.</span><span class="n">async</span><span class="p">(</span><span class="n">parse</span><span class="p">.</span><span class="n">json</span><span class="p">[</span><span class="nc">MessageRequest</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">messageRequest</span><span class="p">:</span><span class="w"> </span><span class="nc">MessageRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="n">body</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">alimtalkService</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="n">messageRequest</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Ok</span><span class="p">)</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Service</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Service</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">sendMessage</span><span class="p">(</span><span class="n">messageRequest</span><span class="p">:</span><span class="w"> </span><span class="nc">MessageRequest</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Unit</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Template</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">messageRequest</span><span class="p">.</span><span class="n">templateType</span><span class="p">)</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="n">szoneUserDao</span><span class="p">.</span><span class="n">getSzoneUsers</span><span class="p">(</span><span class="n">messageRequest</span><span class="p">.</span><span class="n">ids</span><span class="p">).</span><span class="n">flatMap</span><span class="w"> </span><span class="p">{</span>
@@ -22962,10 +22959,12 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="n">messageHistoryDao</span><span class="p">.</span><span class="n">saveMessageHistory</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">)</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>어라 복잡하네? 한번 뜯어보자</strong>
+</ul>
+<ul>
+<li><strong>어라 복잡하네? 한번 뜯어보자</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Service</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">sendMessage</span><span class="p">(</span><span class="n">messageRequest</span><span class="p">:</span><span class="w"> </span><span class="nc">MessageRequest</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Unit</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Template</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">messageRequest</span><span class="p">.</span><span class="n">templateType</span><span class="p">)</span>
@@ -22992,36 +22991,34 @@
 <a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
 <a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">  </span><span class="n">szoneUserDao</span><span class="p">.</span><span class="n">getSzoneUsers</span><span class="p">(</span><span class="n">messageRequest</span><span class="p">.</span><span class="n">ids</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="n">sendAlimtalkToAll</span><span class="p">).</span><span class="n">flatMap</span><span class="p">(</span><span class="n">convertToFuture</span><span class="p">)</span>
 <a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Future [flatMap]</strong></p>
-</li>
-<li>
-<p>future 안에 있는 요소에 특정 함수를 수행시켜 새로운 future를 만들어낸다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flatMap</span><span class="p">[</span><span class="nc">S</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">S</span><span class="p">]):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">S</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transformWith</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Future [flatMap]</strong><ul>
+<li>future 안에 있는 요소에 특정 함수를 수행시켜 새로운 future를 만들어낸다
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flatMap</span><span class="p">[</span><span class="nc">S</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">S</span><span class="p">]):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">S</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transformWith</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="n">t</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Success</span><span class="p">[</span><span class="nc">T</span><span class="p">]])</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="k">asInstanceOf</span><span class="p">(</span><span class="nc">Success</span><span class="p">[</span><span class="nc">T</span><span class="p">]).</span><span class="n">value</span><span class="p">)</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="bp">this</span><span class="p">.</span><span class="k">asInstanceOf</span><span class="p">[</span><span class="nc">Future</span><span class="p">[</span><span class="nc">S</span><span class="p">]]</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Future [map]</strong></p>
+</ul>
+<ul>
+<li><strong>Future [map]</strong><ul>
+<li>future 안에 있는 요소에 특정 함수를 수행시켜 새로운 future를 만들어낸다
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">[</span><span class="nc">S</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">S</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">S</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">f</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p>future 안에 있는 요소에 특정 함수를 수행시켜 새로운 future를 만들어낸다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">[</span><span class="nc">S</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">S</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">S</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transform</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">f</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Future map vs flatMap</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Future map vs flatMap</strong><ul>
 <li>둘의 가장 큰 차이는 "파라미터로 받는 함수의 타입", "계산의 결과값 타입"</li>
 <li>map은 함수가 future를 반환하지 않아</li>
-<li>
-<p>flatMap은 함수가 future를 반환해야해
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MapFlatMap</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AnyFunSuite</span><span class="w"> </span><span class="p">{</span>
+<li>flatMap은 함수가 future를 반환해야해
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MapFlatMap</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AnyFunSuite</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">test</span><span class="p">(</span><span class="s">&quot;future의 map과 flatMap의 차이를 이해한다&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="n">futureMap</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Future</span><span class="p">.</span><span class="n">successful</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -23036,14 +23033,17 @@
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="n">transformedFlatMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">futureFlatMap</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Future [Future.sequence]</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Future [Future.sequence]</strong><ul>
 <li>Future.traverse의 간단한 버전</li>
 <li>비동기/넌블러킹 방식으로 IterableOnce[Future[A]] =&gt; Future[IterableOnce[A]]로 변경</li>
 <li>많~~은 Future를 하나의 Future로 변환하는데 유용하게 쓰임</li>
+</ul>
+</li>
 </ul>
 
 

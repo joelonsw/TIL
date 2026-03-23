@@ -22932,8 +22932,7 @@
 <h2 id="flatmap">이젠 알아보자 FlatMap<a class="headerlink" href="#flatmap" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://knight76.tistory.com/entry/scala-map-flatten-flatmap-%EC%98%88%EC%8B%9C</em></li>
-<li>
-<p><strong>예시</strong>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserService</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">findById</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Long</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">User</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nc">Future</span><span class="p">.</span><span class="n">successful</span><span class="p">(</span><span class="nc">User</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
@@ -22955,10 +22954,10 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kd">val</span><span class="w"> </span><span class="n">test2</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Unit</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="n">findById</span><span class="p">(</span><span class="il">1L</span><span class="p">)</span><span class="w"> </span><span class="n">flatMap</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">readService</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="il">100L</span><span class="p">)</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>가벼운 예제로 알아보자</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>가벼운 예제로 알아보자</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">list1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">list2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">list3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span>
@@ -22980,10 +22979,10 @@
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">println</span><span class="p">(</span><span class="n">flatMapTest</span><span class="p">)</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="c1">// List((1,4), (1,5), (1,6), (2,4), (2,5), (2,6), (3,4), (3,5), (3,6))</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>for-comprehension</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>for-comprehension</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">list1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">list2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">list3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span>
@@ -22996,53 +22995,52 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">println</span><span class="p">(</span><span class="n">forCompTest</span><span class="p">)</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1">// List((1,4,7), (1,4,8), (1,4,9), (1,5,7), (1,5,8), (1,5,9), (1,6,7), (1,6,8), (1,6,9), (2,4,7), (2,4,8), (2,4,9), (2,5,7), (2,5,8), (2,5,9), (2,6,7), (2,6,8), (2,6,9), (3,4,7), (3,4,8), (3,4,9), (3,5,7), (3,5,8), (3,5,9), (3,6,7), (3,6,8), (3,6,9))</span>
-</code></pre></div></p>
-<ul>
-<li>for-comprehension은 최종 연산에 <code>map</code>을 사용하여 결과 처리하고, 그 전엔 줄줄이 <code>flatMap</code>을 사용하여 처리해<ul>
-<li>요런 감성이야
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - for-comprehension은 최종 연산에 <code>map</code>을 사용하여 결과 처리하고, 그 전엔 줄줄이 <code>flatMap</code>을 사용하여 처리해
+        - 요런 감성이야
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">operation1</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">operation2</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">operation3</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">operation1</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">operation2</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">operation3</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">expression</span><span class="p">)))</span>
-</code></pre></div></li>
-<li><code>flatMap</code>을 통해서 중간중간 스텝에서 flatten 처리해서 모나드형식(?)으로 잘 변경해줬다가</li>
-<li><code>map</code>을 통해서 마지막에 트랜스폼을 뚝딱 해주는 겨</li>
-<li>이를 통해 monadic nature를 달성할 수 있는겨</li>
+</code></pre></div>
+        - <code>flatMap</code>을 통해서 중간중간 스텝에서 flatten 처리해서 모나드형식(?)으로 잘 변경해줬다가
+        - <code>map</code>을 통해서 마지막에 트랜스폼을 뚝딱 해주는 겨
+        - 이를 통해 monadic nature를 달성할 수 있는겨</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Future FlatMap &amp; Promise chaining</strong></p>
-</li>
+<ul>
+<li><strong>Future FlatMap &amp; Promise chaining</strong><ul>
 <li>약간 콜백 지옥과도 비슷한 느낌이 드는데...<ul>
 <li>스칼라에서 for-comprehension 중첩 오퍼레이션에 대해 가독성이 좋을 수 있도록 문법적으로 지원을 해주는거야</li>
 <li>JS의 <code>async/await</code> 감성처럼</li>
-<li>둘 모두 인덴트 뒤지게 들어가고 중첩에 중첩을 막으려고해. 동기적으로 보이고, 직관적이게 보이려고. </li>
+<li>둘 모두 인덴트 뒤지게 들어가고 중첩에 중첩을 막으려고해. 동기적으로 보이고, 직관적이게 보이려고. <ul>
 <li><strong>하지만 실질적으로는 굉장히 비동기적으로 열심히 일하고 있고, monadic type으로 서로가 서로를 감싸고 있지</strong></li>
-<li>JS에서 Promise는...</li>
+</ul>
+</li>
+<li>JS에서 Promise는...<ul>
 <li><code>.then()</code>을 통해서 프로미스를 체이닝해 (스칼라의 <code>flatMap()</code>과 비슷하다고 생각해)</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>그러니까 한 번 각각 보자면...</li>
 <li>Scala
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">eventualResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">eventualResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">step1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Future</span><span class="p">(</span><span class="n">doSomething</span><span class="p">())</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">step2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Future</span><span class="p">(</span><span class="n">doSomethinsElse</span><span class="p">(</span><span class="n">step1</span><span class="p">))</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="n">step2</span>
 </code></pre></div></li>
-<li>
-<p>JS
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">eventualResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<li>JS
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">eventualResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step1</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">doSomethingElse</span><span class="p">(</span><span class="nx">step1</span><span class="p">));</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>map, flatten, flatmap</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>map, flatten, flatmap</strong><ul>
 <li>[map]<ul>
 <li>변형의 의미를 가짐</li>
 </ul>
@@ -23052,9 +23050,7 @@
 <li>None은 다 날려줌</li>
 </ul>
 </li>
-<li>
-<p>[flatMap]</p>
-<ul>
+<li>[flatMap]<ul>
 <li>map에 flatten을 합성한 메서드
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">println</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_*</span><span class="mi">2</span><span class="p">)))</span>
@@ -23065,9 +23061,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>자 읽고 블로그에 정리하세요</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>자 읽고 블로그에 정리하세요</strong><ul>
 <li>https://qowns8.github.io/scala/2018/06/14/iteratorTypePedigree.html</li>
 <li>https://tech.kakao.com/2016/03/03/monad-programming-with-scala-future/</li>
 <li>https://gist.github.com/jooyunghan/e14f426839454063d98454581b204452</li>
@@ -23075,44 +23073,48 @@
 <li>http://taewan.kim/post/how_to_process_abnomal_pattern_with_flatmap/</li>
 <li>https://partnerjun.tistory.com/7</li>
 </ul>
+</li>
+</ul>
 <h2 id="hierarchies">스칼라 타입 Hierarchies<a class="headerlink" href="#hierarchies" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://www.baeldung.com/scala/type-hierarchies</em>
 - <img alt="" src="../../images/2023-11-17-scala-hierarchies.jpg" />
 - <strong>개요</strong>
   - 컴파일 타임에 타입 체크, 런타임 퍼포먼스를 위해 코드 최적화</p>
 <ul>
-<li><strong>Any</strong></li>
-<li>
-<p>모든 클래스의 부모로 equals, hashcode, toString 메서드 있음</p>
+<li><strong>Any</strong><ul>
+<li>모든 클래스의 부모로 equals, hashcode, toString 메서드 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>AnyVal</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>AnyVal</strong><ul>
 <li>모든 값 객체의 부모</li>
 <li>자바처럼 원시타입 없어. 박싱이라고 생각하면 됨</li>
 <li>abstract final</li>
 <li>Null 안됨</li>
-<li>
-<p>상속 안됨</p>
+<li>상속 안됨</li>
+</ul>
 </li>
-<li>
-<p><strong>AnyRef</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>AnyRef</strong><ul>
 <li>모든 reference Type의 부모</li>
-<li>
-<p>Java의 Object와 비슷</p>
+<li>Java의 Object와 비슷</li>
+</ul>
 </li>
-<li>
-<p><strong>Null</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Null</strong><ul>
 <li>모든 ReferenceType의 자식</li>
-<li>
-<p>즉, 모든 ReferenceType에 할당될 수 있음</p>
+<li>즉, 모든 ReferenceType에 할당될 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>Nothing</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Nothing</strong><ul>
 <li>모든 스칼라 클래스의 자식</li>
+</ul>
+</li>
 </ul>
 
 

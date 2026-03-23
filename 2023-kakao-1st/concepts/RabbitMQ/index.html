@@ -22887,41 +22887,39 @@
 <h3 id="rabbitmq">RabbitMQ<a class="headerlink" href="#rabbitmq" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>참고: https://co-de.tistory.com/9</em></li>
-<li>
-<p><em>참고: https://velog.io/@sdb016/RabbitMQ-%EA%B8%B0%EC%B4%88-%EA%B0%9C%EB%85%90</em></p>
-</li>
-<li>
-<p><strong>개요</strong></p>
-</li>
+<li><em>참고: https://velog.io/@sdb016/RabbitMQ-%EA%B8%B0%EC%B4%88-%EA%B0%9C%EB%85%90</em></li>
+</ul>
+<ul>
+<li><strong>개요</strong><ul>
 <li>메시지 큐 시스템: SW간 비동기 메시지 통신을 위한 SW</li>
 <li>Erlang으로 AMQP(Advanced Message Queuing Protocol) 구현한 메시지 브로커 시스템<ul>
 <li>AMQP: client application과 middleware broker와의 메시지를 주고 받기 위한 프로토콜</li>
 </ul>
 </li>
-<li>
-<p>서버간 메시지를 전달해주는 오픈소스 메시지 브로커</p>
-<ul>
+<li>서버간 메시지를 전달해주는 오픈소스 메시지 브로커<ul>
 <li>A-&gt;B, A-&gt;B,C,D,E,F... 등 메시지 보내려고 할 때 RabbitMQ가 메시지 받아서 전달</li>
 </ul>
 </li>
-<li>
-<p><strong>사용처</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>사용처</strong><ul>
 <li>요청을 많은 사용자에게 전달할 때</li>
 <li>요청에 대한 처리시간이 길 때</li>
-<li>
-<p>많은 작업이 요청되어 처리를 해야할 때</p>
+<li>많은 작업이 요청되어 처리를 해야할 때</li>
+</ul>
 </li>
-<li>
-<p><strong>장점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>장점</strong><ul>
 <li>해당 요청을 다른 API에게 위임하고 빠른 응답을 할 때 많이 사용됨</li>
-<li>
-<p>MQ를 통해 어플리케이션간에 결합도를 낮출 수 있음</p>
+<li>MQ를 통해 어플리케이션간에 결합도를 낮출 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>아키텍처</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>아키텍처</strong><ul>
 <li><img alt="" src="../../images/2023-03-13-rabbitmq.png" /><ul>
 <li>Producer가 메시지를 보내면, exchange에서 해당하는 키에 맞게 queue에 분배하고, 해당 queue에서 Consumer가 메시지 받음</li>
 <li>producer: 메세지를 보내는 아이</li>
@@ -22935,29 +22933,35 @@
 <li>producer/consumer는 역할의 구분임</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2023-03-13-rabbitmq4.png" /></p>
-<ul>
+<li><img alt="" src="../../images/2023-03-13-rabbitmq4.png" /><ul>
 <li>producer: 요청 보내는 주체, 보내고자 하는 메시지를 excahnge에 publish</li>
 <li>consumer: producer로 부터 메시지를 받아 처리하는 주체</li>
-<li><strong>exchange</strong>: producer로 부터 전달받은 메시지를 어떤 queue로 보낼지 결정 (4가지 타입)</li>
+<li><strong>exchange</strong>: producer로 부터 전달받은 메시지를 어떤 queue로 보낼지 결정 (4가지 타입)<ul>
 <li>Name: Exchange 이름</li>
 <li>Type: 메시지 전달 방식 (Direct, Fanout, Topic, Headers)</li>
 <li>Durability: 브로커 재시작될 때 남아있을지의 여부 (Durable, Transient)</li>
 <li>Auto-delete: 마지막 queue 연결이 해제되면 삭제</li>
-<li><strong>queue</strong>: consumer가 메시지를 consume하기 전까지 보관하는 장소</li>
+</ul>
+</li>
+<li><strong>queue</strong>: consumer가 메시지를 consume하기 전까지 보관하는 장소<ul>
 <li>Name: Queue 이름</li>
 <li>Durability: 브로커가 재시작될 때 남아있는지 여부 (Durable, Transient)</li>
 <li>Auto-delete: 마지막 consumer가 consume을 끝낼 경우 자동 삭제</li>
 <li>Argument: 메시지 TTL, MaxLength 같은 추가 기능 명시</li>
-<li><strong>binding</strong>: exchange와 queue의 관계</li>
+</ul>
+</li>
+<li><strong>binding</strong>: exchange와 queue의 관계<ul>
 <li>Exchange와 Queue를 연결하는 관계</li>
 <li>Exchange 타입과 binding 규칙에 따라 적절한 queue로 전달</li>
 </ul>
 </li>
-<li>
-<p><strong>exchange의 4가지 타입</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>exchange의 4가지 타입</strong><ol>
 <li>Fanout<ul>
 <li><img alt="" src="../../images/2023-03-13-rabbitmq-fanout.png" /></li>
 <li>exchange와 binding된 모든 queue에게 동일한 메시지를 보냄. (전체메시지)</li>
@@ -22973,40 +22977,48 @@
 </li>
 <li>Topic<ul>
 <li><img alt="" src="../../images/2023-03-13-rabbitmq-topic.png" /></li>
-<li>Routing key의 <strong>패턴이 일치</strong>하는 큐에 메시지 전달</li>
+<li>Routing key의 <strong>패턴이 일치</strong>하는 큐에 메시지 전달<ul>
 <li><code>*</code>: 단어 1개를 대체</li>
 <li><code>#</code>: 0개 이상의 단어를 대체</li>
 </ul>
 </li>
-<li>
-<p>Headers</p>
-<ul>
+</ul>
+</li>
+<li>Headers<ul>
 <li><img alt="" src="../../images/2023-03-13-rabbitmq-headers.png" /></li>
 <li>Key-Value로 정의된 헤더에 의해 메시지를 큐에 전달</li>
 <li>메시지 전달하는 Producer 측에서 정의하는 header의 k-v와 메시지를 받는 consumer쪽에서 정의된 k-v 일치하면 바인딩</li>
 </ul>
 </li>
-<li>
-<p><strong>메세징 플랫폼</strong></p>
+</ol>
 </li>
-<li><em>참고: https://www.youtube.com/watch?v=H_DaPyUOeTo&amp;t=20s</em></li>
-<li>메시지 브로커 (레디스큐, RabbitMQ)<ul>
+</ul>
+<ul>
+<li><strong>메세징 플랫폼</strong><ul>
+<li><em>참고: https://www.youtube.com/watch?v=H_DaPyUOeTo&amp;t=20s</em>
+1. 메시지 브로커 (레디스큐, RabbitMQ)<ul>
 <li>이벤트 브로커 역할 X</li>
-<li>미들웨어로 동작</li>
+<li>미들웨어로 동작<ul>
 <li>서비스하는 어플리케이션을 연결시켜주는 SW</li>
-<li>메시지 받아서 적절히 처리하고 나면, 즉시 삭제되는 구조</li>
-<li>데이터를 보내고, 처리하고, 삭제한다</li>
 </ul>
 </li>
-<li>이벤트 브로커 (Kafka)<ul>
+<li>메시지 받아서 적절히 처리하고 나면, 즉시 삭제되는 구조</li>
+<li>데이터를 보내고, 처리하고, 삭제한다
+2. 이벤트 브로커 (Kafka)</li>
 <li>얘는 메시지 브로커 역할도 수행 가능</li>
-<li>이벤트(메시지)라 불리는 레코드를 딱 하나만 저장</li>
+<li>이벤트(메시지)라 불리는 레코드를 딱 하나만 저장<ul>
 <li>인덱스를 통해 접근</li>
+</ul>
+</li>
 <li>업무상 필요한 시간동안 이벤트 보존</li>
-<li>얘는 데이터 삭제 안 해</li>
+<li>얘는 데이터 삭제 안 해<ul>
 <li>단일 진실 공급원</li>
 <li>장애에 대해 복구 포인트</li>
 <li>많은 양의 스트림 포인트로써 가동</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

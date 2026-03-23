@@ -23241,20 +23241,18 @@
 - Given a set of data points =&gt; similarity measure =&gt; find clusters</p>
 <h2 id="data-mining-2-simple-linear-regression">Data Mining 2. Simple Linear Regression<a class="headerlink" href="#data-mining-2-simple-linear-regression" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Regression Analysis</li>
+<li>Regression Analysis<ul>
 <li>Predictor Variable =&gt; Response Variable</li>
-<li>
-<p>Independent Variable =&gt; Dependent Variable</p>
+<li>Independent Variable =&gt; Dependent Variable</li>
+</ul>
 </li>
-<li>
-<p>하나의 predictor variable만 있다면 <strong>simple linear regression</strong> 사용</p>
-</li>
-<li>
-<p>두개 이상의 predictor variable =&gt; multiple linear regression</p>
-</li>
-<li>
-<p>LS(Least Squares) Fit</p>
-</li>
+</ul>
+<ul>
+<li>하나의 predictor variable만 있다면 <strong>simple linear regression</strong> 사용</li>
+<li>두개 이상의 predictor variable =&gt; multiple linear regression</li>
+</ul>
+<ul>
+<li>LS(Least Squares) Fit</li>
 <li>LS Estimate</li>
 <li>Maximum Likelihood Estimators (MLE)</li>
 <li>Anlaysis of Variance (ANOVA)</li>
@@ -23263,37 +23261,51 @@
 <ul>
 <li>Probabilistic Model</li>
 <li>Goodness of Fit of the Model</li>
-<li>Statistical Inference on betas. </li>
+<li>Statistical Inference on betas. <ol>
 <li>Mean</li>
 <li>Variance</li>
+</ol>
+</li>
 <li>Prediction of Future Observation</li>
 <li>F-Test for betas</li>
 </ul>
 <h2 id="data-mining-4-principal-component-analysis-pca">Data Mining 4. Principal Component Analysis (PCA)<a class="headerlink" href="#data-mining-4-principal-component-analysis-pca" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Linear regression은 independent variable들이 크게 상관관계(Multicollinearity)가 없다는 가정하에 Working</li>
-<li>Dimensionality Reduction을 통해 줄임</li>
+<li>Dimensionality Reduction을 통해 줄임<ul>
 <li>Feature Selection</li>
 <li>Feature extraction</li>
-<li>PCA를 통해 Multicollinearity를 해결할 수 있음</li>
+</ul>
+</li>
+<li>PCA를 통해 Multicollinearity를 해결할 수 있음<ul>
 <li>p 변수들에 대한 n 객체들을 모아, uncorrelated axes로 요약해버림!<ul>
 <li>linear combination of the original p variables로</li>
 </ul>
 </li>
-<li>다음과 같은 도구들이 필요함</li>
+</ul>
+</li>
+<li>다음과 같은 도구들이 필요함<ul>
 <li>Variance-Covariance Matrix</li>
 <li>Variance-Covariance Matrix Estimator</li>
 <li>Variance-Covariance Matrix Estimate</li>
-<li><img alt="" src="../../images/2022-05-22-pca.png" /> </li>
+</ul>
+</li>
+<li><img alt="" src="../../images/2022-05-22-pca.png" /> <ul>
 <li>다음과 같이 분산 뚝딱</li>
+</ul>
+</li>
 <li>Generalization to p-dimensions</li>
 <li>PCA Algebra</li>
 <li>Interpreting Eigenvectors</li>
-<li>PCA의 가정</li>
+<li>PCA의 가정<ul>
 <li>variable의 관계가 Linear 하다는 가정</li>
 <li>데이터가 Non-Linear 하다면, principal axes로 꼽힌 축은 효과가 없을 것</li>
-<li>PCA 언제쓰지?</li>
+</ul>
+</li>
+<li>PCA 언제쓰지?<ul>
 <li>변수들의 관계가 거의 linear 하다거나, 최소한 monotonic 한 경우</li>
+</ul>
+</li>
 </ul>
 <h2 id="data-mining-5-logistic-regression">Data Mining 5. Logistic Regression<a class="headerlink" href="#data-mining-5-logistic-regression" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23303,38 +23315,52 @@
 </ul>
 <h2 id="data-mining-6-linear-disciminant-analysis-lda">Data Mining 6. Linear Disciminant Analysis (LDA)<a class="headerlink" href="#data-mining-6-linear-disciminant-analysis-lda" title="Permanent link">&para;</a></h2>
 <ul>
-<li>LDA란? </li>
+<li>LDA란? <ul>
 <li>차원 축소 기법중에 하나</li>
+</ul>
+</li>
 <li>LDA vs PCA</li>
 <li>LDA의 단점</li>
 </ul>
 <h2 id="data-mining-7-evaluation">Data Mining 7. Evaluation<a class="headerlink" href="#data-mining-7-evaluation" title="Permanent link">&para;</a></h2>
 <ul>
-<li>TestSet 평가</li>
+<li>TestSet 평가<ul>
 <li><img alt="" src="../../images/2022-05-22-evaluating.png" /></li>
-<li>Generalized Evaluation</li>
+</ul>
+</li>
+<li>Generalized Evaluation<ul>
 <li><img alt="" src="../../images/2022-05-22-evaluation2.png" /></li>
-<li>평가하는 다양한 방법</li>
+</ul>
+</li>
+<li>평가하는 다양한 방법<ul>
 <li>작은 데이터라면, 1/3 테스팅 2/3 트레이닝으로 분류</li>
 <li>Repeated Holdout Method : 서로 다른 표본을 사용하여 평가 반복</li>
 <li>Cross-Validation : Overlapping testset 방지<ul>
 <li><img alt="" src="../../images/2022-05-22-cross-validation.png" /></li>
-<li>Leave-One-Out Cross-Validation : 가장 데이터를 잘 활용한 경우</li>
+<li>Leave-One-Out Cross-Validation : 가장 데이터를 잘 활용한 경우<ul>
 <li><img alt="" src="../../images/2022-05-22-loo-cross-validation.png" /></li>
 </ul>
 </li>
-<li>평가 기준</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>평가 기준<ul>
 <li>Predictive Accuracy : 모델이 얼마나 새로운 데이터에 대한 예측을 잘 내놓는지</li>
 <li>Time &amp; Memory : Computation Cost</li>
 <li>Robustness : 노이즈에도 불구 얼마나 정확한 모델인지</li>
 <li>Scalability : 많은 양의 데이터 효율적으로 처리가능한가?</li>
 <li>Interpretability : 모델이 주는 인사이트를 이해하기 쉬운가?</li>
 <li>Simplicity : 결정 트리 사이즈, compactness</li>
-<li>Prediction Model</li>
+</ul>
+</li>
+<li>Prediction Model<ul>
 <li>Regression<ul>
-<li>결과값 예시</li>
+<li>결과값 예시<ul>
 <li><img alt="" src="../../images/2022-05-22-prediction-output.png" /></li>
-<li>평가 지표</li>
+</ul>
+</li>
+<li>평가 지표<ul>
 <li>BIAS : 에러의 산술적 평균</li>
 <li>MAD : Mean Absolute Deviation (평균의 절대값 분산)</li>
 <li>MSE : Mean Square Error (가장 선호도 높음)</li>
@@ -23342,10 +23368,14 @@
 <li>RRSE : Root relative squared error</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>Classification<ul>
-<li>결과값 예시</li>
+<li>결과값 예시<ul>
 <li><img alt="" src="../../images/2022-05-22-classification-output.png" /></li>
-<li>평가 지표</li>
+</ul>
+</li>
+<li>평가 지표<ul>
 <li>Confusion Matrix<ul>
 <li>True Positive, True Negative, False Positive, False Negative</li>
 <li>Accuracy = (TP + TN) / (TP + TN + FP + FN)</li>
@@ -23362,22 +23392,30 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="data-mining-8-decision-tree">Data Mining 8. Decision Tree<a class="headerlink" href="#data-mining-8-decision-tree" title="Permanent link">&para;</a></h2>
 <ul>
-<li>결정 트리 생성 방법</li>
+<li>결정 트리 생성 방법<ul>
 <li>Greedy Strategy<ul>
 <li>언제 스플릿 멈출지 생각하며 특정 분야를 최적화 할 수 있는 것으로 레코드 분리!</li>
 </ul>
 </li>
 <li>Multi-way Split, Binary Split</li>
 <li>동형으로 많이 분류 안되는, impurity가 높은 기준으로 나누기</li>
-<li>Node Impurity 측정 방법</li>
+</ul>
+</li>
+<li>Node Impurity 측정 방법<ul>
 <li>Gini Index<ul>
 <li>모든 클래스로 분류가 되었을 때 가장 높고, 하나에 모여있을 때 가장 낮고</li>
 <li><img alt="" src="../../images/2022-05-22-gini.png" /></li>
 <li><img alt="" src="../../images/2022-05-22-gini-example.png" /></li>
-<li>계산 예시</li>
+<li>계산 예시<ul>
 <li><img alt="" src="../../images/2022-05-22-gini-calculation.jpg" /></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Entropy<ul>
@@ -23396,9 +23434,11 @@
 </li>
 <li>Misclassification Error</li>
 </ul>
+</li>
+</ul>
 <h2 id="data-mining-9-random-forest">Data Mining 9. Random Forest<a class="headerlink" href="#data-mining-9-random-forest" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Decision Tree </li>
+<li>Decision Tree <ul>
 <li>장점<ul>
 <li>Regression과 Classification 모두에 적용 가능</li>
 <li>계산 간단</li>
@@ -23412,13 +23452,17 @@
 </ul>
 </li>
 <li>Decision Tree 보다 나은 방법이 없을까?</li>
-<li><strong>Bagging Predictors</strong></li>
+</ul>
+</li>
+<li><strong>Bagging Predictors</strong><ul>
 <li>Bootstrap Aggregating의 줄임말</li>
 <li>Classification/Regression 모델을 부트스트랩 샘플에 맞춰, averaging<em>(regression)</em>/voting<em>(classification)</em>으로 합치기</li>
 <li>bootstrap sample이 데이터의 대체를 통해 랜덤하게 선택됨</li>
 <li>base learner에 대한 분산을 줄임</li>
 <li>약한 base learner이며, 적은 bias와 높은 분산을 가지고 있는 데이터셋에 가장 효율적</li>
-<li><strong>Random Forest</strong></li>
+</ul>
+</li>
+<li><strong>Random Forest</strong><ul>
 <li>많은 양의 Tree를 만들어 Forest 구성</li>
 <li>트레이닝 데이터를 통해 여러가지 independent bootstrap sample 구성</li>
 <li>Decision Tree의 많은 장점 흡수<ul>
@@ -23429,6 +23473,8 @@
 </ul>
 </li>
 <li>RF Predictor</li>
+</ul>
+</li>
 <li><strong>Variance Importance</strong></li>
 <li>MDI</li>
 <li>MDA</li>
@@ -23436,67 +23482,89 @@
 <h2 id="data-mining-10-boosting">Data Mining 10. Boosting<a class="headerlink" href="#data-mining-10-boosting" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://icim.nims.re.kr/post/easyMath/838</em></li>
-<li>Ensemble</li>
+<li>Ensemble<ul>
 <li>머신 러닝 알고리즘으로 자체보다는 더 나은 예측 퍼포먼스를 낼 수 있도록 Ensemble 사용</li>
 <li>여러개의 머신러닝 모델을 섞어서 결과를 예측하기</li>
 <li>이를 Bagging/Boosting을 통해 구현 가능</li>
-<li>Bagging</li>
+</ul>
+</li>
+<li>Bagging<ul>
 <li>학습 데이터를 부트스트랩 샘플링을 이용해 추출하고, 개별 모델 학습</li>
 <li>데이터를 가지고 첫번째 모델 학습 =&gt; 같은 과정 여러번 반복하여 여러개의 개별 학습 모델 만듦 </li>
-<li>Boosting</li>
+</ul>
+</li>
+<li>Boosting<ul>
 <li>오분류된 샘플에 더 많은 가중치 주어 학습하는 방식</li>
+</ul>
+</li>
 <li>Adaboost</li>
 <li>Gradient Boost</li>
 </ul>
 <h2 id="data-mining-11-k-nearest-neighborhood">Data Mining 11. k-Nearest Neighborhood<a class="headerlink" href="#data-mining-11-k-nearest-neighborhood" title="Permanent link">&para;</a></h2>
 <ul>
-<li>개요</li>
+<li>개요<ul>
 <li>패턴 인식에 사용되는 Classification 알고리즘</li>
 <li>k-Nearest Neighbors는 모든 가능한 케이스를 저장해, similarity measure(distance function) 통해 새로운 케이스를 만들어 냄</li>
 <li>Parameter가 없는 lazy-learning 알고리즘</li>
-<li>k-NN</li>
+</ul>
+</li>
+<li>k-NN<ul>
 <li>Object가 다수의 투표로 인해 분류가 된다</li>
 <li>해당 Object가 주변에서 가장 흔한 클래스로 지정이 된다</li>
+</ul>
+</li>
 <li>K-NN Feature Weighting</li>
 <li>Feature Normalization</li>
 <li>Nominal/Categorical Data</li>
 </ul>
 <h2 id="data-mining-12-naive-bayes">Data Mining 12. Naive Bayes<a class="headerlink" href="#data-mining-12-naive-bayes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>가정</li>
+<li>가정<ul>
 <li>각 feature는 독립적이다. </li>
 <li>p(x,y|z) = p(x|z)p(y|z)</li>
 <li>x is conditionally independent of y given z, if the probability distribution governing x is independent of the value of y, given the value of z</li>
+</ul>
+</li>
 <li>MNIST 데이터 셋 두둥등장</li>
 </ul>
 <h2 id="data-mining-13-support-vector-machine">Data Mining 13. Support Vector Machine<a class="headerlink" href="#data-mining-13-support-vector-machine" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Linear Support Vector Machine (Seperable Case)</li>
+<li>Linear Support Vector Machine (Seperable Case)<ul>
 <li>Linear Classifier</li>
-<li>Linear Support Vector Machine (Non-seperable Case)</li>
+</ul>
+</li>
+<li>Linear Support Vector Machine (Non-seperable Case)<ul>
 <li>Soft Margin Classification</li>
 <li>Hard Margin vs Soft Margin</li>
-<li>Nonlinear Support Vector Machine</li>
+</ul>
+</li>
+<li>Nonlinear Support Vector Machine<ul>
 <li>Feature spaces</li>
+</ul>
+</li>
 </ul>
 <h2 id="data-mining-14-clustering">Data Mining 14. Clustering<a class="headerlink" href="#data-mining-14-clustering" title="Permanent link">&para;</a></h2>
 <ul>
-<li>개요</li>
+<li>개요<ul>
 <li>Clustering: unsupervised learning의 한 종류, 비슷한 데이터 샘플을 찾아 묶어주는 용도</li>
 <li><img alt="" src="../../images/2022-05-22-clustring.png" /></li>
 <li>Feature Selection : 클러스터링에 쓸 가장 효과적인 subset 구하기</li>
 <li>Feature Extraction : Input Feature를 통해 새로운 Feature 생성</li>
 <li>Inter-pattern Similarity : 패턴 간의 거리 측정</li>
 <li>Grouping : Group similar patterns in same cluster</li>
-<li>(Dis)similarity Measures</li>
+</ul>
+</li>
+<li>(Dis)similarity Measures<ul>
 <li>Continuous Variable</li>
 <li>Distance Measure</li>
 <li>Correlation (Pearson Linear Correlation)</li>
 <li>Binary Variable</li>
 <li>Nominal Variable</li>
 <li>Ordinal Variable</li>
+</ul>
+</li>
 <li><img alt="" src="../../images/2022-05-22-clustering-algorithms.png" /></li>
-<li>Hierarchical Clustering</li>
+<li>Hierarchical Clustering<ul>
 <li>Agglomerative(bottom-up)</li>
 <li>Divisive(top-down)</li>
 <li>Dendrogram<ul>
@@ -23506,33 +23574,43 @@
 <li>Single-Link/Complete-Link Method</li>
 <li>AGNES</li>
 <li>DIANA</li>
-<li>k-means Algorithm</li>
+</ul>
+</li>
+<li>k-means Algorithm<ol>
 <li>k개의 cluster 선정</li>
 <li>cluster center m1, ... , mk</li>
 <li>각 데이터포인트에 대해 클러스터 센터에 대해 가장 가까운 데이터 포인트 선정</li>
 <li>Re-compute cluster center</li>
 <li>Re-assignment가 없을때까지 계속</li>
+</ol>
+</li>
 <li>Clustering Evaluation</li>
 <li>DBSCAN Algorithm</li>
 </ul>
 <h2 id="data-mining-15-association-rules">Data Mining 15. Association Rules<a class="headerlink" href="#data-mining-15-association-rules" title="Permanent link">&para;</a></h2>
 <ul>
-<li>개요</li>
+<li>개요<ul>
 <li>Market Basket을 통한 유의미한 정보 찾기<ul>
 <li>고객은 누구인가?</li>
 <li>같이 구매하는 경향이 있는 프로덕트는 무엇인가</li>
 <li>왜 이 프로덕트들은 같이 구매되는 경향이 있는가? </li>
 </ul>
 </li>
-<li>Association Rules</li>
+</ul>
+</li>
+<li>Association Rules<ul>
 <li>Clear and Useful result of market basket analysis</li>
 <li>The Useful Rule : high quality, actionable information </li>
 <li>The Trivial Rule</li>
 <li>The Inexplicable Rule</li>
-<li>Basic Process</li>
+</ul>
+</li>
+<li>Basic Process<ul>
 <li>Taxonomy</li>
 <li>Virtual Items</li>
 <li>Generating Rules</li>
+</ul>
+</li>
 </ul>
 
 

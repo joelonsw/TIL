@@ -22931,17 +22931,18 @@
 <h3 id="2023-07-02">2023-07-02<a class="headerlink" href="#2023-07-02" title="Permanent link">&para;</a></h3>
 <h2 id="for-comprehension">For Comprehension<a class="headerlink" href="#for-comprehension" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Scala에서 Future를 다루기 위해서는 <code>flatMap</code>, <code>map</code>, <code>filter</code>를 쓸 수 있다</li>
 <li><code>for comprehension</code>을 <code>Future</code>와 함께 쓴다면, 다수의 비동기 Computation을 동시다발적으로 쓸 수 있다</li>
-<li>
-<p><code>for comprehension</code>안에 들어가는 expression 중에서는 Future, List, Option 등이 들어간다</p>
-<ul>
+<li><code>for comprehension</code>안에 들어가는 expression 중에서는 Future, List, Option 등이 들어간다<ul>
 <li>이게 monadic operation으로 뚝딱 해결된다는데...?</li>
 </ul>
 </li>
-<li>
-<p><strong>코드로 살펴보기 - Future</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>코드로 살펴보기 - Future</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">operation1</span><span class="p">():</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">operation2</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">operation3</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Double</span><span class="p">]</span>
@@ -22959,32 +22960,31 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="futureflatmap-vs-futureoncomplete">Future.flatmap() vs Future.onComplete()<a class="headerlink" href="#futureflatmap-vs-futureoncomplete" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>flatMap()</strong></li>
+<li><strong>flatMap()</strong><ul>
 <li>flatMap은 비동기적인 연산을 composing 하는데에 사용된다</li>
-<li>
-<p>여러개의 Future를 <strong>체이닝</strong>하는 용도</p>
-<ul>
+<li>여러개의 Future를 <strong>체이닝</strong>하는 용도<ul>
 <li>for-comprehension도 future의 체이닝!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">operation1</span><span class="p">():</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Future</span><span class="p">.</span><span class="n">successful</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">operation1</span><span class="p">():</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Future</span><span class="p">.</span><span class="n">successful</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">operation2</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Future</span><span class="p">.</span><span class="n">successful</span><span class="p">(</span><span class="s">s&quot;Hi </span><span class="si">${</span><span class="n">value</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operation1</span><span class="p">().</span><span class="n">flatmap</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">operation2</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>onComplete()</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>onComplete()</strong><ul>
 <li>Future에 대한 콜백메서드를 지정</li>
 <li>Future가 완료되었을때, 실패했던 성공했던 이걸 실행하도록 지정하는 콜백 메서드</li>
 <li>Future를 새로 만들진 않고, 그냥 존재하던 Future 어떻게 처리할지를 다뤄</li>
 <li>Future의 값 자체는 <code>Option[Try[]]</code> 타입이라 이걸 평가하는 것
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculateMeaningOfLife</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculateMeaningOfLife</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nc">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="mi">42</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
@@ -23000,6 +23000,8 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Failure</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;</span><span class="si">${</span><span class="n">exception</span><span class="p">.</span><span class="n">getMessage</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

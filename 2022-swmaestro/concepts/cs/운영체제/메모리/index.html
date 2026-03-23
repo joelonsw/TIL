@@ -22943,7 +22943,7 @@
 <h2 id="_3">현구막의 리눅스 메모리 관리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=qxmdX449z1U</em></li>
-<li><strong>메모리가 관리되는 방법</strong></li>
+<li><strong>메모리가 관리되는 방법</strong><ul>
 <li>코드 -(컴파일러)-&gt; 숫자</li>
 <li>컴파일러가 변화시킨 숫자 주소를 "논리 주소"라고 부름</li>
 <li>주소 변환<ul>
@@ -22956,24 +22956,24 @@
 <li>각 프로그램에 고유한 번호를 앞에 붙여 =&gt; 이게 "물리 주소"</li>
 </ul>
 </li>
-<li>
-<p>아니, 그러면 처음부터 물리주소로 변환하지 그랬냐? </p>
-<ul>
+<li>아니, 그러면 처음부터 물리주소로 변환하지 그랬냐? <ul>
 <li>CPU는 논리 주소만 읽거든</li>
 <li>CPU 입장에선 현재 활동중인 프로세스 내부의 주소만 알면 되거든</li>
 </ul>
 </li>
-<li>
-<p><strong>MMU</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>MMU</strong><ul>
 <li>Base Register, Limit Register, 산술 연산기</li>
 <li>CPU 사용중인 프로세스가 요청하는 논리주소에 Base Register 값 더해서 물리 주소로 변환</li>
-<li>
-<p>이때 변환된 물리 주소가 Limit Register 안짝에 있는지 검증</p>
+<li>이때 변환된 물리 주소가 Limit Register 안짝에 있는지 검증</li>
+</ul>
 </li>
-<li>
-<p><strong>메모리 할당</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>메모리 할당</strong><ul>
 <li>프로세스들을 그러면 하나씩 물리 메모리에 올려봅시다</li>
 <li>이렇게 하나하나 꽉 채웠다가 하나 끝났고, 새로운 프로세스 메모리에 올릴라니까 음... 공간이 부족하네</li>
 <li><img alt="" src="../../images/memory-lack.png" /></li>
@@ -22981,12 +22981,12 @@
 <li>오 느려, 뭘 빼야할지도 모르겠어</li>
 </ul>
 </li>
-<li>
-<p>구멍 계속 생겨...</p>
+<li>구멍 계속 생겨...</li>
+</ul>
 </li>
-<li>
-<p><strong>Paging</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Paging</strong><ul>
 <li>메모리 공간을 일정하게 잘라두고, 프로그램을 잘라서 조금씩 올리자!</li>
 <li>물리 메모리를 일정하게 자르자!<ul>
 <li>이걸 <strong>Frame</strong>이라고 부르기로 했어요</li>
@@ -23002,15 +23002,15 @@
 <li>MMU 연산도 빡세짐</li>
 </ul>
 </li>
-<li>
-<p>따라서...</p>
-<ul>
+<li>따라서...<ul>
 <li>논리 &lt;-&gt; 물리 주소 변환을 위한 페이지 테이블을 생성</li>
 </ul>
 </li>
-<li>
-<p><strong>Paging Table</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Paging Table</strong><ul>
 <li>프로세스마다 페이지 테이블이 필요해졌어</li>
 <li>이는 메모리에 저장됨</li>
 <li>프로세스마다 페이지 테이블 메모리에 놓으면 너무 용량 많자나<ul>
@@ -23022,68 +23022,70 @@
 <li>페이지 접근해서 실제 정보 가져오고</li>
 </ol>
 </li>
-<li>
-<p>그러면 안되니까, <strong>TLB</strong>를 통해 페이지 테이블 캐시 만들어두자고!</p>
+<li>그러면 안되니까, <strong>TLB</strong>를 통해 페이지 테이블 캐시 만들어두자고!</li>
+</ul>
 </li>
-<li>
-<p><strong>Paging with TLB</strong></p>
+</ul>
+<ul>
+<li><strong>Paging with TLB</strong><ul>
+<li>TLB에 주소 있으면 바로 가져올 수 있겠지?</li>
+</ul>
 </li>
-<li>
-<p>TLB에 주소 있으면 바로 가져올 수 있겠지?</p>
-</li>
-<li>
-<p><strong>정리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>정리</strong><ul>
 <li>현대 메모리는 Paging을 베이스로한 기법을 채택</li>
 <li>하드디스크를 Swap area로 활용</li>
-<li>
-<p>MMU, TLB 같은 하드웨어 지원을 통해 Page Table 확인해 메모리 참조</p>
+<li>MMU, TLB 같은 하드웨어 지원을 통해 Page Table 확인해 메모리 참조</li>
+</ul>
 </li>
-<li>
-<p><strong>가상 메모리로 어플리케이션 프로세스 속이기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>가상 메모리로 어플리케이션 프로세스 속이기</strong><ul>
 <li>CPU에서 처리되고 있는 프로세스는 자기가 거대한 메모리에 몽땅 올라와있다고 생각함<ul>
 <li>실제로는 실제 처리되고 있는 부분의 페이지만 메모리에, </li>
 <li>나머지는 스왑공간에 쟁여두고 있음</li>
 </ul>
 </li>
-<li>
-<p>물리메모리 공간 + 스왑공간 = 가상 메모리 </p>
+<li>물리메모리 공간 + 스왑공간 = 가상 메모리 </li>
+</ul>
 </li>
-<li>
-<p><strong>Page Fault</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Page Fault</strong><ol>
 <li>CPU가 프로세스 작업중</li>
 <li>CPU: 메모리 주소 좀~</li>
 <li>TLB: 어라? 메모리 저장된거 없는디?</li>
 <li>MMU: 어이 프로세스. 잠들어라</li>
 <li>OS 등판. CPU 점유</li>
 <li>OS: 하드디스크 스왑공간에서 메모리에 페이지 가져오고, TLB도 업데이트 해드렸습니다~</li>
-<li>CPU: OS 잠들어라. </li>
-<li>
-<p>Page Fault 발생 == CPU Context Switching 이런거 다 일어나니까 성능 저하</p>
+<li>CPU: OS 잠들어라. 
+- Page Fault 발생 == CPU Context Switching 이런거 다 일어나니까 성능 저하</li>
+</ol>
 </li>
-<li>
-<p><strong>Page Replacement</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Page Replacement</strong><ul>
 <li>메모리 꽉차면 내쫓을 페이지 선택 by OS</li>
 <li>이상적인건 LRU<ul>
 <li>하지만 OS는 페이지 폴트나서 메모리에 올려준 정보만 있어</li>
 <li>그게 CPU님께서 얼마나 최근에 접근하셨는지에 대한 정보는 없어</li>
 </ul>
 </li>
-<li>
-<p>Clock Algorithm</p>
-<ul>
+<li>Clock Algorithm<ul>
 <li>메모리에 올라와 있는 모든 page가 reference bit = 0</li>
 <li>cpu를 점유중인 프로세스가 호출하면 reference bit = 1</li>
-<li>내쫓을 타이밍에 페이지 하나씩 보면서 reference bit이 0이면 내쫓기</li>
+<li>내쫓을 타이밍에 페이지 하나씩 보면서 reference bit이 0이면 내쫓기<ul>
 <li>else reference_bit--;</li>
 </ul>
 </li>
-<li>
-<p><strong>Thrashing</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Thrashing</strong><ul>
 <li>다양한 프로그램들이 메모리에 올라오고, 유효공간 줄어들고 CPU 최대한 많이 쓰고</li>
 <li>그러다가 CPU 사용량 똑 떨어져<ul>
 <li>메모리에 프로세스 많아질수록 프로세스 당 쓸 수 있는 물리 메모리 프레임 줄어들고</li>
@@ -23091,29 +23093,31 @@
 <li>딴 프로세스가 CPU 바통 이어받지만 똑같이 page fault</li>
 </ul>
 </li>
-<li>
-<p>모든 페이지가 교체되기 바쁘고 CPU는 놀아</p>
-<ul>
+<li>모든 페이지가 교체되기 바쁘고 CPU는 놀아<ul>
 <li>CPU 노니까 프로세스 더 올려!</li>
 </ul>
 </li>
-<li>
-<p><strong>Thrashing 해소 - Working Set</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Thrashing 해소 - Working Set</strong><ul>
 <li>대부분 프로세스가 일정한 페이지만 집중적으로 쓰는구나!</li>
 <li>특정 시간 동안에 프로세스의 참조되는 페이지 갯수를 파악해서 이게 제대로 다 올라갈 frame이 확보된 이후에 page 올림</li>
-<li>
-<p>"프로세스" 별로 동작</p>
+<li>"프로세스" 별로 동작</li>
+</ul>
 </li>
-<li>
-<p><strong>Thrashing 해소 - PFF</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Thrashing 해소 - PFF</strong><ul>
 <li>page fault rate 상한 하한 둠<ul>
 <li>상한 넘으면 지급 프레임 갯수 줄이고</li>
 <li>하한을 넘으면 지급 프레임 갯수 늘리고</li>
 </ul>
 </li>
 <li>"프로세스" 단위로 동작!</li>
+</ul>
+</li>
 </ul>
 
 

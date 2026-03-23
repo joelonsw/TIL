@@ -22909,36 +22909,38 @@
 <h3 id="2022-10-19">2022-10-19<a class="headerlink" href="#2022-10-19" title="Permanent link">&para;</a></h3>
 <h2 id="_1">부하테스트<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>부하가 많이 걸리는 SQL 뽑기<ul>
 <li>Production과 똑같은 DB 만들기</li>
 </ul>
 </li>
 <li>일반적인 웹서비스의 경우 QPS에 5정도 곱해서 </li>
-<li>
-<p>API throttling 끄기</p>
-<ul>
-<li>API throttling : API 호출을 몇개까지 허용하는지 제한. redis에서 각 pod aggregate</li>
+<li>API throttling 끄기<ul>
+<li>API throttling : API 호출을 몇개까지 허용하는지 제한. redis에서 각 pod aggregate<ul>
 <li>1분에 100번 정도</li>
 </ul>
 </li>
-<li>
-<p><strong>부하테스트 시나리오</strong></p>
+</ul>
 </li>
-<li>
-<p>STRESS </p>
+</ul>
+</li>
+</ul>
 <ul>
+<li><strong>부하테스트 시나리오</strong><ul>
+<li>STRESS <ul>
 <li>load를 천천히 올리면서 극한까지</li>
 <li>부하 줄일때도 천천히 줄여</li>
 <li>일단 모니터링 툴도 볼 수 있어야해</li>
 <li>AWS RDS의 Memory, IOPS, CPU, Cache</li>
 </ul>
 </li>
-<li>
-<p><strong>K6</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>K6</strong><ul>
 <li>서비스 사용자의 사용 패턴에 따라 시나리오를 작성하기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">stages</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">stages</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">{</span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">NUMBER_OF_MAX_VUS</span><span class="o">/</span><span class="mf">4</span><span class="p">},</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">{</span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">NUMBER_OF_MAX_VUS</span><span class="o">/</span><span class="mf">2</span><span class="p">},</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">{</span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">NUMBER_OF_MAX_VUS</span><span class="p">},</span>
@@ -22954,6 +22956,8 @@
 </ul>
 </li>
 <li>탑 쿼리 5개 정도 뽑아서 sleep 중간중간 줘서 실제 배합마냥!</li>
+</ul>
+</li>
 </ul>
 
 

@@ -22909,34 +22909,24 @@
 <h3 id="2021-07-09">2021-07-09<a class="headerlink" href="#2021-07-09" title="Permanent link">&para;</a></h3>
 <h2 id="spring-6-aop">토비의 Spring 6장. AOP<a class="headerlink" href="#spring-6-aop" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>복습</strong></p>
-<ul>
-<li>내가 정의한 객체에 비즈니스 로직이 아닌 "추가 기능"을 넣어주고 싶어<ul>
-<li>가령 트랜잭션</li>
-<li>해당 객체를 생성자 파라미터로 받아서, 추가 처리가 필요한 메서드를 오버라이딩 해준 뒤 추가 로직 구현</li>
-<li>이러면 프록시를 확실히 알아야하고, 매번 만들어줘야해</li>
-</ul>
-</li>
-<li>다이나믹 프록시 등장<ul>
-<li>부가 기능 가진 클래스의 존재 몰라야 해</li>
-<li>데코레이터 패턴<ul>
-<li>타깃에 부가적인 기능을 런타임에 프록시를 통해 부여</li>
-</ul>
-</li>
-<li>다이나믹 프록시가 인터페이스 구현 클래스의 오브젝트 만들어 줌<ul>
-<li>프록시로서 필요한 부가기능 코드는 직접 작성할 것</li>
-<li>import java.lang.reflect.Proxy;</li>
-<li>Proxy.newProxyInstance(클래스로더, 인터페이스 구현 클래스, InvocationHandler)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>팩토리 빈 등장<ul>
-<li>이렇게 만든 다이나믹 프록시 오브젝트는 스프링 빈으로 등록 X</li>
-<li>FactoryBean&lt;?&gt;을 통해 팩토리 빈 만들기<ul>
-<li>getObject()를 통해 필요한 오브젝트 뚝딱 나옴
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MessageFactoryBean</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">FactoryBean</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<li><strong>복습</strong>
+    - 내가 정의한 객체에 비즈니스 로직이 아닌 "추가 기능"을 넣어주고 싶어
+        - 가령 트랜잭션
+        - 해당 객체를 생성자 파라미터로 받아서, 추가 처리가 필요한 메서드를 오버라이딩 해준 뒤 추가 로직 구현
+        - 이러면 프록시를 확실히 알아야하고, 매번 만들어줘야해
+    - 다이나믹 프록시 등장
+        - 부가 기능 가진 클래스의 존재 몰라야 해
+        - 데코레이터 패턴
+            - 타깃에 부가적인 기능을 런타임에 프록시를 통해 부여
+        - 다이나믹 프록시가 인터페이스 구현 클래스의 오브젝트 만들어 줌
+            - 프록시로서 필요한 부가기능 코드는 직접 작성할 것
+            - import java.lang.reflect.Proxy;
+            - Proxy.newProxyInstance(클래스로더, 인터페이스 구현 클래스, InvocationHandler)
+    - 팩토리 빈 등장
+        - 이렇게 만든 다이나믹 프록시 오브젝트는 스프링 빈으로 등록 X
+        - FactoryBean&lt;?&gt;을 통해 팩토리 빈 만들기
+            - getObject()를 통해 필요한 오브젝트 뚝딱 나옴
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MessageFactoryBean</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">FactoryBean</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MessageFactoryBean</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">text</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
@@ -22952,69 +22942,39 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>내가 정의한 프록시 팩토리 빈의 한계</strong></p>
 <ul>
-<li>타깃에 부가기능을 메서드 단위 별로 부여</li>
-<li>한 번에 여러개의 클래스에 공통적인 부가기능 부여 불가</li>
-<li>하나의 타깃에 여러개의 기능 부여도 어려움<ul>
-<li>프록시에 프록시에 프록시에 프록시를 더해서~</li>
+<li><strong>내가 정의한 프록시 팩토리 빈의 한계</strong>
+    - 타깃에 부가기능을 메서드 단위 별로 부여
+    - 한 번에 여러개의 클래스에 공통적인 부가기능 부여 불가
+    - 하나의 타깃에 여러개의 기능 부여도 어려움
+        - 프록시에 프록시에 프록시에 프록시를 더해서~</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>6.4 스프링의 프록시 팩토리 빈</strong></p>
 <ul>
-<li>스프링은 일관된 방법으로 프록시를 만들어주는 추상 레이어 제공<ul>
-<li>생성된 프록시는 스프링의 빈으로 등록</li>
-<li>스프링은 프록시 오브젝트를 생성해주는 기술을 추상화한 팩토리 빈 제공<ul>
-<li><strong>ProxyFactoryBean()</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>ProxyFactoryBean() <ul>
-<li>프록시에서 사용할 부가기능을 MethodInterceptor 인터페이스를 통해 만듦<ul>
-<li>InvocationHandler와 유사<ul>
-<li>InvocationHandler는 타깃 오브젝트에 대한 정보를 제공 X</li>
-<li>MethodInterceptor의 경우 ProxyFactoryBean으로 부터 타깃 오브젝트 정보까지 다 받음<ul>
-<li>ProxyFactoryBean의 경우 인터페이스 자동검출 기능을 통해 타깃 오브젝트가 구현하는 인터페이스 정보 알아냄</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>ProxyFactoryBean은 작은 단위의 템플릿/콜백 구조를 응용하여 작성되었기에 MethodInterceptor을 싱글톤으로 공유 가능</li>
-<li>MethodInterceptor는 타깃 오브젝트의 메서드를 실행할 수 있는 기능있기에, MethodInterceptor는 "부가 기능 제공에만 집중 가능"</li>
-<li>MethodInterceptor... 콜백 오브젝트<ul>
-<li>proceed() 메서드를 통해 타깃 오브젝트의 메서드를 내부적으로 실행</li>
-<li>일종의 공유 가능한 템플릿으로 동작</li>
-<li>MethodInterceptor 재사용 가능한 순수한 부가 기능 코드만 남겨둠 <em>(이를 어드바이스라 지칭)</em></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>어드바이스 &amp; 포인트컷<ul>
-<li>어드바이스: 부가기능을 제공하는 오브젝트</li>
-<li>포인트컷: 메서드 선정 알고리즘</li>
-<li>프록시 처리 순서<ul>
-<li>클라이언트의 요청</li>
-<li>포인트 컷에게 부가 기능을 부여할 메서드인지 확인 부탁</li>
-<li>부여할 대상이라면 MethodInterceptor 호출</li>
-<li>어드바이스가 부가기능을 부여하는 중에 타깃 메서드의 호출이 필요하다면, MethodInvocation 타입 콜백 오브젝트의 proceed() 메서드 호출</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>6.4 스프링의 프록시 팩토리 빈</strong>
+    - 스프링은 일관된 방법으로 프록시를 만들어주는 추상 레이어 제공
+        - 생성된 프록시는 스프링의 빈으로 등록
+        - 스프링은 프록시 오브젝트를 생성해주는 기술을 추상화한 팩토리 빈 제공
+            - <strong>ProxyFactoryBean()</strong>
+    - ProxyFactoryBean() 
+        - 프록시에서 사용할 부가기능을 MethodInterceptor 인터페이스를 통해 만듦
+            - InvocationHandler와 유사
+                - InvocationHandler는 타깃 오브젝트에 대한 정보를 제공 X
+                - MethodInterceptor의 경우 ProxyFactoryBean으로 부터 타깃 오브젝트 정보까지 다 받음
+                    - ProxyFactoryBean의 경우 인터페이스 자동검출 기능을 통해 타깃 오브젝트가 구현하는 인터페이스 정보 알아냄
+        - ProxyFactoryBean은 작은 단위의 템플릿/콜백 구조를 응용하여 작성되었기에 MethodInterceptor을 싱글톤으로 공유 가능
+        - MethodInterceptor는 타깃 오브젝트의 메서드를 실행할 수 있는 기능있기에, MethodInterceptor는 "부가 기능 제공에만 집중 가능"
+        - MethodInterceptor... 콜백 오브젝트
+            - proceed() 메서드를 통해 타깃 오브젝트의 메서드를 내부적으로 실행
+            - 일종의 공유 가능한 템플릿으로 동작
+            - MethodInterceptor 재사용 가능한 순수한 부가 기능 코드만 남겨둠 <em>(이를 어드바이스라 지칭)</em>
+    - 어드바이스 &amp; 포인트컷
+        - 어드바이스: 부가기능을 제공하는 오브젝트
+        - 포인트컷: 메서드 선정 알고리즘
+        - 프록시 처리 순서
+            - 클라이언트의 요청
+            - 포인트 컷에게 부가 기능을 부여할 메서드인지 확인 부탁
+            - 부여할 대상이라면 MethodInterceptor 호출
+            - 어드바이스가 부가기능을 부여하는 중에 타깃 메서드의 호출이 필요하다면, MethodInvocation 타입 콜백 오브젝트의 proceed() 메서드 호출</li>
 </ul>
 
 

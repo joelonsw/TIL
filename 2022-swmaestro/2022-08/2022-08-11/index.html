@@ -22910,32 +22910,36 @@
 <h2 id="transcation-at-exception">Transcation 롤백 at Exception<a class="headerlink" href="#transcation-at-exception" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://techblog.woowahan.com/2606/</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>스프링의 선언적 트랜잭션 <code>@Transactional</code> 안에서 잡은 예외는 롤백 없이 커밋되는게 맞지 않나?<ul>
-<li>RuntimeException이 발생하면 롤백되는게 국룰</li>
+<li>RuntimeException이 발생하면 롤백되는게 국룰<ul>
 <li>CheckedException은 예상된 에러라 롤백 안하고</li>
 <li>UncheckedException은 예상 못한 에러라 롤백하고</li>
+</ul>
+</li>
 <li>근데 try-catch로 감싸주면 롤백 안되지 않을까?</li>
 </ul>
 </li>
-<li>
-<p>그런데 Rollback 예외가 발생하면서 롤백됨!</p>
+<li>그런데 Rollback 예외가 발생하면서 롤백됨!</li>
+</ul>
 </li>
-<li>
-<p><strong>이유</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>이유</strong><ul>
 <li><code>marked as rollback-only</code></li>
 <li>예외가 RuntimeException이면 롤백함</li>
-<li>
-<p>근데 처음에 롤백 바로되는게 아니라 최상위 트랜잭션까지 와서 롤백됨</p>
-<ul>
+<li>근데 처음에 롤백 바로되는게 아니라 최상위 트랜잭션까지 와서 롤백됨<ul>
 <li>이유는 isLocalRollbackOnly = false 가 디폴트이기 때문</li>
 </ul>
 </li>
-<li>
-<p><strong>결론</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>결론</strong><ul>
 <li>참여중인 일부 트랜잭션이 실패할 때 전체 다 롤백하는 것은 의도된 행동</li>
+</ul>
+</li>
 </ul>
 
 

@@ -22989,40 +22989,40 @@
 <p><em>참고: https://www.youtube.com/watch?v=-8V6bMjThNo&amp;list=PLmtsMNDRU0BxryRX4wiwrTZ661xcp6VPM</em></p>
 <h3 id="basics">Basics<a class="headerlink" href="#basics" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>extends App</strong></li>
+<li><strong>extends App</strong><ul>
 <li><code>object Basics extends App</code></li>
-<li>
-<p>App 상속받으면 Play 버튼으로 Run 돌릴 수 있음</p>
+<li>App 상속받으면 Play 버튼으로 Run 돌릴 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>String &amp; String operation</strong></p>
-</li>
-<li>
-<p>스칼라 concat, interpolation 지원
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;I Love Scala&quot;</span>
+</ul>
+<ul>
+<li><strong>String &amp; String operation</strong><ul>
+<li>스칼라 concat, interpolation 지원
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;I Love Scala&quot;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">aComposedString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;I&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;love&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;Scala&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">anInterpolatedString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">s&quot;The meaning of life is </span><span class="si">$</span><span class="n">meaningOfLife</span><span class="s">&quot;</span><span class="w"> </span><span class="c1">// s&quot;$&quot; 감성으로 변수 넣자</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Scala is an Expression</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Scala is an Expression</strong><ul>
 <li>함수형으로 표현을 쓰는게 스칼라를 스칼라처럼 쓰는 방법</li>
 <li>스칼라는 싹다 expression이야</li>
-<li>
-<p>표현: 특정한 행위가 single value로 축약될 수 있다</p>
+<li>표현: 특정한 행위가 single value로 축약될 수 있다</li>
+</ul>
 </li>
-<li>
-<p><strong>Defining a function</strong></p>
+</ul>
+<ul>
+<li><strong>Defining a function</strong><ul>
+<li>파라미터, 리턴 타입 써서 함수를 정의해보자
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">myFunction</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p>파라미터, 리턴 타입 써서 함수를 정의해보자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">myFunction</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Recursion &gt;&gt; Loop</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Recursion &gt;&gt; Loop</strong><ul>
 <li>Loop<ul>
 <li>for/while 같은 명령형 방식의 코딩은 변할 수 있는 변수를 컨트롤하면서 로직이 진행됨</li>
 <li>불변이 아니다보니까 버그로 이어질 수 있음</li>
@@ -23038,24 +23038,25 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="object-oriented">Object-Oriented<a class="headerlink" href="#object-oriented" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Class &amp; Instance</strong></li>
+<li><strong>Class &amp; Instance</strong><ul>
 <li>define fields</li>
-<li>
-<p>define methods
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
+<li>define methods
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;I&#39;m eating&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>상속</strong></p>
-</li>
-<li>
-<p>Constructor argument에 val을 붙여주면, 해당 argument는 필드로 승격됨
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>상속</strong><ul>
+<li>Constructor argument에 val을 붙여주면, 해당 argument는 필드로 승격됨
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;I&#39;m eating&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
@@ -23068,37 +23069,37 @@
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1">// 당연히 다형성 지원</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="kd">val</span><span class="w"> </span><span class="n">aDeclaredAnimal</span><span class="p">:</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Dog</span><span class="p">(</span><span class="s">&quot;Hachi&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">aDeclaredAnimal</span><span class="p">.</span><span class="n">eat</span><span class="p">()</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>추상 클래스</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>추상 클래스</strong><ul>
 <li>자바와 동일</li>
-<li>
-<p>시그니쳐만 써두자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WalkingAnimal</span><span class="w"> </span><span class="p">{</span>
+<li>시그니쳐만 써두자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WalkingAnimal</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">hasLegs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>트래잇</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>트래잇</strong><ul>
 <li>자바의 인터페이스와 동일</li>
-<li>
-<p>싹다 미완성
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Carnivore</span><span class="w"> </span><span class="p">{</span>
+<li>싹다 미완성
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Carnivore</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="n">animal</span><span class="p">:</span><span class="w"> </span><span class="nc">Animal</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>다중상속?</strong></p>
-</li>
-<li>
-<p>클래스 상속은 하나만, 트레잇은 여러개 상속 가능 (자바와 동일)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WalkingAnimal</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>다중상속?</strong><ul>
+<li>클래스 상속은 하나만, 트레잇은 여러개 상속 가능 (자바와 동일)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WalkingAnimal</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">hasLegs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
@@ -23115,41 +23116,40 @@
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="n">animal</span><span class="p">:</span><span class="w"> </span><span class="nc">Animal</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;I am eating&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">?!</span><span class="p">(</span><span class="n">thought</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;I was thinking </span><span class="si">$</span><span class="n">thought</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>메서드 실행</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>메서드 실행</strong><ul>
 <li>그냥 객체에서 함수 실행하듯 할 수 있고, </li>
-<li>
-<p>놀랍게도 아규먼트가 하나라면 이런것도 가능
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aDog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Dog</span>
+<li>놀랍게도 아규먼트가 하나라면 이런것도 가능
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aDog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Dog</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">aCroc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Crocodile</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">aCroc</span><span class="w"> </span><span class="n">eat</span><span class="w"> </span><span class="n">aDog</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">aCroc</span><span class="w"> </span><span class="o">?!</span><span class="w"> </span><span class="s">&quot;think!&quot;</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>익명 클래스</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>익명 클래스</strong><ul>
 <li>인터페이스를 상속받은 클래스를 만들고, 할당하는게 아니라</li>
-<li>
-<p>딱히 이름을 만들지 않고 그냥 trait에 new 때려버리면 익명 클래스 만들어서 컴파일러가 할당해줌
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">dinosaur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Carnivore</span><span class="w"> </span><span class="p">{</span>
+<li>딱히 이름을 만들지 않고 그냥 trait에 new 때려버리면 익명 클래스 만들어서 컴파일러가 할당해줌
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">dinosaur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Carnivore</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="n">animal</span><span class="p">:</span><span class="w"> </span><span class="nc">Animal</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Eat All!&quot;</span><span class="p">)</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>싱글턴 object</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>싱글턴 object</strong><ul>
 <li>딱 하나만 만들어버리는 싱글턴 객체도 만들 수 있어</li>
 <li>static을 생각하라고 하는데... 싱글턴 패턴 같지 않을까 싶기도 해</li>
-<li>
-<p>class와 동일한 이름의 object가 있으면 이를 companion이라고 하는데</p>
-<ul>
+<li>class와 동일한 이름의 object가 있으면 이를 companion이라고 하는데<ul>
 <li>companion의 경우 서로의 필드/메서드에 접근할 수 있다고 함
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">MySingleton</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">MySingleton</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">myVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">333</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">myMethod</span><span class="p">():</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">333333</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 요게 조금 독특</span>
@@ -23161,30 +23161,34 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Case Class</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Case Class</strong><ul>
 <li>equals &amp; hashcode (VO와 같다)</li>
 <li>serialization (직렬화 할 때 많이 쓰이는 거 아닐까 싶음)</li>
 <li>companion with apply (apply 함수를 통해 new를 생략할 수 있도록 지원하는 듯)</li>
-<li>
-<p>패턴 매칭에도 많이 쓰임
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
+<li>패턴 매칭에도 많이 쓰임
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">joel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="s">&quot;Joel&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>제네릭</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>제네릭</strong><ul>
 <li>자바 제네릭과 비슷</li>
-<li>
-<p><code>&lt;&gt;</code> 대신 <code>[]</code> 사용</p>
+<li><code>&lt;&gt;</code> 대신 <code>[]</code> 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>스칼라 객체지향 TIP</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>스칼라 객체지향 TIP</strong><ol>
 <li>Scala의 객체는 싹 다 불변!</li>
 <li>App 클래스안에 main 함수있어서 이거 상속받으면 psvm과 동일</li>
+</ol>
+</li>
 </ul>
 <h2 id="scala-apply">Scala Apply<a class="headerlink" href="#scala-apply" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://hamait.tistory.com/651</em></p>

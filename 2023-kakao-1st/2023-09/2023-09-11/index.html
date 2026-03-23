@@ -23026,22 +23026,24 @@
   - 프록시 서버 주우 일부는 프록시 서버에 요청된 내용을 캐시를 활용해 저장
     - 캐시안에 있는 정보를 요구하는 요청은 프록시가 반환하게 설계할 수도 있음</p>
 <ul>
-<li><strong>Proxy with HTTP...</strong></li>
+<li><strong>Proxy with HTTP...</strong><ul>
 <li>클라이언트 &lt;--&gt; 프록시 서버 &lt;--&gt; 서버</li>
 <li>클라의 모든 HTTP 요청 받아 서버로 전달</li>
 <li>프록시 서버가 클라이언트를 대신하여 서버에 접근하는 역할</li>
-<li>
-<p>프록시 서버는 주로 보안을 위해 사용됨</p>
-<ul>
+<li>프록시 서버는 주로 보안을 위해 사용됨<ul>
 <li>모든 웹 트래픽 흐름속에서 중개자 역할</li>
 <li>요청/응답 필터링</li>
-<li>회사 내부망에서 외부로 요청 보낼 때 이게 신뢰할만한 요청인지를 확인</li>
+<li>회사 내부망에서 외부로 요청 보낼 때 이게 신뢰할만한 요청인지를 확인<ul>
 <li>회사 내부정책에서 인가한 서버만 접속 가능토록</li>
 </ul>
 </li>
-<li>
-<p><strong>Proxy Server 종류</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Proxy Server 종류</strong><ul>
 <li>Caching Proxy Server<ul>
 <li>이전 클라 요청/응답 저장했다가 동일한 요청 들어오면 저장된 컨텐츠 전송</li>
 <li>높은 트래픽 대응 가능</li>
@@ -23068,24 +23070,28 @@
 </li>
 <li>ex)Nginx도 프록시서버라고 볼 수 있음. 캐시/포워드 프록시/리버스 프록시 가능</li>
 </ul>
+</li>
+</ul>
 <h2 id="gateway">Gateway<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Gateway</strong></li>
+<li><strong>Gateway</strong><ul>
 <li>컴퓨터 네트워크에서 서로 다른 통신망, 프로토콜을 사용하는 네트워크 간의 통신을 가능하게 하는 컴퓨터나 소프트웨어를 일컫는 용어</li>
 <li>다른 네트워크로 들어가는 입구 역할을 하는 네트워크 포인트</li>
 <li>다른 네트워크 간의 통로의 역할을 하는 장치</li>
 <li>게이트웨이 지날때 마다 트래픽 증가하기에 속도 느려질수도</li>
 <li>공항 게이트웨이 같은 감성</li>
-<li>
-<p>네트워크 상 다른 통신망/통신프로토콜 적절히 변환해주는 역할</p>
+<li>네트워크 상 다른 통신망/통신프로토콜 적절히 변환해주는 역할</li>
+</ul>
 </li>
-<li>
-<p><strong>Gateway 특징</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Gateway 특징</strong><ul>
 <li>클라 &lt;-&gt; 서버간 통신 중개자 역할을 수행하긴 하지만, 용도가 조금 다름</li>
 <li>HTTP 프로토콜을 다른 프로토콜로 변환하기 위해 사용</li>
 <li>게이트웨이는 언제나 리소스를 자기가 들고 있는 것 마냥 행동</li>
 <li>HTTP &lt;-&gt; FTP 등의 프로토콜 변환도 지원</li>
+</ul>
+</li>
 </ul>
 <h2 id="vpn">VPN<a class="headerlink" href="#vpn" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://www.cloudflare.com/ko-kr/learning/access-management/what-is-a-vpn/</em>
@@ -23094,28 +23100,34 @@
   - 인터넷 통신 암호화 + 익명성 제공
   - 인터넷 검열 우회, 원격 작업을 위해 기업 내부 네트워크에 연결하는 것</p>
 <ul>
-<li><strong>VPN의 작동 방식</strong></li>
+<li><strong>VPN의 작동 방식</strong><ul>
 <li>인터넷 연결시 flow<ul>
 <li>사용자 &lt;--&gt; ISP &lt;--&gt; 인터넷</li>
-<li>이때...</li>
+<li>이때...<ul>
 <li>사용자의 IP주소 노출</li>
 <li>사용자 장치와 웹서버 간 전송되는 데이터 암호화X</li>
 <li>데이터 염탐, 경로상 공격 등이 가능</li>
 </ul>
 </li>
-<li>
-<p>VPN을 사용하면!?</p>
-<ul>
-<li>(VPN 클라이언트 &lt;-&gt; ISP &lt;-&gt; VPN 서버) &lt;-&gt; 인터넷</li>
+</ul>
+</li>
+<li>VPN을 사용하면!?<ul>
+<li>(VPN 클라이언트 &lt;-&gt; ISP &lt;-&gt; VPN 서버) &lt;-&gt; 인터넷<ul>
 <li>() 괄호 안에는 암호화된 연결</li>
 </ul>
 </li>
-<li>
-<p><strong>VPN과 성능</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>VPN과 성능</strong><ul>
 <li>VPN이 모두 동일하게 생성 X</li>
 <li>VPN 서비스에 사용자가 생성한 부하를 처리할 수 있는 서버 용량이 없다면 사용자 인터넷 연결속도 느려짐</li>
 <li>VPN이 액세스 하려는 사용자, 웹 서버 모두 멀리 떨어져도 이동시간으로 인해 속도 느려짐</li>
+</ul>
+</li>
 </ul>
 <h2 id="_1">전용선<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h2 id="curl">cURL<a class="headerlink" href="#curl" title="Permanent link">&para;</a></h2>
@@ -23126,36 +23138,38 @@
   - 보통 특정 서버에서 빠르게 방화벽 예외 상태 테스트하거나
   - REST 서비스 테스트를 위해 사용되는 편</p>
 <ul>
-<li><strong>cURL 설치</strong></li>
-<li>
-<p>Linux, MacOS는 curl 기본 탑재</p>
+<li><strong>cURL 설치</strong><ul>
+<li>Linux, MacOS는 curl 기본 탑재</li>
+</ul>
 </li>
-<li>
-<p><strong>cURL 명령어 옵션</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>cURL 명령어 옵션</strong><ul>
 <li>URL 앞에서는 curl 옵션을 사용하자<ul>
 <li>찾아보면서 하시고...</li>
 </ul>
 </li>
-<li>
-<p>short 형식, long 형식 두개가 있음</p>
-<ul>
+<li>short 형식, long 형식 두개가 있음<ul>
 <li><code>-k</code>, <code>--insecure</code> : SSL 인증서 없이 https 연결</li>
 <li><code>-D</code>, <code>--dump-header</code> : HTTP 헤더 파일에 기록 덤프</li>
 <li><code>-d</code>, <code>--data</code> : HTTP POST 요청 데이터 입력</li>
 <li><code>-X</code>, <code>-request</code> : 요청시 사용할 메소드의 종류 (GET, POST, PUT, PATCH, DELETE)</li>
 </ul>
 </li>
-<li>
-<p><strong>예시</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>예시</strong><ul>
 <li>GET
-  <code>$ curl -X GET www.example.com</code></li>
+<code>$ curl -X GET www.example.com</code></li>
 <li>POST
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ curl -d &#39;{&quot;key1&quot;:&quot;value1&quot;, &quot;key2&quot;:&quot;value2&quot;}&#39; \
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ curl -d &#39;{&quot;key1&quot;:&quot;value1&quot;, &quot;key2&quot;:&quot;value2&quot;}&#39; \
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>-H &quot;Content-Type: application/json&quot; \
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>-X POST http://localhost:8000/data
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="_2">메시지큐<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 

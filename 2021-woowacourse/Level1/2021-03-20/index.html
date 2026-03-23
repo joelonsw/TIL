@@ -22975,333 +22975,183 @@
 <h3 id="2021-03-20">2021-03-20<a class="headerlink" href="#2021-03-20" title="Permanent link">&para;</a></h3>
 <h2 id="web">Web 요청과 응답 과정<a class="headerlink" href="#web" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>핵심 개념</strong></p>
+<li><strong>핵심 개념</strong>
+    - Internet
+        - 컴퓨터 네트워크들 <em>(LAN, MAN, WAN 등)</em> 을 서로 연결 지어주는 범지구적 네트워크
+        - 이렇게 구축된 인터넷이라는 거대한 네트워크에서 우리가 사용하는 다양한 서비스들이 동작
+            - Web도 Internet 위에서 동작하는 서비스들 중 하나!<p>- Web
+      - 정보 자원의 공유를 위해 탄생
+      - 수많은 요청과 응답 사이클의 연속으로 이루어짐
+      - 서버 &amp; 클라이언트
+          - HTTP라는 규약으로 요청과 응답 주고 받음</p>
+<p>- HTTP
+      - 비연결성: 서버 응답 마치면 연결 끊음
+          - HTTP/1.1 Keep-Alive 에서 극복
+      - 무상태: 하나의 요청이 진행되는 동안만 서로를 인지
+          - 쿠키/세션/토큰 등의 상태를 기억하는 기능으로 극복</p>
+</li>
+</ul>
 <ul>
-<li>
-<p>Internet</p>
-<ul>
-<li>컴퓨터 네트워크들 <em>(LAN, MAN, WAN 등)</em> 을 서로 연결 지어주는 범지구적 네트워크</li>
-<li>이렇게 구축된 인터넷이라는 거대한 네트워크에서 우리가 사용하는 다양한 서비스들이 동작<ul>
-<li>Web도 Internet 위에서 동작하는 서비스들 중 하나!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Web</p>
-<ul>
-<li>정보 자원의 공유를 위해 탄생</li>
-<li>수많은 요청과 응답 사이클의 연속으로 이루어짐</li>
-<li>서버 &amp; 클라이언트<ul>
-<li>HTTP라는 규약으로 요청과 응답 주고 받음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>HTTP</p>
-<ul>
-<li>비연결성: 서버 응답 마치면 연결 끊음<ul>
-<li>HTTP/1.1 Keep-Alive 에서 극복</li>
-</ul>
-</li>
-<li>무상태: 하나의 요청이 진행되는 동안만 서로를 인지<ul>
-<li>쿠키/세션/토큰 등의 상태를 기억하는 기능으로 극복</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Web 요청과 응답 과정</strong></p>
-<ol>
-<li>
-<p>URL 찾기</p>
-<ul>
-<li>정의: 네트워크상 자원의 위치 주소</li>
-<li>구조: protocol + domain + directory + file</li>
-</ul>
-</li>
-<li>
-<p>요청을 서버로 전송</p>
-<ul>
-<li>HTTP Request 서버로 전송 (GET, POST, PUT, PATCH, DELETE)</li>
-</ul>
-</li>
-<li>
-<p>서버가 클라이언트로 부터 요청 받고 처리</p>
-<ul>
-<li>Request Headers 확인<ul>
-<li>요청 정보 (URI, Method)</li>
-<li>클라이언트 정보 (accept, user-agent, cookie)</li>
-</ul>
-</li>
-<li>요청에 상응하는 로직 수행</li>
-</ul>
-</li>
-<li>
-<p>서버가 클라이언트에게 응답</p>
-<ul>
-<li>HTTP Response</li>
-</ul>
-</li>
-<li>
-<p>클라이언트가 응답을 받은 후 필요한 리소스들을 추가 요청 &amp; 응답 받기</p>
-</li>
-<li>
-<p>클라이언트가 모든 리소스 요청에 대한 응답을 받음</p>
-<ul>
-<li>이제 육안으로 볼 수 있는 페이지!</li>
-</ul>
-</li>
-</ol>
+<li><strong>Web 요청과 응답 과정</strong>
+    1. URL 찾기
+        - 정의: 네트워크상 자원의 위치 주소
+        - 구조: protocol + domain + directory + file<p>2. 요청을 서버로 전송
+      - HTTP Request 서버로 전송 (GET, POST, PUT, PATCH, DELETE)</p>
+<p>3. 서버가 클라이언트로 부터 요청 받고 처리
+      - Request Headers 확인
+          - 요청 정보 (URI, Method)
+          - 클라이언트 정보 (accept, user-agent, cookie)
+      - 요청에 상응하는 로직 수행</p>
+<p>4. 서버가 클라이언트에게 응답
+      - HTTP Response</p>
+<p>5. 클라이언트가 응답을 받은 후 필요한 리소스들을 추가 요청 &amp; 응답 받기</p>
+<p>6. 클라이언트가 모든 리소스 요청에 대한 응답을 받음
+      - 이제 육안으로 볼 수 있는 페이지!</p>
 </li>
 </ul>
 <h2 id="_1">빌드와 배포<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>컴파일</strong></p>
+<li><strong>컴파일</strong>
+    - 소스 코드를 기계가 읽을 수 있는 바이너리 코드로 변경하는 절차
+    - C++는 exe까지, Java는 class까지 컴파일
+        - Java class 파일을 JVM에서 읽어, Java Byte Code를 OS에 맞게 실행하게 한다</li>
+</ul>
 <ul>
-<li>소스 코드를 기계가 읽을 수 있는 바이너리 코드로 변경하는 절차</li>
-<li>C++는 exe까지, Java는 class까지 컴파일<ul>
-<li>Java class 파일을 JVM에서 읽어, Java Byte Code를 OS에 맞게 실행하게 한다</li>
+<li><strong>빌드</strong>
+    - 소스 코드를 실행 가능한 독립적인 소프트웨어 산출물로 만드는 과정
+        - JAR, WAR의 산출물로 만듬
+            - JAR: 자바에서 사용되는 압축 양식으로 클래스 + 리소스파일로 구성
+            - WAR: 웹 어플리케이션을 압축하고 배포하는데 사용되는 파일 형태
+    - [빌드 과정] 
+        - 컴파일 -&gt; 링크 -&gt; 패키징 -&gt; 테스트</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>빌드</strong></p>
 <ul>
-<li>소스 코드를 실행 가능한 독립적인 소프트웨어 산출물로 만드는 과정<ul>
-<li>JAR, WAR의 산출물로 만듬<ul>
-<li>JAR: 자바에서 사용되는 압축 양식으로 클래스 + 리소스파일로 구성</li>
-<li>WAR: 웹 어플리케이션을 압축하고 배포하는데 사용되는 파일 형태</li>
+<li><strong>빌드 도구</strong>
+    - ANT, MAVEN, GRADLE 이 존재
+    - GRADLE을 살펴보자
+        - JVM 위의 기반 Groovy 언어로 작성
+        - Java 문법과 비슷해 익히기 쉬움</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>[빌드 과정] <ul>
-<li>컴파일 -&gt; 링크 -&gt; 패키징 -&gt; 테스트</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>빌드 도구</strong></p>
 <ul>
-<li>ANT, MAVEN, GRADLE 이 존재</li>
-<li>GRADLE을 살펴보자<ul>
-<li>JVM 위의 기반 Groovy 언어로 작성</li>
-<li>Java 문법과 비슷해 익히기 쉬움</li>
+<li><strong>GRADLE 훑어보기</strong>
+    - settings.gradle: 프로젝트 빌드 정보 저장
+    - build.gradle: 프로젝트 빌드 정보 및 구성에 대해서 표현
+    - .gradlew / .gradle.bt: gradle wrapper의 약자로, gradle 설치 없이도 빌드 가능하게 함</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>GRADLE 훑어보기</strong></p>
 <ul>
-<li>settings.gradle: 프로젝트 빌드 정보 저장</li>
-<li>build.gradle: 프로젝트 빌드 정보 및 구성에 대해서 표현</li>
-<li>.gradlew / .gradle.bt: gradle wrapper의 약자로, gradle 설치 없이도 빌드 가능하게 함</li>
+<li><strong>배포</strong>
+    - JAR, WAR를 일반 사용자가 사용할 수 있도록 소프트웨어를 제공하는 과정</li>
 </ul>
-</li>
-<li>
-<p><strong>배포</strong></p>
 <ul>
-<li>JAR, WAR를 일반 사용자가 사용할 수 있도록 소프트웨어를 제공하는 과정</li>
+<li><strong>CI(Contiguous Integration)</strong>
+    - 정의
+        - 지속적 통합이라는 뜻으로, 코드 변경 사항마다 빌드/테스트까지 자동 진행. 결과물을 보고 하며 리포지토리에 자동 통합
+    - 특징
+        - 변경 사항이 클래스, 기능, 어플리케이션에서의 테스트 수월하게 진행
+        - 신규 코드와 기존 코드 충돌 빠르게 수정 가능
+        - 협업 시 어플리케이션 최신 상태 유지 가능
+    - 대표 CI
+        - Travis
+        - Jenkins</li>
 </ul>
-</li>
-<li>
-<p><strong>CI(Contiguous Integration)</strong></p>
 <ul>
-<li>정의<ul>
-<li>지속적 통합이라는 뜻으로, 코드 변경 사항마다 빌드/테스트까지 자동 진행. 결과물을 보고 하며 리포지토리에 자동 통합</li>
+<li><strong>CD(Contiguous Deployment)</strong>
+    - 정의
+        - 개발자들이 코드에 변경 사항을 줄 경우, 파이프 라인을 통해 이동하여 프로덕션 단계까지 자동 배포
+    - 특징
+        - 어플리케이션 프로덕션으로 빠르고 쉽게 배포
+        - 소비자들의 요구를 빠르게 만족시키는 서비스 출시 가능
+        - 개발팀과 운영팀의 간극 메워줄 생산성 향상</li>
 </ul>
-</li>
-<li>특징<ul>
-<li>변경 사항이 클래스, 기능, 어플리케이션에서의 테스트 수월하게 진행</li>
-<li>신규 코드와 기존 코드 충돌 빠르게 수정 가능</li>
-<li>협업 시 어플리케이션 최신 상태 유지 가능</li>
-</ul>
-</li>
-<li>대표 CI<ul>
-<li>Travis</li>
-<li>Jenkins</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>CD(Contiguous Deployment)</strong></p>
 <ul>
-<li>정의<ul>
-<li>개발자들이 코드에 변경 사항을 줄 경우, 파이프 라인을 통해 이동하여 프로덕션 단계까지 자동 배포</li>
-</ul>
-</li>
-<li>특징<ul>
-<li>어플리케이션 프로덕션으로 빠르고 쉽게 배포</li>
-<li>소비자들의 요구를 빠르게 만족시키는 서비스 출시 가능</li>
-<li>개발팀과 운영팀의 간극 메워줄 생산성 향상</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>DevOps: Development + Operation... 개발과 운영이 연계하여 서비스를 이끌어 나가는 방법론</p>
-</li>
+<li>DevOps: Development + Operation... 개발과 운영이 연계하여 서비스를 이끌어 나가는 방법론</li>
 </ul>
 <h2 id="junit5">JUnit5 사용법<a class="headerlink" href="#junit5" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>JUnit</strong></p>
-<ul>
-<li>단위 테스트 프레임 워크</li>
+<li><strong>JUnit</strong>
+    - 단위 테스트 프레임 워크</li>
 </ul>
-</li>
-<li>
-<p><strong>JUnit5</strong>
-    <img alt="exception" src="../../image/junit_2021_03_20.PNG" /></p>
 <ul>
-<li>Junit5 부터는 스스로 모듈화가 되어있음</li>
+<li><strong>JUnit5</strong>
+    <img alt="exception" src="../../image/junit_2021_03_20.PNG" />
+    - Junit5 부터는 스스로 모듈화가 되어있음</li>
 </ul>
-</li>
-<li>
-<p><strong>Annotations</strong></p>
 <ul>
-<li>
-<p>@Test: 테스트 메서드라는 것을 나타냄</p>
-</li>
-<li>
-<p>@BeforeAll: 클래스 내의 모든 테스트 메서드 실행 전에 "전체적으로 한 번" 실행되는 메서드</p>
-</li>
-<li>
-<p>@BeforeEach: 클래스 내의 모든 테스트 메서드 실행 전에 "각각" 실행되는 메서드</p>
-</li>
-<li>
-<p>@AfterAll: 클래스 내의 모든 테스트 메서드 실행 후에 "전체적으로 한 번" 실행되는 메서드</p>
-</li>
-<li>
-<p>@AfterEach: 클래스 내의 모든 테스트 메서드 실행 후에 "각각" 실행되는 메서드</p>
-</li>
-<li>
-<p>@Disabled: 테스트를 하고 싶지 않은 클래스나 메서드에 붙임</p>
-</li>
-<li>
-<p>@DisplayName: 테스트 이름을 지정하도록 함</p>
-</li>
-<li>
-<p>@RepeatedTest: 특정 테스트를 반복해 테스트</p>
-</li>
-<li>
-<p>@ParameterizedTest: 테스트에 여러 다른 매개변수를 대입해가며 반복 실행할 때 사용</p>
-</li>
-<li>
-<p>@Nested: 테스트 클래스 안에서 내부 클래스를 정의해 테스트를 계층화할 때 사용</p>
+<li><strong>Annotations</strong>
+    - @Test: 테스트 메서드라는 것을 나타냄<p>- @BeforeAll: 클래스 내의 모든 테스트 메서드 실행 전에 "전체적으로 한 번" 실행되는 메서드
+  - @BeforeEach: 클래스 내의 모든 테스트 메서드 실행 전에 "각각" 실행되는 메서드</p>
+<p>- @AfterAll: 클래스 내의 모든 테스트 메서드 실행 후에 "전체적으로 한 번" 실행되는 메서드
+  - @AfterEach: 클래스 내의 모든 테스트 메서드 실행 후에 "각각" 실행되는 메서드</p>
+<p>- @Disabled: 테스트를 하고 싶지 않은 클래스나 메서드에 붙임</p>
+<p>- @DisplayName: 테스트 이름을 지정하도록 함</p>
+<p>- @RepeatedTest: 특정 테스트를 반복해 테스트</p>
+<p>- @ParameterizedTest: 테스트에 여러 다른 매개변수를 대입해가며 반복 실행할 때 사용</p>
+<p>- @Nested: 테스트 클래스 안에서 내부 클래스를 정의해 테스트를 계층화할 때 사용</p>
 </li>
 </ul>
-</li>
-<li>
-<p><strong>Assertions</strong></p>
 <ul>
-<li>assertAll: 매개변수로 받는 모든 테스트코드를 한 번에 실행, 중간에 실패해도 끝까지 ㄱㄱ
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">assertAll</span><span class="p">(</span>
+<li><strong>Assertions</strong>
+    - assertAll: 매개변수로 받는 모든 테스트코드를 한 번에 실행, 중간에 실패해도 끝까지 ㄱㄱ
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">assertAll</span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">study</span><span class="p">),</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">Status</span><span class="p">.</span><span class="na">STARTED</span><span class="p">,</span><span class="w"> </span><span class="n">study</span><span class="p">.</span><span class="na">getStatus</span><span class="p">())</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">);</span>
-</code></pre></div></li>
-<li>assertThrows: 예외 발생을 확인하는 테스트, expectedType 반환하는지 검증</li>
-<li>assertTimeout: 시간 내에 통과하는지 확인</li>
-</ul>
-</li>
+</code></pre></div>
+    - assertThrows: 예외 발생을 확인하는 테스트, expectedType 반환하는지 검증
+    - assertTimeout: 시간 내에 통과하는지 확인</li>
 </ul>
 <h2 id="1">엘레강트 오브젝트 1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>1. 인자의 값으로 null을 보내지 말자</strong></p>
+<li><strong>1. 인자의 값으로 null을 보내지 말자</strong>
+    - 존중 없는 코드의 끝판왕!
+        - 메시지를 보내서 확인하는 것을 최대한 채택하자!
+    - 원시값/문자열 포장하면 예방 가능하다</li>
+</ul>
 <ul>
-<li>존중 없는 코드의 끝판왕!<ul>
-<li>메시지를 보내서 확인하는 것을 최대한 채택하자!</li>
+<li><strong>2. final이거나 abstract이거나</strong>
+    - 상속의 관계를 간결하게 하자!</li>
 </ul>
-</li>
-<li>원시값/문자열 포장하면 예방 가능하다</li>
-</ul>
-</li>
-<li>
-<p><strong>2. final이거나 abstract이거나</strong></p>
 <ul>
-<li>상속의 관계를 간결하게 하자!</li>
+<li><strong>3. -er로 끝나는 이름을 사용하지 말자</strong>
+    - 클래스는 객체의 factory/능동적인 관리자이다
+        - 객체를 만들고, 추적하고, 적절한 시점에 파괴하자
+    - 클래스를 명명할 때에는...
+        - What it does (X)
+        - What it is   (O)</li>
 </ul>
-</li>
-<li>
-<p><strong>3. -er로 끝나는 이름을 사용하지 말자</strong></p>
 <ul>
-<li>클래스는 객체의 factory/능동적인 관리자이다<ul>
-<li>객체를 만들고, 추적하고, 적절한 시점에 파괴하자</li>
+<li><strong>4. 메서드 이름을 신중하게 선택할 것</strong>
+    - 빌더(Builder)
+        - 뭔가를 만들고 새로운 객체를 반환해야함
+        - Type 형을 반환
+        - (형용사) + 명사 로 명명하자
+    - 조정자(Manipulator)
+        - 실세계 Entity를 수정하는 메서드
+        - Void 형을 반환
+        - 동사로 명명하자</li>
 </ul>
-</li>
-<li>클래스를 명명할 때에는...<ul>
-<li>What it does (X)</li>
-<li>What it is   (O)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>4. 메서드 이름을 신중하게 선택할 것</strong></p>
 <ul>
-<li>빌더(Builder)<ul>
-<li>뭔가를 만들고 새로운 객체를 반환해야함</li>
-<li>Type 형을 반환</li>
-<li>(형용사) + 명사 로 명명하자</li>
+<li><strong>5. Procedure와 Method를 분리하자</strong>
+    - 객체를 존중하는 방식을 채택하자!
+    - 돈까스 주문했으면 내비둬!</li>
 </ul>
-</li>
-<li>조정자(Manipulator)<ul>
-<li>실세계 Entity를 수정하는 메서드</li>
-<li>Void 형을 반환</li>
-<li>동사로 명명하자</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>5. Procedure와 Method를 분리하자</strong></p>
 <ul>
-<li>객체를 존중하는 방식을 채택하자!</li>
-<li>돈까스 주문했으면 내비둬!</li>
+<li><strong>6. 생성자 하나를 주생성자로 만들 것</strong>
+    - 클래스에는...
+        - 5~10개의 Constructor
+        - 2~3개의 Method
+            - Method가 많으면 SRP 위반 가능성 UP!</li>
 </ul>
-</li>
-<li>
-<p><strong>6. 생성자 하나를 주생성자로 만들 것</strong></p>
 <ul>
-<li>클래스에는...<ul>
-<li>5~10개의 Constructor</li>
-<li>2~3개의 Method<ul>
-<li>Method가 많으면 SRP 위반 가능성 UP!</li>
+<li><strong>7. 문서를 작성하는 대신 테스트를 작성하자</strong>
+    - 클린 코드를 작성하는 것은 Production 코드와 Test 코드를 포함한다</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>7. 문서를 작성하는 대신 테스트를 작성하자</strong></p>
 <ul>
-<li>클린 코드를 작성하는 것은 Production 코드와 Test 코드를 포함한다</li>
-</ul>
-</li>
-<li>
-<p><strong>8. 생성자에 코드를 넣지 말자</strong></p>
-<ul>
-<li>생성자에는 코드가 없고, 오직 할당문만 있어야 한다</li>
-<li>생성자에 코드가 있다면, 객체 변환과 관련된 실행여부 제어 불가능</li>
-<li>생성자에서 코드를 없애면, 사용자가 쉽게 제어하는 투명한 객체를 만들 수 있다. <ul>
-<li>객체를 이해하고, 재사용하기도 쉬워짐</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>8. 생성자에 코드를 넣지 말자</strong>
+    - 생성자에는 코드가 없고, 오직 할당문만 있어야 한다
+    - 생성자에 코드가 있다면, 객체 변환과 관련된 실행여부 제어 불가능
+    - 생성자에서 코드를 없애면, 사용자가 쉽게 제어하는 투명한 객체를 만들 수 있다. 
+        - 객체를 이해하고, 재사용하기도 쉬워짐</li>
 </ul>
 
 

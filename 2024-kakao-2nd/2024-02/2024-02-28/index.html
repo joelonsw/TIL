@@ -22910,38 +22910,40 @@
 <h2 id="scala-replace-vs-replaceall">Scala replace vs replaceAll<a class="headerlink" href="#scala-replace-vs-replaceall" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>replace</code>, <code>replaceAll</code> 모두 <code>java.lang.String</code>의 것을 사용</li>
-<li><strong><code>replace</code></strong></li>
+<li><strong><code>replace</code></strong><ul>
 <li>특정한 캐릭터, 혹은 문자열이 타겟에 포함되어 있다면, 전부 대체</li>
 <li>regex를 지원하진 않음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, World&quot;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, World&quot;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Scala&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;Hello, Scala&quot;</span>
 </code></pre></div></li>
-<li>
-<p>시간복잡도 O(n) - n: 문자열 길이</p>
+<li>시간복잡도 O(n) - n: 문자열 길이</li>
+</ul>
 </li>
-<li>
-<p><strong><code>replaceAll</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>replaceAll</code></strong><ul>
 <li>첫번째 아규먼트로 regex를 가질 수 있음</li>
 <li>정규표현식을 사용하다보니 강력하지만, 느리게 만들 수 있음</li>
-<li>
-<p>보통 O(n), 백트래킹 등이 들어가면 O(n)보다 느려질 수도</p>
+<li>보통 O(n), 백트래킹 등이 들어가면 O(n)보다 느려질 수도</li>
+</ul>
 </li>
-<li>
-<p><strong>성능 차이</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>성능 차이</strong><ul>
 <li>그냥 간단한 문자열 대체라면 비슷한 성능</li>
 <li>하지만 <code>replaceAll</code>의 빡센 정규표현식을 입힌다면, 훨씬 느릴 수 있음</li>
 <li>다만 타겟 문자열이 엄청 커야 티가 날 듯</li>
-<li>
-<p>그냥 퍼포먼스 생각하면 replace가 나을 듯</p>
+<li>그냥 퍼포먼스 생각하면 replace가 나을 듯</li>
+</ul>
 </li>
-<li>
-<p><strong>정규표현식이 느린이유</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>정규표현식이 느린이유</strong><ol>
 <li>계산이 많이 필요함 : 더 복잡한 패턴일수록, 더 많은 계산 필요</li>
 <li>백트래킹 : 특정 패턴 시도 -&gt; 실패 -&gt; 시도 사이클을 반복할수도</li>
 <li>정규표현식 컴파일 : 정규표현식 자체가 작은 프로그래밍 언어, 돌리기 전에 컴피일 대상임. 계속 컴파일을 해야한다면 오버헤드임</li>
+</ol>
+</li>
 </ul>
 
 

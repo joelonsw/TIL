@@ -22996,127 +22996,107 @@
 </ol>
 <h2 id="-_1">네트워크 - 응용 계층 소개<a class="headerlink" href="#-_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>응용계층?</li>
+<li>응용계층?<ul>
 <li>클라이언트/서버<ul>
 <li>서비스 요청 - 클라이언트</li>
 <li>서비스 제공 - 서버</li>
 </ul>
 </li>
 <li>응용계층이 할 일: 클라이언트의 요청 전달하기 위해 서버가 이해할 수 있는 메시지로 변환하고 전송계층에 전달하는 역할<ul>
-<li>클라이언트 측 어플리케이션과 서버 측 어플리케이션이 통신하려면 응용 계층의 프로토콜을 사용해야 함</li>
+<li>클라이언트 측 어플리케이션과 서버 측 어플리케이션이 통신하려면 응용 계층의 프로토콜을 사용해야 함<ul>
 <li>각 어플리케이션에 대응되는 데이터를 전송하는 역할을 하는게 응용 계층!<ul>
 <li>응용 계층에서 보내려는 데이터가 하위 계층에서 (전송-네트워크-데이터 링크-물리) 처리</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>프로세스 간 통신 접속을 위해 설계되어 통신 프로토콜과 방식을 위해 보유된 추상 계층</li>
 </ul>
 </li>
-<li>
-<p>트랜스 포트 이하의 계층들은 데이터 전송 담당하기에, 데이터 전송 관련 계층 제외한 건 응용 계층 범주라고 보면 됨</p>
+<li>트랜스 포트 이하의 계층들은 데이터 전송 담당하기에, 데이터 전송 관련 계층 제외한 건 응용 계층 범주라고 보면 됨</li>
+</ul>
 </li>
-<li>
-<p>Application Architecture</p>
+</ul>
 <ul>
-<li>Client-Server Architecture: 클라이언트 - 서버로 분리됨<ul>
-<li>서버가 다수의 클라이언트의 요청을 처리하기 힘드니 데이터센터를 독립적으로 운영</li>
-<li>대표적으로 웹 브라우저</li>
+<li>Application Architecture
+    - Client-Server Architecture: 클라이언트 - 서버로 분리됨
+        - 서버가 다수의 클라이언트의 요청을 처리하기 힘드니 데이터센터를 독립적으로 운영
+        - 대표적으로 웹 브라우저
+    - P2P Architecture: 데이터 센터 필요없고 데스크탑/랩탑 유저들에 의해 컨트롤됨
+        - 파일 쉐어링
+        - Self Scalability</li>
 </ul>
-</li>
-<li>P2P Architecture: 데이터 센터 필요없고 데스크탑/랩탑 유저들에 의해 컨트롤됨<ul>
-<li>파일 쉐어링</li>
-<li>Self Scalability</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>결국 프로그램을 실행해서 엔드 시스템들끼리 통신하는 것은 "프로세스" 끼리 통신하는 것</p>
 <ul>
-<li>엔드 시스템 사이에 Message를 네트워크를 통해 교류하는 방식</li>
-<li>주로 두 프로세스 중 먼저 말건 놈을 Client, 대답한 놈을 Server 라고 칭한다.</li>
-<li>프로세스들은 네트워크를 통해 메시지 보내고 받는 것을 Software Interface인 소켓을 통해서 하게 된다.</li>
+<li>결국 프로그램을 실행해서 엔드 시스템들끼리 통신하는 것은 "프로세스" 끼리 통신하는 것
+    - 엔드 시스템 사이에 Message를 네트워크를 통해 교류하는 방식
+    - 주로 두 프로세스 중 먼저 말건 놈을 Client, 대답한 놈을 Server 라고 칭한다.
+    - 프로세스들은 네트워크를 통해 메시지 보내고 받는 것을 Software Interface인 소켓을 통해서 하게 된다.</li>
 </ul>
-</li>
-<li>
-<p>소켓? 소켓이란 Application Layer와 Transport Layer 사이의 인터페이스</p>
 <ul>
-<li>어플리케이션 개발자는 Application Layer 쪽에서 모든 제어권을 가지고 소켓을 설정</li>
-<li>하지만 소켓의 Transport Layer 부분은 건들 수 없어</li>
-<li>소켓으로 메시지를 요청받아야할 프로세스에 똑바로 주기 위해서는 주소가 필요하겠지?<ul>
-<li>주소는 IP 주소와 Port 번호로 대표되는데 나중에 살펴보자.</li>
-<li>가장 쉬운 예시로 웹 페이지를 생각하면 19.20.19.20:80</li>
+<li>소켓? 소켓이란 Application Layer와 Transport Layer 사이의 인터페이스
+    - 어플리케이션 개발자는 Application Layer 쪽에서 모든 제어권을 가지고 소켓을 설정
+    - 하지만 소켓의 Transport Layer 부분은 건들 수 없어
+    - 소켓으로 메시지를 요청받아야할 프로세스에 똑바로 주기 위해서는 주소가 필요하겠지?
+        - 주소는 IP 주소와 Port 번호로 대표되는데 나중에 살펴보자.
+        - 가장 쉬운 예시로 웹 페이지를 생각하면 19.20.19.20:80</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>소켓을 통해 Transport Layer 프로토콜을 사용할 수 있잖아?</p>
 <ul>
-<li>어플리케이션 개발 할 때 있어서 용도에 알맞은 Transport Layer 프로토콜을 사용하도록 개발해야 해.</li>
-<li>어플리케이션 개발 시 Transport Layer 프로토콜에게 필요한 고려사항<ul>
-<li>Reliable Data Transfer</li>
-<li>Throughput</li>
-<li>Timing</li>
-<li>Security</li>
+<li>소켓을 통해 Transport Layer 프로토콜을 사용할 수 있잖아?
+    - 어플리케이션 개발 할 때 있어서 용도에 알맞은 Transport Layer 프로토콜을 사용하도록 개발해야 해.
+    - 어플리케이션 개발 시 Transport Layer 프로토콜에게 필요한 고려사항
+        - Reliable Data Transfer
+        - Throughput
+        - Timing
+        - Security</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>인터넷에서 제공되는 Transport Layer Protocol</p>
 <ul>
-<li>TCP<ul>
-<li>Connection-oriented service: 핸드쉐이크를 기반한 연결 지향형</li>
-<li>Reliable Data Transfer Service: 빠지거나 중복되는 바이트 없이 전송</li>
+<li>인터넷에서 제공되는 Transport Layer Protocol
+    - TCP
+        - Connection-oriented service: 핸드쉐이크를 기반한 연결 지향형
+        - Reliable Data Transfer Service: 빠지거나 중복되는 바이트 없이 전송
+    - UDP
+        - Connection Less
+        - 보장 그런거 없음 빠질수도</li>
 </ul>
-</li>
-<li>UDP<ul>
-<li>Connection Less</li>
-<li>보장 그런거 없음 빠질수도</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>프로세스가 소켓 API를 통해 네트워크를 타고 통신하며, 메시지를 통해 정보를 주고바든다고 했다.</p>
 <ul>
-<li>메시지가 어떻게 구조화 되어있는가?</li>
-<li>메시지의 필드는 뭘 의미하는가?</li>
-<li>언제 프로세스가 메시지 보내는가?</li>
-<li>요런게 Application Layer가 해결할 문제<ul>
-<li>메시지의 종류</li>
-<li>메시지의 Syntax</li>
-<li>메시지의 semantics</li>
-<li>메시지의 Rules</li>
-<li>HTTP, SMTP 등을 하나씩 알아보면서 어플리케이션 레이어의 메시지 구조를 봐보자!</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>프로세스가 소켓 API를 통해 네트워크를 타고 통신하며, 메시지를 통해 정보를 주고바든다고 했다.
+    - 메시지가 어떻게 구조화 되어있는가?
+    - 메시지의 필드는 뭘 의미하는가?
+    - 언제 프로세스가 메시지 보내는가?
+    - 요런게 Application Layer가 해결할 문제
+        - 메시지의 종류
+        - 메시지의 Syntax
+        - 메시지의 semantics
+        - 메시지의 Rules
+        - HTTP, SMTP 등을 하나씩 알아보면서 어플리케이션 레이어의 메시지 구조를 봐보자!</li>
 </ul>
 <h2 id="ssl">SSL<a class="headerlink" href="#ssl" title="Permanent link">&para;</a></h2>
 <ul>
-<li>TCP/UDP 모두 암호화 과정 X</li>
-<li>
-<p>메시지가 소켓으로 흘러들어가 메시지가 여기저기서 감청될 수 있음 (여러 링크들에서)</p>
+<li>TCP/UDP 모두 암호화 과정 X<ul>
+<li>메시지가 소켓으로 흘러들어가 메시지가 여기저기서 감청될 수 있음 (여러 링크들에서)</li>
+</ul>
 </li>
-<li>
-<p>그에 따라 인터넷 커뮤니티가 SSL을 개발 (Enhanced TCP)</p>
-</li>
-<li>
-<p>TCP-enhanced-with-SSL 을 통해...</p>
+</ul>
 <ul>
+<li>그에 따라 인터넷 커뮤니티가 SSL을 개발 (Enhanced TCP)<ul>
+<li>TCP-enhanced-with-SSL 을 통해...<ul>
 <li>TCP가 제공하는 것 모두 제공</li>
-<li>process-to-process 보안</li>
+<li>process-to-process 보안<ul>
 <li>암호화, 데이터 통합, 엔드포인트 Authentication 등</li>
 </ul>
 </li>
-<li>
-<p>SSL의 enhancement는 Application Layer에서 구현됨. </p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>SSL의 enhancement는 Application Layer에서 구현됨. <ul>
 <li>따라서 SSL 서비스를 쓰려면 SSL 코드가 클라이언트 - 서버 둘 모두에 있어야 해</li>
 <li>SSL은 TCP 자체 Socket API와 유사한 자체 Socket API가 있음<ul>
 <li>SSL Socket API는 메시지를 암호화 하여 TCP Socket API 한테 넘겨주는 방식</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

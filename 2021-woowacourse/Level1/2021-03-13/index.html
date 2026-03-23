@@ -22932,36 +22932,27 @@
 <h2 id="_1">전략 패턴<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>참고 1: https://www.geeksforgeeks.org/strategy-pattern-set-1/</li>
-<li>
-<p>참고 2: https://www.youtube.com/watch?v=azrG8bf5EGA</p>
-</li>
-<li>
-<p>전략 패턴은 실행 중에 알고리즘을 선택할 수 있게 하는 디자인 패턴</p>
-</li>
-<li>
-<p>전략 패턴은 런타임에  전략을    선택할 수 있게 하는 디자인 패턴</p>
+<li>참고 2: https://www.youtube.com/watch?v=azrG8bf5EGA</li>
+</ul>
 <ul>
-<li>특정한 계열의 알고리즘(전략)들을 정의하고</li>
-<li>각 알고리즘(전략)들을 캡슐화하여</li>
-<li>이 알고리즘들을 해당 계열 안에서 상호 교체가 가능토록 한다</li>
+<li>전략 패턴은 실행 중에 알고리즘을 선택할 수 있게 하는 디자인 패턴</li>
+<li>전략 패턴은 런타임에  전략을    선택할 수 있게 하는 디자인 패턴
+    - 특정한 계열의 알고리즘(전략)들을 정의하고
+    - 각 알고리즘(전략)들을 캡슐화하여
+    - 이 알고리즘들을 해당 계열 안에서 상호 교체가 가능토록 한다</li>
 </ul>
-</li>
-<li>
-<p>전략 패턴을 이루는 구성 요소는...</p>
 <ul>
-<li>전략 <em>(strategy)</em> : 변하는 것으로, 구체화된 여러가지 알고리즘들의 추상화<ul>
-<li>전략 콘트리트 클래스: 여러가지 알고리즘의 실제 구현</li>
+<li>전략 패턴을 이루는 구성 요소는...
+    - 전략 <em>(strategy)</em> : 변하는 것으로, 구체화된 여러가지 알고리즘들의 추상화
+        - 전략 콘트리트 클래스: 여러가지 알고리즘의 실제 구현
+    - 전략 사용자 <em>(context)</em> : 전략을 사용하는 프로그램의 흐름으로, 변하지 않는 것
+    - 전략 제공자 <em>(client)</em> : 전략 사용자에게 실제 전략으로 사용할 전략 콘크리트 클래스를 주입하는 역할</li>
 </ul>
-</li>
-<li>전략 사용자 <em>(context)</em> : 전략을 사용하는 프로그램의 흐름으로, 변하지 않는 것</li>
-<li>전략 제공자 <em>(client)</em> : 전략 사용자에게 실제 전략으로 사용할 전략 콘크리트 클래스를 주입하는 역할</li>
+<ul>
+<li>전략 객체(strategy)는 전략 사용자(context)를 사용하는 전략 제공자(client)에서 직접 생성</li>
 </ul>
-</li>
-<li>
-<p>전략 객체(strategy)는 전략 사용자(context)를 사용하는 전략 제공자(client)에서 직접 생성</p>
-</li>
-<li>
-<p>코드 예시
+<ul>
+<li>코드 예시
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="c1">// 전략 제공자 (client): 전략 사용자에게 실제 셔플 전략 주입</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">CardDeck</span><span class="w"> </span><span class="n">cardDeck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CardDeckFactory</span><span class="p">.</span><span class="na">make</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RandomShuffleStrategy</span><span class="p">());</span>
@@ -22986,59 +22977,38 @@
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">cards</span><span class="p">;</span>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>전략 패턴의 장점</p>
+</code></pre></div></li>
+</ul>
 <ul>
-<li>context 코드의 변경없이 새로운 전략을 추가할 수 있음</li>
-<li>이를 통해 if-else의 분기를 없앨 수 있다</li>
-<li>OCP의 원칙을 준수한 구조 개선이 가능하다<ul>
-<li>확장에 유리한 코드를 작성할 수 있다</li>
+<li>전략 패턴의 장점
+    - context 코드의 변경없이 새로운 전략을 추가할 수 있음
+    - 이를 통해 if-else의 분기를 없앨 수 있다
+    - OCP의 원칙을 준수한 구조 개선이 가능하다
+        - 확장에 유리한 코드를 작성할 수 있다
+    - 런타임에 전략을 변경시킬 수 있다</li>
 </ul>
-</li>
-<li>런타임에 전략을 변경시킬 수 있다</li>
-</ul>
-</li>
-<li>
-<p>전략 패턴의 단점</p>
 <ul>
-<li>어플리케이션이 모든 전략에 대해 알고있어야 한다<ul>
-<li>클래스로 분리한 각 전략들이 어디에 사용되어야 할지 알아야하니, 어쩌면 유지보수가 어려워진다고 말할 수 있겠다</li>
-</ul>
-</li>
-<li>전략 패턴에서는 주로 전략 제공자에게 전략을 인터페이스로 주입하게 된다.<ul>
-<li>어떤 전략 콘크리트 객체에서는 사용하지 않는 메서드들 역시 인터페이스에 작성해둬야함.</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>전략 패턴의 단점
+    - 어플리케이션이 모든 전략에 대해 알고있어야 한다
+        - 클래스로 분리한 각 전략들이 어디에 사용되어야 할지 알아야하니, 어쩌면 유지보수가 어려워진다고 말할 수 있겠다
+    - 전략 패턴에서는 주로 전략 제공자에게 전략을 인터페이스로 주입하게 된다.
+        - 어떤 전략 콘크리트 객체에서는 사용하지 않는 메서드들 역시 인터페이스에 작성해둬야함.</li>
 </ul>
 <h2 id="_2">상태 패턴<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>의도</strong></p>
+<li><strong>의도</strong>
+    - 객체 자신의 내부 상태에 따라 수행해야 하는 행위를 변경하는 효과를 주기 위해서</li>
+</ul>
 <ul>
-<li>객체 자신의 내부 상태에 따라 수행해야 하는 행위를 변경하는 효과를 주기 위해서</li>
+<li><strong>활용</strong>
+    - 객체의 행위는 상태에 따라 달라진다
+    - 객체의 상태에 따라서 프로그램 실행 중에 수행해야 하는 행위를 변경할 때 활용하자
+    - 객체의 상태에 따라 수 많은 if를 사용해야 할 때, 이를 피할 수 있는 방법 중에 하나!</li>
 </ul>
-</li>
-<li>
-<p><strong>활용</strong></p>
 <ul>
-<li>객체의 행위는 상태에 따라 달라진다</li>
-<li>객체의 상태에 따라서 프로그램 실행 중에 수행해야 하는 행위를 변경할 때 활용하자</li>
-<li>객체의 상태에 따라 수 많은 if를 사용해야 할 때, 이를 피할 수 있는 방법 중에 하나!</li>
-</ul>
-</li>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>기능이 "상태"에 따라서 다르게 동작해야 할 때 사용하는 패턴!<ul>
-<li>"상태" 객체가 "기능"을 제공한다!</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>정의</strong>
+    - 기능이 "상태"에 따라서 다르게 동작해야 할 때 사용하는 패턴!
+        - "상태" 객체가 "기능"을 제공한다!</li>
 </ul>
 
 

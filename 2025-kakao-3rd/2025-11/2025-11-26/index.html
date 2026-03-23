@@ -22913,24 +22913,26 @@
   - redirection에 사용. 요청 완료를 위해 유저 에이전트의 추가 조치 요망
   - 응답 결과에 Location 헤더가 있으면, 해당 위치로 자동 이동</p>
 <ul>
-<li><strong>영구 리다이렉션</strong></li>
+<li><strong>영구 리다이렉션</strong><ul>
 <li><strong>301: Moved Permanently</strong><ul>
 <li>요청 메서드가 GET으로 변하고, 본문이 제거될 수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>308: Permanent Redirect</strong></p>
-<ul>
+<li><strong>308: Permanent Redirect</strong><ul>
 <li>301과 기능은 같으나, 요청 메서드와 본문이 유지됨 (처음 POST로 보내면, 리다이렉트도 POST)</li>
 </ul>
 </li>
-<li>
-<p><strong>일시 리다이렉션</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>일시 리다이렉션</strong><ul>
 <li><strong>302: Found</strong><ul>
 <li>리다이렉트시 요청 메서드가 GET으로 변함, 본문 제거될 수 있음</li>
-<li>302의 처음 의도는 HTTP 메서드를 유지하는 것이였으나, 웹 브라우저들이 GET으로 변경해버림.</li>
+<li>302의 처음 의도는 HTTP 메서드를 유지하는 것이였으나, 웹 브라우저들이 GET으로 변경해버림.<ul>
 <li>모호한 302를 대체하는 명확한 307/303 등장</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>307 Temporary Redirect</strong><ul>
@@ -22939,6 +22941,8 @@
 </li>
 <li><strong>303: See Other</strong><ul>
 <li>302와 가능은 동일. 리다이렉트 시 요청 메서드가 <strong>무조건</strong> GET으로 변경</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

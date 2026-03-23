@@ -23100,7 +23100,7 @@
 <h3 id="1">1. 인덱스<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>인덱스 칼럼은 가공해서 쿼리 날리거나 그런짓 하지 마세요</strong></li>
-<li><strong>인덱스 순서 고려하세요</strong></li>
+<li><strong>인덱스 순서 고려하세요</strong><ul>
 <li>인덱스는 항상 정렬 상태를 유지해서 인덱스 순서에 따라 ORDER BY, GROUP BY 위한 소트 연산 생략할 수 있음</li>
 <li>조건절에 항상 사용하거나 자주 사용하는 칼럼을 인덱스로 선정할 것</li>
 <li><code>=</code> 조건으로 자주 조회하는 칼럼 앞쪽에</li>
@@ -23110,29 +23110,41 @@
 <li>과세코드 + 이름 + 연령</li>
 </ol>
 </li>
-<li><strong>인덱스 제대로 사용하는지 확인</strong></li>
+</ul>
+</li>
+<li><strong>인덱스 제대로 사용하는지 확인</strong><ul>
 <li>커버드 인덱스: 인덱스 스캔과정에서 얻은 정보만으로 처리할 수 있음. 테이블 액세스 발생 X</li>
-<li><strong>복합 인덱스시 범위 검색 컬럼을 뒤에 둘 것</strong></li>
+</ul>
+</li>
+<li><strong>복합 인덱스시 범위 검색 컬럼을 뒤에 둘 것</strong><ul>
 <li>범위 검색을 앞에 두면, 읽어야할 칼럼이 많아지는 지름길</li>
 <li>특정할 수 있는 걸 앞에 두는게 좋겠죠?</li>
 </ul>
+</li>
+</ul>
 <h3 id="2-join">2. Join<a class="headerlink" href="#2-join" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>조인 연결 시, key들 모두 양쪽 다 인덱스를 가지고 있는 것이 좋음</strong></li>
+<li><strong>조인 연결 시, key들 모두 양쪽 다 인덱스를 가지고 있는 것이 좋음</strong><ul>
 <li>한쪽에만 인덱스가 있다면...<ul>
 <li>JoinBuffer를 사용하여 성능 개선을 하려곤 함</li>
 <li>일반적인 중첩 루프 조인에 비해 효율이 떨어짐</li>
 <li>테이블 크기와 상관없이 인덱스가 있는 테이블이 드라이빙 테이블이 되니 주의할 것</li>
 </ul>
 </li>
-<li><strong>데이터가 적은 테이블을 랜덤 액세스 할 것</strong></li>
+</ul>
+</li>
+<li><strong>데이터가 적은 테이블을 랜덤 액세스 할 것</strong><ul>
 <li>드라이빙 테이블의 데이터가 적다면, 중첩 루프 조인 수행하며 드리븐 테이블의 많은 양의 데이터에 인덱스 스캔</li>
 <li>드리븐 테이블의 PK 사용안한다면 많은 양의 데이터에 랜덤 액세스 해야함으로 비효율 적일 수 있음</li>
+</ul>
+</li>
 <li><strong>모수 테이블 크기를 줄일 것</strong></li>
-<li><strong>서브쿼리보다 조인문 쓸 것</strong></li>
+<li><strong>서브쿼리보다 조인문 쓸 것</strong><ul>
 <li><em>참고: https://stackoverflow.com/questions/2577174/join-vs-sub-query</em></li>
 <li>주로 조인이 성능 좋음</li>
 <li>서브쿼리는 A로 부터 이걸 가져오고 B로 부터 조건적으로 이걸 가져오는 느낌</li>
+</ul>
+</li>
 </ul>
 <h2 id="driving-table-driven-table">Driving Table &amp; Driven Table<a class="headerlink" href="#driving-table-driven-table" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://tlstjscjswo.tistory.com/entry/Nested-Loop-%EC%A1%B0%EC%9D%B8</em>
@@ -23158,7 +23170,7 @@
        - 조인이 수행될 때 양쪽 테이블 컬럼에 모두 인덱스 업어야 드리븐 테이블 풀스캔
        - 왠만해선 옵티마이저가 드리븐 테이블 풀 스캔으로 접근 안해</p>
 <ul>
-<li><strong>왜 드라이빙 테이블의 모수를 작게 가져가야하는걸까?</strong></li>
+<li><strong>왜 드라이빙 테이블의 모수를 작게 가져가야하는걸까?</strong><ul>
 <li>A 테이블이 5000만건, B 테이블이 1000만건일 경우... </li>
 <li>A가 드라이빙이면 (B 테이블 5000만번 접근)<ul>
 <li>A 1행 -&gt; B 찾기</li>
@@ -23172,20 +23184,22 @@
 <li>B 1000만행 -&gt; A 찾기</li>
 </ul>
 </li>
-<li>
-<p>드라이빙 테이블은 옵티마이저가 정해줘</p>
-<ul>
+<li>드라이빙 테이블은 옵티마이저가 정해줘<ul>
 <li>인덱스는 걸려있니?</li>
 <li>레코드 건수나 통계정보는 어떠니?</li>
 </ul>
 </li>
-<li>
-<p><strong>Nested Loop Join</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Nested Loop Join</strong><ul>
 <li>정의: 연결고리가 되는 칼럼을 사용해, Driving Table과 Driven Table을 연결</li>
 <li>2개의 테이블이 루프를 돌며 연결고리 항목 추출하는 과정</li>
 <li>2차원 배열 중첩 for문 생각하면 딱</li>
 <li>Driving 테이블의 사이즈가 크면 클수록 실행속도 저하됨!!!!</li>
+</ul>
+</li>
 </ul>
 <h2 id="hash-join-vs-nested-loop-join">Hash Join vs Nested Loop Join<a class="headerlink" href="#hash-join-vs-nested-loop-join" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://jojoldu.tistory.com/173</em>
@@ -23202,10 +23216,12 @@
     - <strong>Inner Table의 조인키에는 인덱스가 걸려있어야 한다</strong>
   - Row가 적은 Driving Table을 쓰고 + Driven Table의 조인키에는 인덱스가 걸려있을 것</p>
 <ul>
-<li><strong>Block Nested-Loop</strong></li>
+<li><strong>Block Nested-Loop</strong><ul>
 <li>결국... Nested Loop 조인만 지원하다보면 조인 칼럼 인덱스가 없으면 뇌절의 지름길</li>
 <li>BNL이 없다면 드리븐 테이블을 스캔 or Index Full Scan =&gt; 성능 저하</li>
 <li>BNL 방식은 프로세스 내에 별도 버퍼 (조인 버퍼)를 두고, Driving Table에 레코드를 저장한 뒤, Driven Table을 스캔하면서 조인 버퍼 탐색</li>
+</ul>
+</li>
 </ul>
 <h2 id="iot-index-organized-table">IOT (Index Organized Table)<a class="headerlink" href="#iot-index-organized-table" title="Permanent link">&para;</a></h2>
 <h2 id="apm-aem">APM &amp; AEM<a class="headerlink" href="#apm-aem" title="Permanent link">&para;</a></h2>

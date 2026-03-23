@@ -23019,41 +23019,37 @@
 </ul>
 <h3 id="2">2단계. 개략적 설계안 제시 및 동의 구하기<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>채팅 서비스 프로토콜</strong></li>
-<li>HTTP를 쓸 땐 keep-alive를 쓰자.</li>
-<li>polling<ul>
-<li>서버 자원이 불필요하게 낭비</li>
-</ul>
-</li>
-<li>long-polling<ul>
+<li><strong>채팅 서비스 프로토콜</strong><ul>
+<li>HTTP를 쓸 땐 keep-alive를 쓰자.
+1. polling<ul>
+<li>서버 자원이 불필요하게 낭비
+2. long-polling</li>
 <li>새 메시지 반환되거나 타임아웃 될 때 까지 연결 유지</li>
-<li>여전히 주기적으로 반복적으로 서버 요청 &gt; 낭비</li>
-</ul>
-</li>
-<li>
-<p>websocket</p>
-<ul>
+<li>여전히 주기적으로 반복적으로 서버 요청 &gt; 낭비
+3. websocket</li>
 <li>처음에는 HTTP 연결, 특정 핸드셰이크 절차 거쳐 웹소켓 연결 업그레이드</li>
 <li>이후에는 비동기적으로 메시지 전송 가능. </li>
 <li>HTTPS/HTTP 기본 포트번호 그대로 사용</li>
 <li>서버 측에서 리소스 관리를 하기에 효율적인 관리 기법이 필수</li>
 </ul>
 </li>
-<li>
-<p><strong>서버 나누기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>서버 나누기</strong><ul>
 <li>무상태 서비스: HTTP 로 프로필, 그룹 등등 기본 웹 요청</li>
 <li>상태 유지 서비스: 웹 소켓 등</li>
 <li>제 3자 서비스 연동 : 푸시 알림 등</li>
-<li>
-<p>규모 확장성이 중요! 서버 한대로 얼마나 많은 접속 동시에 허용 가능한지!?</p>
+<li>규모 확장성이 중요! 서버 한대로 얼마나 많은 접속 동시에 허용 가능한지!?</li>
+</ul>
 </li>
-<li>
-<p><strong>채팅 서버</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>채팅 서버</strong><ul>
 <li>채팅 이력을 보관하기 위해서는 읽기/쓰기 연산 패턴 이해할 것</li>
 <li>key-value 저장소로 HBase/Cassandra 등을 많이 사용<ul>
-<li>Column-Oriented Database</li>
+<li>Column-Oriented Database<ul>
 <li>행이 아닌 열 단위로 데이터를 저장하는 DB</li>
 <li>테이블에 같은 column에 속한 모든 값을 연속적으로 저장</li>
 <li>장점)<ul>
@@ -23064,43 +23060,49 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
 <li>메시지 순서를 보장할 수 있는 message_id 기법이 필요<ul>
 <li>RDB면 auto_increment,</li>
 <li>snowflake같은 전역 순서 생성기도 가능</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="3">3단계. 상세 설계<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>서비스 탐색</strong></li>
+<li><strong>서비스 탐색</strong><ul>
 <li>사용자 로그인 하면, 주키퍼와 같은 서비스 탐색기로 채팅 서버 중에 해당 사용자의 웹소켓 연결을 관리할 서버를 지정</li>
-<li>
-<p>주키퍼)</p>
-<ul>
+<li>주키퍼)<ul>
 <li>분산 어플리케이션을 위한 분산 코디네이션 서비스 제공 오픈소스</li>
 <li>각각의 서버는 다른 서버의 정보 공유</li>
 <li>하트비트 전송 등을 수행</li>
 <li>서버 연결 끊어지면 타 서버와 통신</li>
 </ul>
 </li>
-<li>
-<p><strong>메시지 흐름</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>메시지 흐름</strong><ul>
 <li>여러 단말간 메시지 동기화를 위해 각 단말별로 어디까지 채팅 읽었는지 <code>chatLogId</code>와 같은 것을 저장해두자.</li>
 <li>메시지가 새로 왔을 때, 단체 채팅방에서는 각 수신자별 메시지 큐에 복사해서 넣는것도 가능<ul>
 <li>Qs) 오픈채팅방은 어떻게 구현되어 있을까? </li>
 </ul>
 </li>
-<li>
-<p>한 수신자는 여러 사용자로부터 오는 메시지를 수신할 수 있어야 함</p>
+<li>한 수신자는 여러 사용자로부터 오는 메시지를 수신할 수 있어야 함</li>
+</ul>
 </li>
-<li>
-<p><strong>접속 상태 표시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>접속 상태 표시</strong><ul>
 <li>서버는 클라와 웹 소켓으로 통신하며 실시간 서비스. </li>
 <li>접속 장애 (ex. 터널에 들어감)로 싸그리 상태를 off 하는것은 비효율. </li>
 <li>하트비트 이벤트 등을 통해서 접속 상태 offline으로 변경하는 방법 고려</li>
 <li>접속했는지 상태는 pub-sub 을 지원하는 데이터베이스를 써서 관리하는 것도 좋은 방법. </li>
+</ul>
+</li>
 </ul>
 <h3 id="4">4단계. 마무리<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <ul>

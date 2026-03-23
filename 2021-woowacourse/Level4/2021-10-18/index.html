@@ -22910,73 +22910,53 @@
 <h2 id="vuejs-s3cloudfront">vue.js s3+cloudfront 배포<a class="headerlink" href="#vuejs-s3cloudfront" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p><strong>vue.js npm run build</strong></p>
-<ul>
-<li>dist 폴더에 지금까지 작업한 것 html/css/js로 만들어줌</li>
-</ul>
+<p><strong>vue.js npm run build</strong>
+    - dist 폴더에 지금까지 작업한 것 html/css/js로 만들어줌</p>
 </li>
 <li>
-<p><strong>퍼블릭 액세스가 금지된 s3 버킷 하나 만들고, dist 폴더의 내용물 업로드</strong></p>
-<ul>
-<li><img alt="" src="../../image/2021-10-18-s3-dist.PNG" /></li>
-</ul>
+<p><strong>퍼블릭 액세스가 금지된 s3 버킷 하나 만들고, dist 폴더의 내용물 업로드</strong>
+    - <img alt="" src="../../image/2021-10-18-s3-dist.PNG" /></p>
 </li>
 <li>
-<p><strong>s3 속성 들어가서 정적 웹사이트 호스팅 편집 클릭</strong></p>
-<ul>
-<li><img alt="" src="../../image/2021-10-18-s3-static-website.PNG" /></li>
-</ul>
+<p><strong>s3 속성 들어가서 정적 웹사이트 호스팅 편집 클릭</strong>
+    - <img alt="" src="../../image/2021-10-18-s3-static-website.PNG" /></p>
 </li>
 <li>
-<p><strong>cloudfront에서 해당 s3 버킷에 접속할 수 있게 만들자</strong></p>
-<ul>
-<li>OAI 만들어서 s3 정책 업데이트 하는 옵션으로 만들기</li>
-</ul>
+<p><strong>cloudfront에서 해당 s3 버킷에 접속할 수 있게 만들자</strong>
+    - OAI 만들어서 s3 정책 업데이트 하는 옵션으로 만들기</p>
 </li>
 <li>
-<p><strong>cloudfront 동작 추가</strong></p>
-<ul>
-<li>경로패턴 "/" 으로 가도록 경로 추가</li>
-<li>뷰어 프로토콜 정책은 ssl 인증서 추가할거니까 redirect http to https로 설정!</li>
-<li><img alt="" src="../../image/2021-10-18-cloudfront-%EB%8F%99%EC%9E%91.PNG" /></li>
-</ul>
+<p><strong>cloudfront 동작 추가</strong>
+    - 경로패턴 "/" 으로 가도록 경로 추가
+    - 뷰어 프로토콜 정책은 ssl 인증서 추가할거니까 redirect http to https로 설정!
+    - <img alt="" src="../../image/2021-10-18-cloudfront-%EB%8F%99%EC%9E%91.PNG" /></p>
 </li>
 <li>
-<p><strong>cloudfront - 일반 - 설정을 바꿔주자</strong></p>
-<ul>
-<li>ssl 인증서 등록해주고, 기본 루트 객체 index.html 등록해주고</li>
-<li><img alt="" src="../../image/2021-10-18-cloudfront-setting.PNG" /></li>
-</ul>
+<p><strong>cloudfront - 일반 - 설정을 바꿔주자</strong>
+    - ssl 인증서 등록해주고, 기본 루트 객체 index.html 등록해주고
+    - <img alt="" src="../../image/2021-10-18-cloudfront-setting.PNG" /></p>
 </li>
 <li>
-<p><strong>cloudfront 설정을 조금 더 자세히 들여다보면,,,</strong></p>
-<ul>
-<li>CNAME으로 별명 도메인 하나 등록해주고</li>
-<li>ssl 인증서 발급 받은 것을 등록해주자</li>
-<li><img alt="" src="../../image/2021-10-18-cloudfront-ssl.PNG" /></li>
-</ul>
+<p><strong>cloudfront 설정을 조금 더 자세히 들여다보면,,,</strong>
+    - CNAME으로 별명 도메인 하나 등록해주고
+    - ssl 인증서 발급 받은 것을 등록해주자
+    - <img alt="" src="../../image/2021-10-18-cloudfront-ssl.PNG" /></p>
 </li>
 <li>
-<p><strong>저는 ssl 인증서 발급받은 적이 없는데요?</strong></p>
-<ul>
-<li>인증서 요청 버튼 클릭하시고 과정 거쳐서 하세요</li>
-<li><img alt="" src="../../image/2021-10-18-ssl-register.PNG" /></li>
-</ul>
+<p><strong>저는 ssl 인증서 발급받은 적이 없는데요?</strong>
+    - 인증서 요청 버튼 클릭하시고 과정 거쳐서 하세요
+    - <img alt="" src="../../image/2021-10-18-ssl-register.PNG" /></p>
 </li>
 <li>
-<p><strong>ssl 인증서 등록하는 과정에서 DNS CNAME 등록하는 과정이 있어</strong></p>
-<ul>
-<li>ssl 인증하는 거 txt로 했던 거 기억나지?</li>
-<li>그런거 처럼 cname으로 코드 인증해서 ssl 인증서 받더라고</li>
-<li><img alt="" src="../../image/2021-10-18-cname-ssl-register.PNG" /></li>
-<li><img alt="" src="../../image/2021-10-18-%EB%82%B4%EB%8F%84%EB%A9%94%EC%9D%B8%ED%95%9C%EA%B5%AD%EB%93%B1%EB%A1%9D.PNG" /></li>
-</ul>
+<p><strong>ssl 인증서 등록하는 과정에서 DNS CNAME 등록하는 과정이 있어</strong>
+    - ssl 인증하는 거 txt로 했던 거 기억나지?
+    - 그런거 처럼 cname으로 코드 인증해서 ssl 인증서 받더라고
+    - <img alt="" src="../../image/2021-10-18-cname-ssl-register.PNG" />
+    - <img alt="" src="../../image/2021-10-18-%EB%82%B4%EB%8F%84%EB%A9%94%EC%9D%B8%ED%95%9C%EA%B5%AD%EB%93%B1%EB%A1%9D.PNG" /></p>
 </li>
 <li>
-<p><strong>ssl 인증서 이제 등록했으니 cname에 진또배기 도메인만 남기면 등록 끝!</strong>    </p>
-<ul>
-<li><img alt="" src="../../image/2021-10-18-%EB%82%B4%EB%8F%84%EB%A9%94%EC%9D%B8%ED%95%9C%EA%B5%AD-cname-after.PNG" /></li>
-</ul>
+<p><strong>ssl 인증서 이제 등록했으니 cname에 진또배기 도메인만 남기면 등록 끝!</strong>  <br />
+    - <img alt="" src="../../image/2021-10-18-%EB%82%B4%EB%8F%84%EB%A9%94%EC%9D%B8%ED%95%9C%EA%B5%AD-cname-after.PNG" /></p>
 </li>
 </ol>
 

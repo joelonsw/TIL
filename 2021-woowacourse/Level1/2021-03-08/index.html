@@ -22953,166 +22953,102 @@
 <h3 id="2021-03-08">2021-03-08<a class="headerlink" href="#2021-03-08" title="Permanent link">&para;</a></h3>
 <h2 id="1">블랙잭 1차 미션 피드백<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>controller와 domain에는 view 로직을 추가하지 말자!</p>
-<ul>
-<li>domain 객체가 불변이 보장이 안되더라도, view에 대한 로직은 해당 객체를 view layer에 넘겨준 후, getter를 통해 구현하는게 맞다.</li>
+<li>controller와 domain에는 view 로직을 추가하지 말자!
+    - domain 객체가 불변이 보장이 안되더라도, view에 대한 로직은 해당 객체를 view layer에 넘겨준 후, getter를 통해 구현하는게 맞다.</li>
 </ul>
-</li>
-<li>
-<p>메서드 명에 맞는 return 타입, return 타입에 맞는 메서드명을 갖자!</p>
 <ul>
-<li>ex) calculateAceSum... int를 반환하는 것을 기대</li>
+<li>메서드 명에 맞는 return 타입, return 타입에 맞는 메서드명을 갖자!
+    - ex) calculateAceSum... int를 반환하는 것을 기대</li>
 </ul>
-</li>
-<li>
-<p>Controller에서 로직이 많다면...</p>
 <ul>
-<li>혹시나 Domain에서 해줘야 할 일을 Controller에서 해주고 있지 않나 고민해보자!</li>
+<li>Controller에서 로직이 많다면...
+    - 혹시나 Domain에서 해줘야 할 일을 Controller에서 해주고 있지 않나 고민해보자!</li>
 </ul>
-</li>
-<li>
-<p>boolean 타입의 함수 리턴할 때 ()는 굳이 쓰지 말자
+<ul>
+<li>boolean 타입의 함수 리턴할 때 ()는 굳이 쓰지 말자
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isAce</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">cardNumber</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CardNumber</span><span class="p">.</span><span class="na">ACE</span><span class="p">);</span><span class="w"> </span><span class="c1">// 괄호 필요 없음!</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>getter라면, 인스턴스 필드를 반환하는게 맞다!</p>
+</code></pre></div></li>
+</ul>
 <ul>
-<li>한 단계 더 포장된 필드를 가져오고 싶다면, getter가 아닌 다른 메서드 명을 고민해보자!<ul>
-<li>어떤게 있을고...</li>
+<li>getter라면, 인스턴스 필드를 반환하는게 맞다!
+    - 한 단계 더 포장된 필드를 가져오고 싶다면, getter가 아닌 다른 메서드 명을 고민해보자!
+        - 어떤게 있을고...</li>
 </ul>
-</li>
+<ul>
+<li>인스턴스화가 되면 안되는 클래스는 abstract로 설정해 방어하자!</li>
 </ul>
-</li>
-<li>
-<p>인스턴스화가 되면 안되는 클래스는 abstract로 설정해 방어하자!</p>
-</li>
-<li>
-<p>주석을 쓰지말고, 메서드명/변수명으로 충분히 의도를 나타내는 연습을 하자!</p>
-</li>
+<ul>
+<li>주석을 쓰지말고, 메서드명/변수명으로 충분히 의도를 나타내는 연습을 하자!</li>
 </ul>
 <h2 id="_1">자바 메서드 네이밍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>참고: https://woowacourse.github.io/javable/post/2020-04-26-Method-Naming/</p>
-</li>
-<li>
-<p><strong>네이밍 시 중요한 고려사항</strong></p>
+<li>참고: https://woowacourse.github.io/javable/post/2020-04-26-Method-Naming/</li>
+</ul>
 <ul>
-<li>왜 존재해야 하는가</li>
-<li>무슨 작업을 하는가</li>
-<li>어떻게 사용하는가
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">calculateScore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<li><strong>네이밍 시 중요한 고려사항</strong>
+    - 왜 존재해야 하는가
+    - 무슨 작업을 하는가
+    - 어떻게 사용하는가
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">calculateScore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">        </span><span class="c1">//왜 존재해야 하는가... 현재 패의 점수를 알기 위해</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="c1">//무슨 작업을 하는가... 현재 패의 점수를 계산해 반환한다</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="c1">//어떻게 사용하는가.... 패 클래스에 해당하는 객체에서 실행하면 점수를 계산</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>메서드 명명 규칙</strong></p>
 <ul>
-<li>lowerCamelCase로 쓸 것</li>
-<li>동차/전치사로 시작 할 것<ul>
-<li>기본적으로 메서드 명은 동사로 시작할 것<ul>
-<li>ex) getUserByName(), inputData()</li>
+<li><strong>메서드 명명 규칙</strong>
+    - lowerCamelCase로 쓸 것
+    - 동차/전치사로 시작 할 것
+        - 기본적으로 메서드 명은 동사로 시작할 것
+            - ex) getUserByName(), inputData()
+        - 다른 타입으로 전환하거나, 빌더 패턴을 구현한 클래스의 메서드는 전치사도 가능
+            - ex) toString(), of()
+    - JUnit 테스트 메소드 이름에는 언더스코어(_)로 이름의 논리 컴포넌트를 구분한다
+        - ex) isAdult_AgeLessThan18_False()</li>
 </ul>
-</li>
-<li>다른 타입으로 전환하거나, 빌더 패턴을 구현한 클래스의 메서드는 전치사도 가능<ul>
-<li>ex) toString(), of()</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>JUnit 테스트 메소드 이름에는 언더스코어(_)로 이름의 논리 컴포넌트를 구분한다<ul>
-<li>ex) isAdult_AgeLessThan18_False()</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>메서드 명으로 자주 쓰이는 동사</strong></p>
 <ul>
-<li>
-<p>get/set: getter/setter 구현</p>
-<ul>
-<li>객체지향에 어긋나기 좋다... "객체에 메세지를 보낸다"를 명심할 것</li>
-</ul>
-</li>
-<li>
-<p>init: 데이터를 초기화하는 메서드명에 쓰인다</p>
-</li>
-<li>
-<p>is/has/can: boolean 값을 리턴함</p>
-<ul>
-<li>is: 참/거짓 검증</li>
-<li>has: 데이터 가지고 있는지 검증</li>
-<li>can: 할 수 있는지 없는지 확인</li>
-</ul>
-</li>
-<li>
-<p>create: 새로운 객체를 만든 후 리턴해주는 메서드 명에서 쓰임    </p>
-</li>
-<li>
-<p>find: 데이터를 찾는 메서드 명에 쓰임</p>
-</li>
-<li>
-<p>to: 해당 객체를 다른 형태의 객체로 변환해줄때 쓰임</p>
-</li>
-<li>
-<p>A-By-B: B를 기준으로 A를 할때 쓰임</p>
-<ul>
-<li>ex) getUserByName()</li>
-</ul>
-</li>
-</ul>
+<li><strong>메서드 명으로 자주 쓰이는 동사</strong>
+    - get/set: getter/setter 구현
+        - 객체지향에 어긋나기 좋다... "객체에 메세지를 보낸다"를 명심할 것<p>- init: 데이터를 초기화하는 메서드명에 쓰인다</p>
+<p>- is/has/can: boolean 값을 리턴함
+      - is: 참/거짓 검증
+      - has: 데이터 가지고 있는지 검증
+      - can: 할 수 있는지 없는지 확인</p>
+<p>- create: 새로운 객체를 만든 후 리턴해주는 메서드 명에서 쓰임    </p>
+<p>- find: 데이터를 찾는 메서드 명에 쓰임</p>
+<p>- to: 해당 객체를 다른 형태의 객체로 변환해줄때 쓰임</p>
+<p>- A-By-B: B를 기준으로 A를 할때 쓰임
+      - ex) getUserByName()</p>
 </li>
 </ul>
 <h2 id="_2">자바 변수명 네이밍<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>참고: https://woowacourse.github.io/javable/post/2020-04-24-variable_naming/</p>
-</li>
-<li>
-<p><strong>의도를 분명히 밝혀 이름을 지을 것</strong></p>
+<li>참고: https://woowacourse.github.io/javable/post/2020-04-24-variable_naming/</li>
+</ul>
 <ul>
-<li>가능한 구체적으로 이름을 지을 것</li>
-<li>변수가 표현하고 있는 것을 완벽하고 정확하게 설명해야 함</li>
+<li><strong>의도를 분명히 밝혀 이름을 지을 것</strong>
+    - 가능한 구체적으로 이름을 지을 것
+    - 변수가 표현하고 있는 것을 완벽하고 정확하게 설명해야 함</li>
 </ul>
-</li>
-<li>
-<p><strong>맥락을 고려해서 짓기</strong></p>
 <ul>
-<li>굳이 구구절절하게 짓지 않기<ul>
-<li>ex) User 클래스에서 굳이 userName, userAge (X)</li>
+<li><strong>맥락을 고려해서 짓기</strong>
+    - 굳이 구구절절하게 짓지 않기
+        - ex) User 클래스에서 굳이 userName, userAge (X)</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Boolean 변수의 네이밍</strong></p>
 <ul>
-<li>성공했다는 것을 정확히 설명하는 이름을 쓰자<ul>
-<li>ex) done, error, found, success, ok</li>
+<li><strong>Boolean 변수의 네이밍</strong>
+    - 성공했다는 것을 정확히 설명하는 이름을 쓰자
+        - ex) done, error, found, success, ok
+    - 긍정을 나타내는 변수명을 쓰자
+        - ex) if(found) (O) / if(!notFound) (X)
+    - 필요할 땐 is를 써주자
+        - ex) if(isValid) (O)</li>
 </ul>
-</li>
-<li>긍정을 나타내는 변수명을 쓰자<ul>
-<li>ex) if(found) (O) / if(!notFound) (X)</li>
-</ul>
-</li>
-<li>필요할 땐 is를 써주자<ul>
-<li>ex) if(isValid) (O)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>변수 이름에 자료형은 넣지 말자</strong></p>
-</li>
+<ul>
+<li><strong>변수 이름에 자료형은 넣지 말자</strong></li>
 </ul>
 
 

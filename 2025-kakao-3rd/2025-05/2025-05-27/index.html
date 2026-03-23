@@ -22909,8 +22909,7 @@
 <h3 id="2025-05-27">2025-05-27<a class="headerlink" href="#2025-05-27" title="Permanent link">&para;</a></h3>
 <h2 id="akka-actor">Akka Actor<a class="headerlink" href="#akka-actor" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>conf</strong>
+<li><strong>conf</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>akka {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  actor {
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    deployment {
@@ -22931,11 +22930,12 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    }
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  }
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>}
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
 <li>
 <p><strong>설정값</strong></p>
-</li>
+<ol>
 <li>
 <p><code>bindActor</code> 호출 분석 : <code>bindActor[TestActor]("testActor", FromConfig.props(_).withDispatcher("akka.actor.testActor-dispatcher"))</code></p>
 <ul>
@@ -22948,10 +22948,12 @@
 <li>
 <p>conf 내 설정값 분석</p>
 <ul>
-<li><code>akka.actor.deployment./testActor</code></li>
+<li><code>akka.actor.deployment./testActor</code><ul>
 <li><code>router = round-robin-pool</code>: 단일 액터가 아닌, 여러 <code>testActor</code>의 인스턴스를 관리하는 라우터 액터로 생성. 라운드 로빈 방식으로 메시지를 분배</li>
 <li><code>nr-of-instance</code>: 총 4개의 실제 <code>testActor</code>를 생성하여 풀로써 관리</li>
-<li><code>akka.actor.testActor-dispatcher</code></li>
+</ul>
+</li>
+<li><code>akka.actor.testActor-dispatcher</code><ul>
 <li><code>type = Dispatcher</code>: 표준 메시지 디스패처</li>
 <li><code>executor = "fork-join-executor"</code>: <code>ForkJoinPool</code> 사용하여, 쓰레드풀 관리</li>
 <li><code>parellelism-factor</code>: 스레드 풀 기본 크기를 시스템 CPU의 코어수 x배 설정</li>
@@ -22959,18 +22961,24 @@
 <li><code>parellelism-max</code>: 스레드 풀 최대 스레드 수</li>
 </ul>
 </li>
-<li>
-<p><strong>결정</strong>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>결정</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Module</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AbstractModule</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">AkkaGuiceSupport</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">bindActor</span><span class="p">[</span><span class="nc">TestActor</span><span class="p">](</span><span class="s">&quot;testActor&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 기본 설정 따르도록</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ol>
 <li>consumingActor의 nr-of-instances 설정은 액터를 그 갯수 만큼 만들어서 MQ 컨슈머 쪽수 자체를 늘리는 현상이 발생한다.</li>
 <li>위와 같이 기본 설정이라면, 라우터는 안쓰게 되는거니, 액터는 딱 한개만 만들어짐. <ul>
 <li>이러면 인스턴스당 컨슈머는 한 개로 동작하게 된다.</li>
-<li>동시 처리할 메시지 갯수를 높이고 싶으면, MQ의 prefetch_count를 높이면 됨. </li>
+<li>동시 처리할 메시지 갯수를 높이고 싶으면, MQ의 prefetch_count를 높이면 됨. <ul>
 <li>한번에 더 많은 메시지가 액터로 흘러올거고, Future[unit]으로 처리되는 로직이 내부에서 처리됨. </li>
+</ul>
+</li>
 </ul>
 </li>
 <li>prefetch_count는 몇으로 하느냐가 일단 지금으로서 산정이 조금 어려움.<ul>
@@ -22982,6 +22990,8 @@
 <li>Thread-pool은 공용을 쓰면 좀 곤란할 수 있으니 별도로 만드는게 좋을까?<ul>
 <li>기본적으로 기본빵 쓰레드 풀을 쓰고있긴함. </li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 

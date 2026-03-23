@@ -22953,22 +22953,22 @@
 <h3 id="2024-02-29">2024-02-29<a class="headerlink" href="#2024-02-29" title="Permanent link">&para;</a></h3>
 <h2 id="slick-filter-somenone">Slick의 filter에서 Some/None을 사용하지 못하는 현상<a class="headerlink" href="#slick-filter-somenone" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>문제</strong></li>
+<li><strong>문제</strong><ul>
 <li>테이블 칼럼에 다음과 같은 값이 있었음<ul>
 <li><code>def displayStartAt = column[Option[LocalDateTime]]("display_start_at")</code></li>
 </ul>
 </li>
-<li>
-<p>이 상황에서 테이블에 filter를 걸었는데</p>
-<ul>
+<li>이 상황에서 테이블에 filter를 걸었는데<ul>
 <li><code>Bulletin.filter(_.displayStartAt === Option(LocalDateTime.now()))</code> 는 OK</li>
 <li><code>Bulletin.filter(_.displayStartAt === Some(LocalDateTime.now()))</code> 는 NO</li>
 <li><code>Bulletin.filter(_.displayStartAt === None)</code> 도 No</li>
 </ul>
 </li>
-<li>
-<p><strong>이유</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>이유</strong><ul>
 <li><code>Option</code>과 <code>Some</code>/<code>None</code>은 스칼라에서 다르게 동작</li>
 <li><code>Option</code><ul>
 <li><code>Option(LocalDateTime.now)</code>는 <code>Option.apply</code>를 통해 <code>Some</code> 혹은 <code>None</code>을 반환
@@ -22986,9 +22986,7 @@
 <li>이때 <code>LocalDateTime.now</code>가 null이라면, 직빵으로 NPE가 터짐</li>
 </ul>
 </li>
-<li>
-<p><code>None</code></p>
-<ul>
+<li><code>None</code><ul>
 <li><code>None</code>도 마찬가지
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">Nothing</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">:</span><span class="w"> </span><span class="nc">Nothing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">NoSuchElementException</span><span class="p">(</span><span class="s">&quot;None.get&quot;</span><span class="p">)</span>
@@ -22996,12 +22994,16 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Slick에서는...</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Slick에서는...</strong><ul>
 <li>Slick에서는 DB 칼럼과 None을 직빵으로 비교하는 것에 대해 제재를 하고 있음 (NPE 터질 수 있으니)</li>
 <li>그래서 Option의 <code>isEmpty</code> 사용하도록 권장</li>
 <li><code>.filter(_.displayStartAt.isEmpty)</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="scala-optionsomenone">Scala에서 Option/Some/None의 확실한 관계<a class="headerlink" href="#scala-optionsomenone" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://medium.com/@sukumaar/scala-option-some-none-b9f735acfb82</em>
@@ -23012,40 +23014,40 @@
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">):</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </code></pre></div></p>
 <ul>
-<li>
-<p>그러다 보니 case-match와 호환성이 좋네 (컨테이너니까)
+<li>그러다 보니 case-match와 호환성이 좋네 (컨테이너니까)
     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">optionalPerson</span><span class="p">:</span><span class="nc">Option</span><span class="p">[</span><span class="nc">Person</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Option</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">stringValue2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optionalPerson</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;ohh source really sent null so cant call &quot;</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Option</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Option</strong><ul>
 <li>값이 있거나/없거나 한 상태를 나타냄<ul>
 <li>값이 담겨져 있다면 =&gt; Some[T]</li>
 <li>값이 없으면 =&gt; None</li>
 </ul>
 </li>
 <li>Option은 Try,Future와 함께 대표적인 <strong>모나딕 컬렉션</strong></li>
-<li>
-<p>두 가지 생각하자</p>
-<ol>
+<li>두 가지 생각하자<ol>
 <li>Null을 안전하게 다루자!</li>
 <li>연속체인에서 안정적으로 사용하자!</li>
 </ol>
 </li>
-<li>
-<p><strong>Option 활용처</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Option 활용처</strong><ul>
 <li>Map
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">h2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Some(2)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">h3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;three&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// None</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="scala-monadic-collection">Scala Monadic Collection<a class="headerlink" href="#scala-monadic-collection" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://devus.tistory.com/entry/Learning-Scala-Chapter7-%EA%B7%B8-%EC%99%B8%EC%9D%98-%EC%BB%AC%EB%A0%89%EC%85%98-%EB%AA%A8%EB%82%98%EB%94%95-%EC%BB%AC%EB%A0%89%EC%85%98</em>
@@ -23065,15 +23067,14 @@
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">nullName</span><span class="p">.</span><span class="n">fold</span><span class="p">(</span><span class="s">&quot;JOELJO&quot;</span><span class="p">)(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">s&quot;</span><span class="si">$</span><span class="n">x</span><span class="s">.jo&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// JOELJO</span>
 </code></pre></div></p>
 <ul>
-<li><strong>Try</strong></li>
+<li><strong>Try</strong><ul>
 <li>기존 자바 try/catch를 스칼라의 Try로 바꿔보자!</li>
 <li>스칼라에서도 try/catch 블록을 지원하고, catch 블록에서 발생한 에러를 매칭하는 case 문 포함할 수 있다<ul>
 <li>하지만 <code>util.Try</code>만 사용함으로써 안전/표현력/모나딕 접근법이 가능하다</li>
 </ul>
 </li>
-<li>
-<p>Try를 세련되게 다뤄보자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">emptyList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">()</span>
+<li>Try를 세련되게 다뤄보자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">emptyList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">()</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="s">&quot;JOEL&quot;</span><span class="p">)</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nc">Try</span><span class="p">(</span><span class="n">emptyList</span><span class="p">.</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="c1">// Failure(java.util.NoSuchElementException: head of empty list)</span>
@@ -23081,11 +23082,12 @@
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nc">Try</span><span class="p">(</span><span class="n">emptyList</span><span class="p">.</span><span class="n">head</span><span class="p">).</span><span class="n">toOption</span><span class="w"> </span><span class="c1">// None</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nc">Try</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="n">head</span><span class="p">).</span><span class="n">toOption</span><span class="w"> </span><span class="c1">// Some(&quot;JOEL&quot;)</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Future</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Future</strong><ul>
 <li>백그라운드 작업을 개시하는 컬렉션</li>
 <li>기본적으로 스칼라 코드는 JVM의 메인 쓰레드에서 동작하나, <code>Future</code>의 사용은 별도 쓰레드에서 백그라운드 작업이 가능케 한다<ul>
 <li>다만 백그라운드로 돌리기 위해서는 실행하기 위한 <code>Context</code>를 지정해야 함</li>
@@ -23093,7 +23095,7 @@
 </li>
 <li>기본 사용법</li>
 <li>명시적으로 <code>context</code> 지정
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">global</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">global</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">Future</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">object</span><span class="w"> </span><span class="nc">ScalaFuture</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="w"> </span><span class="p">{</span>
@@ -23103,7 +23105,7 @@
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>묵시적으로 <code>context</code> 지정
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="nc">Implicits</span><span class="p">.</span><span class="n">global</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="nc">Implicits</span><span class="p">.</span><span class="n">global</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">Future</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">object</span><span class="w"> </span><span class="nc">ScalaFuture</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="w"> </span><span class="p">{</span>
@@ -23112,6 +23114,8 @@
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

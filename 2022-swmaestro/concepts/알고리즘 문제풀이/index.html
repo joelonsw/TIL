@@ -23142,87 +23142,88 @@
 <p><em>참고: https://www.inflearn.com/course/%EC%9E%90%EB%B0%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4-%EC%BD%94%ED%85%8C%EB%8C%80%EB%B9%84/dashboard</em></p>
 <h3 id="1">1. 문자열<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Scanner next() vs nextLine()</strong></li>
+<li><strong>Scanner next() vs nextLine()</strong><ul>
 <li>String nextLine() : '\n'을 포함하는 한 라인을 읽고, '\n' 버린 나머지만 리턴</li>
-<li>
-<p>String next() : 다음 토큰을 문자열로 리턴</p>
+<li>String next() : 다음 토큰을 문자열로 리턴</li>
+</ul>
 </li>
-<li>
-<p><strong>String -&gt; Char[]</strong></p>
+</ul>
+<ul>
+<li><strong>String -&gt; Char[]</strong><ul>
+<li>String.toCharArray()</li>
+</ul>
 </li>
-<li>
-<p>String.toCharArray()</p>
+</ul>
+<ul>
+<li><strong>Char[] -&gt; String</strong><ul>
+<li>String.valueOf(char[])</li>
+</ul>
 </li>
-<li>
-<p><strong>Char[] -&gt; String</strong></p>
+</ul>
+<ul>
+<li><strong>문자열 Split</strong><ul>
+<li>String[] splited = input.split(" ")</li>
+</ul>
 </li>
-<li>
-<p>String.valueOf(char[])</p>
+</ul>
+<ul>
+<li><strong>문자열 뒤집기</strong><ul>
+<li>StringBuilder.reverse()</li>
+</ul>
 </li>
-<li>
-<p><strong>문자열 Split</strong></p>
+</ul>
+<ul>
+<li><strong>문자열 대체</strong><ul>
+<li>String.replace(a, b)</li>
+</ul>
 </li>
-<li>
-<p>String[] splited = input.split(" ")</p>
+</ul>
+<ul>
+<li><strong>문자열 알파벳 검사</strong><ul>
+<li>Character.isAlphabetic()</li>
+</ul>
 </li>
-<li>
-<p><strong>문자열 뒤집기</strong></p>
-</li>
-<li>
-<p>StringBuilder.reverse()</p>
-</li>
-<li>
-<p><strong>문자열 대체</strong></p>
-</li>
-<li>
-<p>String.replace(a, b)</p>
-</li>
-<li>
-<p><strong>문자열 알파벳 검사</strong></p>
-</li>
-<li>
-<p>Character.isAlphabetic()</p>
-</li>
-<li>
-<p><strong>문자열 싹다 소문자로</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>문자열 싹다 소문자로</strong><ul>
 <li>String.toLowerCase()</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="2">2. 배열<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>에라토스테네스의 체</strong></li>
+<li><strong>에라토스테네스의 체</strong><ul>
 <li>O(n^(1/2))로 소수 판별하기</li>
-<li>
-<p>for문으로 i= 2~n^(1/2) 까지 돌면서 % 연산으로 소수 판별</p>
+<li>for문으로 i= 2~n^(1/2) 까지 돌면서 % 연산으로 소수 판별</li>
+</ul>
 </li>
-<li>
-<p><strong>배열 정렬하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>배열 정렬하기</strong><ul>
 <li>Arrays.sort(array) : Primitive Type이라면 그냥 써도 ㄱㅊ (오름차순)</li>
-<li>
-<p>Arrays.sort(array, Collections.reverseOrder()) : 내림차순 등의 역순 정렬하려면 Reference Type이여야함!</p>
+<li>Arrays.sort(array, Collections.reverseOrder()) : 내림차순 등의 역순 정렬하려면 Reference Type이여야함!</li>
+</ul>
 </li>
-<li>
-<p><strong>2차원 배열은 제발 그려가면서 풀기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>2차원 배열은 제발 그려가면서 풀기</strong></li>
 </ul>
 <hr />
 <h3 id="3-two-pointers-sliding-window">3. Two Pointers, Sliding Window<a class="headerlink" href="#3-two-pointers-sliding-window" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>배열 중 하나의 원소부터 몇 개까지 어떻게 하라!</strong></li>
-<li>
-<p>라는 문장을 보면 투 포인터 고려해보자!</p>
+<li><strong>배열 중 하나의 원소부터 몇 개까지 어떻게 하라!</strong><ul>
+<li>라는 문장을 보면 투 포인터 고려해보자!</li>
+</ul>
 </li>
-<li>
-<p><strong>투 포인터/슬라이딩 윈도우</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>투 포인터/슬라이딩 윈도우</strong><ol>
 <li>lt, rt 잡기</li>
 <li>rt for문으로 늘려가기</li>
 <li>lt 늘릴 조건 만나면 while로 따라잡기</li>
-<li>
-<p>임시 변수/현재 답 철저히 마킹하기
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">rt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">rt</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"> </span><span class="n">rt</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li>임시 변수/현재 답 철저히 마킹하기
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">rt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">rt</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"> </span><span class="n">rt</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">numbers</span><span class="o">[</span><span class="n">rt</span><span class="o">]</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sum</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">targetNum</span><span class="p">)</span><span class="w"> </span><span class="n">answer</span><span class="o">++</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">sum</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">targetNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23231,18 +23232,19 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sum</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">targetNum</span><span class="p">)</span><span class="w"> </span><span class="n">answer</span><span class="o">++</span><span class="p">;</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ol>
 </li>
-<li>
-<p><strong>List 정렬하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>List 정렬하기</strong><ul>
 <li>Collections.sort(list) : 오름차순</li>
-<li>
-<p>Collections.sort(list, Collections.reverseOrder()) : 내림차순</p>
+<li>Collections.sort(list, Collections.reverseOrder()) : 내림차순</li>
+</ul>
 </li>
-<li>
-<p><strong>이중 for 문으로 모든 경우의 수 따질 땐 Sliding Window를 생각해보자!</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>이중 for 문으로 모든 경우의 수 따질 땐 Sliding Window를 생각해보자!</strong><ul>
 <li><em>참고: https://www.acmicpc.net/problem/1644</em></li>
 <li>2, 3, 5, 7 중 연속된 숫자의 합 구하기<ul>
 <li>2 골라서 ... 2-3, 2-3-5, 2-3-5-7</li>
@@ -23255,87 +23257,91 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <hr />
 <h3 id="4-hashmap-treeset">4. HashMap, TreeSet<a class="headerlink" href="#4-hashmap-treeset" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>Map 초기화시 getOrDefault()쓰기</strong></p>
-</li>
-<li>
-<p><strong>정렬의 기능가진 Set이 필요하다면 TreeSet 쓰기</strong></p>
-</li>
-<li>
-<p><strong>Map 순회방법</strong>
+<li><strong>Map 초기화시 getOrDefault()쓰기</strong></li>
+</ul>
+<ul>
+<li><strong>정렬의 기능가진 Set이 필요하다면 TreeSet 쓰기</strong></li>
+</ul>
+<ul>
+<li><strong>Map 순회방법</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">keySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Set 순회방법</strong></p>
-</li>
-<li>
-<p>그냥 향상된 for문 쓰면 됨
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Set 순회방법</strong><ul>
+<li>그냥 향상된 for문 쓰면 됨
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">set</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Map key로 Entry 삭제하기</strong></p>
+</ul>
+<ul>
+<li><strong>Map key로 Entry 삭제하기</strong><ul>
+<li>map.remove(key);</li>
+</ul>
 </li>
-<li>
-<p>map.remove(key);</p>
-</li>
-<li>
-<p><strong>HashMap과 HashMap 비교</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>HashMap과 HashMap 비교</strong><ul>
 <li>hashmap.equals(hashmap)</li>
 <li>정확히 똑같은 key-value 쌍의 같은 사이즈의 Map이라면 참을 반환</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="5-stack-queue">5. Stack, Queue<a class="headerlink" href="#5-stack-queue" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Stack 선언</strong></li>
-<li>
-<p>Stack<Character> stack = new Stack&lt;&gt;();</p>
+<li><strong>Stack 선언</strong><ul>
+<li>Stack<Character> stack = new Stack&lt;&gt;();</li>
+</ul>
 </li>
-<li>
-<p><strong>Queue 선언</strong></p>
+</ul>
+<ul>
+<li><strong>Queue 선언</strong><ul>
+<li>Queue<Integer> queue = new LinkedList&lt;&gt;();</li>
+</ul>
 </li>
-<li>
-<p>Queue<Integer> queue = new LinkedList&lt;&gt;();</p>
-</li>
-<li>
-<p><strong>Character -&gt; Integer</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Character -&gt; Integer</strong><ul>
 <li>Character.getNumericValue()</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="6-sorting-searching">6. Sorting &amp; Searching<a class="headerlink" href="#6-sorting-searching" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>LinkedList에만 있는 기능</strong></li>
+<li><strong>LinkedList에만 있는 기능</strong><ul>
 <li>linkedList.removeLast()</li>
-<li>
-<p>linkedList.addFirst(item)</p>
+<li>linkedList.addFirst(item)</li>
+</ul>
 </li>
-<li>
-<p><strong>List 중간에 원소 넣기</strong></p>
+</ul>
+<ul>
+<li><strong>List 중간에 원소 넣기</strong><ul>
+<li>List add(int index, E element)</li>
+</ul>
 </li>
-<li>
-<p>List add(int index, E element)</p>
+</ul>
+<ul>
+<li><strong>정렬시켜 비교하는게 빠른 문제도 있어!</strong><ul>
+<li>그냥 O(nlogn) 으로 정렬시키고 뚝딱 O(n)으로 비교하기</li>
+</ul>
 </li>
-<li>
-<p><strong>정렬시켜 비교하는게 빠른 문제도 있어!</strong></p>
-</li>
-<li>
-<p>그냥 O(nlogn) 으로 정렬시키고 뚝딱 O(n)으로 비교하기</p>
-</li>
-<li>
-<p><strong>이분탐색 / 결정 알고리즘</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>이분탐색 / 결정 알고리즘</strong><ul>
 <li>정렬이 되어있고, 특정 범위 내에서 답이 있으리라 판단되면 이분탐색하자!</li>
 <li>lt, rt, mid 잡고 O(logN)으로 탐색 빠르게 진행</li>
 <li>ex. 조건을 만족시킬 수 있는 X를 구하는데, X의 최대값은 뭘까요? <ol>
@@ -23346,78 +23352,81 @@
 </ol>
 </li>
 </ul>
+</li>
+</ul>
 <hr />
 <h3 id="7-recursion-tree-graph-dfsbfs">7. Recursion, Tree, Graph (DFS/BFS 기초)<a class="headerlink" href="#7-recursion-tree-graph-dfsbfs" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>메모이제이션 하기</strong></li>
-<li>
-<p>재귀를 통해 얻은 결과를 기록해두자!</p>
+<li><strong>메모이제이션 하기</strong><ul>
+<li>재귀를 통해 얻은 결과를 기록해두자!</li>
+</ul>
 </li>
-<li>
-<p><strong>DFS : static 변수에 저장하라 (모든 경우 탐색)</strong></p>
+</ul>
+<ul>
+<li><strong>DFS : static 변수에 저장하라 (모든 경우 탐색)</strong><ul>
+<li>static 배열/변수에 현재 상태등을 저장하며 재귀를 돌려라</li>
+</ul>
 </li>
-<li>
-<p>static 배열/변수에 현재 상태등을 저장하며 재귀를 돌려라</p>
-</li>
-<li>
-<p><strong>BFS : Layer, Size, for문, Queue (최단거리/최소횟수 탐색)</strong></p>
-</li>
-<li>
-<p><strong>BFS 과정에서 방문했는지 검사하는 check[] 배열은 필수야!</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>BFS : Layer, Size, for문, Queue (최단거리/최소횟수 탐색)</strong></li>
+</ul>
+<ul>
+<li><strong>BFS 과정에서 방문했는지 검사하는 check[] 배열은 필수야!</strong></li>
 </ul>
 <hr />
 <h3 id="8-dfsbfs">8. DFS/BFS 활용<a class="headerlink" href="#8-dfsbfs" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>DFS : static 활용하기!</strong></li>
+<li><strong>DFS : static 활용하기!</strong><ul>
 <li>static 배열/변수에 메모이제이션</li>
-<li>
-<p>static flag 만들어 바로 return 때릴 준비하기</p>
+<li>static flag 만들어 바로 return 때릴 준비하기</li>
+</ul>
 </li>
-<li>
-<p><strong>순열과 조합</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>순열과 조합</strong><ul>
 <li>순열 : 순서 상관있이 선택, 반장/부반장 선출, nPr = n!/(n-r)!</li>
 <li>조합 : 순서 상관없이 선택, 대표 2명 선출, nCr = n!/(n-r)!r!</li>
-<li>
-<p>팩토리얼 미리 구해두고 구하는 것도 좋은 방법!</p>
+<li>팩토리얼 미리 구해두고 구하는 것도 좋은 방법!</li>
+</ul>
 </li>
-<li>
-<p><strong>DFS로 순열과 조합 구하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DFS로 순열과 조합 구하기</strong><ul>
 <li>순열 : for 그냥 돌고 -&gt; for 시작부터 다시 돌고 선출!</li>
-<li>
-<p>조합 : for 그냥 돌고 -&gt; for index + 1부터 돌고 선출!</p>
+<li>조합 : for 그냥 돌고 -&gt; for index + 1부터 돌고 선출!</li>
+</ul>
 </li>
-<li>
-<p><strong>2차원 배열로 영역 표시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>2차원 배열로 영역 표시</strong><ul>
 <li>지도와 같은 문제!</li>
 <li>x, y 좌표평면이랑 2차원 배열 다른거야!</li>
 <li>제발 깝치지 말고 그냥 그린 다음에 시작해!</li>
 </ul>
+</li>
+</ul>
 <hr />
 <h3 id="9">9. 그리디 알고리즘<a class="headerlink" href="#9" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>정렬과 Count의 미학</strong></li>
+<li><strong>정렬과 Count의 미학</strong><ul>
 <li>Greedy하게 정렬하고, 조건에 맞게 Count할 것!</li>
-<li>
-<p>누가 뽑히는지가 안 중요하고, 몇 명 뽑혔는가가 중요한 경우인지 살펴볼 것!</p>
+<li>누가 뽑히는지가 안 중요하고, 몇 명 뽑혔는가가 중요한 경우인지 살펴볼 것!</li>
+</ul>
 </li>
-<li>
-<p><strong>다익스트라 알고리즘</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>다익스트라 알고리즘</strong><ul>
 <li>간선의 가중치가 모두 0 이상인 경우 사용</li>
-<li>
-<p>PQ를 활용하면 한 점으로부터 각 점까지의 최소 간선거리 구할 수 있음</p>
+<li>PQ를 활용하면 한 점으로부터 각 점까지의 최소 간선거리 구할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>Union &amp; Find</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Union &amp; Find</strong><ul>
 <li>그래프의 Root Parent를 기록해두자!</li>
-<li>
-<p>Union의 과정에서 양쪽 다 Parent를 찾은 후에 Root를 바꿔주자!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getParent</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">student</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li>Union의 과정에서 양쪽 다 Parent를 찾은 후에 Root를 바꿔주자!
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getParent</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">student</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">student</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">studentParent</span><span class="o">[</span><span class="n">student</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">student</span><span class="p">;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
@@ -23430,41 +23439,50 @@
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">parent2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getParent</span><span class="p">(</span><span class="n">student2</span><span class="p">);</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="n">studentParent</span><span class="o">[</span><span class="n">parent1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent2</span><span class="p">;</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>최소 스패닝 트리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>최소 스패닝 트리</strong><ul>
 <li>싸이클이 없는 최소 간선으로 모두를 이어준 트리</li>
 <li>Kruskal Algorithm : 작은 간선 순으로 정렬 -&gt; Union &amp; Find로 Cycle 검사하며 더하기</li>
-<li>
-<p>Prim's Algorithm : 연결리스트로 트리 넣어두기 -&gt; Check 배열에 방문여부 나타내기 -&gt; 방문한 곳 기점 PQ에 최소 간선 순으로 넣어두기</p>
+<li>Prim's Algorithm : 연결리스트로 트리 넣어두기 -&gt; Check 배열에 방문여부 나타내기 -&gt; 방문한 곳 기점 PQ에 최소 간선 순으로 넣어두기</li>
+</ul>
 </li>
-<li>
-<p><strong>다익스트라 알고리즘</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>다익스트라 알고리즘</strong><ul>
 <li><img alt="" src="../../images/2022-03-05-dijkstra.png" /></li>
 <li>다익스트라의 경우 간선의 가중치가 모두 0 이상일 때만 사용가능!</li>
 <li>다익스트라 사고의 흐름<ol>
 <li>1번부터 갈 수 있는 점까지의 최소 거리인 dis[] 배열을 만든다. </li>
 <li>dis[1] = 0</li>
 <li>dis 배열을 돌면서 최소값을 가진 index를 찾는다</li>
-<li>해당 index 에서 갈 수 있는 정점에 대해 가중치 갱신</li>
+<li>해당 index 에서 갈 수 있는 정점에 대해 가중치 갱신<ul>
 <li>dis[1~6] = [0, 12, 4, Max, Max, Max];</li>
+</ul>
+</li>
 <li>dis 배열을 돌면서 최소값을 가진 index를 찾는다</li>
-<li>해당 index 에서 갈 수 있는 정점에 대해 가중치 갱신 (최소값 부터 양수의 간선값을 더해가니 무조건 최솟값)</li>
+<li>해당 index 에서 갈 수 있는 정점에 대해 가중치 갱신 (최소값 부터 양수의 간선값을 더해가니 무조건 최솟값)<ul>
 <li>dis[1~6] = [0, 11, 4, 9, Max, Max];</li>
+</ul>
+</li>
 <li>dis 배열을 돌면서 최소값을 가진 index를 찾는다</li>
-<li>해당 index 에서 갈 수 있는 정점에 대해 가중치 갱신</li>
+<li>해당 index 에서 갈 수 있는 정점에 대해 가중치 갱신<ul>
 <li>dis[1~6] = [0, 11, 4, 9, 14, Max];</li>
+</ul>
+</li>
 </ol>
 </li>
 <li>O(정점 * 간선)</li>
 </ul>
+</li>
+</ul>
 <hr />
 <h3 id="10-dp">10. DP<a class="headerlink" href="#10-dp" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>테이블로 기억하기 프로그래밍</strong></li>
+<li><strong>테이블로 기억하기 프로그래밍</strong><ul>
 <li>하나의 기준을 가지고 테이블을 만들어두자<ul>
 <li>ex. dy[i] = i분까지 얻을 수 있는 최대의 점수, i원을 만드는데 드는 최소의 동전 갯수</li>
 </ul>
@@ -23474,27 +23492,29 @@
 <li>앞선 문제를 레버리지 삼아 뒤에 문제를 해결한다. </li>
 </ol>
 </li>
-<li>
-<p>더 좋은 방법으로 갱신하기</p>
+<li>더 좋은 방법으로 갱신하기</li>
+</ul>
 </li>
-<li>
-<p><strong>DFS <em>O(2^n)<em> -&gt; DP </em>O(n^2)</em></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DFS <em>O(2^n)<em> -&gt; DP </em>O(n^2)</em></strong><ul>
 <li>첫번째 for는 고려해야할 조건 (ex. 동전의 갯수, 문제 풀이에 걸리는 시간)<ul>
 <li>조건이 유한하다면 : 두번째 for는 뒤 -&gt; 앞</li>
 <li>조건이 무한하다면 : 두번째 for는 앞 -&gt; 뒤</li>
 </ul>
 </li>
-<li>
-<p>두번째 for는 과거의 테이블 돌면서 활용하는 것!</p>
-<ul>
-<li>두번째 for가 끝나고 뒤에 값을 채워줘야하는지 검사해볼 것</li>
+<li>두번째 for는 과거의 테이블 돌면서 활용하는 것!<ul>
+<li>두번째 for가 끝나고 뒤에 값을 채워줘야하는지 검사해볼 것<ul>
 <li>ex. 조건이 연속된 것이 아니라면, 연속될 수 있도록 0이 아닌 다른 값으로 채워줘야 할수도!</li>
 </ul>
 </li>
-<li>
-<p><strong>DP 문제 접근법</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>DP 문제 접근법</strong><ol>
 <li>필요시 문제 풀이에 유리하게 정렬한다</li>
 <li>조건을 간략화해서 생각해본다<ul>
 <li>이 블럭이 마지막 벽돌이라고 하면 높이는?</li>
@@ -23504,25 +23524,35 @@
 </li>
 <li>2중 for문 돌면서 if 조건과 함께 값을 max/min 찾기</li>
 <li>시간 여유가 있다면 sout으로 배열 값 다 찍어보기!</li>
+</ol>
+</li>
 </ul>
 <hr />
 <h3 id="tips">TIPS<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h3>
 <ul>
 <li>import java.util.* &lt;- 써놓고 시작하기</li>
-<li>시간 여유가 된다면 제발 System.out.println 배열 다 찍어보기!</li>
+<li>시간 여유가 된다면 제발 System.out.println 배열 다 찍어보기!<ul>
 <li>손으로 쓴 값이랑 일치하는지 살펴봐!</li>
+</ul>
+</li>
 <li>Integer 객체 비교는 .equals() 로 해야해!! <code>==</code> 는 캐싱된거만 되는거 까먹지 말자!</li>
-<li>진수 변환은 다음과 같이!</li>
+<li>진수 변환은 다음과 같이!<ul>
 <li>Integer.toString(number, radix);</li>
-<li>String -&gt; 숫자는 "Long"으로 변환하는게 안전할 수도!</li>
+</ul>
+</li>
+<li>String -&gt; 숫자는 "Long"으로 변환하는게 안전할 수도!<ul>
 <li>Integer가 오버플로우 나는 짜치는 상황 막자!</li>
+</ul>
+</li>
 <li>전역 변수 초기화는 함수 내부에서!</li>
 <li>BFS, DFS 배열 돌때 등호 꼭 붙였나 확인할 것!</li>
 <li>String.contains(string) 할 때, String keys 붙인거라면 개별적으로도 봐야할 수 있음 </li>
 <li>초과/미만 계산할때 0 부터라는 조건이 있으면 -1 부터 정수화 시키는거 유념</li>
-<li>코드 런타임 에러나면...</li>
+<li>코드 런타임 에러나면...<ul>
 <li>리스트나 배열의 0, 1번째 원소 가져오는데 원소가 총 한 개 짜리는 아닌지</li>
 <li>접근하려는 리스트가 Null 인건 아닌지!</li>
+</ul>
+</li>
 <li>손코딩, 경계값 테스팅 코드 짜기 전에 꼼꼼히 해보자!</li>
 <li>투포인터로 누적합 하나씩 빼고 더 해갈때 헷갈리니까 이렇게 해보자
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="n">advSec</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="w"> </span><span class="n">ptSec</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23535,8 +23565,10 @@
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>조합의 수를 줄일 수 있다면 줄이는게 베스트! 문제를 잘 읽고, 가능성이 없는 조합은 굳이 만들지 말자!</li>
-<li>조건을 잘 읽자 조건을 잘 읽자 조건을 잘 읽자!!!!!!!!!!!!</li>
+<li>조건을 잘 읽자 조건을 잘 읽자 조건을 잘 읽자!!!!!!!!!!!!<ul>
 <li>써보자 손으로 테스트 해보자!!!!!</li>
+</ul>
+</li>
 </ul>
 
 

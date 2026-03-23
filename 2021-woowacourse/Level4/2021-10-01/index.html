@@ -22910,22 +22910,19 @@
 <h2 id="binlog">Binlog 원격 전송 타임<a class="headerlink" href="#binlog" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>mysqlbinlog 기능을 사용하기 위해서 백업 EC2에 mariadb-server 설치하자</p>
-<ul>
-<li>본래 EC2랑 똑같은 버전
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[EASY-DEPLOY-BACKUP][05:11:13][ubuntu@ip-192-168-2-179 ~/binlog-backup]
+<p>mysqlbinlog 기능을 사용하기 위해서 백업 EC2에 mariadb-server 설치하자
+    - 본래 EC2랑 똑같은 버전
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[EASY-DEPLOY-BACKUP][05:11:13][ubuntu@ip-192-168-2-179 ~/binlog-backup]
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ mysql --version
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>mysql  Ver 15.1 Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64) using readline 5.2
-</code></pre></div></li>
-</ul>
+</code></pre></div></p>
 </li>
 <li>
-<p>본래 DB EC2에 원격 접속을 허용해주자</p>
-<ul>
-<li>아 설정파일 왜이리 분산되어있어</li>
-<li>찾느라 뒤질 뻔</li>
-<li>bind-address 주석 처리!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
+<p>본래 DB EC2에 원격 접속을 허용해주자
+    - 아 설정파일 왜이리 분산되어있어
+    - 찾느라 뒤질 뻔
+    - bind-address 주석 처리!
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[mysqld]
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>#
@@ -22944,8 +22941,7 @@
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a># Instead of skip-networking the default is now to listen only on
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a># localhost which is more compatible and is not less secure.
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a># bind-address          = 127.0.0.1
-</code></pre></div></li>
-</ul>
+</code></pre></div></p>
 </li>
 <li>
 <p>자 백업 EC2에서 접근할 수 있도록 계정 뚫어주자

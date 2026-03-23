@@ -22996,41 +22996,43 @@
 <ul>
 <li>도커 파일을 생성하기 위한 스크립트 파일</li>
 <li>여러 키워드를 통해 빌드를 보다 쉽게 진행</li>
-<li>다음과 같이 장점</li>
+<li>다음과 같이 장점<ol>
 <li>이미지 어찌 만들어졌는지 기록</li>
 <li>배포에 용이</li>
 <li>컨테이너가 특정 행동 수행하도록 함</li>
+</ol>
+</li>
 <li>신규 서버 받아서 세팅했던것 처럼 이미지만 뚝딱 바로 띄울수 있도록!</li>
 </ul>
 <h3 id="_2">작성 가이드<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>FROM</strong></li>
+<li><strong>FROM</strong><ul>
 <li>어떤 이미지를 기반으로 새로운 이미지를 생성하나요?</li>
 <li>공식 이미지를 쓰세요</li>
 <li>알파인 이미지는 크기가 작고 엄격히 관리되어 추천</li>
-<li>
-<p>뼈대를 만들고 위에다 뭐 올려요!</p>
-<ul>
+<li>뼈대를 만들고 위에다 뭐 올려요!<ul>
 <li>ex) LinuxOS를 FROM 으로 가져와서 아파치를 올린다던지 =&gt; 이러고 다시 베이스 이미지로 뚝딱</li>
 <li>ex) SpringBoot 올릴 땐 Java 위에 올림</li>
 </ul>
 </li>
-<li>
-<p><strong>LABEL</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>LABEL</strong><ul>
 <li>이미지 구성, 라이센스 정보 기록, 자동화 정보 (여러가지 정보 기록)</li>
-<li>
-<p>여러 라벨을 하나의 <code>LABEL</code> 묶어주세요
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">LABEL</span><span class="w"> </span>com.example.version<span class="o">=</span><span class="s2">&quot;0.0.1-beta&quot;</span><span class="w"> </span>com.example.release-date<span class="o">=</span><span class="s2">&quot;2024-09-04&quot;</span>
-</code></pre></div></p>
+<li>여러 라벨을 하나의 <code>LABEL</code> 묶어주세요
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">LABEL</span><span class="w"> </span>com.example.version<span class="o">=</span><span class="s2">&quot;0.0.1-beta&quot;</span><span class="w"> </span>com.example.release-date<span class="o">=</span><span class="s2">&quot;2024-09-04&quot;</span>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>RUN</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>RUN</strong><ul>
 <li>이미지를 빌드할 때 사용하는 커맨드를 설정</li>
 <li>이미지 생성 시 특정 명령어를 실행 (bash 쉘 입력과 동일)</li>
 <li>백슬래쉬를 활용하여 여러줄로 분할하세요
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span>package-bar<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span>pacakge-baz<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span>package-foo<span class="w"> </span><span class="se">\</span>
@@ -23038,16 +23040,15 @@
 </code></pre></div></li>
 <li>이미지 빌드 이후에, 모든 레이어가 도커 캐시안에 들어감</li>
 <li>도커는 이전 명령어와 수정된 명령어가 동일할 때만 이전 단계의 캐시를 사용
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:18.04</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:18.04</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>nginx
 </code></pre></div><ul>
 <li>이런 빌드는 update한게 반영이 안되어 curl/nginx 예전꺼 될수도 있음</li>
 </ul>
 </li>
-<li>
-<p>특정 버전을 명시하여 설치도 가능
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<li>특정 버전을 명시하여 설치도 가능
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>automake<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>build-essential<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
@@ -23055,18 +23056,19 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span>ruby1.9.1-dev<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nv">s3cmd</span><span class="o">=</span><span class="m">1</span>.1.*<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>PIPE</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>PIPE</strong><ul>
 <li><code>RUN</code> 커맨드는 <code>|</code>에 의존하여 동작 가능</li>
-<li>
-<p>파이프의 어느 단계에서 오류로 인해 명령이 실패하기 위해선 <code>set - o pipefail &amp;&amp;</code> 을 붙이자</p>
+<li>파이프의 어느 단계에서 오류로 인해 명령이 실패하기 위해선 <code>set - o pipefail &amp;&amp;</code> 을 붙이자</li>
+</ul>
 </li>
-<li>
-<p><strong>CMD</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>CMD</strong><ul>
 <li>도커 컨테이너 실행시 실행할 커맨드 지정<ul>
 <li>RUN은 빌드 시 실행되고</li>
 <li>CMD는 실행 시 실행되고</li>
@@ -23074,77 +23076,81 @@
 </li>
 <li>ENTRYPOINT와 같이 컨테이너 생성 시 명령이 실행됨</li>
 <li>docker run 명령에서 동작 방식이 다름</li>
-<li>
-<p><code>CMD ["실행 파일", "param1", "param2"]</code></p>
+<li><code>CMD ["실행 파일", "param1", "param2"]</code></li>
+</ul>
 </li>
-<li>
-<p><strong>EXPOSE</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>EXPOSE</strong><ul>
 <li>이미지가 통신을 위해 사용할 포트 지정</li>
 <li>컨테이너가 연결을 받는 포트</li>
-<li>
-<p>어플리케이션에서 공통으로 사용되는 포트를 열 것</p>
+<li>어플리케이션에서 공통으로 사용되는 포트를 열 것</li>
+</ul>
 </li>
-<li>
-<p><strong>ENV</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ENV</strong><ul>
 <li>환경변수 지정해주세요!</li>
 <li>지정한 변수는 $name, ${name} 으로 사용가능</li>
 <li>문법도 있음 ${name:-else} =&gt; name 없으면 else 쓰세요</li>
-<li>
-<p>PATH의 환경변수 업데이트</p>
+<li>PATH의 환경변수 업데이트</li>
+</ul>
 </li>
-<li>
-<p><strong>ADD</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ADD</strong><ul>
 <li>이미지에 호스트의 파일/폴더를 추가하기 위해 사용<ul>
-<li>이미지에 복사하려는 디렉토리 없으면 도커가 자동으로 생성</li>
+<li>이미지에 복사하려는 디렉토리 없으면 도커가 자동으로 생성<ul>
 <li>디렉토리 권한을 알아서 생성해 줘</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>이미지에 호스트 내 파일을 더함 (COPY랑 느낌이 비슷)</li>
-<li>
-<p>COPY에 비해 조금 더 추가기능 제공 (로컬 전용 tar 파일 해제, 원격 url 지원)</p>
+<li>COPY에 비해 조금 더 추가기능 제공 (로컬 전용 tar 파일 해제, 원격 url 지원)</li>
+</ul>
 </li>
-<li>
-<p><strong>COPY</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>COPY</strong><ul>
 <li>ADD와 비슷... 다만<ul>
 <li>curl, wget 등의 url로 끌어오는 건 어려워</li>
 <li>tar 압축 풀고 이런거 어려워</li>
 </ul>
 </li>
-<li>
-<p>단순히 컨테이너에 있는 로컬 파일 복사 </p>
+<li>단순히 컨테이너에 있는 로컬 파일 복사 </li>
+</ul>
 </li>
-<li>
-<p><strong>ENTRYPOINT</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ENTRYPOINT</strong><ul>
 <li>도커 이미지가 실행될 때 사용되는 기본 커맨드 지정 (강제)</li>
 <li>컨테이너 시작시 실행할 스크립트 or 명령</li>
-<li>
-<p>이미지의 메인커맨드 설정으로 명령어를 기본 사용</p>
+<li>이미지의 메인커맨드 설정으로 명령어를 기본 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>VOLUME</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>VOLUME</strong><ul>
 <li>Persistence 데이터 지정</li>
-<li>
-<p>도커 컨테이너가 만든 데이터 저장소 영역, 설정 저장소, 파일/폴더 노출</p>
+<li>도커 컨테이너가 만든 데이터 저장소 영역, 설정 저장소, 파일/폴더 노출</li>
+</ul>
 </li>
-<li>
-<p><strong>USER</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>USER</strong><ul>
 <li>명령어로 유저 그룹</li>
-<li>
-<p>사용 비추 (복잡성 올라감)</p>
+<li>사용 비추 (복잡성 올라감)</li>
+</ul>
 </li>
-<li>
-<p><strong>WORKDIR</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>WORKDIR</strong><ul>
 <li>RUN, CMD, ENTRYPOINT 등의 instruction을 어디서 실행할 것인지 지정!</li>
 <li>해당 이미지 내에서 현재 경로로 설정할 곳</li>
 <li>절대 경로 사용하기</li>
+</ul>
+</li>
 </ul>
 <h3 id="docker-build">docker build<a class="headerlink" href="#docker-build" title="Permanent link">&para;</a></h3>
 <blockquote>

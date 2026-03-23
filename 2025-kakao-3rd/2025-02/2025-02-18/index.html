@@ -22909,24 +22909,26 @@
 <h3 id="2025-02-18">2025-02-18<a class="headerlink" href="#2025-02-18" title="Permanent link">&para;</a></h3>
 <h2 id="akka">Akka 셋업<a class="headerlink" href="#akka" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>SupervisorStrategy</strong></li>
+<li><strong>SupervisorStrategy</strong><ul>
 <li>액터 모델에서 "상황 발생 시 실패를 격리하고 복구하는" 슈퍼비전 메커니즘 제공</li>
-<li>
-<p>각 액터는 자신의 자식 액터들을 감독하며, 자식 액터에서 예외 발생시 어찌 대처할지 정의</p>
-<ul>
+<li>각 액터는 자신의 자식 액터들을 감독하며, 자식 액터에서 예외 발생시 어찌 대처할지 정의<ul>
 <li><code>OneForOneStrategy</code>: 자식 액터 중 하나 실패시, 해당 액터에게만 재시작, 중단, 재개 조치 취함</li>
 <li><code>AllForOneStrategy</code>: 자식 액터 중 하나 실패시, 모든 자식 액터에게 동일한 조치 취함</li>
 </ul>
 </li>
-<li>
-<p><strong>ActorContext</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ActorContext</strong><ul>
 <li>각 액터는 자신의 실행환경을 나타내는 <code>ActorContext</code> 가짐</li>
 <li>액터 자신의 정보(self, 부모, 경로 등), 다음 기능 포함<ul>
 <li>자식 액터 생성 : <code>context.actorOf</code> 를 활용해 자식 액터 생성</li>
 <li>액터 경로 : <code>context.self</code>, <code>context.parent</code> 통한 자신의 경로 정보 확인</li>
 <li>감시 기능 : 타 액터 종료 감지를 위해 <code>context.watch(actorRef)</code></li>
 <li>스케줄링 : <code>context.system.scheduler</code> 일정 기간 후에 작업 예약</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

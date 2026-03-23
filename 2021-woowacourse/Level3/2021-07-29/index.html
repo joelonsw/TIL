@@ -22977,201 +22977,131 @@
 <ul>
 <li><em>참고 1: https://yangbongsoo.gitbook.io/study/spring-1/basic</em></li>
 <li><em>참고 2: https://haruhiism.tistory.com/186</em></li>
-<li>스프링 컨테이너가 다음 사이클 관리 <ul>
-<li>빈 객체 생성 -&gt; 프로퍼티 할당 -&gt; 초기화 수행 -&gt; 사용 끝나면 소멸</li>
-</ul>
-</li>
-<li>스프링은 InitializingBean 인터페이스를 통해 빈 객체가 초기화함<ul>
-<li>빈 라이프사이클<ul>
-<li>빈 객체 생성</li>
-<li>빈 프로퍼티 설정</li>
-<li>BeanNameAware.setBeanName() //해당 빈 객체는 초기화 과정에서 빈 이름 전달받음</li>
-<li>ApplicationContextAware.setApplicationContext() //해당 빈 객체는 초기화 과정에서 ApplicationContext 전달 받음</li>
-<li>BeanPostProcessor의 초기화 전처리</li>
-<li>초기화 <ul>
-<li><code>@PostConstruct</code> 메서드 //초기화 실행 메서드</li>
-<li>InitializingBean.afterPropertiesSet() //객체에 특별한 프로퍼티 추가적으로 설정하거나, 필수 요구사항 충족되었나 검사</li>
-<li>커스텀 initMethod</li>
-</ul>
-</li>
-<li>BeanPostProcessor의 초기화 후처리</li>
-<li>빈 객체 사용</li>
-<li>소멸<ul>
-<li><code>@PreDestroy</code> 메서드 //소멸 실행 메서드</li>
-<li>DisposableBean.destroy() //Bean들을 폐기하는데 해당 destroy 메서드가 호출됨</li>
-<li>커스텀 destroyMethod</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>스프링 컨테이너가 다음 사이클 관리 
+    - 빈 객체 생성 -&gt; 프로퍼티 할당 -&gt; 초기화 수행 -&gt; 사용 끝나면 소멸</li>
+<li>스프링은 InitializingBean 인터페이스를 통해 빈 객체가 초기화함
+    - 빈 라이프사이클
+        - 빈 객체 생성
+        - 빈 프로퍼티 설정
+        - BeanNameAware.setBeanName() //해당 빈 객체는 초기화 과정에서 빈 이름 전달받음
+        - ApplicationContextAware.setApplicationContext() //해당 빈 객체는 초기화 과정에서 ApplicationContext 전달 받음
+        - BeanPostProcessor의 초기화 전처리
+        - 초기화 
+            - <code>@PostConstruct</code> 메서드 //초기화 실행 메서드
+            - InitializingBean.afterPropertiesSet() //객체에 특별한 프로퍼티 추가적으로 설정하거나, 필수 요구사항 충족되었나 검사
+            - 커스텀 initMethod
+        - BeanPostProcessor의 초기화 후처리
+        - 빈 객체 사용
+        - 소멸
+            - <code>@PreDestroy</code> 메서드 //소멸 실행 메서드
+            - DisposableBean.destroy() //Bean들을 폐기하는데 해당 destroy 메서드가 호출됨
+            - 커스텀 destroyMethod</li>
 </ul>
 <h2 id="_2">인덱스<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Index</strong></p>
+<li><strong>Index</strong>
+    - 색인: 어떤 것을 뒤져서 찾아내거나 필요한 것을 밝힘
+    - DB의 Index 사용목적
+        - 대용량 데이터에서 원하는 데이터 빠르게 조회하기 위함
+        - SELECT * FROM feed WHERE title = "제목";
+            - SELECT 문의 조회 속도 향상 시킴
+            - Insert, Update, Delete 시 성능 조금 희생
+            - 대용량이 아니면 조회 시 성능 향상이 없음</li>
+</ul>
 <ul>
-<li>색인: 어떤 것을 뒤져서 찾아내거나 필요한 것을 밝힘</li>
-<li>DB의 Index 사용목적<ul>
-<li>대용량 데이터에서 원하는 데이터 빠르게 조회하기 위함</li>
-<li>SELECT * FROM feed WHERE title = "제목";<ul>
-<li>SELECT 문의 조회 속도 향상 시킴</li>
-<li>Insert, Update, Delete 시 성능 조금 희생</li>
-<li>대용량이 아니면 조회 시 성능 향상이 없음</li>
+<li><strong>Index의 작성/삭제</strong>
+    - Index도 하나의 DB 객체
+    - Oracle, DB2 등에서는 스키마 객체
+    - 작성
+        - CREATE INDEX 인덱스명 ON 테이블명(컬럼명);
+        - DROP INDEX 인덱스명 ON 테이블명;</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Index의 작성/삭제</strong></p>
 <ul>
-<li>Index도 하나의 DB 객체</li>
-<li>Oracle, DB2 등에서는 스키마 객체</li>
-<li>작성<ul>
-<li>CREATE INDEX 인덱스명 ON 테이블명(컬럼명);</li>
-<li>DROP INDEX 인덱스명 ON 테이블명;</li>
+<li><strong>Index 검색에 사용하는 알고리즘</strong>
+    - Full Table Scan
+        - 데이터가 1억건이 있다면 1억번의 값을 비교
+    - B-Tree
+        - 이진 탐색 with B-Tree (Balanced-Tree)
+            - 트리 치우치지 않게</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Index 검색에 사용하는 알고리즘</strong></p>
 <ul>
-<li>Full Table Scan<ul>
-<li>데이터가 1억건이 있다면 1억번의 값을 비교</li>
-</ul>
-</li>
-<li>B-Tree<ul>
-<li>이진 탐색 with B-Tree (Balanced-Tree)<ul>
-<li>트리 치우치지 않게</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Clustered Index vs Non-Clustered Index</strong></p>
-<ul>
-<li>Clustered Index: 군집 인덱스<ul>
-<li>인덱스 안에 데이터 포함</li>
-<li>특징<ul>
-<li>테이블 당 1개만 존재</li>
-<li>PK 제약 조건으로 컬럼 생성하면 자동 생성</li>
-<li>인덱스에 데이터 페이지가 함께 존재</li>
-<li>데이터가 정렬된 상태</li>
-</ul>
-</li>
-<li>루트 페이지 -&gt; 브랜치 페이지 -&gt; 리프 페이지<ul>
-<li><img alt="" src="../../image/2021-07-29-clustered.PNG" /></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Non-Clustered Index: 비군집 인덱스<ul>
-<li>인덱스 안에 데이터 비포함</li>
-<li>특징<ul>
-<li>보조 인덱스</li>
-<li>Unique로 생성하면 자동 생성</li>
-</ul>
-</li>
-<li>CUD는 유리</li>
-<li>R은 군집보다 더 걸려</li>
-</ul>
-</li>
-<li>Cardinality: 중복된 수치가 낮은 것에 인덱스를 생성하자!</li>
-</ul>
-</li>
+<li><strong>Clustered Index vs Non-Clustered Index</strong>
+    - Clustered Index: 군집 인덱스
+        - 인덱스 안에 데이터 포함
+        - 특징
+            - 테이블 당 1개만 존재
+            - PK 제약 조건으로 컬럼 생성하면 자동 생성
+            - 인덱스에 데이터 페이지가 함께 존재
+            - 데이터가 정렬된 상태
+        - 루트 페이지 -&gt; 브랜치 페이지 -&gt; 리프 페이지
+            - <img alt="" src="../../image/2021-07-29-clustered.PNG" />
+    - Non-Clustered Index: 비군집 인덱스
+        - 인덱스 안에 데이터 비포함
+        - 특징
+            - 보조 인덱스
+            - Unique로 생성하면 자동 생성
+        - CUD는 유리
+        - R은 군집보다 더 걸려
+    - Cardinality: 중복된 수치가 낮은 것에 인덱스를 생성하자!</li>
 </ul>
 <h2 id="_3">트랜잭션<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>사용자는 트랜잭션으로 DB 완결성 확보</strong></p>
+<li><strong>사용자는 트랜잭션으로 DB 완결성 확보</strong>
+    - 온전히 명령을 실행해줌
+    - 디비는 트랜잭션 설정 가지고 있어
+        - Redo, Undo 로그를 사용해서 트랜잭션 확보</li>
+</ul>
 <ul>
-<li>온전히 명령을 실행해줌</li>
-<li>디비는 트랜잭션 설정 가지고 있어<ul>
-<li>Redo, Undo 로그를 사용해서 트랜잭션 확보</li>
+<li><strong>트랜잭션은 원자성을 보장해야해!</strong>
+    - 롤백 혹은 커밋이 수행되어야 하나의 흐름 끝!</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>트랜잭션은 원자성을 보장해야해!</strong></p>
 <ul>
-<li>롤백 혹은 커밋이 수행되어야 하나의 흐름 끝!</li>
+<li><strong>여러 명령을 트랜잭션으로 묶고 싶으면 원래 개발자가 명시해줘야해!</strong>
+    - interface PlatformTransactionManager로 관리
+        - getTransaction, commit, rollback로 구성됨
+    - 구현체로는,,,
+        - DataSourceTransactionManager
+        - JpaTransactionManager
+        - JtaTransactionManager</li>
 </ul>
-</li>
-<li>
-<p><strong>여러 명령을 트랜잭션으로 묶고 싶으면 원래 개발자가 명시해줘야해!</strong></p>
 <ul>
-<li>interface PlatformTransactionManager로 관리<ul>
-<li>getTransaction, commit, rollback로 구성됨</li>
-</ul>
-</li>
-<li>구현체로는,,,<ul>
-<li>DataSourceTransactionManager</li>
-<li>JpaTransactionManager</li>
-<li>JtaTransactionManager</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>선언적 트랜잭션 - tx namespace</strong></p>
-<ul>
-<li>일괄적으로 트랜잭션 뚝딱뚝딱</li>
-<li><code>@Transactional</code><ul>
-<li>클래스: 해당 클래스 메서드 모두 다 이걸로</li>
-<li>메서드: 해당 메서드만</li>
-<li><img alt="" src="../../image/2021-07-29-transaction.PNG" /></li>
-<li>propagation: 트랜잭션 전파 옵션 줄 수 있음</li>
-<li>isolation: 동시에 많은 트랜잭션하면서도 부작용 없게</li>
-<li>readOnly: 트랜잭션 Update, Insert, Delete 노! JPA 더티체크</li>
-<li>rollbackForClassName: 어떤 예외가 발생할 경우에만 롤백!</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>선언적 트랜잭션 - tx namespace</strong>
+    - 일괄적으로 트랜잭션 뚝딱뚝딱
+    - <code>@Transactional</code>
+        - 클래스: 해당 클래스 메서드 모두 다 이걸로
+        - 메서드: 해당 메서드만
+        - <img alt="" src="../../image/2021-07-29-transaction.PNG" />
+        - propagation: 트랜잭션 전파 옵션 줄 수 있음
+        - isolation: 동시에 많은 트랜잭션하면서도 부작용 없게
+        - readOnly: 트랜잭션 Update, Insert, Delete 노! JPA 더티체크
+        - rollbackForClassName: 어떤 예외가 발생할 경우에만 롤백!</li>
 </ul>
 <h2 id="jpa">JPA 더티 체킹<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://jojoldu.tistory.com/415</em></li>
-<li>
-<p><strong>상황 보기</strong> </p>
-<ol>
-<li>트랜잭션 시작</li>
-<li>엔티티 조회</li>
-<li>엔티티 값 변경</li>
-<li>트랜잭션 커밋</li>
-<li>update 쿼리 없음애도 변경된 것이 DB에 저장됨!</li>
-</ol>
-</li>
-<li>
-<p><strong>더티 체킹</strong></p>
+<li><strong>상황 보기</strong> 
+    1. 트랜잭션 시작
+    2. 엔티티 조회
+    3. 엔티티 값 변경
+    4. 트랜잭션 커밋
+    - update 쿼리 없음애도 변경된 것이 DB에 저장됨!</li>
+</ul>
 <ul>
-<li>Dirty: 상태의 변화가 생긴 정도</li>
-<li>Dirty Checking: 상태 변경 검사</li>
-<li>JPA는 <strong>"트랜잭션이 끝나는 시점에 변화가 있는 모든 엔티티 객체를 DB에 자동 반영함"</strong><ul>
-<li>변화의 기준은 최초 조회 상태</li>
+<li><strong>더티 체킹</strong>
+    - Dirty: 상태의 변화가 생긴 정도
+    - Dirty Checking: 상태 변경 검사
+    - JPA는 <strong>"트랜잭션이 끝나는 시점에 변화가 있는 모든 엔티티 객체를 DB에 자동 반영함"</strong>
+        - 변화의 기준은 최초 조회 상태</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>더티 체킹 과정</strong></p>
 <ul>
-<li>JPA는 엔티티 조회하면 조회 상태 스냅샷 만듦</li>
-<li>트랜잭션 끝나는 시점에 비교해서 다른점이 있다면 Update Query 날림</li>
-<li>이런 상태 변경 검사의 대상은 영속성 컨텍스트가 관리하는 엔티티에만 적용됨!<ul>
-<li>준영속/비영속 상태의 엔티티는 더티 체킹 대상이 아님!</li>
-</ul>
-</li>
-<li>기본적으로 더티 체킹으로 업데이트 나가는 쿼리는 "모든 필드" 업데이트 시킴<ul>
-<li>엔티티 상단에 <code>@DynamicUpdate</code> 선언하면 바뀐 놈만 쿼리나감
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">feedId</span><span class="p">,</span><span class="w"> </span><span class="n">FeedRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li><strong>더티 체킹 과정</strong>
+    - JPA는 엔티티 조회하면 조회 상태 스냅샷 만듦
+    - 트랜잭션 끝나는 시점에 비교해서 다른점이 있다면 Update Query 날림
+    - 이런 상태 변경 검사의 대상은 영속성 컨텍스트가 관리하는 엔티티에만 적용됨!
+        - 준영속/비영속 상태의 엔티티는 더티 체킹 대상이 아님!
+    - 기본적으로 더티 체킹으로 업데이트 나가는 쿼리는 "모든 필드" 업데이트 시킴
+        - 엔티티 상단에 <code>@DynamicUpdate</code> 선언하면 바뀐 놈만 쿼리나감
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">feedId</span><span class="p">,</span><span class="w"> </span><span class="n">FeedRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">Feed</span><span class="w"> </span><span class="n">findFeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findEntityById</span><span class="p">(</span><span class="n">feedId</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">findFeed</span><span class="p">.</span><span class="na">notSameAuthor</span><span class="p">(</span><span class="n">user</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
@@ -23204,10 +23134,6 @@
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
 

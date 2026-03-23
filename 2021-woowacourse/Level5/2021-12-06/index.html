@@ -22909,41 +22909,27 @@
 <h3 id="2021-12-06">2021-12-06<a class="headerlink" href="#2021-12-06" title="Permanent link">&para;</a></h3>
 <h2 id="6">코어 자바스크립트 [6장. 프로토타입]<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>1. 프로토타입의 개념 이해</strong></p>
+<li><strong>1. 프로토타입의 개념 이해</strong>
+    - 프로토타입 기반 언어에서는 어떤 객체를 원형으로 삼고, 이를 복제함으로써 상속과 비슷한 효과 얻음
+    - 생성할 때 프로세스
+        1. 어떤 Constructor를 new 연산자와 함께 호출하면
+        2. Constructor에서 정의된 내용을 바탕으로 새로운 Instance 생성
+        3. 이때 Instance는 <code>__proto__</code> 라는 프로퍼티가 자동으로 부여됨
+        4. 이 프로퍼티는 Contructor의 prototype이라는 프로퍼티를 참조
+    - <code>__proto__</code>는 생략 가능한 프로퍼티임, 그냥 인스턴스에서 해당 API 직접 호출 가능
+    - 생성자 함수의 프로퍼티인 prototype 객체 내부에는 constructor 프로퍼티가 있음
+        - 인스턴스로 부터 그 원형이 무엇인지를 알 수 있는 수단</li>
+</ul>
 <ul>
-<li>프로토타입 기반 언어에서는 어떤 객체를 원형으로 삼고, 이를 복제함으로써 상속과 비슷한 효과 얻음</li>
-<li>생성할 때 프로세스<ol>
-<li>어떤 Constructor를 new 연산자와 함께 호출하면</li>
-<li>Constructor에서 정의된 내용을 바탕으로 새로운 Instance 생성</li>
-<li>이때 Instance는 <code>__proto__</code> 라는 프로퍼티가 자동으로 부여됨</li>
-<li>이 프로퍼티는 Contructor의 prototype이라는 프로퍼티를 참조</li>
-</ol>
-</li>
-<li><code>__proto__</code>는 생략 가능한 프로퍼티임, 그냥 인스턴스에서 해당 API 직접 호출 가능</li>
-<li>생성자 함수의 프로퍼티인 prototype 객체 내부에는 constructor 프로퍼티가 있음<ul>
-<li>인스턴스로 부터 그 원형이 무엇인지를 알 수 있는 수단</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>2. 프로토타입 체인</strong></p>
-<ul>
-<li>인스턴스가 동일한 이름의 프로퍼티 또는 메서드를 가지는 경우는 어쩌지?</li>
-<li>어떤 메서드를 호출하면, JS 엔진은 <ol>
-<li>데이터 자신의 프로퍼티들을 검색하여 원하는 메서드 있으면 실행</li>
-<li>없으면 <code>__proto__</code>를 검색해 있으면 실행</li>
-<li>없으면 다시 <code>__proto__</code>를 검색해 실행</li>
-</ol>
-</li>
-<li>대각선의 <code>__proto__</code>를 연결해나가면 체인관계를 이어나갈 수 있음<ul>
-<li>클래스와 비슷하게 동작하는 구조를 만들 수 있음</li>
-<li><code>__proto__</code>가 가리키는 대상, 즉 생성자 함수의 prototype이 연결하고자 하는 상위 생성자 함수의 인스턴스를 바라보게끔 함</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>2. 프로토타입 체인</strong>
+    - 인스턴스가 동일한 이름의 프로퍼티 또는 메서드를 가지는 경우는 어쩌지?
+    - 어떤 메서드를 호출하면, JS 엔진은 
+        1. 데이터 자신의 프로퍼티들을 검색하여 원하는 메서드 있으면 실행
+        2. 없으면 <code>__proto__</code>를 검색해 있으면 실행
+        3. 없으면 다시 <code>__proto__</code>를 검색해 실행
+    - 대각선의 <code>__proto__</code>를 연결해나가면 체인관계를 이어나갈 수 있음
+        - 클래스와 비슷하게 동작하는 구조를 만들 수 있음
+        - <code>__proto__</code>가 가리키는 대상, 즉 생성자 함수의 prototype이 연결하고자 하는 상위 생성자 함수의 인스턴스를 바라보게끔 함</li>
 </ul>
 
 

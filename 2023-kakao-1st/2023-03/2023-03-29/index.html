@@ -22909,29 +22909,30 @@
 <h3 id="2023-03-29">2023-03-29<a class="headerlink" href="#2023-03-29" title="Permanent link">&para;</a></h3>
 <h2 id="scala-either">Scala Either<a class="headerlink" href="#scala-either" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>left type 이거나 right type 이거나 둘 중에 하나!<ul>
 <li>Left: 실패케이스</li>
 <li>Right: 성공케이스</li>
 </ul>
 </li>
-<li>
-<p>Computation이 성공할수도 실패할수도 있음</p>
+<li>Computation이 성공할수도 실패할수도 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>Use Case</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Use Case</strong><ul>
 <li>Either는 에러/예외를 FP에서 핸들링하는 경우에 많이 사용됨</li>
 <li>그냥 예외 던지거나, null 반환하기 보다, Either를 반환하는게 낫다<ul>
 <li>successful result || error</li>
 </ul>
 </li>
 <li>이렇게 하면 에러 핸들링이 조금 더 명료하고 쉬워질 수 있음</li>
-<li>
-<p>주로 FP 합성을 활용해 Option, Try와 함께 많이 씀</p>
+<li>주로 FP 합성을 활용해 Option, Try와 함께 많이 씀</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Either</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nc">Left</span><span class="p">(</span><span class="s">&quot;Cannot divide by zero&quot;</span><span class="p">)</span>
@@ -22942,14 +22943,15 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kd">val</span><span class="w"> </span><span class="n">result1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="kd">val</span><span class="w"> </span><span class="n">result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>vs Option</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>vs Option</strong><ul>
 <li><code>Option</code>: presence, absence에 대한 판별</li>
 <li><code>Either</code>: success, failure에 대한 판별</li>
 <li>Option이 None 케이스에 대해 핸들링 하는 것 까먹으면 NPE 터져</li>
+</ul>
+</li>
 </ul>
 
 

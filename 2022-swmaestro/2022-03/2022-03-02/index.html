@@ -22911,15 +22911,15 @@
 <ul>
 <li><em>참고: https://tech.ssut.me/what-even-is-a-container/</em></li>
 <li><em>참고: https://anweh.tistory.com/67</em></li>
-<li><strong>Container vs VM</strong></li>
+<li><strong>Container vs VM</strong><ul>
 <li>하이퍼바이져 : OS 및 커널이 통째로 가상화</li>
 <li>Container : filesystem의 가상화만을 이루며, 호스트 PC의 커널을 공유</li>
-<li>
-<p>호스트 PC의 자원을 격리된 상태로 사용하기에 VM에 비해 성능저하 훨씬 적음</p>
+<li>호스트 PC의 자원을 격리된 상태로 사용하기에 VM에 비해 성능저하 훨씬 적음</li>
+</ul>
 </li>
-<li>
-<p><strong>namespace란?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>namespace란?</strong><ul>
 <li>프로세스를 독립시켜주는 가상화 기술, 각 컨테이너에서 실행된 프로세스가 시스템 등에 대해 독립</li>
 <li>VM : 각 게스트 머신별로 "독립적인 공간"을 제공하며, "서로가 충돌하지 않도록" 하는 기능 제공</li>
 <li>리눅스 : 6가지의 namespace 기능을 커널에 내장해둠 =&gt; 아래 6가지 기능으로 "독립적인 공간" 제공<ul>
@@ -22933,12 +22933,12 @@
 </li>
 <li>namespace 기능은 공간을 공유하되, 조금 더 제한된 공간을 할당해주는 것</li>
 <li>Linux : <code>nsenter</code> 라는 명령어로 namespace 공간에 접근</li>
-<li>
-<p>Docker : <code>docker exec</code> 라는 명령어로 docker namespace 공간에 접근</p>
+<li>Docker : <code>docker exec</code> 라는 명령어로 docker namespace 공간에 접근</li>
+</ul>
 </li>
-<li>
-<p><strong>cgroups</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>cgroups</strong><ul>
 <li>자원에 대한 제어를 가능하게 해주는 리눅스 커널의 기능</li>
 <li>다음과 같은 리소스를 cgroup을 통해 제어 가능<ul>
 <li>메모리</li>
@@ -22948,43 +22948,49 @@
 <li>/dev/</li>
 </ul>
 </li>
-<li>
-<p>최대 메모리 사용량 등을 cgroup에서 변경할 수 있는데, 이를 활용하여 container가 vm 마냥 리소스 할당량 제한 가능</p>
+<li>최대 메모리 사용량 등을 cgroup에서 변경할 수 있는데, 이를 활용하여 container가 vm 마냥 리소스 할당량 제한 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>OCI(Open Container Initative)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>OCI(Open Container Initative)</strong><ul>
 <li>LXC, LibContainer, runC : cgroup, namespace를 표준으로 정의해둔 OCI 스펙을 구현한 컨테이너 기술 구현체</li>
-<li>
-<p>Docker 1.8 이전 LXC를 이용해 구현, 이후에는 libcontainer -&gt; runC로 자체 구현체를 가짐</p>
+<li>Docker 1.8 이전 LXC를 이용해 구현, 이후에는 libcontainer -&gt; runC로 자체 구현체를 가짐</li>
+</ul>
 </li>
-<li>
-<p><strong>Docker</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Docker</strong><ul>
 <li><img alt="" src="../../images/2022-03-02-docker.png" /></li>
 <li>docker 1.11 버전 부터 다음과 같은 구조</li>
 <li>Docker Engine : 이미지, 네트워크, 디스크 등의 관리 역할</li>
 <li>containerd : OCI 구현체인 (주로 runC)를 이용해 container를 관리해주는 daemon</li>
 <li>가상의 격리환경 만들기<ul>
 <li>Container는 <strong>리눅스의 namespace, cgroup 활용</strong> 하여 구현됨!</li>
-<li>namespace</li>
+<li>namespace<ul>
 <li>프로세스 별로 리소스 사용분리</li>
 <li>VM에서는 그냥 Hardware 리소스 자체를 가상화</li>
 <li>namespace는 Linux내의 자원을 가상화<ul>
 <li>pid namespaces, net namespaces, ipc namespaces, mnt namespaces, uts namespaces</li>
 </ul>
 </li>
-<li>cgroup</li>
+</ul>
+</li>
+<li>cgroup<ul>
 <li>메모리/CPU/NW/Device/IO 를 제한하여 사용</li>
 </ul>
 </li>
-<li>
-<p><strong>도커를 통해 프로세스 격리, 프로세스에 필요한 컴퓨팅 자원 독립적으로 할당/격리해 완벽히 격리된 가상환경 구축</strong></p>
+</ul>
 </li>
-<li>
-<p><strong>놀토는 도커 몇버젼?</strong></p>
+<li><strong>도커를 통해 프로세스 격리, 프로세스에 필요한 컴퓨팅 자원 독립적으로 할당/격리해 완벽히 격리된 가상환경 구축</strong></li>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>놀토는 도커 몇버젼?</strong><ul>
 <li><img alt="" src="../../images/2022-03-02-docker-version.png" /></li>
+</ul>
+</li>
 </ul>
 
 

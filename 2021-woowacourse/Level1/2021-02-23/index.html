@@ -22931,53 +22931,39 @@
 <h3 id="2021-02-23">2021-02-23<a class="headerlink" href="#2021-02-23" title="Permanent link">&para;</a></h3>
 <h2 id="refactoring">refactoring 하면서 생긴 질문<a class="headerlink" href="#refactoring" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>scanner는 어디에?</p>
+<li>scanner는 어디에?
+    - Application 클래스의 메인 메서드에서 scanner 하나 생성해서 컨트롤러에게 넘겨줌
+    - View에서 밖에 안쓰이니 private static final?
+    - 애초에 scanner가 하는게 뭐야?</li>
+</ul>
 <ul>
-<li>Application 클래스의 메인 메서드에서 scanner 하나 생성해서 컨트롤러에게 넘겨줌</li>
-<li>View에서 밖에 안쓰이니 private static final?</li>
-<li>애초에 scanner가 하는게 뭐야?</li>
+<li>util의 범위는 어디까지? util 클래스의 기준?
+    - util성 클래스란게 애초에 뭔뜻이야?
+    - 비즈니스 로직이라는건 또 뭔뜻이지?
+    - LottoResult 같은 경우, LottoBundle과 WinningLotto를 받아서 결과를 Map으로 돌려주도록 했다
+        - 이유? 우선 static 메서드 하나만 필요한거 같아서 굳이 모델?
+        - 너무 model에 들어가면 너무 의존적이지 않나 서로서로? (굳이 뭔상관인가 싶긴한데 처음 생각은 그랬음)</li>
 </ul>
-</li>
-<li>
-<p>util의 범위는 어디까지? util 클래스의 기준?</p>
 <ul>
-<li>util성 클래스란게 애초에 뭔뜻이야?</li>
-<li>비즈니스 로직이라는건 또 뭔뜻이지?</li>
-<li>LottoResult 같은 경우, LottoBundle과 WinningLotto를 받아서 결과를 Map으로 돌려주도록 했다<ul>
-<li>이유? 우선 static 메서드 하나만 필요한거 같아서 굳이 모델?</li>
-<li>너무 model에 들어가면 너무 의존적이지 않나 서로서로? (굳이 뭔상관인가 싶긴한데 처음 생각은 그랬음)</li>
+<li>Stream이 어떻게 돌아가지? 
+    - 몇개가 겹치는지 검증하는 로직에서 두 가지 사이 고민
+        1. Stream으로 filter contains 이후 count
+        2. 본인 lotto를 복사하여 retainAll메서드 수행후 size() 반환
+    - 굳이 대놓고 새로운 객체를 생성하는 것 보단 "괜히" stream 생성이 오버헤드가 적지 않을까 싶어서 1번 채택
+    - stream의 오버헤드는? 얘는 복사 안하나?</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Stream이 어떻게 돌아가지? </p>
 <ul>
-<li>몇개가 겹치는지 검증하는 로직에서 두 가지 사이 고민<ol>
-<li>Stream으로 filter contains 이후 count</li>
-<li>본인 lotto를 복사하여 retainAll메서드 수행후 size() 반환</li>
-</ol>
-</li>
-<li>굳이 대놓고 새로운 객체를 생성하는 것 보단 "괜히" stream 생성이 오버헤드가 적지 않을까 싶어서 1번 채택</li>
-<li>stream의 오버헤드는? 얘는 복사 안하나?</li>
+<li>WinningLotto 내에 winningLotto 란 변수 이름 이상한데?</li>
 </ul>
-</li>
-<li>
-<p>WinningLotto 내에 winningLotto 란 변수 이름 이상한데?</p>
-</li>
-<li>
-<p>게임 머니에 대한 상태관리?</p>
-</li>
-<li>
-<p>Stream VS 배열 for?</p>
 <ul>
-<li>스트림 잘 모르는데 우선 변환에 오버헤드,</li>
-<li>최종연산하면 재사용못하니까 스트림 두 번 변환해야하고</li>
-<li>sum()은 어찌... 되는지 알아보자</li>
-<li>대신 스트림이 더 단단해 보이긴하네 뭐랄까 주변에 결과에 영향을 안받아 보이는 군</li>
+<li>게임 머니에 대한 상태관리?</li>
 </ul>
-</li>
+<ul>
+<li>Stream VS 배열 for?
+    - 스트림 잘 모르는데 우선 변환에 오버헤드,
+    - 최종연산하면 재사용못하니까 스트림 두 번 변환해야하고
+    - sum()은 어찌... 되는지 알아보자
+    - 대신 스트림이 더 단단해 보이긴하네 뭐랄까 주변에 결과에 영향을 안받아 보이는 군</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">checkProfitRate</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">LottoRank</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gameResult</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">moneySpent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">LottoRank</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
@@ -23001,51 +22987,35 @@
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>짜다보니 돈을 BigDecimal로 하려고했으나,,, GameMoney만 BigDecimal로 하고 나머지 돈계산은 거의 int로 했네<ul>
-<li>지금은 문제가 없어보임...</li>
-<li>언제 부터 BigDecimal을 써야하고 언제부터 int가 문제가 생기나?</li>
-</ul>
-</li>
+<li>짜다보니 돈을 BigDecimal로 하려고했으나,,, GameMoney만 BigDecimal로 하고 나머지 돈계산은 거의 int로 했네
+    - 지금은 문제가 없어보임...
+    - 언제 부터 BigDecimal을 써야하고 언제부터 int가 문제가 생기나?</li>
 </ul>
 <h2 id="refactoring_1">Refactoring 중점 사안<a class="headerlink" href="#refactoring_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>에러메시지와 예외 처리 코드 일치시킬것</p>
-</li>
-<li>
-<p>상수 Naming엔 적절한 의미가 필요하다</p>
-</li>
-<li>
-<p>메시지에 변수를 섞어 쓸수있으면 써봐라</p>
+<li>에러메시지와 예외 처리 코드 일치시킬것</li>
+</ul>
 <ul>
-<li>변경에 용이</li>
+<li>상수 Naming엔 적절한 의미가 필요하다</li>
 </ul>
-</li>
-<li>
-<p>Lotto.LOTTO_SIZE vs Lotto.SIZE</p>
 <ul>
-<li>굳이 의미가 중복된거를 두번쓰지마 </li>
+<li>메시지에 변수를 섞어 쓸수있으면 써봐라
+    - 변경에 용이</li>
 </ul>
-</li>
-<li>
-<p>stream() 내부의 람다 표현식 :: 로 대체가능</p>
 <ul>
-<li>함정은 :: 가 대체 뭔지 모름</li>
+<li>Lotto.LOTTO_SIZE vs Lotto.SIZE
+    - 굳이 의미가 중복된거를 두번쓰지마 </li>
 </ul>
-</li>
-<li>
-<p>BigDecimal은 값 객체, DTO 대체 가능</p>
 <ul>
-<li>when to use DTO?<ul>
-<li>서로 다른 레이어로 데이터의 getter/setter만을 통해 "운반"에 집중하는 클래스</li>
-<li>BigDecimal 불변객체...?<ul>
-<li>찾아보자</li>
+<li>stream() 내부의 람다 표현식 :: 로 대체가능
+    - 함정은 :: 가 대체 뭔지 모름</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li>BigDecimal은 값 객체, DTO 대체 가능
+    - when to use DTO?
+        - 서로 다른 레이어로 데이터의 getter/setter만을 통해 "운반"에 집중하는 클래스
+        - BigDecimal 불변객체...?
+            - 찾아보자</li>
 </ul>
 
 

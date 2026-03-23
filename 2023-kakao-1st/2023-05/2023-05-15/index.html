@@ -22953,8 +22953,10 @@
 <h3 id="2023-05-15">2023-05-15<a class="headerlink" href="#2023-05-15" title="Permanent link">&para;</a></h3>
 <h2 id="slick-db">Slick DB 연결<a class="headerlink" href="#slick-db" title="Permanent link">&para;</a></h2>
 <ol>
-<li>프로젝트 디펜던시에 슬릭 라이브러리 추가</li>
+<li>프로젝트 디펜던시에 슬릭 라이브러리 추가<ul>
 <li><code>libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.3"</code></li>
+</ul>
+</li>
 <li>DB Config 파일 추가
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">slick</span><span class="p">.</span><span class="nn">jdbc</span><span class="p">.</span><span class="nc">JdbcProfile</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -22992,29 +22994,29 @@
   - 모듈 기능, 파일 분할 기능, jsx 변환 작업, css loader 기능을 지원함
   - 번들러 만들어줘 여러개 파일을 하나로 묶어주기 때문에 네트워크 접속의 부담을 줄여 더 빠른 서비스 제공</p>
 <ul>
-<li><strong>CRA</strong></li>
+<li><strong>CRA</strong><ul>
 <li>create react app</li>
-<li>
-<p>기초 환경을 통틀어 설정하는 boiler plate</p>
+<li>기초 환경을 통틀어 설정하는 boiler plate</li>
+</ul>
 </li>
-<li>
-<p><strong>웹팩</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>웹팩</strong><ul>
 <li>JavaScript 어플리케이션을 위한 [모듈 번들러] =&gt; 모듈을 병합하는 도구!</li>
 <li>모듈이란?<ul>
 <li>각각의 js 파일을 지칭함</li>
 <li>웹팩에서는 HTML, CSS, JS, Images, Font 등 프론트 구성 파일 전부를 모듈로 간주</li>
 </ul>
 </li>
-<li>
-<p>번들러</p>
-<ul>
+<li>번들러<ul>
 <li>모든 모듈을 병합하고, 압축해서 만들어진 하나 이상의 파일</li>
 </ul>
 </li>
-<li>
-<p><strong>웹팩의 필요성</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>웹팩의 필요성</strong><ol>
 <li>모듈화의 필요성<ul>
 <li>커져버린 코드를 하나의 파일로 관리하면 빡세니까</li>
 <li>코드를 나누어 관리하는 모듈에 대한 필요성 생김</li>
@@ -23022,19 +23024,19 @@
 <li>ES2015 부터는 JS에서도 모듈 지원 (import, export)</li>
 </ul>
 </li>
-<li>
-<p>빠른 로딩 속도와 높은 성능</p>
-<ul>
+<li>빠른 로딩 속도와 높은 성능<ul>
 <li>웹팩을 통해 파일들(모듈)을 병합하고 압축해서 하나의 결과물(번들)로 만들면, 파일의 수/크기 줄어든다</li>
 <li>Code Splitting 기법을 통해 필요할 때만 불러올 수 있도록 번들을 분할하여 개선하는 방식도 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>웹팩 구성요소</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>웹팩 구성요소</strong><ul>
 <li>webpack &amp;&amp; webpack-cli 설치</li>
 <li>root 폴더에 webpack.config.js를 만들자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">entry</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="c1">// ...</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="p">},</span>
@@ -23051,8 +23053,10 @@
 </code></pre></div></li>
 <li>[Entry]<ul>
 <li>어플리케이션에 필요한 모듈 찾기</li>
-<li>번들링 시작하기 위한 "최초 진입점"</li>
+<li>번들링 시작하기 위한 "최초 진입점"<ul>
 <li>여기서 부터 Dependency Graph 그려서 뚝딱 찾아내세요~</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>[Output]<ul>
@@ -23068,26 +23072,32 @@
 <li>css-loader, style-loader</li>
 </ul>
 </li>
-<li>
-<p>[Plugins]</p>
-<ul>
+<li>[Plugins]<ul>
 <li>로더가 못하는 일 뚝딱</li>
 </ul>
 </li>
-<li>
-<p><strong>정리</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>정리</strong><ol>
 <li>먼저 엔트리로 부터 의존성있는 모듈 찾음</li>
 <li>로더를 통해 각 모듈을 읽을 수 있게 해석</li>
 <li>모듈 병합/압축하여 아웃풋에 번들된 결과물을 생성</li>
 <li>생성된 결과물에 추가적인 작업 필요하면 플러그인 통해 처리</li>
+</ol>
+</li>
 </ul>
 <h2 id="babel">Babel<a class="headerlink" href="#babel" title="Permanent link">&para;</a></h2>
 <ul>
-<li>트랜스파일러! </li>
+<li>트랜스파일러! <ul>
 <li>ES6 기능을 제공하지 않기 때문에 ES5 코드로 변환시키는 과정을 누군간 해줘야함</li>
-<li>트랜스파일링?</li>
+</ul>
+</li>
+<li>트랜스파일링?<ul>
 <li>특정 언어로 작성된 코드를 비슷한 다른 언어로 변환</li>
+</ul>
+</li>
 </ul>
 
 

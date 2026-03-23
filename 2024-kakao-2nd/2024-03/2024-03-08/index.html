@@ -22909,42 +22909,44 @@
 <h3 id="2024-03-08">2024-03-08<a class="headerlink" href="#2024-03-08" title="Permanent link">&para;</a></h3>
 <h2 id="sql">안 써본 SQL 기능들<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>datetime 필드를 다루는 메서드</strong></li>
+<li><strong>datetime 필드를 다루는 메서드</strong><ul>
 <li><code>DATE_ADD(필드, INTERVER -3 MONTH)</code>: 3달 전으로 필드의 값을 계산해 반환하는 메서드</li>
 <li><code>DATE_FORMAT(필드, '%Y-%m')</code>: YYYY-MM 형식으로 필드의 값을 변환해주는 메서드</li>
 <li><code>DATE(필드)</code>: YYYY-MM-dd 형식으로 시간은 쳐내고 반환해주는 메서드</li>
-<li>
-<p><code>STR_TO_DATE(필드, '%Y-%m-%d')</code>: 문자열을 데이트 형식으로 변환</p>
+<li><code>STR_TO_DATE(필드, '%Y-%m-%d')</code>: 문자열을 데이트 형식으로 변환</li>
+</ul>
 </li>
-<li>
-<p><strong>랜덤 추출 관련</strong></p>
+</ul>
+<ul>
+<li><strong>랜덤 추출 관련</strong><ul>
+<li><code>ORDER BY RAND()</code>: 무작위로 정렬. 랜덤한 데이터를 추출해야할 때 유용</li>
+</ul>
 </li>
-<li>
-<p><code>ORDER BY RAND()</code>: 무작위로 정렬. 랜덤한 데이터를 추출해야할 때 유용</p>
-</li>
-<li>
-<p><strong>데이터 파일 한번에 적재</strong>
+</ul>
+<ul>
+<li><strong>데이터 파일 한번에 적재</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="n">INFILE</span><span class="w"> </span><span class="s1">&#39;file.csv&#39;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">test</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">FIELDS</span><span class="w"> </span><span class="n">TERMINATED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;,&#39;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">LINES</span><span class="w"> </span><span class="n">TERMINATED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Bulk Insert</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Bulk Insert</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a1&#39;</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a2&#39;</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a3&#39;</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a4&#39;</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a5&#39;</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a6&#39;</span><span class="p">);</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>autocommit</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>autocommit</strong><ul>
 <li>사용자가 Commit 명령을 따로 하지 않아도 즉시 반영
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SET</span><span class="w"> </span><span class="n">autocommit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SET</span><span class="w"> </span><span class="n">autocommit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">SET</span><span class="w"> </span><span class="n">unique_checks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">SET</span><span class="w"> </span><span class="n">foregin_key_checks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

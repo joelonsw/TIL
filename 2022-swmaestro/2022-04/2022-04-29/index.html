@@ -22912,28 +22912,27 @@
 <li><em>참고 : https://24hours-beginner.tistory.com/278</em></li>
 <li><em>참고 : https://donghwa-kim.github.io/vscode_ssh.html</em></li>
 <li><em>참고 : https://velog.io/@bismute/VSCode%EB%A1%9C-Remove-Server-%EC%95%88%EC%9D%98-Container%EC%97%90-%EC%A0%91%EA%B7%BC%ED%95%98%EA%B8%B0</em></li>
-<li><strong>1. 준비물</strong></li>
+<li><strong>1. 준비물</strong><ul>
 <li>IDE<ul>
 <li>vscode</li>
 </ul>
 </li>
-<li>
-<p>Extension</p>
-<ul>
+<li>Extension<ul>
 <li>Remote Development</li>
 <li>SSH</li>
 <li>WSL</li>
 <li>Containers</li>
 </ul>
 </li>
-<li>
-<p><strong>2. SSH 관리 파일 수정</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>2. SSH 관리 파일 수정</strong><ul>
 <li>Ctrl + Shift + P</li>
 <li>config 파일 선택</li>
-<li>
-<p>다음과 같은 설정 작성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Host [계정명]@[IP 주소]:[포트번호] 
+<li>다음과 같은 설정 작성
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Host [계정명]@[IP 주소]:[포트번호] 
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    HostName [IP 주소] 
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    User [계정명] 
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    Port [포트 번호] 
@@ -22942,38 +22941,45 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    HostName 192.168.0.1 
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    Port 22 
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    User test
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>3. ssh 접속</strong></p>
+</ul>
+<ul>
+<li><strong>3. ssh 접속</strong><ul>
+<li>Remote-SSH: Connect to Host 검색 =&gt; 등록한 host 선택 =&gt; host의 OS 선택 =&gt; 컨티뉴 =&gt; 비밀번호 입력</li>
+</ul>
 </li>
-<li>
-<p>Remote-SSH: Connect to Host 검색 =&gt; 등록한 host 선택 =&gt; host의 OS 선택 =&gt; 컨티뉴 =&gt; 비밀번호 입력</p>
-</li>
-<li>
-<p><strong>4. 컨테이너의 폴더에 접근하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>4. 컨테이너의 폴더에 접근하기</strong><ul>
 <li>Docker용 Extension 추가로 Install</li>
 <li>SSH에서 접근한 상태에서 원격 접속기 Containers를 클릭</li>
-<li>
-<p>우 클릭 =&gt; Attach to Container</p>
+<li>우 클릭 =&gt; Attach to Container</li>
+</ul>
 </li>
-<li>
-<p><strong>리모트 서버 도커에 VSCODE로 접속하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>리모트 서버 도커에 VSCODE로 접속하기</strong><ul>
 <li>어떻게 하는가?<ol>
-<li>Local에 도커 설치</li>
+<li>Local에 도커 설치<ul>
 <li>Docker Daemon이 server-client 처럼 통신해야 함</li>
+</ul>
+</li>
 <li>VSCode의 Docker Host를 외부 서버로 세팅</li>
 <li>해당 서버에서 도커 컨테이너 실행</li>
 <li>도커 컨테이너에 붙기</li>
 </ol>
 </li>
 <li>원리<ul>
-<li>Docker는 Host Process가 Container Process 관리하는 형식</li>
+<li>Docker는 Host Process가 Container Process 관리하는 형식<ul>
 <li>해당 프로세스들안에 반가상화된 컨테이너와 통신하는 구조</li>
+</ul>
+</li>
 <li>따라서, Host Process가 사용하는 Port에 접근할 수 있다면, Docker도 Local 마냥 사용 가능 + 권한 가져오기 가능</li>
 <li>Docker-Swarm이 해당 방식으로 오케스트레이션 제공</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

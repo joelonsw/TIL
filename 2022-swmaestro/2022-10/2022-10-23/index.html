@@ -22953,12 +22953,10 @@
 <h3 id="2022-10-23">2022-10-23<a class="headerlink" href="#2022-10-23" title="Permanent link">&para;</a></h3>
 <h2 id="database-connection">Database Connection<a class="headerlink" href="#database-connection" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>히카리 풀 관련 쓰레드 <code>HikariPool-1 housekeeper</code> 는 백그라운드에서 계속 돌아가면서 커넥션 타임아웃된거 집 들어오라하고 관리하고 그러는 듯</p>
-</li>
-<li>
-<p><strong>이벤트 조회 API 호출시</strong></p>
-</li>
+<li>히카리 풀 관련 쓰레드 <code>HikariPool-1 housekeeper</code> 는 백그라운드에서 계속 돌아가면서 커넥션 타임아웃된거 집 들어오라하고 관리하고 그러는 듯</li>
+</ul>
+<ul>
+<li><strong>이벤트 조회 API 호출시</strong><ul>
 <li><strong>JPA EntityManager</strong> 열고 (OSIV 열고)</li>
 <li><strong>JPATransactionManager</strong> 에서<ul>
 <li>쓰레드 기반 EntityManager 획득!</li>
@@ -22967,9 +22965,8 @@
 <li>에러 없으니 커밋!</li>
 </ul>
 </li>
-<li>
-<p><strong>JPA EntityManager</strong> 닫고 (OSIV 닫고)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>15:46:46.955 [DEBUG] [HikariPool-1 housekeeper] [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+<li><strong>JPA EntityManager</strong> 닫고 (OSIV 닫고)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>15:46:46.955 [DEBUG] [HikariPool-1 housekeeper] [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>15:46:46.956 [DEBUG] [HikariPool-1 housekeeper] [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>15:47:07.077 [DEBUG] [http-nio-8080-exec-4] [o.s.o.j.s.OpenEntityManagerInViewInterceptor] - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>15:47:07.077 [DEBUG] [http-nio-8080-exec-4] [o.s.orm.jpa.JpaTransactionManager] - Found thread-bound EntityManager [SessionImpl(81249392&lt;open&gt;)] for JPA transaction
@@ -22986,11 +22983,12 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>15:47:07.111 [DEBUG] [http-nio-8080-exec-4] [o.s.o.j.s.OpenEntityManagerInViewInterceptor] - Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>15:47:16.956 [DEBUG] [HikariPool-1 housekeeper] [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>15:47:16.956 [DEBUG] [HikariPool-1 housekeeper] [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>닉네임 변경 API 호출시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>닉네임 변경 API 호출시</strong><ul>
 <li><strong>JPA EntityManager</strong> 열고 (OSIV 열고) - Controller Layer</li>
 <li><strong>JPA TransactionManager</strong> 에서 - Service Layer<ul>
 <li>쓰레드 기반 EntityManager 획득!</li>
@@ -22999,7 +22997,7 @@
 </ul>
 </li>
 <li><strong>JPA EntityManager</strong> 닫고 (OSIV 닫고) - Controller Layer
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>15:55:12.201 [DEBUG] [http-nio-8080-exec-10] [o.s.o.j.s.OpenEntityManagerInViewInterceptor] - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>15:55:12.201 [DEBUG] [http-nio-8080-exec-10] [o.s.o.j.s.OpenEntityManagerInViewInterceptor] - Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>15:55:12.289 [DEBUG] [http-nio-8080-exec-10] [o.s.orm.jpa.JpaTransactionManager] - Found thread-bound EntityManager [SessionImpl(860516403&lt;open&gt;)] for JPA transaction
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>15:55:12.289 [DEBUG] [http-nio-8080-exec-10] [o.s.orm.jpa.JpaTransactionManager] - Creating new transaction with name [com.backend.connectable.user.service.UserService.modifyUserByUserDetails]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>15:55:12.292 [DEBUG] [http-nio-8080-exec-10] [o.s.orm.jpa.JpaTransactionManager] - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@109dab5b]
@@ -23041,12 +23039,12 @@
 <a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>15:56:16.960 [DEBUG] [HikariPool-1 housekeeper] [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="_1">쿠버네티스<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>Container를 운영하다보면 발생하는 문제들에 대한 해결책 필요</p>
-<ul>
+<li><strong>개요</strong><ul>
+<li>Container를 운영하다보면 발생하는 문제들에 대한 해결책 필요<ul>
 <li>여러 Container에 어플리케이션 배포할 때는 어떻게 하는가? </li>
 <li>Health Check 및 설정관리는?</li>
 <li>Container를 새로 띄우면 IP가 바뀌는데, Reverse Proxy 어떻게 감지하는가?</li>
@@ -23055,9 +23053,11 @@
 <li>여러 Node에서 관리하다보면 IP 중복은 안되는가? </li>
 </ul>
 </li>
-<li>
-<p><strong>특징</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>특징</strong><ul>
 <li>Orchestration<ul>
 <li>Master Node의 관리 아래 다양한 컨테이너를 구동</li>
 </ul>
@@ -23066,17 +23066,17 @@
 <li>원하는 상태를 지정하여 쿠버네티스가 자동 조절 및 복구</li>
 </ul>
 </li>
-<li>
-<p>추상화된 리소스 관리</p>
-<ul>
+<li>추상화된 리소스 관리<ul>
 <li>서버별 리소스 사용량 모니터링, 리소스 사용량 제한 등 서버 리소스 관리해줌</li>
 <li>컨테이너 증설 시 내장 스케줄러가 최적 노트 찾아 배치</li>
 <li>자동 확장 기능 제공</li>
 </ul>
 </li>
-<li>
-<p><strong>구성요소</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>구성요소</strong><ul>
 <li>[Ingress] : Nginx 기반 리버스 프록시<ul>
 <li>유입되는 트래픽을 제어</li>
 <li>부하 분산/SSL/도메인 기반 라우팅 등의 기능 제공</li>
@@ -23084,8 +23084,10 @@
 </li>
 <li>[Service] : 끝점 담당<ul>
 <li>어플리케이션 묶음</li>
-<li>Pod와 연결되는 논리적인 Endpoint 제공</li>
+<li>Pod와 연결되는 논리적인 Endpoint 제공<ul>
 <li>pod 변경되어도 사용자는 동일한 IP 사용가능</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>[Pod] : 컨테이너 실행 담당<ul>
@@ -23098,35 +23100,41 @@
 </ul>
 </li>
 <li>Deployment : 배포 담당<ul>
-<li>롤링 업데이트 지원 </li>
+<li>롤링 업데이트 지원 <ul>
 <li><img alt="" src="../../images/2022-10-23-rolling-update.png" /></li>
 <li>중간중간 교체 쓱싹 하는 방식</li>
+</ul>
+</li>
 <li>Scale Out 지원</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h2 id="_2">무중단배포<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Blue/Green 배포</strong></li>
+<li><strong>Blue/Green 배포</strong><ul>
 <li><img alt="" src="../../images/2022-10-23-blue-green.png" /></li>
 <li>블루가 서비스하다가, 그린에 새 버전 배포한 후</li>
 <li>그린으로 트래픽 전환</li>
-<li>
-<p>인스턴스 2배로 필요</p>
+<li>인스턴스 2배로 필요</li>
+</ul>
 </li>
-<li>
-<p><strong>Rolling Update 배포</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Rolling Update 배포</strong><ul>
 <li><img alt="" src="../../images/2022-10-23-rolling-update.png" /></li>
 <li>n대의 서버에 새로운 버전을 교체하는 방식</li>
-<li>
-<p>서로 다른 버전이 동시에 서비스 되는 시간이 있음</p>
+<li>서로 다른 버전이 동시에 서비스 되는 시간이 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>Canary 배포</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Canary 배포</strong><ul>
 <li><img alt="" src="../../images/2022-10-23-canary.png" /></li>
 <li>트래픽을 천천히 새 버전으로 점차 늘려가는 방식</li>
+</ul>
+</li>
 </ul>
 
 

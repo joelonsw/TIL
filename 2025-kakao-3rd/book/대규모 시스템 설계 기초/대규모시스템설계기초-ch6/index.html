@@ -22890,32 +22890,32 @@
 <p><em>참고: https://github.com/shinhee-rebecca/system-design-interview-1/blob/main/6%EC%9E%A5/README.md</em><br />
 <em>참고: https://www.mydistributed.systems/2022/10/dynamodb-ten-years-later.html</em>  </p>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>key-value 저장을 해시테이블에 하면 제일 빠르겠지만, 용량의 한계를 마주한다. 데이터 압축/디스크 사용 해결 한계가 있음</p>
+<li><strong>개요</strong><ul>
+<li>key-value 저장을 해시테이블에 하면 제일 빠르겠지만, 용량의 한계를 마주한다. 데이터 압축/디스크 사용 해결 한계가 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>CAP 정리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>CAP 정리</strong><ul>
 <li>일관성/가용성/파티션 감내 3가지 요구사항 동시 만족 불가능<ul>
 <li>파티션 감내: 네트워크 장애 생겨도 시스템 계속 동작</li>
 <li>현실세계 NW 장애 못피해서 CP/AP 시스템만 동작</li>
 </ul>
 </li>
 <li>노드 장애 - 일관성 유지 : 시스템 읽기/쓰기 멈추기</li>
-<li>
-<p>노드 장애 - 가용성 유지 : 일관성 깨짐</p>
+<li>노드 장애 - 가용성 유지 : 일관성 깨짐</li>
+</ul>
 </li>
-<li>
-<p><strong>데이터 파티션/다중화</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>데이터 파티션/다중화</strong><ul>
 <li>안정 해시 설계를 통해 데이터를 여러 서버에 고르게 분산</li>
-<li>
-<p>해시링 위 배치 -&gt; 시계 방향 순회 -&gt; 첫 N개 서버 데이터 사본 보관</p>
+<li>해시링 위 배치 -&gt; 시계 방향 순회 -&gt; 첫 N개 서버 데이터 사본 보관</li>
+</ul>
 </li>
-<li>
-<p><strong>데이터 일관성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>데이터 일관성</strong><ul>
 <li>Quorom 프로토콜</li>
 <li>정의<ul>
 <li>N : 사본 개수</li>
@@ -22930,31 +22930,33 @@
 <li>W+R &lt;= N: 강한 일관성이 보장되지 않음</li>
 </ul>
 </li>
-<li>
-<p>일관성 모델: 강한 일관성/약한 일관성/최종 일관성</p>
+<li>일관성 모델: 강한 일관성/약한 일관성/최종 일관성</li>
+</ul>
 </li>
-<li>
-<p><strong>데이터 비일관성 해소 기법</strong></p>
-</li>
-<li>
-<p>vector clock을 사용하여 버전 충돌/순서 병합</p>
-</li>
-<li>
-<p><strong>장애 감지</strong></p>
-</li>
-<li>분산 시스템에서 두 대 이상 같은 서버 장애 보고 -&gt; 모든 노드 사이 멀티캐스팅 채널 구축 비효율</li>
-<li>
-<p>가십 프로토콜 사용</p>
+</ul>
 <ul>
+<li><strong>데이터 비일관성 해소 기법</strong><ul>
+<li>vector clock을 사용하여 버전 충돌/순서 병합</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>장애 감지</strong><ul>
+<li>분산 시스템에서 두 대 이상 같은 서버 장애 보고 -&gt; 모든 노드 사이 멀티캐스팅 채널 구축 비효율</li>
+<li>가십 프로토콜 사용<ul>
 <li>무작위 선정 노드 heartbeat counter 갱신</li>
 <li>약간의 헬스체크 느낌</li>
 </ul>
 </li>
-<li>
-<p><strong>장애 처리</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>장애 처리</strong><ul>
 <li>일시적 장애처리: 타 서버에서 요청 대신 처리</li>
 <li>영구 장애처리 : 머클 트리 (해시트리)</li>
+</ul>
+</li>
 </ul>
 
 

@@ -22938,30 +22938,32 @@
   - ex) true/false 저장시...
     - boolean &gt; char(0, 1) &gt; int(0, 1)</p>
 <ul>
-<li><strong>Encoding</strong></li>
+<li><strong>Encoding</strong><ul>
 <li>character나 grapheme을 어떻게 binary로 표시할지 규정한 방법<ul>
 <li>ex) ASCII, ISO-8859-1/LATIN-1, EUC-KR</li>
 </ul>
 </li>
-<li>
-<p>대표적인게 UNICODE</p>
-<ul>
+<li>대표적인게 UNICODE<ul>
 <li>UTF-8: 문자당 1~4 바이트 (호환성 탑, 복잡한 코드 체계, 인/디코딩 때매 느린 속도, 저장공간 많이 먹음)</li>
 <li>UTF-16: 문자당 2 or 4 바이트</li>
 <li>UTF-32: 문자당 4 바이트 (처리속도 탑)</li>
 </ul>
 </li>
-<li>
-<p><strong>Charset (문자 집합)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Charset (문자 집합)</strong><ul>
 <li><strong>[UTF-8 Charset (다국어 언어셋)]</strong><ul>
 <li>실생활의 모든 텍스트 데이터를 저장하고자 나옴</li>
 <li>UTF-8로는 1~4 바이트까지 저장 가능 (가변 바이트)</li>
 <li>전 세계 모든 언어를 다룰 수 있는 "다국어" 언어셋</li>
-<li>MySQL/MariaDB 도 UTF-8 지원</li>
+<li>MySQL/MariaDB 도 UTF-8 지원<ul>
 <li>전세계 모든 언어가 21bit에 저장되기에, MySQL은 utf8을 3바이트 가변 자료형으로 설정</li>
 <li>그런데 최근 나온 4바이트 문자열 <strong>"이모지"</strong>의 등장으로 utf8에 값 저장시 값 손실!</li>
 <li>널리 사용되던 MySQL 환경에서 charset: utf8, collation: utf8_general_ci 인데 이게 환경에서 문제됨</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>[4바이트 UTF-8 Charset (utf8mb4)]</strong><ul>
@@ -22969,9 +22971,8 @@
 <li>Emoji 문자열이 4바이트라서 뚝딱 처리가능</li>
 </ul>
 </li>
-<li>
-<p>MySQL 지원 Charset
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mysql&gt; show character set;
+<li>MySQL 지원 Charset
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mysql&gt; show character set;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>+----------+---------------------------------+---------------------+--------+
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| Charset  | Description                     | Default collation   | Maxlen |
@@ -22985,11 +22986,12 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>| utf8     | UTF-8 Unicode                   | utf8_general_ci     |      3 |
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>| utf8mb4  | UTF-8 Unicode                   | utf8mb4_0900_ai_ci  |      4 |
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>+----------+---------------------------------+---------------------+--------+
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Collation (정렬)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Collation (정렬)</strong><ul>
 <li>텍스트 데이터를 정렬(order by)할 때 사용!</li>
 <li>TEXT 자료형에서만 사용할 수 있는 속성!<ul>
 <li>text에서 a 와 b 중에 뭐가 큰지 어찌알지?</li>
@@ -22997,14 +22999,18 @@
 </ul>
 </li>
 <li><strong>[utf8_bin(utf8mb4_bin)]</strong><ul>
-<li>바이너리 값 그대로 정렬</li>
+<li>바이너리 값 그대로 정렬<ul>
 <li>ex) A &gt; B &gt; a &gt; b</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>[utf8_general_ci(utf8mb4_general_ci)]</strong><ul>
 <li>텍스트 정렬시 a다음 b가 나오는게 맞다는 정렬방식</li>
-<li>바이너리 한차례 가공</li>
+<li>바이너리 한차례 가공<ul>
 <li>ex) A &gt; a &gt; B &gt; b</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>[utf8_unicode_ci(utf8mb4_unicode_ci)]</strong><ul>
@@ -23012,9 +23018,8 @@
 <li>한영중일 사용환경에서는 general_ci, unicode_ci 결과 동일</li>
 </ul>
 </li>
-<li>
-<p>MySQL 지원 Collation
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mysql&gt;  SHOW COLLATION;
+<li>MySQL 지원 Collation
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mysql&gt;  SHOW COLLATION;
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>+----------------------------+----------+-----+---------+----------+---------+---------------+
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>| Collation                  | Charset  | Id  | Default | Compiled | Sortlen | Pad_attribute |
@@ -23032,26 +23037,29 @@
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>| utf8mb4_cs_0900_ai_ci      | utf8mb4  | 266 |         | Yes      |       0 | NO PAD        |
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>| utf8mb4_cs_0900_as_cs      | utf8mb4  | 289 |         | Yes      |       0 | NO PAD        |
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>+----------------------------+----------+-----+---------+----------+---------+---------------+
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>MySQL 8의 charset, collation 변경 사항</strong></p>
-</li>
-<li>MySQL 8의 기본 charset: latin-1 =&gt; utf8mb4</li>
-<li>
-<p>MySQL 8의 기본 collation: utf8mb4_0900_ai_ci</p>
+</ul>
 <ul>
+<li><strong>MySQL 8의 charset, collation 변경 사항</strong><ul>
+<li>MySQL 8의 기본 charset: latin-1 =&gt; utf8mb4</li>
+<li>MySQL 8의 기본 collation: utf8mb4_0900_ai_ci<ul>
 <li>utf8mb4: 각 character 최대 4바이트의 utf8 인코딩 지원</li>
 <li>0900: Unicode의 collation algorithm 9.0.0 지원</li>
 <li>ai: accent insensitivity. (e, è, é, ê, ë 같은 문자로 취급 )</li>
 <li>ci: case insensitivity. (p, P 같은 문자로 취급)</li>
 </ul>
 </li>
-<li>
-<p><strong>Collation 변경에 어찌 대처하는가?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Collation 변경에 어찌 대처하는가?</strong><ul>
 <li>Collation 변경에 따라 정렬, index, pk, unique 까지 영향 줌. </li>
 <li>다개국어 DB는 collation 변경 영향도 측정이 어려움</li>
+</ul>
+</li>
 </ul>
 <h2 id="es-index-templates">ES index templates<a class="headerlink" href="#es-index-templates" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://developer-jp.tistory.com/41</em>
@@ -23060,48 +23068,52 @@
   - 인덱스 템플릿을 통해 인덱스 생성 시 어떻게 구성할지 알려줄 수 있음
   - 인덱스 생성의 기초로 템플릿의 설정이 반영됨</p>
 <ul>
-<li><strong>템플릿의 구성요소</strong></li>
-<li>
-<p>2가지의 템플릿 구성 요소가 있음</p>
-<ol>
-<li>index template (더 큰 개념인가보다)</li>
+<li><strong>템플릿의 구성요소</strong><ul>
+<li>2가지의 템플릿 구성 요소가 있음<ol>
+<li>index template (더 큰 개념인가보다)<ul>
 <li>컴포넌트 템플릿 모음을 포함 가능 </li>
 <li>mapping, setting, alias 설정 가능</li>
-<li>component template</li>
+</ul>
+</li>
+<li>component template<ul>
 <li>재사용 가능한 블럭</li>
 <li>mapping, setting, alias 설정 가능</li>
 <li>인덱스 템플릿 구성 가능하나, 인덱스 집합에 직접 적용되진 X</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p><strong>컴포넌트 템플릿</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>컴포넌트 템플릿</strong><ul>
 <li>다수의 템플릿 관리하는데 문제 있을 수 있음<ul>
 <li>인덱스 템플릿간의 중복 =&gt; 클러스터 상태 커짐</li>
 <li>모든 인덱스 템플릿 변경 시, 각 템플릿 수동 변경</li>
 <li>인덱스가 여러 템플릿과 일치시, opensearch 자체적 병합 시도하며 예기치 않은 병합</li>
 </ul>
 </li>
-<li>
-<p>컴포넌트를 통해 공통 설정, 매핑, 별칭 재사용 가능한 블록으로 추상화!</p>
+<li>컴포넌트를 통해 공통 설정, 매핑, 별칭 재사용 가능한 블록으로 추상화!</li>
+</ul>
 </li>
-<li>
-<p><strong>Index template 조건</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Index template 조건</strong><ol>
 <li>Composable template이 먼저 나와야함.<ul>
 <li>Composable template들의 조건에 아무것도 맞지 않으면, legacy template으로 처리 될 수 있음</li>
 </ul>
 </li>
 <li>Index가 명시적으로 생성되고, 인덱스 템플릿과도 일치한다면, 인덱스 생성 요청의 설정이 가장 우선순위임</li>
 <li>인덱스 템플릿의 세팅은 구성 요소 템플릿의 설정보다 우선함</li>
-<li>
-<p>새 데이터 스트림, 인덱스가 둘 이상의 인덱스 템플릿과 일치한다면, 우선순위 높은 인덱스 템플릿 채택</p>
+<li>새 데이터 스트림, 인덱스가 둘 이상의 인덱스 템플릿과 일치한다면, 우선순위 높은 인덱스 템플릿 채택</li>
+</ol>
 </li>
-<li>
-<p><strong>예시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예시</strong><ul>
 <li>component template 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PUT _component_template/component_template1
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PUT _component_template/component_template1
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>{
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;template&quot;: {
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    &quot;mappings&quot;: {
@@ -23130,9 +23142,8 @@
 <a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>  }
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>}
 </code></pre></div></li>
-<li>
-<p>index template 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PUT _index_template/template_1
+<li>index template 생성
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PUT _index_template/template_1
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>{
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  &quot;index_patterns&quot;: [&quot;te*&quot;, &quot;bar*&quot;],
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  &quot;template&quot;: {
@@ -23164,13 +23175,16 @@
 <a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    &quot;description&quot;: &quot;my custom&quot;
 <a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>  }
 <a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>}
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>활용처</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>활용처</strong><ul>
 <li>이미 정의된 mapping, setting 그대로 새 인덱스 초기화 가능</li>
 <li>지속적으로 인덱싱하는 Log data 라면, index가 동일한 샤드/복제본 같도록 인덱스 템플릿 정의 가능</li>
+</ul>
+</li>
 </ul>
 
 

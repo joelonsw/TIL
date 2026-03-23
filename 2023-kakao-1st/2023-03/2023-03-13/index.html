@@ -22909,15 +22909,13 @@
 <h3 id="2023-03-13">2023-03-13<a class="headerlink" href="#2023-03-13" title="Permanent link">&para;</a></h3>
 <h2 id="scala">Scala 함수 컴비네이터<a class="headerlink" href="#scala" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>foldLeft(), foldRight()</strong></li>
+<li><strong>foldLeft(), foldRight()</strong><ul>
 <li>컬렉션에 있는 여러 요소를 한 쪽 방향으로 접어서 새로운 단 하나의 요소로 변경</li>
 <li>두 개의 요소를 가져다가 하나로 만드는 연속적인 과정
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">foldLeft</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">foldLeft</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">foldRight</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="w"> </span><span class="nc">B</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span>
 </code></pre></div></li>
-<li>
-<p>foldLeft() 예시</p>
-<ul>
+<li>foldLeft() 예시<ul>
 <li>각각의 요소를 i와 j로 받아, 둘을 더해 하나의 값으로 만든다</li>
 <li>초기값 z는 0을 줬고, 결과적으로 컬렉션에 속한 모든 요소를 더한 값인 10을 출력
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">FoldLeft</span><span class="w"> </span><span class="p">{</span>
@@ -22932,13 +22930,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>zip(), upzip()</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>zip(), upzip()</strong><ul>
 <li>튜플 형태의 쌍으로 연결된 리스트를 만들어 줌</li>
-<li>
-<p>짝이 안맞다면 버림
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Zip</span><span class="w"> </span><span class="p">{</span>
+<li>짝이 안맞다면 버림
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Zip</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">oo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span>
@@ -22950,14 +22949,14 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">nn</span><span class="p">)</span><span class="w"> </span><span class="c1">// List(1, 2, 3, 4, 5, 6, 7, 8, 9)</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>find()</strong></p>
-</li>
-<li>
-<p>원하는 조건에 맞는 첫번째 요소 반환
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Find</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>find()</strong><ul>
+<li>원하는 조건에 맞는 첫번째 요소 반환
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Find</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
@@ -22966,15 +22965,15 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">nn</span><span class="p">)</span><span class="w"> </span><span class="c1">// None</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>drop(), dropWhile()</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>drop(), dropWhile()</strong><ul>
 <li>drop(): 해당 인덱스까지 모든 요소 버림</li>
-<li>
-<p>dropWhile(): 차례로 순환, 조건 맞다면 버림
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Drop</span><span class="w"> </span><span class="p">{</span>
+<li>dropWhile(): 차례로 순환, 조건 맞다면 버림
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Drop</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -22984,13 +22983,14 @@
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">nn</span><span class="p">)</span><span class="w"> </span><span class="c1">// List(3, 4, 5, 6, 0)</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>flatten()</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>flatten()</strong><ul>
 <li>리스트 중첩된거 1차원으로 쓱 밀어버림
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Flatten</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Flatten</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">))</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">flatten</span>
@@ -22999,6 +22999,8 @@
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

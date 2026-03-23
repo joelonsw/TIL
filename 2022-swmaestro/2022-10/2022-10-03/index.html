@@ -22957,27 +22957,27 @@
 <li><em>참고: https://docs.spring.io/spring-data/redis/docs/current/api/org/springframework/data/redis/core/RedisTemplate.html#opsForValue--</em></li>
 <li><em>참고: https://luvstudy.tistory.com/143</em></li>
 <li><em>참고: https://stackoverflow.com/questions/70255799/what-is-redis-valueoperations</em></li>
-<li><strong>개요</strong></li>
-<li>
-<p>Spring Boot의 RedisAutoConfiguration은 <code>RedisTemplate</code>과 <code>StringRedisTemplate</code> 두 가지 bean을 자동으로 생성하여 제공</p>
+<li><strong>개요</strong><ul>
+<li>Spring Boot의 RedisAutoConfiguration은 <code>RedisTemplate</code>과 <code>StringRedisTemplate</code> 두 가지 bean을 자동으로 생성하여 제공</li>
+</ul>
 </li>
-<li>
-<p><strong>StringRedisTemplate</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>StringRedisTemplate</strong><ul>
 <li>레디스 key-value 문자열 위주라서 문자열에 특화된 템플릿<ul>
 <li>String-focused extension of RedisTemplate</li>
 </ul>
 </li>
 <li>RedisTemplate을 상속받음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringRedisTemplate</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringRedisTemplate</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>일반적인 String 값을 Key-Value로 사용하는 경우 사용하면 됨</p>
+<li>일반적인 String 값을 Key-Value로 사용하는 경우 사용하면 됨</li>
+</ul>
 </li>
-<li>
-<p><strong>사용법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>사용법</strong><ul>
 <li>RedisTemplate / StringRedisTemplate을 호출하여 사용</li>
 <li>redisTemplate에는 redis가 제공하는 list/set/sortedSet/hash 등과 같은 다양한 Command 지원<ul>
 <li>opsFor* method를 통해 작업</li>
@@ -22987,19 +22987,20 @@
 <li>opsForHash() - HashOperations</li>
 <li>opsForList() - ListOperations</li>
 <li>opsForSet() - SetOperations</li>
-<li>
-<p>...</p>
+<li>...</li>
+</ul>
 </li>
-<li>
-<p><strong>ValueOperation이 뭐야?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ValueOperation이 뭐야?</strong><ul>
 <li>레디스를 그냥 통으로 아주 큰 해시 맵으로 보는 것</li>
 <li>Simple Value에 대한 연산 결과를 반환</li>
 </ul>
+</li>
+</ul>
 <h2 id="threadsleep-noncompliant-code-vs-compliant-code">Thread.sleep() Noncompliant Code vs Compliant Code<a class="headerlink" href="#threadsleep-noncompliant-code-vs-compliant-code" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Noncompliant Code - SonarLint가 얘기하는 해로움</strong>
+<li><strong>Noncompliant Code - SonarLint가 얘기하는 해로움</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Test</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">testDoTheThing</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">myClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">();</span>
@@ -23008,10 +23009,10 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"> </span><span class="c1">// Noncompliant</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="c1">// assertions</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Compliant Code - SonarLint가 추천하는 코드</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Compliant Code - SonarLint가 추천하는 코드</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Test</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testDoTheThing</span><span class="p">(){</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">      </span><span class="n">MyClass</span><span class="w"> </span><span class="n">myClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">();</span>
@@ -23028,12 +23029,11 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">};</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="awaitility">Awaitility<a class="headerlink" href="#awaitility" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>왜 Thread.sleep()을 지양하라고 하지?</strong></li>
+<li><strong>왜 Thread.sleep()을 지양하라고 하지?</strong><ul>
 <li><em>참고: http://daplus.net/c-thread-sleep%EC%9D%B4-%EA%B7%B8%EB%A0%87%EA%B2%8C-%ED%95%B4%EB%A1%9C%EC%9A%B4-%EC%9D%B4%EC%9C%A0/</em></li>
 <li><em>참고: https://stackoverflow.com/questions/17826651/why-thread-sleep-is-bad-to-use</em></li>
 <li>해당 밀리초 내에 발생할 수 있는 타임 슬라이스 수만큼 현재 쓰레드를 차단</li>
@@ -23042,20 +23042,20 @@
 <li>대기중인 쓰레드는 낭비다...!</li>
 </ul>
 </li>
-<li>
-<p>단점</p>
-<ul>
+<li>단점<ul>
 <li>락을 걸어버려서, 데이터베이스 같은거 (isolation level에 따라 다르겠지만) 다른 쓰레드가 DB에 접근조차 못하게 막아 버릴수도</li>
 <li>쓰레드는 심지어 딱 그 시간만큼만 잠드는 게 아닐수도 있어 (thread-starvation으로 이어질수도?)</li>
 </ul>
 </li>
-<li>
-<p><strong>Awaitility를 활용한 테스트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Awaitility를 활용한 테스트</strong><ul>
 <li><em>참고: http://awaitility.org</em></li>
 <li>Polling 방식을 활용하여 Condition이 매칭되는지 확인 (이게 쓰레드 컨텍스트 스위칭보다 저렴한가보네)</li>
 <li>아래와 같이 await()를 활용하여, 해당 시간 안에 데이터가 null로 조회되면 (그니까 조건이 true)가 되면 테스트 통과
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;레디스에 데이터를 만료 시간을 정하여 조회할 수 있다.&quot;</span><span class="p">)</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;레디스에 데이터를 만료 시간을 정하여 조회할 수 있다.&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@Test</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setDataExpire</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="c1">// given</span>
@@ -23074,6 +23074,8 @@
 </code></pre></div></li>
 <li>만약 1초 지날때까지 데이터가 expire가 안되어있다면, 아래와 같은 메시지를 뿜으며 fail<ul>
 <li><code>org.awaitility.core.ConditionTimeoutException: Condition with lambda expression in com.backend.connectable.global.redis.RedisRepositoryTest was not fulfilled within 1 seconds.</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

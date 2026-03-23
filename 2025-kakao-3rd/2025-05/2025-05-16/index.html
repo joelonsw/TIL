@@ -23004,27 +23004,29 @@
   - 데이터 중복을 허용하고 조인을 줄이는 데이터 성능 향상 기법
   - 조회 속도 UP! 데이터 모델 유연성 LOW!</p>
 <ul>
-<li><strong>왜 반정규화?</strong></li>
+<li><strong>왜 반정규화?</strong><ul>
 <li>디스크 I/O량이 많아서 성능이 저하되거나, 경로가 너무 멀어 조인으로 인한 성능저하 예상되거나</li>
 <li>칼럼을 계산하여 읽을 때 성능이 저하될 것이 예상되는 경우</li>
-<li>
-<p>업무적으로 조회에 대한 처리성능이 중요하다고 판단시 부분적으로 반정규화 고려</p>
+<li>업무적으로 조회에 대한 처리성능이 중요하다고 판단시 부분적으로 반정규화 고려</li>
+</ul>
 </li>
-<li>
-<p><strong>언제 반정규화?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>언제 반정규화?</strong><ul>
 <li>자주 사용되는 테이블에 항상 일정한 범위만 조회하는 경우</li>
 <li>대량의 데이터 범위를 자주 처리하는 경우, 처리범위 일정하게 줄이지 않으면 성능을 보장할 수 없는 경우</li>
 <li>통계성 프로세스에 의해 통계정보가 필요한 경우, 별도의 통계테이블 생성</li>
-<li>
-<p>지나치게 많은 조인이 걸려 데이터를 조회하는 작업 기술적으로 어려울 경우</p>
+<li>지나치게 많은 조인이 걸려 데이터를 조회하는 작업 기술적으로 어려울 경우</li>
+</ul>
 </li>
-<li>
-<p><strong>반정규화의 대안?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>반정규화의 대안?</strong><ul>
 <li>성능을 고려한 VIEW 를 생성하여 이를 개발자가 접근하게 함</li>
 <li>인덱스를 조정하여 반정규화를 회피할 수 있도록 클러스터링<ul>
 <li>PK 기반 파티셔닝 등</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23036,7 +23038,7 @@
   - RDB에서 중복을 최소화하기 위해 데이터를 구조화하는 작업
   - 하나의 종속성이 하나의 릴레이션에 포현될 수 있도록 분해</p>
 <ul>
-<li><strong>정규화 종류</strong></li>
+<li><strong>정규화 종류</strong><ul>
 <li>[제1정규화]: 테이블의 칼럼이 하나의 값을 가지도록 분해하자</li>
 <li>[제2정규화]: 제1정규화 진행한 테이블에 대해 완전함수 종속을 만족하도록 테이블을 분해<ul>
 <li>완전함수 종속: 기본키의 부분집합이 결정자가 되어선 안 됨</li>
@@ -23045,6 +23047,8 @@
 </li>
 <li>[제3정규화]: 제2정규화를 진행한 테이블에 대해 이행적 종속을 없애도록 테이블을 분리<ul>
 <li>이행적 종속: A-&gt;B, B-&gt;C 성립할 때, A-&gt;C가 성립되는 것을 의미</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23057,7 +23061,7 @@
   - prefetch=250 이라면 RabbitMQ는 consumer 메모리에 메시지 250개 한번에 푸시
     - 그 후 Consumer는 메모리에서 메시지 하나씩 꺼내서 처리</p>
 <ul>
-<li><strong>성능 고려사항</strong></li>
+<li><strong>성능 고려사항</strong><ul>
 <li>prefetch 갯수 만큼 consumer가 가져갈 메시지 분량이 산정됨</li>
 <li>MQ에 500개 메시지 있고, consumer 3개, prefetch_count = 250이면 다음과 같은 상황 발생 -&gt; 컨슈머 하나 더 추가했는데도 성능 개선 X<ul>
 <li>consumer1: 250</li>
@@ -23065,27 +23069,27 @@
 <li>consumer3: 0</li>
 </ul>
 </li>
-<li>
-<p>prefetch 설정값은 전체 앱 성능에 많은 영향을 끼침. prefetch criteria 하기 설정 볼 것</p>
+<li>prefetch 설정값은 전체 앱 성능에 많은 영향을 끼침. prefetch criteria 하기 설정 볼 것</li>
+</ul>
 </li>
-<li>
-<p><strong>Prefetch Criteria</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Prefetch Criteria</strong><ul>
 <li><img alt="" src="../../images/2025-05-16-prefetch_count.png" /></li>
 <li>메시지 처리 속도 빠름<ul>
 <li>consumer 많음 : prefetch_count = middle</li>
 <li>consumer 적음 : prefetch_count = high</li>
 </ul>
 </li>
-<li>
-<p>메시지 처리 속도 느림 : prefetch_count = 1</p>
-<ul>
+<li>메시지 처리 속도 느림 : prefetch_count = 1<ul>
 <li><code>메시지 처리속도가 느릴경우, 메시지를 먼저 메모리에 올려두는게 비효율적임</code></li>
 </ul>
 </li>
-<li>
-<p><strong>트러블 슈팅</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>트러블 슈팅</strong><ul>
 <li>메시지 처리속도에 따라 최적화된 prefetch_count 설정이 중요</li>
 <li>포스팅 상황<ul>
 <li>MQ &lt;-&gt; Consumer 연결이 모종의 이유로 끊기고</li>
@@ -23094,17 +23098,17 @@
 <li>위 프로세스가 계속 반복되며 데이터 쌓이고 커넥션 끊기고 다시 쌓이고 지연 발생</li>
 </ul>
 </li>
-<li>
-<p>`prefetch=0 이라면 무제한으로 처리됨</p>
-<ul>
+<li>`prefetch=0 이라면 무제한으로 처리됨<ul>
 <li><img alt="" src="../../images/2025-05-16-mq-system.png" /></li>
 <li>QoS(주로 prefetch_count) 설정이 없다면, RabbitMQ는 네트워크/클라이언트가 허용하는 속도로 모든 대기열의 메시지를 클라에 푸시</li>
 <li>Consumer는 RAM에 모든 메시지를 버퍼링하여 메모리가 팽창</li>
 </ul>
 </li>
-<li>
-<p><strong>RabbitMQ 기본 구성요소</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>RabbitMQ 기본 구성요소</strong><ol>
 <li>Channel<ul>
 <li>App &lt;-&gt; RabbitMQ 가상의 통신 경로</li>
 <li>메시지 publish/consume 시, 별도의 채널을 통해 수행하는 것이 일반적</li>
@@ -23116,11 +23120,9 @@
 <li>Consumer는 Queue로 부터 메시지 가져가 처리</li>
 </ul>
 </li>
-<li>
-<p>Exchange</p>
-<ul>
+<li>Exchange<ul>
 <li>Producer가 보낸 메시지를 받아 적절한 큐에 라우팅하는 역할</li>
-<li>정확하게 어느 Queue로 보낼지 결정하는 로직</li>
+<li>정확하게 어느 Queue로 보낼지 결정하는 로직<ul>
 <li>Direct Exchange: 메시지의 라우팅 키와 큐의 바인딩 키가 정확히 일치하는 경우 메시지 전달<ul>
 <li><img alt="" src="../../images/2025-05-16-direct.png" /></li>
 </ul>
@@ -23136,12 +23138,16 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>코드로 확인하기</strong></p>
+</ul>
 </li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>코드로 확인하기</strong><ul>
 <li><code>libraryDepedencies += "com.rabbitmq" % "amqp-client" % "5.15.0"</code></li>
 <li>[메시지 publish]
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">publish</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">publish</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ConnectionFactory</span><span class="p">()</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">factory</span><span class="p">.</span><span class="n">setHost</span><span class="p">(</span><span class="s">&quot;rabbitmq.host&quot;</span><span class="p">)</span>
@@ -23165,7 +23171,7 @@
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>[메시지 consume]
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">consume</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">consume</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="c1">// RabbitMQ 연결 설정</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ConnectionFactory</span><span class="p">()</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="n">factory</span><span class="p">.</span><span class="n">setHost</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">[</span><span class="nc">String</span><span class="p">](</span><span class="s">&quot;rabbitmq.host&quot;</span><span class="p">))</span>
@@ -23203,6 +23209,8 @@
 <a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="rabbitmq-consistent-hash-exchange">RabbitMQ consistent-hash-exchange<a class="headerlink" href="#rabbitmq-consistent-hash-exchange" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://velog.io/@juhyeon1114/RabbitMQ-Consistent-hash-exchange-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0</em><br />
 <em>참고: https://medium.com/@mustafa.karacabey.engineerx/event-ordering-in-rabbitmq-with-consistent-hash-exchange-ea4a49adb48e</em><br />
@@ -23211,18 +23219,20 @@
   - Exchange에서 Routing key값 해싱하여 해시를 기준으로 메시지 자체를 여러큐에 구분해서 보냄
   - 같은 Routing Key를 가진 메시지는 무조건 같은 큐에 할당되게 된다</p>
 <ul>
-<li><strong>장점</strong></li>
+<li><strong>장점</strong><ol>
 <li>순서 보장: 같은 Routing Key를 가진다면, 같은 queue에 들어간다. 이벤트가 동일한 순서로 처리됨을 보장</li>
 <li>확장성: 대규모 이벤트 처리에 용이</li>
-<li>
-<p>Fault Tolerance: 하나 큐 뻑나도 해싱하여 다른 큐에 넣으니 계속 프로세싱</p>
+<li>Fault Tolerance: 하나 큐 뻑나도 해싱하여 다른 큐에 넣으니 계속 프로세싱</li>
+</ol>
 </li>
-<li>
-<p><strong>단점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>단점</strong><ol>
 <li>복잡성 증가</li>
 <li>러닝 커브</li>
 <li>퍼포먼스 저하: 쨋든 연산이 MQ에서 추가되면 힘듦</li>
+</ol>
+</li>
 </ul>
 <h2 id="redislock">RedisLock<a class="headerlink" href="#redislock" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://helloworld.kurly.com/blog/distributed-redisson-lock/</em><br />
@@ -23231,21 +23241,23 @@
   - 분산락: 여러 서버가 공유데이터를 제어하기 위한 기술
   - 락을 획득한 스레드만이 Critical Section에 접근할 수 있도록 하는 것</p>
 <ul>
-<li><strong>Redisson</strong></li>
+<li><strong>Redisson</strong><ul>
 <li>Lock interface 지원. 락에 대한 타임아웃과 같은 설정 지원하여 락을 안전하게 사용가능</li>
-<li>
-<p>Pub/Sub 방식으로 락 해제되면 락 subscribe</p>
+<li>Pub/Sub 방식으로 락 해제되면 락 subscribe</li>
+</ul>
 </li>
-<li>
-<p><strong>참고</strong></p>
+</ul>
+<ul>
+<li><strong>참고</strong><ul>
+<li>트랜잭션 커밋 이후 락이 해제될 수 있도록 보장해야 한다. 그래야 데이터 정합성 보장</li>
+</ul>
 </li>
-<li>
-<p>트랜잭션 커밋 이후 락이 해제될 수 있도록 보장해야 한다. 그래야 데이터 정합성 보장</p>
-</li>
-<li>
-<p><strong>단점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>단점</strong><ul>
 <li>단기간에 많은 요청이 폭주하는 상황일 때, 이미 레디스락이 잡힌 것에 대해 꼼짝없이 기다림</li>
+</ul>
+</li>
 </ul>
 
 

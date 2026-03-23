@@ -23064,26 +23064,26 @@
 <h2 id="_1">빈 스코프<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://velog.io/@probsno/Bean-%EC%8A%A4%EC%BD%94%ED%94%84%EB%9E%80</em></li>
-<li><strong>정의</strong></li>
-<li>
-<p>빈이 사용되어지는 범위</p>
+<li><strong>정의</strong><ul>
+<li>빈이 사용되어지는 범위</li>
+</ul>
 </li>
-<li>
-<p><strong>빈 스코프 종류</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>빈 스코프 종류</strong><ul>
 <li>Singleton : 스프링 IoC 컨테이너당 하나의 인스턴스만 사용</li>
 <li>Prototype : 매번 새로운 빈을 정의하여 사용</li>
 <li>Request : HTTP 라이프사이클 마다 한 개의 빈을 사용</li>
 <li>Session : HTTP 세션마다 한 개의 빈을 사용</li>
 <li>Application : ServletContext 라이프사이클 동안 한 개의 빈을 사용</li>
-<li>
-<p>Websocket : Websocket 라이프사이클 안에서 한 개의 빈을 사용</p>
+<li>Websocket : Websocket 라이프사이클 안에서 한 개의 빈을 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>Prototype 스코프를 사용하는 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Prototype 스코프를 사용하는 방법</strong><ul>
 <li>정의하는 법
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Component</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Component</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Scope</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;prototype&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtoType</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
@@ -23115,36 +23115,38 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="_2">스프링 사용자들의 주입 방식<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://velog.io/@sh95119/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%82%AC%EC%9A%A9%EC%9E%90%EB%93%A4%EC%9D%B4-%EC%84%A0%ED%98%B8%ED%95%98%EB%8A%94-%EC%A3%BC%EC%9E%85-%EB%B0%A9%EC%8B%9D</em></li>
-<li><strong>생성자로 주입하자</strong></li>
+<li><strong>생성자로 주입하자</strong><ul>
 <li>순환참조 방지</li>
 <li>테스트에 용이</li>
 <li>클린한 코드 유지</li>
 <li>불변성 보장 가능</li>
 </ul>
+</li>
+</ul>
 <h2 id="componentscan"><code>@ComponentScan</code><a class="headerlink" href="#componentscan" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://velog.io/@hyun-jii/%EC%8A%A4%ED%94%84%EB%A7%81-component-scan-%EA%B0%9C%EB%85%90-%EB%B0%8F-%EB%8F%99%EC%9E%91-%EA%B3%BC%EC%A0%95</em></li>
 <li><em>참고: https://jjingho.tistory.com/9</em></li>
-<li><strong>정의</strong></li>
+<li><strong>정의</strong><ul>
 <li>빈으로 등록될 준비를 마친 클래스들을 스캔하여, 빈으로 등록해주는 것</li>
-<li>
-<p><code>@Component</code>가 붙은 클래스들이 빈으로 등록 대상이 된다</p>
+<li><code>@Component</code>가 붙은 클래스들이 빈으로 등록 대상이 된다</li>
+</ul>
 </li>
-<li>
-<p><strong>ComponentScan 하는 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ComponentScan 하는 방법</strong><ol>
 <li>xml 파일에 설정<ul>
 <li><code>&lt;context:component-scan base-package="com.rcod.lifelog"/&gt;</code></li>
 <li>base package 기준으로 클래스들을 스캔하여 빈으로 등록 가능</li>
 <li>include-filter, exclude-filter 등을 통해 특정 객체 포함/제외 설정 가능</li>
 </ul>
 </li>
-<li>
-<p>자바 파일 안에서 설정</p>
-<ul>
+<li>자바 파일 안에서 설정<ul>
 <li>특정 패키지를 basePackage로 잡고 ComponentScan을 통한 빈 등록
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@ComponentScan</span><span class="p">(</span><span class="n">basePackages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.rcod.lifelog&quot;</span><span class="p">)</span>
@@ -23153,9 +23155,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>ComponentScan 동작 과정</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>ComponentScan 동작 과정</strong><ol>
 <li>ConfigurationClassParser가 <code>@Configuration</code> 클래스를 파싱</li>
 <li>ComponentScan 설정을 파싱<ul>
 <li>base-package에 명시된 패키지를 기준으로 ComponentScanAnnotationParser가 스캔하기 위한 설정 파싱</li>
@@ -23163,12 +23167,12 @@
 </li>
 <li>base-pacakge 설정을 바탕으로 모든 클래스를 로딩</li>
 <li>ClassLoader가 로딩한 클래스들을 BeanDefinition으로 정의</li>
-<li>
-<p>생성할 빈에 대한 정의를 토대로 빈 생성</p>
+<li>생성할 빈에 대한 정의를 토대로 빈 생성</li>
+</ol>
 </li>
-<li>
-<p><strong>ComponentScan 동작 원리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ComponentScan 동작 원리</strong><ul>
 <li><code>@ComponentScan</code>은 <strong>BeanFactoryPostProcessor</strong>를 구현한 <strong>ConfigurationClassPostProcessor</strong>에 의해 동작</li>
 <li>컴포넌트 스캔을 해서 Bean으로 등록해줌</li>
 <li>vs <code>@Autowired</code><ul>
@@ -23177,10 +23181,12 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="_3">어플리케이션 컨텍스트<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://mangkyu.tistory.com/151</em></li>
-<li><strong>어플리케이션 컨텍스트</strong></li>
+<li><strong>어플리케이션 컨텍스트</strong><ul>
 <li>빈의 생성과 관계 설정 등의 제어를 담당하는 IoC 컨테이너인 빈 팩토리가 존재</li>
 <li>빈의 생성/관계 설정 외에 추가적인 기능이 필요! Spring에서는 빈 팩토리를 상속받아 확장한 <strong>어플리케이션 컨텍스트</strong>를 사용함</li>
 <li>어플리케이션 컨텍스트는...<ul>
@@ -23189,21 +23195,21 @@
 <li>직접 오브젝트를 생성하고 관계를 맺어주는 코드가 없고, 그런 생성 정보와 연관관계 정보에 대한 설정을 읽어 처리함</li>
 </ul>
 </li>
-<li>
-<p><strong>생성 정보, 연관관계 정보에 대한 설정을 참고</strong>하여 처리함 =&gt; <code>@Configuration</code></p>
+<li><strong>생성 정보, 연관관계 정보에 대한 설정을 참고</strong>하여 처리함 =&gt; <code>@Configuration</code></li>
+</ul>
 </li>
-<li>
-<p><strong>클라이언트의 Bean 요청 시 처리 과정</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>클라이언트의 Bean 요청 시 처리 과정</strong><ol>
 <li>ApplicationContext는 <code>@Configuration</code>이 붙은 클래스를 설정 정보로 등록해두고, <code>@Bean</code>이 붙은 메서드의 이름으로 빈 목록 생성</li>
 <li>클라이언트가 해당 빈 요청</li>
 <li>ApplicationContext는 자신의 빈 목록에서 요청한 이름이 있는지 찾음</li>
-<li>
-<p>ApplicationContext는 설정 클래스로부터 빈 생성을 요청, 생성된 빈을 돌려줌</p>
+<li>ApplicationContext는 설정 클래스로부터 빈 생성을 요청, 생성된 빈을 돌려줌</li>
+</ol>
 </li>
-<li>
-<p><strong>어플리케이션 컨텍스트의 장점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>어플리케이션 컨텍스트의 장점</strong><ul>
 <li>클라이언트는 <code>@Configuration</code>이 붙은 구체적인 팩토리 클래스를 알 필요가 없음<ul>
 <li>원하는 객체를 가져오려면 어떤 팩토리 클래스에 접근해야 하는지 알아야하는데...</li>
 <li>어플리케이션 컨텍스트를 사용하면 팩토리가 아무리 많아져도 직접 접근할 필요 X</li>
@@ -23215,29 +23221,31 @@
 <li>그 외에도 후처리나 정보의 조합 인터셉트 등과 같은 다양한 기능이 존재</li>
 </ul>
 </li>
-<li>
-<p>어플리케이션 컨텍스트를 통한 다양한 빈 검색 방법을 제공할 수 있음</p>
-<ul>
+<li>어플리케이션 컨텍스트를 통한 다양한 빈 검색 방법을 제공할 수 있음<ul>
 <li>어플리케이션 컨텍스트에서 빈 목록을 관리하여 빈의 이름이나 타입, 어노테이션 설정 등으로 빈을 찾을 수 있음</li>
 <li>dependency lookup!</li>
 </ul>
 </li>
-<li>
-<p><strong>Spring에서의 Singleton</strong></p>
+</ul>
 </li>
-<li>
-<p>Spring에서 싱글톤</p>
+</ul>
 <ul>
+<li><strong>Spring에서의 Singleton</strong><ul>
+<li>Spring에서 싱글톤<ul>
 <li>여러번 빈을 요청하더라도 매번 동일한 객체</li>
-<li>대규모 트래픽 처리할 수 있도록 하기 위함</li>
+<li>대규모 트래픽 처리할 수 있도록 하기 위함<ul>
 <li>대규모 트래픽 처리하려고 Controller, Service, Repository 등 나뉘게 됨</li>
+</ul>
+</li>
 <li>매번 클라이언트에서 요청이 올 때 마다 빈 새로 만들면 부하 감당 빡셈</li>
 <li>빈을 싱글톤 스코프로 관리하여 1개의 요청 왔을 때 여러 쓰레드가 빈을 공유해 처리하도록 하였음</li>
 </ul>
 </li>
-<li>
-<p><strong>Spring Singleton vs Java Singleton</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Spring Singleton vs Java Singleton</strong><ul>
 <li>Java Singleton의 단점<ul>
 <li>private 생성자를 가져 상속이 불가능</li>
 <li>테스트하기 힘듦</li>
@@ -23253,6 +23261,8 @@
 </li>
 <li>Spring singleton은 내부에 상태를 갖지 않는 무상태 방식으로 만들 것!</li>
 </ul>
+</li>
+</ul>
 <h2 id="jvm-memory-leak">JVM memory leak<a class="headerlink" href="#jvm-memory-leak" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://d2.naver.com/helloworld/1326256</em></li>
@@ -23261,43 +23271,45 @@
 <h2 id="gc-java-reference">GC와 Java Reference<a class="headerlink" href="#gc-java-reference" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://d2.naver.com/helloworld/329631</em></li>
-<li><strong>GC 개요</strong></li>
+<li><strong>GC 개요</strong><ol>
 <li>heap 내의 객체 중에서 garbage를 찾아냄</li>
-<li>
-<p>찾아낸 garbage를 처리해 힙의 메모리 회수</p>
+<li>찾아낸 garbage를 처리해 힙의 메모리 회수</li>
+</ol>
 </li>
-<li>
-<p><strong>GC와 Reachability</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>GC와 Reachability</strong><ul>
 <li>Reachability라는 개념... <ul>
 <li>유효한 참조 O =&gt; reachable</li>
 <li>유효한 참조 X =&gt; unreachable</li>
 </ul>
 </li>
-<li>
-<p>객체는 참조 사슬을 이룸</p>
-<ul>
-<li>유효한 참조 여부를 파악하려면 최초의 참조가 있어야 함 (Root Set)</li>
+<li>객체는 참조 사슬을 이룸<ul>
+<li>유효한 참조 여부를 파악하려면 최초의 참조가 있어야 함 (Root Set)<ul>
 <li>스택 참조</li>
 <li>네이티브 스택 (JNI 참조)</li>
 <li>Static 영역의 참조</li>
-<li><img alt="" src="../../images/2022-11-12-strong-ref.png" /></li>
+</ul>
+</li>
+<li><img alt="" src="../../images/2022-11-12-strong-ref.png" /><ul>
 <li>root set으로 시작한 참조들은 Strong reference</li>
 </ul>
 </li>
-<li>
-<p><strong>Soft, Weak, Phantom Reference</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Soft, Weak, Phantom Reference</strong><ul>
 <li>java.lang.ref 에서 soft reference/weak reference/phantom reference를 클래스 형태로 제공함<ul>
 <li>weak reference는 참조 대상인 객체를 캡슐화한 WeakReference 객체를 생성 =&gt; GC의 특별 취급 대상</li>
 </ul>
 </li>
-<li>
-<p>코드를 통해 봅시다
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Sample</span><span class="p">());</span>
+<li>코드를 통해 봅시다
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Sample</span><span class="p">());</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">Sample</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wr</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
-</code></pre></div></p>
-<ul>
+</code></pre></div><ul>
 <li><img alt="" src="../../images/2022-11-12-weak-ref-1.png" />
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Sample</span><span class="p">());</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">Sample</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wr</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
@@ -23309,9 +23321,11 @@
 <li><code>new Sample()</code> : referent</li>
 </ul>
 </li>
-<li>
-<p><strong>Reference와 Reachability</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Reference와 Reachability</strong><ul>
 <li>원래 GC 대상 여부는 reachable/unreachable</li>
 <li>java.lang.ref 패키지를 통해 객체들을 더 세분화하여 분류 가능<ul>
 <li>strongly reachable</li>
@@ -23325,12 +23339,12 @@
 <li>참조는 가능하지만 반드시 항상 유효할 필요없는 LRU 같은 임시 객체 저장 구조 쉽게 만들 수 있음</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-11-12-weakly.png" /></p>
+<li><img alt="" src="../../images/2022-11-12-weakly.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>Strengths of Reachability</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Strengths of Reachability</strong><ul>
 <li>strongly reachable: root set으로 시작해서 어떤 reference object도 중간에 끼지 않은 상태로 참조 가능<ul>
 <li>객체까지 도달하는 여러 참조 사슬 중 reference object가 없는 사실이 하나라도 있는 객체</li>
 </ul>
@@ -23347,19 +23361,19 @@
 <li>finalize 되었지만, 메모리가 아직 회수되지 않았음</li>
 </ul>
 </li>
-<li>
-<p>unreachable: root set으로 부터 시작되는 참조 사슬로 참조되지 않는 객체</p>
+<li>unreachable: root set으로 부터 시작되는 참조 사슬로 참조되지 않는 객체</li>
+</ul>
 </li>
-<li>
-<p><strong>Softly Reachable과 SoftReference</strong></p>
-</li>
-<li>오직 SoftReference 객체로만 참조된 객체는 힙에 남아있는 <strong>메모리의 크기</strong>와 <strong>해당 객체의 사용 빈도</strong>에 따라 GC 여부가 결정됨</li>
-<li>
-<p>Softly reachable 객체는 GC가 동작할 때마다 회수되지 않으며, 자주 사용될수록 더 오래 살아남을 것</p>
+</ul>
 <ul>
-<li>Oracle Hotspot VM에서는 softly reachable 객체의 GC를 조절하기 위한 옵션을 제공</li>
+<li><strong>Softly Reachable과 SoftReference</strong><ul>
+<li>오직 SoftReference 객체로만 참조된 객체는 힙에 남아있는 <strong>메모리의 크기</strong>와 <strong>해당 객체의 사용 빈도</strong>에 따라 GC 여부가 결정됨</li>
+<li>Softly reachable 객체는 GC가 동작할 때마다 회수되지 않으며, 자주 사용될수록 더 오래 살아남을 것<ul>
+<li>Oracle Hotspot VM에서는 softly reachable 객체의 GC를 조절하기 위한 옵션을 제공<ul>
 <li><code>-XX:SoftRefLRUPolicyMSPerMB=&lt;N&gt;</code> // 옵션 기본값 1000</li>
-<li>Softly reachable 객체의 GC 여부는 설정한 숫자에 따라 다음 수식에 의해 결정</li>
+</ul>
+</li>
+<li>Softly reachable 객체의 GC 여부는 설정한 숫자에 따라 다음 수식에 의해 결정<ul>
 <li><code>(마지막 strong reference가 GC된 때로 부터 지금까지의 시간) &gt; (옵션 설정값 N) * (힙에 남아있는 메모리 크기)</code></li>
 <li>옵션 설정값: 1000</li>
 <li>메모리: 100MB</li>
@@ -23369,17 +23383,21 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>Weakly Reachable과 WeakReference</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Weakly Reachable과 WeakReference</strong><ul>
 <li>weakly reachable 객체는 GC를 수행할 때마다 회수 대상이 됨</li>
 <li>언제 회수될지는 확실하지 않음 =&gt; GC 알고리즘 별로 다 다름</li>
-<li>
-<p>LRU 캐시와 같은 어플리케이션은 weakly reachable이 유리해서 대체로 WeakReference 사용</p>
+<li>LRU 캐시와 같은 어플리케이션은 weakly reachable이 유리해서 대체로 WeakReference 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>ReferenceQueue</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ReferenceQueue</strong><ul>
 <li>SoftReference/WeakReference 객체가 참조하는 객체가 GC의 대상이 되면...<ul>
 <li>SoftReference/WeakReference의 참조는 null,</li>
 <li>SoftReference/WeakReference 객체 자체는 GC에 의해 ReferenceQueue에 enqueue</li>
@@ -23387,38 +23405,38 @@
 </li>
 <li>ReferenceQueue의 poll()/remove()를 통해 reference object가 enqueue 되었는지 확인하여 softly reachable, weakly reachable 객체가 GC 되었는지 판단 =&gt; 후처리 가능</li>
 <li>ReferenceQueue와 WeakReference를 통한 간단한 캐시 구현 가능</li>
-<li>
-<p>PhantomReference는 무조건 ReferenceQueue를 사용해야함</p>
+<li>PhantomReference는 무조건 ReferenceQueue를 사용해야함</li>
+</ul>
 </li>
-<li>
-<p><strong>Phantomly Reachable과 PhantomReference</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Phantomly Reachable과 PhantomReference</strong><ul>
 <li>GC 대상 객체를 처리하는 작업 -- 할당된 메모리 회수하는 작업 각각 별도!</li>
-<li>
-<p>GC 대상 여부를 결정하는 부분에 관여하는 softly reachable, weakly reachable과 달리, phantomly reachable은 파이널라이즈와 메모리 회수 사이에서 관여</p>
+<li>GC 대상 여부를 결정하는 부분에 관여하는 softly reachable, weakly reachable과 달리, phantomly reachable은 파이널라이즈와 메모리 회수 사이에서 관여</li>
+</ul>
 </li>
-<li>
-<p><strong>GC가 객체를 처리하는 순서</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>GC가 객체를 처리하는 순서</strong><ol>
 <li>Soft References =&gt; 메모리 크기/해당 객체의 사용 빈도에 따라 GC 여부 결정</li>
 <li>Weak References =&gt; GC 수행시 마다 회수 대상이 되지만, GC 알고리즘 별로 다 다름</li>
 <li>파이널라이즈 =&gt; 회수할 메모리 결정. Strong Reference는 당연히 회수, 1/2번에서 고른것도 대상</li>
 <li>Phantom References</li>
-<li>
-<p>메모리 회수</p>
+<li>메모리 회수</li>
+</ol>
 </li>
-<li>
-<p><strong>요약</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>요약</strong><ul>
 <li>Java GC는 GC 대상 객체를 찾는다</li>
 <li>대상 객체를 Finalization하고, 할당된 메모리를 회수하는 작업으로 구성된다</li>
 <li>어플리케이션은 사용자 코드에서 Reachability를 조절하여 Java GC에 일부 관여할 수 있다</li>
-<li>
-<p>객체의 Reachablility를 조절하기 위해 java.lang.ref 패키지의 SoftReference, WeakReference, PhantomReference, ReferenceQueue 등 사용</p>
+<li>객체의 Reachablility를 조절하기 위해 java.lang.ref 패키지의 SoftReference, WeakReference, PhantomReference, ReferenceQueue 등 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>참조 유형</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>참조 유형</strong><ul>
 <li><strong>Strong References</strong><ul>
 <li>기본 참조 유형</li>
 <li><code>MyClass obj = new MyClass();</code></li>
@@ -23454,7 +23472,7 @@
 </ul>
 </li>
 <li><strong>Phantom References</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">MyClass</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">();</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">MyClass</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">();</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span><span class="w"> </span><span class="n">refQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span><span class="p">();</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">PhantomReference</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span><span class="w"> </span><span class="n">phantomRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">phantomRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PhantomReference</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">refQueue</span><span class="p">);</span>
@@ -23465,6 +23483,8 @@
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1">// phantomRef.get() == null</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="_4">성능테스트<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://techblog.woowahan.com/2572/</em></li>
@@ -23472,33 +23492,35 @@
 <h2 id="_5">외부 시스템 장애에 대처하는 우리의 자세<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://techblog.woowahan.com/6447/</em></li>
-<li><strong>의존성 제거</strong></li>
+<li><strong>의존성 제거</strong><ul>
 <li>이 연동이 꼭 필요한지 고민할 것</li>
 <li>안정성 신뢰도, 연동 목적, 리스크 감수할 만큼의 가치가 있는지를 명확히 할 것!</li>
-<li>
-<p>의존 관계를 맺지 않는 것이 우리 서비스의 안정성을 높이는 데 가장 좋은 방법일수도 있음</p>
+<li>의존 관계를 맺지 않는 것이 우리 서비스의 안정성을 높이는 데 가장 좋은 방법일수도 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>벤더 이중화</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>벤더 이중화</strong><ul>
 <li>널리 사용되는 서비스의 경우, 여러 업체에서 비슷한 기능 제공</li>
 <li>지도, pg, 문자 등이 대표적</li>
-<li>
-<p>따라서 이중화 구현해두는 것이 좋은 방식!</p>
+<li>따라서 이중화 구현해두는 것이 좋은 방식!</li>
+</ul>
 </li>
-<li>
-<p><strong>장애 격리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>장애 격리</strong><ul>
 <li>이중화에 비용이 많이 들거나, 다른 벤더가 없으면 이중화 못하잖아?</li>
 <li>외부 시스템의 장애가 연동과 관련 없는 부분으로 전파되지 않도록 장애를 격리하는 것이 중요</li>
 <li>특정 기능이 일부 동작하지 않거나 기능이 저하되더라도 사용자가 최소 기능 사용할 수 있도록 하는 것이 핵심!</li>
-<li>
-<p>최대한 한 기능의 장애가 다른 기능의 장애까지 이어지지 않도록 고려해야 함!</p>
+<li>최대한 한 기능의 장애가 다른 기능의 장애까지 이어지지 않도록 고려해야 함!</li>
+</ul>
 </li>
-<li>
-<p><strong>미작동 감내</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>미작동 감내</strong><ul>
 <li>AWS, GCP 자체가 뻑나면... 모니터링 열심히하시고, 서비스 담당부서에 빠르게 확인하는 핫라인 운영하자!</li>
+</ul>
+</li>
 </ul>
 
 

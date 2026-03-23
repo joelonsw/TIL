@@ -22910,24 +22910,22 @@
 <h2 id="spring-security">Spring Security를 통한 인증 및 권한 부여<a class="headerlink" href="#spring-security" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://daddyprogrammer.org/post/636/springboot2-springsecurity-authentication-authorization/</em></li>
-<li><strong>SpringSecurity</strong></li>
+<li><strong>SpringSecurity</strong><ul>
 <li>인증 및 권한 부여를 통해 리소스의 사용을 쉽게 컨트롤할 수 있는 SpringSecurity Framework를 제공함</li>
 <li>보안 관련 처리를 자체적으로 구현할 필요 없이 쉽게 필요한 기능을 구현할 수 있음</li>
 <li>DispatcherServlet 앞단에 Filter를 등록시켜 요청을 가로챔</li>
-<li>
-<p>클라이언트에게 리소스 접근 권한이 없다면 자동으로 로그인 화면으로 리다이렉트</p>
+<li>클라이언트에게 리소스 접근 권한이 없다면 자동으로 로그인 화면으로 리다이렉트</li>
+</ul>
 </li>
-<li>
-<p><strong>SpringSecurity Filter</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>SpringSecurity Filter</strong><ul>
 <li>기능별 필터의 집합으로 되어있고 필터의 처리 순서는 아래와 같음</li>
 <li>클라이언트가 리소스 접근 권한이 없는 경우 기본적으로 로그인 폼으로 보냄: UsernamePasswordAuthenticationFilter<ul>
 <li>RestAPI에서는 로그인 폼이 없으니, UsernamePasswordAuthenticationFilter 전에 관련 처리를 넣어야 함</li>
 </ul>
 </li>
-<li>
-<p>Filter 순서</p>
-<ol>
+<li>Filter 순서<ol>
 <li>ChannelProcessingFilter</li>
 <li>SecurityContextPersistenceFilter</li>
 <li>ConcurrentSessionFilter</li>
@@ -22949,17 +22947,21 @@
 <li>SwitchUserFilter</li>
 </ol>
 </li>
-<li>
-<p><strong>API 인증 및 제한된 리소스의 요청</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>API 인증 및 제한된 리소스의 요청</strong><ul>
 <li>인증을 위해 가입 및 로그인 api를 구현</li>
-<li>
-<p>ROLE_USER 권한을 회원에게 부여</p>
+<li>ROLE_USER 권한을 회원에게 부여</li>
+</ul>
 </li>
-<li>
-<p><strong>JwtAuthenticationFilter</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>JwtAuthenticationFilter</strong><ul>
 <li>UsernamePasswordAuthenticationFilter 앞에 세팅</li>
+</ul>
+</li>
 </ul>
 
 

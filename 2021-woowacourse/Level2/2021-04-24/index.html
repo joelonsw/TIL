@@ -22945,17 +22945,13 @@
 <h2 id="requestbody">@RequestBody 기본생성자 삽질<a class="headerlink" href="#requestbody" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://velog.io/@conatuseus/RequestBody%EC%97%90-%EA%B8%B0%EB%B3%B8-%EC%83%9D%EC%84%B1%EC%9E%90%EB%8A%94-%EC%99%9C-%ED%95%84%EC%9A%94%ED%95%9C%EA%B0%80</em></li>
-<li>
-<p><em>참고 2: https://jojoldu.tistory.com/407</em></p>
-</li>
-<li>
-<p>문제: 직렬화 되어 넘겨받은 데이터를 @RequestBody를 통해 DTO 객체로 매핑을 잘하던중...</p>
-<ul>
-<li>이게 DTO 객체가 인스턴스 변수가 2개면 잘 매핑이되는데</li>
-<li>인스턴스 변수 1개면 매핑이 똑바로 안되는데?</li>
-<li>엥???</li>
+<li><em>참고 2: https://jojoldu.tistory.com/407</em></li>
 </ul>
-</li>
+<ul>
+<li>문제: 직렬화 되어 넘겨받은 데이터를 @RequestBody를 통해 DTO 객체로 매핑을 잘하던중...
+    - 이게 DTO 객체가 인스턴스 변수가 2개면 잘 매핑이되는데
+    - 인스턴스 변수 1개면 매핑이 똑바로 안되는데?
+    - 엥???</li>
 </ul>
 
 

@@ -22940,11 +22940,11 @@
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="n">project</span><span class="p">;</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="p">}</span>
 </code></pre></div></li>
-<li><strong>문제점</strong><ul>
-<li><code>@DataJpaTest</code>에서 Project 지우면 Partnership도 지워지겠지? 근데 안지워짐</li>
-<li>영속성 컨텍스트에 Partnership이랑 부모-자식 관계를 맺는 VentureCapital이 남아있어서 그럼</li>
-<li>TestEntityManager를 주입받아 flush(), clear() 뚝딱 해주자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@BeforeEach</span>
+<li><strong>문제점</strong>
+    - <code>@DataJpaTest</code>에서 Project 지우면 Partnership도 지워지겠지? 근데 안지워짐
+    - 영속성 컨텍스트에 Partnership이랑 부모-자식 관계를 맺는 VentureCapital이 남아있어서 그럼
+    - TestEntityManager를 주입받아 flush(), clear() 뚝딱 해주자
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@BeforeEach</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setUp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">projectRepository</span><span class="p">.</span><span class="na">saveAll</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">EOS</span><span class="p">,</span><span class="w"> </span><span class="n">axieInfinity</span><span class="p">));</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">ventureCapitalRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">hashed</span><span class="p">);</span>
@@ -22968,8 +22968,6 @@
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">partnerships</span><span class="p">).</span><span class="na">hasSize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

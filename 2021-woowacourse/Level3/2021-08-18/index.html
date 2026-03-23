@@ -22909,18 +22909,13 @@
 <h3 id="2021-08-18">2021-08-18<a class="headerlink" href="#2021-08-18" title="Permanent link">&para;</a></h3>
 <h2 id="cascadetypepersist">CascadeType.PERSIST<a class="headerlink" href="#cascadetypepersist" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>이게뭔데</strong></p>
-<ul>
-<li>영속성 객체에 수행하는 행동이 자식까지 전파!</li>
+<li><strong>이게뭔데</strong>
+    - 영속성 객체에 수행하는 행동이 자식까지 전파!</li>
 </ul>
-</li>
-<li>
-<p><strong>PERSIST 옵션 줬을 때 자식 객체 삭제하는법</strong></p>
 <ul>
-<li>
-<p>뼈대 코드
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
+<li><strong>PERSIST 옵션 줬을 때 자식 객체 삭제하는법</strong>
+    - 뼈대 코드
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Member</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nd">@Id</span><span class="w"> </span><span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
@@ -22962,31 +22957,22 @@
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">    </span><span class="n">orderList</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
 <a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">    </span><span class="n">em</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>자식Repository에서 자식 삭제, 부모의 리스트에서는 자식 들고 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//테스트코드</span>
+</code></pre></div><p>- 자식Repository에서 자식 삭제, 부모의 리스트에서는 자식 들고 있음
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">orderList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">orderRepository</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">)</span>
-</code></pre></div></p>
-<ul>
-<li>이거 보면 Member의 orderList 안에 있는 객체들 하나하나 지워준거같자나?</li>
-<li>근데 딜리트 쿼리가 안나가</li>
-<li>왜?<ul>
-<li>자식 객체를 삭제시킨다고 부모 객체가 알아? 모르자나</li>
-<li>트랜잭션 끝나고 부모 객체 FLUSH 할 때 딱 보니까 이제 영속화 할 거 없나~ 하고 보고 이미 영속화 되어있던 친구들은 그냥 내비둔다고 있구나 하고</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>자식Repository에서 자식 삭제, 부모의 리스트에서는 자식 들고 있지 않음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">//테스트코드</span>
+</code></pre></div>
+      - 이거 보면 Member의 orderList 안에 있는 객체들 하나하나 지워준거같자나?
+      - 근데 딜리트 쿼리가 안나가
+      - 왜?
+          - 자식 객체를 삭제시킨다고 부모 객체가 알아? 모르자나
+          - 트랜잭션 끝나고 부모 객체 FLUSH 할 때 딱 보니까 이제 영속화 할 거 없나~ 하고 보고 이미 영속화 되어있던 친구들은 그냥 내비둔다고 있구나 하고</p>
+<p>- 자식Repository에서 자식 삭제, 부모의 리스트에서는 자식 들고 있지 않음
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">orderList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">orderRepository</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
@@ -22994,59 +22980,41 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">)</span>
-</code></pre></div></p>
-<ul>
-<li>이제 orderList 안에 있는 주문들도 지웠어. </li>
-<li>Member가 들고 있는 Order도 지워줬어</li>
-<li>이제 딜리트쿼리가 나가</li>
-</ul>
-</li>
-<li>
-<p>자식Repository에서 자식 삭제하지 않음, 부모의 리스트에서 자식 들고있지 않음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">//테스트코드</span>
+</code></pre></div>
+      - 이제 orderList 안에 있는 주문들도 지웠어. 
+      - Member가 들고 있는 Order도 지워줬어
+      - 이제 딜리트쿼리가 나가</p>
+<p>- 자식Repository에서 자식 삭제하지 않음, 부모의 리스트에서 자식 들고있지 않음
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">orderList</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">)</span>
-</code></pre></div></p>
-<ul>
-<li>딜리트문 당연히 안나감</li>
-<li>멤버에서나 빠진거지 Order 객체 그 자체로는 아직 엄연히 존재하는 친구입니다.</li>
-</ul>
-</li>
-<li>
-<p>자식Repository에서 자식 삭제, 부모의 리스트는 고아객체 삭제옵션 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">//테스트코드</span>
+</code></pre></div>
+      - 딜리트문 당연히 안나감
+      - 멤버에서나 빠진거지 Order 객체 그 자체로는 아직 엄연히 존재하는 친구입니다.</p>
+<p>- 자식Repository에서 자식 삭제, 부모의 리스트는 고아객체 삭제옵션 있음
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">orderList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">orderRepository</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">,</span><span class="w"> </span><span class="n">orphanRemoval</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
-</code></pre></div></p>
-<ul>
-<li>딜리트 안나감</li>
-<li>Member가 지금 Order 들고있거든</li>
-<li>삭제가 될라고 하고 보니까~ Member가 들고 있어서 이거 그냥 영속화시켜버리고 저장 메타</li>
-</ul>
-</li>
-<li>
-<p>자식Repository에서 자식 삭제 안함, 부모의 리스트 비움, 부모의 리스트는 고아객체 삭제옵션 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">//테스트코드</span>
+</code></pre></div>
+      - 딜리트 안나감
+      - Member가 지금 Order 들고있거든
+      - 삭제가 될라고 하고 보니까~ Member가 들고 있어서 이거 그냥 영속화시켜버리고 저장 메타</p>
+<p>- 자식Repository에서 자식 삭제 안함, 부모의 리스트 비움, 부모의 리스트는 고아객체 삭제옵션 있음
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">orderList</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">,</span><span class="w"> </span><span class="n">orphanRemoval</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
-</code></pre></div></p>
-<ul>
-<li>이거 딜리트문 나감</li>
-<li>부모가 영속화 시키는 입장에서 봤을 때 갈곳을 잃은 고아 객체들은 그냥 삭제 쿼리 날려버리는듯<ul>
-<li>여기서 생각해볼건 order가 다른 부모를 또 갖고 있다면 Member가 지맘대로 삭제할수 읎다는것!</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</code></pre></div>
+      - 이거 딜리트문 나감
+      - 부모가 영속화 시키는 입장에서 봤을 때 갈곳을 잃은 고아 객체들은 그냥 삭제 쿼리 날려버리는듯
+          - 여기서 생각해볼건 order가 다른 부모를 또 갖고 있다면 Member가 지맘대로 삭제할수 읎다는것!</p>
 </li>
 </ul>
 

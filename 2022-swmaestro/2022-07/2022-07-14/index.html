@@ -22910,60 +22910,36 @@
 <h2 id="common-architecture-of-caver">Common Architecture of Caver<a class="headerlink" href="#common-architecture-of-caver" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://medium.com/klaytn/common-architecture-of-caver-f7a7a1c554de</em></li>
-<li>
-<p><strong>개요</strong></p>
+<li><strong>개요</strong>
+    - Klaytn을 쉽게 사용하기 위한 SDK</li>
+</ul>
 <ul>
-<li>Klaytn을 쉽게 사용하기 위한 SDK</li>
+<li><strong>Common Architecture의 구조</strong>
+    - <img alt="" src="../../images/2022-07-13-caver-architecture.png" />
+    - [KCT Layer]
+        - KIP-7, KIP-17을 쉽게 배포를 실행하기 위한 기능이 제공되는 레이어
+    - [Contract Layer]
+        - 스마트 컨트랙트를 쉽게 사용할 수 있는 기능이 제공
+        - 스마트 컨트랙트의 ABI와 byte code가 있다면 Contract 레이어에서 제공되는 기능 쉽게 사용해 Klaytn의 컨트랙트 배포/실행 가능
+    - [ABI Layer]
+        - ABI에 대한 기능을 제공하는 레이어
+        - 스마트 컨트랙트의 ABI를 통해 인코딩/디코딩 기능 제공
+    - [Transaction Layer]
+        - Klaytn에서 사용되는 다양한 트랜잭션 타입들이 개별적으로 구현되어 제공됨
+    - [Wallet Layer]
+        - Klaytn Account를 사용할 수 있는 기능들을 제공
+        - Caver에서 Klaytn 계정의 주소와 private key를 보관하는 Keyring
+        - Keyring 관리하는 in-memory wallet 기능 제공하는 KeyringContainer
+    - [Account Layer]
+        - Klaytn Account의 AccountKey를 업데이트할 때에 필요한 데이터 구조와 기능 제공
+    - [RPC Layer]
+        - Klaytn Node와 RPC 통신 기능을 제공
+    - [Utils Layer]
+        - BApp 개발시 필요한 유틸리티 함수 제공</li>
 </ul>
-</li>
-<li>
-<p><strong>Common Architecture의 구조</strong></p>
 <ul>
-<li><img alt="" src="../../images/2022-07-13-caver-architecture.png" /></li>
-<li>[KCT Layer]<ul>
-<li>KIP-7, KIP-17을 쉽게 배포를 실행하기 위한 기능이 제공되는 레이어</li>
-</ul>
-</li>
-<li>[Contract Layer]<ul>
-<li>스마트 컨트랙트를 쉽게 사용할 수 있는 기능이 제공</li>
-<li>스마트 컨트랙트의 ABI와 byte code가 있다면 Contract 레이어에서 제공되는 기능 쉽게 사용해 Klaytn의 컨트랙트 배포/실행 가능</li>
-</ul>
-</li>
-<li>[ABI Layer]<ul>
-<li>ABI에 대한 기능을 제공하는 레이어</li>
-<li>스마트 컨트랙트의 ABI를 통해 인코딩/디코딩 기능 제공</li>
-</ul>
-</li>
-<li>[Transaction Layer]<ul>
-<li>Klaytn에서 사용되는 다양한 트랜잭션 타입들이 개별적으로 구현되어 제공됨</li>
-</ul>
-</li>
-<li>[Wallet Layer]<ul>
-<li>Klaytn Account를 사용할 수 있는 기능들을 제공</li>
-<li>Caver에서 Klaytn 계정의 주소와 private key를 보관하는 Keyring</li>
-<li>Keyring 관리하는 in-memory wallet 기능 제공하는 KeyringContainer</li>
-</ul>
-</li>
-<li>[Account Layer]<ul>
-<li>Klaytn Account의 AccountKey를 업데이트할 때에 필요한 데이터 구조와 기능 제공</li>
-</ul>
-</li>
-<li>[RPC Layer]<ul>
-<li>Klaytn Node와 RPC 통신 기능을 제공</li>
-</ul>
-</li>
-<li>[Utils Layer]<ul>
-<li>BApp 개발시 필요한 유틸리티 함수 제공</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Caver로 KLAY 전송</strong></p>
-<ul>
-<li>keyring 생성 -&gt; in-memory wallet에 keyring 추가 -&gt; transaction 생성 -&gt; transaction 서명 -&gt; Klaytn 네트워크에 전송</li>
-</ul>
-</li>
+<li><strong>Caver로 KLAY 전송</strong>
+    - keyring 생성 -&gt; in-memory wallet에 keyring 추가 -&gt; transaction 생성 -&gt; transaction 서명 -&gt; Klaytn 네트워크에 전송</li>
 </ul>
 
 

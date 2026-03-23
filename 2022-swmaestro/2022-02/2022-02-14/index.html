@@ -22909,18 +22909,18 @@
 <h3 id="2022-02-14">2022-02-14<a class="headerlink" href="#2022-02-14" title="Permanent link">&para;</a></h3>
 <h2 id="-union-find">알고리즘 문제풀이 - 다익스트라 알고리즘 &amp; Union Find<a class="headerlink" href="#-union-find" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>다익스트라 알고리즘</strong></li>
+<li><strong>다익스트라 알고리즘</strong><ul>
 <li>모든 간선의 가중치가 <strong>0 이상일 경우</strong> 사용</li>
-<li>
-<p>PriorityQueue를 활용하여 O(nlogn)으로 쇼부가능</p>
+<li>PriorityQueue를 활용하여 O(nlogn)으로 쇼부가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Union Find</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Union Find</strong><ul>
 <li>그래프의 루트 원소를 계속 갱신해 나가기</li>
 <li>연결되어있다 =&gt; 루트를 하나로 만들기</li>
 <li>배열의 값으로 연결해두기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">unf</span><span class="p">;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">unf</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Find</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">){</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="o">==</span><span class="n">unf</span><span class="o">[</span><span class="n">v</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
@@ -22933,6 +22933,8 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">fa</span><span class="o">!=</span><span class="n">fb</span><span class="p">)</span><span class="w"> </span><span class="n">unf</span><span class="o">[</span><span class="n">fa</span><span class="o">]=</span><span class="n">fb</span><span class="p">;</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

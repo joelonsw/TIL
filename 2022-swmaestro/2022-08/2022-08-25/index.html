@@ -22991,24 +22991,32 @@
 </ul>
 <h3 id="_1">환불 로직<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ol>
-<li>우리 지갑에게 팔린 토큰에 대한 전송 권한을 부여한다. </li>
+<li>우리 지갑에게 팔린 토큰에 대한 전송 권한을 부여한다. <ul>
 <li><em>https://refs.klaytnapi.com/ko/kip17/latest#operation/ApproveToken</em></li>
-<li>우리 지갑으로 토큰을 전송한다. </li>
+</ul>
+</li>
+<li>우리 지갑으로 토큰을 전송한다. <ul>
 <li><em>https://refs.klaytnapi.com/ko/kip17/latest#operation/TransferToken</em></li>
+</ul>
+</li>
 <li>해당 거래의 OrderStatus를 REFUND로 수정</li>
-<li>다시 토큰을 TRANSFER_SUCCESS =&gt; ONSALE 상태로 만든다</li>
-<li>결과 =&gt; 실패</li>
+<li>다시 토큰을 TRANSFER_SUCCESS =&gt; ONSALE 상태로 만든다
+- 결과 =&gt; 실패<ul>
 <li>KIP17 컨트랙트/토큰 발행자를 A라고 두고,</li>
 <li>이를 구매하여 전송받은 사람을 B라고 할 때,</li>
 <li>A가 B의 토큰을 소각할 수 있나요? =&gt; 없습니다</li>
 <li>프론트에서 직접 Transfer를 해주고 백엔드에서 다시 Onsale로 상태를 만들어야 할듯?</li>
+</ul>
+</li>
 </ol>
 <h3 id="nft">입장 검수 전 NFT 전송 막기 (중복 입장 막아야 해)<a class="headerlink" href="#nft" title="Permanent link">&para;</a></h3>
 <ul>
-<li>해결 방안 =&gt; QR 입장 인증 처리</li>
+<li>해결 방안 =&gt; QR 입장 인증 처리<ol>
 <li>Contract 단에서 전송을 막는 Pause</li>
 <li>내부 DB에서 isUsed 필드 전환</li>
 <li>앱 내에서 NFT 전송하기 막아두고, 입장을 누르면 뚝딱?</li>
+</ol>
+</li>
 </ul>
 <h3 id="_2">오픈씨에서 좀 그럴싸하게 보였으면 좋겠는데...<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 

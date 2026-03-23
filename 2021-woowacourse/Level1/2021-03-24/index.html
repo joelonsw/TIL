@@ -23062,303 +23062,201 @@
 <h2 id="90-html">90년생 HTML<a class="headerlink" href="#90-html" title="Permanent link">&para;</a></h2>
 <ul>
 <li>참고: https://www.youtube.com/watch?v=cANdjq3yr1M&amp;t=7s</li>
-<li>
-<p><strong>스위스 태생</strong></p>
+<li><strong>스위스 태생</strong>
+    - CERN 물리학 연구소에서 1990년에 WEB 탄생 <em>(by Tim Berners-Lee)</em></li>
+</ul>
 <ul>
-<li>CERN 물리학 연구소에서 1990년에 WEB 탄생 <em>(by Tim Berners-Lee)</em></li>
+<li><strong>이후 웹의 폭발적 성장</strong>
+    - HTML / CSS / JS
+    - 정보 나타냄 / 정보 꾸며줌 / 정보를 움직이게 함</li>
 </ul>
-</li>
-<li>
-<p><strong>이후 웹의 폭발적 성장</strong></p>
 <ul>
-<li>HTML / CSS / JS</li>
-<li>정보 나타냄 / 정보 꾸며줌 / 정보를 움직이게 함</li>
-</ul>
-</li>
-<li>
-<p><strong>HTML 약속</strong></p>
-<ul>
-<li>HyperText Markup Language<ul>
-<li>하이퍼텍스트(링크)를 중요한 특징으로 가지는 마크업 형식의 언어</li>
-</ul>
-</li>
-<li>정보를 태그로 나타내기!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span> I am a web developer <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</code></pre></div></li>
-<li>\<h1>: 여는 태그, \</h1>: 닫는 태그</li>
-<li>I am ~: 콘텐츠</li>
-<li>
-<p>전체: 엘리먼트</p>
-</li>
-<li>
-<p>태그 150개 이상... 자주 쓰는 것만 알아보고, 나머진 찾아쓰자</p>
-</li>
-</ul>
+<li><strong>HTML 약속</strong>
+    - HyperText Markup Language
+        - 하이퍼텍스트(링크)를 중요한 특징으로 가지는 마크업 형식의 언어
+    - 정보를 태그로 나타내기!
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span> I am a web developer <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</code></pre></div>
+    - \<h1>: 여는 태그, \</h1>: 닫는 태그
+    - I am ~: 콘텐츠
+    - 전체: 엘리먼트<p>- 태그 150개 이상... 자주 쓰는 것만 알아보고, 나머진 찾아쓰자</p>
 </li>
 </ul>
 <h2 id="dom">DOM<a class="headerlink" href="#dom" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>필요성</strong></p>
+<li><strong>필요성</strong>
+    - JS를 통해 html의 데이터를 가져올 수 있음
+    - 웹페이지에 보여지는 데이터를 변경할 수 있음
+    - 인터랙티브한 웹 어플리케이션 만들 수 있음
+    - 동적인 기능이 있는 웹어플리케이션을 만들어보자!</li>
+</ul>
 <ul>
-<li>JS를 통해 html의 데이터를 가져올 수 있음</li>
-<li>웹페이지에 보여지는 데이터를 변경할 수 있음</li>
-<li>인터랙티브한 웹 어플리케이션 만들 수 있음</li>
-<li>동적인 기능이 있는 웹어플리케이션을 만들어보자!</li>
+<li><strong>정의</strong>
+    - Document Object Model의 약자
+    - 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공해, 문서 구조/스타일/내용을 변경할 수 있게 한다</li>
 </ul>
-</li>
-<li>
-<p><strong>정의</strong></p>
 <ul>
-<li>Document Object Model의 약자</li>
-<li>프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공해, 문서 구조/스타일/내용을 변경할 수 있게 한다</li>
+<li><strong>DOM API 사용하기</strong>
+    - 엘리먼트 하나 가져오기
+        - getElement, querySelector
+            - getElementById
+            - querySelector
+    - 엘리먼트 여러 개 가져오기 (HTML Collection 반환)
+        - getElements, querySelectorAll
+            - getElementsByTagName
+            - getElementsByClassName
+            - querySelectorAll</li>
 </ul>
-</li>
-<li>
-<p><strong>DOM API 사용하기</strong></p>
 <ul>
-<li>엘리먼트 하나 가져오기<ul>
-<li>getElement, querySelector<ul>
-<li>getElementById</li>
-<li>querySelector</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>엘리먼트 여러 개 가져오기 (HTML Collection 반환)<ul>
-<li>getElements, querySelectorAll<ul>
-<li>getElementsByTagName</li>
-<li>getElementsByClassName</li>
-<li>querySelectorAll</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>정리</strong></p>
-<ul>
-<li>DOM은 HTML을 위한 API로, HTML을 "탐색"할 수 있고, 구조를 "변경"할 수 있음</li>
-</ul>
-</li>
+<li><strong>정리</strong>
+    - DOM은 HTML을 위한 API로, HTML을 "탐색"할 수 있고, 구조를 "변경"할 수 있음</li>
 </ul>
 <h2 id="bom">BOM<a class="headerlink" href="#bom" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>필요성</strong></p>
-<ul>
-<li>유저에게 경고창 띄워주기</li>
-<li>유저의 yes/no 선택에 따른 응답 보여주고 싶은 경우</li>
-<li>유저가 브라우저 나갈 때 진짜 나갈건지 물어보고 싶은 경우</li>
-<li>유저가 접속한 환경을 알고 싶은 경우</li>
-<li>현재 url 위치, 접속 history를 알고 싶은 경우!</li>
+<li><strong>필요성</strong>
+    - 유저에게 경고창 띄워주기
+    - 유저의 yes/no 선택에 따른 응답 보여주고 싶은 경우
+    - 유저가 브라우저 나갈 때 진짜 나갈건지 물어보고 싶은 경우
+    - 유저가 접속한 환경을 알고 싶은 경우
+    - 현재 url 위치, 접속 history를 알고 싶은 경우!</li>
 </ul>
-</li>
-<li>
-<p><strong>정의</strong></p>
 <ul>
-<li>BOM은 웹 브라우저 환경의 다양한 기능을 객체처럼 다루는 모델</li>
-<li>웹 브라우저의 버튼, URL 주소 입력 창, 타이틀 바 등 웹브라우저 일부분을 제어</li>
+<li><strong>정의</strong>
+    - BOM은 웹 브라우저 환경의 다양한 기능을 객체처럼 다루는 모델
+    - 웹 브라우저의 버튼, URL 주소 입력 창, 타이틀 바 등 웹브라우저 일부분을 제어</li>
 </ul>
-</li>
-<li>
-<p><strong>대표 BOM</strong></p>
 <ul>
-<li>window: 브라우저 창 객체</li>
-<li>screen: 사용자 환경의 디스플레이 정보 객체</li>
-<li>location: 현재 페이지의 url을 다루는 객체</li>
-<li>navigator: 브라우저 환경 정보 객체</li>
-<li>history: 현재 브라우저가 접근했던 URL history</li>
+<li><strong>대표 BOM</strong>
+    - window: 브라우저 창 객체
+    - screen: 사용자 환경의 디스플레이 정보 객체
+    - location: 현재 페이지의 url을 다루는 객체
+    - navigator: 브라우저 환경 정보 객체
+    - history: 현재 브라우저가 접근했던 URL history</li>
 </ul>
-</li>
-<li>
-<p><strong>정리</strong></p>
 <ul>
-<li>BOM은 웹 브라우저의 기능을 객체처럼 다루는 모델</li>
-<li>BOM의 API 활용하면, UX 올라감</li>
-</ul>
-</li>
+<li><strong>정리</strong>
+    - BOM은 웹 브라우저의 기능을 객체처럼 다루는 모델
+    - BOM의 API 활용하면, UX 올라감</li>
 </ul>
 <h2 id="dom-bom">DOM &amp; BOM 테코톡<a class="headerlink" href="#dom-bom" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>DOM</strong><ul>
-<li>JS가 HTML 어케아누?... DOM을 통해!__</li>
-<li>문서에 대한 모든 내용을 담고 있음</li>
-<li><strong>"HTML 요소간의 부자 관계를 반영하여 트리 구조로 구성한 것"</strong></li>
-</ul>
-</li>
-<li><strong>DOM API를 통해 노드 취득</strong><ul>
-<li>getElement~, querySelect~        </li>
-<li>여러개 라면 HTMLCollection, NodeList 등을 반환<ul>
-<li>유사 배열... 배열 변환 후 사용을 권장</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>DOM API를 통해 노드 추가</strong><ul>
-<li>innerHTML: 장) 쉬움, 단) 한번만 삽입할 것</li>
-<li>insertAdjacentHTML: 장) 기존요소 제거 X, 단) 크로스 사이트 스크립팅 공격에 취약</li>
-<li>appendChild: 장) 보안이슈 읎음 단) 새로운 자식 노드 생성 필수</li>
-</ul>
-</li>
-<li><strong>렌더링 과정</strong><ul>
-<li>HTML 순차적 탐색하면서 DOM 생성해나감<ul>
-<li>link CSS 만남... CSSOM 생성함</li>
-</ul>
-</li>
-<li>DOM + CSSOM 합쳐서 렌더 트리 만듦<ul>
-<li>Script JS 만남... 렌더링 엔진 -&gt; JS 엔진으로 제어권 넘김</li>
-<li>만약 JS에서 DOM / CSSOM 건드리면, reflow, repaint 불가피 </li>
-</ul>
-</li>
-<li>질문!<ul>
-<li>CSS 상단에 있는 이유?<ul>
-<li>외부 스타일 시트 최대한 빠르게 다운 받기 위해</li>
-</ul>
-</li>
-<li>Script 하단에 있는 이유?<ul>
-<li>HTML 파서는 script 태그를 만나면 파싱 멈추고 스크립트 읽기에 로딩 늦어짐</li>
-<li>생성안된 DOM 읽거나 조작하는거 불가능해서 오류 발생할 수 있음</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>렌더링 문제점</strong><ul>
-<li>동적 UI 관리 약함... 성능 이슈<ul>
-<li>DOM은 빠른데, css재구성/리페인트가 오래걸림</li>
-</ul>
-</li>
-<li>SPA에서 비효율적</li>
-</ul>
-</li>
-<li><strong>Virtual DOM</strong><ul>
-<li>바뀐 부분만 실제 DOM에 적용</li>
-<li>불필요한 렌더링 횟수 줄임</li>
-</ul>
-</li>
-<li><strong>BOM</strong><ul>
-<li>웹 브라우저 환경의 다양한 기능을 객체처럼 다룸</li>
-<li>DOM은 BOM에 포함됨</li>
-<li>window<ul>
-<li>document</li>
-<li>history</li>
-<li>location</li>
-<li>navigator</li>
-<li>screen</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>DOM</strong>
+    - JS가 HTML 어케아누?... DOM을 통해!<strong>
+    - 문서에 대한 모든 내용을 담고 있음
+    - </strong>"HTML 요소간의 부자 관계를 반영하여 트리 구조로 구성한 것"__</li>
+<li><strong>DOM API를 통해 노드 취득</strong>
+    - getElement~, querySelect~      <br />
+    - 여러개 라면 HTMLCollection, NodeList 등을 반환
+        - 유사 배열... 배열 변환 후 사용을 권장</li>
+<li><strong>DOM API를 통해 노드 추가</strong>
+    - innerHTML: 장) 쉬움, 단) 한번만 삽입할 것
+    - insertAdjacentHTML: 장) 기존요소 제거 X, 단) 크로스 사이트 스크립팅 공격에 취약
+    - appendChild: 장) 보안이슈 읎음 단) 새로운 자식 노드 생성 필수</li>
+<li><strong>렌더링 과정</strong>
+    - HTML 순차적 탐색하면서 DOM 생성해나감
+        - link CSS 만남... CSSOM 생성함
+    - DOM + CSSOM 합쳐서 렌더 트리 만듦
+        - Script JS 만남... 렌더링 엔진 -&gt; JS 엔진으로 제어권 넘김
+        - 만약 JS에서 DOM / CSSOM 건드리면, reflow, repaint 불가피 
+    - 질문!
+        - CSS 상단에 있는 이유?
+            - 외부 스타일 시트 최대한 빠르게 다운 받기 위해
+        - Script 하단에 있는 이유?
+            - HTML 파서는 script 태그를 만나면 파싱 멈추고 스크립트 읽기에 로딩 늦어짐
+            - 생성안된 DOM 읽거나 조작하는거 불가능해서 오류 발생할 수 있음</li>
+<li><strong>렌더링 문제점</strong>
+    - 동적 UI 관리 약함... 성능 이슈
+        - DOM은 빠른데, css재구성/리페인트가 오래걸림
+    - SPA에서 비효율적</li>
+<li><strong>Virtual DOM</strong>
+    - 바뀐 부분만 실제 DOM에 적용
+    - 불필요한 렌더링 횟수 줄임</li>
+<li><strong>BOM</strong>
+    - 웹 브라우저 환경의 다양한 기능을 객체처럼 다룸
+    - DOM은 BOM에 포함됨
+    - window
+        - document
+        - history
+        - location
+        - navigator
+        - screen</li>
 </ul>
 <h2 id="event">Event<a class="headerlink" href="#event" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>필요성</strong></p>
-<ul>
-<li>Interactive 한 사용자 경험!</li>
+<li><strong>필요성</strong>
+    - Interactive 한 사용자 경험!</li>
 </ul>
-</li>
-<li>
-<p><strong>정의</strong></p>
 <ul>
-<li>웹 탐색과정에서 사용자가 ~했을 때를 담당</li>
-<li>~했을 때에 대한 이벤트를 다루도록 한다!</li>
+<li><strong>정의</strong>
+    - 웹 탐색과정에서 사용자가 ~했을 때를 담당
+    - ~했을 때에 대한 이벤트를 다루도록 한다!</li>
 </ul>
-</li>
-<li>
-<p><strong>종류</strong></p>
 <ul>
-<li>
-<p>사용자 인터페이스 이벤트</p>
-<ul>
-<li>load: 웹 페이지 로드 되었을 때</li>
-<li>unload: 새로운 페이지르 요청했을 때</li>
-<li>error: 브라우저가 JS 오류를 만났거나, 요청한 자원이 없을 때</li>
-<li>resize: 브라우저 창의 크기 조정했을 때</li>
-<li>scroll: 사용자가 페이지 위아래로 스크롤할 때</li>
-</ul>
-</li>
-<li>
-<p>키보드 이벤트</p>
-<ul>
-<li>keydown: 사용자가 키 처음 눌렀을 때</li>
-<li>keyup: 사용자가 키를 뗄 때</li>
-<li>keypress: 사용자가 키 누르고 뗴어서 문자 화면에 표시 될 떄</li>
-</ul>
-</li>
-<li>
-<p>마우스 이벤트 </p>
-<ul>
-<li>click: 마우스 클릭했을 때</li>
-<li>dblclick: 마우스 더블 클릭했을 때</li>
-<li>mousedown: 마우스 누르고 있을 때</li>
-<li>mouseup: 마우스 뗄 때</li>
-<li>mousemove: 마우스 움직일 때</li>
-<li>mouseover: 요소 위로 마우스를 움직였을 때</li>
-<li>mouseout: 요소 바깥으로 마우스 움직였을 때</li>
-</ul>
-</li>
-<li>
-<p>focus와 blur</p>
-<ul>
-<li>link, form에서 포커스를 줄 수 있음</li>
-<li>사용자가 form의 요소들과 상호작용(도움말/피드백 등)</li>
-<li>유효성 검사 수행 등</li>
-<li>focus: HTML 엘리먼트가 포커스를 얻음</li>
-<li>blur: HTML 엘리먼트가 포커스를 잃음</li>
-<li>focusin: HTML 엘리먼트가 포커스를 받고 있는 중일 떄</li>
-<li>focusout: HTML 엘리먼트가 포커스를 잃음</li>
-</ul>
+<li><strong>종류</strong>
+    - 사용자 인터페이스 이벤트
+        - load: 웹 페이지 로드 되었을 때
+        - unload: 새로운 페이지르 요청했을 때
+        - error: 브라우저가 JS 오류를 만났거나, 요청한 자원이 없을 때
+        - resize: 브라우저 창의 크기 조정했을 때
+        - scroll: 사용자가 페이지 위아래로 스크롤할 때<p>- 키보드 이벤트
+      - keydown: 사용자가 키 처음 눌렀을 때
+      - keyup: 사용자가 키를 뗄 때
+      - keypress: 사용자가 키 누르고 뗴어서 문자 화면에 표시 될 떄</p>
+<p>- 마우스 이벤트 
+      - click: 마우스 클릭했을 때
+      - dblclick: 마우스 더블 클릭했을 때
+      - mousedown: 마우스 누르고 있을 때
+      - mouseup: 마우스 뗄 때
+      - mousemove: 마우스 움직일 때
+      - mouseover: 요소 위로 마우스를 움직였을 때
+      - mouseout: 요소 바깥으로 마우스 움직였을 때</p>
+<p>- focus와 blur
+      - link, form에서 포커스를 줄 수 있음
+      - 사용자가 form의 요소들과 상호작용(도움말/피드백 등)
+      - 유효성 검사 수행 등
+      - focus: HTML 엘리먼트가 포커스를 얻음
+      - blur: HTML 엘리먼트가 포커스를 잃음
+      - focusin: HTML 엘리먼트가 포커스를 받고 있는 중일 떄
+      - focusout: HTML 엘리먼트가 포커스를 잃음</p>
 </li>
 </ul>
-</li>
-<li>
-<p><strong>이벤트 핸들러</strong></p>
 <ul>
-<li>element.addEventListener(이벤트, 코드[, options]);</li>
-<li>매개변수를 전달 하고자 하면, 다음과 같은 익명함수를 이용하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">$stationAddButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;blur&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<li><strong>이벤트 핸들러</strong>
+    - element.addEventListener(이벤트, 코드[, options]);
+    - 매개변수를 전달 하고자 하면, 다음과 같은 익명함수를 이용하자
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">$stationAddButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;blur&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">onAddStationHandler</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">})</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>이벤트 위임</strong></p>
 <ul>
-<li>이벤트 많다 == 페이지 실행 속도 느리다</li>
-<li>효율적 이벤트 관리 위해, 자식 요소를 포함할 수 있는 요소에 이벤트 핸들러를 지정하고, 이벤트의 흐름을 이용해 다룰 수 있음</li>
-<li>장점<ul>
-<li>동적으로 추가되는 "새로운" 요소에도 동작</li>
-<li>코드가 간결</li>
-</ul>
-</li>
-<li>예시
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;parent-list&quot;</span><span class="p">&gt;</span>
+<li><strong>이벤트 위임</strong>
+    - 이벤트 많다 == 페이지 실행 속도 느리다
+    - 효율적 이벤트 관리 위해, 자식 요소를 포함할 수 있는 요소에 이벤트 핸들러를 지정하고, 이벤트의 흐름을 이용해 다룰 수 있음
+    - 장점
+        - 동적으로 추가되는 "새로운" 요소에도 동작
+        - 코드가 간결
+    - 예시
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;parent-list&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;item1&quot;</span><span class="p">&gt;</span>Item 1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;item2&quot;</span><span class="p">&gt;</span>Item 2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;item3&quot;</span><span class="p">&gt;</span>Item 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>        
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;parent-list&quot;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;parent-list&quot;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;LI&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`List item </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb"> was clicked!`</span><span class="p">);</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">});</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="hashcode-equals">hashCode와 equals의 동치성 보장<a class="headerlink" href="#hashcode-equals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>리뷰어 미립과의 대화!</li>
-<li>문제 상황: 나의 Pawn 클래스에서 오버라이딩한 hashCode와 equals 메서드가 동치성을 보장하지 않는다?!<ul>
-<li>나는 하는 줄 알았는데...</li>
-<li>현재 코드
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Override</span>
+<li>문제 상황: 나의 Pawn 클래스에서 오버라이딩한 hashCode와 equals 메서드가 동치성을 보장하지 않는다?!
+    - 나는 하는 줄 알았는데...
+    - 현재 코드
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Override</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">PAWN_UNICODE_DECIMAL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">direction</span><span class="p">;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
@@ -23370,85 +23268,61 @@
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="na">getClass</span><span class="p">();</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
+<li><strong>1. hashCode 는 같지만 equals 는 같지 않은 케이스는 발생 할 수 없을까요?</strong>
+    - 발생할 수 있어요.<br />
+      현재 Pawn 클래스의 모든 인스턴스는 hashCode로 9817을 가지고 있어요.<br />
+      Integer 클래스 같은 경우, 정수값 그 자체가 hashCode로 사용되어요.<br />
+      만약 다음과 같은 코드를 작성하면, 두 객체의 hashCode의 값은 같아요.  <p><img alt="facade" src="../../image/hashCode_equals_2021_03_24.png" /></p>
+<p>- 다만 Integer객체와 Pawn 객체의 equals는 달라요.<br />
+    HashSet에 둘이 각각 저장된 것이 그것의 반증이에요.<br />
+    객체를 HashSet에 넣을 때 hashCode/equals를 비교하여 같다면 같은 키값으로 인지하는데,<br />
+    해당 테스트 코드에서는 둘을 다른 객체로 인지했으니까요.  </p>
 </li>
-<li>
-<p><strong>1. hashCode 는 같지만 equals 는 같지 않은 케이스는 발생 할 수 없을까요?</strong></p>
+</ul>
 <ul>
-<li>발생할 수 있어요.<br />
-  현재 Pawn 클래스의 모든 인스턴스는 hashCode로 9817을 가지고 있어요.<br />
-  Integer 클래스 같은 경우, 정수값 그 자체가 hashCode로 사용되어요.<br />
-  만약 다음과 같은 코드를 작성하면, 두 객체의 hashCode의 값은 같아요.  </li>
+<li><strong>2. 근데 hash 값과 eqauls 가 다른 방식으로 구현되어 있어 수정 중 둘의 동치성이 깨진다면 hashSet에서 어떤 문제가 발생할까요?</strong>
+    - hashSet은 hash값과 equals가 같은경우, 같은 Key값으로 인지해요.<br />
+      만약 둘 중 하나가 다르다면, hashSet/Map에 key값이 각각 저장될 것이에요.<br />
+      각각 저장된 두개의 Key가 사실 같은 객체였어야 한다면, 다음과 같은 문제가 발생해요.<br />
+      고유한 Key값에 대응하는 Value를 저장하고 싶어 hashMap을 사용하는데, 이것이 보장이 안될 것이에요.  </li>
 </ul>
-<p><img alt="facade" src="../../image/hashCode_equals_2021_03_24.png" /></p>
 <ul>
-<li>다만 Integer객체와 Pawn 객체의 equals는 달라요.<br />
-  HashSet에 둘이 각각 저장된 것이 그것의 반증이에요.<br />
-  객체를 HashSet에 넣을 때 hashCode/equals를 비교하여 같다면 같은 키값으로 인지하는데,<br />
-  해당 테스트 코드에서는 둘을 다른 객체로 인지했으니까요.  </li>
-</ul>
+<li><strong>3. 또한 hash 값의 중복이 발생한다면 또 어떻게 될까요?</strong>
+    - 우선 hash 값의 중복이 발생하면, hash 충돌이 일어나요.<br />
+      hash 충돌이 일어나면, 해당 hash 값을 저장하는 버킷에 하나 이상의 데이터가 저장되어야 해요.<br />
+      만약 hash 충돌이 너무 자주일어나, 하나의 버킷에 주렁주렁 데이터가 저장된다면,<br />
+      O(1)의 속도를 보장하기 때문에 쓰려고 했던 hashMap/hashSet의 성능을 매우 저하시킬 것이에요.  <p>- https://papimon.tistory.com/74<br />
+    얼마 전, HashMap/HashSet의 출력이 순서를 가지는 것 같아 공부를 하던 중 발견한 것들을 제 블로그에 정리했었어요.<br />
+    이때 참고했던 포스팅이 https://d2.naver.com/helloworld/831311 이거였어요.<br />
+    해당 포스팅에서는 hashCode가 충돌하는 데이터를 다음과 같이 처리한다고 명시했어요.<br />
+    기존 Java 7까지는 hash 충돌이 발생한 버킷에 대해, LinkedList로 데이터를 이어 저장해요.<br />
+    이는 탐색에 최악 O(N)의 시간복잡도를 가져요.<br />
+    Java 8 부터는 RBtree를 통한 데이터 저장으로 최악 O(logN)의 시간복잡도를 가지게 했다고 이해했어요.  </p>
 </li>
-<li>
-<p><strong>2. 근데 hash 값과 eqauls 가 다른 방식으로 구현되어 있어 수정 중 둘의 동치성이 깨진다면 hashSet에서 어떤 문제가 발생할까요?</strong></p>
+</ul>
 <ul>
-<li>hashSet은 hash값과 equals가 같은경우, 같은 Key값으로 인지해요.<br />
-  만약 둘 중 하나가 다르다면, hashSet/Map에 key값이 각각 저장될 것이에요.<br />
-  각각 저장된 두개의 Key가 사실 같은 객체였어야 한다면, 다음과 같은 문제가 발생해요.<br />
-  고유한 Key값에 대응하는 Value를 저장하고 싶어 hashMap을 사용하는데, 이것이 보장이 안될 것이에요.  </li>
-</ul>
-</li>
-<li>
-<p><strong>3. 또한 hash 값의 중복이 발생한다면 또 어떻게 될까요?</strong></p>
-<ul>
-<li>
-<p>우선 hash 값의 중복이 발생하면, hash 충돌이 일어나요.<br />
-  hash 충돌이 일어나면, 해당 hash 값을 저장하는 버킷에 하나 이상의 데이터가 저장되어야 해요.<br />
-  만약 hash 충돌이 너무 자주일어나, 하나의 버킷에 주렁주렁 데이터가 저장된다면,<br />
-  O(1)의 속도를 보장하기 때문에 쓰려고 했던 hashMap/hashSet의 성능을 매우 저하시킬 것이에요.  </p>
-</li>
-<li>
-<p>https://papimon.tistory.com/74<br />
-  얼마 전, HashMap/HashSet의 출력이 순서를 가지는 것 같아 공부를 하던 중 발견한 것들을 제 블로그에 정리했었어요.<br />
-  이때 참고했던 포스팅이 https://d2.naver.com/helloworld/831311 이거였어요.<br />
-  해당 포스팅에서는 hashCode가 충돌하는 데이터를 다음과 같이 처리한다고 명시했어요.<br />
-  기존 Java 7까지는 hash 충돌이 발생한 버킷에 대해, LinkedList로 데이터를 이어 저장해요.<br />
-  이는 탐색에 최악 O(N)의 시간복잡도를 가져요.<br />
-  Java 8 부터는 RBtree를 통한 데이터 저장으로 최악 O(logN)의 시간복잡도를 가지게 했다고 이해했어요.  </p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>이제 내 코드의 문제점!</strong></p>
-<ul>
-<li>현재 저의 Pawn의 hashCode, equals 오버라이딩 된 코드에요.<br />
-  Pawn의 direction에 따라 다른 hashCode를 반환하는 대신,<br />
-  equals는 그저 같은 클래스라면 동등성을 보장하도록 제가 코드를 작성해놨어요.<br />
-  여기에서 제가 위에 정리한 문제들이 발생할 수 있을것 같아요!  </li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Override</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">PAWN_UNICODE_DECIMAL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">direction</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nd">@Override</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="n">Pawn</span><span class="w"> </span><span class="n">pawn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Pawn</span><span class="p">)</span><span class="w"> </span><span class="n">o</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pawn</span><span class="p">.</span><span class="na">direction</span><span class="p">;</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
+<li><strong>이제 내 코드의 문제점!</strong>
+    - 현재 저의 Pawn의 hashCode, equals 오버라이딩 된 코드에요.<br />
+      Pawn의 direction에 따라 다른 hashCode를 반환하는 대신,<br />
+      equals는 그저 같은 클래스라면 동등성을 보장하도록 제가 코드를 작성해놨어요.<br />
+      여기에서 제가 위에 정리한 문제들이 발생할 수 있을것 같아요!  <div class="highlight"><pre><span></span><code>``` Java
+@Override
+public int hashCode() {
+    return PAWN_UNICODE_DECIMAL * direction;
+}
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Pawn pawn = (Pawn) o;
+    return direction == pawn.direction;
+}
+```
 </code></pre></div>
-<ul>
-<li>
-<p>해당 방식으로, direction이 같은 경우 동등성을 보장하도록 코드를 작성하는게,<br />
-   hashCode와 equals의 동작을 동일하게 가져가는 방향이겠네요!</p>
-</li>
-<li>
-<p>미립의 답변!</p>
-<ul>
-<li>위처럼 사용자정의로 equals 과 hashCode 를 재정의하면 알 수 없는 사이드 이펙트가 발생 할 수 있기때문에 (사람이 하는 일이라 😭) 신중하게 접근하면 좋을 것 같아요</li>
-</ul>
-</li>
-</ul>
+<p>- 해당 방식으로, direction이 같은 경우 동등성을 보장하도록 코드를 작성하는게,<br />
+     hashCode와 equals의 동작을 동일하게 가져가는 방향이겠네요!</p>
+<p>- 미립의 답변!
+      - 위처럼 사용자정의로 equals 과 hashCode 를 재정의하면 알 수 없는 사이드 이펙트가 발생 할 수 있기때문에 (사람이 하는 일이라 😭) 신중하게 접근하면 좋을 것 같아요</p>
 </li>
 </ul>
 <h2 id="_1">객체 생성을 캡슐화 하는 것<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>

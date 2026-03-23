@@ -23019,158 +23019,99 @@
 <h3 id="2021-08-26-jpa-db">2021-08-26 JPA &amp; DB<a class="headerlink" href="#2021-08-26-jpa-db" title="Permanent link">&para;</a></h3>
 <h2 id="jpa">JPA 기본<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>JPA가 왜 필요한가요? 왜 도입했나요?</strong></p>
+<li><strong>JPA가 왜 필요한가요? 왜 도입했나요?</strong>
+    - 관계형 데이터베이스와 객체간의 패러다임 불일치로 인해 발생하는 문제들을 해결하고자 도입했습니다. 
+    - JPA를 도입함으로써 SQL을 중심으로 생각하는 개발로 변질되는 것을 막을 수 있었다고 생각합니다. </li>
+</ul>
 <ul>
-<li>관계형 데이터베이스와 객체간의 패러다임 불일치로 인해 발생하는 문제들을 해결하고자 도입했습니다. </li>
-<li>JPA를 도입함으로써 SQL을 중심으로 생각하는 개발로 변질되는 것을 막을 수 있었다고 생각합니다. </li>
+<li><strong>JPA가 해결하는 DB 테이블과 객체간의 불일치 패러다임은 뭔가요?</strong>
+    - <em>참고: https://ultrakain.gitbooks.io/jpa/content/chapter1/chapter1.2.html</em>
+    1. 상속의 유무
+        - 객체는 상속 + 다형성이 있지만, RDB에서는 이를 표현할 수 없음
+    2. 연관 관계의 방향성
+        - 객체는 참조를 단방향으로 하게되지만, RDB에서는 양방향으로 참조가능 (Join을 양쪽에서 다 할 수 있음)
+        - 이를 통해 자유로운 객체 그래프 탐색을 할 수 있도록 지원한다
+            - .getMember().get(0).getName() 이런거 다 할 수 있도록
+    3. 비교
+        - 객체는 equals를 오버라이딩하여 동등성을 보장/객체 주소 비교를 통해 동일성을 보장
+        - RDB는 ID를 기반으로 ROW를 비교하여 동등/동****일성 비교
+        - 똑같은 객체 두번 SQL로 조회해서 객체 만들면 다른 객체로 찍힘
+            - 동일성 보장이 어려움
+        - JPA의 1차 캐시가 이를 해결</li>
 </ul>
-</li>
-<li>
-<p><strong>JPA가 해결하는 DB 테이블과 객체간의 불일치 패러다임은 뭔가요?</strong></p>
 <ul>
-<li><em>참고: https://ultrakain.gitbooks.io/jpa/content/chapter1/chapter1.2.html</em></li>
-<li>상속의 유무<ul>
-<li>객체는 상속 + 다형성이 있지만, RDB에서는 이를 표현할 수 없음</li>
+<li><strong>JPA의 장점은 뭔가요?</strong>
+    1. 뻔한 CRUD 쿼리들을 내가 짤 필요가 없다
+        - 생산성 증대
+        - 휴먼 에러도 방지
+    2. 변경의 포인트가 적어진다
+        - SQL 중심으로 DAO를 짜버리면 String으로 짠 쿼리들 매번 변경해야 해
+        - 휴먼 에러 나기 딱 좋음
+    3. 신뢰할 수 있는 엔티티가 생긴다
+        - 예전에 지하철 미션하면서 Line 조회해 올 때 그 안에 소속된 Sections 정보를 어떻게 조회해올지 고민했었음
+            - 코드 보니까 Sections가 없는 Line 조회해오고 나중에 Sections 조회한 다음에 setter로 우겨넣어줌
+        - Line 조회해오는 코드라고 이름 붙였지만 사실 온전한 객체가 아님
+        - JPA는 이런 문제들이 확실히 덜함 (Proxy로 남겨놓고 트랜잭션 끝나면 쪼끔 문제일수도)
+            - 객체가 필요할 때 쿼리를 날려 조회해오도록 할 수 있었음</li>
 </ul>
-</li>
-<li>연관 관계의 방향성<ul>
-<li>객체는 참조를 단방향으로 하게되지만, RDB에서는 양방향으로 참조가능 (Join을 양쪽에서 다 할 수 있음)</li>
-<li>이를 통해 자유로운 객체 그래프 탐색을 할 수 있도록 지원한다<ul>
-<li>.getMember().get(0).getName() 이런거 다 할 수 있도록</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>비교<ul>
-<li>객체는 equals를 오버라이딩하여 동등성을 보장/객체 주소 비교를 통해 동일성을 보장</li>
-<li>RDB는 ID를 기반으로 ROW를 비교하여 동등/동****일성 비교</li>
-<li>똑같은 객체 두번 SQL로 조회해서 객체 만들면 다른 객체로 찍힘<ul>
-<li>동일성 보장이 어려움</li>
-</ul>
-</li>
-<li>JPA의 1차 캐시가 이를 해결</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JPA의 장점은 뭔가요?</strong></p>
-<ol>
-<li>뻔한 CRUD 쿼리들을 내가 짤 필요가 없다<ul>
-<li>생산성 증대</li>
-<li>휴먼 에러도 방지</li>
-</ul>
-</li>
-<li>변경의 포인트가 적어진다<ul>
-<li>SQL 중심으로 DAO를 짜버리면 String으로 짠 쿼리들 매번 변경해야 해</li>
-<li>휴먼 에러 나기 딱 좋음</li>
-</ul>
-</li>
-<li>신뢰할 수 있는 엔티티가 생긴다<ul>
-<li>예전에 지하철 미션하면서 Line 조회해 올 때 그 안에 소속된 Sections 정보를 어떻게 조회해올지 고민했었음<ul>
-<li>코드 보니까 Sections가 없는 Line 조회해오고 나중에 Sections 조회한 다음에 setter로 우겨넣어줌</li>
-</ul>
-</li>
-<li>Line 조회해오는 코드라고 이름 붙였지만 사실 온전한 객체가 아님</li>
-<li>JPA는 이런 문제들이 확실히 덜함 (Proxy로 남겨놓고 트랜잭션 끝나면 쪼끔 문제일수도)<ul>
-<li>객체가 필요할 때 쿼리를 날려 조회해오도록 할 수 있었음</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>JPA 성능 최적화를 활용해 이득을 본 경험이 있다면 공유해주세요</strong></p>
 <ul>
-<li><em>참고: https://happyer16.tistory.com/entry/JPA-15%EC%9E%A5-%EA%B3%A0%EA%B8%89-%EC%A3%BC%EC%A0%9C%EC%99%80-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94</em></li>
-<li>쓰기 지연을 통한 성능 최적화<ul>
-<li>트랜잭션 커밋하는 시점에 쿼리를 날리는 쓰기지연<ul>
-<li>JDBC의 경우 쿼리를 그때 그때 날려버리면 데이터베이스에 락이 그만큼 많이 걸림</li>
-<li>현재 수정중엔 데이터에 다른 트랜잭션이 접근 못함</li>
+<li><strong>JPA 성능 최적화를 활용해 이득을 본 경험이 있다면 공유해주세요</strong>
+    - <em>참고: https://happyer16.tistory.com/entry/JPA-15%EC%9E%A5-%EA%B3%A0%EA%B8%89-%EC%A3%BC%EC%A0%9C%EC%99%80-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94</em>
+    1. 쓰기 지연을 통한 성능 최적화
+        - 트랜잭션 커밋하는 시점에 쿼리를 날리는 쓰기지연
+            - JDBC의 경우 쿼리를 그때 그때 날려버리면 데이터베이스에 락이 그만큼 많이 걸림
+            - 현재 수정중엔 데이터에 다른 트랜잭션이 접근 못함
+        - 한번에 우르르쾅쾅 쿼리 내보내는 쓰기지연을 통해 락이 걸리는 시간 최소화
+        - JPA의 쓰기지연 기능 덕분에 락이 걸리는 시간이 최소화되어 동시에 많은 트랜잭션 처리 가능
+    2. N+1 문제 해결
+        - Line에 List[Station] 있다면 JDBC의 경우 Line 조회하고 안에 Line_id를 FK로 갖는 station 우르르쾅쾅 조회
+        - 그 다음에 List 만들어서 setter로 주입
+        - JPA의 Lazy 로딩도 사실 이런식으로 걸어두면 비슷해
+        - fetchJoin으로 해결할 수 있어! 성능 최적화!</li>
 </ul>
-</li>
-<li>한번에 우르르쾅쾅 쿼리 내보내는 쓰기지연을 통해 락이 걸리는 시간 최소화</li>
-<li>JPA의 쓰기지연 기능 덕분에 락이 걸리는 시간이 최소화되어 동시에 많은 트랜잭션 처리 가능</li>
-</ul>
-</li>
-<li>N+1 문제 해결<ul>
-<li>Line에 List[Station] 있다면 JDBC의 경우 Line 조회하고 안에 Line_id를 FK로 갖는 station 우르르쾅쾅 조회</li>
-<li>그 다음에 List 만들어서 setter로 주입</li>
-<li>JPA의 Lazy 로딩도 사실 이런식으로 걸어두면 비슷해</li>
-<li>fetchJoin으로 해결할 수 있어! 성능 최적화!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>영속성 컨텍스트는 뭔가요?</strong></p>
 <ul>
-<li>엔티티를 영구적으로 저장하는 환경</li>
-<li>어플리케이션 &lt;-&gt; DB 사이에서 객체를 보관하는 역할</li>
-<li>"엔티티 매니저"를 통해 엔티티 저장/조회하면 엔티티 매니저는 영속성 컨텍스트에 엔티티 보관/관리</li>
+<li><strong>영속성 컨텍스트는 뭔가요?</strong>
+    - 엔티티를 영구적으로 저장하는 환경
+    - 어플리케이션 &lt;-&gt; DB 사이에서 객체를 보관하는 역할
+    - "엔티티 매니저"를 통해 엔티티 저장/조회하면 엔티티 매니저는 영속성 컨텍스트에 엔티티 보관/관리</li>
 </ul>
-</li>
-<li>
-<p><strong>엔티티 매니저는 뭐죠?</strong></p>
 <ul>
-<li>엔티티를 CRUD 하도록 기능 제공하는 객체</li>
-<li>하나의 쓰레드에 하나의 엔티티 매니저를 사용하도록 함</li>
+<li><strong>엔티티 매니저는 뭐죠?</strong>
+    - 엔티티를 CRUD 하도록 기능 제공하는 객체
+    - 하나의 쓰레드에 하나의 엔티티 매니저를 사용하도록 함</li>
 </ul>
-</li>
-<li>
-<p><strong>영속성 컨텍스트를 활용하면 누리는 장점이 뭘까요?</strong></p>
-<ol>
-<li>1차 캐시<ul>
-<li>동일한 엔티티를 접근하려는 경우 쿼리 없이 조회해올 수 있음</li>
-</ul>
-</li>
-<li>동일성 보장<ul>
-<li>Id를 기반으로 항상 같은 엔티티를 반환함</li>
-</ul>
-</li>
-<li>트랜잭션 쓰기지연<ul>
-<li>이를 통해 DB에 락걸리는 시간 최소화할 수 있음</li>
-</ul>
-</li>
-<li>변경 감지<ul>
-<li>update 쿼리문 따로 날려주지 않아도 알아서 변경 감지하고 뚝딱 업데이트 해줌</li>
-</ul>
-</li>
-<li>지연 로딩<ul>
-<li>필요할 때 쿼리를 날려 엔티티를 가져올 수 있음</li>
-<li>객체...지향적 + 성능 굿</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>스프링은 JPA를 어떻게 사용할까요?</strong></p>
 <ul>
-<li><em>참고: https://suhwan.dev/2019/02/24/jpa-vs-hibernate-vs-spring-data-jpa/</em></li>
-<li>Spring Data JPA를 사용하여 개발한다<ul>
-<li>이는 JPA를 편하게 만들어 놓은 모듈임</li>
-<li>JPA를 한단계 추상화시킨 인터페이스임</li>
+<li><strong>영속성 컨텍스트를 활용하면 누리는 장점이 뭘까요?</strong>
+    1. 1차 캐시
+        - 동일한 엔티티를 접근하려는 경우 쿼리 없이 조회해올 수 있음
+    2. 동일성 보장
+        - Id를 기반으로 항상 같은 엔티티를 반환함
+    3. 트랜잭션 쓰기지연
+        - 이를 통해 DB에 락걸리는 시간 최소화할 수 있음
+    4. 변경 감지
+        - update 쿼리문 따로 날려주지 않아도 알아서 변경 감지하고 뚝딱 업데이트 해줌
+    5. 지연 로딩
+        - 필요할 때 쿼리를 날려 엔티티를 가져올 수 있음
+        - 객체...지향적 + 성능 굿</li>
 </ul>
-</li>
-<li>내부적으로 코드 뜯어보면 EntityManager를 사용한다고 함</li>
-<li><img alt="" src="https://suhwan.dev/images/jpa_hibernate_repository/overall_design.png" /></li>
-</ul>
-</li>
+<ul>
+<li><strong>스프링은 JPA를 어떻게 사용할까요?</strong>
+    - <em>참고: https://suhwan.dev/2019/02/24/jpa-vs-hibernate-vs-spring-data-jpa/</em>
+    - Spring Data JPA를 사용하여 개발한다
+        - 이는 JPA를 편하게 만들어 놓은 모듈임
+        - JPA를 한단계 추상화시킨 인터페이스임
+    - 내부적으로 코드 뜯어보면 EntityManager를 사용한다고 함
+    - <img alt="" src="https://suhwan.dev/images/jpa_hibernate_repository/overall_design.png" /></li>
 </ul>
 <h2 id="jpql">JPQL<a class="headerlink" href="#jpql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>JPQL이 뭔가요? 왜 사용했나요?</strong></p>
-<ul>
-<li>JPQL은 JPA에서 제공하는 SQL을 추상화한 객체지향 쿼리입니다. </li>
-<li>JPA는 디비를 객체로 변환하기에 검색이 힘들다</li>
-<li>조건을 명시한 쿼리를 만들기에 적합</li>
+<li><strong>JPQL이 뭔가요? 왜 사용했나요?</strong>
+    - JPQL은 JPA에서 제공하는 SQL을 추상화한 객체지향 쿼리입니다. 
+    - JPA는 디비를 객체로 변환하기에 검색이 힘들다
+    - 조건을 명시한 쿼리를 만들기에 적합</li>
 </ul>
-</li>
-<li>
-<p><strong>JPQL을 활용했던 사례를 공유해주세요</strong>
+<ul>
+<li><strong>JPQL을 활용했던 사례를 공유해주세요</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Query</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;select com &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">        </span><span class="s">&quot;from Comment as com &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="s">&quot;join fetch com.author &quot;</span><span class="w"> </span><span class="o">+</span>
@@ -23185,33 +23126,23 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="s">&quot;group by ft.tech.id &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="s">&quot;order by count(ft.feed.id) DESC &quot;</span><span class="p">)</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">Tech</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findTrendTech</span><span class="p">(</span><span class="n">Pageable</span><span class="w"> </span><span class="n">pageable</span><span class="p">);</span>
-</code></pre></div></p>
-<ul>
-<li>댓글과 대댓글을 같은 자기참조 테이블에서 관리함<ul>
-<li>그러다보니 쿼리를 통해 댓글/대댓글을 필터링할 필요 생김</li>
-</ul>
-</li>
-<li>또한 필요한 정보를 한 번에 가져올 수 있도록 fetchJoin을 활용해야할 경우도 생김</li>
-<li>트렌드 테크 같은 경우 FeedTech에서 몇번 사용되었는지가 검색되어야함 =&gt; JPQL로 해결</li>
-<li>정리하자면, <ol>
-<li>자기참조 테이블의 댓글/대댓글에서 둘을 구분하기 위해 검색조건을 줬어야 했음</li>
-<li>LAZY 로딩의 추가적인 쿼리를 막기 위해서 fetchJoin 사용</li>
-<li>트렌드 테크 검색 기능을 JPQL의 쿼리를 작성하여 해결</li>
-</ol>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 댓글과 대댓글을 같은 자기참조 테이블에서 관리함
+        - 그러다보니 쿼리를 통해 댓글/대댓글을 필터링할 필요 생김
+    - 또한 필요한 정보를 한 번에 가져올 수 있도록 fetchJoin을 활용해야할 경우도 생김
+    - 트렌드 테크 같은 경우 FeedTech에서 몇번 사용되었는지가 검색되어야함 =&gt; JPQL로 해결
+    - 정리하자면, 
+        1. 자기참조 테이블의 댓글/대댓글에서 둘을 구분하기 위해 검색조건을 줬어야 했음
+        2. LAZY 로딩의 추가적인 쿼리를 막기 위해서 fetchJoin 사용
+        3. 트렌드 테크 검색 기능을 JPQL의 쿼리를 작성하여 해결</li>
 </ul>
 <h2 id="jpa-n1">JPA N+1 문제<a class="headerlink" href="#jpa-n1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>JPA N+1 문제가 뭔가요? 어떤 상황에서 발생하나요?</strong></p>
-<ul>
-<li>fetchType.LAZY + Loop으로 조회하는 경우 N+1개 만큼의 쿼리가 나가는 문제입니다</li>
+<li><strong>JPA N+1 문제가 뭔가요? 어떤 상황에서 발생하나요?</strong>
+    - fetchType.LAZY + Loop으로 조회하는 경우 N+1개 만큼의 쿼리가 나가는 문제입니다</li>
 </ul>
-</li>
-<li>
-<p><strong>해당 문제를 조인 페치로 해결한다고 하는데, 사례를 공유해주실 수 있나요?</strong>
+<ul>
+<li><strong>해당 문제를 조인 페치로 해결한다고 하는데, 사례를 공유해주실 수 있나요?</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Transactional</span><span class="p">(</span><span class="n">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAllUserHTMLFileName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span>
@@ -23222,16 +23153,13 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">findHostingHTML</span><span class="p">().</span><span class="na">getFilePath</span><span class="p">())</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
-</code></pre></div></p>
-<ul>
-<li>조엘스 웹 호스팅에서 모든 사용자들의 HTML 파일 이름을 추출하는 코드</li>
-<li>우선 List\<User> 로 모든 유저들을 긁어옴 ("1 쿼리")</li>
-<li>List\<User>를 돌면서 그 안의 List\<HostingFile> 내의 HTML 파일 이름을 가져오는 코드<ul>
-<li>각 User 별로 HostingFile 긁어오는 쿼리 한번씩 더나감 ("N 쿼리")</li>
-</ul>
-</li>
-<li>처참한 N+1 쿼리의 현장
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>2021-08-26 11:38:11.584 DEBUG 13300 --- [    Test worker] org.hibernate.SQL                        : 
+</code></pre></div>
+    - 조엘스 웹 호스팅에서 모든 사용자들의 HTML 파일 이름을 추출하는 코드
+    - 우선 List\<User> 로 모든 유저들을 긁어옴 ("1 쿼리")
+    - List\<User>를 돌면서 그 안의 List\<HostingFile> 내의 HTML 파일 이름을 가져오는 코드
+        - 각 User 별로 HostingFile 긁어오는 쿼리 한번씩 더나감 ("N 쿼리")
+    - 처참한 N+1 쿼리의 현장
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>2021-08-26 11:38:11.584 DEBUG 13300 --- [    Test worker] org.hibernate.SQL                        : 
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    select
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        user0_.id as id1_1_,
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        user0_.image_url as image_ur2_1_,
@@ -23376,15 +23304,15 @@
 <a id="__codelineno-2-143" name="__codelineno-2-143" href="#__codelineno-2-143"></a>2021-08-26 11:38:11.758  INFO 13300 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 <a id="__codelineno-2-144" name="__codelineno-2-144" href="#__codelineno-2-144"></a>4 actionable tasks: 3 executed, 1 up-to-date
 <a id="__codelineno-2-145" name="__codelineno-2-145" href="#__codelineno-2-145"></a>오전 11:38:12: Task execution finished &#39;:test --tests &quot;webhosting.webhosting.user.service.UserServiceTest.findAllFilePath&quot;&#39;.
-</code></pre></div></li>
-<li>자 Join Fetch 드가자!<ul>
-<li>UserRepository에 다음과 같은 JPQL 코드 추가
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;select distinct u from User u join fetch u.hostingFiles&quot;</span><span class="p">)</span>
+</code></pre></div>
+    - 자 Join Fetch 드가자!
+        - UserRepository에 다음과 같은 JPQL 코드 추가
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;select distinct u from User u join fetch u.hostingFiles&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAllWithFetchJoin</span><span class="p">();</span>
-</code></pre></div></li>
-<li>innerJoin 쓰기에 중복 조심 (카데시안 곱) distinct나 Set으로 해결</li>
-<li>다음과 같이 코드 변경
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Transactional</span><span class="p">(</span><span class="n">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+</code></pre></div>
+        - innerJoin 쓰기에 중복 조심 (카데시안 곱) distinct나 Set으로 해결
+        - 다음과 같이 코드 변경
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Transactional</span><span class="p">(</span><span class="n">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAllUserHTMLFileName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findAllWithFetchJoin</span><span class="p">();</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;&gt;&gt;&gt;&gt;&gt;&gt;[유저의 리소스를 추출해봅시다]&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;</span><span class="p">);</span>
@@ -23394,9 +23322,9 @@
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">findHostingHTML</span><span class="p">().</span><span class="na">getFilePath</span><span class="p">())</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>아름다운 한방쿼리!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>2021-08-26 11:51:13.792 DEBUG 19096 --- [    Test worker] org.hibernate.SQL                        : 
+</code></pre></div>
+        - 아름다운 한방쿼리!
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>2021-08-26 11:51:13.792 DEBUG 19096 --- [    Test worker] org.hibernate.SQL                        : 
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    select
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        distinct user0_.id as id1_1_0_,
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        hostingfil1_.id as id1_0_1_,
@@ -23423,77 +23351,46 @@
 <a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>오전 11:51:14: Task execution finished &#39;:test --tests &quot;webhosting.webhosting.user.service.UserServiceTest.findAllFilePath&quot;&#39;.
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="_1">자기참조 테이블<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>자기참조 테이블이 뭔가요?</strong></p>
+<li><strong>자기참조 테이블이 뭔가요?</strong>
+    - 자기 참조 관계란 하나의 엔티티가 자기 자신과 관계를 맺는 것을 뜻합니다. 
+    - 이를 테이블 구조로 표현하면 자기참조 테이블이 됩니다. 
+    - 계층 구조를 나타내기 유용하여 사용하게 되었습니다. </li>
+</ul>
 <ul>
-<li>자기 참조 관계란 하나의 엔티티가 자기 자신과 관계를 맺는 것을 뜻합니다. </li>
-<li>이를 테이블 구조로 표현하면 자기참조 테이블이 됩니다. </li>
-<li>계층 구조를 나타내기 유용하여 사용하게 되었습니다. </li>
+<li><strong>어느 상황에 사용하게 되었나요?</strong>
+    - 댓글과 대댓글을 관리할 때 사용했습니다. 
+    - 글 - 댓글의 관계 처럼 처음에는 일대다 관계로 매핑할까 생각했었다. 
+    - 자참테의 장점이 많아 자참테를 사용하게 되었다. </li>
 </ul>
-</li>
-<li>
-<p><strong>어느 상황에 사용하게 되었나요?</strong></p>
 <ul>
-<li>댓글과 대댓글을 관리할 때 사용했습니다. </li>
-<li>글 - 댓글의 관계 처럼 처음에는 일대다 관계로 매핑할까 생각했었다. </li>
-<li>자참테의 장점이 많아 자참테를 사용하게 되었다. </li>
+<li><strong>그냥 일대다 매핑에 비해 어떤 장점이 있었나요?</strong>
+    - 느낀대로 써보자면,,,
+        1. 중복되는 코드가 줄어든다
+            - 비슷한 구조를 가진 댓글/대댓글이 있었다. 
+            - 계층 관계만 나타내주면 사실 두개의 성격은 크게 다를게 없었다
+                - 짜잘하게 helper 이런게 다르긴했는데,,,
+            - 계층 관계만을 표현하기위해 다대일을 쓰는 것은 로직의 중복을 막을수가 없다
+                - 엔티티의 필드도 중복, 엔티티안의 메서드들도 중복, 서비스단에서 CRUD도 중복
+            - 계층 관계를 효율적으로 처리하는 자참테를 도입하여 중복을 줄일 수 있었다. 
+        2. 테이블이 하나로 관리되니 메모리상에 이득이 있음
+            - 댓글을 하나의 테이블로 관리하여 DB 메모리상으로도 이득이 아닐까?</li>
 </ul>
-</li>
-<li>
-<p><strong>그냥 일대다 매핑에 비해 어떤 장점이 있었나요?</strong></p>
 <ul>
-<li>느낀대로 써보자면,,,<ol>
-<li>중복되는 코드가 줄어든다<ul>
-<li>비슷한 구조를 가진 댓글/대댓글이 있었다. </li>
-<li>계층 관계만 나타내주면 사실 두개의 성격은 크게 다를게 없었다<ul>
-<li>짜잘하게 helper 이런게 다르긴했는데,,,</li>
+<li><strong>그럼 어떤 단점이 있을까요?</strong>
+    - 느낀대로 써보자면,,,
+        1. 직관성이 조금 떨어진다
+            - 사실 계층관계면 일대다로 매핑해서 놓는게 더 직관적이라는 생각이 들긴했다
+            - Comment 하나 가져와서 .getReplies() 하면 List\<Reply> 엔티티 반환하는게 자연스러울수도?
+                - 지금은 List\<Comment> 반환
+        2. 많은 양의 JPQL을 쓰게되더라
+            - 사실 JPA의 장점은 DB를 객체처럼 쓴다는 것에 있을텐데 말이지
+            - JPQL을 많이 썼다는것은 어쩌면 쿼리로 해결해야하는 로직들이 많아졌다는 뜻
+            - 자참테를 도입함으로써 조금 DB에 집중된 로직들이 생기는 것 같더라</li>
 </ul>
-</li>
-<li>계층 관계만을 표현하기위해 다대일을 쓰는 것은 로직의 중복을 막을수가 없다<ul>
-<li>엔티티의 필드도 중복, 엔티티안의 메서드들도 중복, 서비스단에서 CRUD도 중복</li>
-</ul>
-</li>
-<li>계층 관계를 효율적으로 처리하는 자참테를 도입하여 중복을 줄일 수 있었다. </li>
-</ul>
-</li>
-<li>테이블이 하나로 관리되니 메모리상에 이득이 있음<ul>
-<li>댓글을 하나의 테이블로 관리하여 DB 메모리상으로도 이득이 아닐까?</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>그럼 어떤 단점이 있을까요?</strong></p>
 <ul>
-<li>느낀대로 써보자면,,,<ol>
-<li>직관성이 조금 떨어진다<ul>
-<li>사실 계층관계면 일대다로 매핑해서 놓는게 더 직관적이라는 생각이 들긴했다</li>
-<li>Comment 하나 가져와서 .getReplies() 하면 List\<Reply> 엔티티 반환하는게 자연스러울수도?<ul>
-<li>지금은 List\<Comment> 반환</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>많은 양의 JPQL을 쓰게되더라<ul>
-<li>사실 JPA의 장점은 DB를 객체처럼 쓴다는 것에 있을텐데 말이지</li>
-<li>JPQL을 많이 썼다는것은 어쩌면 쿼리로 해결해야하는 로직들이 많아졌다는 뜻</li>
-<li>자참테를 도입함으로써 조금 DB에 집중된 로직들이 생기는 것 같더라</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JPA에서 자참테를 쓰려면 어떤식으로 코드를 작성해야할까요?</strong>
+<li><strong>JPA에서 자참테를 쓰려면 어떤식으로 코드를 작성해야할까요?</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nd">@AllArgsConstructor</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Comment</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseEntity</span><span class="w"> </span><span class="p">{</span>
@@ -23509,158 +23406,97 @@
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;parentComment&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">REMOVE</span><span class="p">,</span><span class="w"> </span><span class="n">orphanRemoval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Comment</span><span class="o">&gt;</span><span class="w"> </span><span class="n">replies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="p">}</span>
-</code></pre></div></p>
-<ul>
-<li>약간 요런 갬성?<ul>
-<li>parentComment를 두고 댓글이면 해당 필드 null, 대댓글이면 댓글 채워넣기</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 약간 요런 갬성?
+        - parentComment를 두고 댓글이면 해당 필드 null, 대댓글이면 댓글 채워넣기</li>
 </ul>
 <h2 id="db-migration">DB Migration<a class="headerlink" href="#db-migration" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>DB Migration이 뭔가요? 왜 필요했죠?</strong></p>
+<li><strong>DB Migration이 뭔가요? 왜 필요했죠?</strong>
+    - 데이터베이스 스키마의 버전관리를 위한 방법
+    - 기능이 추가되고 엔티티/테이블을 확장하면서 안전하게 DB를 관리할 필요성이 있었다. 
+        - 기존의 데이터를 날리지 않으면서 테이블의 구조를 변경할 수 있어야 했다
+    - Flyway라는 DB 마이그레이션 툴을 사용하여 안전하게 DB의 구조를 변경할 수 있었음</li>
+</ul>
 <ul>
-<li>데이터베이스 스키마의 버전관리를 위한 방법</li>
-<li>기능이 추가되고 엔티티/테이블을 확장하면서 안전하게 DB를 관리할 필요성이 있었다. <ul>
-<li>기존의 데이터를 날리지 않으면서 테이블의 구조를 변경할 수 있어야 했다</li>
+<li><strong>DB Migration의 장점을 공유해주세요</strong>
+    - 변경 이력을 버전 별로 관리할 수 있음</li>
 </ul>
-</li>
-<li>Flyway라는 DB 마이그레이션 툴을 사용하여 안전하게 DB의 구조를 변경할 수 있었음</li>
-</ul>
-</li>
-<li>
-<p><strong>DB Migration의 장점을 공유해주세요</strong></p>
 <ul>
-<li>변경 이력을 버전 별로 관리할 수 있음</li>
-</ul>
-</li>
-<li>
-<p><strong>DB Migration에 단점도 있었을까요?</strong></p>
-<ul>
-<li>우선 러닝커브?</li>
-<li>테이블 하나 더 생긴다 정도?</li>
-</ul>
-</li>
+<li><strong>DB Migration에 단점도 있었을까요?</strong>
+    - 우선 러닝커브?
+    - 테이블 하나 더 생긴다 정도?</li>
 </ul>
 <h2 id="_2">트랜잭션<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>트랜잭션이 뭔가요?</strong></p>
+<li><strong>트랜잭션이 뭔가요?</strong>
+    - 트랜잭션이란 "일관성"있고 "신뢰할 수 있는 방법"으로 "독립적이게" 처리되는 작업단위
+    - DB의 변화를 나타냄
+        - 예상치 못한 에러 발생에도 신뢰성 있는 상태로 만들어야 한다
+        - DB에 동시접근해도 프로그램 간 격리를 제공하여 에러를 방지한다</li>
+</ul>
 <ul>
-<li>트랜잭션이란 "일관성"있고 "신뢰할 수 있는 방법"으로 "독립적이게" 처리되는 작업단위</li>
-<li>DB의 변화를 나타냄<ul>
-<li>예상치 못한 에러 발생에도 신뢰성 있는 상태로 만들어야 한다</li>
-<li>DB에 동시접근해도 프로그램 간 격리를 제공하여 에러를 방지한다</li>
+<li><strong>트랜잭션의 성질로 대표되는 ACID에 대해 설명해주세요</strong>
+    - Atomicity: 원자성
+        - 트랜잭션 내 연산은 모두 반영되거나, 전혀 반영되지 않아야함
+    - Consistency: 일관성
+        - 트랜잭션은 DB의 정해진 규칙에 따라서만 데이터를 변경시킬 수 있다
+        - PK/FK, Cascade 등
+    - Isolation: 독립성
+        - 트랜잭션 수행 시 다른 트랜잭션의 연산 작업이 끼어들지 못하도록 보장
+    - Durability: 지속성
+        - 성공적으로 수행된 트랜잭션은 영구 반영될 것</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>트랜잭션의 성질로 대표되는 ACID에 대해 설명해주세요</strong></p>
 <ul>
-<li>Atomicity: 원자성<ul>
-<li>트랜잭션 내 연산은 모두 반영되거나, 전혀 반영되지 않아야함</li>
+<li><strong>스프링은 트랜잭션을 어떻게 만드나요?</strong>
+    - AOP를 통한 선언적 트랜잭션
+    - 그니까 트랜잭션 어노테이션을 붙여 쉽게 트랜잭션을 제어한다</li>
 </ul>
-</li>
-<li>Consistency: 일관성<ul>
-<li>트랜잭션은 DB의 정해진 규칙에 따라서만 데이터를 변경시킬 수 있다</li>
-<li>PK/FK, Cascade 등</li>
-</ul>
-</li>
-<li>Isolation: 독립성<ul>
-<li>트랜잭션 수행 시 다른 트랜잭션의 연산 작업이 끼어들지 못하도록 보장</li>
-</ul>
-</li>
-<li>Durability: 지속성<ul>
-<li>성공적으로 수행된 트랜잭션은 영구 반영될 것</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>스프링은 트랜잭션을 어떻게 만드나요?</strong></p>
 <ul>
-<li>AOP를 통한 선언적 트랜잭션</li>
-<li>그니까 트랜잭션 어노테이션을 붙여 쉽게 트랜잭션을 제어한다</li>
+<li><strong>트랜잭션 전파 설정에 대해 알려주세요</strong>
+    - 전파 설정이란 "진행 중인 트랜잭션에서 다른 트랜잭션이 호출될 때 어찌 처리할지를 정하는 것"
+    - 기본적으로 스프링의 트랜잭션 어노테이션에서는 REQUIRED: 부모 트랜잭션에 합류 or 새로 만듦
+        - 다른 종류로는 REQUIRES_NEW, MANDATORY, NESTED, NEVER, SUPPORTS, NOT_SUPPORTS 등이 있음</li>
 </ul>
-</li>
-<li>
-<p><strong>트랜잭션 전파 설정에 대해 알려주세요</strong></p>
 <ul>
-<li>전파 설정이란 "진행 중인 트랜잭션에서 다른 트랜잭션이 호출될 때 어찌 처리할지를 정하는 것"</li>
-<li>기본적으로 스프링의 트랜잭션 어노테이션에서는 REQUIRED: 부모 트랜잭션에 합류 or 새로 만듦<ul>
-<li>다른 종류로는 REQUIRES_NEW, MANDATORY, NESTED, NEVER, SUPPORTS, NOT_SUPPORTS 등이 있음</li>
+<li><strong>트랜잭션 전파 설정을 변경하여 프로젝트에 적용해 본 적이 있을까요?</strong>
+    - 놀토 프로젝트를 하며 REQUIRES_NEW를 사용해본적이 있음
+    - <code>@TransactionalEventListener</code>를 사용하여, 하나의 트랜잭션 종료 후 호출된 메서드에서 또다른 트랜잭션이 필요했음
+        - 이전에 사용하던 트랜잭션은 이미 커밋된 상태라 새로운 트랜잭션이 필요했던 상황
+        - REQUIRES_NEW 옵션으로 해결</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>트랜잭션 전파 설정을 변경하여 프로젝트에 적용해 본 적이 있을까요?</strong></p>
 <ul>
-<li>놀토 프로젝트를 하며 REQUIRES_NEW를 사용해본적이 있음</li>
-<li><code>@TransactionalEventListener</code>를 사용하여, 하나의 트랜잭션 종료 후 호출된 메서드에서 또다른 트랜잭션이 필요했음<ul>
-<li>이전에 사용하던 트랜잭션은 이미 커밋된 상태라 새로운 트랜잭션이 필요했던 상황</li>
-<li>REQUIRES_NEW 옵션으로 해결</li>
+<li><strong>트랜잭션 고립 수준에 대해 알려주세요</strong>
+    - 고립 수준이란 "동시에 여러 트랜잭션이 처리될 떄, 각각의 트랜잭션끼리 얼마나 고립되어 있는지를 뜻함"
+    - 기본적으로 스프링의 트랜잭션 어노테이션에서는 DEFAULT: DB 벤더의 고립 수준 정책을 따라감
+        - 다른 종류로는 READ_UNCOMMITED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE 등이 있음
+        - 놀토는 MariaDB 쓰니까 REPEATABLE_READ 고립수준 쓰겠거니~</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>트랜잭션 고립 수준에 대해 알려주세요</strong></p>
 <ul>
-<li>고립 수준이란 "동시에 여러 트랜잭션이 처리될 떄, 각각의 트랜잭션끼리 얼마나 고립되어 있는지를 뜻함"</li>
-<li>기본적으로 스프링의 트랜잭션 어노테이션에서는 DEFAULT: DB 벤더의 고립 수준 정책을 따라감<ul>
-<li>다른 종류로는 READ_UNCOMMITED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE 등이 있음</li>
-<li>놀토는 MariaDB 쓰니까 REPEATABLE_READ 고립수준 쓰겠거니~</li>
+<li><strong>트랜잭션 고립 수준을 변경하여 프로젝트에 적용해 본 적이 있을까요?</strong>
+    - 사실 없다. 많은 db 조회 요청으로 인해 성능 저하를 체험하려면 서비스가 많이 커져야할듯,,,</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>트랜잭션 고립 수준을 변경하여 프로젝트에 적용해 본 적이 있을까요?</strong></p>
 <ul>
-<li>사실 없다. 많은 db 조회 요청으로 인해 성능 저하를 체험하려면 서비스가 많이 커져야할듯,,,</li>
-</ul>
-</li>
-<li>
-<p><strong>트랜잭션 고립 수준에 따라서 발생하는 다양한 문제들을 한번씩 얘기해주세요</strong></p>
-<ul>
-<li>[READ_UNCOMMITED]<ul>
-<li>커밋 안된 상태의 데이터를 그냥 읽게 냅둠</li>
-<li>트랜잭션 A가 건드리고 있는 데이터를 트랜잭션 B가 더러운 상태로 그냥 읽을수도?</li>
-</ul>
-</li>
-<li>[READ_COMMITTED]<ul>
-<li>어떤 트랜잭션의 변경 내용이 커밋 되어야만 다른 트랜잭션에서 조회가능</li>
-<li>NON_REPEATABLE_READ 부정합 문제 발생 가능<ul>
-<li>A에서 조회했을 때 27살</li>
-<li>B가 그사이 28살로 바꿈</li>
-<li>A에서 다시조회하니까 28살(??????)</li>
-</ul>
-</li>
-<li>금전적 처리라면 참으로 문제</li>
-</ul>
-</li>
-<li>[REPEATABLE_READ]<ul>
-<li>트랜잭션이 "시작되기 전"에 커밋한 내용에 대해서만 조회가능</li>
-<li>자신의 트랜잭션 번호보다 낮은 트랜잭션에서 변경된 것만 보는 것</li>
-<li>팬텀리드 발생<ul>
-<li>A 트랜잭션이 같은 쿼리 두번 수행시, 첫 실행때 없던 놈이 두 번째 실행땐 튀어나옴</li>
-<li>그사이 B 트랜잭션이 커밋해둠</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>[SERIALIZABLE]<ul>
-<li>CRUD 싹다 락걸어</li>
-<li>한번에 하나씩만!</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>트랜잭션 고립 수준에 따라서 발생하는 다양한 문제들을 한번씩 얘기해주세요</strong>
+    - [READ_UNCOMMITED]
+        - 커밋 안된 상태의 데이터를 그냥 읽게 냅둠
+        - 트랜잭션 A가 건드리고 있는 데이터를 트랜잭션 B가 더러운 상태로 그냥 읽을수도?
+    - [READ_COMMITTED]
+        - 어떤 트랜잭션의 변경 내용이 커밋 되어야만 다른 트랜잭션에서 조회가능
+        - NON_REPEATABLE_READ 부정합 문제 발생 가능
+            - A에서 조회했을 때 27살
+            - B가 그사이 28살로 바꿈
+            - A에서 다시조회하니까 28살(??????)
+        - 금전적 처리라면 참으로 문제
+    - [REPEATABLE_READ]
+        - 트랜잭션이 "시작되기 전"에 커밋한 내용에 대해서만 조회가능
+        - 자신의 트랜잭션 번호보다 낮은 트랜잭션에서 변경된 것만 보는 것
+        - 팬텀리드 발생
+            - A 트랜잭션이 같은 쿼리 두번 수행시, 첫 실행때 없던 놈이 두 번째 실행땐 튀어나옴
+            - 그사이 B 트랜잭션이 커밋해둠
+    - [SERIALIZABLE]
+        - CRUD 싹다 락걸어
+        - 한번에 하나씩만!</li>
 </ul>
 
 

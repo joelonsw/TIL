@@ -22911,41 +22911,31 @@
 <ul>
 <li><em>참고: https://jhnyang.tistory.com/328</em></li>
 <li><em>참고: https://www.baeldung.com/spring-jpa-like-queries</em></li>
-<li>
-<p><strong>DB에서 LIKE란?</strong></p>
-<ul>
-<li>특정 문자 또는 문자열을 포함하고 있는 값을 검색하고 싶을 때 사용</li>
+<li><strong>DB에서 LIKE란?</strong>
+    - 특정 문자 또는 문자열을 포함하고 있는 값을 검색하고 싶을 때 사용</li>
 </ul>
-</li>
-<li>
-<p><strong>LIKE 절의 와일드 문자</strong></p>
 <ul>
-<li>%: 0개 이상의 문자열과 대치</li>
-<li>_: 임의의 한 개의 문자와 대치</li>
+<li><strong>LIKE 절의 와일드 문자</strong>
+    - %: 0개 이상의 문자열과 대치
+    - _: 임의의 한 개의 문자와 대치</li>
 </ul>
-</li>
-<li>
-<p><strong>예시</strong>
+<ul>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s2">&quot;blog%&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s2">&quot;%blog&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s2">&quot;%blog%&quot;</span><span class="p">;</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>JPA에서는?</strong></p>
-<ul>
-<li>findByTitleContaining</li>
-<li>findByTitleContains</li>
-<li>findByTitleIsContaining</li>
+</code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>Escape?</strong></p>
 <ul>
-<li>SQL 드라이버에게 이스케이프 부분은 다르게 처리해야한다 알리는 용도</li>
-<li>DB가 못알아먹을 특수문자에 대해 알아듣도록 SQL 서버가 이해하는 SQL 코드로 변환</li>
+<li><strong>JPA에서는?</strong>
+    - findByTitleContaining
+    - findByTitleContains
+    - findByTitleIsContaining</li>
 </ul>
-</li>
+<ul>
+<li><strong>Escape?</strong>
+    - SQL 드라이버에게 이스케이프 부분은 다르게 처리해야한다 알리는 용도
+    - DB가 못알아먹을 특수문자에 대해 알아듣도록 SQL 서버가 이해하는 SQL 코드로 변환</li>
 </ul>
 
 

@@ -23001,7 +23001,7 @@
   - 오픈소스, 인메모리 데이터 저장소
   - 용도 : DB, 캐시, 스트리밍엔진, 메세지 브로커</p>
 <ul>
-<li><strong>구성에 따른 구분</strong></li>
+<li><strong>구성에 따른 구분</strong><ul>
 <li>단일 모드(standalone)<ul>
 <li>간단한 설치 및 개발</li>
 <li>어플리케이션이 하나의 Redis에 데이터 읽고 씀</li>
@@ -23010,36 +23010,38 @@
 </li>
 <li>Master-Slave 복제모드<ul>
 <li>읽기 성능 확장 필요 시</li>
-<li>데이터 쓸 때엔 Master, 읽을 땐 Slave</li>
+<li>데이터 쓸 때엔 Master, 읽을 땐 Slave<ul>
 <li>읽기 성능 늘리기 위해서 Slave 노드 추가하기도 함</li>
+</ul>
+</li>
 <li><img alt="" src="../../images/2025-01-03-redis-ms.png" /></li>
 </ul>
 </li>
-<li>
-<p>Cluster 모드</p>
-<ul>
+<li>Cluster 모드<ul>
 <li>대규모 데이터 운용하기 위함</li>
 <li>기본 6개의 노드 (클러스터 구성 위한 최소 단위는 6개)</li>
 <li>3개의 Master, 3개의 Slave로 구성</li>
 </ul>
 </li>
-<li>
-<p><strong>Multi Key Operation</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Multi Key Operation</strong><ul>
 <li>한번의 명령에 여러 키 동시 전달 처리
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>MGET key1 key2 key3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>MGET key1 key2 key3
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>MSET key1 val1 key2 val2
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>SINTER setKey1 setKey2
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>SUNION setKey1 setKey2
 </code></pre></div></li>
 <li>단일 노드 문제 없음</li>
 <li>클러스터에서는 키들이 서로 다른 노드에 있으면 한번에 처리 어려움</li>
-<li>
-<p>Redis Cluster는 키들을 슬롯 단위로 나눠 각 노드에 분산 저장</p>
+<li>Redis Cluster는 키들을 슬롯 단위로 나눠 각 노드에 분산 저장</li>
+</ul>
 </li>
-<li>
-<p><strong>명령어</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>명령어</strong><ul>
 <li><code>pexpire</code> : 키 만료시간을 밀리초 단위로 설정. (Expire는 초 기준)</li>
 <li><code>lpush</code> : 리스트의 왼쪽에 값 추가</li>
 <li><code>lrange</code> : 리스트의 지정된 범위의 요소 반환</li>
@@ -23049,6 +23051,8 @@
 <li><code>srem</code> : Set에 지정된 멤버 제거</li>
 <li><code>zadd</code> : Sorted Set에 하나 이상의 멤버와 그에 해당하는 점수 추가</li>
 </ul>
+</li>
+</ul>
 <h2 id="redis-cluster">Redis Cluster<a class="headerlink" href="#redis-cluster" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://co-de.tistory.com/24</em><br />
 <em>참고: https://jaehoney.tistory.com/328</em><br />
@@ -23057,7 +23061,7 @@
   - Redis는 16384개의 해시 슬롯으로 키 공간 나눠서 관리
     - CRC16 해싱 % 16384 -&gt; 해시 슬롯 매핑</p>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Redis Cluster 특징 : master 여러개 두어 분산 저장 가능하며, Sharding/Scale out 가능</li>
 <li>Master 하나 이상의 Slave 둘 수 있음</li>
 <li>Slave가 죽어서 복제 노드가 없는 마스터가 생긴다면, 다른 마스터 노드에 여유분이 있다면 해당 노드로 빈자리 채울 수 있음<ul>
@@ -23067,32 +23071,32 @@
 <li>여러 노드에 자동적인 데이터 분산</li>
 <li>일부 노드의 실패나 통신 단절에도 계속 작동하는 가용성</li>
 <li>고성능 보장, 선형 확장성 제공</li>
-<li>
-<p><img alt="" src="../../images/2025-01-03-redis-cluster.png" /></p>
+<li><img alt="" src="../../images/2025-01-03-redis-cluster.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>특징</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>특징</strong><ul>
 <li>full-mesh 구조 통신</li>
 <li>cluster bus 추가 채널 사용</li>
 <li>gossip protocol : 근처 노드 통신</li>
 <li>Multi key 명령어가 제한됨</li>
-<li>
-<p>클라이언트는 모든 노드에 접속?</p>
+<li>클라이언트는 모든 노드에 접속?</li>
+</ul>
 </li>
-<li>
-<p><strong>데이터 분산</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>데이터 분산</strong><ul>
 <li>hash slot (각 키 해싱 후 모듈러 연산해 매핑)<ul>
 <li>CRC16 해싱 후 모듈러 연산으로 16384개의 해시 슬롯 중 하나로 매핑</li>
 </ul>
 </li>
-<li>
-<p>클라이언트 데이터 접근</p>
+<li>클라이언트 데이터 접근</li>
+</ul>
 </li>
-<li>
-<p><strong>클러스터 제약 사항</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>클러스터 제약 사항</strong><ul>
 <li>클러스터는 DB 0 만 사용 가능<ul>
 <li>Redis는 한 인스턴스에 여러 데이터베이스를 가질 수 있으며 디폴트는 16</li>
 <li>이는 용도별로 분리하여 관리를 용이하게 하기 위한 목적</li>
@@ -23101,6 +23105,8 @@
 </li>
 <li>Multi key operation 사용 제약<ul>
 <li>key들이 각각 다른 노드에 저장 -&gt; MSET 등 multi-key operation 사용 X</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23123,23 +23129,23 @@
   - 채팅/푸시/구독 시스템에 사용
   - 수신 확인, 메시지 저장이 필요하지 않다면, 사용하기 좋다. (In-memory라 속도 빠름)</p>
 <ul>
-<li><strong>vs Kafka</strong></li>
+<li><strong>vs Kafka</strong><ul>
 <li>Kafka는 Topic에 publish 되는 메시지를 저장하지만, Redis는 publish 메시지 저장하지 않음</li>
-<li>
-<p>Redis에 subscriber 존재하지 않으면 메시지 사라짐</p>
+<li>Redis에 subscriber 존재하지 않으면 메시지 사라짐</li>
+</ul>
 </li>
-<li>
-<p><strong>pub/sub</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>pub/sub</strong><ul>
 <li><img alt="" src="../../images/2025-01-03-pubsub.png" /></li>
 <li><img alt="" src="../../images/2025-01-03-redis_pub_sub.png" /></li>
 <li>특정 주제를 구독한 구독자에게 메시지를 발행하는 방식</li>
-<li>
-<p>레디스는 인메모리라서 웹 소켓을 사용하는 네트워크 방식보다 매우 빠름</p>
+<li>레디스는 인메모리라서 웹 소켓을 사용하는 네트워크 방식보다 매우 빠름</li>
+</ul>
 </li>
-<li>
-<p><strong>Redis Pub/Sub 순서</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Redis Pub/Sub 순서</strong><ul>
 <li>Redis는 Topic 따로 생성하지 않고, Subscribe가 Topic을 구독하면 Topic이 생성</li>
 <li>Pub/Sub 순서<ol>
 <li>Subscriber가 특정 Topic 구독</li>
@@ -23147,19 +23153,19 @@
 <li>Topic을 구독하는 Subscriber 들이 메시지 수신</li>
 </ol>
 </li>
-<li>
-<p>명령어
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>subscribe chnannel        // 특정 채널 구독, 메시지 수신 받음
+<li>명령어
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>subscribe chnannel        // 특정 채널 구독, 메시지 수신 받음
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>publish channel message   // 메시지를 특정 채널에 발송
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>pubsub subcommand         // Redis에 등록된 채널, 패턴 조회
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>psubscribe pattern        // 채널 이름을 패턴으로 등록
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>unsubscribe [channel]     // 특정 채널 구독 해제
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>punsubscribe [pattern]    // psubscribe로 구독한 패턴 채널 구독 해제
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Subscriber는 계속 커넥션을 잡고 있어야 하나?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Subscriber는 계속 커넥션을 잡고 있어야 하나?</strong><ul>
 <li>Redis Pub/Sub에서도 Redis 클라/서버 간 사용되는 RESP(Redis Serialization Protocol) 사용</li>
 <li>Subscriber 입장에서 지속적으로 Redis 서버와 TCP 연결을 유지해야 실시간 수신 가능<ul>
 <li>이는 Pub/Sub에서 자연스러운 동작</li>
@@ -23172,31 +23178,39 @@
 </ul>
 </li>
 <li>성능/부하<ol>
-<li>지속 연결로 인한 과부하 X</li>
+<li>지속 연결로 인한 과부하 X<ul>
 <li>매우 가벼운 오버헤드를 가지고 수많은 구독자 연결</li>
-<li>메시지 처리량 이슈</li>
+</ul>
+</li>
+<li>메시지 처리량 이슈<ul>
 <li>Redis Pub/Sub은 브로커 역할이라, Redis에서 메시지 받아서 바로 모든 Subscriber에게 전송</li>
 <li>매우 빈번하거나 대량이라면, Redis 서버의 네트워크 대역폭, CPU 부하가 문제될 수 있음</li>
 <li>일반적인 규모로는 Redis 단일로도 충분</li>
-<li>Scale Out</li>
+</ul>
+</li>
+<li>Scale Out<ul>
 <li>트래픽 기하급수적으로 늘어나면 Redis 클러스터 구성을 통해 분산 처리 가능</li>
 <li>Pub/Sub보다 고급 기능 (메시지, ack, reprocessing)에서는 Redis Stream, Kafka 등의 메시징 시스템 고려도 함</li>
+</ul>
+</li>
 </ol>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="scala-211-scala-213">Scala 2.11 라이브러리를 Scala 2.13에서 쓰면 안 되는 이유<a class="headerlink" href="#scala-211-scala-213" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>스칼라는 마이너 버전(2.11, 2.12, 2.13)간의 바이너리 호환성을 보장하지 않음</li>
-<li>
-<p>스칼라 2.11로 컴파일된 라이브러리는 내부적으로 스칼라 2.11 표준 라이브러리와 컴파일러 구현 디테일에 의존</p>
-<ul>
+<li>스칼라 2.11로 컴파일된 라이브러리는 내부적으로 스칼라 2.11 표준 라이브러리와 컴파일러 구현 디테일에 의존<ul>
 <li>스칼라 2.13에서 이거 그대로 쓰면 런타임 시점에 충돌</li>
 </ul>
 </li>
-<li>
-<p><strong>구체적인 이유</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>구체적인 이유</strong><ol>
 <li>표준 라이브러리 변경됨<ul>
 <li>스칼라 2.11에서 사용되던 컬렉션/메서드/API가 스칼라 2.13에서 삭제/시그니처 변경되었을 수 있음</li>
 <li>NoSuchMethodError, ClassNotFoundError 등장하기 좋음</li>
@@ -23211,6 +23225,8 @@
 </ul>
 </li>
 <li>SBT나 Maven, Gradle 등에서 충돌</li>
+</ol>
+</li>
 </ul>
 
 

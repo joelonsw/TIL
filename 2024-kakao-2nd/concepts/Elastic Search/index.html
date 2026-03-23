@@ -23425,19 +23425,25 @@
 <h4 id="cluster">Cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h4>
 <ul>
 <li>ES의 가장 큰 시스템 단위. node의 집합</li>
-<li>클러스터는 여러 노드의 집합. 최초 설치시엔 master 노드만 존재함</li>
+<li>클러스터는 여러 노드의 집합. 최초 설치시엔 master 노드만 존재함<ul>
 <li>primary shard: 데이터 저장시 나눠진 파티션. 설치시 5개가 존재</li>
 <li>replica shard: 고가용성을 위해 존재하는 primary shard의 복제본. 설치시 1개 존재</li>
 <li>primary - replica 는 각기 다른 노드에 존재함. </li>
-<li>정리하자면</li>
+</ul>
+</li>
+<li>정리하자면<ul>
 <li>Cluster: 노드의 집합</li>
 <li>Node: shard의 집합</li>
 <li>Shard: 데이터를 저장하는 곳. </li>
 </ul>
+</li>
+</ul>
 <h4 id="index-type-document">Index, Type, Document<a class="headerlink" href="#index-type-document" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Index: 1개 이상의 primary shard에 매핑. 0개 이상의 replica shard를 가질 수 있음. </li>
+<li>Index: 1개 이상의 primary shard에 매핑. 0개 이상의 replica shard를 가질 수 있음. <ul>
 <li>RDBMS의 DB와 같은 존재</li>
+</ul>
+</li>
 <li>Type: DB의 테이블과 유사</li>
 <li>Document: DB의 row와 유사</li>
 </ul>
@@ -23445,16 +23451,18 @@
 <p><em>참고: https://victorydntmd.tistory.com/314</em></p>
 <h4 id="query-context-filter-context">Query Context &amp; Filter Context<a class="headerlink" href="#query-context-filter-context" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Query Context</strong></li>
+<li><strong>Query Context</strong><ul>
 <li>해당 document가 query절과 얼마나 잘 일치하는가?</li>
-<li>
-<p>_score를 통해 document가 얼마나 잘 일치하는지는 점수로 나타냄</p>
+<li>_score를 통해 document가 얼마나 잘 일치하는지는 점수로 나타냄</li>
+</ul>
 </li>
-<li>
-<p><strong>Filter Context</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Filter Context</strong><ul>
 <li>해당 document가 query절과 얼마나 잘 일치하는가 </li>
 <li>true/false로만 반환하며, 점수 X</li>
+</ul>
+</li>
 </ul>
 <h4 id="match_all-match_none">match_all / match_none<a class="headerlink" href="#match_all-match_none" title="Permanent link">&para;</a></h4>
 <ul>
@@ -23474,9 +23482,11 @@
 <h4 id="term">term<a class="headerlink" href="#term" title="Permanent link">&para;</a></h4>
 <ul>
 <li>역색인에 명시된 토큰 중 정확한 키워드가 포함된 document 조회</li>
-<li><strong>정확한 키워드</strong>로 검색하기에 full text search에는 적합하지 않음</li>
+<li><strong>정확한 키워드</strong>로 검색하기에 full text search에는 적합하지 않음<ul>
 <li>ES에서는 text 타입은 역색인을 함</li>
 <li>keyword 타입은 역색인 X</li>
+</ul>
+</li>
 <li>term은 full text search에 안어울려. 이땐 match 써</li>
 </ul>
 <h4 id="terms">terms<a class="headerlink" href="#terms" title="Permanent link">&para;</a></h4>
@@ -23492,9 +23502,11 @@
 <p><em>참고: https://victorydntmd.tistory.com/315</em></p>
 <h4 id="fromsize">from/size<a class="headerlink" href="#fromsize" title="Permanent link">&para;</a></h4>
 <ul>
-<li>pagination을 도입하기 위함</li>
+<li>pagination을 도입하기 위함<ul>
 <li>from: 쪽수</li>
 <li>size: 게시글 수</li>
+</ul>
+</li>
 </ul>
 <h4 id="sort">sort<a class="headerlink" href="#sort" title="Permanent link">&para;</a></h4>
 <ul>
@@ -23517,15 +23529,23 @@
 <h4 id="_2">개요<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>서치쿼리에 기반하여 aggregated data를 제공</li>
-<li><strong>Bucketing</strong></li>
+<li><strong>Bucketing</strong><ul>
 <li>각 버킷은 특정 키 - 도큐먼트로 연결</li>
 <li>각 버킷은 모든 컨텍스트 내 도큐먼트와 평가되어 항목이 맞다면, 버켓으로 투입시킴.</li>
-<li><strong>Metric</strong></li>
+</ul>
+</li>
+<li><strong>Metric</strong><ul>
 <li>지표를 트래킹하기 위함</li>
-<li><strong>Matrix</strong></li>
+</ul>
+</li>
+<li><strong>Matrix</strong><ul>
 <li>여러 필드에서 작동/요청된 문서 필드에서 행렬 결과 생성</li>
-<li><strong>Pipeline</strong></li>
+</ul>
+</li>
+<li><strong>Pipeline</strong><ul>
 <li>타 메트릭 출력을 집계</li>
+</ul>
+</li>
 </ul>
 <h4 id="aggregation_2">Aggregation 만들기<a class="headerlink" href="#aggregation_2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&quot;aggregations&quot;: {
@@ -23560,30 +23580,32 @@
 <ul>
 <li>주어진 조건으로 분류된 버킷을 만들고, 각 버킷에 소속되는 도큐먼트를 모아 그룹으로 구분</li>
 <li>doc_count에 기본 표시됨</li>
-<li><strong>range</strong></li>
+<li><strong>range</strong><ul>
 <li>각 숫자 필드 값으로 범위를 지정, 각 범위에 해당하는 버킷을 만듦</li>
-<li>
-<p>field 옵션에 해당 필드 이름 지정, ranges - from, to 사이에 버킷 안에 넣을 친구들 지정 가능</p>
+<li>field 옵션에 해당 필드 이름 지정, ranges - from, to 사이에 버킷 안에 넣을 친구들 지정 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>histogram</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>histogram</strong><ul>
 <li>range와 유사하게 숫자 필드의 범위를 나누는 aggs</li>
-<li>
-<p>interval 옵션으로 주어진 간격 크기대로 버킷 구분 가능</p>
+<li>interval 옵션으로 주어진 간격 크기대로 버킷 구분 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>date_range, date_histogram</strong></p>
+</ul>
+<ul>
+<li><strong>date_range, date_histogram</strong><ul>
+<li>날짜 필드를 기반으로 범위별 버킷 생성도 가능</li>
+</ul>
 </li>
-<li>
-<p>날짜 필드를 기반으로 범위별 버킷 생성도 가능</p>
-</li>
-<li>
-<p><strong>terms</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>terms</strong><ul>
 <li>keyword 필드의 문자열을 기반으로 버킷을 나누어 집계!</li>
 <li>keyword 필드값으로만 사용이 가능!!!!<ul>
 <li>형태소 분석으로 역색인 들어간 text에는 사용 X</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

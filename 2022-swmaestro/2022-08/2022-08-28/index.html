@@ -22933,36 +22933,36 @@
 <ul>
 <li><em>참고: https://www.baeldung.com/spring-open-session-in-view</em></li>
 <li><em>참고: https://ykh6242.tistory.com/entry/JPA-OSIVOpen-Session-In-View%EC%99%80-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>OSIV는 영속성 컨텍스트를 뷰까지 열어두는 기능</li>
-<li>
-<p>영속성 컨텍스트가 유지되면, 엔티티도 영속 상태로 유지됨</p>
-<ul>
+<li>영속성 컨텍스트가 유지되면, 엔티티도 영속 상태로 유지됨<ul>
 <li>이는 뷰에서 Lazy Loading을 가능하게한다. (DTO 생성 가능) </li>
 </ul>
 </li>
-<li>
-<p><strong>기능</strong></p>
+</ul>
 </li>
-<li>
-<p>Spring Framework에서 제공하는 OSIV... <strong>서블릿 필터</strong>에서 적용할지, <strong>스프링 인터셉터</strong>에서 적용할지 선택 가능!</p>
+</ul>
 <ul>
+<li><strong>기능</strong><ul>
+<li>Spring Framework에서 제공하는 OSIV... <strong>서블릿 필터</strong>에서 적용할지, <strong>스프링 인터셉터</strong>에서 적용할지 선택 가능!<ul>
 <li><code>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</code></li>
 <li><code>org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Why Needed?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Why Needed?</strong><ul>
 <li>스프링 프레임워크가 제공하는 OSIV는 비즈니스 계층에서 트랜잭션 사용하는 OSIV</li>
 <li>영속성 컨텍스트는 사용자의 요청 시점에서 생성이 된다. </li>
 <li>데이터 쓰거나, 수정하는 트랜잭션은 비즈니스 계층에서 뚝딱. </li>
-<li>
-<p><img alt="" src="../../images/2022-08-28-osiv.png" /></p>
+<li><img alt="" src="../../images/2022-08-28-osiv.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>동작 원리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>동작 원리</strong><ol>
 <li>클라이언트의 요청이 들어오면 서블릿 필터나 스프링 인터셉터에서 <strong>영속성 컨텍스트 생성</strong><ul>
 <li>이때 트랜잭션은 시작 X</li>
 </ul>
@@ -22976,21 +22976,23 @@
 </ul>
 </li>
 <li>컨트롤러와 뷰까지 영속성 컨텍스트가 유지되기에 조회한 엔티티는 영속 상태 유지<ul>
-<li>이러다보니까 lazy loading이 가능하고, (proxy를 조회해오는 것)</li>
+<li>이러다보니까 lazy loading이 가능하고, (proxy를 조회해오는 것)<ul>
 <li>트랜잭션이 없어도 읽기는 동작함 (Nontransactional read)</li>
 </ul>
 </li>
-<li>
-<p>서블릿 필터나 스프링 인터셉터로 요청이 돌아오면 영속성 컨텍스트 종료</p>
-<ul>
+</ul>
+</li>
+<li>서블릿 필터나 스프링 인터셉터로 요청이 돌아오면 영속성 컨텍스트 종료<ul>
 <li>이때 em.flush() 없이 그냥 종료</li>
 <li>em.close()를 통해 영속성 컨텍스트만 종료시켜버림</li>
 <li>em.flush() 억지로 시켜도 TransactionRequiredException 발생!</li>
 </ul>
 </li>
-<li>
-<p><strong>OSIV 주의점</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>OSIV 주의점</strong><ul>
 <li>프록시를 초기화하는 작업을 View에서도 할 수 있는데 왜 주의해야지?</li>
 <li>OSIV 전략은 최초 DB 커넥션 시작 시점부터 API 응답이 끝날 때 까지 영속성 컨텍스트와 DB 커넥션을 유지함</li>
 <li>DB 커넥션을 오랜기간 유지하는게 장애로 이어질 수도!<ul>
@@ -22999,79 +23001,81 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="_1">영속성 컨텍스트 &amp; 엔티티 매니저 &amp; 엔티티 매니저 팩토리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=XlL0eq9Phws</em></li>
 <li><em>참고: https://ultrakain.gitbooks.io/jpa/content/chapter3/chapter3.1.html</em></li>
 <li><em>참고: https://stackoverflow.com/questions/42074270/should-there-be-an-entitymanager-per-thread-in-spring-hibernate</em></li>
-<li><strong>영속성 컨텍스트?</strong></li>
+<li><strong>영속성 컨텍스트?</strong><ul>
 <li>엔티티 메모리 저장소 (Cache)</li>
-<li>
-<p>엔티티 타입과 식별자를 키로 사용하는 객체의 집합</p>
-<ul>
+<li>엔티티 타입과 식별자를 키로 사용하는 객체의 집합<ul>
 <li>KEY: ENTITY_TYPE + PK</li>
 <li>VALUE: ENTITY ITSELF</li>
 </ul>
 </li>
-<li>
-<p><strong>영속성 컨텍스트의 장점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>영속성 컨텍스트의 장점</strong><ul>
 <li>1차 캐시</li>
 <li>동일성 보장</li>
 <li>트랜잭션 쓰기지연</li>
 <li>변경 감지</li>
-<li>
-<p>지연 로딩</p>
+<li>지연 로딩</li>
+</ul>
 </li>
-<li>
-<p><strong>엔티티 매니저</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>엔티티 매니저</strong><ul>
 <li>커밋 시점에 영속성 컨텍스트에서 관리하고 있던 영속 객체의 변경 내역을 추적하여 DB에 반영</li>
 <li>데이터베이스 액세스를 위한 객체</li>
 <li>쓰레드간 공유 불가!</li>
 <li>DB 연결이 필요한 시점까지 커넥션 얻지 않음</li>
 <li>엔티티 매니저로 DB 데이터를 CRUD</li>
 <li>em.flush(), em.clear()</li>
-<li>
-<p>엔티티매니저는 ThreadLocal에 저장!</p>
-<ul>
+<li>엔티티매니저는 ThreadLocal에 저장!<ul>
 <li><code>@Transactional</code>에서 엔티티 매니저 만들어서 ThreadLocal 변수에 엔티티 매니저 저장</li>
 <li><code>@Transactional</code>이 끝난다면, 엔티티 매니저가 close 됨!</li>
 </ul>
 </li>
-<li>
-<p><strong>어플리케이션에서 관리하는 엔티티 매니저</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>어플리케이션에서 관리하는 엔티티 매니저</strong><ul>
 <li>어플리케이션 시작 =&gt; EntityManagerFactory 초기화 =&gt; 필요한 상황에 EntityManager 생성하여 사용</li>
 <li>EntityManger의 사용 마치면 close()</li>
-<li>
-<p>자원 누수 문제 발생할 수 있음</p>
+<li>자원 누수 문제 발생할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>컨테이너에서 관리하는 엔티티 매니저 =&gt; Spring JPA</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>컨테이너에서 관리하는 엔티티 매니저 =&gt; Spring JPA</strong><ul>
 <li>컨테이너에서 관리하는 엔티티 매니저는 JEE 컨테이너에서 EntityMangerFactory와 EntityManger의 라이프사이클 관리</li>
 <li>어플리케이션 코드에서는 컨테이너가 제공하는 엔티티 매니저 사용</li>
-<li>
-<p><code>@PersistenceContext</code> 사용한 구현</p>
+<li><code>@PersistenceContext</code> 사용한 구현</li>
+</ul>
 </li>
-<li>
-<p><strong>엔티티 매니저 &amp; 영속성 컨텍스트</strong></p>
+</ul>
+<ul>
+<li><strong>엔티티 매니저 &amp; 영속성 컨텍스트</strong><ul>
+<li>엔티티 매니저 생성시 하나의 영속성 컨텍스트가 생성</li>
+</ul>
 </li>
-<li>
-<p>엔티티 매니저 생성시 하나의 영속성 컨텍스트가 생성</p>
-</li>
-<li>
-<p><strong>엔티티 매니저 팩토리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>엔티티 매니저 팩토리</strong><ul>
 <li>만드는 비용이 커서 한개만 만들어서 어플리케이션 전체에서 공유</li>
 <li>여러 쓰레드가 동시에 점근해도 안전. </li>
-<li>
-<p>쓰레드간 공유 OK</p>
+<li>쓰레드간 공유 OK</li>
+</ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-08-28-emf-em.png" /></p>
-</li>
+</ul>
+<ul>
+<li><img alt="" src="../../images/2022-08-28-emf-em.png" /></li>
 </ul>
 
 

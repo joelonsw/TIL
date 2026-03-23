@@ -22999,113 +22999,73 @@
 <ul>
 <li>참고1: https://aljjabaegi.tistory.com/387</li>
 <li>참고2: https://www.youtube.com/watch?v=f0cAmTYo4tQ</li>
-<li>
-<p>참고3: https://www.youtube.com/watch?v=L19wXSpv5cs</p>
-</li>
-<li>
-<p><strong>Java 컴파일 과정</strong></p>
+<li>참고3: https://www.youtube.com/watch?v=L19wXSpv5cs</li>
+</ul>
 <ul>
-<li>Java 소스 코드(.java) ---Java Compiler(javac)--&gt; Java 바이트 코드(.class)</li>
-<li>Java 바이트 코드(.class) ---Class Loader--&gt; JVM<ul>
-<li>이제 JVM 안의 실행 엔진에 의해 기계어로 해석 후 메모리 상에 배치</li>
-<li>실행 엔진에는 Interpreter와 JIT Compiler가 있음<ul>
-<li>Interpreter: Java 바이트 코드 한 줄씩 실행, slow</li>
-<li>JIT Compiler: 전체 바이트 코드 컴파일, slow but after cached fast</li>
+<li><strong>Java 컴파일 과정</strong>
+    - Java 소스 코드(.java) ---Java Compiler(javac)--&gt; Java 바이트 코드(.class)
+    - Java 바이트 코드(.class) ---Class Loader--&gt; JVM
+        - 이제 JVM 안의 실행 엔진에 의해 기계어로 해석 후 메모리 상에 배치
+        - 실행 엔진에는 Interpreter와 JIT Compiler가 있음
+            - Interpreter: Java 바이트 코드 한 줄씩 실행, slow
+            - JIT Compiler: 전체 바이트 코드 컴파일, slow but after cached fast</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JVM 메모리 구조</strong></p>
 <ul>
-<li>Stack Area<ul>
-<li>클래스 내의 메서드에서 사용되는 정보들의 저장</li>
-<li>매개변수, 지역변수, 리턴값 등</li>
+<li><strong>JVM 메모리 구조</strong>
+    - Stack Area
+        - 클래스 내의 메서드에서 사용되는 정보들의 저장
+        - 매개변수, 지역변수, 리턴값 등
+    - Method Area
+        - 클래스, 메서드, 인스턴스 변수, 클래스 변수, 상수 등 저장
+    - Heap Area
+        - New 명령어를 통해 생성한 인스턴스
+        - 참조형 변수 정보들이 저장
+        - GC의 대상
+    - PC Register Area
+        - Thread 별로 하나씩 생성된 JVM 명령의 주소값이 저장되는 곳
+    - Native Method Stack Area
+        - Java 외의 다른 언어의 호출 담당
+        - C/C++을 호출하는 Stack 영역</li>
 </ul>
-</li>
-<li>Method Area<ul>
-<li>클래스, 메서드, 인스턴스 변수, 클래스 변수, 상수 등 저장</li>
-</ul>
-</li>
-<li>Heap Area<ul>
-<li>New 명령어를 통해 생성한 인스턴스</li>
-<li>참조형 변수 정보들이 저장</li>
-<li>GC의 대상</li>
-</ul>
-</li>
-<li>PC Register Area<ul>
-<li>Thread 별로 하나씩 생성된 JVM 명령의 주소값이 저장되는 곳</li>
-</ul>
-</li>
-<li>Native Method Stack Area<ul>
-<li>Java 외의 다른 언어의 호출 담당</li>
-<li>C/C++을 호출하는 Stack 영역</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JDK, JRE, JVM</strong></p>
 <ul>
-<li>JDK &gt; JRE &gt; JVM 관계<ul>
-<li>JVM: OS 별로 다름. Bytecode를 검증하고 실행</li>
-<li>JRE: JVM + 시스템 라이브러리들을 가지고 있음 <em>(scanner 등)</em></li>
-<li>JDK: JRE + 개발을 위한 도구 <em>(compiler, debugger 등)</em></li>
+<li><strong>JDK, JRE, JVM</strong>
+    - JDK &gt; JRE &gt; JVM 관계
+        - JVM: OS 별로 다름. Bytecode를 검증하고 실행
+        - JRE: JVM + 시스템 라이브러리들을 가지고 있음 <em>(scanner 등)</em>
+        - JDK: JRE + 개발을 위한 도구 <em>(compiler, debugger 등)</em></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>빌드</strong></p>
 <ul>
-<li>정의<ul>
-<li>소스코드 파일을 여러 과정을 거쳐 컴퓨터에서 실행할 수 있는 독립 sw 가공물 <em>(jar, war)</em> 로 변환시키는 과정</li>
-</ul>
-</li>
-<li>빌드 단계<ul>
-<li>소스코드 컴파일</li>
-<li>Test 코드 컴파일</li>
-<li>Test 코드 실행</li>
-<li>Test 코드 리포트 작성</li>
-<li>기타 추가 설정한 작업들 진행</li>
-<li>패키징 수행</li>
-<li>독립 sw 가공물 만들기</li>
-</ul>
-</li>
-<li>빌드 자동화<ul>
-<li>빌드가 수동이라면, 사람마다 다르게 빌드하고, 큰일 남</li>
-<li>소스코드의 빌드 과정을 자동으로 처리해주는 프로그램을 사용</li>
-<li>외부 라이브러리의 자동 추가/관리를 지원</li>
-<li>ANT, Maven, Gradle이 존재</li>
-</ul>
-</li>
-<li>Maven<ul>
-<li>빌드를 위해 xml으로 설정</li>
-<li>외부 라이브러리 관리 가능</li>
-<li>ANT의 장황한 스크립트 해결</li>
-<li>하지만 xml의 태생적 한계에 부딪힘... 복잡</li>
-</ul>
-</li>
-<li>Gradle<ul>
-<li>빌드를 위해 JVM 위에서 동작하는 Groovy 언어 사용</li>
-<li>외부 라이브러리 관리 가능</li>
-<li>유연한 빌드 스크립트 작성 가능<ul>
-<li>build.gradle에 dependencies를 추가해주자</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>빌드</strong>
+    - 정의
+        - 소스코드 파일을 여러 과정을 거쳐 컴퓨터에서 실행할 수 있는 독립 sw 가공물 <em>(jar, war)</em> 로 변환시키는 과정
+    - 빌드 단계
+        - 소스코드 컴파일
+        - Test 코드 컴파일
+        - Test 코드 실행
+        - Test 코드 리포트 작성
+        - 기타 추가 설정한 작업들 진행
+        - 패키징 수행
+        - 독립 sw 가공물 만들기
+    - 빌드 자동화
+        - 빌드가 수동이라면, 사람마다 다르게 빌드하고, 큰일 남
+        - 소스코드의 빌드 과정을 자동으로 처리해주는 프로그램을 사용
+        - 외부 라이브러리의 자동 추가/관리를 지원
+        - ANT, Maven, Gradle이 존재
+    - Maven
+        - 빌드를 위해 xml으로 설정
+        - 외부 라이브러리 관리 가능
+        - ANT의 장황한 스크립트 해결
+        - 하지만 xml의 태생적 한계에 부딪힘... 복잡
+    - Gradle
+        - 빌드를 위해 JVM 위에서 동작하는 Groovy 언어 사용
+        - 외부 라이브러리 관리 가능
+        - 유연한 빌드 스크립트 작성 가능
+            - build.gradle에 dependencies를 추가해주자</li>
 </ul>
 <h2 id="_2">자바 문자열<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>String vs StringBuffer vs StringBuilder</strong><ul>
-<li>StringBuffer --&gt; threadSafe?</li>
-</ul>
-</li>
+<li><strong>String vs StringBuffer vs StringBuilder</strong>
+    - StringBuffer --&gt; threadSafe?</li>
 </ul>
 <h2 id="jcf">자바 JCF<a class="headerlink" href="#jcf" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23114,170 +23074,103 @@
 </ul>
 <p><img alt="JCF" src="../../image/JCF_2021_02_19.jpg" /></p>
 <ul>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>Java Collections Framework</li>
-<li>Collections: 데이터의 집합, 그룹</li>
-<li>JCF는 이러한 데이터/자료구조인 Collection과 이를 구현하는 클래스/인터페이스들을 제공</li>
+<li><strong>정의</strong>
+    - Java Collections Framework
+    - Collections: 데이터의 집합, 그룹
+    - JCF는 이러한 데이터/자료구조인 Collection과 이를 구현하는 클래스/인터페이스들을 제공</li>
 </ul>
-</li>
-<li>
-<p><strong>장점</strong></p>
 <ul>
-<li>코드 재사용</li>
-<li>속도, 품질 보장</li>
+<li><strong>장점</strong>
+    - 코드 재사용
+    - 속도, 품질 보장</li>
 </ul>
-</li>
-<li>
-<p><strong>List</strong></p>
 <ul>
-<li>
-<p>ArrayList: 배열을 구현한 클래스, 물리적 순서가 동일함</p>
-<ul>
-<li>삽입: 기본 Capacity 10, 꽉 차면 기존 크기에서 50%의 크기를 더해 새로운 크기를 산정해 새로운 배열에 복사 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minCapacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li><strong>List</strong>
+    - ArrayList: 배열을 구현한 클래스, 물리적 순서가 동일함
+        - 삽입: 기본 Capacity 10, 꽉 차면 기존 크기에서 50%의 크기를 더해 새로운 크기를 산정해 새로운 배열에 복사 
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minCapacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elementData</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">newCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">//기존 사이즈의 50%를 추가해 새로운 크기 산정</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">...</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>삭제: 삭제하는 index 다음부터 복붙, 마지막 데이터 null 처리</li>
-</ul>
+</code></pre></div>
+        - 삭제: 삭제하는 index 다음부터 복붙, 마지막 데이터 null 처리<p>- LinkedList: 논리적으로 순차적, 물리적으론 안 순차적
+      - 삽입: 앞과 뒤는 빨리 찾음 <em>(처음, 끝 내부적으로 저장 해둠)</em>, 중간 인덱스 오래걸림
+      - 삭제: 걸리는 시간은 삽입과 같음. 자기자신을 null 처리</p>
+<p>- List<Integer> integers = new ArrayList&lt;&gt;();
+      - 왜 List로 초기화를 시키는가?
+      - 우리의 관심사는 데이터 구조 안에 있는 Integer이지 어떻게 저장되어 있는가가 X
+          - 한 단계 더 추상화 시킨 List로 Integer를 관리하는 "무엇"으로 초기화 시키는 것이 변경 및 확장에 유리</p>
 </li>
-<li>
-<p>LinkedList: 논리적으로 순차적, 물리적으론 안 순차적</p>
+</ul>
 <ul>
-<li>삽입: 앞과 뒤는 빨리 찾음 <em>(처음, 끝 내부적으로 저장 해둠)</em>, 중간 인덱스 오래걸림</li>
-<li>삭제: 걸리는 시간은 삽입과 같음. 자기자신을 null 처리</li>
+<li><strong>Vector</strong>
+    - ArrayList와 같은 구조
+    - 근데 얘는 동기화된 메서드로 구성되어 있어 MultiThread에서 안전!
+        - ArrayList는 Thread Safe 하지 않아... 개발자의 명시적 동기화 필수</li>
 </ul>
-</li>
-<li>
-<p>List<Integer> integers = new ArrayList&lt;&gt;();</p>
 <ul>
-<li>왜 List로 초기화를 시키는가?</li>
-<li>우리의 관심사는 데이터 구조 안에 있는 Integer이지 어떻게 저장되어 있는가가 X<ul>
-<li>한 단계 더 추상화 시킨 List로 Integer를 관리하는 "무엇"으로 초기화 시키는 것이 변경 및 확장에 유리</li>
+<li><strong>Stack</strong>
+    - LIFO
+    - Vector로 구성되어 있음</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Vector</strong></p>
 <ul>
-<li>ArrayList와 같은 구조</li>
-<li>근데 얘는 동기화된 메서드로 구성되어 있어 MultiThread에서 안전!<ul>
-<li>ArrayList는 Thread Safe 하지 않아... 개발자의 명시적 동기화 필수</li>
+<li><strong>Queue</strong>
+    - FIFO
+    - 인터페이스라서 객체 생성 불가능... LinkedList or PriorityQueue 사용하자
+        - Queue<String> queue = new LinkedList&lt;&gt;();
+        - Queue<String> queue = new PriorityQueue&lt;&gt;();</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Stack</strong></p>
 <ul>
-<li>LIFO</li>
-<li>Vector로 구성되어 있음</li>
-</ul>
+<li><strong>Set</strong>
+    - HashSet
+        - 특징
+            - 객체 정렬 순서 유지 X
+            - Iterator 혹은 stream으로 순회
+            - HashMap에서 key부분만 활용하여 구현
+            - Value에는 더미 값 투입
+        - 저장 방식
+            - 객체의 hashCode() 호출
+            - hashCode()가 같은 객체가 있다면
+            - 객체의 equals() 호출
+            - equals()도 같다면 동일한 놈이구나 -&gt; 저장 X<p>- TreeSet
+      - 특징
+          - 객체 정렬 순서 유지 O
+          - BST (RB Tree로 구현)</p>
 </li>
-<li>
-<p><strong>Queue</strong></p>
+</ul>
 <ul>
-<li>FIFO</li>
-<li>인터페이스라서 객체 생성 불가능... LinkedList or PriorityQueue 사용하자<ul>
-<li>Queue<String> queue = new LinkedList&lt;&gt;();</li>
-<li>Queue<String> queue = new PriorityQueue&lt;&gt;();</li>
-</ul>
+<li><strong>Map</strong>
+    - HashMap
+        - Key와 Value의 쌍으로 연관지어 저장
+        - HashSet과 동일한 저장 방식
+        - LinkedList 구조와 유사<p>- TreeMap
+      - 객체의 정렬에 사용
+      - 내부 구조 TreeSet과 동일</p>
 </li>
 </ul>
-</li>
-<li>
-<p><strong>Set</strong></p>
 <ul>
-<li>
-<p>HashSet</p>
-<ul>
-<li>특징<ul>
-<li>객체 정렬 순서 유지 X</li>
-<li>Iterator 혹은 stream으로 순회</li>
-<li>HashMap에서 key부분만 활용하여 구현</li>
-<li>Value에는 더미 값 투입</li>
-</ul>
-</li>
-<li>저장 방식<ul>
-<li>객체의 hashCode() 호출</li>
-<li>hashCode()가 같은 객체가 있다면</li>
-<li>객체의 equals() 호출</li>
-<li>equals()도 같다면 동일한 놈이구나 -&gt; 저장 X</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>TreeSet</p>
-<ul>
-<li>특징<ul>
-<li>객체 정렬 순서 유지 O</li>
-<li>BST (RB Tree로 구현)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Map</strong></p>
-<ul>
-<li>
-<p>HashMap</p>
-<ul>
-<li>Key와 Value의 쌍으로 연관지어 저장</li>
-<li>HashSet과 동일한 저장 방식</li>
-<li>LinkedList 구조와 유사</li>
-</ul>
-</li>
-<li>
-<p>TreeMap</p>
-<ul>
-<li>객체의 정렬에 사용</li>
-<li>내부 구조 TreeSet과 동일</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>왜 Map은 컬렉션 인터페이스를 상속 안 받는가?</strong></p>
-<ul>
-<li>Set, List, Map 구분하고 나니...<ul>
-<li>야, Set이랑 List 겹친다! 추출해! ==&gt; Collection</li>
-</ul>
-</li>
-<li>Map은 컬렉션 인터페이스의 "엘리먼트들의 그룹"이라는 기본 개념에 안 맞음ㅜㅜ</li>
-</ul>
-</li>
+<li><strong>왜 Map은 컬렉션 인터페이스를 상속 안 받는가?</strong>
+    - Set, List, Map 구분하고 나니...
+        - 야, Set이랑 List 겹친다! 추출해! ==&gt; Collection
+    - Map은 컬렉션 인터페이스의 "엘리먼트들의 그룹"이라는 기본 개념에 안 맞음ㅜㅜ</li>
 </ul>
 <h2 id="generics">자바 Generics<a class="headerlink" href="#generics" title="Permanent link">&para;</a></h2>
 <ul>
 <li>참고 1: https://www.youtube.com/watch?v=n28M8iryFPw&amp;t=267s</li>
-<li>
-<p>참고 2: https://vvshinevv.tistory.com/55</p>
-</li>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>다양한 Type의 객체를 다루는 메서드나 클래스에 Compile시 Type Check를 지원하는 기능!</li>
+<li>참고 2: https://vvshinevv.tistory.com/55</li>
 </ul>
-</li>
-<li>
-<p><strong>장점</strong></p>
 <ul>
-<li>의도하지 않은 Type이 메서드나 클래스에 들어오는 것을 막아줌</li>
-<li>데이터 구조에 무엇이 들었는가에 따라 형변환을 고려할 필요가 없음</li>
+<li><strong>정의</strong>
+    - 다양한 Type의 객체를 다루는 메서드나 클래스에 Compile시 Type Check를 지원하는 기능!</li>
 </ul>
-</li>
-<li>
-<p><strong>생김새</strong>
+<ul>
+<li><strong>장점</strong>
+    - 의도하지 않은 Type이 메서드나 클래스에 들어오는 것을 막아줌
+    - 데이터 구조에 무엇이 들었는가에 따라 형변환을 고려할 필요가 없음</li>
+</ul>
+<ul>
+<li><strong>생김새</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Box</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -23285,44 +23178,33 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>사용법</strong></p>
-<ul>
-<li>참조 변수와 생성자에 대입된 Type이 일치해야 한다!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">Box</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// Compile Error! Apple이 Fruit을 상속해도 안 됨  </span>
 </code></pre></div></li>
-<li>모든 객체에 동일하게 동작하는 static에서 타입 변수 T는 사용할 수 없다!<ul>
-<li>대입된 타입의 종류에 관계없이 동일한 것이여야 하기 때문</li>
 </ul>
-</li>
-<li>제네릭 타입의 배열 생성, instanceof 연산도 X<ul>
-<li>new 연산자 때문... new 연산자는 컴파일 시점에 정확히 타입 T가 뭔지 알아야 함</li>
-<li>newInstance()와 같은 동적으로 객체를 생성하는 메서드를 고려해볼 것</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>제한된 제네릭</strong></p>
 <ul>
-<li>위의 방법으로는 T가 모든 Type을 받아들인다</li>
-<li>나는 제한하고 싶은데...?</li>
-<li><strong>T extends Fruit</strong><ul>
-<li>Fruit 타입의 자손들만 대입할 수 있음</li>
-<li>상한선을 정하는 것</li>
-<li>인터페이스를 구현해야 한다는 제약에도 extends를 사용</li>
+<li><strong>사용법</strong>
+    - 참조 변수와 생성자에 대입된 Type이 일치해야 한다!
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">Box</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// Compile Error! Apple이 Fruit을 상속해도 안 됨  </span>
+</code></pre></div>
+    - 모든 객체에 동일하게 동작하는 static에서 타입 변수 T는 사용할 수 없다!
+        - 대입된 타입의 종류에 관계없이 동일한 것이여야 하기 때문
+    - 제네릭 타입의 배열 생성, instanceof 연산도 X
+        - new 연산자 때문... new 연산자는 컴파일 시점에 정확히 타입 T가 뭔지 알아야 함
+        - newInstance()와 같은 동적으로 객체를 생성하는 메서드를 고려해볼 것</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>와일드 카드</strong></p>
 <ul>
-<li>? 로 표현되며, 어떠한 타입도 받아들임
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">printList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li><strong>제한된 제네릭</strong>
+    - 위의 방법으로는 T가 모든 Type을 받아들인다
+    - 나는 제한하고 싶은데...?
+    - <strong>T extends Fruit</strong>
+        - Fruit 타입의 자손들만 대입할 수 있음
+        - 상한선을 정하는 것
+        - 인터페이스를 구현해야 한다는 제약에도 extends를 사용</li>
+</ul>
+<ul>
+<li><strong>와일드 카드</strong>
+    - ? 로 표현되며, 어떠한 타입도 받아들임
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">printList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">elem</span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">}</span><span class="w">  </span>
@@ -23339,29 +23221,21 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="n">MyClass</span><span class="p">.</span><span class="na">printList</span><span class="p">(</span><span class="n">fruits</span><span class="p">);</span><span class="w"> </span><span class="c1">//에러!!! 정확히 Object형의 요소만 받아요!!!</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="n">MyClass</span><span class="p">.</span><span class="na">printListWithWildCard</span><span class="p">(</span><span class="n">fruits</span><span class="p">);</span><span class="w"> </span><span class="c1">// 정상 작동!</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>하나의 참조 변수로 대입된 타입이 다른 객체를 참조 가능</li>
-<li>&lt;? extends T&gt; : T와 그 자손들만 가능</li>
-<li>&lt;? super T&gt; : T와 그 조상들만 가능</li>
-<li>&lt;?&gt; : 제한 없음 모든 타입이 가능
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ArrayList</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Tv</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK!</span>
+</code></pre></div>
+    - 하나의 참조 변수로 대입된 타입이 다른 객체를 참조 가능
+    - &lt;? extends T&gt; : T와 그 자손들만 가능
+    - &lt;? super T&gt; : T와 그 조상들만 가능
+    - &lt;?&gt; : 제한 없음 모든 타입이 가능
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ArrayList</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Tv</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK!</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">ArrayList</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Audio</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK!</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>제이슨과 함께하는 와일드 카드</strong></p>
 <ul>
-<li>클래스 구조 <ul>
-<li>Animal(부모)<ul>
-<li>Dog(자식)</li>
-<li>Cat(자식)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>제이슨과 함께하는 와일드 카드</strong>
+    - 클래스 구조 
+        - Animal(부모)
+            - Dog(자식)
+            - Cat(자식)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">    </span><span class="c1">// 상한... Animal이거나 Animal을 상속한 List만 매개변수로 받을게요~</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">extends</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Animal</span><span class="o">&gt;</span><span class="w"> </span><span class="n">animals</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23376,36 +23250,24 @@
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>
-<p><strong>제네릭 메서드</strong></p>
+<li><strong>제네릭 메서드</strong>
+    - 메서드의 선언부에 제네릭 타입이 선언된 메서드
+    - 메서드에서 어떤 타입이 들어와도 동작하게 하고싶음!
+    - public <T> T foo(List<T> list) { }
+        - <T>: 타입 매개변수 -- 이게 새로운 문법!
+        - T: 리턴 타입
+        - foo: 메서드 명
+        - List<T> list: 매개변수
+    - 전달되는 타입 매개변수의 범위를 제한하고 싶다면 앞의 타입 매개변수에서 해주자
+        - public <T> T foo(List<T extends Fruit> list) {} // X
+        - public <T extends Fruit> T foo(List<T> list) {} // O
+    - 제너릭 메서드의 타입과 제네릭 클래스의 타입은 상관이 없다!</li>
+</ul>
 <ul>
-<li>메서드의 선언부에 제네릭 타입이 선언된 메서드</li>
-<li>메서드에서 어떤 타입이 들어와도 동작하게 하고싶음!</li>
-<li>public <T> T foo(List<T> list) { }<ul>
-<li><T>: 타입 매개변수 -- 이게 새로운 문법!</li>
-<li>T: 리턴 타입</li>
-<li>foo: 메서드 명</li>
-<li>List<T> list: 매개변수</li>
-</ul>
-</li>
-<li>전달되는 타입 매개변수의 범위를 제한하고 싶다면 앞의 타입 매개변수에서 해주자<ul>
-<li>public <T> T foo(List<T extends Fruit> list) {} // X</li>
-<li>public <T extends Fruit> T foo(List<T> list) {} // O</li>
-</ul>
-</li>
-<li>제너릭 메서드의 타입과 제네릭 클래스의 타입은 상관이 없다!</li>
-</ul>
-</li>
-<li>
-<p><strong>제네릭 메서드 vs 와일드카드</strong></p>
-<ul>
-<li>제네릭: 지금은 이 타입을 모르지만, 이 타입이 정해지면 그 타입 특성에 맞게 사용하겠다!</li>
-<li>와일드카드: 지금도 이 타입 모르고, 앞으로도 모를 것이다! <ul>
-<li>얘가 좀 더 무책임하다</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test2</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li><strong>제네릭 메서드 vs 와일드카드</strong>
+    - 제네릭: 지금은 이 타입을 모르지만, 이 타입이 정해지면 그 타입 특성에 맞게 사용하겠다!
+    - 와일드카드: 지금도 이 타입 모르고, 앞으로도 모를 것이다! 
+        - 얘가 좀 더 무책임하다<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test2</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruits</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">fruits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">fruits</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// OK!! 나는 너의 타입이 정해지면 맞춰줄거야!</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
@@ -23419,59 +23281,40 @@
 </ul>
 <h2 id="enum">자바 Enum<a class="headerlink" href="#enum" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>참고: https://velog.io/@pop8682/Enum-27k067ns4a</p>
-</li>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>관련한 상수 Singleton 객체의 모음집</li>
-<li>컴파일 당시, 가능한 모든 값을 알고 있다면 Enum 활용을 고려해보자!</li>
+<li>참고: https://velog.io/@pop8682/Enum-27k067ns4a</li>
 </ul>
-</li>
-<li>
-<p><strong>장점</strong></p>
 <ul>
-<li>C/C++ 과는 다르게 Java Enum은 클래스 처럼 변수, 메서드, 생성자를 추가할 수 있다</li>
-<li>상태와 행위를 동시에 관리 가능하다!</li>
+<li><strong>정의</strong>
+    - 관련한 상수 Singleton 객체의 모음집
+    - 컴파일 당시, 가능한 모든 값을 알고 있다면 Enum 활용을 고려해보자!</li>
 </ul>
-</li>
-<li>
-<p><strong>특징</strong></p>
 <ul>
-<li>모든 Enum은 클래스를 통해 내부적으로 정의됨
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Operator</span><span class="w"> </span><span class="p">{</span>
+<li><strong>장점</strong>
+    - C/C++ 과는 다르게 Java Enum은 클래스 처럼 변수, 메서드, 생성자를 추가할 수 있다
+    - 상태와 행위를 동시에 관리 가능하다!</li>
+</ul>
+<ul>
+<li><strong>특징</strong>
+    - 모든 Enum은 클래스를 통해 내부적으로 정의됨
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Operator</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">Plus</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">),</span><span class="w">      </span><span class="c1">// public static final Operator Plus = new Operator(&quot;+&quot;) 와 동일</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">Minus</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// public static final Operator Minus = new Operator(&quot;-&quot;) 와 동일</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">}</span><span class="w"> </span>
-</code></pre></div></li>
-<li>
-<p>모든 enum은 java.lang.Enum 클래스를 상속받음</p>
+</code></pre></div>
+    - 모든 enum은 java.lang.Enum 클래스를 상속받음
+        - 따라서 또다른 클래스를 enum에 상속할 수는 없다!<p>- 생성자는 항상 private!</p>
+<p>- Setter는 쓰지말자
+      - 컴파일 시에 필요한 상수를 모두 모았다는 전제하에 enum을 쓰는 것인데, 런타임에 수정할 구멍을 주면 의미가 없어서 그런 듯 하다.</p>
+</li>
+</ul>
 <ul>
-<li>따라서 또다른 클래스를 enum에 상속할 수는 없다!</li>
+<li><strong>제공 API</strong>
+    - values(): enum 안에 존재하는 모든 값 반환
+    - ordinal(): enum 상수 인덱스 값 반환
+    - valueOf(): 존재한다면 enum 상수의 스트링 값 반환</li>
 </ul>
-</li>
-<li>
-<p>생성자는 항상 private!</p>
-</li>
-<li>
-<p>Setter는 쓰지말자</p>
 <ul>
-<li>컴파일 시에 필요한 상수를 모두 모았다는 전제하에 enum을 쓰는 것인데, 런타임에 수정할 구멍을 주면 의미가 없어서 그런 듯 하다.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>제공 API</strong></p>
-<ul>
-<li>values(): enum 안에 존재하는 모든 값 반환</li>
-<li>ordinal(): enum 상수 인덱스 값 반환</li>
-<li>valueOf(): 존재한다면 enum 상수의 스트링 값 반환</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculator Enum 리팩토링</strong>
+<li><strong>Calculator Enum 리팩토링</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Operator</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">PLUS</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="nd">@Override</span>
@@ -23529,8 +23372,7 @@
 <a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Operator</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">operator</span><span class="p">).</span><span class="na">calculate</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Number</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Number</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
 <a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

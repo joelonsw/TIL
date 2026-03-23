@@ -22931,7 +22931,7 @@
 <h3 id="2023-04-13">2023-04-13<a class="headerlink" href="#2023-04-13" title="Permanent link">&para;</a></h3>
 <h2 id="angular">Angular 역사<a class="headerlink" href="#angular" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>AngularJS</strong></li>
+<li><strong>AngularJS</strong><ul>
 <li>Angular1 이라고도 불림</li>
 <li>2010년 출시</li>
 <li>JS 베이스 오픈소스 웹앱 프레임워크이며, 구글에 의해 개발됨</li>
@@ -22940,12 +22940,12 @@
 <li>model 바뀌면 view 바뀌는 거</li>
 </ul>
 </li>
-<li>
-<p>자스로 만들어짐</p>
+<li>자스로 만들어짐</li>
+</ul>
 </li>
-<li>
-<p><strong>Angular</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Angular</strong><ul>
 <li>Angular2+ 라고도 불림</li>
 <li>2016년 출시</li>
 <li>AngularJS를 완전히 갈아 엎은 것</li>
@@ -22958,10 +22958,12 @@
 <li>타스로 만들어짐</li>
 <li>AngularJS 보다 빠름</li>
 </ul>
+</li>
+</ul>
 <h2 id="angularjs-v150">AngularJS v1.5.0<a class="headerlink" href="#angularjs-v150" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=FlUCU13dJyo&amp;list=PL4cUxeGkcC9gsJS5QgFT2IvWIX78dV3_v&amp;index=1</em></li>
-<li><strong>Angular JS란?</strong></li>
+<li><strong>Angular JS란?</strong><ul>
 <li>MVC 스타일의 JS 프레임워크 for spa</li>
 <li>기능<ul>
 <li>2 way data binding</li>
@@ -22972,15 +22974,15 @@
 <li>many more...</li>
 </ul>
 </li>
-<li>
-<p>SPA</p>
-<ul>
+<li>SPA<ul>
 <li>Views, routing으로 뚝딱</li>
 </ul>
 </li>
-<li>
-<p><strong>Angular JS MVC</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Angular JS MVC</strong><ul>
 <li>Model<ul>
 <li>json, db</li>
 </ul>
@@ -22991,32 +22993,32 @@
 <li><code>&lt;html tag&gt; {{data}} &lt;/html tag&gt;</code></li>
 </ul>
 </li>
-<li>
-<p>Controller</p>
-<ul>
+<li>Controller<ul>
 <li>functionality of our views</li>
 <li>interaction model &lt;-&gt; view</li>
 <li>diff controllers for diff areas of application</li>
 </ul>
 </li>
-<li>
-<p><strong>2-way data binding</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>2-way data binding</strong><ul>
 <li>update model -&gt; update view</li>
-<li>
-<p>update view -&gt; update model</p>
+<li>update view -&gt; update model</li>
+</ul>
 </li>
-<li>
-<p><strong>Directives</strong></p>
+</ul>
+<ul>
+<li><strong>Directives</strong><ul>
+<li><em>참고: https://docs.angularjs.org/api/ng/directive</em></li>
+</ul>
 </li>
-<li>
-<p><em>참고: https://docs.angularjs.org/api/ng/directive</em></p>
-</li>
-<li>
-<p><strong>Modules</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Modules</strong><ul>
 <li>app.js 에서 제어하고자 하는 모듈을 만들어보자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 각각 모듈의 이름, 모듈의 디펜던시를 나타냄</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 각각 모듈의 이름, 모듈의 디펜던시를 나타냄</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">joelApp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;joelApp&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[]);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// configurations: 어플리케이션이 실행되기 전에 수행되는 설정들</span>
@@ -23028,16 +23030,16 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">// 컨트롤러 제어는 여기서 할 수 있음</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nx">joelApp</span><span class="p">.</span><span class="nx">controller</span>
 </code></pre></div></li>
-<li>
-<p>html 페이지에서 모듈로 제어될 친구들을 설정하여 지정해보자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">ng-app</span><span class="o">=</span><span class="s">&quot;joel-app&quot;</span><span class="p">&gt;</span>
+<li>html 페이지에서 모듈로 제어될 친구들을 설정하여 지정해보자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">ng-app</span><span class="o">=</span><span class="s">&quot;joel-app&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="cm">&lt;!-- joel app~~ --&gt;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Controllers</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Controllers</strong><ul>
 <li>app.js에서 controller를 만들 수 있음</li>
 <li>여기에서 MVC 패턴을 적용하자<ul>
 <li>View: HTML</li>
@@ -23046,29 +23048,28 @@
 </ul>
 </li>
 <li>controller에서 정의한 함수 안에서 $scope에 여러 js 객체를 저장할 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;NinjaController&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;NinjaController&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1">// scope HTML view &lt;-&gt; JS controller &lt;-&gt; Model Scope</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">$scope</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hey y;all&quot;</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">$scope</span><span class="p">.</span><span class="nx">ninjas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}]);</span>
 </code></pre></div></li>
-<li>
-<p>이후에 저장된 js 객체를 화면에 띄워주자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">ng-controller</span><span class="o">=</span><span class="s">&quot;NinjaController&quot;</span><span class="p">&gt;</span>
+<li>이후에 저장된 js 객체를 화면에 띄워주자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">ng-controller</span><span class="o">=</span><span class="s">&quot;NinjaController&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{message}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">ng-repeat</span><span class="o">=</span><span class="s">&quot;ninja in ninjas&quot;</span><span class="p">&gt;</span>{{ninja}}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>filters</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>filters</strong><ul>
 <li>태그 속성에 <code>|</code>를 활용해 필터링 기능을 만들 수 있음</li>
-<li>
-<p>혹은 템플릿 <code>{{}}</code> 자체에서 <code>|</code>를 통해 필터 기능 제공할 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">ng-controller</span><span class="o">=</span><span class="s">&quot;NinjaController&quot;</span><span class="p">&gt;</span>
+<li>혹은 템플릿 <code>{{}}</code> 자체에서 <code>|</code>를 통해 필터 기능 제공할 수 있음
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">ng-controller</span><span class="o">=</span><span class="s">&quot;NinjaController&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model</span><span class="o">=</span><span class="s">&quot;search&quot;</span> <span class="p">/&gt;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{message}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
@@ -23077,40 +23078,41 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ng-show &amp; ng-hide</strong> </p>
-</li>
+</ul>
+<ul>
+<li><strong>ng-show &amp; ng-hide</strong> <ul>
 <li>ng-show: 조건에 따라 보여주자 <code>ng-show="ninja.available"</code></li>
-<li>
-<p>ng-hide: 조건에 따라 숨기자 <code>ng-hide="ninja.available"</code></p>
+<li>ng-hide: 조건에 따라 숨기자 <code>ng-hide="ninja.available"</code></li>
+</ul>
 </li>
-<li>
-<p><strong>ng-click</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ng-click</strong><ul>
 <li>클릭을 함으로써 특정한 변수에 매핑을 할 수 있음 (함수라고 생각)</li>
 <li>컨트롤러와 인터랙션 가능</li>
-<li>
-<p>함수를 컨트롤러에 정의하고, 뷰에서 ng-click을 통해 해당 함수 사용하도록 하자</p>
+<li>함수를 컨트롤러에 정의하고, 뷰에서 ng-click을 통해 해당 함수 사용하도록 하자</li>
+</ul>
 </li>
-<li>
-<p><strong>ng-submit</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ng-submit</strong><ul>
 <li>form 만들고 submit 할 수 있도록 지원할 것!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">ng-submit</span><span class="o">=</span><span class="s">&quot;addNinja()&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">ng-submit</span><span class="o">=</span><span class="s">&quot;addNinja()&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">ng-model</span><span class="o">=</span><span class="s">&quot;newninja.name&quot;</span> <span class="p">/&gt;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;belt&quot;</span> <span class="na">ng-model</span><span class="o">=</span><span class="s">&quot;newninja.belt&quot;</span> <span class="p">/&gt;</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;rate&quot;</span> <span class="na">ng-model</span><span class="o">=</span><span class="s">&quot;newninja.rate&quot;</span> <span class="p">/&gt;</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Add new ninja&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 </code></pre></div></li>
-<li>
-<p>단! ng-controller 스코프 안에서 지지고 볶을 수 있도록 기억하자...!</p>
+<li>단! ng-controller 스코프 안에서 지지고 볶을 수 있도록 기억하자...!</li>
+</ul>
 </li>
-<li>
-<p><strong>views &amp; routes</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>views &amp; routes</strong><ul>
 <li>app.js 에서 컨피그를 정의해주자~
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">config</span><span class="p">([</span><span class="s1">&#39;$routeProvider&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">$routeProvider</span><span class="p">){</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nx">$routeProvider</span>
@@ -23126,30 +23128,29 @@
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span><span class="p">})</span>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="p">}]);</span>
 </code></pre></div></li>
-<li>
-<p>이때, when 절에서 controller를 정의해주면, 해당 (컴포넌트라 해야하나...)는 컨트롤러에 자동 매핑되어 ng-controller 안써줘도 됨!</p>
+<li>이때, when 절에서 controller를 정의해주면, 해당 (컴포넌트라 해야하나...)는 컨트롤러에 자동 매핑되어 ng-controller 안써줘도 됨!</li>
+</ul>
 </li>
-<li>
-<p><strong>Http 통신</strong></p>
-</li>
-<li>
-<p>app.js 컨트롤러 단에서 $http 모듈을 가져와서 사용해보자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;NinjaController&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;$http&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span><span class="w"> </span><span class="nx">$http</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>Http 통신</strong><ul>
+<li>app.js 컨트롤러 단에서 $http 모듈을 가져와서 사용해보자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;NinjaController&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;$http&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span><span class="w"> </span><span class="nx">$http</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;data/ninjas.json&#39;</span><span class="p">).</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">      </span><span class="nx">$scope</span><span class="p">.</span><span class="nx">ninjas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">ninjas</span><span class="p">)</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="p">});</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">}]);</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Custom Directives</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Custom Directives</strong><ul>
 <li>자기 맘대로 html 태그를 만들어 재사용 할 수 있다!</li>
 <li>해당 태그의 기능은 app.js에 넣어 정의해두도록 하자</li>
-<li>
-<p>아래 예시 맹키로다가 <code>&lt;random-ninja&gt;</code> 태그를 정의해 둘 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;randomNinja&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="kd">function</span><span class="p">(){</span>
+<li>아래 예시 맹키로다가 <code>&lt;random-ninja&gt;</code> 태그를 정의해 둘 수 있음
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;randomNinja&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="kd">function</span><span class="p">(){</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="c1">// E: element, A: Attiribute</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="nx">restrict</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;EA&#39;</span><span class="p">,</span>
@@ -23164,22 +23165,23 @@
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="p">};</span>
 <a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="p">}])</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&lt;</span><span class="nt">random-ninja</span> <span class="na">ninjas</span><span class="o">=</span><span class="s">&quot;ninjas&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;&#39;Random Ninja&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">random-ninja</span><span class="p">&gt;</span>
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&lt;</span><span class="nt">random-ninja</span> <span class="na">ninjas</span><span class="o">=</span><span class="s">&quot;ninjas&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;&#39;Random Ninja&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">random-ninja</span><span class="p">&gt;</span>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Animations</strong></p>
-</li>
-<li>angular-animate.min.js</li>
-<li>
-<p>css + js 조합으로 휘뚜루 마뚜루</p>
+</ul>
 <ul>
+<li><strong>Animations</strong><ul>
+<li>angular-animate.min.js</li>
+<li>css + js 조합으로 휘뚜루 마뚜루<ul>
 <li>css에서 id/class 선택하고 <code>.ng-enter.ng-enter-active</code> 를 만들자</li>
 </ul>
 </li>
-<li>
-<p><strong>Form Validation</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Form Validation</strong><ul>
 <li>Form classes<ul>
 <li>ng-pristine: form/input 아직 안쓰임 =&gt; $pristine (true/false)</li>
 <li>ng-dirty: form/input 쓰임 =&gt; $dirty</li>
@@ -23196,6 +23198,8 @@
 </li>
 <li>CSS를 통한 UI 제어<ul>
 <li>ng-invalid가 생기면 border를 2px solid red로 박아버린다던지...</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

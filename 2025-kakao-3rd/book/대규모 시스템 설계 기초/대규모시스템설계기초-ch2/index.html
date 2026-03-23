@@ -22922,16 +22922,14 @@
 
 <h2 id="ch2">대규모 시스템 설계 기초 ch2. 계략적인 규모 추정<a class="headerlink" href="#ch2" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>추정치를 계산하는 행위로써, 어떤 설계가 요구사항에 부합할 것인지 보기 위한 것</p>
+<li><strong>개요</strong><ul>
+<li>추정치를 계산하는 행위로써, 어떤 설계가 요구사항에 부합할 것인지 보기 위한 것</li>
+</ul>
 </li>
-<li>
-<p><strong>2의 제곱수</strong></p>
-</li>
-<li>
-<p>제대로된 계산 결과를 얻으려면 데이터 볼륨의 단위를 2의 제곱수로 표현한 결과를 알자</p>
+</ul>
 <ul>
+<li><strong>2의 제곱수</strong><ul>
+<li>제대로된 계산 결과를 얻으려면 데이터 볼륨의 단위를 2의 제곱수로 표현한 결과를 알자<ul>
 <li>2^10 = 1KB</li>
 <li>2^20 = 1MB</li>
 <li>2^30 = 1GB</li>
@@ -22939,9 +22937,11 @@
 <li>2^50 = 1PB</li>
 </ul>
 </li>
-<li>
-<p><strong>모든 프로그래머가 알아야 하는 응답지연 값</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>모든 프로그래머가 알아야 하는 응답지연 값</strong><ul>
 <li>2020년 기준 연산 처리속도)<ul>
 <li>L1 캐시 참조: 1ns</li>
 <li>L2 캐시 참조: 4ns</li>
@@ -22958,9 +22958,7 @@
 <li>CA - 네덜란드 패킷 왕복 지연시간: 150ms</li>
 </ul>
 </li>
-<li>
-<p>Tip)</p>
-<ul>
+<li>Tip)<ul>
 <li>메모리는 빠르지만 디스크는 아직도 느리다</li>
 <li>디스크 탐색은 가능한 한 피하라</li>
 <li>단순한 압축 알고리즘은 빠르다</li>
@@ -22968,50 +22966,62 @@
 <li>데이터 센터는 보통 여러 지역에 분산되어 있고, 센터들 간에 데이터를 주고 받는데는 시간이 걸린다. </li>
 </ul>
 </li>
-<li>
-<p><strong>가용성에 관련된 수치들</strong></p>
+</ul>
 </li>
-<li>가용률은 관습적으로 9를 사용해 uptime을 표현. 99.999% =&gt; 하루 장애시간 864ms</li>
-<li>
-<p>QPS/저장소 요구량 측정 문제)</p>
+</ul>
 <ul>
-<li>조건</li>
+<li><strong>가용성에 관련된 수치들</strong><ul>
+<li>가용률은 관습적으로 9를 사용해 uptime을 표현. 99.999% =&gt; 하루 장애시간 864ms</li>
+<li>QPS/저장소 요구량 측정 문제)<ul>
+<li>조건<ul>
 <li>서비스의 MAU, DAU</li>
 <li>Active User 당 하루 평균 x건의 행동 y를 한다.</li>
 <li>행동 y 중 특수한 행동은 z% 이다.</li>
 <li>데이터는 a년간 보관된다.</li>
-<li>QPS 구해보기</li>
+</ul>
+</li>
+<li>QPS 구해보기<ul>
 <li>행동 y는 2건의 Query</li>
 <li>행동 y 중 특수한 행동은 3건의 Query</li>
 <li>총 행동 y = (2 * (100 - z)/100) + (3 * z/100) Query로 산정...</li>
 <li>DAU * x * {(2 * (100 - z)/100) + (3 * z/100)} = QPS</li>
 <li>피크 시간대에 데이터 분포가 ~~ 한 경우가 있으니 해당 시간대엔 QPS * 3 =&gt; Max QPS</li>
-<li>저장소 요구량</li>
+</ul>
+</li>
+<li>저장소 요구량<ul>
 <li>평균 x건 행동에 대한 데이터 크기 (200byte)</li>
 <li>DAU * x * 200byte = 하루에 저장되는 데이터 크기 =&gt; 5년치 계산</li>
 </ul>
 </li>
-<li>
-<p><strong>팁</strong></p>
+</ul>
 </li>
-<li>
-<p>결국 논리적 사고력이 중요하다. 문제를 풀어나가는 절차. 올바른 절차 &gt; 정확한 계산</p>
+</ul>
+</li>
+</ul>
 <ul>
+<li><strong>팁</strong><ul>
+<li>결국 논리적 사고력이 중요하다. 문제를 풀어나가는 절차. 올바른 절차 &gt; 정확한 계산<ul>
 <li>숫자/시간은 근사치여도 괜찮다</li>
 <li>가정을 적어두자</li>
 <li>단위를 기록하자</li>
 <li>QPS 측정하는 연습해보자</li>
 </ul>
 </li>
-<li>
-<p><strong>질문</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>질문</strong><ul>
 <li>각자 맡고 있는 모듈의 QPS를 한번 논리적으로 추론해볼까요?</li>
+</ul>
+</li>
 </ul>
 <h3 id="_1">스터디<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>L1, L2, L3 캐시 - CPU 칩 안에 내장</li>
+<li>L1, L2, L3 캐시 - CPU 칩 안에 내장<ul>
 <li>https://github.com/jinsusong/CS-Study/issues/22</li>
+</ul>
+</li>
 </ul>
 
 

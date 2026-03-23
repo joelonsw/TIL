@@ -22931,75 +22931,42 @@
 <h3 id="2021-05-22">2021-05-22<a class="headerlink" href="#2021-05-22" title="Permanent link">&para;</a></h3>
 <h2 id="spring-3">토비의 Spring [3장. 템플릿]<a class="headerlink" href="#spring-3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>핵심 내용</strong></p>
-<ul>
-<li>
-<p>[템플릿] </p>
-<ul>
-<li>"변경이 거의 일어나지 않으며 일정한 패턴으로 유지되는 특성"을 가진 부분을,<br />
-"자유롭게 변경되는 성질을 가진 부분"으로부터 독립시켜서 효과적으로 활용할 수 있도록 하는 방법</li>
-</ul>
-</li>
-<li>
-<p>[JDBC]</p>
-<ul>
-<li>일반적으로 서버에서는 제한된 갯수의 DB 커넥션을 만들어서 재사용 가능한 풀로 관리<ul>
-<li>미처 반환되지 못한 Connection이 계속 쌓이면 리소스 모자라다는 오류 발생</li>
-<li>try/catch/finally 구문을 통해 리소스 반환</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>[전략 패턴을 통한 JDBC 구현]</p>
-<ul>
-<li>StatementStrategy 인터페이스를 작성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">StatementStrategy</span><span class="w"> </span><span class="p">{</span>
+<li><strong>핵심 내용</strong>
+    - [템플릿] 
+        - "변경이 거의 일어나지 않으며 일정한 패턴으로 유지되는 특성"을 가진 부분을,<br />
+        "자유롭게 변경되는 성질을 가진 부분"으로부터 독립시켜서 효과적으로 활용할 수 있도록 하는 방법<p>- [JDBC]
+      - 일반적으로 서버에서는 제한된 갯수의 DB 커넥션을 만들어서 재사용 가능한 풀로 관리
+          - 미처 반환되지 못한 Connection이 계속 쌓이면 리소스 모자라다는 오류 발생
+          - try/catch/finally 구문을 통해 리소스 반환</p>
+<p>- [전략 패턴을 통한 JDBC 구현]
+      - StatementStrategy 인터페이스를 작성
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">StatementStrategy</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="nf">makePreparedStatement</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>해당 인터페이스를 구현하여 구체적인 SQLStatement를 작성</li>
-<li>하지만 전략 사용자가 직접 전략을 선택해야함<ul>
-<li>전략 패턴 정신에 위배</li>
-</ul>
+</code></pre></div>
+      - 해당 인터페이스를 구현하여 구체적인 SQLStatement를 작성
+      - 하지만 전략 사용자가 직접 전략을 선택해야함
+          - 전략 패턴 정신에 위배
+      - 익명 클래스를 통한 리팩토링 적용</p>
+<p>- [스프링 DI]
+      - DI의 근본... 인터페이스를 사이에 두고 클래스 레벨에서는 의존 관계 고정 X, 런타임 주입 O
+      - 하지만 UserDao와 JdbcContext는 각각 클래스임에도 DI 구조를 가져도 괜찮다
+          1. Singleton으로써 Spring Container의 관리를 받을 수 있음
+          2. JdbcContext가 DI를 통해 여러 Bean에서 쓰일 수 있음
+          3. UserDao와 JdbcContext는 애초에 매우 긴밀한 관계로 태어남
+              - 강한 응집도를 가져서 어차피 바꿀라면 다 바꿔야함</p>
+<p>- [템플릿/콜백 패턴]
+      - "전략 패턴"과 "DI의 장점"을 "내부 클래스 사용 전략"과 결합한 사용법
+          - 템플릿: 전략 패턴의 컨텍스트 <em>(전략 사용자)</em> 
+          - 콜백: 내부 클래스로 만들어지는 오브젝트
+      - 매번 메서드 단위로 사용할 오브젝트를 새롭게 전달받음
+      - try/catch/finally 블록을 사용하는 코드는 템플릿/콜백 패턴의 후보
+      - 제네릭스 응용을 통해 리턴 값을 갖는 템플릿/콜백 패턴 구현 가능      <br />
+      - 스프링은 JDBC 코드 작성을 위해 JdbcTemplate을 기반으로 하는 다양한 템플릿과 콜백을 제공</p>
 </li>
-<li>익명 클래스를 통한 리팩토링 적용</li>
 </ul>
-</li>
-<li>
-<p>[스프링 DI]</p>
 <ul>
-<li>DI의 근본... 인터페이스를 사이에 두고 클래스 레벨에서는 의존 관계 고정 X, 런타임 주입 O</li>
-<li>하지만 UserDao와 JdbcContext는 각각 클래스임에도 DI 구조를 가져도 괜찮다<ol>
-<li>Singleton으로써 Spring Container의 관리를 받을 수 있음</li>
-<li>JdbcContext가 DI를 통해 여러 Bean에서 쓰일 수 있음</li>
-<li>UserDao와 JdbcContext는 애초에 매우 긴밀한 관계로 태어남<ul>
-<li>강한 응집도를 가져서 어차피 바꿀라면 다 바꿔야함</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p>[템플릿/콜백 패턴]</p>
-<ul>
-<li>"전략 패턴"과 "DI의 장점"을 "내부 클래스 사용 전략"과 결합한 사용법<ul>
-<li>템플릿: 전략 패턴의 컨텍스트 <em>(전략 사용자)</em> </li>
-<li>콜백: 내부 클래스로 만들어지는 오브젝트</li>
-</ul>
-</li>
-<li>매번 메서드 단위로 사용할 오브젝트를 새롭게 전달받음</li>
-<li>try/catch/finally 블록을 사용하는 코드는 템플릿/콜백 패턴의 후보</li>
-<li>제네릭스 응용을 통해 리턴 값을 갖는 템플릿/콜백 패턴 구현 가능        </li>
-<li>스프링은 JDBC 코드 작성을 위해 JdbcTemplate을 기반으로 하는 다양한 템플릿과 콜백을 제공</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>계산기 템플릿/콜백 실습</strong>
+<li><strong>계산기 템플릿/콜백 실습</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//Callback Interface</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">LineCallback</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">doSomethingWithLine</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
@@ -23027,20 +22994,16 @@
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
 <a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">    </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">br</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">br</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
 <a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="p">}</span>
-</code></pre></div></p>
-<ul>
-<li>실행 순서<ol>
-<li>calcSum에서 sumCallback이라는, LineCallback 인터페이스의 클래스 구현체를 생성</li>
-<li>lineReadTemplate으로 sumCallback을 전달</li>
-<li>lineReadTemplate에서는 자원 할당을 하며 필요한 작업 시작</li>
-<li>sumCallback을 호출하여 익명 클래스에서 doSomethingWithLine에 대응하는 작업 수행</li>
-<li>모든 처리가 끝나면 Template 작업 결과 반환</li>
-</ol>
-</li>
+</code></pre></div>
+    - 실행 순서
+        1. calcSum에서 sumCallback이라는, LineCallback 인터페이스의 클래스 구현체를 생성
+        2. lineReadTemplate으로 sumCallback을 전달
+        3. lineReadTemplate에서는 자원 할당을 하며 필요한 작업 시작
+        4. sumCallback을 호출하여 익명 클래스에서 doSomethingWithLine에 대응하는 작업 수행
+        5. 모든 처리가 끝나면 Template 작업 결과 반환</li>
 </ul>
-</li>
-<li>
-<p><strong>JdbcTemplate 살펴보기</strong>
+<ul>
+<li><strong>JdbcTemplate 살펴보기</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">//UserDao.deleteAll()</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">jdbcTemplate</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="s">&quot;delete from users&quot;</span><span class="p">);</span>
@@ -23110,40 +23073,29 @@
 <a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a><span class="w">        </span><span class="n">DataSourceUtils</span><span class="p">.</span><span class="na">releaseConnection</span><span class="p">(</span><span class="n">con</span><span class="p">,</span><span class="w"> </span><span class="n">getDataSource</span><span class="p">());</span>
 <a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="jdbc">JDBC<a class="headerlink" href="#jdbc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://kouzie.github.io/jdbc/JDBC.-1%EC%9D%BC%EC%B0%A8/#jdbc</em></li>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>Java Database Connectivity의 약자로 다양한 DB에 연결/작업을 위한 자바 표준 interface</li>
+<li><strong>정의</strong>
+    - Java Database Connectivity의 약자로 다양한 DB에 연결/작업을 위한 자바 표준 interface</li>
 </ul>
-</li>
-<li>
-<p><strong>JDBC Interface</strong></p>
 <ul>
-<li>ORACLE, MongoDB, Mysql, MSSQL 등 각종 다른 DBMS에 접근시 각기 다른 종류의 메서드 필요</li>
-<li>JDBC 인터페이스로 모든 DB에 같은 메서드로 연동하여 쿼리 </li>
-<li>해당 JDBC 인터페이스를 구현한 클래스들을 DB 회사에서 jar 파일로 배포</li>
+<li><strong>JDBC Interface</strong>
+    - ORACLE, MongoDB, Mysql, MSSQL 등 각종 다른 DBMS에 접근시 각기 다른 종류의 메서드 필요
+    - JDBC 인터페이스로 모든 DB에 같은 메서드로 연동하여 쿼리 
+    - 해당 JDBC 인터페이스를 구현한 클래스들을 DB 회사에서 jar 파일로 배포</li>
 </ul>
-</li>
-<li>
-<p><strong>JDBC Driver Manager</strong></p>
 <ul>
-<li>DriverManager 클래스를 통해 DB 접속</li>
-<li>프로그램 -&gt; DriverManager -&gt; JDBC Interface -&gt; JDBC Driver -&gt; DB</li>
-<li>Connection 순서<ol>
-<li>Class.forName()으로 JDBC 드라이버 메모리에 로딩</li>
-<li>Connection 객체 생성</li>
-<li>필요한 작업</li>
-<li>연결 종료</li>
-</ol>
-</li>
-</ul>
-</li>
+<li><strong>JDBC Driver Manager</strong>
+    - DriverManager 클래스를 통해 DB 접속
+    - 프로그램 -&gt; DriverManager -&gt; JDBC Interface -&gt; JDBC Driver -&gt; DB
+    - Connection 순서
+        1. Class.forName()으로 JDBC 드라이버 메모리에 로딩
+        2. Connection 객체 생성
+        3. 필요한 작업
+        4. 연결 종료</li>
 </ul>
 
 

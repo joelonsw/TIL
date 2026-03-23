@@ -22953,136 +22953,86 @@
 <h3 id="2021-07-18">2021-07-18<a class="headerlink" href="#2021-07-18" title="Permanent link">&para;</a></h3>
 <h2 id="oauth">생활코딩 OAuth<a class="headerlink" href="#oauth" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><em>참고: https://opentutorials.org/course/3405</em></p>
-</li>
-<li>
-<p><strong>개요</strong></p>
+<li><em>참고: https://opentutorials.org/course/3405</em></li>
+</ul>
 <ul>
-<li>사용자 -&gt; 서비스 -&gt; Google 캘린더에 기록<ul>
-<li>사용자의 id/pw를 받아서 서비스가 기록해주기<ul>
-<li>모두가 불행해지는 지름길</li>
+<li><strong>개요</strong>
+    - 사용자 -&gt; 서비스 -&gt; Google 캘린더에 기록
+        - 사용자의 id/pw를 받아서 서비스가 기록해주기
+            - 모두가 불행해지는 지름길
+    - OAuth를 통해 극복!
+        - 사용자의 요청에 따라 accessToken을 Google이 발급해줌
+        - accessToken을 서비스가 넘겨받음
+        - accessToken을 사용하여 서비스가 Google이 허락한 범위 내에서 기능 처리 뚝딱</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>OAuth를 통해 극복!<ul>
-<li>사용자의 요청에 따라 accessToken을 Google이 발급해줌</li>
-<li>accessToken을 서비스가 넘겨받음</li>
-<li>accessToken을 사용하여 서비스가 Google이 허락한 범위 내에서 기능 처리 뚝딱</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>역할</strong></p>
 <ul>
-<li>Resource Owner (user)</li>
-<li>Client (서비스)</li>
-<li>Resource Server (Google) <ul>
-<li>Authorization Server (인증 전담 서버) 포함</li>
+<li><strong>역할</strong>
+    - Resource Owner (user)
+    - Client (서비스)
+    - Resource Server (Google) 
+        - Authorization Server (인증 전담 서버) 포함</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>등록</strong></p>
 <ul>
-<li>Client --[register]--&gt; Resource Server<ul>
-<li>[register]<ul>
-<li>Client ID, Client Secret, Authorized redirect URIs (https://client/callback)</li>
+<li><strong>등록</strong>
+    - Client --[register]--&gt; Resource Server
+        - [register]
+            - Client ID, Client Secret, Authorized redirect URIs (https://client/callback)
+        - 구글님! 저 당신의 OAuth 서비스를 쓸려고 합니다. 
+        - 우리 서비스는 이런 이름을 가지고 있고, 이런 URL을 사용해요. 
+        - 인증 다 해주시고 https://client/callback으로 요청 주세요!</li>
 </ul>
-</li>
-<li>구글님! 저 당신의 OAuth 서비스를 쓸려고 합니다. </li>
-<li>우리 서비스는 이런 이름을 가지고 있고, 이런 URL을 사용해요. </li>
-<li>인증 다 해주시고 https://client/callback으로 요청 주세요!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Resource Owner의 승인</strong></p>
 <ul>
-<li>이제 Resource Owner가 우리 서비스 들어와서 구글로 로그인 하기 클릭했어</li>
-<li>그러면 우리 서비스에서 구글에게 요청을 보내줘야해<ul>
-<li>https://resource.server?client_id=1&amp;scope=B,C&amp;redirect_uri=https://client/callback<ul>
-<li>발급 받은 client_id : 1</li>
-<li>사용하고자 하는 기능 : B, C</li>
-<li>리다이렉트 할 URI : https://client/callback</li>
+<li><strong>Resource Owner의 승인</strong>
+    - 이제 Resource Owner가 우리 서비스 들어와서 구글로 로그인 하기 클릭했어
+    - 그러면 우리 서비스에서 구글에게 요청을 보내줘야해
+        - https://resource.server?client_id=1&amp;scope=B,C&amp;redirect_uri=https://client/callback
+            - 발급 받은 client_id : 1
+            - 사용하고자 하는 기능 : B, C
+            - 리다이렉트 할 URI : https://client/callback
+    - 이제 Resource Owner가 구글에 로그인하면,,,
+        - 구글에서 user_id = 1이, 기능 B,C에 대해 나의 서비스에서 접근 가능하도록 요청했다 기록</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>이제 Resource Owner가 구글에 로그인하면,,,<ul>
-<li>구글에서 user_id = 1이, 기능 B,C에 대해 나의 서비스에서 접근 가능하도록 요청했다 기록</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Resource Server의 승인</strong></p>
 <ul>
-<li>Resource Server는 Authorization_Code를 발급함</li>
-<li>Resource Owner에게 https://client/callback?code=Authorization_Code 로 리다이렉트 보내라고 지시</li>
-<li>Resource Owner는 자기도 모르게 우리 서비스에 해당 요청 보냄</li>
-<li>이제 우리 서비스에서 Resource Server에 직접 접근한다!<ul>
-<li>https://resource.server/token?grant_type=authorization_code&amp;code=3&amp;redirect_uri=https://client/callback&amp;client_id=1&amp;client_secret=2</li>
+<li><strong>Resource Server의 승인</strong>
+    - Resource Server는 Authorization_Code를 발급함
+    - Resource Owner에게 https://client/callback?code=Authorization_Code 로 리다이렉트 보내라고 지시
+    - Resource Owner는 자기도 모르게 우리 서비스에 해당 요청 보냄
+    - 이제 우리 서비스에서 Resource Server에 직접 접근한다!
+        - https://resource.server/token?grant_type=authorization_code&amp;code=3&amp;redirect_uri=https://client/callback&amp;client_id=1&amp;client_secret=2
+    - 요청한 정보가 다 맞다면 이제 Access Token 발급해주자!</li>
 </ul>
-</li>
-<li>요청한 정보가 다 맞다면 이제 Access Token 발급해주자!</li>
-</ul>
-</li>
-<li>
-<p><strong>Access Token</strong></p>
 <ul>
-<li>Resource Server랑 서비스에서 Authorization_Code를 지움!</li>
-<li>Resource Server가 AccessToken 발급하고, 서비스에게 넘겨줌!</li>
-<li>Access Token을 이제 HTTP 헤더 에다가 끼워서 넣어주세요~</li>
+<li><strong>Access Token</strong>
+    - Resource Server랑 서비스에서 Authorization_Code를 지움!
+    - Resource Server가 AccessToken 발급하고, 서비스에게 넘겨줌!
+    - Access Token을 이제 HTTP 헤더 에다가 끼워서 넣어주세요~</li>
 </ul>
-</li>
-<li>
-<p><strong>Refresh Token</strong></p>
 <ul>
-<li>Access Token은 수명이 있어!</li>
-<li>그래서 Resource Server가 처음에 Access Token이랑 Refresh Token을 같이 줘<ul>
-<li>Access Token이 Invalid라면 Refresh Token으로 찔러서 새로운 Access Token 받아!</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Refresh Token</strong>
+    - Access Token은 수명이 있어!
+    - 그래서 Resource Server가 처음에 Access Token이랑 Refresh Token을 같이 줘
+        - Access Token이 Invalid라면 Refresh Token으로 찔러서 새로운 Access Token 받아!</li>
 </ul>
 <h2 id="spring-restdocs">Spring RestDocs<a class="headerlink" href="#spring-restdocs" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://techblog.woowahan.com/2597/</em></li>
-<li>
-<p><strong>RestDocs vs Swagger</strong></p>
+<li><strong>RestDocs vs Swagger</strong>
+    - RestDocs 장점
+        - Production 코드 영향 X
+        - 테스트 코드 성공 시 문서작성 완료
+    - RestDocs 단점
+        - 적용하기 어려움</li>
+</ul>
 <ul>
-<li>RestDocs 장점<ul>
-<li>Production 코드 영향 X</li>
-<li>테스트 코드 성공 시 문서작성 완료</li>
+<li><strong>MockMvc vs RestAssured</strong>
+    - MockMvc를 통해 <code>@WebMvcTest</code>로 테스트 수행하자
+        - Controller Layer만 테스트함
+    - Spring RestDocs를 통해 문서 작성하기엔 MockMvc가 더 좋음</li>
 </ul>
-</li>
-<li>RestDocs 단점<ul>
-<li>적용하기 어려움</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>MockMvc vs RestAssured</strong></p>
 <ul>
-<li>MockMvc를 통해 <code>@WebMvcTest</code>로 테스트 수행하자<ul>
-<li>Controller Layer만 테스트함</li>
-</ul>
-</li>
-<li>Spring RestDocs를 통해 문서 작성하기엔 MockMvc가 더 좋음</li>
-</ul>
-</li>
-<li>
-<p><strong>build.gradle 살펴보기</strong></p>
-<ul>
-<li>junit, MockMvc(<code>@WebMvcTeat</code>), asciiDoc을 통해 최소한의 라이브러리로 문서화 제공 가능
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>buildscript {
+<li><strong>build.gradle 살펴보기</strong>
+    - junit, MockMvc(<code>@WebMvcTeat</code>), asciiDoc을 통해 최소한의 라이브러리로 문서화 제공 가능
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>buildscript {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    ext {
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        springBootVersion = &#39;2.1.1.RELEASE&#39;
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    }
@@ -23132,12 +23082,10 @@
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>}
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>기능 살펴보기</strong></p>
 <ul>
-<li>getDocumentRequest() 로 호스트 이름을 바꿔주자!ㄴ
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+<li><strong>기능 살펴보기</strong>
+    - getDocumentRequest() 로 호스트 이름을 바꿔주자!ㄴ
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@AutoConfigureRestDocs</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nd">@MockBean</span><span class="p">(</span><span class="n">JpaMetamodelMappingContext</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ControllerTest</span><span class="w"> </span><span class="p">{</span>
@@ -23181,35 +23129,23 @@
 <a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="http-redirect">HTTP Redirect<a class="headerlink" href="#http-redirect" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://dololak.tistory.com/147</em></li>
 <li><em>참고 2: https://mangkyu.tistory.com/51</em></li>
-<li><strong>리다이렉트란?</strong><ul>
-<li>웹서버는 HTTP 응답 상태코드를 302로 보내고, 헤더 중 Location 값으로 리다이렉트 되어야 할 주소 설정해 리턴</li>
-</ul>
-</li>
-<li><strong>Forward vs Redirect</strong><ul>
-<li>Forward<ul>
-<li>브라우저는 다른 페이지로 이동한지 몰라</li>
-<li>브라우저에는 최초 호출한 URL 표시되고, 이동한 URL의 정보 확인 X</li>
-<li>현재 실행중인 페이지와 forward에 의해 호출될 페이지는 Request, Response 객체 공유함<ul>
-<li>이동할 URL로 요청정보를 그대로 전달</li>
-<li>사용자가 최초로 요청한 요청정보는 다음 URL에서도 유효</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Redirect<ul>
-<li>웹 브라우저에게 다른 페이지로 이동하라고 명령</li>
-<li>URL을 지시된 주소로 바꾸고 이동</li>
-<li>새로운 Request, Response 객체 생성</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>리다이렉트란?</strong>
+    - 웹서버는 HTTP 응답 상태코드를 302로 보내고, 헤더 중 Location 값으로 리다이렉트 되어야 할 주소 설정해 리턴</li>
+<li><strong>Forward vs Redirect</strong>
+    - Forward
+        - 브라우저는 다른 페이지로 이동한지 몰라
+        - 브라우저에는 최초 호출한 URL 표시되고, 이동한 URL의 정보 확인 X
+        - 현재 실행중인 페이지와 forward에 의해 호출될 페이지는 Request, Response 객체 공유함
+            - 이동할 URL로 요청정보를 그대로 전달
+            - 사용자가 최초로 요청한 요청정보는 다음 URL에서도 유효
+    - Redirect
+        - 웹 브라우저에게 다른 페이지로 이동하라고 명령
+        - URL을 지시된 주소로 바꾸고 이동
+        - 새로운 Request, Response 객체 생성</li>
 </ul>
 
 

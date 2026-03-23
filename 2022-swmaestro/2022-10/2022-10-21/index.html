@@ -22999,7 +22999,7 @@
 <ul>
 <li><em>참고: https://parkadd.tistory.com/127</em></li>
 <li><em>참고: https://parkadd.tistory.com/128</em></li>
-<li><strong>MySQL Replication 장점</strong></li>
+<li><strong>MySQL Replication 장점</strong><ul>
 <li>Scale Out Solution<ul>
 <li>부하 분산을 통한 성능 향상</li>
 <li>모든 write는 source 서버에서</li>
@@ -23010,34 +23010,38 @@
 <li>replica 서버는 replication 일시 중지 할 수 있어, 원본 데이터 손상 없이 백업 가능</li>
 </ul>
 </li>
-<li>
-<p>데이버 분석</p>
-<ul>
+<li>데이버 분석<ul>
 <li>데이터 분석에 대한 부하를 replication에 주어 서비스 성능에 영향 최소화</li>
 </ul>
 </li>
-<li>
-<p><strong>MySQL Replication 사전 설정</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>MySQL Replication 사전 설정</strong><ul>
 <li>Replication 사용하도록 source 서버 구성하자 <ul>
-<li>binlog 활성화 여부</li>
+<li>binlog 활성화 여부<ul>
 <li>my.cnf에 해당 설정을 ON으로 뒀는지 확인</li>
-<li>고유한 서버 ID 있는지 여부</li>
+</ul>
+</li>
+<li>고유한 서버 ID 있는지 여부<ul>
 <li>source 서버와 replica 서버의 id가 각각 달라야함</li>
 </ul>
 </li>
-<li>
-<p>Replication을 위한 유저 생성</p>
-<ul>
+</ul>
+</li>
+<li>Replication을 위한 유저 생성<ul>
 <li>각 replica 서버는 MySQL "사용자 이름"과 "비밀번호"를 통해 source 서버에 연결</li>
 <li>replica 서버가 연결하는데 사용할 수 있는 사용자 계정이 source 서버에 있어야 함</li>
 </ul>
 </li>
-<li>
-<p><strong>Spring Replication 설정</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Spring Replication 설정</strong><ul>
 <li>yml 작성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">spring</span><span class="p">:</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">spring</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">datasource</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nt">hikari</span><span class="p">:</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">            </span><span class="nt">source</span><span class="p">:</span>
@@ -23055,9 +23059,7 @@
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">                        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replicapw</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">                        </span><span class="nt">jdbc-url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:mysql://localhost:33308/...생략...</span>
 </code></pre></div></li>
-<li>
-<p>Spring에서 2개 이상의 DB 쓰기 위해서는 DataSource를 직접 생성해줄 것</p>
-<ul>
+<li>Spring에서 2개 이상의 DB 쓰기 위해서는 DataSource를 직접 생성해줄 것<ul>
 <li>HikariDataSource 등을 통해 구현할 수 있음
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Component</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@ConfigurationProperties</span><span class="p">(</span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;spring.datasource.hikari.replica&quot;</span><span class="p">)</span>
@@ -23092,13 +23094,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>RoutingDataSource 구현체 생성</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>RoutingDataSource 구현체 생성</strong><ul>
 <li><code>@Transactional(readOnly = false)</code> -&gt; Master</li>
-<li>
-<p><code>@Transactional(readOnly = true)</code> -&gt; Slave
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Slf4j</span>
+<li><code>@Transactional(readOnly = true)</code> -&gt; Slave
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Slf4j</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReplicationRoutingDataSource</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractRoutingDataSource</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DATASOURCE_SOURCE_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;source&quot;</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -23135,18 +23138,19 @@
 <a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>DatabaseConfig</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DatabaseConfig</strong><ul>
 <li>DataSource 설정</li>
 <li><code>@Configuration</code> : 컨테이너에 빈 등록</li>
 <li><code>@EnableAutoConfiguration</code> : 어플리케이션 컨텍스트의 자동 구성 활성화</li>
 <li><code>@EnableTransactionManagement</code> : Spring의 어노테이션 기반 트랜잭션 관리 기능 활성화</li>
 <li><code>@EnableConfigurationProperties</code> : <code>@ConfigurationProperties</code></li>
 <li><code>@EnableJpaRepositories</code> : JPA repository 활성화
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Configuration</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@EnableAutoConfiguration</span><span class="p">(</span><span class="n">exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">DataSourceAutoConfiguration</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nd">@EnableTransactionManagement</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nd">@EnableConfigurationProperties</span><span class="p">(</span><span class="n">Replicas</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
@@ -23200,18 +23204,20 @@
 <a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="route-53">Route 53<a class="headerlink" href="#route-53" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://brunch.co.kr/@topasvga/49</em></li>
 <li><em>참고: https://aws.amazon.com/ko/route53/</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>AWS에서 제공하는 DNS</li>
-<li>
-<p>도메인을 IP로 변환하는 일 수행</p>
+<li>도메인을 IP로 변환하는 일 수행</li>
+</ul>
 </li>
-<li>
-<p><strong>Route 53 기능</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Route 53 기능</strong><ul>
 <li>DNS + 모니터링 + L4 + GSLB 기능 제공</li>
 <li>[모니터링]<ul>
 <li>특정 포트에 대해 모니터링 가능</li>
@@ -23221,19 +23227,19 @@
 <li>네트워크 장비 넷스케일러, 파운드리, 파이오링크와 같이 Failover 기능이 있음</li>
 </ul>
 </li>
-<li>
-<p>[GSLB]</p>
-<ul>
+<li>[GSLB]<ul>
 <li>Global Server Load Balancing</li>
-<li>특정 IDC에 의존적이지 않게, 지역과 나라에 무관한 Load Balancing 가능</li>
-<li>Failover</li>
-<li>Act-Act: 트래픽 조절</li>
-<li>Geolocation: 응답 속도를 빠르게 </li>
+<li>특정 IDC에 의존적이지 않게, 지역과 나라에 무관한 Load Balancing 가능
+1. Failover
+2. Act-Act: 트래픽 조절
+3. Geolocation: 응답 속도를 빠르게 </li>
 </ul>
 </li>
-<li>
-<p><strong>이점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>이점</strong><ul>
 <li>높은 가용성과 안정성 : Amazon Route 53</li>
 <li>유연성 : 지리적 위치, 지연 시간 등의 범주를 기반으로 트래픽 라우팅 </li>
 <li>다른 AWS 서비스와의 연계 </li>
@@ -23244,91 +23250,103 @@
 <li>확장성 : Route53 사용자 개입 없이도 대규모 쿼리 볼륨 자동확장</li>
 <li>하이브리드 클라우드 단순화</li>
 </ul>
+</li>
+</ul>
 <h2 id="alb">ALB<a class="headerlink" href="#alb" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://no-easy-dev.tistory.com/entry/AWS-ALB%EC%99%80-NLB-%EC%B0%A8%EC%9D%B4%EC%A0%90</em></li>
 <li><em>참고: https://docs.aws.amazon.com/ko_kr/elasticloadbalancing/latest/application/introduction.html</em></li>
 <li><img alt="" src="../../images/2022-10-21-alb.png" /></li>
-<li><strong>설명</strong></li>
+<li><strong>설명</strong><ul>
 <li>클라이언트에 대한 단일 접점 역할 수행</li>
-<li>
-<p><strong>여러 가용 영역</strong>에서 EC2 인스턴스 같은 여러 대상에 <strong>수신 어플리케이션 트래픽</strong>을 분산</p>
+<li><strong>여러 가용 영역</strong>에서 EC2 인스턴스 같은 여러 대상에 <strong>수신 어플리케이션 트래픽</strong>을 분산</li>
+</ul>
 </li>
-<li>
-<p><strong>개요</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>개요</strong><ol>
 <li>L7단의 로드밸런서를 지원</li>
 <li>HTTP/HTTPS 프로토콜의 헤더를 보고 적절한 패킷으로 전송</li>
 <li>IP + 포트 번호 + 패킷 내용 보고 스위칭 제공</li>
 <li>IP 주소가 변동되기에 Client에서 Access할 ELB의 DNS Name 이용</li>
-<li>
-<p>ALB는 L7단을 지원하기에 SSL 적용 가능</p>
+<li>ALB는 L7단을 지원하기에 SSL 적용 가능</li>
+</ol>
 </li>
-<li>
-<p><strong>Target Group</strong></p>
+</ul>
+<ul>
+<li><strong>Target Group</strong><ul>
+<li>Instance의 ID로 지정하여 로드밸런싱</li>
+</ul>
 </li>
-<li>
-<p>Instance의 ID로 지정하여 로드밸런싱</p>
-</li>
-<li>
-<p><strong>특징</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>특징</strong><ul>
 <li>HTTP Header, 요청 Method 등을 통해 사용자 요청을 적절한 대상 그룹으로 라우팅</li>
 <li>HTTP의 특성을 활용한 부하 분선<ul>
 <li>HTTP Header - 요청헤더/일반헤더</li>
 <li>HTTP 요청 메서드 - GET/POST/PUT 등</li>
 </ul>
 </li>
-<li>
-<p>HTTP/2 지원 -&gt; 네트워크 트래픽 줄이고 접속 효율 높임</p>
+<li>HTTP/2 지원 -&gt; 네트워크 트래픽 줄이고 접속 효율 높임</li>
+</ul>
 </li>
-<li>
-<p><strong>동작 원리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>동작 원리</strong><ol>
 <li>사용자 &lt;-&gt; ALB 3-way-handshake 실시</li>
 <li>ALB &lt;-&gt; EC2 3-way-handshake 실시</li>
-<li>
-<p>사용자 &lt;----&gt; EC2 요청 왔다 갔다</p>
+<li>사용자 &lt;----&gt; EC2 요청 왔다 갔다</li>
+</ol>
 </li>
-<li>
-<p><strong>리스너</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>리스너</strong><ul>
 <li>구성한 프로토콜 및 포트를 사용해 클라이언트의 연결 요청 확인</li>
 <li>리스너에 대해 정의한 규칙에 따라 로드 밸런서가 등록된 대상으로 요청을 라우팅 하는 방법이 결정됨</li>
 </ul>
+</li>
+</ul>
 <h2 id="connectable-alb">Connectable ALB<a class="headerlink" href="#connectable-alb" title="Permanent link">&para;</a></h2>
 <ul>
-<li>ALB 설정 보기</li>
+<li>ALB 설정 보기<ul>
 <li><img alt="" src="../../images/2022-10-21-connectable-alb-1.png" /></li>
-<li>리스너 목록 확인</li>
+</ul>
+</li>
+<li>리스너 목록 확인<ul>
 <li><img alt="" src="../../images/2022-10-21-connectable-alb-3.png" /></li>
-<li>443 리스너 확인</li>
+</ul>
+</li>
+<li>443 리스너 확인<ul>
 <li><img alt="" src="../../images/2022-10-21-connectable-alb-2.png" /></li>
+</ul>
+</li>
 </ul>
 <h2 id="nlb">NLB<a class="headerlink" href="#nlb" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://no-easy-dev.tistory.com/entry/AWS-ALB%EC%99%80-NLB-%EC%B0%A8%EC%9D%B4%EC%A0%90</em></li>
 <li><em>참고: https://docs.aws.amazon.com/ko_kr/elasticloadbalancing/latest/network/introduction.html</em></li>
 <li><em>참고: https://kim-dragon.tistory.com/112</em></li>
-<li><strong>설명</strong></li>
+<li><strong>설명</strong><ul>
 <li>클라이언트 단일 접점 역할 수행</li>
-<li>
-<p>수신 트래픽을 EC2 인스턴스와 같은 여러 대상에 분산</p>
+<li>수신 트래픽을 EC2 인스턴스와 같은 여러 대상에 분산</li>
+</ul>
 </li>
-<li>
-<p><strong>개요</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>개요</strong><ol>
 <li>L4단의 로드밸런서 지원</li>
 <li>TCP/IP 프로토콜의 헤더를 보고 적절한 패킷으로 전송</li>
 <li>IP + 포트 번호를 보고 스위칭</li>
 <li>NLB는 할당한 Elastic IP를 static IP로 사용 가능하며 DNS Name, IP 주소 모두 사용 가능</li>
-<li>
-<p>SSL 적용 안댐. </p>
+<li>SSL 적용 안댐. </li>
+</ol>
 </li>
-<li>
-<p><strong>Target Group</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Target Group</strong><ul>
 <li>IP로 지정하여 로드 밸런싱</li>
+</ul>
+</li>
 </ul>
 
 

@@ -22909,42 +22909,30 @@
 <h3 id="2021-03-14">2021-03-14<a class="headerlink" href="#2021-03-14" title="Permanent link">&para;</a></h3>
 <h2 id="2">블랙잭 미션 2단계 피드백<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>메서드가 모두 static으로 이루어진 클래스는 private으로 생성자 닫아두자</p>
-</li>
-<li>
-<p>객체 생성에 대한 검증 로직을 생성자와 정적 팩토리 메서드 중에서 어디서 해야할까? 장단점은?</p>
+<li>메서드가 모두 static으로 이루어진 클래스는 private으로 생성자 닫아두자</li>
+</ul>
 <ul>
-<li>내 답변: https://github.com/woowacourse/java-blackjack/pull/193#discussion_r593838481</li>
-<li>생성자<ul>
-<li>우선 여기서 해주니까 static 하게 함수를 선언하지 않아도 되네</li>
-<li>static 하게 함수를 정의해 주는게 무슨 단점이 있을까?<ul>
-<li>메모리를 할당 받고 프로그램 종료 시점에 반환되므로 사용하지 않고 있어도 메모리가 할당되어 있음</li>
-<li>디버깅도, 테스트도 어렵다고 하네...</li>
+<li>객체 생성에 대한 검증 로직을 생성자와 정적 팩토리 메서드 중에서 어디서 해야할까? 장단점은?
+    - 내 답변: https://github.com/woowacourse/java-blackjack/pull/193#discussion_r593838481
+    - 생성자
+        - 우선 여기서 해주니까 static 하게 함수를 선언하지 않아도 되네
+        - static 하게 함수를 정의해 주는게 무슨 단점이 있을까?
+            - 메모리를 할당 받고 프로그램 종료 시점에 반환되므로 사용하지 않고 있어도 메모리가 할당되어 있음
+            - 디버깅도, 테스트도 어렵다고 하네...
+        - static 그래도 장점도 있겠지
+            - 객체 생성없이 변수 접근/메서드 실행이 가능해 속도가 빠르다
+            - JVM이 클래스를 읽어 들일때 자동적으로 메모리에 적재
+    - 캡슐화/은닉성에 대한 측면으로 바라보자...
+        - 이게 결국 validation이 객체가 인스턴스화 될 때 필요한 과정인거자나?</li>
 </ul>
-</li>
-<li>static 그래도 장점도 있겠지<ul>
-<li>객체 생성없이 변수 접근/메서드 실행이 가능해 속도가 빠르다</li>
-<li>JVM이 클래스를 읽어 들일때 자동적으로 메모리에 적재</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>캡슐화/은닉성에 대한 측면으로 바라보자...<ul>
-<li>이게 결국 validation이 객체가 인스턴스화 될 때 필요한 과정인거자나?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>중복에 대한 검사는 Set으로 해도 괜찮지 않을까?</p>
 <ul>
-<li>참고: https://kapentaz.github.io/java/Java8-stream%EC%9C%BC%EB%A1%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C-%EC%A1%B4%EC%9E%AC-%ED%99%95%EC%9D%B8/#</li>
-<li>참고: https://www.geeksforgeeks.org/stream-allmatch-java-examples/</li>
-<li>내 답변: https://github.com/woowacourse/java-blackjack/pull/193#discussion_r593837044</li>
-<li>stream의 distinct(), count() 로 고유한 원소 갯수 세기<ul>
-<li>distinct()는 list "전체"를 대상을 탐색하며 중복을 제거
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li>중복에 대한 검사는 Set으로 해도 괜찮지 않을까?
+    - 참고: https://kapentaz.github.io/java/Java8-stream%EC%9C%BC%EB%A1%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C-%EC%A1%B4%EC%9E%AC-%ED%99%95%EC%9D%B8/#
+    - 참고: https://www.geeksforgeeks.org/stream-allmatch-java-examples/
+    - 내 답변: https://github.com/woowacourse/java-blackjack/pull/193#discussion_r593837044
+    - stream의 distinct(), count() 로 고유한 원소 갯수 세기
+        - distinct()는 list "전체"를 대상을 탐색하며 중복을 제거
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">duplicated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
@@ -22953,12 +22941,10 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">duplicated</span><span class="p">);</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>HashSet으로 검사하기<ul>
-<li>중복된 요소가 존재하면 거기서 끊고 리턴할 수 있게 코드 작성 가능
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - HashSet으로 검사하기
+        - 중복된 요소가 존재하면 거기서 끊고 리턴할 수 있게 코드 작성 가능
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Member</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">Member</span><span class="p">(</span><span class="mi">1L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Tom&quot;</span><span class="p">),</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">Member</span><span class="p">(</span><span class="mi">2L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Smith&quot;</span><span class="p">),</span>
@@ -22970,30 +22956,20 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unique</span><span class="p">);</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div>
+    - 사실 필요한 정보는 해당 리스트 안에 중복된 객체의 유무이지, 고유한 객체가 몇 개나 리스트에 있는지가 아님</li>
 </ul>
-</li>
-<li>사실 필요한 정보는 해당 리스트 안에 중복된 객체의 유무이지, 고유한 객체가 몇 개나 리스트에 있는지가 아님</li>
-</ul>
-</li>
-<li>
-<p>DealerMoney와 PlayerMoney를 굳이 나눴어야 했나?</p>
 <ul>
-<li>Money로 만드는 것은 어떤가?</li>
-<li>VO를 공부해볼 것</li>
+<li>DealerMoney와 PlayerMoney를 굳이 나눴어야 했나?
+    - Money로 만드는 것은 어떤가?
+    - VO를 공부해볼 것</li>
 </ul>
-</li>
-<li>
-<p>assertEquals vs assertSame</p>
 <ul>
-<li>assertEquals: 두 개의 값이 같은지를 비교</li>
-<li>assertSame: 두 객체가 동일한 객체인지 주소값으로 비교<ul>
-<li>Singleton 으로 만들어진 객체를 비교확인</li>
-<li>리스트의 clone 메서드로 복사된 객체 비교 할수도 있음</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>assertEquals vs assertSame
+    - assertEquals: 두 개의 값이 같은지를 비교
+    - assertSame: 두 객체가 동일한 객체인지 주소값으로 비교
+        - Singleton 으로 만들어진 객체를 비교확인
+        - 리스트의 clone 메서드로 복사된 객체 비교 할수도 있음</li>
 </ul>
 
 

@@ -22914,42 +22914,47 @@
   - <code>RedissonMultiLock</code>은 여러 노드에 대한 락을 조합하여 사용하는 RedLock 구현체
   - 몇가지의 독립적인 락을 하나의 락 처럼 그룹화하여 다룸</p>
 <ul>
-<li><strong>구현</strong></li>
+<li><strong>구현</strong><ul>
 <li><code>RedissonClient</code>: <code>getMultiLock(RLock... locks)</code><ul>
 <li>정의된 lock에 대한 MultiLock 인스턴스 반환</li>
 </ul>
 </li>
-<li>
-<p><code>RedissonMultiLock</code>: <code>tryLockAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId)</code></p>
-<ul>
+<li><code>RedissonMultiLock</code>: <code>tryLockAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId)</code><ul>
 <li>threadId로 명시한 thread와 leaseTime으로 락을 획득하려고 함</li>
 <li>lock을 획득할 때 까지 waitTime 만큼 기다림</li>
 <li>leaseTime 인터벌 이후에 lock은 자동으로 해지함</li>
-<li>락 획득 시도할 때, multiLock에 정의된 전체 내부의 모든 락을 다 획득해야 함</li>
+<li>락 획득 시도할 때, multiLock에 정의된 전체 내부의 모든 락을 다 획득해야 함<ul>
 <li><code>newRLock</code> 성공, <code>oldRLock</code> 실패 시, 모든 락에 대해 즉시 해제 명령 날림</li>
 </ul>
 </li>
-<li>
-<p><strong>오버헤드</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>오버헤드</strong><ul>
 <li>락 획득/락 해제에 상당한 오버헤드가 발생하더라... 따라서 매우 작은 임계영역에서만 사용할 것!</li>
-<li>
-<p><code>하나의 연산 = (락 획득 시간 + 실제 작업 시간 + 락 해제 시간)</code></p>
-<ol>
-<li>락 획득 시간</li>
+<li><code>하나의 연산 = (락 획득 시간 + 실제 작업 시간 + 락 해제 시간)</code><ol>
+<li>락 획득 시간<ul>
 <li>Network Round-Trip Time: 두개의 Redis 서버 각각에게 락을 잡아달라는 명령. 최소 2번의 NRT</li>
 <li>락 경합 및 대기: 두 번째 작업부터는 앞선 작업이 락 해제해줄 때 까지 기다림, Pub/Sub을 통한 락 해제 알림 대기</li>
+</ul>
+</li>
 <li>실제 작업 시간</li>
-<li>락 해제 시간</li>
+<li>락 해제 시간<ul>
 <li><code>multiLock.unlockAsync()</code> 역시 두개의 서버 각각에게 락 해제하는 명령</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p><strong>테스트 코드</strong></p>
+</ul>
 </li>
-<li>
-<p>countDownLatch를 사용하여 모든 작업이 완료될 때 까지 쓰레드 기다리게 할 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="s">&quot;멀티락 테스트&quot;</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>테스트 코드</strong><ul>
+<li>countDownLatch를 사용하여 모든 작업이 완료될 때 까지 쓰레드 기다리게 할 수 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="s">&quot;멀티락 테스트&quot;</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="s">&quot;멀티락 10개를 동시에 수행했을 때 정상적으로 동작해야 한다.&quot;</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="n">taskCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">AtomicInteger</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -22982,49 +22987,58 @@
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">        </span><span class="n">count</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="p">(</span><span class="n">taskCount</span><span class="p">)</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
+</ul>
+<ul>
 <li>
 <p><strong>데드락 걸릴 가능성?</strong></p>
-</li>
-<li>프로세스 B가 진행되기 위해, 프로세스 A가 점유하고 있는 리소스를 대기하는 상황... (여기선 Lock)</li>
-<li>
-<p>1차 배포: Old -&gt; Old &amp; New </p>
 <ul>
-<li>시나리오 1.</li>
+<li>프로세스 B가 진행되기 위해, 프로세스 A가 점유하고 있는 리소스를 대기하는 상황... (여기선 Lock)</li>
+<li>1차 배포: Old -&gt; Old &amp; New <ul>
+<li>시나리오 1.<ul>
 <li>프로세스 A Old 잡음</li>
 <li>프로세스 B Old&amp;New 잡기 위해 대기 중</li>
 <li>프로세스 A Old 해제</li>
 <li>프로세스 B Old&amp;New 잡음</li>
-<li>시나리오 2.</li>
+</ul>
+</li>
+<li>시나리오 2.<ul>
 <li>프로세스 A Old&amp;New 잡음</li>
 <li>프로세스 B Old 잡기 위해 대기 중</li>
 <li>프로세스 A Old&amp;New 해제</li>
 <li>프로세스 B Old 잡음</li>
 </ul>
 </li>
-<li>
-<p>2차 배포: Old&amp;New -&gt; New</p>
+</ul>
+</li>
+</ul>
 <ul>
-<li>시나리오 1.</li>
+<li>2차 배포: Old&amp;New -&gt; New<ul>
+<li>시나리오 1.<ul>
 <li>프로세스 A Old&amp;New 잡음</li>
 <li>프로세스 B New 잡기 위해 대기 중</li>
 <li>프로세스 A Old&amp;New 해제</li>
 <li>프로세스 B New 잡음</li>
-<li>시나리오 2. </li>
+</ul>
+</li>
+<li>시나리오 2. <ul>
 <li>프로세스 A New 잡음</li>
 <li>프로세스 B Old&amp;New 잡기 위해 대기 중</li>
 <li>프로세스 A New 해제</li>
 <li>프로세스 B Old&amp;New 잡음</li>
 </ul>
 </li>
-<li>
-<p><strong>유일하게 락 걸릴 가능성 (둘 다 Old&amp;New 락 잡을 때)</strong></p>
+</ul>
+</li>
+</ul>
 <ul>
+<li><strong>유일하게 락 걸릴 가능성 (둘 다 Old&amp;New 락 잡을 때)</strong><ul>
 <li>프로세스 A Old&amp;New 잡을라고 함 -- 프로세스 B Old&amp;New 잡을라고 함</li>
 <li>프로세스 A는 Old 부터 잡았고, 프로세스 B는 New 부터 잡았음</li>
 <li>이러면 서로가 서로 잡은거 놔줘야 한명이라도 잡는데, 못잡는 교착상태 발생</li>
-<li>이러려면 항상 동일한 순서로 Old&amp;New를 잡는 보장이 있어야 함.</li>
+<li>이러려면 항상 동일한 순서로 Old&amp;New를 잡는 보장이 있어야 함.<ul>
 <li>다행히 RedissonMultiLock은 명확한 순서로 잡음</li>
 <li>참고: https://github.com/redisson/redisson/blob/master/redisson/src/main/java/org/redisson/RedissonMultiLock.java#L82 <ul>
 <li>현재 코드베이스 버전은 3.14
@@ -23069,6 +23083,10 @@
 <a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">    </span><span class="c1">// ...</span>
 <a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

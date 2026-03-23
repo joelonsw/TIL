@@ -22975,57 +22975,42 @@
 <h3 id="2021-02-17">2021-02-17<a class="headerlink" href="#2021-02-17" title="Permanent link">&para;</a></h3>
 <h2 id="dto">DTO<a class="headerlink" href="#dto" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>정의</strong></p>
+<li><strong>정의</strong>
+    - 계층 간 통신 용도로 오가는, 데이터 교환을 위한 객체
+    - 로직이 없는 순수한 데이터 객체로, getter와 setter만을 갖는다
+        - DB에서 꺼낸 값은 setter 대신 생성자로 값을 할당한다</li>
+</ul>
 <ul>
-<li>계층 간 통신 용도로 오가는, 데이터 교환을 위한 객체</li>
-<li>로직이 없는 순수한 데이터 객체로, getter와 setter만을 갖는다<ul>
-<li>DB에서 꺼낸 값은 setter 대신 생성자로 값을 할당한다</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>왜 필요한가?</strong></p>
-<ul>
-<li>몇 번의 호출에 의해 전송될 데이터를 모으는 DTO를 이용해서 한 번만 호출하도록 한다</li>
-</ul>
-</li>
+<li><strong>왜 필요한가?</strong>
+    - 몇 번의 호출에 의해 전송될 데이터를 모으는 DTO를 이용해서 한 번만 호출하도록 한다</li>
 </ul>
 <h2 id="stringformat">String.format<a class="headerlink" href="#stringformat" title="Permanent link">&para;</a></h2>
 <ul>
 <li>format()은 형식화된 문자열을 만들어내는 방법</li>
-<li>printf()와 사용법이 동일하다<ul>
-<li>ex) String str = String.format("%d 더하기 %d는 %d입니다.", 3, 5, 3+5);</li>
-</ul>
-</li>
+<li>printf()와 사용법이 동일하다
+    - ex) String str = String.format("%d 더하기 %d는 %d입니다.", 3, 5, 3+5);</li>
 </ul>
 <h2 id="map">Map인터페이스<a class="headerlink" href="#map" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>key와 value를 쌍으로 묶어서 저장하는 JCF</li>
-<li>key 중복 NO</li>
-<li>value는 중복 OK</li>
+<li><strong>정의</strong>
+    - key와 value를 쌍으로 묶어서 저장하는 JCF
+    - key 중복 NO
+    - value는 중복 OK</li>
 </ul>
-</li>
-<li>
-<p><strong>메서드</strong></p>
 <ul>
-<li><strong>void clear()</strong>: Map의 모든 객체 삭제</li>
-<li><strong>boolean containsKey(Object key)</strong>: 지정된 key객체와 일치하는 Map의 key객체 확인</li>
-<li><strong>boolean containsValue(Object value)</strong>: 지정된 value객체와 일치하는 Map의 value객체 확인</li>
-<li><strong>Set entrySet()</strong>: Map에 저장된 key-value쌍을 Map.Entry타입의 객체로 저장한 Set으로 반환</li>
-<li><strong>boolean equals(Object o)</strong>: 동일한 Map인지 비교</li>
-<li><strong>Object get(Object key)</strong>: 지정한 key객체에 대응하는 value객체 찾아서 반환</li>
-<li><strong>Set keySet()</strong>: Map에 저장된 모든 key객체 반환</li>
-<li><strong>Object put(Object key, Object value)</strong>: Map에 value객체를 key에 연결하여 저장한다</li>
-<li><strong>Object remove(Object key)</strong>: 지정한 key객체와 일치하는 key-value 객체를 삭제한다</li>
+<li><strong>메서드</strong>
+    - <strong>void clear()</strong>: Map의 모든 객체 삭제
+    - <strong>boolean containsKey(Object key)</strong>: 지정된 key객체와 일치하는 Map의 key객체 확인
+    - <strong>boolean containsValue(Object value)</strong>: 지정된 value객체와 일치하는 Map의 value객체 확인
+    - <strong>Set entrySet()</strong>: Map에 저장된 key-value쌍을 Map.Entry타입의 객체로 저장한 Set으로 반환
+    - <strong>boolean equals(Object o)</strong>: 동일한 Map인지 비교
+    - <strong>Object get(Object key)</strong>: 지정한 key객체에 대응하는 value객체 찾아서 반환
+    - <strong>Set keySet()</strong>: Map에 저장된 모든 key객체 반환
+    - <strong>Object put(Object key, Object value)</strong>: Map에 value객체를 key에 연결하여 저장한다
+    - <strong>Object remove(Object key)</strong>: 지정한 key객체와 일치하는 key-value 객체를 삭제한다</li>
 </ul>
-</li>
-<li>
-<p><strong>HashMap</strong>
+<ul>
+<li><strong>HashMap</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HashMap</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractMap</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Map</span><span class="p">,</span><span class="w"> </span><span class="n">Cloneable</span><span class="p">,</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">transient</span><span class="w"> </span><span class="n">Entry</span><span class="o">[]</span><span class="w"> </span><span class="n">table</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="p">...</span>
@@ -23034,20 +23019,19 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>HashMap은 key와 value를 Object 타입으로 저장</li>
+</ul>
+</li>
 </ul>
 <h2 id="singleton">Singleton<a class="headerlink" href="#singleton" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>참조: https://elfinlas.github.io/2019/09/23/java-singleton/</p>
-</li>
-<li>
-<p><strong>정의</strong></p>
+<li>참조: https://elfinlas.github.io/2019/09/23/java-singleton/</li>
+</ul>
 <ul>
-<li>어떤 클래스가 최초 한번만 메모리를 할당하고, 그 메모리에 객체를 만들어 사용하는 디자인 패턴</li>
-<li>생성자의 호출이 반복적으로 이뤄져도, 최초 생성된 객체를 반환
+<li><strong>정의</strong>
+    - 어떤 클래스가 최초 한번만 메모리를 할당하고, 그 메모리에 객체를 만들어 사용하는 디자인 패턴
+    - 생성자의 호출이 반복적으로 이뤄져도, 최초 생성된 객체를 반환
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExampleClass</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ExampleClass</span><span class="w"> </span><span class="n">singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExampleClass</span><span class="p">();</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -23059,20 +23043,14 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>장점</strong></p>
 <ul>
-<li>메모리 낭비 방지</li>
-<li>다른 객체와 공유가 용이함</li>
+<li><strong>장점</strong>
+    - 메모리 낭비 방지
+    - 다른 객체와 공유가 용이함</li>
 </ul>
-</li>
-<li>
-<p><strong>문제점</strong></p>
 <ul>
-<li>다른 객체간의 결함도가 높아져 객체 지향 설계 원칙에 어긋남</li>
-</ul>
-</li>
+<li><strong>문제점</strong>
+    - 다른 객체간의 결함도가 높아져 객체 지향 설계 원칙에 어긋남</li>
 </ul>
 
 

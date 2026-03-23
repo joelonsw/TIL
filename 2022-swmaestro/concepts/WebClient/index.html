@@ -22970,13 +22970,13 @@
 </ul>
 <h3 id="webclient_1">WebClient<a class="headerlink" href="#webclient_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>왜 필요한가?</strong></li>
-<li>
-<p>요청자와 제공자 사이의 통신을 좀 더 효율적인 Non-Blocking 방식으로 하기 위함</p>
+<li><strong>왜 필요한가?</strong><ul>
+<li>요청자와 제공자 사이의 통신을 좀 더 효율적인 Non-Blocking 방식으로 하기 위함</li>
+</ul>
 </li>
-<li>
-<p><strong>어떻게 동작하는가? [RestTemplate]</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>어떻게 동작하는가? [RestTemplate]</strong><ul>
 <li><img alt="" src="../../images/2022-09-27-resttemplate.png" /></li>
 <li>Multi-Thread 와 Blocking 방식 사용</li>
 <li>Thread-Pool은 요청자 어플리케이션 구동시 미리 만들어 둠<ul>
@@ -22984,38 +22984,39 @@
 <li>각 쓰레드는 블로킹 방식으로 처리되어 응답 올 때 까지 해당 쓰레드 다른 요청에 할당 x</li>
 </ul>
 </li>
-<li>
-<p>요청을 처리할 쓰레드가 없다면 Queue에서 대기</p>
-<ul>
+<li>요청을 처리할 쓰레드가 없다면 Queue에서 대기<ul>
 <li>여기에서 병목이 발생하면 서비스가 매우 느려짐</li>
 </ul>
 </li>
-<li>
-<p><strong>어떻게 동작하는가 [WebClient]</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>어떻게 동작하는가 [WebClient]</strong><ul>
 <li><img alt="" src="../../images/2022-09-27%20WebClient.jpeg" /></li>
 <li>Single-Thread와 Non-Blocking 방식 사용<ul>
 <li>Core 당 1개의 Thread 이용</li>
 </ul>
 </li>
-<li>
-<p>각 요청은 Event Loop내에 Job으로 등록</p>
-<ul>
+<li>각 요청은 Event Loop내에 Job으로 등록<ul>
 <li>Event Loop는 각 Job을 제공자에게 요청한 후, 결과 기다리지 않고 다른 Job 처리</li>
 <li>제공자로 부터 callback 응답이 오면, 그 결과를 요청자에게 제공</li>
 </ul>
 </li>
-<li>
-<p><strong>VS RestTemplate</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>VS RestTemplate</strong><ul>
 <li>1000명까지는 비슷하지만, 그 이후에는 WebClient가 압도적</li>
+</ul>
+</li>
 </ul>
 <h2 id="_1">프로젝트 로그 분석<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>테스트 대상 메서드 sendMyToken()</strong></li>
-<li>
-<p>단일 HTTP 요청
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Test</span>
+<li><strong>테스트 대상 메서드 sendMyToken()</strong><ul>
+<li>단일 HTTP 요청
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Test</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">sendToken</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">TransactionResponse</span><span class="w"> </span><span class="n">transactionResponse</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">            </span><span class="n">kasService</span><span class="p">.</span><span class="na">sendMyToken</span><span class="p">(</span><span class="n">NEW_CONTRACT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0x2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">JOEL_KAIKAS</span><span class="p">);</span>
@@ -23026,10 +23027,12 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>로그 sendMyToken()</strong>
+</ul>
+<ul>
+<li><strong>로그 sendMyToken()</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>16:10:52.262 [DEBUG] [Test worker] [o.s.t.c.c.DefaultCacheAwareContextLoaderDelegate] - Retrieved ApplicationContext [34644587] from cache with key [[WebMergedContextConfiguration@5649ec46 testClass = KasServiceTestWithTestnet, locations = &#39;{}&#39;, classes = &#39;{class com.backend.connectable.ConnectableApplication}&#39;, contextInitializerClasses = &#39;[]&#39;, activeProfiles = &#39;{}&#39;, propertySourceLocations = &#39;{}&#39;, propertySourceProperties = &#39;{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}&#39;, contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1ddae9b5, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@f74e835, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@21d8bcbe, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@24fb6a80, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@3efe7086, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@24faea88, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@16b2bb0c], resourceBasePath = &#39;src/main/webapp&#39;, contextLoader = &#39;org.springframework.boot.test.context.SpringBootContextLoader&#39;, parent = [null]]]
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>16:10:52.262 [DEBUG] [Test worker] [o.springframework.test.context.cache] - Spring test ApplicationContext cache statistics: [DefaultContextCache@737fbdc2 size = 1, maxSize = 32, parentContextCount = 0, hitCount = 89, missCount = 1]
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>16:10:52.265 [TRACE] [Test worker] [o.s.w.r.f.client.ExchangeFunctions] - [7fafb60] HTTP POST https://kip17-api.klaytnapi.com/v2/contract/0xa875f3b7e62ea14cde486cfb6f4c3e5926dceedb/token/0x2, headers={masked}
@@ -23052,36 +23055,42 @@
 <a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>16:10:52.402 [DEBUG] [reactor-http-nio-2] [r.n.r.PooledConnectionProvider] - [92e2fd67, L:/10.64.154.214:63793 - R:kip17-api.klaytnapi.com/13.125.50.215:443] Channel cleaned, now: 0 active connections, 1 inactive connections and 0 pending acquire requests.
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>transactionResponse.getStatus() = Submitted
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>transactionResponse.getTransactionHash() = 0x8e94cd81906268707e6072ed01f2259ac1679a6717b220ca5ddc4cc8a55cbeb2
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 <li>ExchangeFunctions을 통해 HTTP POST 요청할 정보 생성</li>
-<li>PooledConnectionProvider에서 [Channel acquired] 를 통해 연결할 정보를 생성하고, 현재 HTTP 연결 상황 보여줌</li>
+<li>PooledConnectionProvider에서 [Channel acquired] 를 통해 연결할 정보를 생성하고, 현재 HTTP 연결 상황 보여줌<ul>
 <li>1 active connections</li>
 <li>0 inactive connections</li>
 <li>0 pending acquire requests</li>
-<li>HttpClientConnect에 Handler being applied</li>
+</ul>
+</li>
+<li>HttpClientConnect에 Handler being applied<ul>
 <li>핸들러 정보 : <code>{uri=https://kip17-api.klaytnapi.com/v2/contract/0xa875f3b7e62ea14cde486cfb6f4c3e5926dceedb/token/0x2, method=POST}</code></li>
-<li>DefaultPooledConnectionProvider에서 해당 요청에 대한 단계별 변경을 감지 [onStateChange]</li>
+</ul>
+</li>
+<li>DefaultPooledConnectionProvider에서 해당 요청에 대한 단계별 변경을 감지 [onStateChange]<ul>
 <li>request_prepared</li>
 <li>request_sent</li>
 <li>response_received</li>
 <li>response_completed</li>
 <li>disconnecting</li>
 <li>Releasing channel</li>
-<li>PooledConnectionProvider에서 [Channel cleaned]</li>
+</ul>
+</li>
+<li>PooledConnectionProvider에서 [Channel cleaned]<ul>
 <li>0 active connections</li>
 <li>1 inactive connections</li>
-<li>
-<p>0 pending acquire requests.</p>
+<li>0 pending acquire requests.</li>
+</ul>
 </li>
-<li>
-<p><strong>테스트 대상 메서드 findAllTokensOwnedByUser()</strong></p>
+</ul>
+<ul>
+<li><strong>테스트 대상 메서드 findAllTokensOwnedByUser()</strong><ul>
+<li>여러 HTTP 요청 with CountDownLatch</li>
+</ul>
 </li>
-<li>
-<p>여러 HTTP 요청 with CountDownLatch</p>
-</li>
-<li>
-<p><strong>로그 findAllTokensOwnedByUser()</strong>
+</ul>
+<ul>
+<li><strong>로그 findAllTokensOwnedByUser()</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>16:39:42.219 [TRACE] [Test worker] [o.s.w.r.f.client.ExchangeFunctions] - [53506644] HTTP GET https://kip17-api.klaytnapi.com/v2/contract/0xb29566b9f7ff197c84b1df3fa203e0e230fa87c2/owner/0xEa06ee0577795e39A0465b46d509168ff6302973, headers={masked}
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>16:39:42.229 [DEBUG] [reactor-http-nio-4] [r.n.r.DefaultPooledConnectionProvider] - [ceaf5bfe, L:/10.64.154.214:64166 - R:kip17-api.klaytnapi.com/13.125.50.215:443] Registering pool release on close event for channel
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>16:39:42.230 [DEBUG] [reactor-http-nio-4] [r.n.r.PooledConnectionProvider] - [ceaf5bfe, L:/10.64.154.214:64166 - R:kip17-api.klaytnapi.com/13.125.50.215:443] Channel connected, now: 9 active connections, 0 inactive connections and 0 pending acquire requests.
@@ -23151,15 +23160,16 @@
 <a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>    DefaultDnsRawRecord(kip17-api.klaytnapi.com. 47 IN A 4B)
 <a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>    DefaultDnsRawRecord(kip17-api.klaytnapi.com. 47 IN A 4B)
 <a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>    DefaultDnsRawRecord(OPT flags:0 udp:4000 0B)
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 <li>우선 아까보다 훨씬 많은 쓰레드를 쓰고 있음 <code>reactor-http-nio-1</code> ~ <code>reactor-http-nio-7</code></li>
 <li>DnsNameResolver를 통해 "kip17-api.klaytnapi.com" 의 DNS 주소 &lt;-&gt; IP 주소를 UDP를 통해 가져오고 있음 </li>
-<li>소켓 Connection을 다른 API를 쓰는데도 그대로 쓰는 경우도 발견 =&gt; Keep-Alive?</li>
+<li>소켓 Connection을 다른 API를 쓰는데도 그대로 쓰는 경우도 발견 =&gt; Keep-Alive?<ul>
 <li>아 아니구나, 해당 소켓 통신 끝나가지고 그 포트 그대로 쓰는 거 일수도?
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>16:39:42.260 [DEBUG] [reactor-http-nio-2] - [0a3d2492, L:/10.64.154.214:64162 - R:kip17-api.klaytnapi.com/13.125.28.148:443] onStateChange(GET{uri=/v2/contract/0xa875f3b7e62ea14cde486cfb6f4c3e5926dceedb/owner/0xEa06ee0577795e39A0465b46d509168ff6302973, connection=PooledConnection{channel=[id: 0x0a3d2492, L:/10.64.154.214:64162 - R:kip17-api.klaytnapi.com/13.125.28.148:443]}}, [response_completed])
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>16:39:42.309 [DEBUG] [reactor-http-nio-2] - [0a3d2492-52, L:/10.64.154.214:64162 - R:kip17-api.klaytnapi.com/13.125.28.148:443] Handler is being applied: {uri=https://kip17-api.klaytnapi.com/v2/contract/0xe13e1f3c1270b5f9f7a641ae0eadfc18582e0b93/owner/0xEa06ee0577795e39A0465b46d509168ff6302973, method=GET}
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="webflux">어떻게 WebFlux는 적은 리소스로 많은 트래픽을 감당할 수 있을까?<a class="headerlink" href="#webflux" title="Permanent link">&para;</a></h2>
 <p><strong>[Blocking I/O]</strong>

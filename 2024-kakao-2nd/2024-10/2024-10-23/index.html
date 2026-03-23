@@ -23015,32 +23015,34 @@
   - 일괄 수정
   - 통계</p>
 <ul>
-<li><strong>배치 성능 개선 방법 - 대량 데이터 READ</strong></li>
+<li><strong>배치 성능 개선 방법 - 대량 데이터 READ</strong><ul>
 <li>배치 성능 개선은 Reader의 비중이 높다</li>
 <li>Reader의 복잡한 조회 조건이 배치 전체의 성능을 크게 좌우</li>
-<li>SELECT 를 제대로 튜닝만 해도 성능 개선 많아짐</li>
-<li>
-<p>MySQL Limit/Offset</p>
-<ul>
+<li>SELECT 를 제대로 튜닝만 해도 성능 개선 많아짐
+1. MySQL Limit/Offset<ul>
 <li>Offset이 커질수록 MySQL은 부담이 커짐</li>
 <li>앞에서 읽었던 행을 버리지만 다시 읽어야 하는 특성</li>
 <li>굳이 페이징이 필요없다면 (무한 스크롤 처럼) LIMIT 절만 걸로 id로 제어 하는 것도 좋은 방법</li>
 </ul>
 </li>
-<li>
-<p><strong>배치 성능 개선 방법 - 대량 데이터 WRITE</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>배치 성능 개선 방법 - 대량 데이터 WRITE</strong><ol>
 <li>Batch Insert 사용하기 (일괄 쿼리 요청)</li>
-<li>
-<p>명시적 쿼리 (필요한 칼럼만 Update, 영속성 컨텍스트 X)</p>
+<li>명시적 쿼리 (필요한 칼럼만 Update, 영속성 컨텍스트 X)</li>
+</ol>
 </li>
-<li>
-<p><strong>Batch와 JPA의 궁합?</strong></p>
+</ul>
+<ul>
+<li><strong>Batch와 JPA의 궁합?</strong><ul>
+<li>JPA를 쓰는게 그렇게 좋지 않을 수 있다!
+1. Dirty Checking + 영속성 관리 =&gt; 성능 손해
+2. UPDATE 시 불필요한 칼럼도 UPDATE
+3. JPA Batch Insert 지원 어려움. (ID 생성 전략이 IDENTITY면 더더욱 어려움)</li>
+</ul>
 </li>
-<li>JPA를 쓰는게 그렇게 좋지 않을 수 있다!</li>
-<li>Dirty Checking + 영속성 관리 =&gt; 성능 손해</li>
-<li>UPDATE 시 불필요한 칼럼도 UPDATE</li>
-<li>JPA Batch Insert 지원 어려움. (ID 생성 전략이 IDENTITY면 더더욱 어려움)</li>
 </ul>
 <h2 id="jdbctemplate-batchupdate">JdbcTemplate batchUpdate()<a class="headerlink" href="#jdbctemplate-batchupdate" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://inkyu-yoon.github.io/docs/Language/Spring/JdbcBatchUpdate</em>
@@ -23050,8 +23052,7 @@
   - DB를 MySQL로 사용, 엔티티 기본키 전략이 <code>IDENTITY</code> 인 경우 Hibernate에서 Batch Insert 비활성화 하여 사용 못함
     - <code>IDENTITY</code>는 DB에 입력이 되면서 기본키 값이 부여되는 전략</p>
 <ul>
-<li>
-<p><strong>Batch Insert</strong>
+<li><strong>Batch Insert</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- 개별</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="p">(</span><span class="n">col1</span><span class="p">,</span><span class="w"> </span><span class="n">col2</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">val1</span><span class="p">,</span><span class="w"> </span><span class="n">val11</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="p">(</span><span class="n">col1</span><span class="p">,</span><span class="w"> </span><span class="n">col2</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">val2</span><span class="p">,</span><span class="w"> </span><span class="n">val22</span><span class="p">);</span>
@@ -23062,19 +23063,19 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">     </span><span class="p">(</span><span class="n">val1</span><span class="p">,</span><span class="w"> </span><span class="n">val11</span><span class="p">),</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">     </span><span class="p">(</span><span class="n">val2</span><span class="p">,</span><span class="w"> </span><span class="n">val22</span><span class="p">),</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">     </span><span class="p">(</span><span class="n">val3</span><span class="p">,</span><span class="w"> </span><span class="n">val33</span><span class="p">);</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Chunk Size?</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Chunk Size?</strong><ul>
 <li>기본 100 ~ 10,000 레코드가 넣을 때 좋음</li>
 <li>배치 사이즈가 크면 데이터 베이스 round-trip과 성능 증대</li>
 <li>하지만, 너무 크면 메모리와 load가 많아지겠지</li>
-<li>
-<p>주로 1000개 정도가 굿 밸런스</p>
+<li>주로 1000개 정도가 굿 밸런스</li>
+</ul>
 </li>
-<li>
-<p><strong>JdbcTemplate batchUpdate()</strong>
+</ul>
+<ul>
+<li><strong>JdbcTemplate batchUpdate()</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">saveAll</span><span class="p">(</span><span class="n">templates</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Template</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">batchUpdate</span><span class="p">(</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="s">&quot;&quot;&quot;</span>
@@ -23098,8 +23099,7 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="c1">// 각 컬렉션을 순회하며 각 컬렉션 원소마다 함수형 인터페이스 pss를 적용함</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h4 id="toss-spring-jdbc">TOSS - Spring JDBC 성능 문제<a class="headerlink" href="#toss-spring-jdbc" title="Permanent link">&para;</a></h4>
 <p><em>참고: https://toss.tech/article/engineering-note-7</em>
@@ -23113,16 +23113,18 @@
   - 중복된 키가 없다면 INSERT
   - 중복 키 오류 발생 시, 사용자가 UPDATE 될 값을 지정할 수 있음</p>
 <ul>
-<li><strong>INSERT IGNORE</strong></li>
+<li><strong>INSERT IGNORE</strong><ul>
 <li>중복 키 에러가 발생했을 때, 신규로 입력되는 레코드 무시하는 방법</li>
-<li>
-<p>중복이라면... <code>Query OK, 0 row affected</code></p>
+<li>중복이라면... <code>Query OK, 0 row affected</code></li>
+</ul>
 </li>
-<li>
-<p><strong>REPLACE INTO</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>REPLACE INTO</strong><ul>
 <li>중복 발생 시, 기존 레코드 삭제 후 신규 레코드 INSERT</li>
 <li>해당 방식 수행 시, AUTO_INCREMENT는 새롭게 발급 됨. (DELETE -&gt; INSERT 니까)</li>
+</ul>
+</li>
 </ul>
 <h2 id="spring-transactionmanager">Spring TransactionManager<a class="headerlink" href="#spring-transactionmanager" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://jiwondev.tistory.com/154</em>
@@ -23138,25 +23140,25 @@
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>}
 </code></pre></div></p>
 <ul>
-<li><strong>Spring의 <code>@Transactional</code></strong></li>
+<li><strong>Spring의 <code>@Transactional</code></strong><ul>
 <li>추상화해서 위의 JDBC 트랜잭션을 관리</li>
-<li>
-<p>isolation/propagation level을 어노테이션 값으로 지정하는 것은 결국 JDBC의 변수 set 하는 과정
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>// isolation = TransactionDefinition.ISOLATION_READ_UNCOMMITED
+<li>isolation/propagation level을 어노테이션 값으로 지정하는 것은 결국 JDBC의 변수 set 하는 과정
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>// isolation = TransactionDefinition.ISOLATION_READ_UNCOMMITED
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>// propagation = TransactionDefinition.NESTED
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Savepoint savePoint = connection.setSavePoint();
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>...
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>connection.rollback();
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Transaction Management</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Transaction Management</strong><ul>
 <li>스프링은 트랜잭션 처리 TransactionManager 객체를 통해 처리</li>
 <li>구현체는 갈아 끼울 수 있는 PlatformTransactionManager 주입되어 사용
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">PlatformTransactionManager</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">PlatformTransactionManager</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">TransactionStatus</span><span class="w"> </span><span class="nf">getTransaction</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">TransactionDefinition</span><span class="w"> </span><span class="n">var1</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">TransactionException</span><span class="p">;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">commit</span><span class="p">(</span><span class="n">TransactionStatus</span><span class="w"> </span><span class="n">var1</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">TransactionException</span><span class="p">;</span>
@@ -23165,45 +23167,47 @@
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
 </code></pre></div></li>
 <li><img alt="" src="../../images/2024-10-23-txManager.png" /></li>
-<li>
-<p>구현체마다 동일한 부분이 있을 수 있어 AbstractPlatformTxManager가 있기도 하다</p>
-<ul>
+<li>구현체마다 동일한 부분이 있을 수 있어 AbstractPlatformTxManager가 있기도 하다<ul>
 <li>기본 구현체는 DataSourceTxManager, SpringDataJPA - JpaTxManager. </li>
 </ul>
 </li>
-<li>
-<p><strong><code>@Transactional</code>의 한계</strong></p>
+</ul>
 </li>
-<li>선언적 트랜잭션은 클래스/메서드에서만 붙일 수 있음</li>
-<li>
-<p>TransactionTemplate을 주입받아 세부적으로 메서드 내 operation 별로 트랜잭션 관리 가능</p>
+</ul>
 <ul>
+<li><strong><code>@Transactional</code>의 한계</strong><ul>
+<li>선언적 트랜잭션은 클래스/메서드에서만 붙일 수 있음</li>
+<li>TransactionTemplate을 주입받아 세부적으로 메서드 내 operation 별로 트랜잭션 관리 가능<ul>
 <li>얘도 내부적으로는 <code>PlatformTransactionManager</code>로 실행</li>
 </ul>
 </li>
-<li>
-<p><strong>선언적 트랜잭션 <code>@Transactional</code></strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>선언적 트랜잭션 <code>@Transactional</code></strong><ul>
 <li>스프링은 PlatformTxManager를 통해 DIP를 적용시켜둠</li>
 <li>스프링은 트랜잭션 코드를 프록시화 된 객체에 직접 추가하진 않음<ul>
 <li>스프링 AOP는 프록시 객체에 다음과 같이 <strong>[TransactionManager 객체]</strong>에게 위임하는 코드를 추가</li>
 <li><strong>[TransactionManager 객체]</strong>의 <code>doBegin()</code>/<code>doCommit()</code> 메서드에 위임</li>
 </ul>
 </li>
-<li>
-<p>정리하면 스프링 트랜잭션은 결국 모두 JDBC로 동작한다!</p>
-<ol>
+<li>정리하면 스프링 트랜잭션은 결국 모두 JDBC로 동작한다!<ol>
 <li>스프링은 <code>@Transactional</code> 메서드 발견시, 다이나믹 프록시 생성</li>
 <li>해당 프록시 객체는 [TransactionManager 객체]에게 트랜잭션 동작 위임하는 코드 가짐</li>
 <li>[TransactionManager 객체]는 JDBC 통해 트랜잭션 실행</li>
 </ol>
 </li>
-<li>
-<p><strong>JPA+Spring?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>JPA+Spring?</strong><ul>
 <li>JPA(하이버네이트)가 관리하도록 <code>@Transactional</code>을 달아버리면 (SessionFactory 주입)</li>
 <li>스프링에서 AOP 프록시 생성할 때, PlatformTxManager에게 위임 X =&gt; JpaTransactionManger O<ul>
 <li><code>spring-boot-starter-data-jpa</code>를 쓰면 자동으로 Jpa 트랜잭션 매니저 쓰도록 설정 바꿔줌!</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

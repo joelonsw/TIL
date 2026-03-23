@@ -23059,39 +23059,39 @@
 <h3 id="dependency">[의존성 (Dependency)]<a class="headerlink" href="#dependency" title="Permanent link">&para;</a></h3>
 <ul>
 <li>같이 변경되는 코드를 같이 넣으세요</li>
-<li><strong>클래스 사이의 Dependency</strong></li>
+<li><strong>클래스 사이의 Dependency</strong><ul>
 <li>연관관계: 협력을 위해 필요한 영구적인 탐색구조
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>의존관계: 협력을 위해 일시적으로 필요한 의존성
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">B</span><span class="p">();</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>상속관계
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>실체화관계
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+<li>실체화관계
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>패키지 사이의 Dependency</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>패키지 사이의 Dependency</strong><ul>
 <li>패키지에 포함된 클래스 사이의 의존성</li>
-<li>
-<p>딴 패키지 import 들어있으면 의존관계</p>
+<li>딴 패키지 import 들어있으면 의존관계</li>
+</ul>
 </li>
-<li>
-<p><strong>의존성 TIP</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>의존성 TIP</strong><ol>
 <li>양방향 의존성을 피하라<ul>
 <li>싱크 맞추는 상황에서 머리아픔</li>
 </ul>
@@ -23102,17 +23102,19 @@
 </li>
 <li>의존성 필요없으면 제거해라</li>
 <li>패키지 사이의 의존성 사이클 제거하기</li>
+</ol>
+</li>
 </ul>
 <h3 id="_2">[설계 개선하기]<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>설계 개선 TIP</strong></li>
+<li><strong>설계 개선 TIP</strong><ul>
 <li>의존성을 그림으로 그려보기</li>
-<li>
-<p>이게 여기에 있는게 맞나?</p>
+<li>이게 여기에 있는게 맞나?</li>
+</ul>
 </li>
-<li>
-<p><strong>중간 객체를 이용한 의존성 사이클 끊기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>중간 객체를 이용한 의존성 사이클 끊기</strong><ul>
 <li>상황<ul>
 <li>shop 패키지: <code>Shop</code>, <code>Menu</code>, <code>OptionGroupSpecification</code>, <code>OptionSpecification</code></li>
 <li>order 패키지: <code>Order</code>, <code>OrderLineItem</code>, <code>OrderOptionGroup</code>, <code>OrderOption</code></li>
@@ -23131,9 +23133,7 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>중간객체 생성    </p>
-<ul>
+<li>중간객체 생성    <ul>
 <li>shop 패키지: <code>Shop</code>, <code>Menu</code>, <code>OptionGroupSpecification</code>, <code>OptionGroup</code>, <code>OptionSpecification</code>, <code>Option</code></li>
 <li>order 패키지: <code>Order</code>, <code>OrderLineItem</code>, <code>OrderOptionGroup</code>, <code>OrderOption</code></li>
 <li>shop은 order 알 필요없게 다 변환해줘!
@@ -23151,18 +23151,20 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>추상화</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>추상화</strong><ul>
 <li>어떤거에 비해서 어떤건 잘 변하지 않아</li>
 <li>OptionGroup, Option에는 변하지 않는 정보가 담겨있어</li>
 <li>이런것도 추상화야 (DIP의 변형)</li>
-<li>
-<p>인터페이스, 추상클래스만 추상화가 아니라!</p>
+<li>인터페이스, 추상클래스만 추상화가 아니라!</li>
+</ul>
 </li>
-<li>
-<p><strong>ORM 사용시 어디까지 조회할 것인가?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ORM 사용시 어디까지 조회할 것인가?</strong><ul>
 <li>싹다 조회하면 lazy loading 오지게 발생함 =&gt; 성능문제</li>
 <li>수정시 도메인 규칙을 적용할 경계는 어디까지인가? =&gt; 트랜잭션 경계문제<ul>
 <li>Shop, Order, Delivery가 주문 한번에 변경해버림...</li>
@@ -23170,11 +23172,13 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="_3">[객체참조는 꼭 필요한가?]<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>객체 참조는 결합도가 가장 높은 의존성</li>
 <li>객체 참조 필요없으면 끊어!</li>
-<li>어떤 객체를 묶고, 어떤 객체를 분리할지에 대한 간단한 <strong>경계 규칙</strong> (With Business Rule)</li>
+<li>어떤 객체를 묶고, 어떤 객체를 분리할지에 대한 간단한 <strong>경계 규칙</strong> (With Business Rule)<ul>
 <li>함께 생성되고 함께 삭제되는 객체들을 묶어라</li>
 <li>도메인 제약사항을 공유하는 객체들을 함께 묶어라</li>
 <li>가능하면 분리하라</li>
@@ -23183,17 +23187,25 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="_4">[컴파일 에러 어찌해결?]<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
-<li>중간 객체 만들기</li>
+<li>중간 객체 만들기<ul>
 <li>절차지향으로 Validation등 묶기</li>
 <li>때로는 절차지향 &gt;&gt; 객체지향 </li>
 <li>의존성 제거</li>
-<li>도메인 이벤트 퍼블리싱</li>
+</ul>
+</li>
+<li>도메인 이벤트 퍼블리싱<ul>
 <li>높은 결합도를 느슨하게 끊기 위해 이벤트를 발행하자</li>
 <li>이벤트 &amp; 이벤트 리스너</li>
-<li>순환 참조 걸려있으면 패키지 분리하는 것도 방법</li>
+</ul>
+</li>
+<li>순환 참조 걸려있으면 패키지 분리하는 것도 방법<ul>
 <li>사이클 도는거 해결하다보면 도메인을 뚜렷하게 찢을 수 있어!</li>
+</ul>
+</li>
 </ol>
 <h3 id="_5">[의존성과 시스템 분리]<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>

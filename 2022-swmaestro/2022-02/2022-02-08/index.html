@@ -22909,55 +22909,55 @@
 <h3 id="2022-02-08">2022-02-08<a class="headerlink" href="#2022-02-08" title="Permanent link">&para;</a></h3>
 <h2 id="-dfs-bfs">알고리즘 문제풀이 - DFS, BFS 기초<a class="headerlink" href="#-dfs-bfs" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>DFS</strong></li>
+<li><strong>DFS</strong><ul>
 <li>재귀를 통해서 풀 수 있어야함</li>
 <li>상태 트리를 잘 생각해서 풀 것</li>
 <li>필요하다면 static 변수등을 통해 전역에서 접근할 수 있는 곳에 상태를 기록해 둘 것</li>
-<li>
-<p>경우의 수를 구할 때 DFS를 생각할 것!</p>
+<li>경우의 수를 구할 때 DFS를 생각할 것!</li>
+</ul>
 </li>
-<li>
-<p><strong>부분집합 구하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>부분집합 구하기</strong><ul>
 <li>경우의 수를 고려하여 상태 트리를 만들자<ul>
 <li>이게 들어간 경우</li>
 <li>이게 들어가지 않은 경우</li>
 </ul>
 </li>
-<li>
-<p>상태를 기록해두기 위해 static 배열/변수를 만들자</p>
+<li>상태를 기록해두기 위해 static 배열/변수를 만들자</li>
+</ul>
 </li>
-<li>
-<p><strong>BFS</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>BFS</strong><ul>
 <li>큐를 통해서 풀 수 있어야 함</li>
-<li>
-<p>최단거리/최소횟수를 구할 때 BFS를 생각할 것!</p>
+<li>최단거리/최소횟수를 구할 때 BFS를 생각할 것!</li>
+</ul>
 </li>
-<li>
-<p><strong>트리의 레이어를 돌아가면서 최단 경로 구하기</strong></p>
+</ul>
+<ul>
+<li><strong>트리의 레이어를 돌아가면서 최단 경로 구하기</strong><ul>
+<li>이런거 레이어 별로 탐색하면서 Queue에서 빼서 뚝딱 체크</li>
+</ul>
 </li>
-<li>
-<p>이런거 레이어 별로 탐색하면서 Queue에서 빼서 뚝딱 체크</p>
-</li>
-<li>
-<p><strong>순회</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>순회</strong><ul>
 <li>전위 순회: 부모 -&gt; 왼 -&gt; 오</li>
 <li>중위 순회: 왼 -&gt; 부모 -&gt; 오</li>
-<li>
-<p>후위 순회: 왼 -&gt; 오 -&gt; 부모</p>
+<li>후위 순회: 왼 -&gt; 오 -&gt; 부모</li>
+</ul>
 </li>
-<li>
-<p><strong>DFS vs BFS</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DFS vs BFS</strong><ul>
 <li>DFS: 모든 경우의 수를 파악해야하는 경우</li>
-<li>
-<p>BFS: 최단 거리, 최단 경우의 수</p>
+<li>BFS: 최단 거리, 최단 경우의 수</li>
+</ul>
 </li>
-<li>
-<p><strong>그래프와 인접 행렬</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>그래프와 인접 행렬</strong><ol>
 <li>무방향 그래프<ul>
 <li><img alt="" src="../../images/2022-02-08-%EB%B0%A9%ED%96%A5%EA%B7%B8%EB%9E%98%ED%94%84.png" /></li>
 <li>(1-2), (1-3), (2-4), (3-4), (2-5) </li>
@@ -22978,6 +22978,8 @@
 <li>인접 행렬에서는 (1-2)의 경우 [1][2] 에 "2" 넣어주기</li>
 <li>인접 리스트에서는 Node를 만들어서 value/가중치 넣어주기</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 

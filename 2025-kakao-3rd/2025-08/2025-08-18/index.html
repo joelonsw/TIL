@@ -22931,7 +22931,7 @@
 <h3 id="2025-08-18">2025-08-18<a class="headerlink" href="#2025-08-18" title="Permanent link">&para;</a></h3>
 <h2 id="play-vs-spring-thin-jar-fat-jar">Play vs Spring 배포 프로세스 비교 (thin Jar, fat Jar)<a class="headerlink" href="#play-vs-spring-thin-jar-fat-jar" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Play Framework</strong></li>
+<li><strong>Play Framework</strong><ul>
 <li><code>sbt dist</code>로 배포할 파일 빌드하면 전통적인 방식의 배포판 구조 사용</li>
 <li><code>bin/</code>: 실행 스크립트 포함<ol>
 <li>스크립트는 실행환경 보고 (ex. OS, java 위치)</li>
@@ -22946,12 +22946,12 @@
 </ol>
 </li>
 <li><code>lib/</code>: 어플리케이션 코드 JAR와 모든 의존성 라이브러리 JAR들이 각각 파일로 들어있음</li>
-<li>
-<p><code>conf/</code>: 설정 파일(application.conf, routes)</p>
+<li><code>conf/</code>: 설정 파일(application.conf, routes)</li>
+</ul>
 </li>
-<li>
-<p><strong>SpringBoot</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>SpringBoot</strong><ul>
 <li><code>gradle bootJar</code>로 빌드하면 실행 가능한 <code>*.jar</code> 파일 생성</li>
 <li>생성된 <code>*.jar</code>에는 어플리케이션 코드 + 의존성 라이브러리 jar 들이 <code>BOOT-INF/lib</code> 폴더 안에 그대로 포함됨</li>
 <li><code>java -jar til.jar</code>와 같이 실행<ul>
@@ -22962,19 +22962,23 @@
 </li>
 <li>모든 준비 끝나면 로더가 사용자의 main 메서드 호출해 앱 실행</li>
 </ul>
+</li>
+</ul>
 <h2 id="rabbitmq-close-jvm-hang">rabbitMQ close jvm hang<a class="headerlink" href="#rabbitmq-close-jvm-hang" title="Permanent link">&para;</a></h2>
 <ul>
 <li>https://lists.rabbitmq.com/pipermail/rabbitmq-discuss/2011-November/016426.html</li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>단위 테스트에서 어플리케이션 컨텍스트 다시 로드할 때, 타 쓰레드에서 channel, connection 동시에 닫히면서 데드락 발생</li>
-<li>
-<p>테스트가 행이 걸려버리는 현상</p>
+<li>테스트가 행이 걸려버리는 현상</li>
+</ul>
 </li>
-<li>
-<p><strong>원인</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>원인</strong><ul>
 <li>서로 다른 스레드에서 <code>channel.close()</code>, <code>connection.close()</code> 동시에 호출되면 문제 생길 수 있음</li>
 <li>따라서 단일로 닫히도록 하자</li>
+</ul>
+</li>
 </ul>
 
 

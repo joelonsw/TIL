@@ -22986,43 +22986,50 @@
   - 대부분의 성능이 I/O (Network, File)로 인해 느려진다
   - Akka Dispatcher를 통해 성능 튜닝을 할 수 있다</p>
 <ul>
-<li><strong>디스패처란?</strong></li>
+<li><strong>디스패처란?</strong><ul>
 <li>쓰레드 풀에서 실행 가능한 쓰레드를 가져다가 처리할 메시지와 함께 액터에 전달하여 액터가 동작하도록 하는 엔진</li>
 <li>디스패처 설정을 통해 디스패처가 사용할 쓰레드 풀 관련 설정, 메일박스 설정 할 수 있음</li>
-<li>
-<p>어떻게 쓰레드와 메일박스를 처리할지에 따라 디스패처 종류도 나뉨</p>
-<ul>
-<li>Default Dispatcher</li>
+<li>어떻게 쓰레드와 메일박스를 처리할지에 따라 디스패처 종류도 나뉨<ul>
+<li>Default Dispatcher<ul>
 <li><img alt="" src="../../images/2023-09-26-default-dispatcher.png" /></li>
 <li>디폴트 디스패처가 액터와 메일박스로 부터 메시지를 고름</li>
 <li>액터와 메시지가 쓰레드에 실행을 위해 할당됨</li>
-<li>Pinned Dispatcher</li>
+</ul>
+</li>
+<li>Pinned Dispatcher<ul>
 <li><img alt="" src="../../images/2023-09-26-pinned-dispatcher.png" /></li>
 <li>핀드 디스패처가 액터와 메일박스로 부터 메시지를 고름</li>
 <li>액터와 메시지가 지정된 쓰레드에 실행을 위해 각각 할당됨</li>
-<li>Balancing Dispatcher</li>
+</ul>
+</li>
+<li>Balancing Dispatcher<ul>
 <li><img alt="" src="../../images/2023-09-26-balancing-dispatcher.png" /></li>
 <li>모든 액터가 같은 메일 박스 사용</li>
 <li>밸런싱 디스패처가 메일박스에서 메시지를, 액터를 고름</li>
 <li>액터와 메시지가 쓰레드에 실행을 위해 할당됨</li>
 </ul>
 </li>
-<li>
-<p><strong>Default Dispatcher</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Default Dispatcher</strong><ul>
 <li>actor-system이 가지고 있는 기본 Dispatcher</li>
-<li>
-<p>대부분 케이스 성능이 좋은 fork-join-executor를 사용</p>
+<li>대부분 케이스 성능이 좋은 fork-join-executor를 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>Dispatcher 종류</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Dispatcher 종류</strong><ul>
 <li>Dispatcher : ThreadPoolExecutor로는 fork-join-executor, thread-pool-executor가 있음</li>
-<li>
-<p>Pinned Dispatcher : Actor 1개당, 하나의 Thread-pool을 제공하는 디스패처. File, Network I/O에서 활용</p>
+<li>Pinned Dispatcher : Actor 1개당, 하나의 Thread-pool을 제공하는 디스패처. File, Network I/O에서 활용</li>
+</ul>
 </li>
-<li>
-<p><strong>Actor Dispatcher 세팅</strong>
+</ul>
+<ul>
+<li><strong>Actor Dispatcher 세팅</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>my-dispatcher {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  type = Dispatcher                 # 이벤트 기반의 디스패처
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  executor = &quot;fork-join-executor&quot;   # fork-join-executor를 ExecutionSerivce로 사용할게요
@@ -23033,10 +23040,10 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  }
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  throughput = 100                  # 다른 액터로 넘어가기 전에 처리할 메시지 최대 갯수. 1이 가장 균등 분배
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>}
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>코드 레벨 셋업</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>코드 레벨 셋업</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ActorRef myActor = system.actorOf(Props.create(MyActor.class), &quot;myactor&quot;)
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ActorRef myActor = system.actorOf(Props.create(MyActor.class).withDispatcher(&quot;my-dispatcher&quot;), &quot;myactor3&quot;)
 </code></pre></div>
@@ -23045,11 +23052,10 @@
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    dispatcher = my-dispatcher
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  }
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>}
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>서비스 로직이 Blocking인 경우 + 병목이라면...</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>서비스 로직이 Blocking인 경우 + 병목이라면...</strong><ul>
 <li>Blocking...<ul>
 <li>I/O 로직 (네트워크, File I/O)</li>
 <li>외부 서비스와의 연동 (REST API)</li>
@@ -23063,66 +23069,70 @@
 <li><strong>따라서 =&gt; Blocking 되는 서비스 로직은 다른 디스패처를 사용하자</strong></li>
 <li><strong>Blokcing이 있는 Actor 자체를 다른 Dispatcher로 활용</strong></li>
 </ul>
+</li>
+</ul>
 <h3 id="akka">복습해보는 Akka...<a class="headerlink" href="#akka" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>Akka는 Actor Model을 구현하였으며, 병렬/동시성 어플리케이션을 만들 때 쓰인다</p>
+<li><strong>개요</strong><ul>
+<li>Akka는 Actor Model을 구현하였으며, 병렬/동시성 어플리케이션을 만들 때 쓰인다</li>
+</ul>
 </li>
-<li>
-<p><strong>Actor Model</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Actor Model</strong><ul>
 <li>병렬 컴퓨팅을 위한 수학적 모델</li>
 <li>액터는 기본적인 유닛이며, 이는 메시지를 받고 액션을 수행하고 다른 액터에 메시지를 보낼 수 있다</li>
-<li>
-<p>액터는 고립되어 있으며, 오로지 메시지를 통해서만 소통할 수 있다. </p>
+<li>액터는 고립되어 있으며, 오로지 메시지를 통해서만 소통할 수 있다. </li>
+</ul>
 </li>
-<li>
-<p><strong>Akka Actor</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Akka Actor</strong><ul>
 <li>Akka에서 액터는 경량화되어 있고, 고립되어 있는 컴퓨터 유닛임</li>
 <li>Akka 액터는 고수준의 추상화를 제공하며, 병렬/분산 시스템을 만들기에 좋다</li>
 <li>Akka 액터는 그들의 고유 상태가 있고, 메시지를 비동기적으로 처리할 수 있다</li>
-<li>
-<p>Akka 액터는 위치 독립적이다. 이는 그들이 같은 JVM에서 돌아갈 수 있다는 것이며, 분산 시스템이면 여러 JVM에서도 돌아갈 수 있다</p>
+<li>Akka 액터는 위치 독립적이다. 이는 그들이 같은 JVM에서 돌아갈 수 있다는 것이며, 분산 시스템이면 여러 JVM에서도 돌아갈 수 있다</li>
+</ul>
 </li>
-<li>
-<p><strong>Actor Systems</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Actor Systems</strong><ul>
 <li>액터 시스템은 아카의 가장 고수준 컨테이너. 이는 액터의 생성/생명주기/감시를 수행한다</li>
 <li>각 액터 시스템은 액터를 위한 고유의 쓰레드풀 설정을 가진다. </li>
-<li>
-<p>액터 시스템은 아카 어플리케이션의 시작 시점에 생성된다</p>
+<li>액터 시스템은 아카 어플리케이션의 시작 시점에 생성된다</li>
+</ul>
 </li>
-<li>
-<p><strong>Message 전송</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Message 전송</strong><ul>
 <li>아카에서 액터는, 메시지를 주고 받으며 소통한다. 메시지 전송은 비동기적인 커뮤니케이션이다</li>
 <li>메시지는 불변이며, 직렬화가 가능한 어떤 객체라도 가능하다</li>
-<li>
-<p>액터는 메시지를 한번에 하나씩 처리하며 이는 그들의 행동을 추적하기 쉽게 만든다. </p>
+<li>액터는 메시지를 한번에 하나씩 처리하며 이는 그들의 행동을 추적하기 쉽게 만든다. </li>
+</ul>
 </li>
-<li>
-<p><strong>동시성 &amp; 병렬성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>동시성 &amp; 병렬성</strong><ul>
 <li>아카는 동시성/병렬성을 관리하는 것을 도와줘 액터가 동시적으로 일하도록 한다</li>
-<li>
-<p>액터는 여러 기계들 사이에 분산될 수 있으며, 분산시스템에서 병렬처리를 가능토록 한다</p>
+<li>액터는 여러 기계들 사이에 분산될 수 있으며, 분산시스템에서 병렬처리를 가능토록 한다</li>
+</ul>
 </li>
-<li>
-<p><strong>Fault Tolerance</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Fault Tolerance</strong><ul>
 <li>아카는 에러 처리를 빌트인으로 제공한다</li>
 <li>아카는 자식 액터를 어찌 처리할지 정의할 수 있다</li>
-<li>
-<p>이런 Fault Tolerance는 Akka가 고가용성을 유지하도록 도와준다</p>
+<li>이런 Fault Tolerance는 Akka가 고가용성을 유지하도록 도와준다</li>
+</ul>
 </li>
-<li>
-<p><strong>기타 Utils...</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>기타 Utils...</strong><ul>
 <li>Akka Cluster: 분산/클러스터 시스템 만들도록 도와줌</li>
 <li>Akka Persistence: 이벤트 소스 어플리케이션 모듈</li>
 <li>Akka Streams: 스트림 데이터 추상화</li>
+</ul>
+</li>
 </ul>
 
 

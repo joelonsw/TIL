@@ -22944,18 +22944,17 @@
   - Role-Based Access Control
   - 사용자, 그룹, 서비스 계정 (SA)에 클러스터 내의 리소스 접근을 제어하는 방법</p>
 <ul>
-<li><strong>Role</strong></li>
+<li><strong>Role</strong><ul>
 <li>특정 네임스페이스에 권한 부여를 정의</li>
-<li>
-<p>네임스페이스 내에 수행할 수 있는 행동, 그 행동이 적용될 리소스를 지정</p>
+<li>네임스페이스 내에 수행할 수 있는 행동, 그 행동이 적용될 리소스를 지정</li>
+</ul>
 </li>
-<li>
-<p><strong>RoleBinding</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>RoleBinding</strong><ul>
 <li>사용자/그룹/서비스 계정에 Role을 연결시키는 방법</li>
-<li>
-<p>네임스페이스 범위 내에서만 동작
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+<li>네임스페이스 범위 내에서만 동작
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RoleBinding</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-rolebinding</span>
@@ -22996,15 +22995,14 @@
 <a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Role</span>
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-role</span>
 <a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ClusterRole</strong></p>
-</li>
-<li>클러스터 전체에 걸쳐 권한을 정의</li>
-<li>
-<p>네임스페이스 전체를 다 사용할 수 있는 권한</p>
+</ul>
 <ul>
+<li><strong>ClusterRole</strong><ul>
+<li>클러스터 전체에 걸쳐 권한을 정의</li>
+<li>네임스페이스 전체를 다 사용할 수 있는 권한<ul>
 <li>모든 네임스페이스 수준의 리소스에 대한 권한도 부여할 수 있음.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
@@ -23017,11 +23015,15 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>ClusterRoleBinding</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ClusterRoleBinding</strong><ul>
 <li>사용자/그룹/서비스 계정에 ClusterRole을 연결</li>
 <li>namespace를 지정하는 부분이 별도로 없음!</li>
+</ul>
+</li>
 </ul>
 
 

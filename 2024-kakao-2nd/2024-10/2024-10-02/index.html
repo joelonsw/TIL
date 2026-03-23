@@ -22957,23 +22957,19 @@
 - <strong>컨테이닝 블록</strong>
   - 대부분은 가장 가까운 블록 레벨 조상의 컨텐츠 영역 (꼭 그런것은 아님!)</p>
 <ul>
-<li><strong>컨테이닝 블록 식별</strong></li>
-<li>position 속성에 따라 완전히 달라짐!!</li>
-<li>position: <code>static</code>, <code>relative</code>, <code>sticky</code><ul>
+<li><strong>컨테이닝 블록 식별</strong><ul>
+<li>position 속성에 따라 완전히 달라짐!!
+1. position: <code>static</code>, <code>relative</code>, <code>sticky</code><ul>
 <li>컨테이닝 블록은 가장 가까운 조상 블록 컨테이너 (<code>inline-block</code>, <code>block</code>, <code>list-item</code>)</li>
-<li>가장 가까우면서 서식 맥락을 형성하는 조상 요소의 콘텐츠 영역 경계 (<code>table</code>, <code>flex</code>, <code>grid</code>)</li>
-</ul>
-</li>
-<li>position: <code>absolute</code><ul>
-<li>position 속성 값이 static이 아닌, 가장 가까운 조상의 내부 여백 영역</li>
-</ul>
-</li>
-<li>position: <code>fixed</code><ul>
-<li>컨테이닝 블록은 뷰포트/페이지 영역(페이지로 나뉘는 매체)</li>
-</ul>
-</li>
-<li>position: <code>absolute</code> || <code>fixed</code> 의 경우, 다음 조건 중 하나를 만족하는 가장 가까운 조상이 컨테이닝 블록 될 수 있음<ul>
+<li>가장 가까우면서 서식 맥락을 형성하는 조상 요소의 콘텐츠 영역 경계 (<code>table</code>, <code>flex</code>, <code>grid</code>)
+2. position: <code>absolute</code></li>
+<li>position 속성 값이 static이 아닌, 가장 가까운 조상의 내부 여백 영역
+3. position: <code>fixed</code></li>
+<li>컨테이닝 블록은 뷰포트/페이지 영역(페이지로 나뉘는 매체)
+4. position: <code>absolute</code> || <code>fixed</code> 의 경우, 다음 조건 중 하나를 만족하는 가장 가까운 조상이 컨테이닝 블록 될 수 있음</li>
 <li>transform/perspective 속성이 none이 아님</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -22982,70 +22978,72 @@
 - <strong>position 부터...</strong>
   - 문서 상에 요소를 배치하는 방법 지정 (top, right, bottom, left)</p>
 <ul>
-<li><strong><code>static</code></strong></li>
+<li><strong><code>static</code></strong><ul>
 <li>요소를 일반적인 문서의 흐름에 따라 배치</li>
 <li>top/right/bottom/left/z-index 속성은 아무런 영향을 주지 않음</li>
-<li>
-<p>기본값!</p>
+<li>기본값!</li>
+</ul>
 </li>
-<li>
-<p><strong><code>relative</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>relative</code></strong><ul>
 <li>요소를 일반적인 문서의 흐름에 따라 배치하고, 자기 기준으로 top, right, bottom, left의 값에 따라 오프셋 적용<ul>
 <li>오프셋은 다른 요소에는 영향을 주지 않음</li>
 </ul>
 </li>
-<li>
-<p>차지하는 공간은 static 일때와 같음</p>
+<li>차지하는 공간은 static 일때와 같음</li>
+</ul>
 </li>
-<li>
-<p><strong><code>absolute</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>absolute</code></strong><ul>
 <li>일반적인 문서 흐름에서 제거 + 페이지 레이아웃 공간 배정 X</li>
 <li>가장 가까운 위치 지정 조상 요소에 대해 상대적으로 배치<ul>
 <li>조상 중 위치 지정 요소가 없다면, 컨테이닝 블록을 기준으로 삼음</li>
 </ul>
 </li>
 <li>최종 위치는 top/right/bottom/left 값이 지정</li>
-<li>
-<p>z-index의 값이 auto라면 새로운 쌓임 맥락 생성</p>
+<li>z-index의 값이 auto라면 새로운 쌓임 맥락 생성</li>
+</ul>
 </li>
-<li>
-<p><strong><code>fixed</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>fixed</code></strong><ul>
 <li>일반적인 문서 흐름에서 제거 + 페이지 레이아웃 공간 배정 X<ul>
 <li>요소의 조상 중 하나가 transform, perspective, filter 중 하나라도 none이 아니라면, 그 조상을 컨테이닝 블록으로 삼음</li>
 </ul>
 </li>
 <li>최종 위치는 top/right/bottom/left</li>
 <li>fixed는 요소의 컨테이닝 블록이 뷰포트의 초기 컨테이닝 블록</li>
-<li>
-<p>스크롤에 관계없이 특정 화면 지점에 고정되는 floating 요소를 생성할 수 있음</p>
+<li>스크롤에 관계없이 특정 화면 지점에 고정되는 floating 요소를 생성할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong><code>sticky</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>sticky</code></strong><ul>
 <li>요소를 문서 흐름에 따라 배치하고, 테이블 관련 요소를 포함해 가장 가까운 스크롤되는 조상과, 표 관련 요소 포함한 컨테이닝 블록 기준으로 top/bottom/right/left 에 따른 오프셋 적용</li>
 <li>스크롤 동작 (overflow: hidden/scroll/auto/overlay) 가 존재하는 가장 가까운 조상에 달라붙음. </li>
 <li>상대 위치(<code>static</code>) + 고정 위치(<code>fixed</code>) 합친 느낌<ul>
 <li>상대적으로 배치된 요소로 취급하다가, 주어진 경계선 지나면 고정위치</li>
 </ul>
 </li>
-<li>
-<p><code>sticky</code>가 의도대로 동작하려면, <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> 중 적어도 하나의 임계값 설정해야해!</p>
+<li><code>sticky</code>가 의도대로 동작하려면, <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> 중 적어도 하나의 임계값 설정해야해!</li>
+</ul>
 </li>
-<li>
-<p><strong>sticky 예시</strong>
+</ul>
+<ul>
+<li><strong>sticky 예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">.</span><span class="nc">btn-target-fold</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">sticky</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">.9</span><span class="p">;</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>원래는 요소 안에서 static 마냥 요소의 흐름대로 배치되어 있다가,</li>
 <li>sticky 영역이 설정된 bottom:0 에 도달하면 fixed 요소처럼 floating 하는 느낌을 준다. </li>
+</ul>
+</li>
 </ul>
 <h2 id="css-backdrop-filter">CSS backdrop-filter<a class="headerlink" href="#css-backdrop-filter" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter</em>
@@ -23054,17 +23052,13 @@
   - <code>backdrop-filter</code>: 요소 뒤 흐림/색상 시프트 등 그래픽 효과를 적용하는 속성
   - 요소 "뒤"에 적용하는 방식으로, 효과 확인을 위해서는 요소/요소의 배경을 적어도 반투명하게 설정해줄 것.</p>
 <ul>
-<li>
-<p><strong>기능</strong></p>
-<ul>
-<li><code>backdrop-filter: blur(10px)</code> : 뒤의 요소 블러 처리</li>
-<li><code>backdrop-filter: invert(80%)</code> : 뒤의 요소 색상 반전처리</li>
-<li><code>backdrop-filter: sepia(90%)</code> : 뒤의 요소 세피아(어두운 갈색) 처리</li>
+<li><strong>기능</strong>
+    - <code>backdrop-filter: blur(10px)</code> : 뒤의 요소 블러 처리
+    - <code>backdrop-filter: invert(80%)</code> : 뒤의 요소 색상 반전처리
+    - <code>backdrop-filter: sepia(90%)</code> : 뒤의 요소 세피아(어두운 갈색) 처리</li>
 </ul>
-</li>
-<li>
-<p><strong>blur는 어느정도가 적당할까?</strong></p>
-</li>
+<ul>
+<li><strong>blur는 어느정도가 적당할까?</strong><ul>
 <li>Tailwind CSS provides preset blur values that can serve as a good reference:<ul>
 <li>backdrop-blur-sm: 4px</li>
 <li>backdrop-blur: 8px</li>
@@ -23073,6 +23067,8 @@
 <li>backdrop-blur-xl: 24px</li>
 <li>backdrop-blur-2xl: 40px</li>
 <li>backdrop-blur-3xl: 64px</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

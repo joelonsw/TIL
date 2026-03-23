@@ -22909,49 +22909,51 @@
 <h3 id="2025-06-25">2025-06-25<a class="headerlink" href="#2025-06-25" title="Permanent link">&para;</a></h3>
 <h2 id="rabbitmq-3x-4x">RabbitMQ 3.x -&gt; 4.x<a class="headerlink" href="#rabbitmq-3x-4x" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>3.x 지원 중지</strong></li>
+<li><strong>3.x 지원 중지</strong><ul>
 <li><em>참고: https://www.rabbitmq.com/release-information#currently-supported</em></li>
-<li>
-<p>2025년 3월 현재 모든 3.x 버전의 community support가 종료 되었으며 이에 따라 커뮤니티의 지원을 더 이상 받을 수 없음.</p>
+<li>2025년 3월 현재 모든 3.x 버전의 community support가 종료 되었으며 이에 따라 커뮤니티의 지원을 더 이상 받을 수 없음.</li>
+</ul>
 </li>
-<li>
-<p><strong>3.x -&gt; 4.x 제거사항</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>3.x -&gt; 4.x 제거사항</strong><ul>
 <li>Classic Queue Mirroring 제거<ul>
 <li>성능저하, 관리 복잡성, 예측 불가한 장애 복구 등</li>
 </ul>
 </li>
-<li>
-<p>Classic Queue 금지</p>
-<ul>
+<li>Classic Queue 금지<ul>
 <li>단일 노드 메시지 저장하는데, 안정성/확정성/장애 복구 측면에서 사용 금지</li>
 </ul>
 </li>
-<li>
-<p><strong>3.x -&gt; 4.x 변경사항</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>3.x -&gt; 4.x 변경사항</strong><ul>
 <li><code>Quorom Queue</code>: Raft consensus 알고리즘 기반으로 고가용성 큐를 디폴트로 사용<ul>
 <li>여러 노드에 분산 저장 -&gt; 장애 시에도 데이터 손실 없이 복구 가능</li>
 <li>데이터 일관성이 classic queue보다 좋음</li>
-<li><code>at-least-once dead-lettering</code> 지원</li>
+<li><code>at-least-once dead-lettering</code> 지원<ul>
 <li>최소 한번 이상 처리된 후에서 실패한 메시지를 DLQ로 보낼 수 있음</li>
 </ul>
 </li>
-<li>
-<p>프로토콜 자체의 호환성은 유지되기에, 이관의 문제는 크게 없음. </p>
+</ul>
 </li>
-<li>
-<p><strong>Quorum Queue</strong></p>
+<li>프로토콜 자체의 호환성은 유지되기에, 이관의 문제는 크게 없음. </li>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Quorum Queue</strong><ul>
 <li>Raft 컨센서스 알고리즘에 기반을 둔 지속 가능/복제된 형태의 현대적 queue 타입</li>
 <li>고가용성/장애 대비 복제가 필요한 환경에서 디폴트로 고려</li>
 <li>데이터 안정성 + 신뢰할 수 있는 리더 선출 =&gt; classic queue의 해결책</li>
-<li>
-<p>at-least-once dead-lettering 사용 가능</p>
+<li>at-least-once dead-lettering 사용 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Virtual host (vhost)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Virtual host (vhost)</strong><ul>
 <li>RabbitMQ 내의 하나의 서버(브로커) 내에서 여러개의 논리적으로 완전히 분리된 메시징 환경 제공</li>
 <li>vhost는 독립적으로 Queue, Exchange, Binding, 사용자 권한 등 관리. 각 vhost 별 리소스/권한 분리됨</li>
 <li>특징<ol>
@@ -22965,6 +22967,8 @@
 <li>생성/관리: 콘솔에서 vhost 추가 가능</li>
 <li>접속: RabbitMQ 연결시 접속할 vhost 명시 가능. 권한 있어야만 연결 허용.</li>
 <li>유의점: vhost 별 queue/exchange 직접 연결 X</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -23060,9 +23060,11 @@
   - <strong>Docker build를 하는 시점</strong>에 이미지 생성 과정에서 특정 명령어 수행</p>
 <h3 id="_1">라운지용 도커파일<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Dockerfile에 JDK를 설치하는 과정을 기입했을 때, 매번 Docker build 시 마다 재 설치 되지 않을까 했지만...</li>
+<li>Dockerfile에 JDK를 설치하는 과정을 기입했을 때, 매번 Docker build 시 마다 재 설치 되지 않을까 했지만...<ul>
 <li>이미지 레이어 재사용으로 인해 그러진 않음. 캐싱된 레이어를 그대로 재사용</li>
 <li>파일 시스템에 변경이 가해질 때마다 이미지 레이어에 변경이 생김 (늘어감)</li>
+</ul>
+</li>
 <li><strong>Dockerfile</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># private 도커 레지스트리에서 rocky8 리눅스 가져오기</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">idock.dkao.io/kbase/rocky8:latest</span>

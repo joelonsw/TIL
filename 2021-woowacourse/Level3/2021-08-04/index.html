@@ -22954,78 +22954,56 @@
 <h2 id="spring-eventlistener">Spring EventListener<a class="headerlink" href="#spring-eventlistener" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://brunch.co.kr/@springboot/422#comment</em></li>
-<li>
-<p><strong>왜 필요해?</strong></p>
-<ul>
-<li>복잡한 도메인 의존성을 줄이기 위함</li>
-<li>A로직에 B로직이 필요한데 사실 A로직 입장에서 B로직이 핵심 역할이 아니야</li>
+<li><strong>왜 필요해?</strong>
+    - 복잡한 도메인 의존성을 줄이기 위함
+    - A로직에 B로직이 필요한데 사실 A로직 입장에서 B로직이 핵심 역할이 아니야</li>
 </ul>
-</li>
-<li>
-<p><strong>사용법</strong></p>
 <ul>
-<li>메서드 상단에 <code>@EventListener</code> 어노테이션을 선언해주자!</li>
-<li>매개변수에 Event클래스를 정의하자!</li>
-<li><img alt="" src="../../image/2021-08-06-eventListener.PNG" /></li>
+<li><strong>사용법</strong>
+    - 메서드 상단에 <code>@EventListener</code> 어노테이션을 선언해주자!
+    - 매개변수에 Event클래스를 정의하자!
+    - <img alt="" src="../../image/2021-08-06-eventListener.PNG" /></li>
 </ul>
-</li>
-<li>
-<p><strong>기선님 강의</strong></p>
 <ul>
-<li>ApplicationEventPublisher<ul>
-<li>이벤트 프로그래밍에 필요한 인터페이스 제공</li>
-</ul>
-</li>
-<li>스프링 4.2 이전
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyEvent</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ApplicationEvent</span><span class="w"> </span><span class="p">{</span>
+<li><strong>기선님 강의</strong>
+    - ApplicationEventPublisher
+        - 이벤트 프로그래밍에 필요한 인터페이스 제공
+    - 스프링 4.2 이전
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyEvent</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ApplicationEvent</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyEvent</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>이런 이벤트를 퍼블리싱 하는게 어플리케이션 컨텍스트한테 있어<ul>
-<li>자~ 이거 주입받자 (ApplicationEventPublisher)</li>
-<li>ApplicationEventPublisher.publishEvent(new MyEvent());</li>
-</ul>
-</li>
-<li>이제 이걸 받을 친구를 만들어주자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">MyEventHandler</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ApplicationListener</span><span class="o">&lt;</span><span class="n">MyEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+        - 이런 이벤트를 퍼블리싱 하는게 어플리케이션 컨텍스트한테 있어
+            - 자~ 이거 주입받자 (ApplicationEventPublisher)
+            - ApplicationEventPublisher.publishEvent(new MyEvent());
+        - 이제 이걸 받을 친구를 만들어주자
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">MyEventHandler</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ApplicationListener</span><span class="o">&lt;</span><span class="n">MyEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onApplicationEvent</span><span class="p">(</span><span class="n">MyEvent</span><span class="p">);</span><span class="w"> </span><span class="c1">// 뚝딱받아서 처리</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>스프링 4.2 이후<ul>
-<li>필요없는 상속 멈춰!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyEvent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//빈 아니야</span>
+</code></pre></div>
+    - 스프링 4.2 이후
+        - 필요없는 상속 멈춰!
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyEvent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//빈 아니야</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyEvent</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">//그냥 이렇게!</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>POJO 기반!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Component</span><span class="w"> </span><span class="c1">//빈등록</span>
+</code></pre></div>
+        - POJO 기반!
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Component</span><span class="w"> </span><span class="c1">//빈등록</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">class</span> <span class="nc">MyEventHandler</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">//@EventListener //듣자!</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onApplicationEvent</span><span class="p">(</span><span class="n">MyEvent</span><span class="p">);</span><span class="w"> </span><span class="c1">// 뚝딱받아서 처리</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>이벤트 핸들러 여러가지<ul>
-<li>이벤트 발생시 리스닝하고 있는거 다 실행</li>
-<li>순차적으로 실행됨 (뭐가 먼전진 모르겠어)</li>
-<li>순서 중요하면 <code>@Order()</code>로 순서 지정하자</li>
-</ul>
-</li>
-<li><code>@Async</code> 각각의 쓰레드 풀에서 따로 돌아<ul>
-<li>따라서 <code>@Order</code>가 무의미해</li>
-<li>메인에서 <code>@EnableAsync</code>로 뚝딱 해주자</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>스프링이 기본으로 제공하는 이벤트들<ul>
-<li>ContextRefreshedEvent() </li>
-<li>ContextClosedEvent() </li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+        - 이벤트 핸들러 여러가지
+            - 이벤트 발생시 리스닝하고 있는거 다 실행
+            - 순차적으로 실행됨 (뭐가 먼전진 모르겠어)
+            - 순서 중요하면 <code>@Order()</code>로 순서 지정하자
+        - <code>@Async</code> 각각의 쓰레드 풀에서 따로 돌아
+            - 따라서 <code>@Order</code>가 무의미해
+            - 메인에서 <code>@EnableAsync</code>로 뚝딱 해주자
+    - 스프링이 기본으로 제공하는 이벤트들
+        - ContextRefreshedEvent() 
+        - ContextClosedEvent() </li>
 </ul>
 <h2 id="transactionaleventlistener"><code>@TransactionalEventListener</code><a class="headerlink" href="#transactionaleventlistener" title="Permanent link">&para;</a></h2>
 <h2 id="cascade">CASCADE<a class="headerlink" href="#cascade" title="Permanent link">&para;</a></h2>

@@ -22909,45 +22909,59 @@
 <h3 id="2022-03-04">2022-03-04<a class="headerlink" href="#2022-03-04" title="Permanent link">&para;</a></h3>
 <h2 id="cryptohows">CryptoHows 깃 브랜치 전략<a class="headerlink" href="#cryptohows" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>기본적으로 Git Flow</strong></li>
-<li>
-<p>MASTER (upstream) &lt;-PR- DEVELOP (upstream) &lt;-PR- FEATURE (origin)</p>
+<li><strong>기본적으로 Git Flow</strong><ul>
+<li>MASTER (upstream) &lt;-PR- DEVELOP (upstream) &lt;-PR- FEATURE (origin)</li>
+</ul>
 </li>
-<li>
-<p><strong>문제 상황</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>문제 상황</strong><ul>
 <li>Develop - Squash And Merge -&gt; Master <ul>
-<li>장점</li>
+<li>장점<ul>
 <li>커밋 이력이 간소하고 이쁨</li>
-<li>단점</li>
+</ul>
+</li>
+<li>단점<ul>
 <li>스머를 해버리면 커밋이 Develop께 다 합쳐져서 Master로 들어감</li>
 <li>Develop에 더 커밋이 이후에 생겨서 Master로 들어갈 때 충돌이 발생</li>
 <li>매번 충돌을 해결해줘야하는 문제가 생김</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>Develop - Rebase And Merge -&gt; Master<ul>
-<li>장점</li>
+<li>장점<ul>
 <li>커밋 이력이 동일하지 않을까?</li>
-<li>단점</li>
+</ul>
+</li>
+<li>단점<ul>
 <li>커밋 해시값이 동일하지 않았음</li>
 <li>아마 Merge를 하는 과정에서 해시가 바뀐것 같음</li>
 <li>충돌이 더 커짐</li>
 </ul>
 </li>
-<li>
-<p>Develop - Create Merge Commit -&gt; Master</p>
-<ul>
-<li>장점</li>
+</ul>
+</li>
+<li>Develop - Create Merge Commit -&gt; Master<ul>
+<li>장점<ul>
 <li>커밋 하나에 deploy의 개념을 담을 수 있음</li>
-<li>단점</li>
+</ul>
+</li>
+<li>단점<ul>
 <li>Develop에 비해 한개의 커밋이 더생김</li>
 </ul>
 </li>
-<li>
-<p><strong>합의점</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>합의점</strong><ul>
 <li>Create Merge Commit 활용토록 함<ul>
 <li>Master에 생긴 하나의 커밋을 그냥 Develop에서 떙겨와서 Develop에 푸시해두도록 함</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

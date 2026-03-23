@@ -22977,152 +22977,88 @@
 <ul>
 <li><img alt="" src="../../image/jvmjrejdk-2021-05-23.PNG" /></li>
 <li><img alt="" src="../../image/java-run-process-2021-05-23.png" /></li>
-<li><strong>JVM</strong><ul>
-<li>Java Bytecode를 어떻게 실행할지에 대한 표준 Spec!<ul>
-<li>따라서 여러 JVM 구현체들이 많음!<ul>
-<li>JVM 벤더: 오라클, 아마존, Azul...</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>플랫폼에 종속적</li>
-<li>Java Bytecode는 인터프리터/JIT 컴파일러를 통해 OS에 알맞는 머신코드로 변경</li>
-</ul>
-</li>
-<li><strong>JRE</strong><ul>
-<li>Java 어플리케이션을 "실행"할 수 있도록 구성된 배포판<ul>
-<li>javac 같은 컴파일러 없음</li>
-</ul>
-</li>
-<li>저기 사진에 런타임 환경을 담당하나 보다!<ul>
-<li>JVM + 런타임 환경에 필요한 리소스</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>JDK</strong><ul>
-<li>JRE + 개발에 필요한 툴<ul>
-<li>javac 같은 컴파일러!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>JAR</strong><ul>
-<li>여러개의 자바 클래스 파일 + 관련 리소스 (텍스트/그림/메타데이터)를 하나의 파일로 모아 배포하기 위한 SW 패키지 </li>
-</ul>
-</li>
+<li><strong>JVM</strong>
+    - Java Bytecode를 어떻게 실행할지에 대한 표준 Spec!
+        - 따라서 여러 JVM 구현체들이 많음!
+            - JVM 벤더: 오라클, 아마존, Azul...
+    - 플랫폼에 종속적
+    - Java Bytecode는 인터프리터/JIT 컴파일러를 통해 OS에 알맞는 머신코드로 변경</li>
+<li><strong>JRE</strong>
+    - Java 어플리케이션을 "실행"할 수 있도록 구성된 배포판
+        - javac 같은 컴파일러 없음
+    - 저기 사진에 런타임 환경을 담당하나 보다!
+        - JVM + 런타임 환경에 필요한 리소스</li>
+<li><strong>JDK</strong>
+    - JRE + 개발에 필요한 툴
+        - javac 같은 컴파일러!</li>
+<li><strong>JAR</strong>
+    - 여러개의 자바 클래스 파일 + 관련 리소스 (텍스트/그림/메타데이터)를 하나의 파일로 모아 배포하기 위한 SW 패키지 </li>
 </ul>
 <h2 id="jvm">JVM 구조<a class="headerlink" href="#jvm" title="Permanent link">&para;</a></h2>
 <ul>
 <li><img alt="" src="../../image/jvm-2021-05-24.PNG" /></li>
-<li><strong>클래스 로더</strong><ul>
-<li>.class 파일에서 바이트코드를 읽고, 메모리에 저장!</li>
-<li>로딩/링크/초기화 과정 거침</li>
+<li><strong>클래스 로더</strong>
+    - .class 파일에서 바이트코드를 읽고, 메모리에 저장!
+    - 로딩/링크/초기화 과정 거침</li>
+<li><strong>메모리</strong>
+    - 전체 thread 공유 자원 
+        - &lt;메소드&gt;
+            - 클래스 수준의 정보들을 저장
+                - 클래스 이름 / 부모 클래스 이름 / 메서드 / 변수
+        - &lt;힙&gt;
+            - 객체를 저장, 실제 인스턴스
+    - thread에서만 공유
+        - &lt;스택&gt;
+            - 쓰레드마다 런타임 스택 만들어 그 안에 "메서드 호출"을 스택 프레임이라는 블럭으로 쌓음
+        - <PC>
+            - 쓰레드 내 현재 실행할 스택 프레임을 가리키는 포인터
+        - &lt;네이티브 메서드 스택&gt;
+            - native method를 수행할 수 있는 스택</li>
 </ul>
-</li>
-<li>
-<p><strong>메모리</strong></p>
 <ul>
-<li>전체 thread 공유 자원 <ul>
-<li>&lt;메소드&gt;<ul>
-<li>클래스 수준의 정보들을 저장<ul>
-<li>클래스 이름 / 부모 클래스 이름 / 메서드 / 변수</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>&lt;힙&gt;<ul>
-<li>객체를 저장, 실제 인스턴스</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>thread에서만 공유<ul>
-<li>&lt;스택&gt;<ul>
-<li>쓰레드마다 런타임 스택 만들어 그 안에 "메서드 호출"을 스택 프레임이라는 블럭으로 쌓음</li>
-</ul>
-</li>
-<li><PC><ul>
-<li>쓰레드 내 현재 실행할 스택 프레임을 가리키는 포인터</li>
-</ul>
-</li>
-<li>&lt;네이티브 메서드 스택&gt;<ul>
-<li>native method를 수행할 수 있는 스택</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>실행 엔진</strong></p>
-<ul>
-<li>인터프리터: 바이트 코드 한줄씩 읽으며 네이티브 코드로</li>
-<li>JIT 컴파일러: 인터프리터 반복 코드를 미리 네이티브 코드로 바꿔줌</li>
-<li>GC<ul>
-<li>throughput vs stop-the-world</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>실행 엔진</strong>
+    - 인터프리터: 바이트 코드 한줄씩 읽으며 네이티브 코드로
+    - JIT 컴파일러: 인터프리터 반복 코드를 미리 네이티브 코드로 바꿔줌
+    - GC
+        - throughput vs stop-the-world</li>
 </ul>
 <h2 id="_1">자바 파일 읽기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>getClass()</strong><ul>
-<li><em>참고: https://ifuwanna.tistory.com/282</em></li>
-<li>클래스에 대한 메타 속성 정보를 얻을 수 있음<ul>
-<li>객체를 통해 클래스의 정보를 분석! <em>(리플렉션)</em>    </li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>getClass()</strong>
+    - <em>참고: https://ifuwanna.tistory.com/282</em>
+    - 클래스에 대한 메타 속성 정보를 얻을 수 있음
+        - 객체를 통해 클래스의 정보를 분석! <em>(리플렉션)</em>    </li>
 <li><strong>getResource()</strong></li>
 <li><strong>getPath()</strong></li>
 </ul>
 <h2 id="sql-mapper-vs-jdbc">SQL Mapper vs JDBC<a class="headerlink" href="#sql-mapper-vs-jdbc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=VTqqZSuSdOk&amp;t=23s</em></li>
-<li>
-<p>JDBC 만을 이용하여 영속성 계층 구현</p>
+<li>JDBC 만을 이용하여 영속성 계층 구현
+    - <strong>Java DataBase Connectivity</strong>
+        - 자바 애플리케이션에서 DBMS의 종류에 상관없이 하나의 JDBC API를 이용해 DB 작업 처리
+    - 처리순서
+        0. Load DB Driver
+        1. getConnection()
+        2. createStatement()
+        3. SELECT: executeQuery(), INSERT/UPDATE/DELETE: executeUpdate()
+        4. next(), getXXX()
+        5. close()
+    - 단점
+        - 간단한 SQL 실행에도 중복코드 반복 사용
+        - 자원 반환 신경써야함</li>
+</ul>
 <ul>
-<li><strong>Java DataBase Connectivity</strong><ul>
-<li>자바 애플리케이션에서 DBMS의 종류에 상관없이 하나의 JDBC API를 이용해 DB 작업 처리</li>
-</ul>
-</li>
-<li>처리순서<ol>
-<li>Load DB Driver</li>
-<li>getConnection()</li>
-<li>createStatement()</li>
-<li>SELECT: executeQuery(), INSERT/UPDATE/DELETE: executeUpdate()</li>
-<li>next(), getXXX()</li>
-<li>close()</li>
-</ol>
-</li>
-<li>단점<ul>
-<li>간단한 SQL 실행에도 중복코드 반복 사용</li>
-<li>자원 반환 신경써야함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Persistence Framework를 통한 영속성 계층 구현</p>
-<ul>
-<li>JDBC 프로그래밍의 복잡함이나 번거로움 없이 간단한 작업만으로 DB와 연동되는 시스템 빠르게 개발</li>
-<li><strong>SQL Mapper</strong><ul>
-<li>SQL을 직접 작성</li>
-<li>SQL문과 객체의 필드를 매핑하여 데이터를 객체화</li>
-<li>JDBC Template!</li>
-</ul>
-</li>
-<li>핵심적인 로직만 구현, 다른 자원반환, 준비, 예외처리는 JdbcTemplate한테 위임</li>
-<li>장점<ul>
-<li>쿼리 수행 결과와 객체의 필드를 매핑, RowMapper 재활용</li>
-<li>JDBC에서 반복적으로 해야하는 많은 작업 대신해줌</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>Persistence Framework를 통한 영속성 계층 구현
+    - JDBC 프로그래밍의 복잡함이나 번거로움 없이 간단한 작업만으로 DB와 연동되는 시스템 빠르게 개발
+    - <strong>SQL Mapper</strong>
+        - SQL을 직접 작성
+        - SQL문과 객체의 필드를 매핑하여 데이터를 객체화
+        - JDBC Template!
+    - 핵심적인 로직만 구현, 다른 자원반환, 준비, 예외처리는 JdbcTemplate한테 위임
+    - 장점
+        - 쿼리 수행 결과와 객체의 필드를 매핑, RowMapper 재활용
+        - JDBC에서 반복적으로 해야하는 많은 작업 대신해줌</li>
 </ul>
 
 

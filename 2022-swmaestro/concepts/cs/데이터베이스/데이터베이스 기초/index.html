@@ -22935,13 +22935,13 @@
 <h3 id="_1">데이터베이스 기초<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <h2 id="_2">관계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>1:1</strong></li>
-<li>
-<p>Ticket과 OrderDetail이 1:1 관계</p>
+<li><strong>1:1</strong><ul>
+<li>Ticket과 OrderDetail이 1:1 관계</li>
+</ul>
 </li>
-<li>
-<p><strong>1:N</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>1:N</strong><ul>
 <li>Order와 OrderDetail이 1:N 관계</li>
 <li>하나의 Order가 들어오면, 각각의 OrderDetail이 생성됨</li>
 <li>Order에는...<ul>
@@ -22951,48 +22951,52 @@
 <li>List<OrderDetail\> => 자식</li>
 </ul>
 </li>
-<li>
-<p>OrderDetail에는...</p>
-<ul>
+<li>OrderDetail에는...<ul>
 <li>OrderStatus</li>
 <li>txHash =&gt; 결국 티켓 한장씩 보내주는건 개별 트랜잭션 이니까...</li>
 <li>Ticket =&gt; 티켓 한장에 대한 주문 상세</li>
 <li>Order =&gt; 부모</li>
 </ul>
 </li>
-<li>
-<p><strong>M:N</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>M:N</strong><ul>
 <li>놀토에서 FeedTech</li>
 <li>하나의 Feed에서 여러개의 Tech를 가지고, </li>
 <li>하나의 Tech가 여러개의 Feed에서 쓰일 수 있으니, </li>
 <li>해당 정보를 담아둔 중개 테이블을 만들자</li>
 </ul>
+</li>
+</ul>
 <h2 id="_3">키<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>기본키(PK)</strong></li>
-<li>
-<p>유일성/최소성을 만족</p>
+<li><strong>기본키(PK)</strong><ul>
+<li>유일성/최소성을 만족</li>
+</ul>
 </li>
-<li>
-<p><strong>자연키</strong></p>
+</ul>
+<ul>
+<li><strong>자연키</strong><ul>
+<li>중복되지 않는 것을 자연스레 뽑다가 나오는 키...?</li>
+</ul>
 </li>
-<li>
-<p>중복되지 않는 것을 자연스레 뽑다가 나오는 키...?</p>
-</li>
-<li>
-<p><strong>인조키</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>인조키</strong><ul>
 <li>인위적으로 유저 아이디를 부여하여 고유식별자 부여</li>
 <li>MySQL Auto-Increment</li>
-<li>
-<p>기본키는 인조키 방식으로 설정</p>
+<li>기본키는 인조키 방식으로 설정</li>
+</ul>
 </li>
-<li>
-<p><strong>외래키(FK)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>외래키(FK)</strong><ul>
 <li>다른 테이블의 기본키를 그대로 참조하는 값으로 개체와의 관계를 식별하는데 사용</li>
 <li>중복되어도 오케이!</li>
+</ul>
+</li>
 </ul>
 
 

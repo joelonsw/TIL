@@ -22910,51 +22910,33 @@
 <h2 id="jpa">JPA<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/playlist?list=PL9mhQYIlKEhfpMVndI23RwWTL9-VL-B7U</em></li>
-<li>
-<p><strong>왜 JPA 배우지?</strong></p>
+<li><strong>왜 JPA 배우지?</strong>
+    - "객체를 관계형 DB에 저장"
+    1. SQL 중심의 개발...
+        - SQL 의존적인 개발하게 됨
+        - Dao에서 반환된 객체 자체를 100% 믿고 사용할 수 있나? 
+    2. 패러다임 불일치
+        - 객체와 관계형 DB는 다른 사상을 가짐
+            - 객체는 상속 O, DB는 상속 X
+            - 객체의 연관관계는 단방향성, DB의 연관관계는 양방향성
+            - 객체의 데이터 타입은 객체, DB의 데이터 타입은 객체ID
+    - 객체를 자바 컬렉션에 저장하듯 저장할 수는 없을까?</li>
+</ul>
 <ul>
-<li>"객체를 관계형 DB에 저장"</li>
-<li>SQL 중심의 개발...<ul>
-<li>SQL 의존적인 개발하게 됨</li>
-<li>Dao에서 반환된 객체 자체를 100% 믿고 사용할 수 있나? </li>
+<li><strong>JPA의 장점</strong>
+    - 신뢰할 수 있는 Entity
+        - 동일성 보장
+    - Collection을 쓰듯 DB 저장
+    - JPA 성능 최적화 가능
+        - 1차 캐시 도입
+        - Transaction을 지원하는 쓰기 지연
+            - 지연로딩, 즉시로딩</li>
 </ul>
-</li>
-<li>패러다임 불일치<ul>
-<li>객체와 관계형 DB는 다른 사상을 가짐<ul>
-<li>객체는 상속 O, DB는 상속 X</li>
-<li>객체의 연관관계는 단방향성, DB의 연관관계는 양방향성</li>
-<li>객체의 데이터 타입은 객체, DB의 데이터 타입은 객체ID</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>객체를 자바 컬렉션에 저장하듯 저장할 수는 없을까?</li>
-</ul>
-</li>
-<li>
-<p><strong>JPA의 장점</strong></p>
 <ul>
-<li>신뢰할 수 있는 Entity<ul>
-<li>동일성 보장</li>
-</ul>
-</li>
-<li>Collection을 쓰듯 DB 저장</li>
-<li>JPA 성능 최적화 가능<ul>
-<li>1차 캐시 도입</li>
-<li>Transaction을 지원하는 쓰기 지연<ul>
-<li>지연로딩, 즉시로딩</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JPA 실습</strong></p>
-<ul>
-<li>여러 Database 방언 지원<ul>
-<li>resources/META-INF/persistence.xml에서 사용할 DB를 등록해주자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<li><strong>JPA 실습</strong>
+    - 여러 Database 방언 지원
+        - resources/META-INF/persistence.xml에서 사용할 DB를 등록해주자
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">&lt;persistence</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://xmlns.jcp.org/xml/ns/persistence&quot;</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;2.2&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&lt;persistence-unit</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;hello&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="nt">&lt;properties&gt;</span>
@@ -22973,11 +22955,9 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">      </span><span class="nt">&lt;/properties&gt;</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="nt">&lt;/persistence-unit&gt;</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="nt">&lt;/persistence&gt;</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>EntityManagerFactory?
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - EntityManagerFactory?
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">EntityManagerFactory</span><span class="w"> </span><span class="n">emf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persistence</span><span class="p">.</span><span class="na">createEntityManagerFactory</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">EntityManager</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emf</span><span class="p">.</span><span class="na">createEntityManager</span><span class="p">();</span>
@@ -23001,37 +22981,27 @@
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">        </span><span class="n">emf</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>Persistence.xml을 읽어 설정 정보 조회... Persistence 생성</li>
-<li>Persistence.createEntityManagerFactory를 통해 EntityManagerFactory 생성<ul>
-<li>EntityManagerFactory는 하나만 생성해 어플리케이션 전체에서 공유</li>
-</ul>
-</li>
-<li>EntityManagerFactory를 통해 EntityManager를 생성<ul>
-<li>JPA 모든 Data 변경은 트랜잭션 내부에서 실행</li>
-<li>EntityManager는 쓰레드 간 교류 XXX</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>DB 스키마 자동 생성해보기<ul>
-<li><property name="hibernate.hbm2ddl.auto" value="create"/></li>
-<li>persistence.xml에서 다음과 같은 프로퍼티를 추가해주자</li>
-<li>value에 따라,,,<ul>
-<li>create: 기존 테이블 삭제 후 재생성</li>
-<li>create-drop: create와 동일 + 종료 시 테이블 drop</li>
-<li>update: 변경문만 반영</li>
-<li>validate: Entity-Table 매핑 확인</li>
-<li>none: 사용 X</li>
-</ul>
-</li>
-<li>개발 초기: create/update</li>
-<li>테스트 서버: update/validate</li>
-<li>스테이징/운영: validate/none</li>
-</ul>
-</li>
-<li>어노테이션을 통한 Entity - Table 매핑
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Entity</span><span class="w"> </span><span class="c1">//자 Entity 생성합니다</span>
+</code></pre></div>
+        - Persistence.xml을 읽어 설정 정보 조회... Persistence 생성
+        - Persistence.createEntityManagerFactory를 통해 EntityManagerFactory 생성
+            - EntityManagerFactory는 하나만 생성해 어플리케이션 전체에서 공유
+        - EntityManagerFactory를 통해 EntityManager를 생성
+            - JPA 모든 Data 변경은 트랜잭션 내부에서 실행
+            - EntityManager는 쓰레드 간 교류 XXX
+    - DB 스키마 자동 생성해보기
+         - <property name="hibernate.hbm2ddl.auto" value="create"/>
+         - persistence.xml에서 다음과 같은 프로퍼티를 추가해주자
+         - value에 따라,,,
+            - create: 기존 테이블 삭제 후 재생성
+            - create-drop: create와 동일 + 종료 시 테이블 drop
+            - update: 변경문만 반영
+            - validate: Entity-Table 매핑 확인
+            - none: 사용 X
+        - 개발 초기: create/update
+        - 테스트 서버: update/validate
+        - 스테이징/운영: validate/none
+    - 어노테이션을 통한 Entity - Table 매핑
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Entity</span><span class="w"> </span><span class="c1">//자 Entity 생성합니다</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Member</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nd">@Id</span><span class="w"> </span><span class="c1">//PK로 이걸 쓸거에요</span>
@@ -23053,18 +23023,12 @@
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="nd">@Enumerated</span><span class="p">(</span><span class="n">EnumType</span><span class="p">.</span><span class="na">STRING</span><span class="p">)</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MemberType</span><span class="w"> </span><span class="n">memberType</span><span class="p">;</span>
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>식별자 Mapping 방법<ul>
-<li>IDENTITY: DB에 위임</li>
-<li>SEQUENCE: DB sequence object 사용</li>
-<li>TABLE: 키 생성용 테이블 사용</li>
-<li>AUTO: 기본값</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+        - 식별자 Mapping 방법
+            - IDENTITY: DB에 위임
+            - SEQUENCE: DB sequence object 사용
+            - TABLE: 키 생성용 테이블 사용
+            - AUTO: 기본값</li>
 </ul>
 
 

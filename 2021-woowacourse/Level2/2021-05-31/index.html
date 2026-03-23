@@ -22968,35 +22968,27 @@
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">                </span><span class="sc">&#39;}&#39;</span><span class="p">;</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>여기에서 기본 생성자 Car()를 빼버리면 직렬화에 실패해버림 <em>(리플렉션을 통해 값을 주입시켜주는 것은 아닐까?)</em>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Cannot construct instance of `Car` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+</code></pre></div>
+    - 여기에서 기본 생성자 Car()를 빼버리면 직렬화에 실패해버림 <em>(리플렉션을 통해 값을 주입시켜주는 것은 아닐까?)</em>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Cannot construct instance of `Car` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> at [Source: (String)&quot;{ &quot;color&quot; : &quot;Black&quot;, &quot;type&quot; : &quot;BMW&quot; }&quot;; line: 1, column: 3]
-</code></pre></div><ul>
-<li>해결책1. 기본생성자 만들기</li>
-<li>해결책2. <code>@JsonProperty</code>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="nf">Car2</span><span class="p">(</span>
+</code></pre></div>
+        - 해결책1. 기본생성자 만들기
+        - 해결책2. <code>@JsonProperty</code>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="nf">Car2</span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;color&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">color</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>해결책3. <code>@ConstructorProperties</code></li>
+</code></pre></div>
+        - 해결책3. <code>@ConstructorProperties</code></li>
+<li><strong>Getter는 필수다? <em>(JSON-&gt;JavaObject)</em></strong>
+    - 그냥 JavaObject에서는 뻗음
+    - <code>@JsonProperty</code>하면 안뻗음</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Getter는 필수다? <em>(JSON-&gt;JavaObject)</em></strong></p>
 <ul>
-<li>그냥 JavaObject에서는 뻗음</li>
-<li><code>@JsonProperty</code>하면 안뻗음</li>
-</ul>
-</li>
-<li>
-<p><strong><code>@JsonProperty</code></strong></p>
-</li>
+<li><strong><code>@JsonProperty</code></strong></li>
 </ul>
 <h2 id="swagger">Swagger<a class="headerlink" href="#swagger" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23019,15 +23011,11 @@
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>각 Controller에 <code>@Api(tags = "설명설명")</code>을 붙여 설명 제공</li>
-<li>PathController 같은 경우 노출을 막기 위해 <code>@ApiIgnore</code> 설정해둠</li>
-<li>현재 배포된 Swagger 문서<ul>
-<li><em>https://joel-subway.kro.kr/swagger-ui.html</em></li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 각 Controller에 <code>@Api(tags = "설명설명")</code>을 붙여 설명 제공
+    - PathController 같은 경우 노출을 막기 위해 <code>@ApiIgnore</code> 설정해둠
+    - 현재 배포된 Swagger 문서
+        - <em>https://joel-subway.kro.kr/swagger-ui.html</em></li>
 </ul>
 
 

@@ -22932,39 +22932,41 @@
 <h2 id="autoconfiguremockmvc"><code>@AutoConfigureMockMvc</code><a class="headerlink" href="#autoconfiguremockmvc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://we1cometomeanings.tistory.com/65</em></li>
-<li><strong>공통점</strong></li>
-<li>
-<p>웹 어플리케이션에서 컨트롤러 테스트 할 때 사용</p>
+<li><strong>공통점</strong><ul>
+<li>웹 어플리케이션에서 컨트롤러 테스트 할 때 사용</li>
+</ul>
 </li>
-<li>
-<p><strong><code>@WebMvcTest</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>@WebMvcTest</code></strong><ul>
 <li>웹에서 테스트하기 힘든 컨트롤러 테스트</li>
 <li>시큐리티/필터 까지 자동으로 테스트</li>
 <li><code>@MockBean</code> + Controller Bean 조합</li>
-<li>
-<p><code>@Service</code>, <code>@Component</code>, <code>@Repository</code> 사용 불가</p>
+<li><code>@Service</code>, <code>@Component</code>, <code>@Repository</code> 사용 불가</li>
+</ul>
 </li>
-<li>
-<p><strong><code>@AutoConfigureMockMvc</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>@AutoConfigureMockMvc</code></strong><ul>
 <li><code>@Service</code>, <code>@Repository</code> 객체도 메모리에 모두 올림</li>
 <li>MockMvc 보다 세밀하게 제어하기 위해 사용</li>
 <li>어플리케이션 전체에 대한 테스트에 쓰임 =&gt; <code>@SpringBootTest</code> 갬성</li>
 </ul>
+</li>
+</ul>
 <h2 id="connectable-controller-test">Connectable Controller Test<a class="headerlink" href="#connectable-controller-test" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>@WebMvcTest</code></strong></li>
+<li><strong><code>@WebMvcTest</code></strong><ul>
 <li>controllers를 명시하여 어떤 컨트롤러를 로딩할지 명시</li>
-<li>
-<p><code>@Component</code>로 등록되어있는 빈은 <code>@WebMvcTest</code>로 로딩 못함</p>
-<ul>
+<li><code>@Component</code>로 등록되어있는 빈은 <code>@WebMvcTest</code>로 로딩 못함<ul>
 <li>따라서 JwtAuthenticationFilter 등은 Exclude 해주자 -&gt; 대신 <code>@WithMockUser</code> 도입</li>
 </ul>
 </li>
-<li>
-<p><strong><code>@MockBean(JpaMetamodelMappingContext.class)</code></strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong><code>@MockBean(JpaMetamodelMappingContext.class)</code></strong><ul>
 <li><em>참고: https://1-7171771.tistory.com/136</em> </li>
 <li>없으면 JPA metamodel must not be empty! 에러가 뜸</li>
 <li>기본적으로 <code>@WebMvcTest</code>는 JPA 생성 기능이 없음<ul>
@@ -22972,6 +22974,8 @@
 </ul>
 </li>
 <li>JpaMetamodelMappingContext를 모킹하면서 해결하자</li>
+</ul>
+</li>
 </ul>
 
 

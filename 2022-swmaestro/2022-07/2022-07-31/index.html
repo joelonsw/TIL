@@ -22911,14 +22911,14 @@
 <ul>
 <li><em>참고: https://victorydntmd.tistory.com/176</em></li>
 <li><em>참고: https://victorydntmd.tistory.com/177</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Interceptor: 컨트롤러에 들어오는 요청 HttpRequest와 컨트롤러가 응답하는 HttpResponse 가로채는 역할</li>
-<li>
-<p>Filter와 그 역할이 유사하지만, 둘이 다름</p>
+<li>Filter와 그 역할이 유사하지만, 둘이 다름</li>
+</ul>
 </li>
-<li>
-<p><strong>vs Filter</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>vs Filter</strong><ol>
 <li>호출 시점<ul>
 <li>Filter: DispatcherServlet 실행 전</li>
 <li>Interceptor: DispatcherServlet 실행 후</li>
@@ -22929,42 +22929,44 @@
 <li>Interceptor: spring-servlet.xml</li>
 </ul>
 </li>
-<li>
-<p>구현 방식</p>
-<ul>
+<li>구현 방식<ul>
 <li>Filter: web.xml</li>
 <li>Interceptor: 메서드 구현 필요</li>
 </ul>
 </li>
-<li>
-<p><strong>구현 방식</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>구현 방식</strong><ul>
 <li>HandlerInterceptor 인터페이스 구현<ul>
 <li>preHandle() : 컨트롤러가 호출되기 전에 실행</li>
 <li>postHandle() : 컨트롤러가 실행된 후에 호출</li>
 <li>afterCompletion() : 뷰까지 최종 결과 생성하고 실행</li>
-<li>각 메서드에서 true 반환시 다음 체인 실행</li>
+<li>각 메서드에서 true 반환시 다음 체인 실행<ul>
 <li>false 반환시 남은 인터셉터/컨트롤러 실행 X</li>
 </ul>
 </li>
-<li>
-<p>HandlerInterceptorAdapter 클래스 상속</p>
-<ul>
+</ul>
+</li>
+<li>HandlerInterceptorAdapter 클래스 상속<ul>
 <li>postHandle(), afterCompletion() 구현되어있음</li>
 <li>preHandle() 만 뚝딱 구현</li>
 </ul>
 </li>
-<li>
-<p><strong>어노테이션으로 접근 권한 조절</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>어노테이션으로 접근 권한 조절</strong><ul>
 <li>어노테이션 만들기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Retention</span><span class="p">(</span><span class="n">RUNTIME</span><span class="p">)</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Retention</span><span class="p">(</span><span class="n">RUNTIME</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Target</span><span class="p">(</span><span class="n">METHOD</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">Auth</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>인터셉터 만들기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthInterceptor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HandlerInterceptorAdapter</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthInterceptor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HandlerInterceptorAdapter</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">preHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="c1">// 1. handler 종류 확인</span>
@@ -22989,7 +22991,7 @@
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>WebMvcConfigurer 등록
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Configuration</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@RequiredArgsConstructor</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthWebMvcConfig</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">WebMvcConfigurer</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -23006,6 +23008,8 @@
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

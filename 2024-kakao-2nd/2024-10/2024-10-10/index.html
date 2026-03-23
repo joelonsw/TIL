@@ -23100,16 +23100,18 @@
 - <strong>개요</strong>
   - 쿠버네티스 어노테이션을 활용해 커스텀 행동 지정 가능</p>
 <ul>
-<li><strong>configuration-snippet</strong></li>
+<li><strong>configuration-snippet</strong><ul>
 <li>Nginx location에 redirect/rewrite를 포함한 다양한 설정 추가적으로 지정 가능</li>
-<li>
-<p>location 블럭에 지정되는 설정</p>
+<li>location 블럭에 지정되는 설정</li>
+</ul>
 </li>
-<li>
-<p><strong>server-snippet</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>server-snippet</strong><ul>
 <li>server block에 지정되는 설정</li>
 <li>각 호스트마다 하나만 사용될 수 있다는 의미...</li>
+</ul>
+</li>
 </ul>
 <h2 id="play">Play 빌드 방식<a class="headerlink" href="#play" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://www.playframework.com/documentation/3.0.x/BuildOverview</em>
@@ -23134,17 +23136,16 @@
     1. null을 대체하여 안전하게 사용
     2. 연속 체인에서 안정적인 사용</p>
 <ul>
-<li><strong>Option + Map</strong></li>
+<li><strong>Option + Map</strong><ul>
 <li>map은 Option 타입을 스스로 변경하여 적용</li>
-<li>
-<p>None이 map안으로 들어가면 계산이 취소되어 아무것도 안 함. </p>
+<li>None이 map안으로 들어가면 계산이 취소되어 아무것도 안 함. </li>
+</ul>
 </li>
-<li>
-<p><strong>Either</strong></p>
-</li>
-<li>
-<p>둘 중 하나의 값을 가질 수 있는 타입
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 제대로 된 값은 right, 뇌절은 left</span>
+</ul>
+<ul>
+<li><strong>Either</strong><ul>
+<li>둘 중 하나의 값을 가질 수 있는 타입
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 제대로 된 값은 right, 뇌절은 left</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">eitherTest</span><span class="p">(</span><span class="n">num</span><span class="p">:</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span><span class="w"> </span><span class="nc">Either</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="n">num</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">right</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -23153,24 +23154,27 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">eitherTest</span><span class="p">(</span><span class="nc">Some</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Either 활용하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Either 활용하기</strong><ul>
 <li>isRight / isLeft
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eitherTest</span><span class="p">(</span><span class="nc">Some</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eitherTest</span><span class="p">(</span><span class="nc">Some</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="p">.</span><span class="n">isRight</span><span class="p">)</span><span class="w"> </span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;Number is </span><span class="si">${</span><span class="n">test</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">get</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="p">.</span><span class="n">isLeft</span><span class="p">)</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;error </span><span class="si">${</span><span class="n">test</span><span class="p">.</span><span class="n">left</span><span class="p">.</span><span class="n">get</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 </code></pre></div></li>
 <li>pattern matching
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eitherExample</span><span class="p">(</span><span class="nc">Some</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eitherExample</span><span class="p">(</span><span class="nc">Some</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Right</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Left</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">err</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="scala-either">Scala Either<a class="headerlink" href="#scala-either" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://www.baeldung.com/scala/either-type</em>
@@ -23180,56 +23184,61 @@
     - compiler가 이를 트래킹 하는데 별다른 도움이 되지 않기 때문
   - 더 좋은 대안은 <code>Either[A, B]</code> 타입을 사용하는 것</p>
 <ul>
-<li><strong>Either Type에 대해서...</strong></li>
-<li>
-<p><code>Either[A, B]</code>는 타입 A나 타입 B를 가질 수 있는 것</p>
-<ul>
+<li><strong>Either Type에 대해서...</strong><ul>
+<li><code>Either[A, B]</code>는 타입 A나 타입 B를 가질 수 있는 것<ul>
 <li>정확히는 <code>Left[A]</code> 혹은 <code>Right[B]</code>가 될 수 있는 것</li>
-<li><code>Left[A]</code>를 에러로 지칭</li>
+<li><code>Left[A]</code>를 에러로 지칭<ul>
 <li>여기에 exception을 담고 있다면 <code>Try[T]</code>를 쓸 수도 있어</li>
+</ul>
+</li>
 <li><code>Right[B]</code>를 성공적인 결과로 지칭</li>
 </ul>
 </li>
-<li>
-<p><strong>example code</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>example code</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="nc">Either</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Right</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">test</span><span class="p">:</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">merge</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="scala">Scala의 예외처리<a class="headerlink" href="#scala" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://wonyong-jang.github.io/scala/2021/04/29/Scala-Option-Either-Try.html</em></p>
 <h3 id="1-option">1. Option<a class="headerlink" href="#1-option" title="Permanent link">&para;</a></h3>
 <ul>
-<li><img alt="" src="../../images/2024-10-10-option.png" /></li>
-<li>
-<p>값이 있으면 Some(value), 없으면 None</p>
+<li><img alt="" src="../../images/2024-10-10-option.png" /><ul>
+<li>값이 있으면 Some(value), 없으면 None</li>
+</ul>
 </li>
-<li>
-<p><strong>2가지 특징</strong></p>
-</li>
-<li>Type Safety: Option으로 감싼 값이기에, 매개변수를 통해 전달 =&gt; 타입 안정성 보장 가능</li>
-<li>
-<p>Functionally aware: Option은 버그를 적게 생성하는데 도움이 되는 함수형 프로그래밍 방법 제공. </p>
+</ul>
 <ul>
+<li><strong>2가지 특징</strong><ol>
+<li>Type Safety: Option으로 감싼 값이기에, 매개변수를 통해 전달 =&gt; 타입 안정성 보장 가능</li>
+<li>Functionally aware: Option은 버그를 적게 생성하는데 도움이 되는 함수형 프로그래밍 방법 제공. <ul>
 <li>연속적으로 계산되는 체이닝에서 문제 생기는 것 방어</li>
 </ul>
 </li>
-<li>
-<p><strong>Mapping Operations</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>Mapping Operations</strong><ul>
 <li>map, flatMap, filter, foreach 쓰세용
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">final</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">B</span><span class="p">]</span><span class="w"> </span><span class="c1">// 알맹이만 쏙~ 변환하는 Functor (https://papimon.tistory.com/124)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">final</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">B</span><span class="p">]</span><span class="w"> </span><span class="c1">// 알맹이만 쏙~ 변환하는 Functor (https://papimon.tistory.com/124)</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="2-either">2. Either<a class="headerlink" href="#2-either" title="Permanent link">&para;</a></h3>
 <ul>
-<li><img alt="" src="../../images/2024-10-10-Either.png" /></li>
-<li>
-<p>정상 값이 없을 때, Either</p>
+<li><img alt="" src="../../images/2024-10-10-Either.png" /><ul>
+<li>정상 값이 없을 때, Either</li>
+</ul>
 </li>
-<li>
-<p>제대로된 인자는 Right, 잘못된 친구는 Left
+</ul>
+<ul>
+<li>제대로된 인자는 Right, 잘못된 친구는 Left
   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">eitherTest</span><span class="p">(</span><span class="n">num</span><span class="p">:</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span><span class="w"> </span><span class="nc">Either</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="n">num</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Right</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -23241,17 +23250,17 @@
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Right</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Left</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">err</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="3-try">3. Try<a class="headerlink" href="#3-try" title="Permanent link">&para;</a></h3>
 <ul>
-<li><img alt="" src="../../images/2024-10-10-Try.png" /></li>
-<li>
-<p>예외 발생 시, Try로 감싸서 예외를 <strong>값</strong>으로 다룰 수 있다는 장점!</p>
+<li><img alt="" src="../../images/2024-10-10-Try.png" /><ul>
+<li>예외 발생 시, Try로 감싸서 예외를 <strong>값</strong>으로 다룰 수 있다는 장점!</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nc">Try</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="n">upperString</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
@@ -23260,15 +23269,16 @@
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Success</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="c1">// ...</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Failure</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="c1">// ...</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Try를 쓰면 다음 문법도 가능</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Try를 쓰면 다음 문법도 가능</strong><ul>
 <li>Failure =&gt; None 반환</li>
 <li>Success =&gt; Some 반환
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nc">Try</span><span class="p">(</span><span class="n">upperString</span><span class="p">(</span><span class="n">str</span><span class="p">)).</span><span class="n">toOption</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nc">Try</span><span class="p">(</span><span class="n">upperString</span><span class="p">(</span><span class="n">str</span><span class="p">)).</span><span class="n">toOption</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="nginx">Nginx 설정 톺아보기<a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h2>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">server</span><span class="w"> </span><span class="p">{</span>
@@ -23295,8 +23305,10 @@
   - 2-1. Nginx가 처음 URI를 보고 매칭되는 static file이 root(<code>/home/lounge/current/public</code>)에 있나 보고 있으면 주고
   - 2-2. 그게 아니라면, <code>/home/lounge/current/public/index.html</code>을 반환한다!</p>
 <ul>
-<li>쿠버 옮길때, ingress에 nginx-server-snippet에 이런 설정 똑같이 하면 제대로 안될거야</li>
+<li>쿠버 옮길때, ingress에 nginx-server-snippet에 이런 설정 똑같이 하면 제대로 안될거야<ul>
 <li>그 전에, nginx &lt;-&gt; was 분리해서 설정 먹여도 이거 설정 그대로하면 안될거야. </li>
+</ul>
+</li>
 <li>try_files: 같은 인스턴스 내의 static-resource를 반환하는거! 그러니까, 좀 고민을 해야해!</li>
 </ul>
 

@@ -22909,9 +22909,11 @@
 <h3 id="2022-10-28">2022-10-28<a class="headerlink" href="#2022-10-28" title="Permanent link">&para;</a></h3>
 <h2 id="aws-cli-s3">AWS CLI를 활용한 로그 S3에 백업<a class="headerlink" href="#aws-cli-s3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>AWS-CLI 설치 : https://lindarex.github.io/aws/ubuntu-aws-cli-installation/</li>
+<li>AWS-CLI 설치 : https://lindarex.github.io/aws/ubuntu-aws-cli-installation/<ul>
 <li>aws-cli 설치한 뒤, IAM 권한을 부여해주면 계정에서 만든 s3 버킷 확인 가능!</li>
 <li><img alt="" src="../../images/2022-10-28-awscli-s3.png" /></li>
+</ul>
+</li>
 <li>다음과 같은 쉘 스크립트 + Crontab을 작성해 매일 0시 5분에 수행하도록 설정
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="ch">#!/bin/bash</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -22936,8 +22938,10 @@
 </code></pre></div>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="m">10</span><span class="w"> </span><span class="m">0</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/home/ubuntu/logs/log-backup.sh<span class="w"> </span>&gt;<span class="w"> </span>/home/ubuntu/logs/crontab.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span>
 </code></pre></div></li>
-<li>결과</li>
+<li>결과<ul>
 <li><img alt="" src="../../images/2022-10-28-log-backup.png" /></li>
+</ul>
+</li>
 </ul>
 
 

@@ -23002,69 +23002,67 @@
 <h2 id="tcpip-4-vs-osi-7">TCP/IP 4계층 vs OSI 7계층<a class="headerlink" href="#tcpip-4-vs-osi-7" title="Permanent link">&para;</a></h2>
 <ul>
 <li><img alt="" src="../../images/tcp-ip-osi.png" /></li>
-<li><strong>TCP/IP 4계층</strong></li>
+<li><strong>TCP/IP 4계층</strong><ul>
 <li>어플리케이션 계층: FTP, HTTP, SSH, SMTP, DNS</li>
 <li>전송 계층: TCP, UDP</li>
 <li>인터넷 계층: IP, ARP, ICMP / 패킷을 수신해야 할 상대의 주소를 지정하여 데이터 전달</li>
-<li>
-<p>링크 계층: 전선, 광섬유, 무선 등으로 실질적 데이터 전달</p>
+<li>링크 계층: 전선, 광섬유, 무선 등으로 실질적 데이터 전달</li>
+</ul>
 </li>
-<li>
-<p><strong>OSI 7계층</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>OSI 7계층</strong><ul>
 <li>어플리케이션 계층</li>
 <li>프레젠테이션 계층</li>
 <li>세션 계층</li>
 <li>전송 계층</li>
 <li>네트워크 계층</li>
 <li>데이터 링크 계층</li>
-<li>
-<p>물리 계층</p>
+<li>물리 계층</li>
+</ul>
 </li>
-<li>
-<p>특정 계층이 변경되었을 때, 다른 계층이 영향을 받지 않도록 설계</p>
-</li>
+</ul>
+<ul>
+<li>특정 계층이 변경되었을 때, 다른 계층이 영향을 받지 않도록 설계</li>
 </ul>
 <h2 id="_1">전송 계층<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>TCP</strong></li>
+<li><strong>TCP</strong><ul>
 <li>패킷 사이의 순서를 보장하고 연결 지향 프로토콜 사용</li>
 <li>신뢰성 있는 패킷 연결 구축</li>
-<li>
-<p>가상회선 패킷 교환 방식</p>
-<ul>
+<li>가상회선 패킷 교환 방식<ul>
 <li>각 패킷에는 가상회선 식별자가 포함되며 모든 패킷을 전송하면 가상회선이 해제되고 패킷들은 전송된 '순서대로' 도착하는 방식</li>
 </ul>
 </li>
-<li>
-<p><strong>UDP</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>UDP</strong><ul>
 <li>순서를 보장하지 않고 수신 여부를 확인하지 않으며 단순히 데이터만 주는 방식</li>
 <li>하나의 메시지에서 분할된 여러 패킷은 서로 다른 경로로 전송될 수 있으며 도착한 '순서가 다를 수'있는 방식을 뜻함</li>
 </ul>
+</li>
+</ul>
 <h2 id="tcp">TCP 연결/해제<a class="headerlink" href="#tcp" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>TCP 연결 수립 과정 (3-way-handshake)</strong></li>
-<li>신뢰성이 구축되고 데이터 전송을 시작 </li>
-<li>SYN<ul>
+<li><strong>TCP 연결 수립 과정 (3-way-handshake)</strong><ul>
+<li>신뢰성이 구축되고 데이터 전송을 시작 
+1. SYN<ul>
 <li>클라이언트 --(클라 ISN, SYN)--&gt; 서버 </li>
-<li>ISN: 새로운 TCP 연결의 첫 번째 패킷에 할당된 임의의 시퀀스 번호</li>
-</ul>
-</li>
-<li>SYN+ACK<ul>
+<li>ISN: 새로운 TCP 연결의 첫 번째 패킷에 할당된 임의의 시퀀스 번호
+2. SYN+ACK</li>
 <li>서버 : 클라이언트의 SYN 수신</li>
-<li>서버 --(서버 ISN, 승인번호[클라 ISN + 1])--&gt; 클라이언트</li>
-</ul>
-</li>
-<li>
-<p>ACK</p>
-<ul>
+<li>서버 --(서버 ISN, 승인번호[클라 ISN + 1])--&gt; 클라이언트
+3. ACK</li>
 <li>클라이언트 --(승인번호[서버 ISN + 1])--&gt; 서버</li>
 </ul>
 </li>
-<li>
-<p><strong>TCP 연결 해제 과정 (4-way-handshake)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>TCP 연결 해제 과정 (4-way-handshake)</strong><ol>
 <li>클라이언트가 연결 닫으려고 FIN 서버로 전송<ul>
 <li>클라: FIN_WAIT_1 변경</li>
 </ul>
@@ -23078,39 +23076,41 @@
 <li>클라이언트 TIME_WAIT 상태로 변경, 클라이언트가 서버로 ACK 전송<ul>
 <li>서버: CLOSED 변경</li>
 <li>어느 정도의 시간을 대기한 후 연결이 닫히고 클라이언트와 서버의 모든 자원의 연결 해제</li>
-</ul>
-</li>
-<li>TIME_WAIT: 소켓이 바로 소멸되지 않고 일정 시간 유지되는 상태<ul>
+<li>TIME_WAIT: 소켓이 바로 소멸되지 않고 일정 시간 유지되는 상태</li>
 <li>지연 패킷의 문제점을 해결</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 <h2 id="_2">계층 간 데이터 송수신 과정<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>PC1 ----------- PC2</li>
+<li>PC1 ----------- PC2<ul>
 <li>어플리케이션 계층 : 메시지</li>
 <li>전송 계층 : 세그먼트(TCP), 데이터그램(UDP)</li>
 <li>인터넷 계층 : 패킷</li>
-<li>
-<p>링크 계층 : 프레임(데이터 링크 계층), 비트(물리 계층)</p>
+<li>링크 계층 : 프레임(데이터 링크 계층), 비트(물리 계층)</li>
+</ul>
 </li>
-<li>
-<p><strong>캡슐화 과정</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>캡슐화 과정</strong><ul>
 <li>상위 계층의 헤더와 데이터를 하위 계층의 데이터 부분에 포함시키고 해당 계층의 헤더를 삽입하는 과정</li>
+</ul>
+</li>
 </ul>
 <h2 id="_3">네트워크 기기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>계층별 처리 기기</strong></li>
+<li><strong>계층별 처리 기기</strong><ul>
 <li>어플리케이션 계층: L7 스위치, (L4 스위치)</li>
 <li>인터넷 계층: 라우터(L3 스위치)</li>
 <li>데이터 링크 계층: L2 스위치, 브리지</li>
-<li>
-<p>물리 계층: NIC, 리피터, AP</p>
+<li>물리 계층: NIC, 리피터, AP</li>
+</ul>
 </li>
-<li>
-<p><strong>[어플리케이션 계층 처리 기기]</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>[어플리케이션 계층 처리 기기]</strong><ul>
 <li><strong>L7 스위치</strong><ul>
 <li>로드 밸런서</li>
 <li>서버의 부하를 분산하는 기기</li>
@@ -23119,41 +23119,41 @@
 <li>AWS ALB (Application Load Balancer)</li>
 </ul>
 </li>
-<li>
-<p><strong>L4 스위치</strong></p>
-<ul>
+<li><strong>L4 스위치</strong><ul>
 <li>인터넷 계층을 처리하는 기기</li>
 <li>메시지를 기반으로 인식하지 못하고 IP/Port 기반으로 트래픽을 분산</li>
 <li>AWS NLB (Network Load Balancer)</li>
 </ul>
 </li>
-<li>
-<p><strong>[인터넷 계층 처리 기기]</strong></p>
+</ul>
 </li>
-<li>
-<p><strong>라우터 (L3 스위치)</strong></p>
+</ul>
 <ul>
+<li><strong>[인터넷 계층 처리 기기]</strong><ul>
+<li><strong>라우터 (L3 스위치)</strong><ul>
 <li>여러 개의 네트워크를 연결/분할/구분 시켜주는 역할</li>
 <li>타 네트워크에 존재하는 장치끼리 서로 데이터 주고 받을 때 <strong>패킷 소모 최소화 &amp; 경로 최적화</strong></li>
 </ul>
 </li>
-<li>
-<p><strong>[데이터 링크 계층을 처리하는 기기]</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>[데이터 링크 계층을 처리하는 기기]</strong><ul>
 <li><strong>L2 스위치</strong><ul>
 <li>장치들의 MAC 주소를 MAC 주소 테이블을 통해 관리, 연결된 장치로 부터 패킷 왔을 때 패킷 전송 담당</li>
 <li>단순히 패킷의 MAC 주소를 읽어서 스위칭하는 역할</li>
 </ul>
 </li>
-<li>
-<p><strong>브리지</strong></p>
-<ul>
+<li><strong>브리지</strong><ul>
 <li>두 개의 근거리 통신망을 상호 접속할 수 있도록 하는 통신망 연결 장치</li>
 </ul>
 </li>
-<li>
-<p><strong>[물리 계층을 처리하는 기기]</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>[물리 계층을 처리하는 기기]</strong><ul>
 <li><strong>NIC(LAN 카드)</strong><ul>
 <li>네트워크와 빠른 속도로 데이터를 송수신할 수 있도록 컴퓨터 내에 설치하는 확장 카드</li>
 <li>고유의 식별번호인 MAC 주소가 있음</li>
@@ -23165,6 +23165,8 @@
 </li>
 <li><strong>AP</strong><ul>
 <li>패킷을 복사하는 기기</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -22915,7 +22915,7 @@
     - 사설 네트워크 IP 대역은 바깥으로 나가서 요청이 처리될 수 없음
   - Client가 요청하는 IP의 형태(공인/사설)에 따라 목적지에서 받아들이는 source ip의 정보는 다름</p>
 <ul>
-<li><strong>사설 네트워크</strong></li>
+<li><strong>사설 네트워크</strong><ul>
 <li>사설 네트워크 IP 대역<ul>
 <li><code>10.0.0.0 ~ 10.255.255.255</code></li>
 <li><code>172.16.0.0 ~ 172.31.255.255</code></li>
@@ -22931,27 +22931,29 @@
 <li>네트워크 바깥으로 나가서 요청이 처리될 일도 X</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2024-08-14-private-ip.webp" /></p>
+<li><img alt="" src="../../images/2024-08-14-private-ip.webp" /></li>
+</ul>
 </li>
-<li>
-<p><strong>사설 IP에 접근하는 방법</strong></p>
-</li>
-<li>회사 바깥의 특정 클라이언트에 어떤 요청을 해도 사설 IP에는 도달하지 못함</li>
-<li>
-<p>VPN 구성이 되어있다면 가능</p>
+</ul>
 <ul>
+<li><strong>사설 IP에 접근하는 방법</strong><ul>
+<li>회사 바깥의 특정 클라이언트에 어떤 요청을 해도 사설 IP에는 도달하지 못함</li>
+<li>VPN 구성이 되어있다면 가능<ul>
 <li>Virtual Private Network</li>
 <li>회사 바깥의 특정 Client 또한 동일 네트워크 범주에 속하게 하는 것</li>
 </ul>
 </li>
-<li>
-<p><strong>Gateway</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Gateway</strong><ul>
 <li>Gateway에는 사설 네트워크 인입되는 공인 IP를 가짐</li>
 <li>같은 네트워크 자원끼리도 어떻게 요청 보내냐에 따라 달라짐</li>
 <li>사설 네트워크 내 인스턴스에 공인 IP로 요청을 보내면, 게이트웨이를 거쳐 요청됨으로 요청이 게이트웨이에서 인입된 것으로 보일 것</li>
 <li><img alt="" src="../../images/2024-08-14-private-ip2.webp" /></li>
+</ul>
+</li>
 </ul>
 
 

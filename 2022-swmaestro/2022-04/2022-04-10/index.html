@@ -22932,7 +22932,7 @@
 <h2 id="sqlite">SQLite<a class="headerlink" href="#sqlite" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.hostinger.com/tutorials/sqlite-vs-mysql-whats-the-difference/</em></li>
-<li><strong>SQLite vs MySQL</strong></li>
+<li><strong>SQLite vs MySQL</strong><ul>
 <li>SQLite<ul>
 <li>오픈소스 in public domain</li>
 <li>Blob, Integer, Null, Text, Real 지원</li>
@@ -22940,40 +22940,42 @@
 <li>not suitable for multiple user access</li>
 </ul>
 </li>
-<li>
-<p>MySQL</p>
-<ul>
+<li>MySQL<ul>
 <li>오라클 + 서버 아키텍쳐</li>
 <li>Tinyint, Smallint, Mediumint, Int, Bigint, Double, Float, Real, Decimal, Double precision, Numeric, Timestamp, Date, Datetime, Char, Varchar, Year, Tinytext, Tinyblob, Blob, Text, MediumBlob, MediumText, Enum, Set, Longblob, Longtext.</li>
 <li>MySQL server is about 600 MB</li>
 <li>can handle multiple users and grant various levels of permission</li>
 </ul>
 </li>
-<li>
-<p><strong>이때 SQLite 쓰세요</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>이때 SQLite 쓰세요</strong><ul>
 <li>작은 앱을 만들때</li>
 <li>스케일러빌리티가 작은 앱을 만들때</li>
 <li>Basic Development</li>
+</ul>
+</li>
 </ul>
 <h2 id="sqlite-with-springboot">SQLite with SpringBoot<a class="headerlink" href="#sqlite-with-springboot" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/spring-boot-sqlite</em></li>
 <li><em>참고: https://skagh.tistory.com/59</em></li>
-<li>
-<p><strong>의존성 추가</strong>
+<li><strong>의존성 추가</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;dependency&gt;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &lt;groupId&gt;org.xerial&lt;/groupId&gt;
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &lt;version&gt;3.25.2&lt;/version&gt;
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>&lt;/dependency&gt;
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>SQLite Dialect 생성</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>SQLite Dialect 생성</strong><ul>
 <li>Hibernate는 SQLite의 Dialect를 기본제공하지 않음</li>
 <li>따라서 직접 정의해줘야하는 형식</li>
+</ul>
+</li>
 </ul>
 
 

@@ -22932,39 +22932,41 @@
 <h2 id="threadcurrentthreadinterrupt">Thread.currentThread().interrupt()<a class="headerlink" href="#threadcurrentthreadinterrupt" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: http://happinessoncode.com/2017/10/09/java-thread-interrupt/</em></li>
-<li><strong>Java Thread의 인터럽트 메커니즘</strong></li>
+<li><strong>Java Thread의 인터럽트 메커니즘</strong><ul>
 <li>자바에서는 쓰레드에 하던 일을 멈추라는 신호 보내기 위해 인터럽트 사용</li>
 <li>한 쓰레드가 다른 쓰레드 인터럽트 가능, 쓰레드 스스로 인터럽트도 가능</li>
-<li>
-<p>각 쓰레드는 자신이 인터럽트 되었는지 확인 가능</p>
+<li>각 쓰레드는 자신이 인터럽트 되었는지 확인 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>인터럽트 확인법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>인터럽트 확인법</strong><ul>
 <li>Thread.interrupted(): 정적 메서드 -&gt; 호출 후에 interrupt state 사라짐</li>
-<li>
-<p>Thread.isInterrupted(): 인스턴스 메서드 -&gt; 호출 후에 interrupt state 유지</p>
+<li>Thread.isInterrupted(): 인스턴스 메서드 -&gt; 호출 후에 interrupt state 유지</li>
+</ul>
 </li>
-<li>
-<p><strong>.interrupt() 왜 필요하냐면</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>.interrupt() 왜 필요하냐면</strong><ul>
 <li>쓰레드를 관리하는 상위 레이어 쓰레드풀에 인터럽트 발생 여부를 알려야함</li>
 <li>그래야 적절히 쓰레드풀이 인터럽트를 관리할 수 있음</li>
+</ul>
+</li>
 </ul>
 <h2 id="db">DB 락<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=ZXV6ZqMyJLg&amp;t=353s</em></li>
 <li><em>참고: https://suhwan.dev/2019/06/09/transaction-isolation-level-and-lock/</em></li>
-<li><strong>왜 필요한가?</strong></li>
-<li>
-<p>트랜잭션들이 동시에 수행될 때, 일관성을 해치지 않도록 데이터 접근을 제어하는 DBMS의 기능</p>
+<li><strong>왜 필요한가?</strong><ul>
+<li>트랜잭션들이 동시에 수행될 때, 일관성을 해치지 않도록 데이터 접근을 제어하는 DBMS의 기능</li>
+</ul>
 </li>
-<li>
-<p><strong>동시성 제어 Lock</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>동시성 제어 Lock</strong><ul>
 <li>[Optimistic Lock] =&gt; 동시 업데이트 적을 경우<ul>
 <li>경합이 발생하지 않으리라 봄</li>
-<li>재고 하나의 카카오 인형 경합</li>
+<li>재고 하나의 카카오 인형 경합<ul>
 <li>A 트랜잭션<ul>
 <li>READ COUNT = 1개 (VER 150)</li>
 <li>--업데이트--</li>
@@ -22981,66 +22983,70 @@
 </li>
 </ul>
 </li>
-<li>
-<p>[Pessimistic Lock] =&gt; 동시 업데이트 많은 경우</p>
-<ul>
+</ul>
+</li>
+<li>[Pessimistic Lock] =&gt; 동시 업데이트 많은 경우<ul>
 <li>경합이 발생할 가능성이 높다고 봄</li>
 <li>다른 사용자는 먼저 레코드 잠금이 릴리즈 될 때 까지 대기!</li>
 </ul>
 </li>
-<li>
-<p><strong>Pessimistic Lock</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Pessimistic Lock</strong><ul>
 <li>[Shared Lock]<ul>
 <li>read 연산 실행 가능, write 연산 실행 불가능</li>
 <li>여러 트랜잭션이 데이터를 읽을 수 있음</li>
 </ul>
 </li>
-<li>
-<p>[Exclusive Lock]</p>
-<ul>
+<li>[Exclusive Lock]<ul>
 <li>read/write 연산 모두 불가능</li>
 <li>해당 트랜잭션에서 독점권을 가짐</li>
 </ul>
 </li>
-<li>
-<p><strong>Lock 단위</strong></p>
+</ul>
 </li>
-<li>
-<p>데이터베이스 - 파일 - 레코드 - 필드</p>
+</ul>
+<ul>
+<li><strong>Lock 단위</strong><ul>
+<li>데이터베이스 - 파일 - 레코드 - 필드</li>
+</ul>
 </li>
-<li>
-<p><strong>문제점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>문제점</strong><ul>
 <li>[Blocking]<ul>
 <li>하나의 트랜잭션이 Exclusive Lock 걸면 무한으로 대기해야 함</li>
 <li>하나의 트랜잭션 커밋/롤백 되어야 풀림</li>
 </ul>
 </li>
-<li>
-<p>[DeadLock] </p>
-<ul>
+<li>[DeadLock] <ul>
 <li>서로다른 트랜잭션이 상대의 트랜잭션으로 인해 걸린 락이 끝나길 대기하는 상태</li>
 </ul>
 </li>
-<li>
-<p><strong>데드락 해결방안</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>데드락 해결방안</strong><ol>
 <li>트랜잭션 처리 속도 최소화</li>
-<li>
-<p>Lock Timeout을 통한 시간 조절 </p>
+<li>Lock Timeout을 통한 시간 조절 </li>
+</ol>
 </li>
-<li>
-<p><strong>InnoDB의 락</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>InnoDB의 락</strong><ul>
 <li>transaction의 ACID 원칙과 동시성을 최대한 보장하기 위해 다양한 종류의 Lock 사용</li>
 <li>[Row-Level Lock] =&gt; Select S Lock - 수정 X Lock<ul>
 <li>SELECT 쿼리에 대해 Shared Lock</li>
 <li>UPDATE/DELETE 쿼리에 대해 Exclusive Lock</li>
-<li>규칙</li>
+<li>규칙<ul>
 <li>여러 트랜잭션이 동시에 한 row에 S Lock 걸 수 있음 =&gt; 동시에 한 row 읽기 가능</li>
 <li>S Lock 걸린 row에 다른 트랜잭션이 X Lock 걸 수 없음</li>
 <li>X Lock이 걸린 row에는 S Lock/X Lock 둘 다 못검</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>[Record Lock] =&gt; 레코드 인덱스에 락!<ul>
@@ -23056,24 +23062,24 @@
 <li>10과 20 사이에 갭락이 걸리면서 X Lock 발동</li>
 </ul>
 </li>
-<li>
-<p>락들은 커밋/롤백 시에 언락!</p>
+<li>락들은 커밋/롤백 시에 언락!</li>
+</ul>
 </li>
-<li>
-<p><strong>Repeatable Read vs Read Committed</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Repeatable Read vs Read Committed</strong><ul>
 <li>현재 테이블에 13, 17 투입됨</li>
 <li>[Transaction A]
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">COMMIT</span><span class="p">;</span>
 </code></pre></div></li>
 <li>[Transaction B]
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">COMMIT</span><span class="p">;</span>
 </code></pre></div></li>
 <li>[A, B 순서]
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">(</span><span class="n">B</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">(</span><span class="n">B</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">COMMIT</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
@@ -23083,15 +23089,15 @@
 <li>처음보는 15가 A-2에서 튀어나옴</li>
 </ul>
 </li>
-<li>
-<p>Repeatable Read 라면 갭락을 걸어주니까...</p>
-<ul>
+<li>Repeatable Read 라면 갭락을 걸어주니까...<ul>
 <li>처음보는 놈 안나옴! 기다려라 트랜잭션 B!</li>
 </ul>
 </li>
-<li>
-<p><strong>InnoDB는 Gap Lock을 통해 Repeatable Read의 Phantom Read 문제 해결!</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>InnoDB는 Gap Lock을 통해 Repeatable Read의 Phantom Read 문제 해결!</strong></li>
 </ul>
 
 

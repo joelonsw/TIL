@@ -22962,18 +22962,19 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ADDRESS_ID</span>
 </code></pre></div></p>
 <ul>
-<li>Slick의 경우 grouping key를 기반으로 List<Row> 의 Map 형태로 반환</li>
+<li>Slick의 경우 grouping key를 기반으로 List<Row> 의 Map 형태로 반환<ul>
 <li><code>Map(key -&gt; List(row))</code></li>
 <li>자동으로 변환해주는 것은 아니고, 명시적으로 스칼라에서 처리해줘야 함</li>
 <li><strong>SQL에서는 grouped value에 대해서는 aggregate를 강요하기 때문에 슬릭에서 역시 동일하게 강요한다</strong></li>
-<li>
-<p>즉, Slick의 groupBy는 map을 통해 뚝딱 aggregation 처리해줘야 한다는 것
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">people</span><span class="p">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">addressId</span><span class="p">)</span>
+<li>즉, Slick의 groupBy는 map을 통해 뚝딱 aggregation 처리해줘야 한다는 것
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">people</span><span class="p">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">addressId</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="p">.</span><span class="n">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">addressId</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">addressId</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">age</span><span class="p">).</span><span class="n">avg</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>예시 테이블</strong>
+</ul>
+<ul>
+<li><strong>예시 테이블</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Employee</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">department</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Employees</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span><span class="w"> </span><span class="nc">Tag</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Table</span><span class="p">[</span><span class="nc">Employee</span><span class="p">](</span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;employees&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -22985,24 +22986,21 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="kd">val</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">TableQuery</span><span class="p">[</span><span class="nc">Employees</span><span class="p">]</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Group By를 Slick에서 쓰는 법</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Group By를 Slick에서 쓰는 법</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">groupByQuery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">employees</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="p">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">department</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="p">.</span><span class="n">map</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">department</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">department</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div></p>
-<ul>
-<li><code>groupBy</code></li>
-<li>해당 column || expression 으로 GroupBy 해주세요</li>
-<li><code>map</code></li>
-<li>각각의 그룹화된 결과값을 본인이 원하는대로 바꾸기 위함</li>
-<li>이 상황에서는 (department, group) =&gt; (department, group.length)로 변경</li>
-</ul>
-</li>
+</code></pre></div>
+    - <code>groupBy</code>
+      - 해당 column || expression 으로 GroupBy 해주세요
+    - <code>map</code>
+      - 각각의 그룹화된 결과값을 본인이 원하는대로 바꾸기 위함
+      - 이 상황에서는 (department, group) =&gt; (department, group.length)로 변경</li>
 </ul>
 <h2 id="slick-subquery">Slick Subquery<a class="headerlink" href="#slick-subquery" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://scala-slick.org/doc/3.0.0/sql-to-slick.html#subquery</em>

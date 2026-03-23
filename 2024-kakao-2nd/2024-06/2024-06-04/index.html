@@ -22941,42 +22941,43 @@
   - 데이터 구조가 확실하지 않은 로그 데이터로 작업 시, 런타임 필드가 유용함
   - 검색 속도가 조금 느려질 수 있음</p>
 <ul>
-<li><strong>장점</strong></li>
+<li><strong>장점</strong><ul>
 <li>인덱스 사이즈를 늘리지 않아도 사용 가능</li>
 <li>런타임 필드를 통해 검색 요청, 집계, 필터링, 정렬에 사용 가능</li>
 <li>런타임 필드 -&gt; 인덱싱 필드로 전환 시, 런타임 필드 참조 쿼리 수정할 필요 X</li>
-<li>
-<p>데이터 수집이 완료된 시점에도 문서에 필드 추가 가능</p>
-<ul>
+<li>데이터 수집이 완료된 시점에도 문서에 필드 추가 가능<ul>
 <li>런타임 필드를 사용하면 인덱스를 작게 유지하면서 기능 제공할 수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>인센티브</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>인센티브</strong><ul>
 <li>런타임 필드를 통해 <code>_search</code> API를 사용하는 많은 방법 대체 가능<ul>
 <li>GET /_search 이런거</li>
 </ul>
 </li>
-<li>
-<p><code>script fields</code>를 통해서 <code>_source</code>의 값들을 가져올 수 있음</p>
-<ul>
+<li><code>script fields</code>를 통해서 <code>_source</code>의 값들을 가져올 수 있음<ul>
 <li>스크립트 기반으로 검색 요청의 문서를 필터링하는 스크립트 쿼리 작성 가능</li>
 </ul>
 </li>
-<li>
-<p><strong>단점</strong></p>
+</ul>
 </li>
-<li>런타임 필드는 디스크 공간을 덜 사용하고 데이터 액세스에 유연성을 제공하나... 검색 쿼리에 따라 검색 성능에 영향 줄 것</li>
-<li>
-<p>검색 성능과 유연성의 균형을 위해서...</p>
+</ul>
 <ul>
+<li><strong>단점</strong><ul>
+<li>런타임 필드는 디스크 공간을 덜 사용하고 데이터 액세스에 유연성을 제공하나... 검색 쿼리에 따라 검색 성능에 영향 줄 것</li>
+<li>검색 성능과 유연성의 균형을 위해서...<ul>
 <li>타임스탬프 같은 자주 찾고 필터링하는 것은 인덱싱 해두세요</li>
 <li>더 빠른 response time을 제공합니다</li>
 </ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>if (doc[&#39;log.keyword&#39;].size() != 0) {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    def path = doc[&#39;log.keyword&#39;].value;
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    if (path.contains(&quot;[ReceiptStatService]&quot;)) {
@@ -22986,25 +22987,26 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        }
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    }
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>}
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="painless">Painless<a class="headerlink" href="#painless" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://blog.naver.com/occidere/222102329176</em>
 - <strong>개요</strong>
   - ES 전용 Script 언어로, inline scripts/stored scripts에 사용</p>
 <ul>
-<li><strong>특징</strong></li>
+<li><strong>특징</strong><ul>
 <li>빠른 성능</li>
 <li>높은 안정성</li>
 <li>동적 타입 지원 : int와 같은 명시타입 / def와 같은 동적 타입</li>
-<li>
-<p>문법 : Java와 유사</p>
+<li>문법 : Java와 유사</li>
+</ul>
 </li>
-<li>
-<p><strong>언제 쓰지?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>언제 쓰지?</strong><ul>
 <li>하나의 데이터 내에서 필드간 연산, 가공 등이 필요한 경우 사용</li>
+</ul>
+</li>
 </ul>
 
 

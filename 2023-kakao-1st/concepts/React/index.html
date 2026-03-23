@@ -22965,20 +22965,20 @@
 <h3 id="react">React<a class="headerlink" href="#react" title="Permanent link">&para;</a></h3>
 <h4 id="1">1. 리액트란?<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>리액트는 라이브러리!</strong></li>
+<li><strong>리액트는 라이브러리!</strong><ul>
 <li>리액트는 전적으로 UI 렌더링하는데에 관여</li>
-<li>
-<p>여러 라이브러리 기능 중 채택해서 사용</p>
-<ul>
+<li>여러 라이브러리 기능 중 채택해서 사용<ul>
 <li>화면 라우팅은 react-router-dom</li>
 <li>상태관리는 redux, mobx</li>
 <li>빌드는 webpack, npm</li>
 <li>테스팅은 Eslint, Mocha</li>
 </ul>
 </li>
-<li>
-<p><strong>컴포넌트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>컴포넌트</strong><ul>
 <li>클래스형 컴포넌트<ul>
 <li>클래식한 방법
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Component</span><span class="w"> </span><span class="p">{</span>
@@ -22989,9 +22989,7 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>함수형 컴포넌트</p>
-<ul>
+<li>함수형 컴포넌트<ul>
 <li>React-Hooks 발표된 이후 요즘은 이걸 더 많이 써
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">안녕</span><span class="o">!&lt;</span><span class="err">/h1&gt;;</span>
@@ -22999,9 +22997,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>브라우저가 그려지는 원리</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>브라우저가 그려지는 원리</strong><ul>
 <li>스텝 프로세스<ol>
 <li>HTML 파싱 -&gt; DOM 트리 생성</li>
 <li>CSS 파싱 -&gt; CSSOM 트리 생성</li>
@@ -23009,51 +23009,51 @@
 <li>RenderTree 그리기</li>
 </ol>
 </li>
-<li>
-<p>DOM이 인터랙션에 의해 변화하면 모든 스타일의 요소들이 다시 그려짐</p>
-<ul>
+<li>DOM이 인터랙션에 의해 변화하면 모든 스타일의 요소들이 다시 그려짐<ul>
 <li>맨날 DOM 바뀔수도!</li>
 </ul>
 </li>
-<li>
-<p><strong>VirtualDOM</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>VirtualDOM</strong><ul>
 <li>실제 DOM을 메모리에 복사해두고 (snapshot)</li>
-<li>
-<p>바뀐 부분만 실제 DOM 바꿔치기 해주는 기법!</p>
+<li>바뀐 부분만 실제 DOM 바꿔치기 해주는 기법!</li>
+</ul>
 </li>
-<li>
-<p><strong>React가 그리는 VirtualDOM</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>React가 그리는 VirtualDOM</strong><ol>
 <li>JSX 렌더링 -&gt; VirtualDOM 업데이트</li>
 <li>VirtualDOM 스냅샷과 비교</li>
-<li>
-<p>VirtualDOM 바뀐 부분 RealDOM에서 갈아 끼우기</p>
+<li>VirtualDOM 바뀐 부분 RealDOM에서 갈아 끼우기</li>
+</ol>
 </li>
-<li>
-<p><strong>Webpack</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Webpack</strong><ul>
 <li>자바스크립트 코드 압축 &amp; 최적화 -&gt; 네트워크 로딩 비용 감소</li>
 <li>모듈 단위 개발로 유지보수 up</li>
-<li>
-<p>모듈화로 개발 --- webpack ---&gt; js 압축/최적화본 뚝딱 등장</p>
+<li>모듈화로 개발 --- webpack ---&gt; js 압축/최적화본 뚝딱 등장</li>
+</ul>
 </li>
-<li>
-<p><strong>Babel</strong></p>
+</ul>
+<ul>
+<li><strong>Babel</strong><ul>
+<li>구형 브라우저에서 돌아갈 수 있도록 js 문법 포팅</li>
+</ul>
 </li>
-<li>
-<p>구형 브라우저에서 돌아갈 수 있도록 js 문법 포팅</p>
-</li>
-<li>
-<p><strong>npx</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>npx</strong><ul>
 <li>npx create-react-app 으로 리액트 설치하는데</li>
-<li>
-<p>npx: 노드 패키지 실행을 도와주는 도구... npm 레지스트리에 있는 패키지 가져와서 설치</p>
+<li>npx: 노드 패키지 실행을 도와주는 도구... npm 레지스트리에 있는 패키지 가져와서 설치</li>
+</ul>
 </li>
-<li>
-<p><strong>JSX</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>JSX</strong><ul>
 <li>JSX: 자바스크립트 확장 문법<ul>
 <li>UI가 보이는 모습을 이걸로 써주세요!</li>
 </ul>
@@ -23067,37 +23067,37 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h4 id="2">2. 리액트 기초<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>map()</strong></li>
-<li>
-<p>리스트 하나하나 어떻게 해주세요~ 는 map()으로 처리합시다</p>
+<li><strong>map()</strong><ul>
+<li>리스트 하나하나 어떻게 해주세요~ 는 map()으로 처리합시다</li>
+</ul>
 </li>
-<li>
-<p><strong>JSX key</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>JSX key</strong><ul>
 <li>리액트에서 리스트 요소 나열시 Key를 꼭 넣어주세요</li>
 <li>변경/추가/제거시 항목 식별에 도움을 줍니다</li>
 <li>가상돔에서 갈아 끼워서 실제돔 만들자나요? 이때 Key를 기반으로 인식합니다</li>
-<li>
-<p>unique한 값으로 넣어줘야 불필요한 렌더링 최소화할 수 있어요</p>
+<li>unique한 값으로 넣어줘야 불필요한 렌더링 최소화할 수 있어요</li>
+</ul>
 </li>
-<li>
-<p><strong>filter()</strong></p>
-</li>
-<li>새로운 리스트 만들어 줄 수 있도록 조건을 filter()에 넣어서 휘뚜루 마뚜루</li>
-<li>
-<p>함수형 프로그래밍 처럼 휘뚜루 마뚜루</p>
-</li>
-<li>
-<p><strong>React State</strong></p>
-</li>
-<li>
-<p>데이터가 변했을 때 렌더링 다시해주려면 <strong>React State</strong> 사용해주세요</p>
+</ul>
 <ul>
+<li><strong>filter()</strong><ul>
+<li>새로운 리스트 만들어 줄 수 있도록 조건을 filter()에 넣어서 휘뚜루 마뚜루</li>
+<li>함수형 프로그래밍 처럼 휘뚜루 마뚜루</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>React State</strong><ul>
+<li>데이터가 변했을 때 렌더링 다시해주려면 <strong>React State</strong> 사용해주세요<ul>
 <li>state는 변경되면 리렌더링이 수행됨</li>
 <li>state는 컴포넌트가 관리
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="p">{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">            </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
@@ -23113,20 +23113,21 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Spread Operator</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Spread Operator</strong><ul>
 <li>배열
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">]</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">]</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">7</span><span class="p">,</span><span class="w"> </span><span class="mf">8</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">]</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">a1</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">a2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">a3</span><span class="p">]</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">total</span><span class="p">);</span><span class="w"> </span><span class="c1">// [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
 </code></pre></div></li>
-<li>
-<p>객체
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">obj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<li>객체
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">obj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;B&#39;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
@@ -23145,48 +23146,53 @@
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="cm">*   d: &#39;D&#39;</span>
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="cm">* }</span>
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="cm">* */</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>React Hooks</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>React Hooks</strong><ul>
 <li>class 없이 state를 사용할 수 있는 새로운 기능<ul>
-<li>React Hooks 이전까지는 리액트의 생명주기를 Functional Component에서 쓰지 못했음</li>
+<li>React Hooks 이전까지는 리액트의 생명주기를 Functional Component에서 쓰지 못했음<ul>
 <li>생명주기<ul>
 <li>Mounting: componentDidMount()</li>
 <li>Updating: componentDidUpdate()</li>
 <li>Unmounting: componentWillUnmount()</li>
 </ul>
 </li>
-<li>함수형 컴포넌트에서도 생명주기를 사용할 수 있게되었다!</li>
+</ul>
+</li>
+<li>함수형 컴포넌트에서도 생명주기를 사용할 수 있게되었다!<ul>
 <li>useEffect만 있으면 생명주기를 위에 component~뭐시꺵이 다 사용할 수 있어!</li>
 </ul>
 </li>
-<li>
-<p>커스텀 훅을 만들어 코드 중복을 방지할 수도 있음</p>
+</ul>
 </li>
-<li>
-<p><strong>State &amp; Props</strong></p>
+<li>커스텀 훅을 만들어 코드 중복을 방지할 수도 있음</li>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>State &amp; Props</strong><ul>
 <li>State<ul>
 <li>해당 컴포넌트 내에서 데이터를 조작</li>
 <li>변경 가능</li>
 <li>변하면 re-render</li>
 </ul>
 </li>
-<li>
-<p>Props</p>
-<ul>
+<li>Props<ul>
 <li>부모 컴포넌트로 부터 받은 데이터</li>
 <li>읽기 전용</li>
 <li>부모 컴포넌트에서 setter 역시 전달받아 이를 호출하는 방식</li>
 </ul>
 </li>
-<li>
-<p><strong>구조 분해 할당</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>구조 분해 할당</strong><ul>
 <li>객체
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Joel&#39;</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="mf">27</span><span class="p">,</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nx">phone</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;01012341234&quot;</span><span class="p">,</span>
@@ -23198,37 +23204,39 @@
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="kd">let</span><span class="w"> </span><span class="p">{</span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">code</span><span class="p">,</span><span class="w"> </span><span class="nx">street</span><span class="p">}}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">person</span>
 </code></pre></div></li>
-<li>
-<p>배열
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">]</span>
+<li>배열
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">]</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">const</span><span class="w"> </span><span class="p">[,,</span><span class="nx">three</span><span class="p">,</span><span class="w"> </span><span class="nx">five</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">numbers</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>JS 자료구조 불변성</strong></p>
-</li>
-<li>원시타입: Boolean, String, Number, null, undefined, Symbol</li>
-<li>
-<p>참조타입: Object, Array</p>
+</ul>
 <ul>
+<li><strong>JS 자료구조 불변성</strong><ul>
+<li>원시타입: Boolean, String, Number, null, undefined, Symbol</li>
+<li>참조타입: Object, Array<ul>
 <li>깊은 복사로 처리하자!</li>
 <li>새로운 배열을 반환하도록!</li>
 <li>원본데이터 변경하는 메서드: splice, push</li>
 </ul>
 </li>
-<li>
-<p><strong>React.memo</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>React.memo</strong><ul>
 <li>렌더링 최적화</li>
-<li>
-<p>렌더링 안해도 될 컴포넌트는 스킵할 수 있도록!</p>
+<li>렌더링 안해도 될 컴포넌트는 스킵할 수 있도록!</li>
+</ul>
 </li>
-<li>
-<p><strong>useCallback</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>useCallback</strong><ul>
 <li>컴포넌트 재렌더링 되면 다시 함수를 만드는게 일반적...</li>
 <li>근데 그렇게 하지 말고 우리 useCallback 쓰면 최초 렌더링 시에만 함수가 생성될 수 있어</li>
+</ul>
+</li>
 </ul>
 <h4 id="3">3. 리액트 심화<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 

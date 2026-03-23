@@ -22931,26 +22931,26 @@
 <h3 id="2025-02-17">2025-02-17<a class="headerlink" href="#2025-02-17" title="Permanent link">&para;</a></h3>
 <h2 id="localdatetime-vs-date">LocalDateTime vs Date<a class="headerlink" href="#localdatetime-vs-date" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Date</strong></li>
+<li><strong>Date</strong><ul>
 <li>1970.01.01 이후의 밀리초 저장</li>
-<li>
-<p>mutable =&gt; deprecated</p>
+<li>mutable =&gt; deprecated</li>
+</ul>
 </li>
-<li>
-<p><strong>LocalDateTime</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>LocalDateTime</strong><ul>
 <li>immutable, thread-safe</li>
-<li>
-<p>장점</p>
-<ol>
+<li>장점<ol>
 <li>불변성 : 한번 생성시 값 변경 X</li>
 <li>직관적인 API : 날짜, 시간, 타임스탬프, 시간대 구분하여 사용 가능. Date는 단지 타임스탬프 wrapper. </li>
 <li>시간대 관리 명시성 : 시간대 포함 안하니, 시간대 필요없는 경우에 더 좋음</li>
 </ol>
 </li>
-<li>
-<p><strong>Timestamp</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Timestamp</strong><ul>
 <li>Unix Epoch(1970.01.01 00:00:00 UTC) 이후 경과한 시간을 나타냄. 밀리초/초단위로 표기</li>
 <li><code>Date</code> -&gt; <code>Timestamp</code><ul>
 <li>객체 내부적으로 이미 epoch 기준의 밀리초 값을 저장하고 있음</li>
@@ -22960,6 +22960,8 @@
 <li>타임존 정보가 없어, 타임스탬프 변환을 위해서는 어떤 타임존 기준으로 해석할 것인지 명시 필요. 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">toTimestamp</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nc">LocalDateTime</span><span class="p">):</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="n">atZone</span><span class="p">(</span><span class="nc">ZoneId</span><span class="p">.</span><span class="n">systemDefault</span><span class="p">).</span><span class="n">toInstant</span><span class="p">.</span><span class="n">toEpochMilli</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -22989,18 +22991,18 @@
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span>
 </code></pre></div></p>
 <ul>
-<li><strong>[TO-BE: Play 2.8.9]</strong></li>
+<li><strong>[TO-BE: Play 2.8.9]</strong><ol>
 <li>명시적 DI 기반 ActorSystem</li>
 <li>업데이트된 Akka 버전</li>
 <li>설정 병합 및 구성 변화</li>
-<li>
-<p>라이프사이클 관리 강화</p>
+<li>라이프사이클 관리 강화</li>
+</ol>
 </li>
-<li>
-<p><strong>변경된 사용 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>변경된 사용 방법</strong><ul>
 <li>ActorSystem 주입 예시
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyActor</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Actor</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyActor</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Actor</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;Received: </span><span class="si">$</span><span class="n">msg</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="p">}</span>
@@ -23016,9 +23018,8 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>Actor 바인딩을 위한 Guice Module (AkkaGuideSupport 활용)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Module</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AbstractModule</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">AkkaGuiceSupport</span><span class="w"> </span><span class="p">{</span>
+<li>Actor 바인딩을 위한 Guice Module (AkkaGuideSupport 활용)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Module</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AbstractModule</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">AkkaGuiceSupport</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">configure</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">bindActor</span><span class="p">[</span><span class="nc">MyActor</span><span class="p">](</span><span class="s">&quot;myActor&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;myActor&quot;라는 이름으로 MyActor 바인딩</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="p">}</span>
@@ -23030,20 +23031,25 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="n">myActor</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="n">msg</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
-</code></pre></div></p>
-<ol>
-<li>단일 ActorSystem 사용</li>
+</code></pre></div><ol>
+<li>단일 ActorSystem 사용<ul>
 <li>일반적으로 Play에는 단일 <code>ActorSystem</code>이 생성되어 DI 컨테이너에 바인딩. 어플리케이션 전체에서 액터 생성/관리</li>
-<li>액터 생성 및 바인딩: <code>bindActor[MyActor]("myActor")</code></li>
+</ul>
+</li>
+<li>액터 생성 및 바인딩: <code>bindActor[MyActor]("myActor")</code><ul>
 <li>DI 컨테이너(Guice)에 "myActor"라는 이름으로 ActorRef 바인딩</li>
 <li>내부적으로는 DI 컨테이너(Guice)에 이미 바인딩된 기본 ActorSystem을 주입받아, 그 ActorSystem 내에서 <code>MyActor</code> 액터 인스턴스 생성<ul>
 <li>ActorSystem에서 액터 인스턴스를 생성, <code>ActorRef</code>를 DI 컨테이너에 바인딩</li>
 </ul>
 </li>
 <li>생성된 액터의 <code>ActorRef</code>가 Guice의 바인딩에 등록되어, 나중에 <code>@Named("myActor")</code>로 주입</li>
-<li>DI를 통한 주입</li>
+</ul>
+</li>
+<li>DI를 통한 주입<ul>
 <li>타 클래스에서 <code>@Named("myActor")</code> 활용해 <code>ActorRef</code> 주입 시, Guice는 바인딩된 액터 참조 찾아 주입</li>
-<li><code>asEagerSingleton()</code></li>
+</ul>
+</li>
+<li><code>asEagerSingleton()</code><ul>
 <li>Guice가 어플리케이션 시작 지점에 즉시 인스턴스화 하도록 하는 설정</li>
 <li>일반적인 싱글톤은 처음 요청될 때 생성, eager singleton은 DI 컨테이너가 생성되는 시점에 미리 인스턴스 만들어 초기화 로직 실행. <ul>
 <li>Guice는 기본적으로 싱글톤 바인딩을 요청 시점에 생성한다...</li>
@@ -23051,52 +23057,66 @@
 </ul>
 </li>
 <li>바로 생성해서 스케줄링 등 지연없이 뚝딱</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p><strong>ActorSystem</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ActorSystem</strong><ul>
 <li>액터를 생성, 관리, 실행하는 컨테이너</li>
 <li>역할<ol>
-<li>액터 생성 및 관리</li>
+<li>액터 생성 및 관리<ul>
 <li>액터를 생성하는 팩토리 역할. 생성시 반드시 어떤 ActorSystem에서 생성할 것</li>
 <li>생성된 액터들을 트리 구조로 관리. <ul>
 <li>상위 액터가 하위 액터의 오류를 감지하고 재시작하는 등 생명 주기 관리</li>
 </ul>
 </li>
-<li>메시지 디스패칭</li>
+</ul>
+</li>
+<li>메시지 디스패칭<ul>
 <li>액터들이 메시지 서로 주고 받을 때, 메시지 전달, 스케줄링, 디스패칭 등 담당</li>
 <li>내부적으로 쓰레드풀 활용하여 액터에게 메시지 전달/처리</li>
-<li>라이프사이클 관리</li>
+</ul>
+</li>
+<li>라이프사이클 관리<ul>
 <li>ActorSystem -&gt; 생성/종료의 책임</li>
 <li>어플리케이션 종료시 모든 액터 종료, 관련 리소스 해제</li>
 <li>시스템 전체의 초기화/정리 담당</li>
-<li>구성 및 설정 관리</li>
+</ul>
+</li>
+<li>구성 및 설정 관리<ul>
 <li><code>application.conf</code> 파일을 통해 Akka 관련 설정 관리, 이를 기반으로 내부 동작 방식 설정</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p>Play 2.8에서는 ActorSystem이 DI 컨테이너에 싱글톤으로 등록됨에 따라, Play의 내장 라이프사이클에 의해 자동 관리 (<code>ApplicationLifecyle</code>)</p>
-<ul>
+<li>Play 2.8에서는 ActorSystem이 DI 컨테이너에 싱글톤으로 등록됨에 따라, Play의 내장 라이프사이클에 의해 자동 관리 (<code>ApplicationLifecyle</code>)<ul>
 <li>별도 <code>GuiceApplicationLoader</code>에서 액터 바인딩/stop 필요 없이, 모듈에만 등록하면 OK</li>
 </ul>
 </li>
-<li>
-<p><strong>업그레이드시 고려할 포인트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>업그레이드시 고려할 포인트</strong><ol>
 <li>DI 방식으로의 전환</li>
 <li>application.conf 및 Akka 설정 업데이트</li>
 <li>Akka API 변경사항 점검</li>
-<li>
-<p>라이프사이클 및 종료 처리</p>
+<li>라이프사이클 및 종료 처리</li>
+</ol>
 </li>
-<li>
-<p><strong>왜 DI 방식으로 변했을까...</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>왜 DI 방식으로 변했을까...</strong><ul>
 <li>전역 방식의 문제<ul>
 <li>암묵적 의존성 : 액터와 ActorSystem이 전역 상태로 관리, 어느 클래스가 어느 전역 객체에 의존하는지 코드상 명확 X</li>
 <li>테스트 어려움 : mock 객체 (mockito)로 객체지향적으로 테스트 분리해서 진행하기 어려운건 알고...</li>
 <li>유지보수 복잡성 : 변경을 했을 때 영향 범위가 어디까지인지, 어플리케이션 전반에 영향 미칠 수 있으니 조심스러워짐</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

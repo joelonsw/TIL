@@ -22918,7 +22918,7 @@
     - 각각의 모듈은 서로를 향한 의존성을 가질 수 있음
     - 각 모듈은 독립적으로 빌드할 수 있는 특징이 있음</p>
 <ul>
-<li><strong>예시</strong></li>
+<li><strong>예시</strong><ol>
 <li>기존 모놀리식 처럼 프로젝트 생성 (해당 모듈이 루트 모듈)</li>
 <li>루트 모듈 <code>build.gradle</code> 수정<ul>
 <li><code>bootJar.enabled = false</code> : 빌드시 현재 모듈에 .jar 생성 X</li>
@@ -22932,13 +22932,15 @@
 <li><code>include 'module-common'</code> 등등...</li>
 </ul>
 </li>
-<li>
-<p>루트 모듈 <code>src</code> 제거</p>
+<li>루트 모듈 <code>src</code> 제거</li>
+</ol>
 </li>
-<li>
-<p><strong>빌드/배포</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>빌드/배포</strong><ul>
 <li><code>./gradlew :moduleName:build</code></li>
+</ul>
+</li>
 </ul>
 
 

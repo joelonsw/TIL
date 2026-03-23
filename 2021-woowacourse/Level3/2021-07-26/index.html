@@ -22976,96 +22976,60 @@
 <h2 id="logback-vs-slf4j-vs-log4j2">Logback vs SLF4J vs Log4J2<a class="headerlink" href="#logback-vs-slf4j-vs-log4j2" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=SWHYrCXIL38</em></li>
-<li>
-<p>Java1.4에 기본 Logger 있긴했어</p>
+<li>Java1.4에 기본 Logger 있긴했어
+    - Log Levels은 다음과 같았음
+        - info/severe/fine
+    - Handlers
+        - How to handle message?
+    - 근데 구렸어ㅜ</li>
+</ul>
 <ul>
-<li>Log Levels은 다음과 같았음<ul>
-<li>info/severe/fine</li>
+<li>Open Source Library 사용하기 시작!
+    - Log4J 두등등장
+        - Log Levels
+            - debug/error/info
+        - Appenders
+            - File / Console / Rolling File / JDBC / SMTP
+        - Formatting도 지원!</li>
 </ul>
-</li>
-<li>Handlers<ul>
-<li>How to handle message?</li>
-</ul>
-</li>
-<li>근데 구렸어ㅜ</li>
-</ul>
-</li>
-<li>
-<p>Open Source Library 사용하기 시작!</p>
 <ul>
-<li>Log4J 두등등장<ul>
-<li>Log Levels<ul>
-<li>debug/error/info</li>
+<li>Log4J 좋다 이거야 근데 Java1.4 Logger에서 다 바꿀라니까 뇌절 지름길
+    - Facade 패턴 등장!
+        - 인터페이스만 뒤지게 정의해놓고 실제 찐 콘크리트 클래스가 할일 함
+    - SLF4J 두둥등장
+        - API 같은 거야! JDBC 기억나지? 약간 고런 갬성</li>
 </ul>
-</li>
-<li>Appenders<ul>
-<li>File / Console / Rolling File / JDBC / SMTP</li>
-</ul>
-</li>
-<li>Formatting도 지원!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Log4J 좋다 이거야 근데 Java1.4 Logger에서 다 바꿀라니까 뇌절 지름길</p>
 <ul>
-<li>Facade 패턴 등장!<ul>
-<li>인터페이스만 뒤지게 정의해놓고 실제 찐 콘크리트 클래스가 할일 함</li>
+<li>현재 가장 유명한 라이브러리
+    - Logback
+    - Log4J2</li>
 </ul>
-</li>
-<li>SLF4J 두둥등장<ul>
-<li>API 같은 거야! JDBC 기억나지? 약간 고런 갬성</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>현재 가장 유명한 라이브러리</p>
 <ul>
-<li>Logback</li>
-<li>Log4J2</li>
+<li>그냥 안쓰고 SLF4J 쓰는이유?
+    - Logback을 쓰던 Log4J2를 쓰던 SLF4J가 뚝딱 정리해줌 </li>
 </ul>
-</li>
-<li>
-<p>그냥 안쓰고 SLF4J 쓰는이유?</p>
 <ul>
-<li>Logback을 쓰던 Log4J2를 쓰던 SLF4J가 뚝딱 정리해줌 </li>
-</ul>
-</li>
-<li>
-<p>추천 로깅 전략</p>
-<ul>
-<li>Use SLF4J!</li>
-<li>찐 로그 남기는 친구는 Logback 혹은 Log4J2<ul>
-<li>Logback이 쪼꼼 더 인기 좋음</li>
-<li>Log4J2가 쪼꼼 더 기능 많아<ul>
-<li>Lazy Loading message 같은거</li>
-<li>Async Loggind 같은거</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>추천 로깅 전략
+    - Use SLF4J!
+    - 찐 로그 남기는 친구는 Logback 혹은 Log4J2
+        - Logback이 쪼꼼 더 인기 좋음
+        - Log4J2가 쪼꼼 더 기능 많아
+            - Lazy Loading message 같은거
+            - Async Loggind 같은거</li>
 </ul>
 <h2 id="_1">스프링부트에서 로깅하기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=lGrcZsw-hKQ</em></li>
-<li>
-<p>Use Proper Logging Framework!</p>
-<ul>
-<li>Configurable, Log levels, Log destination</li>
+<li>Use Proper Logging Framework!
+    - Configurable, Log levels, Log destination</li>
 </ul>
-</li>
-<li>
-<p>스프링 부트는 로깅 라이브러리 딸려와요 써봅시다</p>
 <ul>
-<li>spring-boot-starter-web<ul>
-<li>spring-boot-starter-logging<ul>
-<li>spring-jcl<ul>
-<li>Logback으로 찐 로그 찍음
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">Class</span><span class="w"> </span><span class="n">Controller</span><span class="w"> </span><span class="p">{</span>
+<li>스프링 부트는 로깅 라이브러리 딸려와요 써봅시다
+    - spring-boot-starter-web
+        - spring-boot-starter-logging
+            - spring-jcl
+                - Logback으로 찐 로그 찍음
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">Class</span><span class="w"> </span><span class="n">Controller</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">Controller</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
@@ -23074,106 +23038,72 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span><span class="w">       </span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>로거 팩토리에서 getLogger =&gt; 찐 로그하는 클래스가 어디인지<ul>
-<li>SLF4J를 사용합니다</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Log Level 설정!</p>
-<ul>
-<li>property 파일에서 로그 레벨에 따라 출력 설정해줌
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">logging.level.root</span><span class="o">=</span><span class="s">TRACE //이러면 찐으로 스프링 시작할때도 싹 다 트레이스레벨 우르르나와</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">logging.level.root</span><span class="o">=</span><span class="s">INFO</span>
+    - 로거 팩토리에서 getLogger =&gt; 찐 로그하는 클래스가 어디인지
+        - SLF4J를 사용합니다</li>
+</ul>
+<ul>
+<li>Log Level 설정!
+    - property 파일에서 로그 레벨에 따라 출력 설정해줌
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">logging.level.root</span><span class="o">=</span><span class="s">TRACE //이러면 찐으로 스프링 시작할때도 싹 다 트레이스레벨 우르르나와</span>
+</code></pre></div>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">logging.level.root</span><span class="o">=</span><span class="s">INFO</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">logging.level.webhosting.webhosting</span><span class="o">=</span><span class="s">TRACE</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p>XML 설정!</p>
 <ul>
-<li>스프링 부트는 클래스패쓰에 있는 특정 XML 파일이 있나 살펴봄<ul>
-<li>logback.xml, logback-spring.xml 등</li>
-</ul>
-</li>
-<li>base.xml 상속받아서 사용하자!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<li>XML 설정!
+    - 스프링 부트는 클래스패쓰에 있는 특정 XML 파일이 있나 살펴봄
+        - logback.xml, logback-spring.xml 등
+    - base.xml 상속받아서 사용하자!
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">&lt;configuration&gt;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">resource=</span><span class="s">&quot;org/springframework/boot/logging/logback/base.xml&quot;</span><span class="nt">/&gt;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&lt;logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;org.springframework.web&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;DEBUG&quot;</span><span class="nt">/&gt;</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nt">&lt;/configuration&gt;</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="_2">로깅 공식문서<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://docs.spring.io/spring-boot/docs/2.1.5.RELEASE/reference/html/boot-features-logging.html</em></li>
-<li>
-<p><strong>로그 포맷</strong></p>
-<ul>
-<li>기본적으로 다음과 같은 포맷
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>2014-03-05 10:57:51.112  INFO 45469 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/7.0.52
+<li><strong>로그 포맷</strong>
+    - 기본적으로 다음과 같은 포맷
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>2014-03-05 10:57:51.112  INFO 45469 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/7.0.52
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>2014-03-05 10:57:51.253  INFO 45469 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>2014-03-05 10:57:51.253  INFO 45469 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1358 ms
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>2014-03-05 10:57:51.698  INFO 45469 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: &#39;dispatcherServlet&#39; to [/]
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>2014-03-05 10:57:51.702  INFO 45469 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: &#39;hiddenHttpMethodFilter&#39; to: [/*]
-</code></pre></div></li>
-<li>시간 / 로그레벨 / 프로세스ID / --- / 쓰레드 이름 / 발생한 클래스 이름 / 로그 메시지</li>
+</code></pre></div>
+    - 시간 / 로그레벨 / 프로세스ID / --- / 쓰레드 이름 / 발생한 클래스 이름 / 로그 메시지</li>
 </ul>
-</li>
-<li>
-<p><strong>파일 출력</strong></p>
 <ul>
-<li>기본적으로 스프링 부트는 콘솔에만 로그 찍지, 파일로 저장 X<ul>
-<li>추가적으로 파일로 저장하려면 application.properties에서 logging.file, logging.path에 저장해둬<ul>
-<li>logging.file=my.log --&gt; 현재 위치에서 상대경로 해서 저장</li>
-<li>logging.path=/var/log --&gt; 절대 경로로 뚝딱 가능</li>
+<li><strong>파일 출력</strong>
+    - 기본적으로 스프링 부트는 콘솔에만 로그 찍지, 파일로 저장 X
+        - 추가적으로 파일로 저장하려면 application.properties에서 logging.file, logging.path에 저장해둬
+            - logging.file=my.log --&gt; 현재 위치에서 상대경로 해서 저장
+            - logging.path=/var/log --&gt; 절대 경로로 뚝딱 가능
+    - 로그 파일 10MB 차면 rotate
+        - 디폴트로는 Error/Warn/Info가 찍힘
+        - 파일 리밋은 logging.file.max-size로 변경 가능
+        - 옛날 로그 찍어둔거는 logging.file.max-history로 설정 안해두면 평생 남아</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>로그 파일 10MB 차면 rotate<ul>
-<li>디폴트로는 Error/Warn/Info가 찍힘</li>
-<li>파일 리밋은 logging.file.max-size로 변경 가능</li>
-<li>옛날 로그 찍어둔거는 logging.file.max-history로 설정 안해두면 평생 남아</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>커스텀 로그 설정</strong></p>
 <ul>
-<li>logging.config에서 설정 가능</li>
-<li>Logback: logback-spring.xml, logback.xml로 설정가능</li>
-</ul>
-</li>
+<li><strong>커스텀 로그 설정</strong>
+    - logging.config에서 설정 가능
+    - Logback: logback-spring.xml, logback.xml로 설정가능</li>
 </ul>
 <h2 id="logback">Logback<a class="headerlink" href="#logback" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/logback</em></li>
-<li>
-<p><strong>Logback Architecture</strong></p>
-<ul>
-<li>Logger: 로그 메시지 형식, 로그 메시지 생성을 담당</li>
-<li>Appender: 로그 메시지를 최종 목표에 놓아둠, 하나 이상일 수 있음</li>
-<li>Layout: 메세지 아웃풋 준비</li>
+<li><strong>Logback Architecture</strong>
+    - Logger: 로그 메시지 형식, 로그 메시지 생성을 담당
+    - Appender: 로그 메시지를 최종 목표에 놓아둠, 하나 이상일 수 있음
+    - Layout: 메세지 아웃풋 준비</li>
 </ul>
-</li>
-<li>
-<p><strong>실습 따라쳐보기</strong></p>
 <ul>
-<li>classpath에 logback.xml 넣기
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">&lt;configuration&gt;</span>
+<li><strong>실습 따라쳐보기</strong>
+    - classpath에 logback.xml 넣기
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">&lt;configuration&gt;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;STDOUT&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="nt">&lt;encoder&gt;</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">            </span><span class="nt">&lt;pattern&gt;</span>%d{HH:mm:ss.SSS}<span class="w"> </span>[%thread]<span class="w"> </span>%-5level<span class="w"> </span>%logger{36}<span class="w"> </span>-<span class="w"> </span>%msg%n<span class="nt">&lt;/pattern&gt;</span>
@@ -23184,9 +23114,9 @@
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="nt">&lt;appender-ref</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;STDOUT&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">&lt;/root&gt;</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nt">&lt;/configuration&gt;</span>
-</code></pre></div></li>
-<li>main 메서드에서 logger쳐보기
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - main 메서드에서 logger쳐보기
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">Example</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
@@ -23195,12 +23125,10 @@
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Example log from {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Example</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getSimpleName</span><span class="p">());</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
+</code></pre></div>
+    - console output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>20:34:22.136 [main] INFO Example - Example log from Example
 </code></pre></div></li>
-<li>console output
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>20:34:22.136 [main] INFO Example - Example log from Example
-</code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

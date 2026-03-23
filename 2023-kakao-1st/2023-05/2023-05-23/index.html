@@ -22982,7 +22982,9 @@
     - 순서에 맞게 항상 수행될 것이며,
     - 하나의 데이터베이스 세션을 사용할 것이다</p>
 <ul>
-<li><strong>DBIO 실행하는 법</strong></li>
+<li>
+<p><strong>DBIO 실행하는 법</strong></p>
+<ol>
 <li>
 <p>Materialized</p>
 <ul>
@@ -22999,7 +23001,7 @@
 <p>Streaming</p>
 <ul>
 <li>Collection-valued queries</li>
-<li>Pub/Sub 구조로 수행될 수 있음</li>
+<li>Pub/Sub 구조로 수행될 수 있음<ul>
 <li>Publisher: Reactive Streams</li>
 <li>Consumer: Akka Streams
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coffees</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">name</span>
@@ -23010,13 +23012,17 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+</li>
 <li>
 <p>Pinned Sessions</p>
 <ul>
-<li><code>DBIOAction</code>인데 여러가지 작은 액션들의 조합이라면...</li>
+<li><code>DBIOAction</code>인데 여러가지 작은 액션들의 조합이라면...<ul>
 <li>슬릭은 커넥션 풀로부터 세션을 얻고, </li>
 <li>db 계산이 아니라면,</li>
 <li>세션을 쓱 놔준다</li>
+</ul>
+</li>
 <li><code>withPinnedSession</code>등을 사용해 사용중인 세션을 계속해서 non-db 계산에서도 사용할 수 있다</li>
 </ul>
 </li>
@@ -23028,6 +23034,8 @@
 <li>실제 데이터베이스 트랜잭션은 가장 바깥쪽 트랜잭션에 대해서만 생성되며, 커밋/롤백 된다</li>
 </ul>
 </li>
+</ol>
+</li>
 </ul>
 <h2 id="transactionally">transactionally<a class="headerlink" href="#transactionally" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://github.com/slick/slick/issues/1425</em>
@@ -23035,15 +23043,13 @@
   - multiple databases operation을 다루기 위함
   - DBIO 타입에 있다는데 (사실 변환하는 듯)</p>
 <ul>
-<li><strong>Implicit Conversions</strong></li>
+<li><strong>Implicit Conversions</strong><ul>
 <li>JdbcActionComponent<ul>
 <li>Slick에서 database action을 수행하기 위함</li>
 <li>이걸 통해 transactionally 등의 메서드를 DBIO가 쓸 수 있도록 지원해줌</li>
 </ul>
 </li>
-<li>
-<p>jdbcActionExtensionMethods</p>
-<ul>
+<li>jdbcActionExtensionMethods<ul>
 <li>jdbcActionExtensionMethods를 통해 DBIO를 추가적인 메서드를 쓸 수 있도록 지원해준다</li>
 <li>이를 통해 transactionally를 쓸 수 있는 것
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">implicit</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">jdbcActionExtensionMethods</span><span class="p">[</span><span class="nc">E</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="nc">Effect</span><span class="p">,</span><span class="w"> </span><span class="nc">R</span><span class="p">,</span><span class="w"> </span><span class="nc">S</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="nc">NoStream</span><span class="p">](</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">DBIOAction</span><span class="p">[</span><span class="nc">R</span><span class="p">,</span><span class="w"> </span><span class="nc">S</span><span class="p">,</span><span class="w"> </span><span class="nc">E</span><span class="p">]):</span><span class="w"> </span><span class="nc">JdbcActionExtensionMethods</span><span class="p">[</span><span class="nc">E</span><span class="p">,</span><span class="w"> </span><span class="nc">R</span><span class="p">,</span><span class="w"> </span><span class="nc">S</span><span class="p">]</span><span class="w"> </span><span class="o">=</span>
@@ -23051,19 +23057,23 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>그니까...</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>그니까...</strong><ul>
 <li>DBIO --jdbcActionExtensionMethods--&gt; JdbcActionComponent로 변환해줌</li>
-<li>
-<p>db.run 할 때 transactionally 메서드를 가진 DBIO를 만나면, transactionally flag를 트랜잭션 수행</p>
+<li>db.run 할 때 transactionally 메서드를 가진 DBIO를 만나면, transactionally flag를 트랜잭션 수행</li>
+</ul>
 </li>
-<li>
-<p><strong>OK 그러니까...</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>OK 그러니까...</strong><ul>
 <li>결국에 Service에서 이 "transactionally"를 쓸라면 JdbcProfile을 Scope에서 쓸 수 있도록 import를 해와야해<ul>
 <li>변환할 때 db.execute를 가져오는 과정에서 protected로 정의되어 있는 친구들은 클래스 레벨에서 임포트가 안 될거야</li>
 <li>필요한 클래스 내부에서 import 문으로 가져와보자</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

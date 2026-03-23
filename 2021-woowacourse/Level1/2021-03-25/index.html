@@ -22909,57 +22909,39 @@
 <h3 id="2021-03-25">2021-03-25<a class="headerlink" href="#2021-03-25" title="Permanent link">&para;</a></h3>
 <h2 id="sql">멍토의 SQL<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>고맙게도, SQL을 접해본 적이 없는 나를 위해 차근차근 하나씩 SQL에 필요한 용어/개념을 알려주었다</p>
-</li>
-<li>
-<p>SELECT</p>
+<li>고맙게도, SQL을 접해본 적이 없는 나를 위해 차근차근 하나씩 SQL에 필요한 용어/개념을 알려주었다</li>
+</ul>
 <ul>
-<li>데이터를 읽어오는 구문</li>
-<li><em>ex) SELECT field FROM table {WHERE 조건}</em><ul>
-<li>전체 column field를 가져오려면 * 를 사용</li>
+<li>SELECT
+    - 데이터를 읽어오는 구문
+    - <em>ex) SELECT field FROM table {WHERE 조건}</em>
+        - 전체 column field를 가져오려면 * 를 사용</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>INSERT</p>
 <ul>
-<li>데이터를 입력하는 구문</li>
-<li><em>ex) INSERT INTO table(field1, field2....) VALUES (values1, values2....);</em></li>
+<li>INSERT
+    - 데이터를 입력하는 구문
+    - <em>ex) INSERT INTO table(field1, field2....) VALUES (values1, values2....);</em></li>
 </ul>
-</li>
-<li>
-<p>WHERE</p>
 <ul>
-<li>검색 조건을 지정</li>
-<li><em>ex) SELECT * FROM 테이블명 WHERE no = 2;</em></li>
+<li>WHERE
+    - 검색 조건을 지정
+    - <em>ex) SELECT * FROM 테이블명 WHERE no = 2;</em></li>
 </ul>
-</li>
-<li>
-<p>GROUP BY</p>
 <ul>
-<li>데이터를 원하는 그룹으로 나누기<ul>
-<li>데이터를 묶어서 쿼리를 처리할 때 사용</li>
-<li>공통된 기준을 가지고 묶어주는 것!</li>
-</ul>
-</li>
-<li><em>ex) SELECT department_id, SUM(salary) FROM hr.employees</em><br />
+<li>GROUP BY
+    - 데이터를 원하는 그룹으로 나누기
+        - 데이터를 묶어서 쿼리를 처리할 때 사용
+        - 공통된 기준을 가지고 묶어주는 것!
+    - <em>ex) SELECT department_id, SUM(salary) FROM hr.employees</em><br />
 <em>GROUP BY department_id</em> </li>
 </ul>
-</li>
-<li>
-<p>ORDER BY</p>
 <ul>
-<li>기본적으로 SELECT 문은 테이블에 입력된 순서대로 출력<ul>
-<li>내림차순/오름차순으로 데이터를 정렬할 필요가 있다</li>
-<li>이떄 ORDER BY 사용할 것!</li>
-</ul>
-</li>
-<li><em>ex) SELECT * FROM table_name</em><br />
+<li>ORDER BY
+    - 기본적으로 SELECT 문은 테이블에 입력된 순서대로 출력
+        - 내림차순/오름차순으로 데이터를 정렬할 필요가 있다
+        - 이떄 ORDER BY 사용할 것!
+    - <em>ex) SELECT * FROM table_name</em><br />
 <em>ORDER BY column_name(ASC, DESC)</em></li>
-</ul>
-</li>
 </ul>
 
 

@@ -22907,31 +22907,35 @@
 <h3 id="2026-03-18">2026-03-18<a class="headerlink" href="#2026-03-18" title="Permanent link">&para;</a></h3>
 <h2 id="es-reindex-7x-8x">ES reindex 및 7.x -&gt; 8.x 전환<a class="headerlink" href="#es-reindex-7x-8x" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>색인 최적화</strong></li>
+<li><strong>색인 최적화</strong><ul>
 <li>_reindex 할 때, <code>number_of_replicas: 0</code>, <code>refresh_interval: -1</code></li>
 <li><code>refresh_interval: -1</code><ul>
 <li>하드디스크에는 썼지만, 검색엔진(메모리)에는 올라가지 않음</li>
-<li>ES에서는 데이터를 받으면 세그먼트라는 파일로 디스크에 저장</li>
+<li>ES에서는 데이터를 받으면 세그먼트라는 파일로 디스크에 저장<ul>
 <li>하지만, 저장했다고 바로 검색되는 거 아님</li>
+</ul>
+</li>
 <li><code>refresh</code>를 통해 메모리에 오픈하는  과정을 refresh</li>
 <li><code>-1</code>로 지정하면, 내가 수동으로 시키기 전까지 절 때 <code>refresh</code> 하지 않도록 설정하는 것!</li>
 <li>따라서 해당 값이 -1로 설정되어 있다면, 키바나에서 ES에게 데이터 달라해도 새로고침 안해서 검색 가능한거 없어 라는 반응!</li>
 <li>대신 <code>refresh</code> 설정이 CPU, I/O 자원 꽤 먹기에, 대량 이관시 이 과정 생략해야 복사 속도가 2~3배 개선된다고 함</li>
 </ul>
 </li>
-<li>
-<p><code>number_of_replicas: 0</code></p>
-<ul>
+<li><code>number_of_replicas: 0</code><ul>
 <li>복사 속도를 2배로 올리고, 서버 부하를 절반으로 줄이기 위함</li>
-<li>ES에서는 Primary Shard가 깨질것을 대비해 똑같은 복사본을 다른 노드에 하나 더 만들어 둠. </li>
+<li>ES에서는 Primary Shard가 깨질것을 대비해 똑같은 복사본을 다른 노드에 하나 더 만들어 둠. <ul>
 <li>상용 환경에서 1로 설정하면 원본 1개 + 복사본 1개 =&gt; 2벌 유지</li>
+</ul>
+</li>
 <li>이관 시 해당 값을 0으로 설정하게 된다면, 서버가 원본 쓰기에만 집중</li>
 <li>이관 100% 완료되고 난 뒤, 0 -&gt; 1로 올려 복제를 해주자!</li>
 </ul>
 </li>
-<li>
-<p><strong>ES 7.x -&gt; 8.x 인덱스 템플릿 마이그레이션</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ES 7.x -&gt; 8.x 인덱스 템플릿 마이그레이션</strong><ul>
 <li>ES 7.x 의 템플릿 구조 (Legacy Template)<ul>
 <li><code>PUT _template/{name}</code> API 사용</li>
 <li>하나의 인덱스 생성 시, 패턴이 매칭되는 여러 템플릿이 동시에 적용. order 순서로 mappings가 머지</li>
@@ -22947,6 +22951,8 @@
 <li>레고 조립하듯 component template 으로 각 매핑을 분리하고, index template에서 composed_of 배열로 조합</li>
 <li>priority: 100으로 줘서 인프라 템플릿 보다 먼저 보도록</li>
 <li>하지만 관리가 부담스러움. 필요한 인덱스를 직접 _index_template 으로 생성하여 지정하도록 함.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

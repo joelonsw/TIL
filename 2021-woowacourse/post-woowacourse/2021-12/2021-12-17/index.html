@@ -22954,55 +22954,39 @@
 <h2 id="ptr-reverse-dns">PTR 레코드 (Reverse DNS)<a class="headerlink" href="#ptr-reverse-dns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: http://blog.servis.co.kr/index.php/2020/01/02/ptr/</em></li>
-<li>
-<p><strong>PTR 레코드란</strong></p>
+<li><strong>PTR 레코드란</strong>
+    - Reverse/Inverse Domain 이라고도 부름
+    - 일반적인 도메인 조회가 도메인 네임 -&gt; DNS 질의 -&gt; IP 주소 찾기 사이클과 반대로 "IP 주소 -&gt; 도메인 네임 찾기"
+    - 따라서 역방향 도메인이라고 불릴 때도 있다. </li>
+</ul>
 <ul>
-<li>Reverse/Inverse Domain 이라고도 부름</li>
-<li>일반적인 도메인 조회가 도메인 네임 -&gt; DNS 질의 -&gt; IP 주소 찾기 사이클과 반대로 "IP 주소 -&gt; 도메인 네임 찾기"</li>
-<li>따라서 역방향 도메인이라고 불릴 때도 있다. </li>
-</ul>
-</li>
-<li>
-<p><strong>왜 필요한가?</strong></p>
-<ul>
-<li>SMTP의 스팸 필터</li>
-<li>일부 메일 서버는 메일 수신하고 목적지 전달하기 전에 <strong>발신인의 IP 주소를 인버스 도메인으로 변환해 DNS에 역질문</strong><ul>
-<li>역질문 해 얻은 도메인 네임 == 메일 계정 도메인인지 확인</li>
-<li>일치하는 경우에 메일을 정상적으로 접수</li>
-</ul>
-</li>
-<li>메일 서버는 외부 네트워크에서 온 메일의 발신인을 인증할 수 있음</li>
-</ul>
-</li>
+<li><strong>왜 필요한가?</strong>
+    - SMTP의 스팸 필터
+    - 일부 메일 서버는 메일 수신하고 목적지 전달하기 전에 <strong>발신인의 IP 주소를 인버스 도메인으로 변환해 DNS에 역질문</strong>
+        - 역질문 해 얻은 도메인 네임 == 메일 계정 도메인인지 확인
+        - 일치하는 경우에 메일을 정상적으로 접수
+    - 메일 서버는 외부 네트워크에서 온 메일의 발신인을 인증할 수 있음</li>
 </ul>
 <h2 id="dns-mx">DNS MX 레코드<a class="headerlink" href="#dns-mx" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>MX 레코드란</strong><ul>
-<li>Mail Exchanger Record</li>
-<li>수신자의 도메인 중간에 이메일 메시지 수용을 책임지는 메일 서버</li>
-<li>유효성이 확인된 DNS 리소스 레코드의 일종</li>
-</ul>
-</li>
+<li><strong>MX 레코드란</strong>
+    - Mail Exchanger Record
+    - 수신자의 도메인 중간에 이메일 메시지 수용을 책임지는 메일 서버
+    - 유효성이 확인된 DNS 리소스 레코드의 일종</li>
 </ul>
 <h2 id="_1">스팸메일 방지하기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://blog.stibee.com/%EB%82%B4%EA%B0%80-%EB%B3%B4%EB%82%B8-%EC%9D%B4%EB%A9%94%EC%9D%BC%EC%9D%B4-%EC%8A%A4%ED%8C%B8%EB%A9%94%EC%9D%BC%EB%A1%9C-%EB%B6%84%EB%A5%98%EB%90%9C%EB%8B%A4%EB%A9%B4-cd4e2ef93bad</em></li>
-<li>
-<p><strong>스팸 필터 동작 원리</strong></p>
-<ul>
-<li>스팸 필터를 통과하기 위한 기술적 조치</li>
-<li>구글 : DKIM 서명, SPF 레코드, DMARC 게시를 통한 이메일 인증</li>
+<li><strong>스팸 필터 동작 원리</strong>
+    - 스팸 필터를 통과하기 위한 기술적 조치
+    - 구글 : DKIM 서명, SPF 레코드, DMARC 게시를 통한 이메일 인증</li>
 </ul>
-</li>
-<li>
-<p><strong>피하는 방법</strong></p>
-<ol>
-<li>스팸메일로 오해할 자극적인 표현 X</li>
-<li>텍스트 없이 한 장의 큰 이미지 X</li>
-<li>유효하지 않은 수신자는 발송 대상에서 제외할 것</li>
-<li>답장을 받을 수 있는 진짜 이메일 주소를 사용할 것</li>
-</ol>
-</li>
+<ul>
+<li><strong>피하는 방법</strong>
+    1. 스팸메일로 오해할 자극적인 표현 X
+    2. 텍스트 없이 한 장의 큰 이미지 X
+    3. 유효하지 않은 수신자는 발송 대상에서 제외할 것
+    4. 답장을 받을 수 있는 진짜 이메일 주소를 사용할 것</li>
 </ul>
 
 

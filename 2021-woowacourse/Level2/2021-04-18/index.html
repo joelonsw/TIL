@@ -22954,151 +22954,101 @@
 <h2 id="rest-api">REST API란?<a class="headerlink" href="#rest-api" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>출처: https://meetup.toast.com/posts/92</em></li>
-<li>
-<p><strong>REST API 탄생</strong></p>
+<li><strong>REST API 탄생</strong>
+    - HTTP 설계를 제대로 잘 활용하는 네트워크 아키텍쳐 <em>(자원에 대한 주소를 지정하는 방법)</em></li>
+</ul>
 <ul>
-<li>HTTP 설계를 제대로 잘 활용하는 네트워크 아키텍쳐 <em>(자원에 대한 주소를 지정하는 방법)</em></li>
+<li><strong>REST 구성</strong>
+    - 자원(Resource): URI
+    - 행위(Verb): HTTP Method
+    - 표현(Representations)</li>
 </ul>
-</li>
-<li>
-<p><strong>REST 구성</strong></p>
 <ul>
-<li>자원(Resource): URI</li>
-<li>행위(Verb): HTTP Method</li>
-<li>표현(Representations)</li>
+<li><strong>REST 특징</strong>
+    1. Uniform
+        - URI로 지정한 리소스에 대한 조작을 통일되고 한정적인 인터페이스로 수행
+    2. Stateless
+        - 무상태성
+        - 작업을 위한 상태정보를 따로 저장X, 관리X
+            - 세션, 쿠키 정보 없음
+        - 그냥 단순히 들어오는 요청을 처리하는 것
+    3. Cacheable
+        - HTTP의 웹표준을 그대로 사용
+            - 웹 인프라를 그대로 활용가능
+            - HTTP 캐싱 기능 적용 가능
+    4. Self-descriptiveness
+        - REST API 메시지만 보고도 쉽게 이해해야 함
+    5. Client-Server 구조
+        - Client: 사용자 인증, 세션/로그인 정보 관리
+        - Server: API 제공
+        - 둘의 의존성 DOWN
+    6. 계층형 구조
+        - 다중 계층으로 구성 가능
+            - 보안, 로드 밸런싱, 암호화 계층을 추가해 유연한 구조 설계 가능</li>
 </ul>
-</li>
-<li>
-<p><strong>REST 특징</strong></p>
-<ol>
-<li>Uniform<ul>
-<li>URI로 지정한 리소스에 대한 조작을 통일되고 한정적인 인터페이스로 수행</li>
-</ul>
-</li>
-<li>Stateless<ul>
-<li>무상태성</li>
-<li>작업을 위한 상태정보를 따로 저장X, 관리X<ul>
-<li>세션, 쿠키 정보 없음</li>
-</ul>
-</li>
-<li>그냥 단순히 들어오는 요청을 처리하는 것</li>
-</ul>
-</li>
-<li>Cacheable<ul>
-<li>HTTP의 웹표준을 그대로 사용<ul>
-<li>웹 인프라를 그대로 활용가능</li>
-<li>HTTP 캐싱 기능 적용 가능</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Self-descriptiveness<ul>
-<li>REST API 메시지만 보고도 쉽게 이해해야 함</li>
-</ul>
-</li>
-<li>Client-Server 구조<ul>
-<li>Client: 사용자 인증, 세션/로그인 정보 관리</li>
-<li>Server: API 제공</li>
-<li>둘의 의존성 DOWN</li>
-</ul>
-</li>
-<li>계층형 구조<ul>
-<li>다중 계층으로 구성 가능<ul>
-<li>보안, 로드 밸런싱, 암호화 계층을 추가해 유연한 구조 설계 가능</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>REST API 디자인 가이드</strong>  </p>
-<ol>
-<li><strong>URI는 "정보의 자원"을 표현할 것</strong>  </li>
-<li><strong>자원의 행위는 HTTP Method(GET, POST, PUT, DELETE)로 표현할 것</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>GET  /members/show/1    (X)
+<ul>
+<li><strong>REST API 디자인 가이드</strong><br />
+    1. <strong>URI는 "정보의 자원"을 표현할 것</strong><br />
+    2. <strong>자원의 행위는 HTTP Method(GET, POST, PUT, DELETE)로 표현할 것</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>GET  /members/show/1    (X)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>GET  /members/1         (O)
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>GET  /members/insert/2  (X)
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>POST /members/2         (O)
-</code></pre></div></li>
-<li>작성 규칙<ul>
-<li>"/"는 계층 관계를 나타낼 때 쓰자</li>
-<li>URI 마지막에 "/" 쓰지말자</li>
-<li>"-"를 통해 가독성 높이자</li>
-<li>"_"는 URI에 쓰지말자</li>
-<li>URI는 소문자로 쓰자</li>
-<li>파일 확장자는 URI에 쓰지말자</li>
-</ul>
-</li>
-<li>리소스 끼리 연관 관계가 있다면...
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/리소스명/리소스 ID/관계있는 다른 리소스명
+</code></pre></div>
+    - 작성 규칙
+        - "/"는 계층 관계를 나타낼 때 쓰자
+        - URI 마지막에 "/" 쓰지말자
+        - "-"를 통해 가독성 높이자
+        - "_"는 URI에 쓰지말자
+        - URI는 소문자로 쓰자
+        - 파일 확장자는 URI에 쓰지말자
+    - 리소스 끼리 연관 관계가 있다면...
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/리소스명/리소스 ID/관계있는 다른 리소스명
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>GET : /users/{userid}/devices
-</code></pre></div></li>
-<li>Collection(집합)과 Document(객체)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/sports/soccer
+</code></pre></div>
+    - Collection(집합)과 Document(객체)
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/sports/soccer
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>/sports/soccer/players/13
 </code></pre></div></li>
-</ol>
-</li>
 </ul>
 <h2 id="spring">김영한님 Spring 입문 강의 복습<a class="headerlink" href="#spring" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/dashboard</em></li>
-<li>
-<p><strong>template내의 html 호출법</strong></p>
+<li><strong>template내의 html 호출법</strong>
+    - localhost:8080/hello --&gt; [[helloController -model(data:hello)-&gt; viewResolver]] --&gt; hello.html
+        - 컨트롤러에서 리턴값으로 String을 반환하면, viewResolver가 resources/template 내의 같은 이름 찾아서 처리</li>
+</ul>
 <ul>
-<li>localhost:8080/hello --&gt; [[helloController -model(data:hello)-&gt; viewResolver]] --&gt; hello.html<ul>
-<li>컨트롤러에서 리턴값으로 String을 반환하면, viewResolver가 resources/template 내의 같은 이름 찾아서 처리</li>
+<li><strong>@ResponseBody</strong>
+<img alt="responseBody" src="../../image/responseBody_2021_04_18.PNG" />
+    - 이거 붙이면 viewResolver 사용 X
+        - HttpMessageConverter 사용 O
+    - HTTP BODY에...
+        - String이면, 문자 내용 반환 (StringHttpMessageConverter)
+        - Object면, JSON 변환 반환 (MappingJackson2HttpMessageConverter)</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>@ResponseBody</strong>
-<img alt="responseBody" src="../../image/responseBody_2021_04_18.PNG" /></p>
 <ul>
-<li>이거 붙이면 viewResolver 사용 X<ul>
-<li>HttpMessageConverter 사용 O</li>
+<li><strong>웹 애플리케이션 계층 구조</strong>
+<img alt="webStructure" src="../../image/webStructure_2021_04_18.PNG" />
+    - 컨트롤러: 웹 MVC 컨트롤러 역할
+    - 서비스: 핵심 비즈니스 로직 구현
+    - 리포지토리: DB에 접근, 도메인 객체를 DB에 저장하고 관리
+    - 도메인: 비즈니스 도메인 객체</li>
 </ul>
-</li>
-<li>HTTP BODY에...<ul>
-<li>String이면, 문자 내용 반환 (StringHttpMessageConverter)</li>
-<li>Object면, JSON 변환 반환 (MappingJackson2HttpMessageConverter)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>웹 애플리케이션 계층 구조</strong>
-<img alt="webStructure" src="../../image/webStructure_2021_04_18.PNG" /></p>
 <ul>
-<li>컨트롤러: 웹 MVC 컨트롤러 역할</li>
-<li>서비스: 핵심 비즈니스 로직 구현</li>
-<li>리포지토리: DB에 접근, 도메인 객체를 DB에 저장하고 관리</li>
-<li>도메인: 비즈니스 도메인 객체</li>
-</ul>
-</li>
-<li>
-<p><strong>스프링 빈과 의존관계</strong></p>
-<ol>
-<li>컴포넌트 스캔과 자동 의존관계 설정<ul>
-<li>생성자에 @AutoWired가 있으면 Spring에서 연관된 객체를 Spring Container에서 찾아서 넣어줌</li>
-<li>스프링 빈으로 등록하기 =&gt; @Bean, @Component, @Controller, @Repository, @Service<ul>
-<li>@Bean VS @Component <em>(참고: https://jojoldu.tistory.com/27)</em><ul>
-<li>@Bean: 개발자가 컨트롤이 불가능한 외부 라이브러리 등록할 때 사용</li>
-<li>@Component: 개발자가 컨트롤이 가능한 클래스의 경우</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>스프링이 스프링 컨테이너에 스프링 빈 등록할 때, 싱글톤으로 등록</li>
-<li>같은 스프링 빈 == 같은 인스턴스</li>
-</ul>
-</li>
-<li>자바 코드로 직접 스프링 빈 등록하기<ul>
-<li>@Component, @Controller, @Repository, @Service, @Autowired 다 빼봐
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Configuration</span>
+<li><strong>스프링 빈과 의존관계</strong>
+    1. 컴포넌트 스캔과 자동 의존관계 설정
+        - 생성자에 @AutoWired가 있으면 Spring에서 연관된 객체를 Spring Container에서 찾아서 넣어줌
+        - 스프링 빈으로 등록하기 =&gt; @Bean, @Component, @Controller, @Repository, @Service
+            - @Bean VS @Component <em>(참고: https://jojoldu.tistory.com/27)</em>
+                - @Bean: 개발자가 컨트롤이 불가능한 외부 라이브러리 등록할 때 사용
+                - @Component: 개발자가 컨트롤이 가능한 클래스의 경우
+        - 스프링이 스프링 컨테이너에 스프링 빈 등록할 때, 싱글톤으로 등록
+        - 같은 스프링 빈 == 같은 인스턴스
+    2. 자바 코드로 직접 스프링 빈 등록하기
+        - @Component, @Controller, @Repository, @Service, @Autowired 다 빼봐
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SpringConfig</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nd">@Bean</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MemberService</span><span class="w"> </span><span class="nf">memberService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -23112,66 +23062,42 @@
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>발전해나가는 DB접근 방식</strong></p>
 <ul>
-<li>순수 JDBC<ul>
-<li>Connection, PreparedStatement, ResultSet 생성 반환</li>
-<li>중복 코드 다수</li>
+<li><strong>발전해나가는 DB접근 방식</strong>
+    - 순수 JDBC
+        - Connection, PreparedStatement, ResultSet 생성 반환
+        - 중복 코드 다수
+    - JdbcTemplate
+        - JDBC API의 반복코드를 제거
+        - SQL문은 직접 작성할 것
+    - JPA
+        - 반복코드, SQL JPA가 다 해줌
+        - SQL, 데이터 중심의 설계가 ==&gt; 객체 중심으로 전환!
+    - Spring Data JPA
+        - 리포지토리에 구현 클래스도 필요없어짐
+        - CRUD 모두 JPA가 제공</li>
 </ul>
-</li>
-<li>JdbcTemplate<ul>
-<li>JDBC API의 반복코드를 제거</li>
-<li>SQL문은 직접 작성할 것</li>
-</ul>
-</li>
-<li>JPA<ul>
-<li>반복코드, SQL JPA가 다 해줌</li>
-<li>SQL, 데이터 중심의 설계가 ==&gt; 객체 중심으로 전환!</li>
-</ul>
-</li>
-<li>Spring Data JPA<ul>
-<li>리포지토리에 구현 클래스도 필요없어짐</li>
-<li>CRUD 모두 JPA가 제공</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>통합 테스트 VS 단위 테스트</strong></p>
 <ul>
-<li>통합 테스트: 모듈 간의 인터페이스가 올바르게 작동하는가?</li>
-<li>단위 테스트: 테스트가 가능한 최소 단위로 나누어 SW내의 결함 발견하기!</li>
+<li><strong>통합 테스트 VS 단위 테스트</strong>
+    - 통합 테스트: 모듈 간의 인터페이스가 올바르게 작동하는가?
+    - 단위 테스트: 테스트가 가능한 최소 단위로 나누어 SW내의 결함 발견하기!</li>
 </ul>
-</li>
-<li>
-<p><strong>AOP</strong></p>
 <ul>
-<li>공통된 로직이 여러 클래스에 적용이 필요하다면?</li>
-<li>공통 관심 사항 분리</li>
-<li>프록시 컨테이너...?</li>
-</ul>
-</li>
+<li><strong>AOP</strong>
+    - 공통된 로직이 여러 클래스에 적용이 필요하다면?
+    - 공통 관심 사항 분리
+    - 프록시 컨테이너...?</li>
 </ul>
 <h2 id="_1">리팩토링 질문<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>서비스랑 리포지토리가 있다더라</p>
-<ul>
-<li>나는 서비스에서 DB 접근해주고, 비즈니스 로직도 구현해주는데... 솔직히 지금은 분리가 될 필요 없어보인다. </li>
-<li>언제 그러면 분리?</li>
+<li>서비스랑 리포지토리가 있다더라
+    - 나는 서비스에서 DB 접근해주고, 비즈니스 로직도 구현해주는데... 솔직히 지금은 분리가 될 필요 없어보인다. 
+    - 언제 그러면 분리?</li>
 </ul>
-</li>
-<li>
-<p>새로운 게임 시작하는거</p>
 <ul>
-<li>어쨌든 DB에 새로운 게임을 생성하는건데... POST방식이 어울리는건가?</li>
-<li>어감은 GET이 더 자연스러운데?</li>
-</ul>
-</li>
+<li>새로운 게임 시작하는거
+    - 어쨌든 DB에 새로운 게임을 생성하는건데... POST방식이 어울리는건가?
+    - 어감은 GET이 더 자연스러운데?</li>
 </ul>
 
 

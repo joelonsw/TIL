@@ -22937,15 +22937,15 @@
     - 데이터 색인되자마자 검색 X
     - 내부적으로 일정 주기 (기본 1초)마다 refresh 작업을 통해서만 새 데이터가 검색에 노출</p>
 <ul>
-<li><strong>Refresh 동작 원리</strong></li>
+<li><strong>Refresh 동작 원리</strong><ul>
 <li>변경된 문서를 메모리 버퍼, 트랜잭션 로그 (translog)에 저장</li>
 <li>refresh 발생 시, 메모리 버퍼의 Lucene 세그먼트로 변환되어 검색 가능한 상태로 변경</li>
-<li>
-<p>기본적으로 1초마다 refresh 되지만, 주기는 refresh_interval로 조정 가능</p>
+<li>기본적으로 1초마다 refresh 되지만, 주기는 refresh_interval로 조정 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Refresh Policy 옵션</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Refresh Policy 옵션</strong><ul>
 <li>Index/Update/Delete/Bulk API 등에서는 <code>refresh</code> 파라미터로 정책 지정 가능</li>
 <li>false (기본값)<ul>
 <li>별도의 refresh 동작 X. 변경 사항 반영 시점은 다음 자동 refresh. 성능에 가장 유리</li>
@@ -22956,28 +22956,29 @@
 <li>해당 요청 직후 즉시 refresh 수행. 변경 사항 바로 검색에 반영. 성능 저하 위험 있음</li>
 </ul>
 </li>
-<li>
-<p>wait_for</p>
-<ul>
+<li>wait_for<ul>
 <li>변경 사항 refresh 되어 반영될 때 까지 응답 지연. 즉시 refresh X, 다음 refresh 까지 대기</li>
 </ul>
 </li>
-<li>
-<p><strong><a href="https://github.com/Philippus/elastic4s">elastic4s</a></strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong><a href="https://github.com/Philippus/elastic4s">elastic4s</a></strong><ul>
 <li><code>refresh=false</code> &lt;-&gt; <code>.refresh(RefreshPolicy.None)</code> 혹은 명시 X</li>
 <li><code>refresh=true</code> &lt;-&gt; <code>.refresh(RefreshPolicy.Immediate)</code> or <code>.refreshImmediately</code></li>
 <li><code>refresh=wait_for</code> &lt;-&gt; <code>.refresh(RefreshPolicy.WaitFor)</code></li>
 </ul>
+</li>
+</ul>
 <h2 id="netstat-curl-netcat">netstat, curl, netcat<a class="headerlink" href="#netstat-curl-netcat" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>netstat (network status)</strong><br />
-<em>참고: https://semtul79.tistory.com/6</em>  </li>
+<em>참고: https://semtul79.tistory.com/6</em>  <ul>
 <li>네트워크 연결, 라우팅 테이블, 인터페이스 통계, 포트 상태 등 네트워크 관련 정보 출력</li>
 <li>현재 서버에서 열린 포트, 연결된 클라이언트, 서버 listen 중인 포트, 네트워크 상태 진단 등에 사용</li>
-<li>
-<p>예시)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ netstat -ant
+<li>예시)
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ netstat -ant
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Active Internet connections (servers and established)
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Proto | Recv-Q | Send-Q | Local Address         | Foreign Address       | State
@@ -22988,31 +22989,34 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>tcp          0        0   172.31.22.162:22        13.209.1.57:48444       ESTABLISHED
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>tcp6         0        0   :::22                   :::*                    LISTEN      
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>tcp          0        0   172.31.22.162:53484     142.251.42.142:443      ESTABLISHED
-</code></pre></div></p>
-<ul>
+</code></pre></div><ul>
 <li>모든 ip (0.0.0.0:22) 로 LISTEN 되며, 외부 컴퓨터는 아무 ip/port와 가능</li>
 <li>현재 컴퓨터의 주소는 ifconfig의 eth0 =&gt; 172.31.22.162</li>
 <li>142.251.42.142는 https로 접속 (클라이언트)</li>
 <li>각각은 소켓이라고 볼 수 있으며, 소켓은 5가지 항목 (프로토콜 | src ip | src port | dst ip | dst port) 으로 구성</li>
 </ul>
 </li>
-<li>
-<p><strong>curl</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>curl</strong><ul>
 <li>url 기반의 데이터를 웹 서버로 전송하기 위한 명령줄 유틸</li>
 <li>HTTP/HTTPS/SCP/SFTP/FTP 등 다양한 프로토콜, 프록시 헤더 쿠키 등 세부 옵션 설정 가능. </li>
-<li>
-<p>postman과 같은 역할 가능</p>
+<li>postman과 같은 역할 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>netcat</strong><br />
-<em>참고: https://feccle.tistory.com/253</em>  </p>
-</li>
+</ul>
+<ul>
+<li><strong>netcat</strong><br />
+<em>참고: https://feccle.tistory.com/253</em>  <ul>
 <li>TCP/UDP 사용해 네트워크 연결 읽고 쓰는데 사용</li>
 <li>네트워크 디버깅, 파일전송, 포트 스캐닝, 원격 제어 등 다양한 용도 사용 가능
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kakao@joel-MacBook-Pro  ~  nc -zv 1.1.1.1 53
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kakao@joel-MacBook-Pro  ~  nc -zv 1.1.1.1 53
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Connection to 1.1.1.1 port 53 [tcp/domain] succeeded!
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

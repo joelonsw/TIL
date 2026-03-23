@@ -22925,17 +22925,15 @@ Front는 다음으로 제거할 데이터의 위치를, Back은 다음번의 데
 </li>
 <li>
 <p>저번 뉴스레터에서 봤던 선형 큐의 단점으로 꼽힌 시나리오를 원형 큐에서 해결할 수 있는지 확인해볼까요? 
-큐의 사이즈는 총 8칸이라고 가정했어요. </p>
-<ul>
-<li>원형 큐가 비어있는 상태에요. 
-<img alt="" src="../images/2021-01-15-empty-cqueue.png" /></li>
-<li>원형 큐에 10부터 80까지를 차례로 Enqueue 했어요. <em>(큐가 꽉 차자 Back 변수가 배열의 0번째 index를 가리키는 것을 알 수 있어요! 마치 한 바퀴 돌았으니 다시 처음으로 돌아온거죠)</em>
-<img alt="" src="../images/2021-01-15-full-cqueue.png" /></li>
-<li>원형 큐에 총 4개의 원소를 Dequeue 했어요. 
-<img alt="" src="../images/2021-01-15-half-cqueue.png" /></li>
-<li>원형 큐에 90, 100을 넣어도 큐에 잘 저장되는 것을 알 수 있어요! <em>(선형 큐와 달리 배열의 앞 index 공간을 잘 활용하는 것을 알 수 있어요!)</em>
-<img alt="" src="../images/2021-01-15-final-cqueue.png" /></li>
-</ul>
+큐의 사이즈는 총 8칸이라고 가정했어요. 
+    - 원형 큐가 비어있는 상태에요. 
+    <img alt="" src="../images/2021-01-15-empty-cqueue.png" />
+    - 원형 큐에 10부터 80까지를 차례로 Enqueue 했어요. <em>(큐가 꽉 차자 Back 변수가 배열의 0번째 index를 가리키는 것을 알 수 있어요! 마치 한 바퀴 돌았으니 다시 처음으로 돌아온거죠)</em>
+    <img alt="" src="../images/2021-01-15-full-cqueue.png" />
+    - 원형 큐에 총 4개의 원소를 Dequeue 했어요. 
+    <img alt="" src="../images/2021-01-15-half-cqueue.png" />
+    - 원형 큐에 90, 100을 넣어도 큐에 잘 저장되는 것을 알 수 있어요! <em>(선형 큐와 달리 배열의 앞 index 공간을 잘 활용하는 것을 알 수 있어요!)</em>
+    <img alt="" src="../images/2021-01-15-final-cqueue.png" /></p>
 </li>
 <li>
 <p>다만 원형 큐에서는 큐가 빈 상태와 꽉 찬 상태 모두 front와 back의 값이 같아지는데요. 

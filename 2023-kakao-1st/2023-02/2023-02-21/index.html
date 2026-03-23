@@ -22931,29 +22931,29 @@
 <h3 id="2023-02-21">2023-02-21<a class="headerlink" href="#2023-02-21" title="Permanent link">&para;</a></h3>
 <h2 id="join">JOIN<a class="headerlink" href="#join" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>두 개 이상의 테이블을 Relational Key로 연결하여 Merge 하는 것</li>
-<li>
-<p>한 DB내의 여러 테이블 레코드를 조합해 하나의 열로 표현</p>
+<li>한 DB내의 여러 테이블 레코드를 조합해 하나의 열로 표현</li>
+</ul>
 </li>
-<li>
-<p><strong>종류</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>종류</strong><ul>
 <li>Nested Loop Join<ul>
 <li>MySQL 5.x 까지의 조인 방식</li>
 <li>Driving 테이블에서 조건에 만족하는 레코드 검색 후, 결합 조건에 일치하는 레코드를 Driven Table에서 조인</li>
 </ul>
 </li>
-<li>
-<p>Hash Join</p>
-<ul>
+<li>Hash Join<ul>
 <li>MySQL 8.0.18 부터 지원</li>
 <li>해시테이블을 사용해 두 입력간에 일치하는 행을 찾는 조인을 실행</li>
 </ul>
 </li>
-<li>
-<p><strong>Nested Loop Join</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Nested Loop Join</strong><ul>
 <li>선행 테이블의 처리범위가 액세스할 데이터량을 결정</li>
 <li>후행 테이블의 처리 범위는 종속적</li>
 <li>Random Access 방식으로 처리</li>
@@ -22961,9 +22961,7 @@
 <li>처리량이 적은 경우에 유리</li>
 <li>연결고리에 반드시 index 필요</li>
 <li>선행 테이블의 처리 범위가 수행속도에 절대적 영향 미치기에 조인 순서가 중요</li>
-<li>
-<p>요약</p>
-<ul>
+<li>요약<ul>
 <li>처리방식: 순차적</li>
 <li>Access 방식: Random Access</li>
 <li>연결 고리: 절대 영향</li>
@@ -22972,9 +22970,11 @@
 <li>주요 체크 요소: 연결 고리 상태 및 처리량</li>
 </ul>
 </li>
-<li>
-<p><strong>Hash Join</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Hash Join</strong><ul>
 <li>해시테이블을 사용해 두 입력간에 일치하는 행을 찾는 조인 실행 방법</li>
 <li>테이블 중 하나가 메모리에 들어갈 수 있다면, Nested Loop Join보다 효율적<ul>
 <li>메모리 사용량은 join_buffer_size를 사용해 제어</li>
@@ -22988,6 +22988,8 @@
 <li>Join 방향: 영향 있음</li>
 <li>처리량: 넓은 범위에 유리</li>
 <li>주요 체크 요소: join_buffer_size</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

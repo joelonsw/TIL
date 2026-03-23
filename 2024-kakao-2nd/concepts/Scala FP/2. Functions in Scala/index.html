@@ -23053,17 +23053,21 @@
 </ul>
 <h4 id="_2">함수<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li>함수는 일급 시민</li>
+<li>함수는 일급 시민<ul>
 <li>함수가 매개변수로 전달, 리턴 가능</li>
 <li>변수에 할당할 수 있음</li>
 <li>그냥 값 처럼 타입을 지정할 수 있음</li>
-<li><strong>def</strong></li>
+</ul>
+</li>
+<li><strong>def</strong><ul>
 <li>매번 평가</li>
 <li>메서드라고 부름</li>
 <li>객체나 클래스 내에 정의해야 함. </li>
 <li>클래스 인스턴스에서 implicit 참조가 있음</li>
 <li>값이 아니며, 타입이 없음</li>
-<li><strong>val</strong></li>
+</ul>
+</li>
+<li><strong>val</strong><ul>
 <li>한번 평가 후 계속 씀</li>
 <li>function value</li>
 <li><code>FunctionN</code> 의 타입 (N : 0 ~ 22)<ul>
@@ -23087,10 +23091,14 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h4 id="partially-applied-functions">부분 적용 함수 (Partially-Applied Functions)<a class="headerlink" href="#partially-applied-functions" title="Permanent link">&para;</a></h4>
 <ul>
-<li>아규먼트가 부분적으로 적용됨</li>
+<li>아규먼트가 부분적으로 적용됨<ul>
 <li>일반 함수보다 구체적인 함수를 만들 수 있음. 반복적인 코드 피할 수 있음</li>
+</ul>
+</li>
 <li>함수 적용 시, 모든 파라미터에 대해 아규먼트를 넘기지 않고, 몇 개만 넘기고 나머지 빈칸</li>
 <li>이러면 스칼라는 남은 파라미터는 순서대로 넣어주면 되는 새로운 함수를 리턴</li>
 <li>부분 적용 함수는 항상 새로운 함수 반환해!</li>
@@ -23122,12 +23130,16 @@
 - 많은 보일러 플레이트 함수들을 개선할 수 있음!</p>
 <h4 id="_4">함수 커링<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ul>
-<li>커링된 함수는 여러개의 아규먼트 그룹을 하나씩 받도록 함</li>
+<li>커링된 함수는 여러개의 아규먼트 그룹을 하나씩 받도록 함<ul>
 <li>커링된 함수는 첫번째 아규먼트 그룹을 받아, 그 다음 아규먼트 그룹을 받는 함수를 리턴. </li>
 <li>부분 적용 함수와 비슷. (하지만 기술적으로 다름)</li>
-<li>함수 커링은...</li>
+</ul>
+</li>
+<li>함수 커링은...<ul>
 <li>함수 (A, B, C, D)를 (A =&gt; (B =&gt; (C =&gt; D)))</li>
-<li>근데 이거 굳이 왜 함?</li>
+</ul>
+</li>
+<li>근데 이거 굳이 왜 함?<ol>
 <li>Future를 보면, apply 메서드가 커링 함수를 씀<ul>
 <li>두번째 파라미터 그룹이 <code>implicit execution context</code> 를 받아서 넘김!
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">executionContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">fromExecutorService</span><span class="p">(</span><span class="nc">Executors</span><span class="p">.</span><span class="n">newCachedThreadPool</span><span class="p">())</span>
@@ -23164,6 +23176,8 @@
 <a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="n">withListItems</span><span class="p">(</span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))(</span><span class="n">number</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">number</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="c1">// compiles</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 <h4 id="_5">부분 함수<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>

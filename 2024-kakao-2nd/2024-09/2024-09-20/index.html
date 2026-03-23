@@ -22940,7 +22940,7 @@
   - 서버 -&gt; 클라 text message를 보내는 브라우저 기반 웹 어플리케이션 기술
     - HTTP의 persistence connections 기반 HTML5 표준 기술</p>
 <ul>
-<li><strong>vs Polling</strong></li>
+<li><strong>vs Polling</strong><ul>
 <li>Short Polling: 주기적으로 API 찔러서 변경사항 확인<ul>
 <li>장: 준 실시간 | 단: 서버 요청수 너무 많아짐</li>
 </ul>
@@ -22949,41 +22949,47 @@
 <li>장: HTTP 요청 수 감소 | 단: 어쨋든 데이터 변경 시마다, HTTP Connection 맺어야 함</li>
 </ul>
 </li>
-<li><strong>SSE</strong></li>
+</ul>
+</li>
+<li><strong>SSE</strong><ul>
 <li>HTTP Connection 한번만 맺음</li>
-<li>
-<p>잦은 HTTP 요청 X -&gt; 응답시간 Up, 디바이스 배터리 사용률 Low</p>
+<li>잦은 HTTP 요청 X -&gt; 응답시간 Up, 디바이스 배터리 사용률 Low</li>
+</ul>
 </li>
-<li>
-<p><strong>SSE 원리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>SSE 원리</strong><ol>
 <li>HTTP Connection 유지<ul>
 <li>HTTP/1.0 -&gt; header Connection keep-alive</li>
 <li>HTTP/1.1 -&gt; 트랜잭션 끝나도 연결 유지해서 따로 설정 X</li>
 <li>HTTP/2.0 -&gt; 하나의 HTTP 커넥션에 HTTP 요청 이뤄져서 설정 X</li>
 </ul>
 </li>
-<li>
-<p>그 외 설정</p>
-<ul>
-<li>HTTP Request </li>
+<li>그 외 설정<ul>
+<li>HTTP Request <ul>
 <li>Accept Header: text/event-stream</li>
-<li>HTTP Response</li>
+</ul>
+</li>
+<li>HTTP Response<ul>
 <li>Content-Type: text/event-stream</li>
 <li>Cache-Control: no-store</li>
 </ul>
 </li>
-<li>
-<p><strong>SSE Event format</strong></p>
+</ul>
 </li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>SSE Event format</strong><ul>
 <li>field/value (field 종류: event/data/id/retry)</li>
 <li>event는 <code>\n\n</code> 으로 구분</li>
-<li>
-<p>인코딩 UTF-8</p>
+<li>인코딩 UTF-8</li>
+</ul>
 </li>
-<li>
-<p><strong>SSE 통신 과정</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>SSE 통신 과정</strong><ol>
 <li>[Client] SSE Subscribe 요청<ul>
 <li>서버의 이벤트 구독을 위한 요청 보냄
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; Request Headers
@@ -22999,9 +23005,7 @@
 <li>Response 미디어 타입 <code>text/event-stream</code></li>
 </ul>
 </li>
-<li>
-<p>[Server] 이벤트 전달</p>
-<ul>
+<li>[Server] 이벤트 전달<ul>
 <li>클라이언트에서 Subscribe 하면, 서버는 해당 클라이언트에게 비동기적으로 데이터 전달</li>
 <li>서로 다른 이벤트 <code>\n\n</code> 구분, <code>name:value</code>로 구성
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; Response 
@@ -23019,8 +23023,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>[Client] SSE</strong>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>[Client] SSE</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// 클라이언트 측은 들어오는 이벤트 처리하는 부분 웹소켓과 거의 유사</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">evtSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">EventSource</span><span class="p">(</span><span class="s2">&quot;/event/sse&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">withCredentials</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -23050,13 +23057,14 @@
 <a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="c1">// 닫기</span>
 <a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="nx">evtSource</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>vs Websocket</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>vs Websocket</strong><ul>
 <li>Websocket: 클라 &lt;-&gt; 서버 양방향, 둘이 프로토콜도 다름</li>
 <li>SSE: 서버 -&gt; 클라 단방향</li>
+</ul>
+</li>
 </ul>
 <h2 id="redis-pubsub">Redis Pub/Sub<a class="headerlink" href="#redis-pubsub" title="Permanent link">&para;</a></h2>
 

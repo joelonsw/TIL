@@ -22910,7 +22910,7 @@
 - <strong>개요</strong>
   - OpenAI에서 Codex를 통해 로직, 테스트, CI, 문서, 접근성, 인터널 툴링까지 다 작성</p>
 <ul>
-<li><strong>방법론</strong></li>
+<li><strong>방법론</strong><ul>
 <li>빈 레포에서 AGENTS.md 부터 Codex가 씀</li>
 <li>Codex가 유용한 작업을 수행할 수 있도록 지원하는 것이 목표</li>
 <li>큰 목표를 작은 블락으로 breakdown<ul>
@@ -22918,30 +22918,28 @@
 <li>뭔가 망가지면, 더 열심히 하라고 얘기하는게 아니라, 어떻게 하면 에이전트가 이를 이해하고 실행할 수 있도록 도울지 검토</li>
 </ul>
 </li>
-<li>
-<p>PR 검토할 수 있지만, 요구되진 않았음. </p>
+<li>PR 검토할 수 있지만, 요구되진 않았음. </li>
+</ul>
 </li>
-<li>
-<p><strong>legibility(이해도) 향상하기</strong></p>
-</li>
-<li>
-<p>에이전트가 UI, log, app 메트릭까지 본인이 수집하도록 했음</p>
+</ul>
 <ul>
+<li><strong>legibility(이해도) 향상하기</strong><ul>
+<li>에이전트가 UI, log, app 메트릭까지 본인이 수집하도록 했음<ul>
 <li>git worktree로 app을 bootable 하도록</li>
 <li>Chrome DevTools 로 DOM snapshot/screenshot/navigation</li>
 <li>logs, metrics, traces를 모두 Codex에게 오픈해서 맥락 제공</li>
 </ul>
 </li>
-<li>
-<p><strong>Context 관리</strong></p>
+</ul>
 </li>
-<li>
-<p>Codex에게 map을 줘라. 1000 페이지짜리 매뉴얼은 무쓸모</p>
+</ul>
 <ul>
-<li>큰 <code>AGENTS.md</code> 파일을 줬지만...</li>
+<li><strong>Context 관리</strong><ul>
+<li>Codex에게 map을 줘라. 1000 페이지짜리 매뉴얼은 무쓸모<ul>
+<li>큰 <code>AGENTS.md</code> 파일을 줬지만...<ul>
 <li>Context는 부족한 리소스이고, 너무 많은 가이드는 없는 가이드이고, 금방 썩고, verify 어려움</li>
 <li>목차 (table of contents) 처럼 진행
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>AGENTS.md
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>AGENTS.md
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ARCHITECTURE.md
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docs/
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── design-docs/
@@ -22971,25 +22969,31 @@
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>├── RELIABILITY.md
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>└── SECURITY.md
 </code></pre></div></li>
+</ul>
+</li>
 <li>신입사원을 교육하는 것과 마찬가지로, 에이전트에게 제품 원칙/엔지니어링 표준/팀 문화 등 정보를 제공해 정렬된 결과 얻자</li>
 <li>좋은 설계는 여전히 중요하다. 헷갈리지 않도록, 일관성을 유지하도록</li>
 </ul>
 </li>
-<li>
-<p><strong>자동화 단계</strong></p>
+</ul>
 </li>
-<li>
-<p>규칙 명시가 중요하다. </p>
-<ol>
+</ul>
+<ul>
+<li><strong>자동화 단계</strong><ul>
+<li>규칙 명시가 중요하다. <ol>
 <li>utility packages &lt;&lt; hand-rolled helpers</li>
 <li>"YOLO-style" probe x</li>
 </ol>
 </li>
-<li>
-<p><strong>결론</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>결론</strong><ul>
 <li>소프트웨어의 코드일관성, 추상화, 피드백 루프 중요성은 점점 커짐</li>
 <li>에이전트가 목표 달성하도록 돕는 환경, 피드백 루프, 제어 시스템 설계에 집중</li>
+</ul>
+</li>
 </ul>
 
 

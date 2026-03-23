@@ -23019,65 +23019,69 @@
 </ul>
 <h3 id="2">2단계. 개략적 설계안 제시 및 동의 구하기<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>시스템 나누기</strong></li>
+<li><strong>시스템 나누기</strong><ol>
 <li>데이터 수집 서비스</li>
 <li>질의 서비스<ul>
 <li>DB의 like 절 + LIMIT 쓸 수 있지만, 대규모 시스템이면 터지기 딱 좋음</li>
 </ul>
 </li>
+</ol>
+</li>
 </ul>
 <h3 id="3">3단계. 상세 설계<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>트라이 자료구조</strong></li>
+<li><strong>트라이 자료구조</strong><ul>
 <li>문자열을 간략하게 저장할 수 있는 자료구조</li>
 <li>트리 형태의 자료구조, 루트는 빈 문자열</li>
 <li>노드에 빈도 정보까지 함께 저장할 것</li>
-<li>
-<p>노드에 질의어를 top5 검색어를 캐시해두면 시간 복잡도 O(1)으로 커버 가능</p>
+<li>노드에 질의어를 top5 검색어를 캐시해두면 시간 복잡도 O(1)으로 커버 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>데이터 수집 서비스</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>데이터 수집 서비스</strong><ul>
 <li>수천만건의 질의가 입력될 때, 트라이를 매번 갱신하면 서비스 부하 너무 큼</li>
 <li>인기 검색어 만들어지면 트라이 자주 변할 것은 아님. 갱신은 자주할 필요가 없음</li>
-<li>
-<p>로그 취합 -&gt; 분류 작업 서버 -&gt; 트라이 갱신도 가능</p>
+<li>로그 취합 -&gt; 분류 작업 서버 -&gt; 트라이 갱신도 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>트라이 데이터베이스</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>트라이 데이터베이스</strong><ol>
 <li>문서 저장소<ul>
 <li>MongoDB와 같은 도큐먼트 디비를 통해 데이터 편하게 저장 가능</li>
 </ul>
 </li>
-<li>
-<p>key-value 저장소</p>
-<ul>
+<li>key-value 저장소<ul>
 <li>모든 트라이 데이터를 해시테이블 처럼 대응하여 저장 가능.</li>
 </ul>
 </li>
-<li>
-<p><strong>질의 서비스</strong></p>
+</ol>
 </li>
-<li>API 서버는 트라이 캐시에서 데이터를 가져와 해당 요청에 대한 자동완성 검색어 제안 응답 구성</li>
-<li>
-<p>브라우저 캐싱을 통해 한동안 자동완성 똑같은 쿼리 안날리도록 조치</p>
-</li>
-<li>
-<p><strong>트라이 연산</strong></p>
-</li>
-<li>트라이는 DB, 로그 등에서 취합한 데이터 사용</li>
-<li>
-<p>검색어 삭제: 필터 계층을 두고 부적절한 질의어가 반환되지 않도록 하기</p>
+</ul>
 <ul>
+<li><strong>질의 서비스</strong><ul>
+<li>API 서버는 트라이 캐시에서 데이터를 가져와 해당 요청에 대한 자동완성 검색어 제안 응답 구성</li>
+<li>브라우저 캐싱을 통해 한동안 자동완성 똑같은 쿼리 안날리도록 조치</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>트라이 연산</strong><ul>
+<li>트라이는 DB, 로그 등에서 취합한 데이터 사용</li>
+<li>검색어 삭제: 필터 계층을 두고 부적절한 질의어가 반환되지 않도록 하기<ul>
 <li>어뷰징 제어하듯</li>
 </ul>
 </li>
-<li>
-<p><strong>저장소 규모 확장</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>저장소 규모 확장</strong><ul>
 <li>샤딩을 통해서 특정 노드들을 분산시킬 수 있음.</li>
 <li>여기에서도 유명인사 문제가 발생할 수 있어, 과거의 데이터를 통해 노드를 쪽수별로 잘 분산할 수 있도록 샤딩 필요</li>
+</ul>
+</li>
 </ul>
 <h3 id="4">4단계. 마무리<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <ul>

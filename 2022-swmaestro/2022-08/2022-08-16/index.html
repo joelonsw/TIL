@@ -22955,13 +22955,12 @@
 <ul>
 <li><em>참고: https://velog.io/@jakeseo_me/JPA-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%95%8C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD-%EC%A0%95%EB%A6%AC</em></li>
 <li><em>참고: https://ppomelo.tistory.com/147</em></li>
-<li><strong>문제 상황</strong></li>
+<li><strong>문제 상황</strong><ul>
 <li>Security 단에서 Optional&lt;User&gt;를 findKlaytnAddress()로 트랜잭션을 열고 가져오게 되는데...</li>
 <li>로그를 보아하니 가져는 오는데, 변경 감지를 하고 얘를 트랜잭션 끝나는 시점에 flush를 해주면했는데... 안한다? </li>
 <li>어허... 엔티티 가져와서 넣어두면 변경 감지 해줘야하는거 국룰 아니야?</li>
-<li>
-<p><code>@Transactional</code>도 붙여뒀는데 서비스 단에서... Controller로 <code>@AuthenticationPrincipal</code> 받아서 했는데 말이지? 엔티티 아닌가 이거?
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2022-08-10 20:24:58.324[TRACE] : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByKlaytnAddress]: This method is not transactional.
+<li><code>@Transactional</code>도 붙여뒀는데 서비스 단에서... Controller로 <code>@AuthenticationPrincipal</code> 받아서 했는데 말이지? 엔티티 아닌가 이거?
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2022-08-10 20:24:58.324[TRACE] : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByKlaytnAddress]: This method is not transactional.
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Hibernate: 
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    select
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        user0_.id as id1_5_,
@@ -22977,23 +22976,24 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>2022-08-10 20:24:58.342[TRACE] : binding parameter [1] as [VARCHAR] - [0x9f3c619b6f534d123c8fc35607d73eee0161da7b]
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>2022-08-10 20:24:58.418[TRACE] : Getting transaction for [com.backend.connectable.user.service.UserService.modifyUserByUserDetails]
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>2022-08-10 20:24:58.419[TRACE] : Completing transaction for [com.backend.connectable.user.service.UserService.modifyUserByUserDetails]
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>문제점</strong></p>
-</li>
-<li>
-<p>Spring Security Context에 JPA엔티티를 들고 다니지 말 것! =&gt; 준영속 상태로 이어짐</p>
+</ul>
 <ul>
+<li><strong>문제점</strong><ul>
+<li>Spring Security Context에 JPA엔티티를 들고 다니지 말 것! =&gt; 준영속 상태로 이어짐<ul>
 <li>JPA 엔티티를 SecurityContext 내부에 있는 <code>.contextHolder()</code>에 들고 다님</li>
 <li><code>.contextHolder()</code>에 있는 JPA 엔티티는 아무리 수정해도, 디비나 영속성 컨텍스트에 반영이 되지 않음!</li>
 <li>영속성 컨텍스트에 있는 JPA 엔티티를 변화시켜도 <code>SecurityContext.contextHolder()</code>에 있는 JPA 엔티티는 <strong>영속상태가 아니기에</strong> 변화가 적용되지 않음!</li>
 <li>따라서 그냥 ID와 같은 문자열 정보만 저장하는게 좋아보임</li>
 </ul>
 </li>
-<li>
-<p><strong>준영속 상태</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>준영속 상태</strong><ul>
 <li>준영속 상태란?<ul>
 <li>영속 상태의 엔티티가 영속성 컨텍스트에서 "분리" 된 것</li>
 <li>영속성 컨텍스트에 저장되었다가 분리된 상태로, 현재는 영속 상태가 아닌 상태</li>
@@ -23007,47 +23007,53 @@
 </ul>
 </li>
 <li>준영속 엔티티를 수정하는 2가지 방법<ul>
-<li>변경 감지 기능 사용</li>
+<li>변경 감지 기능 사용<ul>
 <li>다시 엔티티 조회하고, 데이터 수정</li>
-<li>병합 사용</li>
+</ul>
+</li>
+<li>병합 사용<ul>
 <li>em.merge(entity)</li>
 </ul>
 </li>
-<li>
-<p>준영속 상태는 한번 영속화되었다가 트랜잭션 끝나서 영속성 컨텍스트가 더는 관리하지 않는 엔티티</p>
+</ul>
 </li>
-<li>
-<p><strong>왜 Spring Security를 거치면 준영속 상태가 되는거야?</strong></p>
+<li>준영속 상태는 한번 영속화되었다가 트랜잭션 끝나서 영속성 컨텍스트가 더는 관리하지 않는 엔티티</li>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>왜 Spring Security를 거치면 준영속 상태가 되는거야?</strong><ul>
 <li>필터를 지나 mvc로 넘어가면 엔티티 매니저가 닫혀버리나?</li>
+</ul>
+</li>
 </ul>
 <h2 id="_1">엔티티의 생명주기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://tecoble.techcourse.co.kr/post/2020-08-31-entity-lifecycle-1/</em></li>
 <li><em>참고: https://tecoble.techcourse.co.kr/post/2020-09-20-entity-lifecycle-2/</em></li>
-<li><strong>문제 상황</strong></li>
-<li>
-<p>시큐리티로 부터 엔티티 받아서 일대다 연관관계에 있는 엔티티 조회하려니 LazyInitializationException</p>
+<li><strong>문제 상황</strong><ul>
+<li>시큐리티로 부터 엔티티 받아서 일대다 연관관계에 있는 엔티티 조회하려니 LazyInitializationException</li>
+</ul>
 </li>
-<li>
-<p><strong>해결 방법 at 서비스단</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>해결 방법 at 서비스단</strong><ol>
 <li>엔티티 한번 더 불러오기 (준영속 =&gt; 영속)</li>
 <li>Entity 강제 초기화 (필요한 정보 UserDetails에서 다 끌고오기)</li>
-<li>
-<p>FetchType.EAGER</p>
+<li>FetchType.EAGER</li>
+</ol>
 </li>
-<li>
-<p><strong>그런데 말입니다</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>그런데 말입니다</strong><ul>
 <li>Controller에서 준영속 상태인 entity가 지연로딩 불가한 상황</li>
 <li>영속성 컨텍스트 Controller 살아있도록 하면 되는거 아닌가? </li>
-<li>
-<p>그런데 놀랍게도 OSIV는 true임...!</p>
+<li>그런데 놀랍게도 OSIV는 true임...!</li>
+</ul>
 </li>
-<li>
-<p><strong>OSIV를 알아보기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>OSIV를 알아보기</strong><ul>
 <li>Spring Boot에서 자동으로 Bean 설정해주는 Configuration<ul>
 <li>OpenEntityManagerInViewIinterceptor를 인터셉터로 등록하여 OSIV 등록 함
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
@@ -23078,73 +23084,75 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>Spring에서 웹 요청 처리과정에서는 Filter를 제외한 대부분의 영역에서 <code>@Transactional</code>없어도 EntityManager의 관리를 받게 된다</p>
-<ul>
+<li>Spring에서 웹 요청 처리과정에서는 Filter를 제외한 대부분의 영역에서 <code>@Transactional</code>없어도 EntityManager의 관리를 받게 된다<ul>
 <li>왜냐하면 OSIV는 디폴트 true이기 때문!</li>
 </ul>
 </li>
-<li>
-<p><strong>Spring Security는 어떤 방식으로 유저 정보 가져오는데?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Spring Security는 어떤 방식으로 유저 정보 가져오는데?</strong><ul>
 <li>Spring Security는 Filter 기반으로 동작</li>
 <li>DelegatingFilterProxy에서 사용자 요청 가로채 보안이 적용되게끔 함<ul>
 <li>SecurityFilter가 존재해 일종의 FilterChain 이루어 동작</li>
 </ul>
 </li>
-<li>
-<p>CustomUserDetailsService =&gt; UserDetailsService를 구현</p>
+<li>CustomUserDetailsService =&gt; UserDetailsService를 구현</li>
+</ul>
 </li>
-<li>
-<p><strong>자 여기서!</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>자 여기서!</strong><ul>
 <li>Spring Security에서 Filter단에서 User 정보 가져옴</li>
 <li>OSIV는 Interceptor 단에서 부터 적용됨</li>
-<li>
-<p>Filter가 Interceptor 보다 먼저 실행되기에, 영속성 컨텍스트는 CustomUserDetailsService에서만 유지됨 </p>
-<ul>
+<li>Filter가 Interceptor 보다 먼저 실행되기에, 영속성 컨텍스트는 CustomUserDetailsService에서만 유지됨 <ul>
 <li>이러니까 준영속 상태로 엔티티가 Spring MVC에 도착하는 것!</li>
 </ul>
 </li>
-<li>
-<p><strong>해결 방법</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>해결 방법</strong><ol>
 <li>OpenEntityManagerInterceptor의 우선 순위 높이기<ul>
 <li>이걸 Interceptor가 아니라 Filter로 교체하고, Bean으로 등록해서 뚝딱해결</li>
 <li>근데 과연 OSIV를 Filter단까지 올리는게 좋은 방법일까?</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 <h2 id="transaction-readonly">Transaction ReadOnly<a class="headerlink" href="#transaction-readonly" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/spring-transactions-read-only</em></li>
 <li><em>참고: https://willseungh0.tistory.com/75</em></li>
-<li><strong>트랜잭션이란?</strong></li>
+<li><strong>트랜잭션이란?</strong><ul>
 <li>하나 혹은 더 많은 statement를 가진 원자적 연산 =&gt; 한번에 성공하거나 모두 실패하거나</li>
 <li>ACID로 대표됨</li>
-<li>
-<p>Isolation =&gt; 'performance' vs 'consistency'</p>
+<li>Isolation =&gt; 'performance' vs 'consistency'</li>
+</ul>
 </li>
-<li>
-<p><strong>언제 트랜잭션 쓰지?</strong></p>
-</li>
-<li>
-<p>InnoDB 엔진에서는 모든 statement가 transaction</p>
+</ul>
 <ul>
+<li><strong>언제 트랜잭션 쓰지?</strong><ul>
+<li>InnoDB 엔진에서는 모든 statement가 transaction<ul>
 <li>따라서 locking/snapshot 등을 포함할 수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>어플리케이션 vs DB</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>어플리케이션 vs DB</strong><ul>
 <li>persistence layer를 다루려면 많은 추상화된 layer를 포함해야 함</li>
 <li>각 레이어는 제각기 다른 책임이 있음</li>
-<li>
-<p>DAO =&gt; Transcational abstraction =&gt; JPA abstraction =&gt; ORM Framework =&gt; JDBC Driver =&gt; RDBMS</p>
+<li>DAO =&gt; Transcational abstraction =&gt; JPA abstraction =&gt; ORM Framework =&gt; JDBC Driver =&gt; RDBMS</li>
+</ul>
 </li>
-<li>
-<p><strong>트랜잭션 관리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>트랜잭션 관리</strong><ul>
 <li>autocommit 속성을 꺼두고 JDBC 드라이버가 트랜잭션 시작함</li>
 <li>BEGIN TRANSACTION statment와 동일<ul>
 <li>commit/rollback 둘중하나는 해야해</li>
@@ -23155,24 +23163,26 @@
 <li>이런 이유로, 몇몇 statement는 pending changes를 버리는데 사용될 수 있음</li>
 </ul>
 </li>
-<li>
-<p>autocommit</p>
-<ul>
+<li>autocommit<ul>
 <li>트랜잭션이 하나의 쿼리만 실행시킨다면, autocommit=true 가 round-trips를 예방</li>
-<li>트랜잭션에 여러개의 쿼리가 있다면, 명시적으로 read-only 트랜잭션을 써야함</li>
+<li>트랜잭션에 여러개의 쿼리가 있다면, 명시적으로 read-only 트랜잭션을 써야함<ul>
 <li>이렇게 해야 write&lt;-&gt;read-only 왔다갔다 하는 round trip을 피할 수 있고, </li>
 </ul>
 </li>
-<li>
-<p><strong>영속성 컨텍스트</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>영속성 컨텍스트</strong><ul>
 <li>여기서 관리되면 1차 캐시부터 변경 감지까지 얻을 수 있는 헤택이 많음</li>
-<li>
-<p>변경 감지를 위해 스냅샷 인스턴스를 보관, 더 많은 메모리를 사용함. </p>
+<li>변경 감지를 위해 스냅샷 인스턴스를 보관, 더 많은 메모리를 사용함. </li>
+</ul>
 </li>
-<li>
-<p><strong>읽기 전용으로 엔티티 조회하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>읽기 전용으로 엔티티 조회하기</strong><ol>
 <li>스칼라 타입으로 조회하기<ul>
 <li>스칼라 타입으로 필요한 필드만을 조회하는 방식</li>
 <li>엔티티 객체가 아니니, 영속성 컨텍스트가 결과를 관리하지 않음</li>
@@ -23189,6 +23199,8 @@
 <li>트랜잭션 커밋하더라도 영속성 컨텍스트는 플러쉬되지 않아 엔티티 등록/수정/삭제 동작 x</li>
 <li>읽기 전용으로, 영속성 컨텍스트는 변경 감지를 위한 스냅샷 보관하지 않으므로 성능 향상</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 

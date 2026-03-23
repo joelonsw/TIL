@@ -22999,16 +22999,13 @@
 <ul>
 <li><em>참고 1: https://gmlwjd9405.github.io/2018/07/13/template-method-pattern.html</em></li>
 <li><em>참고 2: https://yaboong.github.io/design-pattern/2018/09/27/template-method-pattern/</em></li>
-<li>
-<p><strong>개념</strong></p>
-<ul>
-<li>변하지 않는 기능 : 슈퍼 클래스</li>
-<li>변경/확장될 기능 : 서브 클래스</li>
-<li>전체적으로는 동일하면서 부분적으로는 다른 구문으로 구성된 메서드의 코드 중복 최소화</li>
+<li><strong>개념</strong>
+    - 변하지 않는 기능 : 슈퍼 클래스
+    - 변경/확장될 기능 : 서브 클래스
+    - 전체적으로는 동일하면서 부분적으로는 다른 구문으로 구성된 메서드의 코드 중복 최소화</li>
 </ul>
-</li>
-<li>
-<p><strong>예시</strong>
+<ul>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractClass</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hook1</span><span class="p">();</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hook2</span><span class="p">();</span>
@@ -23037,27 +23034,21 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">        </span><span class="n">abstractClass</span><span class="p">.</span><span class="na">templateMethod</span><span class="p">();</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="_2">템플릿 콜백 패턴<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://multifrontgarden.tistory.com/101</em></li>
-<li>
-<p><strong>개념</strong></p>
+<li><strong>개념</strong>
+    - 전략 패턴과 템플릿 메서드 패턴의 혼합
+    - 전략 패턴이 "클래스 레벨"에서의 확장이라면, 템플릿 메서드 패턴은 "메서드 레벨"에서의 확장
+    - 외부에서 함수를 주입한다! (JS에서는 자연스러운 흐름)
+        - 자바에서는 어쩔 수 없이 객체를 생성해야함
+        - 난잡하게 하나하나 다 생성할 수는 없으니 '익명 내부 클래스' 로 쇼부
+        - 함수형 인터페이스로 발전 가능함!</li>
+</ul>
 <ul>
-<li>전략 패턴과 템플릿 메서드 패턴의 혼합</li>
-<li>전략 패턴이 "클래스 레벨"에서의 확장이라면, 템플릿 메서드 패턴은 "메서드 레벨"에서의 확장</li>
-<li>외부에서 함수를 주입한다! (JS에서는 자연스러운 흐름)<ul>
-<li>자바에서는 어쩔 수 없이 객체를 생성해야함</li>
-<li>난잡하게 하나하나 다 생성할 수는 없으니 '익명 내부 클래스' 로 쇼부</li>
-<li>함수형 인터페이스로 발전 가능함!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>예시</strong>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@FunctionalInterface</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">interface</span> <span class="nc">Calculator</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">calculation</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num2</span><span class="p">);</span>
@@ -23076,57 +23067,40 @@
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">ct</span><span class="p">.</span><span class="na">templateMethod</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="w"> </span><span class="n">num2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">num1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">num2</span><span class="p">));</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="non-clustered-index-vs-clustered-index">Non-Clustered Index VS Clustered Index<a class="headerlink" href="#non-clustered-index-vs-clustered-index" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=js4y5VDknfA</em></li>
-<li>
-<p><strong>Non-Clustered</strong></p>
+<li><strong>Non-Clustered</strong>
+    - <img alt="" src="../../image/2021-11-24-Non-clustered.PNG" />
+    - 인덱스의 키 값에는 해당 데이터에 대한 "포인터"가 존재
+    - 한 테이블에 여러개가 생성 가능하다
+    - 물리적인 테이블의 정렬을 바꾸진 않음! "포인터"만 빠르게 탐색할 수 있도록 트리로 정렬</li>
+</ul>
 <ul>
-<li><img alt="" src="../../image/2021-11-24-Non-clustered.PNG" /></li>
-<li>인덱스의 키 값에는 해당 데이터에 대한 "포인터"가 존재</li>
-<li>한 테이블에 여러개가 생성 가능하다</li>
-<li>물리적인 테이블의 정렬을 바꾸진 않음! "포인터"만 빠르게 탐색할 수 있도록 트리로 정렬</li>
-</ul>
-</li>
-<li>
-<p><strong>Clustered</strong></p>
-<ul>
-<li><img alt="" src="../../image/2021-11-24-Clustered.PNG" /></li>
-<li>데이터를 인덱스로 "지정한 컬럼에 맞춰서" 정렬!<ul>
-<li>테이블 구조에 실제로 영향 미침! (PK)</li>
-<li>한 테이블에 하나만 생성 가능</li>
-</ul>
-</li>
-<li>클러스터 키로 검색 시 처리 성능 매우 빠름!</li>
-</ul>
-</li>
+<li><strong>Clustered</strong>
+    - <img alt="" src="../../image/2021-11-24-Clustered.PNG" />
+    - 데이터를 인덱스로 "지정한 컬럼에 맞춰서" 정렬!
+        - 테이블 구조에 실제로 영향 미침! (PK)
+        - 한 테이블에 하나만 생성 가능
+    - 클러스터 키로 검색 시 처리 성능 매우 빠름!</li>
 </ul>
 <h2 id="http-tcp-3-way-handshake">HTTP 요청 전에 TCP 3-way handshake<a class="headerlink" href="#http-tcp-3-way-handshake" title="Permanent link">&para;</a></h2>
 <ul>
-<li>엄한 곳에 한 번 연결해보자 (12.12.12.12)<ul>
-<li>여기 80 포트엔 그 무엇도 리스닝하고 있지 않아</li>
-</ul>
-</li>
-<li>브라우저 네트워크를 켜서 보면 12.12.12.12 를 치고 결과를 기다리면...<ul>
-<li><img alt="" src="../../image/2021-11-24-invalid-http.PNG" /></li>
-<li>이런식으로 http://12.12.12.12 에 http request 보내기 전에 3-way handshake를 통한 연결 수립 기다리고 있는데 응답이 없나봐?</li>
-</ul>
-</li>
-<li>응답이 없는 걸 눈으로 봐보자<ul>
-<li><img alt="" src="../../image/2021-11-24-3way-handshake-fail.PNG" /></li>
-<li>이렇게 TCP로 내 아무런 포트 -&gt; 12.12.12.12:80 으로 SYN을 보냈지만 돌아오지 않는 ACK...</li>
-<li>3-way handshake가 안되면 http 요청도 못 보낸다!</li>
-</ul>
-</li>
-<li>만약 TCP 연결이 수립이 되었다면, 해당 소켓을 통해 HTTP 요청!<ul>
-<li><em>참고: https://www.techopedia.com/definition/10339/three-way-handshake</em></li>
-<li>A three-way handshake is primarily used to create a TCP socket connection to reliably transmit data between devices. </li>
-<li>3-way handshake를 통해 TCP 소켓 커넥션을 생성함!</li>
-</ul>
-</li>
+<li>엄한 곳에 한 번 연결해보자 (12.12.12.12)
+    - 여기 80 포트엔 그 무엇도 리스닝하고 있지 않아</li>
+<li>브라우저 네트워크를 켜서 보면 12.12.12.12 를 치고 결과를 기다리면...
+    - <img alt="" src="../../image/2021-11-24-invalid-http.PNG" />
+    - 이런식으로 http://12.12.12.12 에 http request 보내기 전에 3-way handshake를 통한 연결 수립 기다리고 있는데 응답이 없나봐?</li>
+<li>응답이 없는 걸 눈으로 봐보자
+    - <img alt="" src="../../image/2021-11-24-3way-handshake-fail.PNG" />
+    - 이렇게 TCP로 내 아무런 포트 -&gt; 12.12.12.12:80 으로 SYN을 보냈지만 돌아오지 않는 ACK...
+    - 3-way handshake가 안되면 http 요청도 못 보낸다!</li>
+<li>만약 TCP 연결이 수립이 되었다면, 해당 소켓을 통해 HTTP 요청!
+    - <em>참고: https://www.techopedia.com/definition/10339/three-way-handshake</em>
+    - A three-way handshake is primarily used to create a TCP socket connection to reliably transmit data between devices. 
+    - 3-way handshake를 통해 TCP 소켓 커넥션을 생성함!</li>
 </ul>
 <h2 id="http">복습해보는 HTTP 미션<a class="headerlink" href="#http" title="Permanent link">&para;</a></h2>
 <ul>

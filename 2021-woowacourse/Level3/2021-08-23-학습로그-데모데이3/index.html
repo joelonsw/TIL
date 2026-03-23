@@ -22997,203 +22997,129 @@
 <h3 id="2021-08-23-3">2021-08-23 학습로그 데모데이 3<a class="headerlink" href="#2021-08-23-3" title="Permanent link">&para;</a></h3>
 <h2 id="db-migration">DB Migration<a class="headerlink" href="#db-migration" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>왜 필요하지?</strong></p>
+<li><strong>왜 필요하지?</strong>
+    - 데이터베이스의 스키마 변경 사항을 기록하여 버전관리
+    - DB의 변경이력을 남기면서 안전한 DB 변경 가능
+    - 기존의 데이터를 날리고 DB 스키마를 바꾸고 백업해 줄 필요가 없어짐</li>
+</ul>
 <ul>
-<li>데이터베이스의 스키마 변경 사항을 기록하여 버전관리</li>
-<li>DB의 변경이력을 남기면서 안전한 DB 변경 가능</li>
-<li>기존의 데이터를 날리고 DB 스키마를 바꾸고 백업해 줄 필요가 없어짐</li>
+<li><strong>사용법</strong>
+    - 메타데이터 테이블을 만들어
+    - 버전을 추가하며 DB를 변경해 나감
+        - 꼬리에 꼬리를 무는 변경</li>
 </ul>
-</li>
-<li>
-<p><strong>사용법</strong></p>
 <ul>
-<li>메타데이터 테이블을 만들어</li>
-<li>버전을 추가하며 DB를 변경해 나감<ul>
-<li>꼬리에 꼬리를 무는 변경</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
-<ul>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-24.md</li>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-28.md#%EC%BD%94%EA%B8%B0-flyway-%ED%8A%B9%EA%B0%95</li>
-</ul>
-</li>
+<li><strong>링크</strong>
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-24.md
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-28.md#%EC%BD%94%EA%B8%B0-flyway-%ED%8A%B9%EA%B0%95</li>
 </ul>
 <h2 id="_1">로깅<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>왜 필요하지?</strong></p>
+<li><strong>왜 필요하지?</strong>
+    - 디버깅을 하지 못하는 상황에서 로그를 남김
+    - 웹 기반은 사실 로깅에 의존해야하는 경우 다수
+        - 서버에 내 프로그램 올려서 디버깅을 할 수 있는 툴이 별로 없어
+        - 실서버는 로깅 보면서 해결해야 하는 경우가 다수</li>
+</ul>
 <ul>
-<li>디버깅을 하지 못하는 상황에서 로그를 남김</li>
-<li>웹 기반은 사실 로깅에 의존해야하는 경우 다수<ul>
-<li>서버에 내 프로그램 올려서 디버깅을 할 수 있는 툴이 별로 없어</li>
-<li>실서버는 로깅 보면서 해결해야 하는 경우가 다수</li>
+<li><strong>놀토의 로깅전략</strong> 
+    - 로깅 레벨
+        - FATAL: 매우 심각한 에러, 프로그램 종료되는 경우
+        - ERROR: 에러가 발생하지만, 프로그램 종료되지 않는 경우
+        -----------------------의도하지 않은 Exception-----------------------
+        - WARN: 에러가 될 수 있는 잠재적 가능성 있는 경우 (ex. 인메모리 캐시 용량 꽉차감, DB 커넥션 예상보다 오래걸림)
+        - INFO: 애플리케이션의 상태를 간결하게 보여주는 경우
+        - DEBUG: INFO 보다 더 자세한 정보가 필요한 경우
+        - TRACE: DEBUG 보다 더 자세한 정보가 필요한 경우, 최종 프로덕션이나 커밋에서 포함하지 말 것
+    - XML으로 로깅 설정 작성 후 yml에서 spring profile로 추가하여 사용
+        - profile별 어플리케이션 런타임 로깅 전략
+            - local: console에 INFO 이상의 로그
+            - dev: ERROR 레벨 이상의 로그, INFO 레벨 이상의 로그 각각 nolto-error.log, nolto-info.log에 저장
+            - prod: ERROR 레벨 이상의 로그, INFO 레벨 이상의 로그 각각 nolto-error.log, nolto-info.log에 저장
+            - dev/prod 환경에서 ERROR 레벨의 로그 찍히면 슬랙에 메시지 전송
+        - sql 쿼리 로그 찍기
+            - DB에 보낸 쿼리문을 nolto-sql.log에 저장
+            - dev 환경에서만 해당 파일 저장</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>놀토의 로깅전략</strong> </p>
 <ul>
-<li>로깅 레벨<ul>
-<li>FATAL: 매우 심각한 에러, 프로그램 종료되는 경우</li>
-<li>ERROR: 에러가 발생하지만, 프로그램 종료되지 않는 경우
------------------------의도하지 않은 Exception-----------------------</li>
-<li>WARN: 에러가 될 수 있는 잠재적 가능성 있는 경우 (ex. 인메모리 캐시 용량 꽉차감, DB 커넥션 예상보다 오래걸림)</li>
-<li>INFO: 애플리케이션의 상태를 간결하게 보여주는 경우</li>
-<li>DEBUG: INFO 보다 더 자세한 정보가 필요한 경우</li>
-<li>TRACE: DEBUG 보다 더 자세한 정보가 필요한 경우, 최종 프로덕션이나 커밋에서 포함하지 말 것</li>
-</ul>
-</li>
-<li>XML으로 로깅 설정 작성 후 yml에서 spring profile로 추가하여 사용<ul>
-<li>profile별 어플리케이션 런타임 로깅 전략<ul>
-<li>local: console에 INFO 이상의 로그</li>
-<li>dev: ERROR 레벨 이상의 로그, INFO 레벨 이상의 로그 각각 nolto-error.log, nolto-info.log에 저장</li>
-<li>prod: ERROR 레벨 이상의 로그, INFO 레벨 이상의 로그 각각 nolto-error.log, nolto-info.log에 저장</li>
-<li>dev/prod 환경에서 ERROR 레벨의 로그 찍히면 슬랙에 메시지 전송</li>
-</ul>
-</li>
-<li>sql 쿼리 로그 찍기<ul>
-<li>DB에 보낸 쿼리문을 nolto-sql.log에 저장</li>
-<li>dev 환경에서만 해당 파일 저장</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
-<ul>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-25.md</li>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-26.md</li>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-27.md</li>
-</ul>
-</li>
+<li><strong>링크</strong>
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-25.md
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-26.md
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-07-27.md</li>
 </ul>
 <h2 id="_2">트랜잭션<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>트랜잭션이란?</strong></p>
+<li><strong>트랜잭션이란?</strong>
+    - 데이터베이스 트랜잭션은 일관성 있고 신뢰할 수 있는 방식으로 독립적이게 처리되는 작업 단위를 뜻한다.
+    - 데이터베이스 트랜잭션은 데이터베이스의 변화를 나타낸다. 데이터베이스 트랜잭션은 크게 두 가지의 목적을 가진다. 
+        1. 예상치 못한 에러가 발생해도 데이터베이스를 신뢰성 있는 상태로 만들 수 있도록 신뢰할 수 있는 작업 단위를 제공한다.
+        2. 데이터베이스에 동시에 접근하는 경우 프로그램 간에 격리를 제공하여 에러를 방지한다.</li>
+</ul>
 <ul>
-<li>데이터베이스 트랜잭션은 일관성 있고 신뢰할 수 있는 방식으로 독립적이게 처리되는 작업 단위를 뜻한다.</li>
-<li>데이터베이스 트랜잭션은 데이터베이스의 변화를 나타낸다. 데이터베이스 트랜잭션은 크게 두 가지의 목적을 가진다. <ol>
-<li>예상치 못한 에러가 발생해도 데이터베이스를 신뢰성 있는 상태로 만들 수 있도록 신뢰할 수 있는 작업 단위를 제공한다.</li>
-<li>데이터베이스에 동시에 접근하는 경우 프로그램 간에 격리를 제공하여 에러를 방지한다.</li>
-</ol>
-</li>
+<li><strong>트랜잭션의 성질</strong>
+    - 트랜잭션의 성질은 ACID로 대표됨
+        - [ Atomicity - 원자성 ]
+        - [ Consistency - 일관성 ]
+        - [ Isolation - 독립성 ]
+        - [ Durability - 지속성 ] </li>
 </ul>
-</li>
-<li>
-<p><strong>트랜잭션의 성질</strong></p>
 <ul>
-<li>트랜잭션의 성질은 ACID로 대표됨<ul>
-<li>[ Atomicity - 원자성 ]</li>
-<li>[ Consistency - 일관성 ]</li>
-<li>[ Isolation - 독립성 ]</li>
-<li>[ Durability - 지속성 ] </li>
+<li><strong>스프링에서의 트랜잭션</strong>        <br />
+    - AOP를 활용한 선언적 트랜잭션 <code>@Transactional</code>
+    - 여러가지 옵션을 어노테이션의 속성 값으로 명시함으로써 간편히 사용가능
+    - 트랜잭션 전파 설정
+        - REQUIRED, REQUIRES_NEW, MANDATORY, NESTED, NEVER, SUPPORTS, NOT_SUPPORTED
+    - 트랜잭션 고립 수준
+        - DEFAULT, READ_UNCOMMITED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>스프링에서의 트랜잭션</strong>          </p>
 <ul>
-<li>AOP를 활용한 선언적 트랜잭션 <code>@Transactional</code></li>
-<li>여러가지 옵션을 어노테이션의 속성 값으로 명시함으로써 간편히 사용가능</li>
-<li>트랜잭션 전파 설정<ul>
-<li>REQUIRED, REQUIRES_NEW, MANDATORY, NESTED, NEVER, SUPPORTS, NOT_SUPPORTED</li>
-</ul>
-</li>
-<li>트랜잭션 고립 수준<ul>
-<li>DEFAULT, READ_UNCOMMITED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
-<ul>
-<li>https://papimon.tistory.com/89</li>
-</ul>
-</li>
+<li><strong>링크</strong>
+    - https://papimon.tistory.com/89</li>
 </ul>
 <h2 id="_3">빈 생명주기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>빈 생명주기</strong></p>
+<li><strong>빈 생명주기</strong>
+    - 스프링의 컨테이너는 빈 객체의 생성/소멸/주입/제공 등을 담당
+    - 생명주기는 다음과 같음<br />
+        1. 빈 인스턴스화 및 DI
+            - XML/자바 설정 클래스/어노테이션으로 빈 정의 스캔
+            - 빈 인스턴스 생성
+            - 빈 프로퍼티에 의존성 주입
+        2. 빈이 인터페이스 구현시 호출
+            - 빈이 BeanNameAwate 인터페이스 구현 시 setBeanName() 호출
+            - 빈이 BeanClassLoaderAware 인터페이스 구현 시 setBeanClassLoader() 호출
+            - 빈이 ApplicationContextAware 인터페이스 구현시 setApplicationContext() 호출
+        3. 빈 생성 생명주기 콜백
+            - <code>@PostConstruct</code> 어노테이션 적용 메서드 호출
+            - 빈이 InitializingBean 인터페이스 구현 시 afterPropertiesSet() 호출
+            - 빈이 init-method 정의하면 지정한 메서드 호출
+        4. 빈 소멸 생성주기 콜백
+            - <code>@PreDestory</code> 어노테이션 적용 메서드 호출
+            - 빈이 DisposableBean 인터페이스 구현시 destory() 호출
+            - 빈이 destory-method 정의하면 지정한 메서드 호출</li>
+</ul>
 <ul>
-<li>스프링의 컨테이너는 빈 객체의 생성/소멸/주입/제공 등을 담당</li>
-<li>생명주기는 다음과 같음  <ol>
-<li>빈 인스턴스화 및 DI<ul>
-<li>XML/자바 설정 클래스/어노테이션으로 빈 정의 스캔</li>
-<li>빈 인스턴스 생성</li>
-<li>빈 프로퍼티에 의존성 주입</li>
-</ul>
-</li>
-<li>빈이 인터페이스 구현시 호출<ul>
-<li>빈이 BeanNameAwate 인터페이스 구현 시 setBeanName() 호출</li>
-<li>빈이 BeanClassLoaderAware 인터페이스 구현 시 setBeanClassLoader() 호출</li>
-<li>빈이 ApplicationContextAware 인터페이스 구현시 setApplicationContext() 호출</li>
-</ul>
-</li>
-<li>빈 생성 생명주기 콜백<ul>
-<li><code>@PostConstruct</code> 어노테이션 적용 메서드 호출</li>
-<li>빈이 InitializingBean 인터페이스 구현 시 afterPropertiesSet() 호출</li>
-<li>빈이 init-method 정의하면 지정한 메서드 호출</li>
-</ul>
-</li>
-<li>빈 소멸 생성주기 콜백<ul>
-<li><code>@PreDestory</code> 어노테이션 적용 메서드 호출</li>
-<li>빈이 DisposableBean 인터페이스 구현시 destory() 호출</li>
-<li>빈이 destory-method 정의하면 지정한 메서드 호출</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
-<ul>
-<li>https://yangbongsoo.gitbook.io/study/spring-1/basic</li>
-<li>https://haruhiism.tistory.com/186</li>
-</ul>
-</li>
+<li><strong>링크</strong>
+    - https://yangbongsoo.gitbook.io/study/spring-1/basic
+    - https://haruhiism.tistory.com/186</li>
 </ul>
 <h2 id="jpql">JPQL<a class="headerlink" href="#jpql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>왜 필요하지?</strong></p>
+<li><strong>왜 필요하지?</strong>
+    - 필요한 정보를 가져오기 위해 .get().get() 을 통해 가져오는 것에 대한 비효율성
+    - 필요한 데이터를 DB에서 가져오려면 검색 조건을 명시한 SQL 쿼리의 필요성 대두</li>
+</ul>
 <ul>
-<li>필요한 정보를 가져오기 위해 .get().get() 을 통해 가져오는 것에 대한 비효율성</li>
-<li>필요한 데이터를 DB에서 가져오려면 검색 조건을 명시한 SQL 쿼리의 필요성 대두</li>
+<li><strong>JPQL?</strong>
+    - JPA는 SQL을 추상화한 JPQL이란 객체 지향 쿼리 제공
+        - SQL과 문법이 유사
+        - JPQL은 엔티티 객체를 대상으로 쿼리를 질의하고, SQL은 데이터베이스 테이블 대상으로 쿼리를 질의
+    - 테이블이 아닌 객체를 대상으로 검색하는 객체지향 쿼리!
+        - SQL을 추상화했기에 특정 DB 벤더에 의존 X</li>
 </ul>
-</li>
-<li>
-<p><strong>JPQL?</strong></p>
 <ul>
-<li>JPA는 SQL을 추상화한 JPQL이란 객체 지향 쿼리 제공<ul>
-<li>SQL과 문법이 유사</li>
-<li>JPQL은 엔티티 객체를 대상으로 쿼리를 질의하고, SQL은 데이터베이스 테이블 대상으로 쿼리를 질의</li>
-</ul>
-</li>
-<li>테이블이 아닌 객체를 대상으로 검색하는 객체지향 쿼리!<ul>
-<li>SQL을 추상화했기에 특정 DB 벤더에 의존 X</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
-<ul>
-<li>https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-08-02.md</li>
-</ul>
-</li>
+<li><strong>링크</strong>
+    - https://github.com/PapimonLikelion/woowacourse-TIL/blob/master/Level3/2021-08-02.md</li>
 </ul>
 
 

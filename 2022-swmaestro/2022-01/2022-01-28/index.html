@@ -22909,75 +22909,77 @@
 <h3 id="2022-01-25">2022-01-25<a class="headerlink" href="#2022-01-25" title="Permanent link">&para;</a></h3>
 <h2 id="-">알고리즘 문제풀이 - 문자열<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>String -&gt; char[]</strong></li>
-<li>
-<p>문자열.toCharArray() : charAt() 대신 사용 고려</p>
+<li><strong>String -&gt; char[]</strong><ul>
+<li>문자열.toCharArray() : charAt() 대신 사용 고려</li>
+</ul>
 </li>
-<li>
-<p><strong>char[] -&gt; String</strong></p>
+</ul>
+<ul>
+<li><strong>char[] -&gt; String</strong><ul>
+<li>String.valueOf(char[]) : 이러면 문자열로 변환</li>
+</ul>
 </li>
-<li>
-<p>String.valueOf(char[]) : 이러면 문자열로 변환</p>
-</li>
-<li>
-<p><strong>대문자 -&gt; 소문자</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>대문자 -&gt; 소문자</strong><ul>
 <li>Character.isLowerCase() : 소문자인지 확인</li>
 <li>Character.toUpperCase(c) : c를 대문자로</li>
-<li>
-<p>32를 char에 더하고 뺀 뒤 Casting</p>
-<ul>
+<li>32를 char에 더하고 뺀 뒤 Casting<ul>
 <li>대문자 아스키 : 65 ~ 90</li>
 <li>소문자 아스키 : 97 ~ 122</li>
 </ul>
 </li>
-<li>
-<p><strong>StringBuilder 활용하기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>StringBuilder 활용하기</strong><ul>
 <li>new StringBuilder(string) : 생성자에 String 넣어서 생성 가능</li>
-<li>
-<p>StringBuilder.reverse() : 문자열 뒤집기</p>
+<li>StringBuilder.reverse() : 문자열 뒤집기</li>
+</ul>
 </li>
-<li>
-<p><strong>문자열 중복 제거</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>문자열 중복 제거</strong><ul>
 <li>어렵게 생각하지마,,, 대칭이 아니라 그냥 중복된 놈이 있으면 삭제하는 문제였음</li>
 <li>indexOf를 활용해서 현재 문자 위치와 첫번째로 해당 문자가 등장한 위치를 비교해서 풀이 가능</li>
-<li>
-<p>LinkedHashSet으로 순서 기억하며 중복 제가하는 방법도 가능</p>
+<li>LinkedHashSet으로 순서 기억하며 중복 제가하는 방법도 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>양 끝 부터 비교</strong></p>
-</li>
-<li>
-<p>길이의 1/2 만큼만 돌면 충분히 비교할 수 있음</p>
-</li>
-<li>
-<p><strong>ReplaceAll &amp; Regex</strong></p>
-</li>
-<li>
-<p>모든 알파벳이 아닌 문자를 없애고 싶어!</p>
+</ul>
 <ul>
+<li><strong>양 끝 부터 비교</strong><ul>
+<li>길이의 1/2 만큼만 돌면 충분히 비교할 수 있음</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>ReplaceAll &amp; Regex</strong><ul>
+<li>모든 알파벳이 아닌 문자를 없애고 싶어!<ul>
 <li>string.toUpperCase().replaceAll("[^A-Z]", "");</li>
 </ul>
 </li>
-<li>
-<p><strong>char이 숫자인지 검증</strong></p>
+</ul>
 </li>
-<li>
-<p>Character.isDigit(char)</p>
+</ul>
+<ul>
+<li><strong>char이 숫자인지 검증</strong><ul>
+<li>Character.isDigit(char)</li>
+</ul>
 </li>
-<li>
-<p><strong>문자열의 char 다른 char로 변경</strong></p>
+</ul>
+<ul>
+<li><strong>문자열의 char 다른 char로 변경</strong><ul>
+<li>string.replace('#', '1');</li>
+</ul>
 </li>
-<li>
-<p>string.replace('#', '1');</p>
-</li>
-<li>
-<p><strong>2진법의 문자열 10진법으로 변경</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>2진법의 문자열 10진법으로 변경</strong><ul>
 <li>Integer.parseInt(string, 2);<ul>
 <li>2가 radix</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

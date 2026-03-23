@@ -22909,7 +22909,7 @@
 <h3 id="2025-07-05">2025-07-05<a class="headerlink" href="#2025-07-05" title="Permanent link">&para;</a></h3>
 <h2 id="client-side-session">Client-Side Session<a class="headerlink" href="#client-side-session" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Client-Side Session</strong></li>
+<li><strong>Client-Side Session</strong><ul>
 <li>개념: 세션 데이터를 암호화/서명하여 직접 클라이언트 쿠키에 저장하고, 클라에서 관리</li>
 <li>상태: Stateless (스케일 아웃에 용이)</li>
 <li>저장 위치: 클라이언트 쿠키</li>
@@ -22917,39 +22917,41 @@
 <li>데이터 기밀성: 높음</li>
 <li>장점: 서버 리소스 절약, 스케일 아웃 용이</li>
 <li>단점: 쿠키 크기 제한. 모든 서버가 비밀키 공유 필수</li>
-<li>
-<p>ex) Play Framework 기본 세션</p>
+<li>ex) Play Framework 기본 세션</li>
+</ul>
 </li>
-<li>
-<p><strong>Server-Side Session</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Server-Side Session</strong><ul>
 <li>개념: 세션 데이터를 서버 메모리/서버 측 저장소에 저장하고, 클라에게는 세션 ID만 발급하여 쿠키로 전달</li>
 <li>상태: Stateful (스케일 아웃 어려움)</li>
 <li>저장 위치: 서버</li>
 <li>데이터 크기 제한: 없음</li>
 <li>데이터 기밀성: 높음</li>
 <li>장점: 구현 간단. 세션 만료 제어 용이</li>
-<li>
-<p>ex) Spring Session: JSESSIONID</p>
+<li>ex) Spring Session: JSESSIONID</li>
+</ul>
 </li>
-<li>
-<p><strong>JWT</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>JWT</strong><ul>
 <li>개념: 사용자 정보와 권한을 담은 토큰을 서명하여 클라에게 발급. 클라에서 관리</li>
 <li>상태: Stateless (스케일 아웃에 용이)</li>
 <li>저장 위치: 클라이언트 Auth 헤더, 리액트에 상태 변수로 저장, 브라우저 스토리지</li>
 <li>데이터 크기 제한: 있음</li>
 <li>데이터 기밀성: 낮음 (Payload Base64로 인코딩되어 있음)</li>
-<li>
-<p>장점: 표준화됨</p>
+<li>장점: 표준화됨</li>
+</ul>
 </li>
-<li>
-<p><strong>Play에서 Client-Side Session 사용하기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Play에서 Client-Side Session 사용하기</strong><ul>
 <li>Action에서 로그인 과정 처리를 진행하고 다음과 같은 코드가 있다. <ul>
-<li><code>result.addingToSession(s.tuple)(request)</code> (s가 로그인 정보로 사용할 튜플 (TOKEN_KEY, TOKEN_VALUE))</li>
+<li><code>result.addingToSession(s.tuple)(request)</code> (s가 로그인 정보로 사용할 튜플 (TOKEN_KEY, TOKEN_VALUE))<ol>
 <li>이는 내부적으로 튜플 정보를 JWT 인코딩 시켜서</li>
 <li><code>set-cookie: PLAY_SESSION=JWT토큰화</code> 로 반환</li>
+</ol>
+</li>
 </ul>
 </li>
 <li>이후, 로그인 요청이 들어오면, 다음과 같이 PLAY_SESSION 해독 + 튜플의 (TOKEN_KEY, TOKEN_VALUE) 추출<ul>
@@ -22957,6 +22959,8 @@
 </ul>
 </li>
 <li>TOKEN_VALUE를 기반으로 인가 과정 검증. </li>
+</ul>
+</li>
 </ul>
 
 

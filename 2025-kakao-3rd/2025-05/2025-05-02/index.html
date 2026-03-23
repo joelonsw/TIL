@@ -22909,23 +22909,25 @@
 <h3 id="2025-05-02">2025-05-02<a class="headerlink" href="#2025-05-02" title="Permanent link">&para;</a></h3>
 <h2 id="elasticsearch-update">Elasticsearch Update<a class="headerlink" href="#elasticsearch-update" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>인덱스 검색</strong></li>
+<li><strong>인덱스 검색</strong><ul>
 <li><code>GET /_cat/indices/prod-message-*</code></li>
 <li><code>GET /_cat/indices/prod-message-*?v</code> : <code>?v</code>로 헤더(컬럼명) 포함하여 결과 보기 좋게</li>
-<li>
-<p><code>GET /_cat/indices/prod-message-*?v&amp;s=index:asc</code> : 오름차순으로 인덱스 이름 보도록 정렬</p>
+<li><code>GET /_cat/indices/prod-message-*?v&amp;s=index:asc</code> : 오름차순으로 인덱스 이름 보도록 정렬</li>
+</ul>
 </li>
-<li>
-<p><strong>인덱스 필드 조회</strong></p>
+</ul>
+<ul>
+<li><strong>인덱스 필드 조회</strong><ul>
+<li><code>GET /prod-message-2025.05.02/_mapping</code></li>
+</ul>
 </li>
-<li>
-<p><code>GET /prod-message-2025.05.02/_mapping</code></p>
-</li>
-<li>
-<p><strong>인덱스 데이터 확인</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>인덱스 데이터 확인</strong><ul>
 <li><code>GET /prod-message-2025.05.02/_search</code> : 검색</li>
 <li><code>GET /prod-message-2025.05.02/_doc/docID</code>: 특정 ID로 도큐먼트 가져오기</li>
+</ul>
+</li>
 </ul>
 <p>Qs) logstash에서 파싱된 필드 &gt; ES 중에 누락된 건을 보충하려면?<br />
 - <strong>방법1 - 기존 인덱스에 누락된 필드 추가하기</strong>
@@ -22961,7 +22963,7 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>}
 </code></pre></div></p>
 <ul>
-<li><strong>방법2 - Reindex</strong></li>
+<li><strong>방법2 - Reindex</strong><ul>
 <li>POST _reindex &gt; script 써서 누락되었던 필드 인덱싱...<ul>
 <li>누락된 필드 추출하는 pipeline 같은 걸 만들고 해당 pipeline 을 통해서 재색인할 수도 있음</li>
 <li>파이프라인을 끼워서 리인덱싱할때 이걸 태우고 리인덱싱하게 도움을 주는 장치</li>
@@ -22973,11 +22975,9 @@
 </li>
 <li>단점<ul>
 <li>인덱스 이름이 바뀜(후처리 필요)</li>
-<li>저장공간 일시적 2배</li>
-</ul>
-</li>
-<li>파이프 라인 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>http://es.com/_ingest/pipeline/joel_test
+<li>저장공간 일시적 2배
+1. 파이프 라인 생성
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>http://es.com/_ingest/pipeline/joel_test
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>{
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;description&quot;: &quot;메시지 필드에서 phoneNumber, testId 추출&quot;,
@@ -23025,14 +23025,14 @@
 <a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>    }
 <a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>  ]
 <a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>}
-</code></pre></div></li>
-<li>신규 인덱스 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PUT http://es.com/joel-pipeline
+</code></pre></div>
+2. 신규 인덱스 생성
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PUT http://es.com/joel-pipeline
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>{ 기존 매핑... }
-</code></pre></div></li>
-<li>리인덱스
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>POST http://bzm-moa-dev.es.onkakao.net:9200/_reindex
+</code></pre></div>
+3. 리인덱스
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>POST http://bzm-moa-dev.es.onkakao.net:9200/_reindex
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>{
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  &quot;source&quot;: {
@@ -23044,6 +23044,10 @@
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  }
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>}
 </code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 

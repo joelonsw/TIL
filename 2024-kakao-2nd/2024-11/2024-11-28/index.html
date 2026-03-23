@@ -22909,44 +22909,40 @@
 <h3 id="2024-11-28">2024-11-28<a class="headerlink" href="#2024-11-28" title="Permanent link">&para;</a></h3>
 <h2 id="styled-components">Styled Components<a class="headerlink" href="#styled-components" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>아래와 같이 reactRef를 ref에 두고 하위에 shadowDom을 깔았는데, 여기서 reactRef의 height를 계산을 못했음</li>
-<li>
-<p>계속 height를 잘 계산했다가 계속 0이였다가 반복... shadowDom을 하위로 쓰다보니 그런 것 같아서 찾아봄
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">reactRef</span><span class="p">}</span><span class="o">&gt;</span>
+<li>계속 height를 잘 계산했다가 계속 0이였다가 반복... shadowDom을 하위로 쓰다보니 그런 것 같아서 찾아봄
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">reactRef</span><span class="p">}</span><span class="o">&gt;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="o">&lt;</span><span class="nx">root</span><span class="p">.</span><span class="nx">div</span><span class="o">&gt;~~~&lt;</span><span class="err">/root.div&gt;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&lt;</span><span class="err">/&gt;</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>ShadowDom</strong></p>
-</li>
-<li>ShadowDOM을 쓰게되면, 별도의 DOM 트리를 쓰게 된다. 이는 기존 메인 도큐먼트와 분리를 시켜버리는 역할을 함. </li>
-<li>이런 분리는 height/width 등의 속성 계산에 애를 먹임</li>
-<li>DOM Isolation<ul>
-<li>ShadowDOM은 분리/캡슐화된 DOM 트리를 만듦</li>
-<li>이는 ShadowDOM 안에서의 hieght를 ShadowDOM 밖에서 재려고 할때 오류가 날 수 있음. </li>
+</code></pre></div></li>
 </ul>
 </li>
-<li>Style Encapsulation</li>
-<li>
-<p>Layout Calculations</p>
+</ul>
 <ul>
+<li><strong>ShadowDom</strong><ul>
+<li>ShadowDOM을 쓰게되면, 별도의 DOM 트리를 쓰게 된다. 이는 기존 메인 도큐먼트와 분리를 시켜버리는 역할을 함. </li>
+<li>이런 분리는 height/width 등의 속성 계산에 애를 먹임
+1. DOM Isolation<ul>
+<li>ShadowDOM은 분리/캡슐화된 DOM 트리를 만듦</li>
+<li>이는 ShadowDOM 안에서의 hieght를 ShadowDOM 밖에서 재려고 할때 오류가 날 수 있음. 
+2. Style Encapsulation
+3. Layout Calculations</li>
 <li>브라우저는 ShadowDOM을 별도의 레이아웃 컨텍스트로 취급함</li>
 <li>이는 정확한 측정에 어려움을 줄 것</li>
 </ul>
 </li>
-<li>
-<p><strong>해결책 Styled Components</strong>
-https://www.daleseo.com/react-styled-components/  </p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>해결책 Styled Components</strong>
+https://www.daleseo.com/react-styled-components/  <ul>
 <li>[CCS in JS]<ul>
 <li>스타일 정의를 CSS가 아닌 JS로 작성된 컴포넌트에 바로 삽입하는 것</li>
 </ul>
 </li>
-<li>
-<p>[문법]</p>
-<ul>
+<li>[문법]<ul>
 <li><code>styled</code> 함수를 임포트하여 원하는 스타일 적용
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">styles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;!raw-loader!./../../scss/style_v2.scss&#39;</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="nx">cstyles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;!raw-loader!./../../scss/custom.css&#39;</span><span class="p">;</span>
@@ -22962,10 +22958,12 @@ https://www.daleseo.com/react-styled-components/  </p>
 <li>props 처럼 특정 속성을 넘겨서 가변 영역으로 쓸 수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>장단점</strong>
-https://junghan92.medium.com/%EB%B2%88%EC%97%AD-%EC%9A%B0%EB%A6%AC%EA%B0%80-css-in-js%EC%99%80-%ED%97%A4%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0-a2e726d6ace6  </p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>장단점</strong>
+https://junghan92.medium.com/%EB%B2%88%EC%97%AD-%EC%9A%B0%EB%A6%AC%EA%B0%80-css-in-js%EC%99%80-%ED%97%A4%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0-a2e726d6ace6  <ul>
 <li>[장점]<ol>
 <li>지역 스코프 스타일</li>
 <li>Co-location: 관련된 스타일을 JS/CSS 한곳에 모을 수 있다. </li>
@@ -22981,6 +22979,8 @@ https://junghan92.medium.com/%EB%B2%88%EC%97%AD-%EC%9A%B0%EB%A6%AC%EA%B0%80-css-
 <li>CSS 규칙 자주 삽입하면 브라우저에서 더 많은 추가 작업 수행 필요</li>
 <li>SSR/컴포너트 라이브러리 사용시 잘못될 가능성이 올라감 (SSR에 취약함)</li>
 </ol>
+</li>
+</ul>
 </li>
 </ul>
 

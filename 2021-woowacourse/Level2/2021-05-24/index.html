@@ -22931,225 +22931,139 @@
 <h3 id="2021-05-24">2021-05-24<a class="headerlink" href="#2021-05-24" title="Permanent link">&para;</a></h3>
 <h2 id="jvm">JVM 이해하기<a class="headerlink" href="#jvm" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>정의</strong></p>
+<li><strong>정의</strong>
+    - 자바 바이트 코드를 OS에 특화된 코드로 변환하여 실행하는 프로그램!
+    - 정해진 스펙을 구현한 여러 개의 구현체가 존재!
+        - <em>표준 스펙: https://docs.oracle.com/javase/specs/jvms/se11/html/</em></li>
+</ul>
 <ul>
-<li>자바 바이트 코드를 OS에 특화된 코드로 변환하여 실행하는 프로그램!</li>
-<li>정해진 스펙을 구현한 여러 개의 구현체가 존재!<ul>
-<li><em>표준 스펙: https://docs.oracle.com/javase/specs/jvms/se11/html/</em></li>
+<li><strong>JVM</strong>
+    - <em>참고: https://howtodoinjava.com/java/basics/jdk-jre-jvm/</em>
+    - <em>참고: https://blog.jamesdbloom.com/JVMInternals.html</em>
+    - <strong>[Java 프로그램의 실행]</strong>
+        1. Simple.java 파일 작성
+        2. javac 컴파일러를 통해 Simple.class로 바이트코드 생성
+        3. 바이트코드(클래스파일)을 실행할 수 있는 JVM에서 실행
+        4. JVM이 바이트코드를 native machine code로 변환하여 실행
+    - <strong>[JVM이란?]</strong>
+        - JVM은 자바 바이트코드를 실행하는 가상 머신임
+        - 가장 인기있는 JVM은 오라클의 Hotspot
+        - GC와 adaptive optimizer를 통해 자바 어플리케이션의 최적 실행을 보장
+        - JVM은 client / server 버전으로 출시
+            - server는 최적화된 속도로 수행
+        - JVM이 virtual이라 불리는 이유는 실행하는 기계의 os/hw에 종속적이지 않기 때문
+        - <strong>[ClassLoader]</strong>
+            - 클래스 파일을 로드하는데 사용
+            1. Loading
+                - Bootstrap - Extension - Application 수행
+                - 클래스 파일 로드할 때, JVM은 임의의 클래스에 의존성을 찾아냄
+                - Bootstrap은 jre\lib\rt.jar 파일을 스캔
+                - 못 찾으면, Extension 클래스 로더가 클래스 파일을 jre\lib\ext에서 찾아봄
+                - 못 찾으면, Application 클래스 로더가 모든 jar 파일과 classpath내의 클래스를 찾아봄
+                - 이래도 못 찾으면 ClassNotFoundException 발생
+            2. Linking
+                - 클래스가 클래스 로더에 로딩되면, 링킹이 수행됨
+                - Bytecode verifier가 생성된 바이트코드가 올바른지 검증
+                - static 변수들과 클래스 메서드들의 메모리 배치를 수행
+            3. Initialization
+                - Static 변수들이 할당
+                - Static 블록이 수행!
+        - <strong>[JVM Memory Area]</strong>
+            - <strong>Method Area</strong>
+                - 클래스 구조를 메타데이터 처럼 가짐
+                - Constant Runtime Pool
+                - 메서드의 코드
+            - <strong>Heap</strong>
+                - 어플리케이션 수행중에 생성되는 객체 저장
+            - <strong>Stacks</strong>
+                - 각 스레드에서 로컬 변수, 중간 연산 결과 저장
+                - 각 스레드 별로 JVM 스택이 있음
+            - <strong>PC register</strong>
+                - Statement의 물리적 주소를 저장
+                - 각 스레드 별로 PC register
+            - <strong>Native Code</strong>
+                - C/C++ Low level 코드를 스택에서 실행
+        - <strong>[JVM Execution Engine]</strong>
+            - 모든 코드는 Execution Engine에 할당됨
+                - 하나씩 수행
+                - Interpreter, JIT compiler를 통해 바이트코드 -&gt; 머신코드
+            - <strong>Interpreter</strong>
+                - 바로 바이트 코드를 최적화 없이 수행
+            - <strong>JIT Compiler</strong>
+                - 코드 블럭을 가져와 최적화하고 머신코드로 바꿈
+                - 기본적으로 사용됨
+        - <strong>[JNI]</strong>
+            - Native Method Library를 가져와 C/C++ 수행</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JVM</strong></p>
 <ul>
-<li><em>참고: https://howtodoinjava.com/java/basics/jdk-jre-jvm/</em></li>
-<li><em>참고: https://blog.jamesdbloom.com/JVMInternals.html</em></li>
-<li><strong>[Java 프로그램의 실행]</strong><ol>
-<li>Simple.java 파일 작성</li>
-<li>javac 컴파일러를 통해 Simple.class로 바이트코드 생성</li>
-<li>바이트코드(클래스파일)을 실행할 수 있는 JVM에서 실행</li>
-<li>JVM이 바이트코드를 native machine code로 변환하여 실행</li>
-</ol>
-</li>
-<li><strong>[JVM이란?]</strong><ul>
-<li>JVM은 자바 바이트코드를 실행하는 가상 머신임</li>
-<li>가장 인기있는 JVM은 오라클의 Hotspot</li>
-<li>GC와 adaptive optimizer를 통해 자바 어플리케이션의 최적 실행을 보장</li>
-<li>JVM은 client / server 버전으로 출시<ul>
-<li>server는 최적화된 속도로 수행</li>
+<li><strong>JVM Run-time Data Areas</strong>
+    - <em>참고: https://javapapers.com/core-java/java-jvm-run-time-data-areas/#Program_Counter_PC_Register</em>
+    - <img alt="" src="https://javapapers.com/wp-content/uploads/2013/11/JVM-Run-time-Data-Areas.png" />  <br />
+    - <strong>[Managed per-Thread]</strong>
+        - <strong>PC Register</strong>
+            - 멀티스레딩 지원. 쓰레드별로 인스트럭션 수행토록 함
+            - native 실행중이면 PC는 "undefined"
+        - <strong>JVM Stacks</strong>
+            - Memory size가 2가지, fixed/varying 이 있음
+            - StackOverflowError: fixed size JVM stack에 메모리가 꽉 차서 넘치면
+            - OutOfMemoryError: dynamic size JVM stack에 메모리가 더 이상 할당 불가라면 
+        - <strong>Native Method Stacks</strong>
+            - native method를 수행하기 위해 사용
+    - <strong>[Shared with all threads]</strong>
+        - <strong>Heap</strong>
+            - VM 시작시 생성
+            - GC를 통해 메모리 관리
+            - 메모리가 부족해지면 OutOfMemoryError
+        - <strong>Method Area</strong>
+            - Heap Area의 논리적 부분 (JVM 벤더가 결정)
+            - method data, method, constructor code, run-time constant pool 관리
+            - 메모리가 부족해지면 OutOfMemoryError
+        - <strong>Run-time constant pool</strong>
+            - String pool 같은거 관리
+            - constant pool table을 통해 클래스 별 관리할 수 있는 거 관리</li>
 </ul>
-</li>
-<li>JVM이 virtual이라 불리는 이유는 실행하는 기계의 os/hw에 종속적이지 않기 때문</li>
-<li><strong>[ClassLoader]</strong><ul>
-<li>클래스 파일을 로드하는데 사용</li>
-<li>Loading<ul>
-<li>Bootstrap - Extension - Application 수행</li>
-<li>클래스 파일 로드할 때, JVM은 임의의 클래스에 의존성을 찾아냄</li>
-<li>Bootstrap은 jre\lib\rt.jar 파일을 스캔</li>
-<li>못 찾으면, Extension 클래스 로더가 클래스 파일을 jre\lib\ext에서 찾아봄</li>
-<li>못 찾으면, Application 클래스 로더가 모든 jar 파일과 classpath내의 클래스를 찾아봄</li>
-<li>이래도 못 찾으면 ClassNotFoundException 발생</li>
-</ul>
-</li>
-<li>Linking<ul>
-<li>클래스가 클래스 로더에 로딩되면, 링킹이 수행됨</li>
-<li>Bytecode verifier가 생성된 바이트코드가 올바른지 검증</li>
-<li>static 변수들과 클래스 메서드들의 메모리 배치를 수행</li>
-</ul>
-</li>
-<li>Initialization<ul>
-<li>Static 변수들이 할당</li>
-<li>Static 블록이 수행!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>[JVM Memory Area]</strong><ul>
-<li><strong>Method Area</strong><ul>
-<li>클래스 구조를 메타데이터 처럼 가짐</li>
-<li>Constant Runtime Pool</li>
-<li>메서드의 코드</li>
-</ul>
-</li>
-<li><strong>Heap</strong><ul>
-<li>어플리케이션 수행중에 생성되는 객체 저장</li>
-</ul>
-</li>
-<li><strong>Stacks</strong><ul>
-<li>각 스레드에서 로컬 변수, 중간 연산 결과 저장</li>
-<li>각 스레드 별로 JVM 스택이 있음</li>
-</ul>
-</li>
-<li><strong>PC register</strong><ul>
-<li>Statement의 물리적 주소를 저장</li>
-<li>각 스레드 별로 PC register</li>
-</ul>
-</li>
-<li><strong>Native Code</strong><ul>
-<li>C/C++ Low level 코드를 스택에서 실행</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>[JVM Execution Engine]</strong><ul>
-<li>모든 코드는 Execution Engine에 할당됨<ul>
-<li>하나씩 수행</li>
-<li>Interpreter, JIT compiler를 통해 바이트코드 -&gt; 머신코드</li>
-</ul>
-</li>
-<li><strong>Interpreter</strong><ul>
-<li>바로 바이트 코드를 최적화 없이 수행</li>
-</ul>
-</li>
-<li><strong>JIT Compiler</strong><ul>
-<li>코드 블럭을 가져와 최적화하고 머신코드로 바꿈</li>
-<li>기본적으로 사용됨</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>[JNI]</strong><ul>
-<li>Native Method Library를 가져와 C/C++ 수행</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JVM Run-time Data Areas</strong></p>
 <ul>
-<li><em>참고: https://javapapers.com/core-java/java-jvm-run-time-data-areas/#Program_Counter_PC_Register</em></li>
-<li><img alt="" src="https://javapapers.com/wp-content/uploads/2013/11/JVM-Run-time-Data-Areas.png" />    </li>
-<li><strong>[Managed per-Thread]</strong><ul>
-<li><strong>PC Register</strong><ul>
-<li>멀티스레딩 지원. 쓰레드별로 인스트럭션 수행토록 함</li>
-<li>native 실행중이면 PC는 "undefined"</li>
-</ul>
-</li>
-<li><strong>JVM Stacks</strong><ul>
-<li>Memory size가 2가지, fixed/varying 이 있음</li>
-<li>StackOverflowError: fixed size JVM stack에 메모리가 꽉 차서 넘치면</li>
-<li>OutOfMemoryError: dynamic size JVM stack에 메모리가 더 이상 할당 불가라면 </li>
-</ul>
-</li>
-<li><strong>Native Method Stacks</strong><ul>
-<li>native method를 수행하기 위해 사용</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>[Shared with all threads]</strong><ul>
-<li><strong>Heap</strong><ul>
-<li>VM 시작시 생성</li>
-<li>GC를 통해 메모리 관리</li>
-<li>메모리가 부족해지면 OutOfMemoryError</li>
-</ul>
-</li>
-<li><strong>Method Area</strong><ul>
-<li>Heap Area의 논리적 부분 (JVM 벤더가 결정)</li>
-<li>method data, method, constructor code, run-time constant pool 관리</li>
-<li>메모리가 부족해지면 OutOfMemoryError</li>
-</ul>
-</li>
-<li><strong>Run-time constant pool</strong><ul>
-<li>String pool 같은거 관리</li>
-<li>constant pool table을 통해 클래스 별 관리할 수 있는 거 관리</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Thread</strong></p>
-<ul>
-<li>Hotspot JVM은 자바 쓰레드와 OS 쓰레드 1:1 매핑 지원</li>
-<li>Main 백그라운드 시스템 쓰레드는...    <ul>
-<li>VM Thread</li>
-<li>Periodic Task Thread</li>
-<li>GC Thread</li>
-<li>Compiler Thread</li>
-<li>Signal Dispatcher Thread</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Thread</strong>
+    - Hotspot JVM은 자바 쓰레드와 OS 쓰레드 1:1 매핑 지원
+    - Main 백그라운드 시스템 쓰레드는...  <br />
+        - VM Thread
+        - Periodic Task Thread
+        - GC Thread
+        - Compiler Thread
+        - Signal Dispatcher Thread</li>
 </ul>
 <h2 id="_1">클래스 로더<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.geeksforgeeks.org/jvm-works-jvm-architecture/</em></li>
 <li>로딩 -&gt; 링크 -&gt; 초기화 순으로 진행</li>
-<li>
-<p><strong>로딩</strong></p>
+<li><strong>로딩</strong>
+    - ClassLoader가 .class 파일 읽어, 내용에 따라 적절히 바이너리 데이터를 만들어, "메소드" 영역에 다음을 저장
+        - Fully Qualified Class Name (패키지 경로 포함 클래스 이름)
+        - 바로 위 부모 클래스
+        - 클래스 / 인터페이스 / 이넘
+        - 접근제어자 / 메서드 / 변수
+    - ClassLoader는 3가지가 제공되며 계층 구조로 구성됨
+        - {BootStrap ClassLoader}
+            - “JAVA_HOME/jre/lib” 에 있는 코어 자바 API
+            - 최상위 우선순위
+            - 주로 C, C++로 작성됨
+        - {Platform ClassLoader}
+            - “JAVA_HOME/jre/lib/ext” || java.ext.dirs 시스템 변수의 클래스
+        - {Application ClassLoader}
+            - classpath, java.class.path 에서 클래스 읽음
+    - 로딩이 끝나면, 해당 클래스 타입의 Class 객체 하나를 생성해 "힙" 에 저장
+        - getClass()로 가져오기 가능</li>
+</ul>
 <ul>
-<li>ClassLoader가 .class 파일 읽어, 내용에 따라 적절히 바이너리 데이터를 만들어, "메소드" 영역에 다음을 저장<ul>
-<li>Fully Qualified Class Name (패키지 경로 포함 클래스 이름)</li>
-<li>바로 위 부모 클래스</li>
-<li>클래스 / 인터페이스 / 이넘</li>
-<li>접근제어자 / 메서드 / 변수</li>
+<li><strong>링크</strong>
+    - Verify -&gt; Prepare -&gt; Resolve
+    - Verify: .class 파일 형식 유효성 검증... 파토나면 java.lang.VerifyError
+    - Preparation: 클래스 변수와 기본값에 필요한 메모리 준비
+    - Resolve: 기존의 심볼릭(논리적인) 메모리 레퍼런스를 실제 메서드 영역에 있는 실제 레퍼런스로 변경</li>
 </ul>
-</li>
-<li>ClassLoader는 3가지가 제공되며 계층 구조로 구성됨<ul>
-<li>{BootStrap ClassLoader}<ul>
-<li>“JAVA_HOME/jre/lib” 에 있는 코어 자바 API</li>
-<li>최상위 우선순위</li>
-<li>주로 C, C++로 작성됨</li>
-</ul>
-</li>
-<li>{Platform ClassLoader}<ul>
-<li>“JAVA_HOME/jre/lib/ext” || java.ext.dirs 시스템 변수의 클래스</li>
-</ul>
-</li>
-<li>{Application ClassLoader}<ul>
-<li>classpath, java.class.path 에서 클래스 읽음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>로딩이 끝나면, 해당 클래스 타입의 Class 객체 하나를 생성해 "힙" 에 저장<ul>
-<li>getClass()로 가져오기 가능</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>링크</strong></p>
 <ul>
-<li>Verify -&gt; Prepare -&gt; Resolve</li>
-<li>Verify: .class 파일 형식 유효성 검증... 파토나면 java.lang.VerifyError</li>
-<li>Preparation: 클래스 변수와 기본값에 필요한 메모리 준비</li>
-<li>Resolve: 기존의 심볼릭(논리적인) 메모리 레퍼런스를 실제 메서드 영역에 있는 실제 레퍼런스로 변경</li>
-</ul>
-</li>
-<li>
-<p><strong>초기화</strong></p>
-<ul>
-<li>Static 변수 할당, Static 블록 실행</li>
-</ul>
-</li>
+<li><strong>초기화</strong>
+    - Static 변수 할당, Static 블록 실행</li>
 </ul>
 
 

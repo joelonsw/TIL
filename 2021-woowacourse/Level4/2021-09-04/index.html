@@ -22931,98 +22931,64 @@
 <h3 id="2021-09-04">2021-09-04<a class="headerlink" href="#2021-09-04" title="Permanent link">&para;</a></h3>
 <h2 id="db">DB 특강<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>DB 엔지니어?</strong></p>
+<li><strong>DB 엔지니어?</strong>
+    - DB 구성 및 설계
+        - DB Replication: 
+        - 재난 상황을 대비하여 Disaster Recovery 정책 수립
+    - DB 백업 및 복구
+        - CPU utilization을 보면서 비상 사태를 대비할 것
+    - DB 용량 산정
+        - scale-out: db 해당 사이즈를 여러개
+        - scale-up: db 사이즈를 크게
+    - DB 최적화 
+        - query per second를 측정하여 최적화
+    - DB 보안
+        - 접속 권한에 대한 보안 필요!
+    - DB 트러블 슈팅
+        - 현상 및 원인 파악 -&gt; 문제해결/정상화 -&gt; 원인 상세 분석 -&gt; 재발 방지 대책 수립</li>
+</ul>
 <ul>
-<li>DB 구성 및 설계<ul>
-<li>DB Replication: </li>
-<li>재난 상황을 대비하여 Disaster Recovery 정책 수립</li>
+<li><strong>서비스 특징에 따라 DB 정하기</strong>
+    - RDBMS
+        - 대표 벤더: Oracle, MySQL, PostgreSQL, SQLite
+        - 저장 구조: 테이블, 칼럼, 로우
+        - 스키마: 변경에 어려움
+        - 확장: 수직적 확장
+        - 우선사항: ACID
+    - NoSQL
+        - 대표 벤더: redis, mongoDB, casandra, HBASE
+        - 저장 구조: Document, Key-Value, Graph
+        - 스키마: 동적 변경 가능
+        - 확장: 수평적 확장
+        - 우선 사항: 유연한 사용, 확장성, BASE</li>
 </ul>
-</li>
-<li>DB 백업 및 복구<ul>
-<li>CPU utilization을 보면서 비상 사태를 대비할 것</li>
-</ul>
-</li>
-<li>DB 용량 산정<ul>
-<li>scale-out: db 해당 사이즈를 여러개</li>
-<li>scale-up: db 사이즈를 크게</li>
-</ul>
-</li>
-<li>DB 최적화 <ul>
-<li>query per second를 측정하여 최적화</li>
-</ul>
-</li>
-<li>DB 보안<ul>
-<li>접속 권한에 대한 보안 필요!</li>
-</ul>
-</li>
-<li>DB 트러블 슈팅<ul>
-<li>현상 및 원인 파악 -&gt; 문제해결/정상화 -&gt; 원인 상세 분석 -&gt; 재발 방지 대책 수립</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>서비스 특징에 따라 DB 정하기</strong></p>
 <ul>
-<li>RDBMS<ul>
-<li>대표 벤더: Oracle, MySQL, PostgreSQL, SQLite</li>
-<li>저장 구조: 테이블, 칼럼, 로우</li>
-<li>스키마: 변경에 어려움</li>
-<li>확장: 수직적 확장</li>
-<li>우선사항: ACID</li>
+<li><strong>DB Key Point</strong>
+    1. OLTP
+    2. ACID
+    3. MVCC</li>
 </ul>
-</li>
-<li>NoSQL<ul>
-<li>대표 벤더: redis, mongoDB, casandra, HBASE</li>
-<li>저장 구조: Document, Key-Value, Graph</li>
-<li>스키마: 동적 변경 가능</li>
-<li>확장: 수평적 확장</li>
-<li>우선 사항: 유연한 사용, 확장성, BASE</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>DB Key Point</strong></p>
-<ol>
-<li>OLTP</li>
-<li>ACID</li>
-<li>MVCC</li>
-</ol>
-</li>
-<li>
-<p><strong>DB 엔지니어의 미래</strong></p>
 <ul>
-<li>인프라 전반을 이해하기</li>
-<li>클라우드 &amp; 컨테이너 환경에 대한 이해</li>
-<li>DBA + 개발자 =&gt; DevOps로 나아가기</li>
-</ul>
-</li>
+<li><strong>DB 엔지니어의 미래</strong>
+    - 인프라 전반을 이해하기
+    - 클라우드 &amp; 컨테이너 환경에 대한 이해
+    - DBA + 개발자 =&gt; DevOps로 나아가기</li>
 </ul>
 <h2 id="sql-vs-nosql">SQL vs NoSQL<a class="headerlink" href="#sql-vs-nosql" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://www.youtube.com/watch?v=Q_9cFgzZr8Q</em></li>
 <li><em>참고 2: https://www.youtube.com/watch?v=5llIti9VK48</em></li>
-<li>NoSQL: Document DB, Key Value DB, GraphDB <ul>
-<li>Document DB (mongoDB)<ul>
-<li>json document로 데이터 저장</li>
-<li>데이터의 포맷이 일관될 필요 없음</li>
-</ul>
-</li>
-<li>Key Value DB (CassandraDB, DynamoDB)<ul>
-<li>많이 쓰고 개빨리 읽어야 할 때</li>
-</ul>
-</li>
-<li>Graph DB (Tao)<ul>
-<li>column, document 필요없음</li>
-<li>각 노드 사이 관계 알아야 할 때</li>
-<li>각각의 엔티티 만들고 연결관계 저장 </li>
-<li>페이스북에서 사용</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>NoSQL: Document DB, Key Value DB, GraphDB 
+    - Document DB (mongoDB)
+        - json document로 데이터 저장
+        - 데이터의 포맷이 일관될 필요 없음
+    - Key Value DB (CassandraDB, DynamoDB)
+        - 많이 쓰고 개빨리 읽어야 할 때
+    - Graph DB (Tao)
+        - column, document 필요없음
+        - 각 노드 사이 관계 알아야 할 때
+        - 각각의 엔티티 만들고 연결관계 저장 
+        - 페이스북에서 사용</li>
 <li>장점: 데이터 추가하기에 유연하다!!</li>
 </ul>
 

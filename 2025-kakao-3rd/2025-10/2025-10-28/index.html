@@ -22909,41 +22909,43 @@
 <h3 id="2025-10-28">2025-10-28<a class="headerlink" href="#2025-10-28" title="Permanent link">&para;</a></h3>
 <h2 id="typetag">TypeTag<a class="headerlink" href="#typetag" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>JVM의 타입 이레이저 문제를 해결하기 위한 스칼라 고유의 reflection 도구</li>
-<li>
-<p>컴파일 타입의 구체적인 타입 정보를 런타임까지 안전하게 배달해주는 역할</p>
+<li>컴파일 타입의 구체적인 타입 정보를 런타임까지 안전하게 배달해주는 역할</li>
+</ul>
 </li>
-<li>
-<p><strong>JVM의 Type Erasure</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>JVM의 Type Erasure</strong><ul>
 <li>JVM에서는 타입 이레이저라는 특징이 있음</li>
 <li><code>List[String]</code>과 <code>List[Int]</code>는 컴파일 시점에 서로 다른 타입이지만, 런타임에서는 정보가 모두 지워져 <code>List[Object]</code>로 보이게 됨</li>
-<li>
-<p>따라서, 런타임에는 <code>List[String]</code>과 <code>List[Int]</code>를 구분할 방법이 없음</p>
+<li>따라서, 런타임에는 <code>List[String]</code>과 <code>List[Int]</code>를 구분할 방법이 없음</li>
+</ul>
 </li>
-<li>
-<p><strong>Scala TypeTag &amp; ClassTag</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Scala TypeTag &amp; ClassTag</strong><ul>
 <li>스칼라 컴파일러가 컴파일 시점에 <code>T</code>의 정확한 타입 정보를 담은 객체(TypeTag)를 생성, 이를 런타임까지 implicit parameter로 전달</li>
 <li>이로써 런타임에 <code>T</code>의 정확한 제네릭 타임을 알아야만 하는 기능 구현시 필수</li>
 <li><code>ClassTag[T]</code>: 제네릭 정보를 제외한 최상위 클래스 정보만 있음<ul>
 <li><code>List[String]</code>/<code>List[Int]</code> -&gt; 모두 <code>List</code></li>
 </ul>
 </li>
-<li>
-<p><code>TypeTag[T]</code>: 모든 중첩된 제네릭 정보 (<code>List[Map[String, Int]]</code> 등) Full Type 정보</p>
+<li><code>TypeTag[T]</code>: 모든 중첩된 제네릭 정보 (<code>List[Map[String, Int]]</code> 등) Full Type 정보</li>
+</ul>
 </li>
-<li>
-<p><strong>TypeTag 용도</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>TypeTag 용도</strong><ul>
 <li>다음과 같이 리플렉션과 곁들여서 함께 사용
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">private</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">accessors</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">tag</span><span class="p">:</span><span class="w"> </span><span class="nc">TypeTag</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">MethodSymbol</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tag</span><span class="p">.</span><span class="n">tpe</span><span class="p">.</span><span class="n">members</span><span class="p">.</span><span class="n">collect</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">private</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">accessors</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">tag</span><span class="p">:</span><span class="w"> </span><span class="nc">TypeTag</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">MethodSymbol</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tag</span><span class="p">.</span><span class="n">tpe</span><span class="p">.</span><span class="n">members</span><span class="p">.</span><span class="n">collect</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">m</span><span class="p">:</span><span class="w"> </span><span class="nc">MethodSymbol</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">isPublic</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">isCaseAccessor</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">m</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}.</span><span class="n">toList</span>
 </code></pre></div></li>
 <li>직렬화/역직렬화 라이브러리에서도 많이 사용. JSON을 어떤 Case class로 바꿀까요?</li>
 <li>고급 타입 안정성 및 DSL에서도 쓰임</li>
+</ul>
+</li>
 </ul>
 
 

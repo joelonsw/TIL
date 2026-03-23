@@ -22912,13 +22912,11 @@
 <li><em>참고: https://hiseon.me/linux/ubuntu/dkim-settings/</em></li>
 <li><em>참고: https://meetup.toast.com/posts/248</em></li>
 <li><em>참고: https://www.cisco.com/c/ko_kr/support/docs/security/email-security-appliance/215360-best-practice-for-email-authentication.html</em></li>
-<li>
-<p><strong>DKIM 이란?</strong></p>
-<ul>
-<li>메일 발송자의 도메인과 메일의 무결성을 검증할 수 있는 기술</li>
-<li>보낸사람 주소가 위조된 경우 메일 탐지</li>
-<li>Verbling DKIM signature
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=info.verbling.com; 
+<li><strong>DKIM 이란?</strong>
+    - 메일 발송자의 도메인과 메일의 무결성을 검증할 수 있는 기술
+    - 보낸사람 주소가 위조된 경우 메일 탐지
+    - Verbling DKIM signature
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=info.verbling.com; 
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>h=content-type:from:mime-version:subject:reply-to:x-feedback-id:to; 
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>s=s1; bh=yurMcrg5W97a0bnM840AyZYyEnx4j8QZcGCRwB4r6eM=; 
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>b=qEiTpG63wwKCYlEPQ05DfLtq5OzIgvT5qgKwhqn0h6IN/3khkA7pfD5C33a9phS+MBTH 
@@ -22926,36 +22924,28 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>EFqT33dTpty4jKzhbe2YMJUfFKfP1AZ8ENQN/+GvjDufjguwBUJ0PhEZrH8NCnsheszPw9 
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>gu9Sb5abx5WsCbvoUBJtDaXgwyLDpAwwgK6H6NgPw1Zt96a531KjM7053omFk2zu872lnG 
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>uk74LtvEc5MUglVqbvHevFk74CUsxHUCaoTlKNq14UQCtVdZ3jT/R2NQwbQ3nZeg==
-</code></pre></div></li>
-<li>DKIM 검증 흐름<ul>
-<li><img alt="" src="../../images/2021-12-21-dkim-%EA%B2%80%EC%A6%9D%ED%9D%90%EB%A6%84.png" /></li>
+</code></pre></div>
+    - DKIM 검증 흐름
+        - <img alt="" src="../../images/2021-12-21-dkim-%EA%B2%80%EC%A6%9D%ED%9D%90%EB%A6%84.png" /></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>OpenDKIM 설치</strong></p>
 <ul>
-<li><code>$ sudo apt-get install opendkim opendkim-tools</code></li>
+<li><strong>OpenDKIM 설치</strong>
+    - <code>$ sudo apt-get install opendkim opendkim-tools</code></li>
 </ul>
-</li>
-<li>
-<p><strong>DKIM 이론</strong></p>
 <ul>
-<li>발신자가 발신 메시지에 암호로 서명하고, 다른 확인 메타데이터와 함께 DKIM-Signature에 포함시켜 전송</li>
-<li>발신자는 DNS에 공개키를 게시</li>
-<li>DKIM을 구현하기 위해 전송조직은 하나의 공개키쌍을 생성하고, DNS에 공개키를 TXT레코드로 게시<ul>
-<li>각 키쌍은 "selector"에서 참조</li>
-</ul>
-</li>
-<li>다음과 같이 서명<ul>
-<li>a: 서명에 사용될 알고리즘</li>
-<li>c: 정규화 체계 지정</li>
-<li>s: 선택키 또는 키 참조</li>
-<li>d: 서명 도메인</li>
-<li>h: 서명된 헤더를 나열</li>
-<li>i: 서명 사용자 id
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=info.verbling.com;
+<li><strong>DKIM 이론</strong>
+    - 발신자가 발신 메시지에 암호로 서명하고, 다른 확인 메타데이터와 함께 DKIM-Signature에 포함시켜 전송
+    - 발신자는 DNS에 공개키를 게시
+    - DKIM을 구현하기 위해 전송조직은 하나의 공개키쌍을 생성하고, DNS에 공개키를 TXT레코드로 게시
+        - 각 키쌍은 "selector"에서 참조
+    - 다음과 같이 서명
+        - a: 서명에 사용될 알고리즘
+        - c: 정규화 체계 지정
+        - s: 선택키 또는 키 참조
+        - d: 서명 도메인
+        - h: 서명된 헤더를 나열
+        - i: 서명 사용자 id
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=info.verbling.com;
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>h=content-type:from:mime-version:subject:reply-to:x-feedback-id:to;
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>s=s1; bh=yurMcrg5W97a0bnM840AyZYyEnx4j8QZcGCRwB4r6eM=;
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>b=qEiTpG63wwKCYlEPQ05DfLtq5OzIgvT5qgKwhqn0h6IN/3khkA7pfD5C33a9phS+MBTH
@@ -22963,24 +22953,18 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>EFqT33dTpty4jKzhbe2YMJUfFKfP1AZ8ENQN/+GvjDufjguwBUJ0PhEZrH8NCnsheszPw9
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>gu9Sb5abx5WsCbvoUBJtDaXgwyLDpAwwgK6H6NgPw1Zt96a531KjM7053omFk2zu872lnG
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>uk74LtvEc5MUglVqbvHevFk74CUsxHUCaoTlKNq14UQCtVdZ3jT/R2NQwbQ3nZeg==
-</code></pre></div></li>
+</code></pre></div>
+    - DKIM 서명 메시지를 수신하면 다음 DNS 쿼리를 구성해 공개키 조회
+        - selector._domainkey.cstoday.me
+        - 버블링 예시: s1._domainkey.info.verbling.com
+        - <img alt="" src="../../images/2021-12-21-verbling-dkim.PNG" /></li>
 </ul>
-</li>
-<li>DKIM 서명 메시지를 수신하면 다음 DNS 쿼리를 구성해 공개키 조회<ul>
-<li>selector._domainkey.cstoday.me</li>
-<li>버블링 예시: s1._domainkey.info.verbling.com</li>
-<li><img alt="" src="../../images/2021-12-21-verbling-dkim.PNG" /></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>드디어 성공한 DKIM</strong></p>
 <ul>
-<li>자바에서는 pem 말고 der 양식의 인증서만 읽을 수 있음</li>
-<li>따라서 파일로써 읽은 다음에 인증에 사용하도록 코드를 구현</li>
-<li>요런 갬성
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Service</span>
+<li><strong>드디어 성공한 DKIM</strong>
+    - 자바에서는 pem 말고 der 양식의 인증서만 읽을 수 있음
+    - 따라서 파일로써 읽은 다음에 인증에 사용하도록 코드를 구현
+    - 요런 갬성
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Service</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MailSenderService</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">WELCOME_MAIL_SUBJECT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;오늘의 CS를 구독해주셔서 감사합니다 🎁&quot;</span><span class="p">;</span>
@@ -23041,8 +23025,6 @@
 <a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

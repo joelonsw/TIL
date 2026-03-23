@@ -22954,79 +22954,63 @@
 <h2 id="spring">Spring에서 테스트 코드 작성하기<a class="headerlink" href="#spring" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/spring-boot-testing</em></li>
-<li>
-<p><strong><code>@SpringBootTest</code>로 통합 테스트 진행하기</strong></p>
+<li><strong><code>@SpringBootTest</code>로 통합 테스트 진행하기</strong>
+    - 다른 계층의 어플리케이션을 테스트하는데 중점 (mocking을 포함해서)
+    - 이상적으로는, 이를 단위테스트와 격리시켜 테스트를 작성해야한다. 
+    - 우선 컨테이너를 띄워서 테스트를 진행해야함
+        - <code>@SpringBootTest</code>로 전체 컨테이너 부트스트랩 가능
+        - ApplicationContext의 생성
+        - <code>@TestConfiguration</code>으로 실제 어플리케이션 컨텍스트에 사용되는 빈 말고 모킹할 수 있음
+        - <code>@MockBean</code>으로 모킹가능</li>
+</ul>
 <ul>
-<li>다른 계층의 어플리케이션을 테스트하는데 중점 (mocking을 포함해서)</li>
-<li>이상적으로는, 이를 단위테스트와 격리시켜 테스트를 작성해야한다. </li>
-<li>우선 컨테이너를 띄워서 테스트를 진행해야함<ul>
-<li><code>@SpringBootTest</code>로 전체 컨테이너 부트스트랩 가능</li>
-<li>ApplicationContext의 생성</li>
-<li><code>@TestConfiguration</code>으로 실제 어플리케이션 컨텍스트에 사용되는 빈 말고 모킹할 수 있음</li>
-<li><code>@MockBean</code>으로 모킹가능</li>
+<li><strong><code>@DataJpaTest</code>로 통합테스트</strong>
+    - 엔티티와 DB 통합테스트 가능</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong><code>@DataJpaTest</code>로 통합테스트</strong></p>
 <ul>
-<li>엔티티와 DB 통합테스트 가능</li>
+<li><strong><code>@WebMvcTest</code>로 통합테스트</strong>
+    - <code>@WebMvcTest(EmployeeRestController.class)</code> 로 단일 컨트롤러 클래스 테스트
+    - 서비스 레이어의 코드를 모킹 뚝딱해서 테스트 진행</li>
 </ul>
-</li>
-<li>
-<p><strong><code>@WebMvcTest</code>로 통합테스트</strong></p>
 <ul>
-<li><code>@WebMvcTest(EmployeeRestController.class)</code> 로 단일 컨트롤러 클래스 테스트</li>
-<li>서비스 레이어의 코드를 모킹 뚝딱해서 테스트 진행</li>
-</ul>
-</li>
-<li>
-<p><strong>기타 설정을 쉽게 해주는 어노테이션들!</strong></p>
-<ul>
-<li><code>@WebFluxTest</code> : 스프링 WebFlux 컨트롤러 테스트 지원</li>
-<li><code>@JdbcTest</code> : JPA 어플리케이션 테스트에 용이. 하나의 데이터소스 요구</li>
-<li><code>@JooqTest</code> : jOOQ 관련 테스트 </li>
-<li><code>@DataMongoTest</code> : 몽고DB 테스트</li>
-<li><code>@DataRedisTest</code> : 레디스 어플리케이션 테스트</li>
-<li><code>@DataLdapTest</code> : 인메모리 LDAP 테스트</li>
-<li><code>@RestClientTest</code> : REST client에 대한 테스트</li>
-<li><code>@JsonTest</code> : Spring 어플리케이션 컨텍스트 빈들중에 JSON 직렬화 필요한 놈 테스트</li>
-</ul>
-</li>
+<li><strong>기타 설정을 쉽게 해주는 어노테이션들!</strong>
+    - <code>@WebFluxTest</code> : 스프링 WebFlux 컨트롤러 테스트 지원
+    - <code>@JdbcTest</code> : JPA 어플리케이션 테스트에 용이. 하나의 데이터소스 요구
+    - <code>@JooqTest</code> : jOOQ 관련 테스트 
+    - <code>@DataMongoTest</code> : 몽고DB 테스트
+    - <code>@DataRedisTest</code> : 레디스 어플리케이션 테스트
+    - <code>@DataLdapTest</code> : 인메모리 LDAP 테스트
+    - <code>@RestClientTest</code> : REST client에 대한 테스트
+    - <code>@JsonTest</code> : Spring 어플리케이션 컨텍스트 빈들중에 JSON 직렬화 필요한 놈 테스트</li>
 </ul>
 <h2 id="springboot-testresttemplate">SpringBoot TestRestTemplate 알아보기<a class="headerlink" href="#springboot-testresttemplate" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/spring-boot-testresttemplate</em></li>
-<li>
-<p><strong>TestRestTemplate vs RestTemplate</strong></p>
-<ul>
-<li>모두 통합테스트 작성에 적합, HTTP API와의 통신 처리 잘함</li>
-<li>표준 메서드, 헤더, HTTP 구성과 동일하게 제공</li>
-<li>하지만 TestRestTemplate은 RestTemplate을 확장하지 않으면서 흥미로운 새 기능을 제공</li>
+<li><strong>TestRestTemplate vs RestTemplate</strong>
+    - 모두 통합테스트 작성에 적합, HTTP API와의 통신 처리 잘함
+    - 표준 메서드, 헤더, HTTP 구성과 동일하게 제공
+    - 하지만 TestRestTemplate은 RestTemplate을 확장하지 않으면서 흥미로운 새 기능을 제공</li>
 </ul>
-</li>
-<li>
-<p><strong>TestRestTemplate의 새로운 기능은 무엇인가?</strong></p>
 <ul>
-<li>기본 인증 자격 있는 생성자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>TestRestTemplate testRestTemplate
+<li><strong>TestRestTemplate의 새로운 기능은 무엇인가?</strong>
+    - 기본 인증 자격 있는 생성자
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>TestRestTemplate testRestTemplate
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> = new TestRestTemplate(&quot;user&quot;, &quot;passwd&quot;);
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ResponseEntity&lt;String&gt; response = testRestTemplate.
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  getForEntity(URL_SECURED_BY_AUTHENTICATION, String.class);
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));   
-</code></pre></div></li>
-<li>HttpClientOption 있는 생성자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>TestRestTemplate testRestTemplate = new TestRestTemplate(&quot;user&quot;, 
+</code></pre></div>
+    - HttpClientOption 있는 생성자
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>TestRestTemplate testRestTemplate = new TestRestTemplate(&quot;user&quot;, 
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;passwd&quot;, TestRestTemplate.HttpClientOption.ENABLE_COOKIES);
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ResponseEntity&lt;String&gt; response = testRestTemplate.
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  getForEntity(URL_SECURED_BY_AUTHENTICATION, String.class);
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>assertThat(response.getStatusCode(), equalTo(HttpStatus.OK))
-</code></pre></div></li>
-<li>자격을 얻어오는 새로운 방법
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>TestRestTemplate testRestTemplate = new TestRestTemplate();
+</code></pre></div>
+    - 자격을 얻어오는 새로운 방법
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>TestRestTemplate testRestTemplate = new TestRestTemplate();
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ResponseEntity&lt;String&gt; response = testRestTemplate.withBasicAuth(
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;user&quot;, &quot;passwd&quot;).getForEntity(URL_SECURED_BY_AUTHENTICATION, 
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  String.class);
@@ -23034,51 +23018,35 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="_1">레거시 코드<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>소프트웨어의 존재 가치</strong></p>
+<li><strong>소프트웨어의 존재 가치</strong>
+    - 사용자를 위해 도메인에 관련된 문제 해결하는 능력
+    - 당면한 문제를 해결하지 못하는 SW는 실패한 SW. 
+    - 얼마나 빠른가, 얼마나 많이 처리할 수 있는가, 얼마나 많은 사람이 붙어서 사용할 수 있는가는 나중이야기!</li>
+</ul>
 <ul>
-<li>사용자를 위해 도메인에 관련된 문제 해결하는 능력</li>
-<li>당면한 문제를 해결하지 못하는 SW는 실패한 SW. </li>
-<li>얼마나 빠른가, 얼마나 많이 처리할 수 있는가, 얼마나 많은 사람이 붙어서 사용할 수 있는가는 나중이야기!</li>
+<li><strong>기존의 개발</strong>
+    - DB 종속적 어플리케이션
+    - DB 스키마 정해지면 모든 코드 결정</li>
 </ul>
-</li>
-<li>
-<p><strong>기존의 개발</strong></p>
 <ul>
-<li>DB 종속적 어플리케이션</li>
-<li>DB 스키마 정해지면 모든 코드 결정</li>
+<li><strong>Anemic Domain Model</strong>
+    - 빈약한 도메인 모델 
+    - 객체 지향의 Object의 상태와 행위는 없음
+    - 그저 데이터만 가지는 데이터홀더 개념의 객체들,,,
+    - 구조적인 한계들은 과도한 서비스 레이어의 사용을 부추김</li>
 </ul>
-</li>
-<li>
-<p><strong>Anemic Domain Model</strong></p>
 <ul>
-<li>빈약한 도메인 모델 </li>
-<li>객체 지향의 Object의 상태와 행위는 없음</li>
-<li>그저 데이터만 가지는 데이터홀더 개념의 객체들,,,</li>
-<li>구조적인 한계들은 과도한 서비스 레이어의 사용을 부추김</li>
+<li><strong>Business Object</strong>
+    - 비즈니스가 분산되어 구현된 오브젝트
+    - 동작을 실행하거나 관리하는 클래스
+    - 클라이언트 데이터에 대한 요청을 DAO에 호출하는 역할도 함</li>
 </ul>
-</li>
-<li>
-<p><strong>Business Object</strong></p>
 <ul>
-<li>비즈니스가 분산되어 구현된 오브젝트</li>
-<li>동작을 실행하거나 관리하는 클래스</li>
-<li>클라이언트 데이터에 대한 요청을 DAO에 호출하는 역할도 함</li>
-</ul>
-</li>
-<li>
-<p><strong>Big Service Layer</strong></p>
-<ul>
-<li>거대한 서비스 레이어 != 객체지향의 설계 원칙<ul>
-<li>메인 로직 여러곳에 산재하고, 코드의 중복과 오브젝트 재활용성 떨어뜨림</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Big Service Layer</strong>
+    - 거대한 서비스 레이어 != 객체지향의 설계 원칙
+        - 메인 로직 여러곳에 산재하고, 코드의 중복과 오브젝트 재활용성 떨어뜨림</li>
 </ul>
 
 

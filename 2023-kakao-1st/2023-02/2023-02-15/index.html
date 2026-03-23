@@ -22909,30 +22909,30 @@
 <h3 id="2023-02-15">2023-02-15<a class="headerlink" href="#2023-02-15" title="Permanent link">&para;</a></h3>
 <h2 id="ctecommon-table-expression">CTE(Common Table Expression)<a class="headerlink" href="#ctecommon-table-expression" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><em>참고: https://jjon.tistory.com/entry/MySQL-80-%EC%8B%A0%EA%B8%B0%EB%8A%A5-CTECommon-Table-Expression-%ED%99%9C%EC%9A%A9</em>
+<li><em>참고: https://jjon.tistory.com/entry/MySQL-80-%EC%8B%A0%EA%B8%B0%EB%8A%A5-CTECommon-Table-Expression-%ED%99%9C%EC%9A%A9</em>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">WITH</span><span class="w"> </span><span class="n">GDATA</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">TEST</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">20</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">TEST</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;합계&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;총 레코드 수&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">TEST</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;TEST 레코드수&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">TEST</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;평균&#39;</span><span class="w"> </span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">GDATA</span><span class="p">;</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>여기서 GDATA란?</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>여기서 GDATA란?</strong><ul>
 <li>Common Table Expression으로, 쿼리문 내에서 참조할 수 있는 임시 집합을 생성</li>
 <li>해당 테이블에서는 AS 키워드 뒤에 괄호로 묶인 쿼리로 정의됨</li>
-<li>
-<p>GDATA는 일부 데이터가 포함된 임시 테이블 생성됨</p>
+<li>GDATA는 일부 데이터가 포함된 임시 테이블 생성됨</li>
+</ul>
 </li>
-<li>
-<p><strong>CTE?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>CTE?</strong><ul>
 <li>서브 쿼리로 쓰이는 파생 테이블과 비슷한 개념</li>
 <li>권한이 필요없고 하나의 쿼리문이 끝날때 까지만 지속되는 일회성 테이블</li>
 <li>복잡한 쿼리문에서 코드의 가독성과 재사용성을 위해 파생 테이블 대신 사용하기에 유용</li>
+</ul>
+</li>
 </ul>
 
 

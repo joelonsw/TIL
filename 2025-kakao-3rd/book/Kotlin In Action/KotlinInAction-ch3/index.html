@@ -23033,7 +23033,7 @@
 <h2 id="kotlin-in-action-ch3">Kotlin In Action - ch3. 함수 정의와 호출<a class="headerlink" href="#kotlin-in-action-ch3" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 코틀린에서 컬렉션 만들기<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>선언 방법 및 생성 Java Collection</strong></li>
+<li><strong>선언 방법 및 생성 Java Collection</strong><ul>
 <li>불변)<ul>
 <li><code>listOf</code>: <code>java.util.Arrays.ArrayList</code> (크기 변경 불가)</li>
 <li><code>setOf</code>: <code>java.util.LinkedHashSet</code> (RO)</li>
@@ -23047,9 +23047,11 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="32">3.2 함수를 호출하기 쉽게 만들기<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>편의 기능</strong></li>
+<li><strong>편의 기능</strong><ul>
 <li>toString을 기본으로 제공</li>
 <li>인자를 이름 붙여서 제공할 수 있음 (스칼라와 같이)</li>
 <li>코틀린에서는 함수 선언에서 파라미터 기본값을 지정할 수 있어 오버로드 중 상당수 피할 수 있음</li>
@@ -23059,26 +23061,29 @@
 </li>
 <li>스칼라와 같이 코틀린에서도 하나의 파일에 여러 클래스, 인터페이스 정의 가능</li>
 </ul>
+</li>
+</ul>
 <h3 id="33">3.3 메서드를 다른 클래스에 추가: 확장 함수와 확장 프로퍼티<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>확장 함수</strong></li>
+<li><strong>확장 함수</strong><ul>
 <li>클래스의 멤버 메서드인 것 처럼 호출할 수 있지만, 그 클래스 밖에 선언된 함수</li>
 <li>하지만, 캡슐화를 깬 private/protected 멤버 사용은 못함</li>
 <li>내부적으로 수신 객체를 첫번째 인자로 받는 정적 메서드</li>
-<li>
-<p><code>char c = StringUtilKt.lastChar("Java")</code></p>
+<li><code>char c = StringUtilKt.lastChar("Java")</code></li>
+</ul>
 </li>
-<li>
-<p><strong>확장 프로퍼티</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>확장 프로퍼티</strong><ul>
 <li>클래스의 멤버 변수인것 처럼 호출하지만, 그 클래스 밖에 선언됨</li>
 <li><code>get()</code>이 필수. Backing Field (프로퍼티의 값을 실제로 저장하는 보이지 않는 변수) 가 없기 때문</li>
 <li>이미 컴파일된 String 클래스에 특정한 저장공간을 추가할 수 없어.</li>
-<li>
-<p>따라서 <code>get()</code>을 통해 이 값을 요청하면, 이 로직을 실행하여 계산해라 지시</p>
+<li>따라서 <code>get()</code>을 통해 이 값을 요청하면, 이 로직을 실행하여 계산해라 지시</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">fun</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="nf">lastChar</span><span class="p">():</span><span class="w"> </span><span class="kt">Char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">[</span><span class="k">this</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="o">]</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="nf">lastChar</span><span class="p">:</span><span class="w"> </span><span class="kt">Char</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">[</span><span class="k">this</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="o">]</span>
@@ -23091,32 +23096,37 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="na">lastChar</span><span class="p">())</span><span class="w"> </span><span class="c1">// n</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="na">lastChar</span><span class="p">)</span><span class="w"> </span><span class="c1">// n</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="34">3.4 컬렉션 처리: 가변 길이 인자, 중위 함수 호출, 라이브러리 지원<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>중위 함수</strong></li>
+<li><strong>중위 함수</strong><ul>
 <li>infix 예약어를 통해 함수를 선언하면 중위 호출에 사용할 수 있음</li>
-<li>
-<p><code>infix fun Any.to(other: Any) = Pair(this, other)</code></p>
+<li><code>infix fun Any.to(other: Any) = Pair(this, other)</code></li>
+</ul>
 </li>
-<li>
-<p><strong>구조 분해할당</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>구조 분해할당</strong><ul>
 <li><code>for((index, element) in collection.withIndex())</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="35">3.5 문자열과 정규식 다루기<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>문자열 나누기</strong></li>
+<li><strong>문자열 나누기</strong><ul>
 <li>regex를 통해 나눌 수 있고, 문자 자체를 줘서 이를 기반으로 나눌 수 있음</li>
 <li>` 3개를 가지고 멀티라인 String 표현 가능</li>
 </ul>
+</li>
+</ul>
 <h3 id="36">3.6 코드 깔끔하게 다듬기: 로컬 함수와 확장<a class="headerlink" href="#36" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>로컬 함수</strong></li>
+<li><strong>로컬 함수</strong><ul>
 <li>함수 내부에 함수를 선언할 수 있음 (스칼라 처럼)</li>
 <li>한단계 정도만 내포해주세요</li>
+</ul>
+</li>
 </ul>
 
 

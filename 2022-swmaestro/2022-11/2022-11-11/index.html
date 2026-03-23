@@ -22931,33 +22931,35 @@
 <h3 id="2022-11-11">2022-11-11<a class="headerlink" href="#2022-11-11" title="Permanent link">&para;</a></h3>
 <h2 id="transactionalreadonly-true"><code>@Transactional(readOnly = true)</code><a class="headerlink" href="#transactionalreadonly-true" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>문제 상황</strong></li>
+<li><strong>문제 상황</strong><ul>
 <li>repository.save() 하는 메서드 로직에 <code>@Transactional</code> 을 빼먹은 상황</li>
 <li>클래스 단위에는 <code>@Transactional(readOnly=true)</code>가 작성되어 있음</li>
-<li>
-<p>update 쿼리가 날라가는데 이때 서비스 테스트가 안터짐! =&gt; 그냥 쓱 insert 쿼리 날라감</p>
+<li>update 쿼리가 날라가는데 이때 서비스 테스트가 안터짐! =&gt; 그냥 쓱 insert 쿼리 날라감</li>
+</ul>
 </li>
-<li>
-<p><strong>뭐가 문제였을까</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>뭐가 문제였을까</strong><ul>
 <li>h2 데이터베이스를 가지고 테스트를 하면 테스트가 통과함</li>
 <li>로컬 도커에 mysql을 가지고 테스트를 진행하면 테스트가 터짐</li>
-<li>
-<p><code>@Transactional(readOnly=true)</code> 자체가 데이터베이스에 따라 다르게 추상화 되는구나</p>
+<li><code>@Transactional(readOnly=true)</code> 자체가 데이터베이스에 따라 다르게 추상화 되는구나</li>
+</ul>
 </li>
-<li>
-<p><strong>해결 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>해결 방법</strong><ul>
 <li><em>참고: https://ssisksl77.gitlab.io/code-that-talks/220526-spring-transactional-readonly.html</em></li>
 <li>h2에서는 <code>@Transactional(readOnly=true)</code>가 안 먹힌다</li>
 <li>원래 readOnly가 쓰여있다고 무조건 write를 막는 것은 아님</li>
 <li>트랜잭션 매니저가 readOnly 힌트를 사용하지 않을 수 있음</li>
 <li></li>
-<li>
-<p><strong>HibernateJpaDialect</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>HibernateJpaDialect</strong><ul>
 <li>트랜잭션 시작시 호출되는 함수
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Override</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Override</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">beginTransaction</span><span class="p">(</span><span class="n">EntityManager</span><span class="w"> </span><span class="n">entityManager</span><span class="p">,</span><span class="w"> </span><span class="n">TransactionDefinition</span><span class="w"> </span><span class="n">definition</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">PersistenceException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="p">,</span><span class="w"> </span><span class="n">TransactionException</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -23008,63 +23010,67 @@
 <a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="psa-portable-service-abstraction">PSA (Portable Service Abstraction)<a class="headerlink" href="#psa-portable-service-abstraction" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=P3vzrqADl8I</em></li>
 <li><em>참고: https://atoz-develop.tistory.com/entry/Spring-%EC%8A%A4%ED%94%84%EB%A7%81-PSA</em></li>
-<li><strong>정의</strong></li>
+<li><strong>정의</strong><ul>
 <li>[추상화 계층]을 사용해서 [어떤 기술을 내부에 숨기고] 개발자에게 편의성을 제공해주는 것!</li>
 <li>코드를 거의 변경하지 않고 스프링이 다른 것 쓸 수 있도록 지원</li>
-<li>
-<p>서비스가 추상화 되어있다 == 서비스의 내용을 모르더라도 해당 서비스를 이용할 수 있다는 것</p>
-<ul>
+<li>서비스가 추상화 되어있다 == 서비스의 내용을 모르더라도 해당 서비스를 이용할 수 있다는 것<ul>
 <li>JDBC Driver 사용해 DB 접근하더라도 JDBC Driver가 어떻게 구현되어 있는지는 관심 X</li>
 <li>핵심적인 요소만 개발자에게 제공하면 됨!</li>
 </ul>
 </li>
-<li>
-<p><strong>예시와 함께 이해하기</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>예시와 함께 이해하기</strong><ul>
 <li>Portable Service Abstraction</li>
 <li>비즈니스 로직의 수정없이 언제든지 변경할 수 있음!</li>
-<li>
-<p>Spring PSA는 확장에는 열려있고 수정에는 닫혀있는 OCP의 대표격!</p>
+<li>Spring PSA는 확장에는 열려있고 수정에는 닫혀있는 OCP의 대표격!</li>
+</ul>
 </li>
-<li>
-<p><strong>구현 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>구현 방법</strong><ul>
 <li><img alt="" src="../../images/2022-11-11-psa2.png" /></li>
 <li>여러 서비스를 비즈니스 로직을 수정하지 않고 교체할 수 있도록 하는 것</li>
 <li>추상화 계층의 인터페이스인 PlatformTransactionManager 인터페이스를 두고 이를 구현하는 다양한 서비스의 비즈니스 로직을 추상화 해두었다는 것</li>
 <li>개발자는 그냥 PlatformTransactionManager를 선언해서 이용하면 되고, 언제든지 이를 구현하는 다른 구현체로 변경 가능</li>
-<li>
-<p>트랜잭션, 톰캣/네티 등도 개발자의 코드는 건들지 않고 이를 구동하는 추상화된 서비스를 통해 구동(PSA)시키기에 뚝딱 처리가능</p>
+<li>트랜잭션, 톰캣/네티 등도 개발자의 코드는 건들지 않고 이를 구동하는 추상화된 서비스를 통해 구동(PSA)시키기에 뚝딱 처리가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Spring Web MVC</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Spring Web MVC</strong><ul>
 <li><code>@Controller</code>와 <code>@GetMapping</code>, <code>@PostMapping</code> 만 있으면 요청을 매핑할 수 있는 컨트롤러 역할 수행</li>
 <li>HttpServlet 상속받아 doGet(), doPost() 같은거 안해도 됨! =&gt; 서블릿 사용 기술의 추상화!</li>
 <li>심지어 Spring Web MVC 코드는 그대로 두고, 톰캣 말고 완전히 다른 기술 스택으로 실행하는 것도 가능</li>
-<li>
-<p>Webflux 의존성을 받아 톰캣 말고 netty 기반의 실행도 가능!</p>
+<li>Webflux 의존성을 받아 톰캣 말고 netty 기반의 실행도 가능!</li>
+</ul>
 </li>
-<li>
-<p><strong>Spring Transaction</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Spring Transaction</strong><ul>
 <li>스프링 트랜잭션도 PSA로 로직 추상화시켜 혜택 제공받을 수 있다!<ul>
 <li>JDBC: DatasourceTransactionmanager</li>
 <li>JPA: JpaTransactionManager</li>
 <li>Hibernate: HibernateTransactionManager</li>
 </ul>
 </li>
-<li>
-<p>코드는 변경하지 않은채, 실제 동작 구현체는 스프링이 바꿔낄 수 있는 것!</p>
+<li>코드는 변경하지 않은채, 실제 동작 구현체는 스프링이 바꿔낄 수 있는 것!</li>
+</ul>
 </li>
-<li>
-<p><strong>Spring Cache</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Spring Cache</strong><ul>
 <li>JCacheManager, ConcurrentMapCacheManager, EhCacheCacheManager와 같은 여러가지 구현체 사용 가능</li>
+</ul>
+</li>
 </ul>
 
 

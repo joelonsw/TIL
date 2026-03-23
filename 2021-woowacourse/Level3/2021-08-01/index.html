@@ -22954,47 +22954,37 @@
 <h2 id="loblarge-object">LOB(Large Object)<a class="headerlink" href="#loblarge-object" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://stepping.tistory.com/30</em></li>
-<li>LOB: 텍스트, 그래픽, 이미지, 비디오, 사운드 등 구조화 되지 않은 대형 데이터 저장에 사용<ul>
-<li>CLOB: 문자 대형 객체 (보통 4000자를 넘어가는 경우)</li>
-<li>BLOB: 이진 대형 객체</li>
-<li>NCLOB: 내셔널 문자 대형 객체</li>
-<li>BFILE: OS에 저장되는 이진 파일의 이름과 위치를 저장</li>
-</ul>
-</li>
+<li>LOB: 텍스트, 그래픽, 이미지, 비디오, 사운드 등 구조화 되지 않은 대형 데이터 저장에 사용
+    - CLOB: 문자 대형 객체 (보통 4000자를 넘어가는 경우)
+    - BLOB: 이진 대형 객체
+    - NCLOB: 내셔널 문자 대형 객체
+    - BFILE: OS에 저장되는 이진 파일의 이름과 위치를 저장</li>
 </ul>
 <h2 id="text-vs-varchar">TEXT vs VARCHAR<a class="headerlink" href="#text-vs-varchar" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://stackoverflow.com/questions/25300821/difference-between-varchar-and-text-in-mysql/25301046#25301046</em></li>
-<li>TEXT<ul>
-<li>max-size-limit 65535</li>
-<li>index의 일부로 사용 X</li>
-<li>디스크에 저장해서 느림</li>
-<li>디스크 공간의 (2+저장텍스트) 바이트</li>
-</ul>
-</li>
-<li>VARCHAR<ul>
-<li>max-size-limit 1~65535 사이에서 지정 가능</li>
-<li>index의 일부 사용 O</li>
-<li>메모리에 저장해서 빠름</li>
-<li>(1+저장텍스트(&lt;=255))) 혹은 (2+저장텍스트(256~65535))</li>
-</ul>
-</li>
+<li>TEXT
+    - max-size-limit 65535
+    - index의 일부로 사용 X
+    - 디스크에 저장해서 느림
+    - 디스크 공간의 (2+저장텍스트) 바이트</li>
+<li>VARCHAR
+    - max-size-limit 1~65535 사이에서 지정 가능
+    - index의 일부 사용 O
+    - 메모리에 저장해서 빠름
+    - (1+저장텍스트(&lt;=255))) 혹은 (2+저장텍스트(256~65535))</li>
 </ul>
 <h2 id="service-transactional">Service 테스트에 <code>@Transactional</code> 붙는 이유?<a class="headerlink" href="#service-transactional" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>EntityManager를 사용하여 flush(), clear()를 사용한다</p>
-<ul>
-<li>만약 transaction이 없는 상태에서 해당 메서드를 호출하면 다음과 같은 에러
-<code>No EntityManager with actual transaction available for current thread - cannot reliably process 'flush' call</code></li>
+<li>EntityManager를 사용하여 flush(), clear()를 사용한다
+    - 만약 transaction이 없는 상태에서 해당 메서드를 호출하면 다음과 같은 에러
+    <code>No EntityManager with actual transaction available for current thread - cannot reliably process 'flush' call</code></li>
 </ul>
-</li>
-<li>
-<p>또한 객체를 조회하고 가져와서 테스트 코드에서 그 안의 내용물이 같은지 검사</p>
 <ul>
-<li>Lazy Loading의 경우 프록시만을 반환함</li>
-<li>트랜잭션 끊겨서 그 안의 내용물 쿼리날려 가져올 방법이 없음
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>failed to lazily initialize a collection of role: com.wooteco.nolto.feed.domain.Feed.feedTechs, could not initialize proxy - no Session
+<li>또한 객체를 조회하고 가져와서 테스트 코드에서 그 안의 내용물이 같은지 검사
+    - Lazy Loading의 경우 프록시만을 반환함
+    - 트랜잭션 끊겨서 그 안의 내용물 쿼리날려 가져올 방법이 없음
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>failed to lazily initialize a collection of role: com.wooteco.nolto.feed.domain.Feed.feedTechs, could not initialize proxy - no Session
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.wooteco.nolto.feed.domain.Feed.feedTechs, could not initialize proxy - no Session
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    at org.hibernate.collection.internal.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:606)
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    at org.hibernate.collection.internal.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:218)
@@ -23003,8 +22993,6 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    at org.hibernate.collection.internal.PersistentBag.iterator(PersistentBag.java:387)
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    at java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1821)
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

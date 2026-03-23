@@ -23124,7 +23124,7 @@
 </ul>
 <h3 id="_1">고차 함수<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>함수를 파라미터로 받거나, 함수를 결과값으로 리턴하거나</li>
 <li>함수 자체를 First Class Value (일급 객체)<ul>
 <li>함수를 ㄹㅇ 일반 값처럼 다룰 수 있어야 함</li>
@@ -23132,37 +23132,36 @@
 </ul>
 </li>
 <li>일상적인 예 <code>map</code>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">salaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span><span class="w"> </span><span class="mi">70000</span><span class="p">,</span><span class="w"> </span><span class="mi">40000</span><span class="p">)</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">salaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span><span class="w"> </span><span class="mi">70000</span><span class="p">,</span><span class="w"> </span><span class="mi">40000</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">doubleSalary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">newSalaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">salaries</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">doubleSalary</span><span class="p">)</span><span class="w"> </span><span class="c1">// List(40000, 140000, 80000)</span>
 </code></pre></div></li>
-<li>
-<p>익명함수로 리팩터링도 가능 (심지어 괴랄하게도 가능) 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">salaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span><span class="w"> </span><span class="mi">70000</span><span class="p">,</span><span class="w"> </span><span class="mi">40000</span><span class="p">)</span>
+<li>익명함수로 리팩터링도 가능 (심지어 괴랄하게도 가능) 
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">salaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span><span class="w"> </span><span class="mi">70000</span><span class="p">,</span><span class="w"> </span><span class="mi">40000</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">newSalaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">salaries</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// List(40000, 140000, 80000)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">newSalaries2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">salaries</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div></p>
-<ul>
+</code></pre></div><ul>
 <li>어떤 타입이 파라미터로 올지 스칼라 컴파일러는 알고 있기에 <code>_</code>를 통해 넘겨주세요</li>
 </ul>
 </li>
-<li>
-<p><strong>메서드를 함수로 강제 변환</strong></p>
+</ul>
 </li>
-<li>
-<p><code>convertCtoF</code> 를 <code>x =&gt; convertCtoF(x)</code> 로 변환
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WeeklyWeatherForecast</span><span class="p">(</span><span class="n">temparatures</span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Double</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>메서드를 함수로 강제 변환</strong><ul>
+<li><code>convertCtoF</code> 를 <code>x =&gt; convertCtoF(x)</code> 로 변환
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WeeklyWeatherForecast</span><span class="p">(</span><span class="n">temparatures</span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Double</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">convertCtoF</span><span class="p">(</span><span class="n">temp</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">32</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">forecastInFahrenheit</span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Double</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temparatures</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">convertCtoF</span><span class="p">)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>고차함수 쓰는 이유</strong></p>
-</li>
-<li>
-<p>중복되는 코드를 고차함수를 통해 줄일 수 있다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">SalaryRaiser</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>고차함수 쓰는 이유</strong><ul>
+<li>중복되는 코드를 고차함수를 통해 줄일 수 있다
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">SalaryRaiser</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">promotion</span><span class="p">(</span><span class="n">salaries</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Double</span><span class="p">],</span><span class="w"> </span><span class="n">promotionFunction</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Double</span><span class="p">):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Double</span><span class="p">]</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">salaries</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">promotionFunction</span><span class="p">)</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -23175,10 +23174,12 @@
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">hugePromotion</span><span class="p">(</span><span class="n">salaries</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Double</span><span class="p">]):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Double</span><span class="p">]</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="n">promotion</span><span class="p">(</span><span class="n">salaries</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">salary</span><span class="p">)</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>함수를 리턴하는 함수</strong>
+</ul>
+<ul>
+<li><strong>함수를 리턴하는 함수</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">urlBuilder</span><span class="p">(</span><span class="n">ssl</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="p">,</span><span class="w"> </span><span class="n">domainName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="p">(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ssl</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;https://&quot;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s">&quot;http://&quot;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="p">(</span><span class="n">endpoint</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">s&quot;</span><span class="si">$</span><span class="n">schema</span><span class="si">$</span><span class="n">domainName</span><span class="s">/</span><span class="si">$</span><span class="n">endpoint</span><span class="s">?</span><span class="si">$</span><span class="n">query</span><span class="s">&quot;</span>
@@ -23189,14 +23190,13 @@
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="kd">val</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;users&quot;</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kd">val</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;id=1&quot;</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="kd">val</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getURL</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;https://www.example.com/users?id=1&quot;</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="_2">중첩 함수<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>메서드를 중첩시켜 메서드를 정의할 수 있다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">fact</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">accumulator</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">accumulator</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="n">fact</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">accumulator</span><span class="p">)</span>
@@ -23208,17 +23208,17 @@
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">println</span><span class="p">(</span><span class="s">&quot;Factorial of 3: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="multiple-parameter-list">Multiple Parameter List<a class="headerlink" href="#multiple-parameter-list" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>메서드는 파라미터 파라미터 리스트를 가질 수 있음</li>
-<li>
-<p>Iterable trait를 봐보자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Iterable</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<li>Iterable trait를 봐보자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Iterable</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">foldLeft</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
-</code></pre></div></p>
-<ul>
+</code></pre></div><ul>
 <li><code>foldLeft</code>는 두 파라미터 함수 op를 초기값 z에 적용 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">foldLeft</span><span class="p">(</span><span class="mi">0</span><span class="p">)((</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
@@ -23226,11 +23226,13 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>예시</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>예시</strong><ul>
 <li>타입추론 할 수 있도록 써주세요
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foldLeft1</span><span class="p">[</span><span class="nc">A</span><span class="p">,</span><span class="w"> </span><span class="nc">B</span><span class="p">](</span><span class="n">as</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">],</span><span class="w"> </span><span class="n">b0</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">???</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foldLeft1</span><span class="p">[</span><span class="nc">A</span><span class="p">,</span><span class="w"> </span><span class="nc">B</span><span class="p">](</span><span class="n">as</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">],</span><span class="w"> </span><span class="n">b0</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">???</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1">// 이런거 안대! 타입추론 파토남</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">notPossible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foldLeft1</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="w"> </span>
@@ -23240,14 +23242,17 @@
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">secondWay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foldLeft1</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="case-class">Case Class<a class="headerlink" href="#case-class" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>불변 데이터 모델링에 유용</p>
+<li><strong>개요</strong><ul>
+<li>불변 데이터 모델링에 유용</li>
+</ul>
 </li>
-<li>
-<p><strong>케이스 클래스 정의</strong>
+</ul>
+<ul>
+<li><strong>케이스 클래스 정의</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// 정의하는 방법</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Book</span><span class="p">(</span><span class="n">isbn</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">frankenstein</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Book</span><span class="p">(</span><span class="s">&quot;987-93939212&quot;</span><span class="p">)</span>
@@ -23258,38 +23263,40 @@
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">println</span><span class="p">(</span><span class="n">message1</span><span class="p">.</span><span class="n">sender</span><span class="p">)</span><span class="w"> </span><span class="c1">// joel610@naver.com</span>
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">message1</span><span class="p">.</span><span class="n">sender</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;joel610naver@gmail.com&quot;</span><span class="w"> </span><span class="c1">// 안대! 내부적으로 val 쓰거든</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>비교</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>비교</strong><ul>
 <li>케이스 클래스 인스턴스는 레퍼런스로 비교 안해</li>
-<li>
-<p>구조 그 자체로 비교됨
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">recipient</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
+<li>구조 그 자체로 비교됨
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">recipient</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">message1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="s">&quot;joel610@naver.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;luckyys610@unist.ac.kr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello!&quot;</span><span class="p">)</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">message2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="s">&quot;joel610@naver.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;luckyys610@unist.ac.kr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello!&quot;</span><span class="p">)</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">message2</span><span class="w"> </span><span class="c1">// true</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>복제</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>복제</strong><ul>
 <li><code>copy</code> 메서드를 통해서는 안의 인스턴스 변수 얕은 복사가 됨
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">recipient</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">recipient</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">message1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="s">&quot;joel610@naver.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;luckyys610@unist.ac.kr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello!&quot;</span><span class="p">)</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">message2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message1</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">sender</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message1</span><span class="p">.</span><span class="n">recipient</span><span class="p">,</span><span class="w"> </span><span class="n">recipient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;joel.jo@kakaocorp.com&quot;</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="_3">패턴 매칭<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>자바의 switch와 같아</li>
-<li>
-<p>if-else 대신 써볼래요?</p>
+<li>if-else 대신 써볼래요?</li>
+</ul>
 </li>
-<li>
-<p><strong>문법</strong>
+</ul>
+<ul>
+<li><strong>문법</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">util</span><span class="p">.</span><span class="nc">Random</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Random</span><span class="p">.</span><span class="n">nextInt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -23300,10 +23307,10 @@
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;two&quot;</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;other&quot;</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>활용</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>활용</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">sealed</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="nc">Notification</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Email</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Notification</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SMS</span><span class="p">(</span><span class="n">caller</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Notification</span>
@@ -23324,14 +23331,12 @@
 <a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
 <a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="n">println</span><span class="p">(</span><span class="n">showNotification</span><span class="p">(</span><span class="n">someSms</span><span class="p">))</span>
 <a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="n">println</span><span class="p">(</span><span class="n">showNotification</span><span class="p">(</span><span class="n">someVoiceRecording</span><span class="p">))</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>패턴 가드</strong></p>
-</li>
-<li>
-<p>boolean expresion을 통해 조건을 걸어 패턴 가드를 걸 수 있다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">showImportantNotification</span><span class="p">(</span><span class="n">notification</span><span class="p">:</span><span class="w"> </span><span class="nc">Notification</span><span class="p">,</span><span class="w"> </span><span class="n">importantPeopleInfo</span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>패턴 가드</strong><ul>
+<li>boolean expresion을 통해 조건을 걸어 패턴 가드를 걸 수 있다
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">showImportantNotification</span><span class="p">(</span><span class="n">notification</span><span class="p">:</span><span class="w"> </span><span class="nc">Notification</span><span class="p">,</span><span class="w"> </span><span class="n">importantPeopleInfo</span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="n">notification</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nc">Email</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">importantPeopleInfo</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">sender</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span><span class="s">&quot;You got an email from special someone!&quot;</span>
@@ -23348,14 +23353,14 @@
 <a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
 <a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="n">println</span><span class="p">(</span><span class="n">showImportantNotification</span><span class="p">(</span><span class="n">importantSms</span><span class="p">,</span><span class="w"> </span><span class="n">importantPeopleInfo</span><span class="p">))</span>
 <a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="n">println</span><span class="p">(</span><span class="n">showImportantNotification</span><span class="p">(</span><span class="n">importantEmail</span><span class="p">,</span><span class="w"> </span><span class="n">importantPeopleInfo</span><span class="p">))</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>타입만 가지고도 휘뚜루 마뚜루</strong></p>
-</li>
-<li>
-<p>타입으로만 매칭 시켜서 액션시킬 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">sealed</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="nc">Device</span>
+</ul>
+<ul>
+<li><strong>타입만 가지고도 휘뚜루 마뚜루</strong><ul>
+<li>타입으로만 매칭 시켜서 액션시킬 수 있음
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">sealed</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="nc">Device</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Phone</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Device</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">screenOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Turning screen Off&quot;</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">}</span>
@@ -23368,34 +23373,36 @@
 <a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="nc">Phone</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">screenOff</span>
 <a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">c</span><span class="p">:</span><span class="w"> </span><span class="nc">Computer</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">screenSaverOn</span>
 <a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Sealed Types</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Sealed Types</strong><ul>
 <li><code>sealed</code> 키워드가 있다면, 해당 trait/abstract class의 자식은 같은 파일내에서만 정의해야해!</li>
 <li>이러면 match 같은거 쓸 때 다른 곳에 자식없다는게 명확해지니 개꿀이겠지?</li>
 </ul>
+</li>
+</ul>
 <h3 id="_4">싱글턴 오브젝트<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>최초 참조시에 lazy init</li>
 <li>딱 하나만 만들어짐</li>
-<li>
-<p>Java의 static이랑 느낌이 비슷</p>
+<li>Java의 static이랑 느낌이 비슷</li>
+</ul>
 </li>
-<li>
-<p><strong>문법</strong></p>
-</li>
-<li>
-<p><code>object</code> 키워드
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">package</span><span class="w"> </span><span class="n">logging</span>
+</ul>
+<ul>
+<li><strong>문법</strong><ul>
+<li><code>object</code> 키워드
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">package</span><span class="w"> </span><span class="n">logging</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">object</span><span class="w"> </span><span class="nc">Logger</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">info</span><span class="p">(</span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;INFO: </span><span class="si">$</span><span class="n">message</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">}</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">logging</span><span class="p">.</span><span class="nc">Logger</span><span class="p">.</span><span class="n">info</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">logging</span><span class="p">.</span><span class="nc">Logger</span><span class="p">.</span><span class="n">info</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Project</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">daysToComplete</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
@@ -23404,14 +23411,15 @@
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">project2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Project</span><span class="p">(</span><span class="s">&quot;Website Redesign&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">  </span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Created Projects&quot;</span><span class="p">)</span>
 <a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Companion objects</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Companion objects</strong><ul>
 <li>클래스와 같은 이름의 오브젝트(싱글턴)을 companion object 라고 부름</li>
 <li>오브젝트와 같은 이름의 클래스를 companion class 라고 부름
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">math</span><span class="p">.</span><span class="n">pow</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">math</span><span class="p">.</span><span class="n">pow</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">(</span><span class="n">radius</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="k">import</span><span class="w"> </span><span class="nc">Circle</span><span class="p">.</span><span class="n">_</span>
@@ -23426,7 +23434,7 @@
 <a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="n">circle1</span><span class="p">.</span><span class="n">area</span>
 </code></pre></div></li>
 <li>companion object에 factory method를 넣어둘 수도 있어
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Email</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">username</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">domainName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Email</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">username</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">domainName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">object</span><span class="w"> </span><span class="nc">Email</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">fromString</span><span class="p">(</span><span class="n">emailString</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">Email</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
@@ -23444,14 +23452,17 @@
 <a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="regex">REGEX<a class="headerlink" href="#regex" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p><code>.r</code> 하나면 모든 String이 Regex로 변경된다</p>
+<li><strong>개요</strong><ul>
+<li><code>.r</code> 하나면 모든 String이 Regex로 변경된다</li>
+</ul>
 </li>
-<li>
-<p><strong>활용</strong>
+</ul>
+<ul>
+<li><strong>활용</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">util</span><span class="p">.</span><span class="nn">matching</span><span class="p">.</span><span class="nc">Regex</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">numberPattern</span><span class="p">:</span><span class="w"> </span><span class="nc">Regex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[0-9]&quot;</span><span class="p">.</span><span class="n">r</span><span class="w"> </span>
@@ -23460,8 +23471,7 @@
 <a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Password OK!&quot;</span><span class="p">)</span>
 <a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Password must contain a number&quot;</span><span class="p">)</span>
 <a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="_5">함수형 프로그래밍에서의 커링<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23477,9 +23487,11 @@
 <a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>
 <a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="c1">// 예시 (y 값을 디폴트로 100)</span>
 <a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="kd">val</span><span class="w"> </span><span class="nc">AdderY100</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AdderDefaultY</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>함수는 불려질 때 어떤 파라미터가 어떤 값이 되어야 함</li>
 <li>주석/문서화보다 더 좋음! =&gt; 안정성 증가</li>
+</ul>
+</li>
 </ul>
 
 

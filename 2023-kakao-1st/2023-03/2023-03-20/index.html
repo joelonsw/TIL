@@ -23023,64 +23023,70 @@
 </ul>
 <h2 id="seq-vs-list">Seq vs List<a class="headerlink" href="#seq-vs-list" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>JSON 리스트 -&gt; Seq[]가 유리하다</strong></li>
+<li><strong>JSON 리스트 -&gt; Seq[]가 유리하다</strong><ol>
 <li>다형성: Seq[] 타입은 List[], Vector[], 그 외에도 잘 어울림. 유연한 코드 작성 가능</li>
 <li>퍼포먼스: 많은 컬렉션을 다룰때, Seq[]의 성능이 List[]보다 좋음. Seq[]는 lazy evaluation을 지원하기에, 메모리/시간 측면에서 유리</li>
-<li>
-<p>FP: Seq[] 타입이 List[] 보다 불변, 합성적인 측면에서 유리한가봄</p>
+<li>FP: Seq[] 타입이 List[] 보다 불변, 합성적인 측면에서 유리한가봄</li>
+</ol>
 </li>
-<li>
-<p><strong>Seq[] 장점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Seq[] 장점</strong><ul>
 <li>더 유연함</li>
 <li>큰 컬렉션에서 더 나은 퍼포먼스</li>
-<li>
-<p>불변/합성에 더 유리</p>
+<li>불변/합성에 더 유리</li>
+</ul>
 </li>
-<li>
-<p><strong>Seq[] 단점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Seq[] 단점</strong><ul>
 <li>List[] 보다 덜 구체적임. 몇 개 메서드는 없을껄?</li>
 <li>타입 어노테이션이 필요할 수도</li>
 </ul>
+</li>
+</ul>
 <h2 id="play">Play는 어떻게 비동기로 동작하지?<a class="headerlink" href="#play" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Netty는 싱글쓰레드로 동작하나?</strong></li>
+<li><strong>Netty는 싱글쓰레드로 동작하나?</strong><ul>
 <li>Netty는 하나 이상의 보스 쓰레드를 두고 있음. 보스 쓰레드는 새로운 커넥션을 수립하는 책임을 가짐</li>
 <li>Netty는 하나 이상의 워커 쓰레드를 두고 있음. 워커 쓰레드는 수립된 커넥션이 요구하는 I/O 이벤트 등을 수행함</li>
-<li>
-<p>이러한 구조로 Netty는 많은 트래픽 동시성 처리를 가능하게 함</p>
+<li>이러한 구조로 Netty는 많은 트래픽 동시성 처리를 가능하게 함</li>
+</ul>
 </li>
-<li>
-<p><strong>Play는?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Play는?</strong><ul>
 <li>Netty 위에 지어진 Play Framework의 경우 비슷한 쓰레드 모델을 채택중임</li>
 <li>Play Framework는 고정된 쓰레드 풀을 사용해 들어오는 요청을 처리함</li>
 <li>쓰레드풀의 사이즈는 conf에서 변경할 수 있음</li>
-<li>
-<p>따라서 Play는, 들어오는 요청을 다루는 thread를 thread pool에서 관리하여 여러개를 처리함</p>
+<li>따라서 Play는, 들어오는 요청을 다루는 thread를 thread pool에서 관리하여 여러개를 처리함</li>
+</ul>
 </li>
-<li>
-<p><strong>쓰레드 몇 개로 관리함?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>쓰레드 몇 개로 관리함?</strong><ul>
 <li>기본적으로 몇 개를 쓰레드풀에 쟁여둘지는 <code>ExecutionContext.global</code>에 명시되어 있음</li>
 <li>기본적으로는 CPU cores 만큼 쓰레드를 만들 것임<ul>
 <li>quad-core라면 4개의 쓰레드를 생성할 것임</li>
 <li>물론 application.conf에서 조정할 수 있음</li>
 </ul>
 </li>
-<li>
-<p>어플리케이션 및 하드웨어의 속성에 따라 몇개의 쓰레드를 쓸지가 결정됨</p>
-<ul>
-<li>만약 어플리케이션이 CPU-Bound라면... (계산하는데에 많은 시간을 씀)</li>
+<li>어플리케이션 및 하드웨어의 속성에 따라 몇개의 쓰레드를 쓸지가 결정됨<ul>
+<li>만약 어플리케이션이 CPU-Bound라면... (계산하는데에 많은 시간을 씀)<ul>
 <li>쓰레드 갯수 증가가 멀티코어 환경에서 퍼포먼스 증대에 역할</li>
-<li>만약 어플리케이션이 IO-Bound라면...</li>
+</ul>
+</li>
+<li>만약 어플리케이션이 IO-Bound라면...<ul>
 <li>이러면 쓰레드 더 많이 생성한다고 퍼포먼스가 좋아질 이유는 없음</li>
 </ul>
 </li>
-<li>
-<p><strong>작업 메인 쓰레드한테 끝났다고 어떻게 알려줘?</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>작업 메인 쓰레드한테 끝났다고 어떻게 알려줘?</strong><ul>
 <li>플레이는 Akka를 기반으로 비동기 처리를 함</li>
 <li>해당 Task가 끝나면, main thread에게 일 끝났다고 알려줘</li>
 <li>커뮤니케이션은 Actor System을 기반으로 동작함 (Akka의 근본)</li>
@@ -23090,21 +23096,19 @@
 <li>Main Thread는 Future가 역할을 끝내줬길 기다리고 있었고, 결과값이 있다는 걸 확인하면, 실행을 마저 뚝딱</li>
 </ul>
 </li>
-<li>
-<p>정리</p>
-<ul>
+<li>정리<ul>
 <li><code>Action.async</code>를 사용하면 매핑된 쓰레드가 처리하고 Actor 시스템에 메시지를 응답한다</li>
 <li>메시지는 Future의 Result를 담고있다</li>
 <li>Main Thread는 Future에 Result가 있다는 사실로 Job이 끝났다는 것을 알게되며 이후 필요한 일을 처리한다</li>
 </ul>
 </li>
-<li>
-<p><strong>Play's Main Thread != Netty's Boss Thread</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Play's Main Thread != Netty's Boss Thread</strong><ul>
 <li>Play의 Main thread는 클라이언트의 요청을 핸들링 해주는 쓰레드임</li>
-<li>
-<p>Flow</p>
-<ol>
+<li>Flow<ol>
 <li>클라이언트의 request 도착</li>
 <li>Netty의 worker thread pool 중 하나의 쓰레드가 해당 요청을 처리하라고 매핑됨</li>
 <li>만약 컨트롤러가 <code>Action.async</code>를 달고 있다면, 해당 쓰레드가 Netty로 반환됨</li>
@@ -23112,9 +23116,11 @@
 <li>Netty worker thread 중 다른 친구들을 핸들링 하고 있던 쓰레드가 그제서야 알림을 받음</li>
 </ol>
 </li>
-<li>
-<p><strong>한 번 더 정리해보는 Play 흐름</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>한 번 더 정리해보는 Play 흐름</strong><ol>
 <li>클라이언트가 TCP Connection 수립하려 한다</li>
 <li>Netty의 Boss Thread가 Connection을 수립해 Worker Thread Pool 중 하나의 Worker Thread에 넘긴다</li>
 <li>Netty의 Worker Thread는 소켓으로 부터 넘어온 데이터를 읽으며, Play Framework의 Netty Server에게 프로세싱을 맡긴다</li>
@@ -23122,24 +23128,24 @@
 <li>Action.async가 달려있는 거라면, 쓰레드풀에서 하나 쓰레드 할당해 비동기적으로 처리하도록 한다</li>
 <li>비동기로 처리가 완료되고 나면, Akka로 결과값이 넘어가게 된다</li>
 <li>플레이 메인쓰레드에게 Akka가 끝났다고 알려준다</li>
-<li>
-<p>플레이 메인쓰레드가 Netty의 Worker Thread Pool 중에 하나를 가져와 클라이언트에게 소켓으로 응답함</p>
+<li>플레이 메인쓰레드가 Netty의 Worker Thread Pool 중에 하나를 가져와 클라이언트에게 소켓으로 응답함</li>
+</ol>
 </li>
-<li>
-<p><strong>Play Framework의 Netty Server란건 또 뭐야?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Play Framework의 Netty Server란건 또 뭐야?</strong><ul>
 <li>Play Framework의 Netty Server는 Netty networking 라이브러리를 활용하여 구축되었음</li>
 <li>Play의 상황에 알맞게 커스텀했음</li>
 <li>Netty는 low-level networking library로써, async/event-driven 방식의 프레임워크임</li>
-<li>
-<p>Play Framework의 Netty Server는 Netty 위에서 higher-level abstraction으로 HTTP request/response를 다루기 위해 사용됨</p>
+<li>Play Framework의 Netty Server는 Netty 위에서 higher-level abstraction으로 HTTP request/response를 다루기 위해 사용됨</li>
+</ul>
 </li>
-<li>
-<p><strong>하나의 쓰레드는 여러개의 소켓 커넥션을 들고 있을 수 있다</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>하나의 쓰레드는 여러개의 소켓 커넥션을 들고 있을 수 있다</strong><ul>
 <li>Netty 서버가 소켓 커넥션을 다룸</li>
 <li>Client가 요청 보냄 -&gt; Netty Worker Thread가 요청을 받음 -&gt; Play에게 Request 넘겨줌 -&gt; <br />
-    Play 할일 하고 Netty Worker Thread에게 응답 줌 -&gt; Client에게 응답 줌</li>
+  Play 할일 하고 Netty Worker Thread에게 응답 줌 -&gt; Client에게 응답 줌</li>
 <li>이 과정에서 Netty Worker Thread는 socket connection을 여전히 들고 있으면서 플레이의 응답을 기다림<ul>
 <li>그러면서 non-blocking/async니까 딴일도 딴일 나름대로 처리 중</li>
 <li>Netty Worker Thread가 요청 받으면, 해당 요청 처리를 Akka와 같은 non-blocking 라이브러리에 넘길 수 있음</li>
@@ -23147,64 +23153,67 @@
 </li>
 <li>여러개의 소켓을 하나의 쓰레드에서 관리할 수 있다!</li>
 </ul>
+</li>
+</ul>
 <h2 id="future">Future 다루는 방법<a class="headerlink" href="#future" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>map</strong></li>
+<li><strong>map</strong><ul>
 <li><code>Future</code> 클래스의 메서드로, 새로운 <code>Future</code>를 리턴함</li>
 <li>사이드 이펙트 없이 현재 <code>Future</code>를 새로운 <code>Future</code>로 변환</li>
 <li>다른 map, flatMap 등으로 체이닝이 가능</li>
-<li>
-<p>다만, <code>Future</code>가 성공적으로 수행되었는지, 실패했는지는 알 길이 없음</p>
+<li>다만, <code>Future</code>가 성공적으로 수행되었는지, 실패했는지는 알 길이 없음</li>
+</ul>
 </li>
-<li>
-<p><strong>onSuccess</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>onSuccess</strong><ul>
 <li><code>Future</code>가 성공적으로 완수되면, 콜백 함수가 <code>Future</code>의 결과값을 가지고 지지고 볶는다</li>
 <li>하지만 사이드 이펙트 있을 수 있음</li>
 <li><code>Future</code>가 성공했을떄, 무슨 콜백으로 어떤 오퍼레이션 뚝딱 할 것인지 제공</li>
 <li>사이드 이펙트 발생가능 : shared state, logging etc</li>
 <li>새로운 <code>Future</code>를 반환하진 않음</li>
 </ul>
+</li>
+</ul>
 <h2 id="action">Action<a class="headerlink" href="#action" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.playframework.com/documentation/2.8.x/ScalaActions</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li><code>play.api.mvc.Action</code>은 <code>play.api.mvc.Request =&gt; play.api.mvc.Result</code> 함수를 나타낸다<ul>
 <li>request를 처리해 result를 만든다는 뜻</li>
 </ul>
 </li>
-<li>
-<p><strong>컨트롤러는 그저 Action 생성기임을 기억해주세용</strong></p>
+<li><strong>컨트롤러는 그저 Action 생성기임을 기억해주세용</strong></li>
+</ul>
 </li>
-<li>
-<p><strong>Action 만들기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Action 만들기</strong><ul>
 <li>BaseController를 extend한 컨트롤러의 경우, Action이 기본 탑재되어 있음</li>
-<li>
-<p>여러가지 Action 빌더들을 통해 Action을 생성할 수 있음</p>
+<li>여러가지 Action 빌더들을 통해 Action을 생성할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>예시 1. Request 참조 없이</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예시 1. Request 참조 없이</strong><ul>
 <li>가장 간단한 방법 중에 하나</li>
-<li>
-<p>하지만 incoming request에 대한 참조를 얻을 수 없다
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Action {
+<li>하지만 incoming request에 대한 참조를 얻을 수 없다
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Action {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    OK(&quot;Hello World&quot;)
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>}
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>예시 2. Request =&gt; Result</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예시 2. Request =&gt; Result</strong><ul>
 <li><code>Request =&gt; Result</code>를 아규먼트로 받아 반환하는 친구가 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nc">Action</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nc">Action</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nc">Ok</span><span class="p">(</span><span class="s">&quot;Got Request [ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>여기서 request를 implicit으로 받으면, 다른 API에서 받아서 처리할 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nc">Action</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
+<li>여기서 request를 implicit으로 받으면, 다른 API에서 받아서 처리할 수 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nc">Action</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nc">Ok</span><span class="p">(</span><span class="s">&quot;Got Request [ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -23216,21 +23225,23 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">anotherMethod</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)(</span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="p">:</span><span class="w"> </span><span class="nc">Request</span><span class="p">[</span><span class="n">_</span><span class="p">])</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="c1">// do sth that needs access</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>예시 3. additional BodyParser</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예시 3. additional BodyParser</strong><ul>
 <li>다른 BodyParser 기능을 통해 Action 객체를 만들수 있나봄</li>
-<li>
-<p>현재로썬 그냥 Any content body parser가 있나보다~
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nc">Action</span><span class="p">(</span><span class="n">parse</span><span class="p">.</span><span class="n">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
+<li>현재로썬 그냥 Any content body parser가 있나보다~
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nc">Action</span><span class="p">(</span><span class="n">parse</span><span class="p">.</span><span class="n">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nc">Ok</span><span class="p">(</span><span class="s">&quot;Got request [ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Simple Results</strong>
+</ul>
+<ul>
+<li><strong>Simple Results</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nc">Result</span><span class="p">(</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ResponseHeader</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nc">Map</span><span class="p">.</span><span class="n">empty</span><span class="p">),</span>
@@ -23249,10 +23260,10 @@
 <a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="kd">val</span><span class="w"> </span><span class="n">badRequest</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nc">BadRequest</span><span class="p">(</span><span class="n">views</span><span class="p">.</span><span class="n">html</span><span class="p">.</span><span class="n">form</span><span class="p">(</span><span class="n">formWithErrors</span><span class="p">))</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="kd">val</span><span class="w"> </span><span class="n">oops</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nc">InternalServerError</span><span class="p">(</span><span class="s">&quot;Oops&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="kd">val</span><span class="w"> </span><span class="n">anyStatus</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nc">Status</span><span class="p">(</span><span class="mi">488</span><span class="p">)(</span><span class="s">&quot;Strange response type&quot;</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Redirect도 그저 간단한 Result 일 뿐</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Redirect도 그저 간단한 Result 일 뿐</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nc">Redirect</span><span class="p">(</span><span class="s">&quot;/user/home&quot;</span><span class="p">)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
@@ -23260,40 +23271,39 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nc">Redirect</span><span class="p">(</span><span class="s">&quot;/user/home&quot;</span><span class="p">,</span><span class="w"> </span><span class="nc">MOVED_PERMANENTLY</span><span class="p">)</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="actionasync">Action.async<a class="headerlink" href="#actionasync" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>비동기적으로 다른 쓰레드 풀에서 non-blocking 코드를 실행하도록 지원함</p>
-<ul>
+<li><strong>개요</strong><ul>
+<li>비동기적으로 다른 쓰레드 풀에서 non-blocking 코드를 실행하도록 지원함<ul>
 <li>따라서 해당 코드가 long-run operation에 들어가더라도, 서버는 다른 incoming request 처리가 가능하다</li>
 </ul>
 </li>
-<li>
-<p><strong>클라이언트에게 응답이 어떻게 가능하지?</strong></p>
+</ul>
 </li>
-<li><code>Action.async</code>는 <code>Future[Result]</code>를 반환한다</li>
-<li>
-<p><code>Action.async</code>가 있다면, 플레이가 Http request를 받는 쓰레드가 아닌, 다른 쓰레드에 해당 function 수행을 매핑시켜 실행시킬 거임</p>
+</ul>
 <ul>
+<li><strong>클라이언트에게 응답이 어떻게 가능하지?</strong><ul>
+<li><code>Action.async</code>는 <code>Future[Result]</code>를 반환한다</li>
+<li><code>Action.async</code>가 있다면, 플레이가 Http request를 받는 쓰레드가 아닌, 다른 쓰레드에 해당 function 수행을 매핑시켜 실행시킬 거임<ul>
 <li><code>Future[Result]</code>가 완료된다면, 플레이는 Http request를 통해 클라이언트에게 해당 응답을 줄 수 있도록 할 것임</li>
 </ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">delayResponse</span><span class="p">:</span><span class="w"> </span><span class="nc">Action</span><span class="p">[</span><span class="nc">AnyContent</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="p">.</span><span class="n">async</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nc">Akka</span><span class="p">.</span><span class="n">system</span><span class="p">.</span><span class="n">scheduler</span><span class="p">.</span><span class="n">scheduleOnce</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="nc">Future</span><span class="p">.</span><span class="n">successful</span><span class="p">(</span><span class="nc">Ok</span><span class="p">(</span><span class="s">&quot;Response after 1 second delay!&quot;</span><span class="p">))</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Action.async vs Action</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Action.async vs Action</strong><ul>
 <li>시간을 많이 잡아먹는 작업이 request를 받는 thread에서 수행된다면 =&gt; Action.async가 좋음</li>
 <li>다만, <code>Action.async</code>에는 단점이 있어서 필요할 때만 사용하는 것도 좋아보인다. <ul>
 <li><code>Future</code>를 관리하는 비용</li>
@@ -23301,6 +23311,8 @@
 </ul>
 </li>
 <li>벤치마크 확인하고, 코드 프로파일링하고, 병목/최적화 하는 것이 좋아보임</li>
+</ul>
+</li>
 </ul>
 
 

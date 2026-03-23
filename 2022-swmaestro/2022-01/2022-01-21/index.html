@@ -22932,45 +22932,47 @@
 <h2 id="dapp-">이더리움 DApp 개발 - 블록체인 이론<a class="headerlink" href="#dapp-" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=fiSIihG42zk&amp;list=PLEyeIL2R56nseAQCkVx2pDTQhxjbQashO&amp;index=1</em></li>
-<li><strong>Bitcoin</strong></li>
+<li><strong>Bitcoin</strong><ul>
 <li>비트코인은 화폐를 대체하고자 블록체인을 활용</li>
-<li>
-<p>합의 알고리즘 / 분산 시스템 / 암호화 알고리즘 / 블록 체인</p>
+<li>합의 알고리즘 / 분산 시스템 / 암호화 알고리즘 / 블록 체인</li>
+</ul>
 </li>
-<li>
-<p><strong>Smart Contract</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Smart Contract</strong><ul>
 <li>오프라인으로의 계약을 온라인으로 가져오기</li>
-<li>
-<p>[Buyer]---[Code As Law]---[Seller]</p>
+<li>[Buyer]---[Code As Law]---[Seller]</li>
+</ul>
 </li>
-<li>
-<p><strong>Ethereum</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Ethereum</strong><ul>
 <li>Smart Contract를 쓸 수 있게 탈중앙화 플랫폼화</li>
 <li>"이더"라는 고유화폐가 존재</li>
-<li>
-<p>Turing Compelete (코드가 실행 시 어떤 결과 나올지 예측가능 하단 것)</p>
+<li>Turing Compelete (코드가 실행 시 어떤 결과 나올지 예측가능 하단 것)</li>
+</ul>
 </li>
-<li>
-<p><strong>Bitcoin VS Ethereum</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Bitcoin VS Ethereum</strong><ul>
 <li>Bitcoin (UTXO)<ul>
 <li>얼마 만큼의 BTC =&gt; 누구에게 준다</li>
 </ul>
 </li>
-<li>
-<p>Ethereum (Account)</p>
-<ul>
-<li>다음과 같은 정보를 상태로써 유지하고 있음</li>
+<li>Ethereum (Account)<ul>
+<li>다음과 같은 정보를 상태로써 유지하고 있음<ul>
 <li>Address: 0xabcd~</li>
 <li>Balance: 40ETH</li>
 <li>Code: c=a+b</li>
 </ul>
 </li>
-<li>
-<p><strong>Ethereum Account</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Ethereum Account</strong><ul>
 <li>Externally Owned Accounts (사람이 개인으로 가지고 있는 지갑)<ul>
 <li>단체/사람/기관이 소유</li>
 <li>이더를 전송하거나 컨트랙을 실행하는 트랜잭션 생성 가능</li>
@@ -22979,48 +22981,52 @@
 </li>
 <li>Contract Accounts (외부 이벤트가 있어야 실행)<ul>
 <li>스마트 컨트랙이 소유한 계정</li>
-<li>트랜잭션/함수에 의해 코드 실행</li>
+<li>트랜잭션/함수에 의해 코드 실행<ul>
 <li>트랜잭션이 발생하면 그에 반응해야 동작함</li>
 <li>컨트랙을 통한 제어!</li>
+</ul>
+</li>
 <li>주소와 이더 중요</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-01-21-eth.PNG" /></p>
+<li><img alt="" src="../../images/2022-01-21-eth.PNG" /></li>
+</ul>
 </li>
-<li>
-<p><strong>EVM</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>EVM</strong><ul>
 <li>Solidity -&gt; Solidity Compiler -&gt; EVM Code</li>
 <li>Vyper -&gt; Vyper Compiler -&gt; EVM Code</li>
-<li>
-<p>각 노드가 블록 검증 과정에서 <strong>EVM 실행</strong></p>
-<ul>
+<li>각 노드가 블록 검증 과정에서 <strong>EVM 실행</strong><ul>
 <li>컨트랙이 블록에서 EVM이 실행된다</li>
 <li>실행되는 코드는 특정 언어가 아닌 EVM 바이트코드!</li>
 </ul>
 </li>
-<li>
-<p><strong>GAS</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>GAS</strong><ul>
 <li>만약 노드가 무한루프에 빠진다면, 모든 ETH가 마비가 되고 모든 ETH 가치가 0가 됨</li>
 <li>이를 해결하고자 수수료 GAS로 해결<ul>
 <li>EVM의 opcode 별로 실행에 필요한 GAS가 산정됨</li>
 </ul>
 </li>
 <li>트랜잭션 생성시 (start-gas * price-gas) 만큼 이더가 차감</li>
-<li>
-<p>트랜잭션 결과</p>
-<ul>
+<li>트랜잭션 결과<ul>
 <li>성공: 실행후 남은 gas 모두 유저에게 반환</li>
 <li>실패: 실행 전 상태로 돌아감. 다만 트랜잭션 생성에 소요된 GAS는 반환되지 않음</li>
 </ul>
 </li>
-<li>
-<p><strong>Ethereum Network</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Ethereum Network</strong><ul>
 <li>결국 상태 머신이야! 상태를 저장해두는 것!</li>
 <li><img alt="" src="../../images/2022-01-15-eth-network.PNG" /></li>
+</ul>
+</li>
 </ul>
 <h2 id="dapp-_1">이더리움 DApp 개발 - 솔리디티 이해<a class="headerlink" href="#dapp-_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23028,10 +23034,12 @@
 <li>contract : class 와 비슷</li>
 <li>mapping : 딕셔너리와 비슷</li>
 <li>address : 이더리움 지갑 주소</li>
-<li>event : 컨트랙 실행 과정에서, 외부 리스너들에게 공개된 액션</li>
+<li>event : 컨트랙 실행 과정에서, 외부 리스너들에게 공개된 액션<ul>
 <li>외부에서 해당 값들을 추적할 수 있도록 <em>(나중에 백트래킹 필요)</em></li>
 <li>JS가 해당 컨트랙에 대해 watch 하고 있고, 이벤트 발생시 띄워줄 수 있도록 함!<ul>
 <li>DApp 훅으로의 역할</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>constructor : 생성자 유일하게 배포시 한 번 실행</li>

@@ -22910,15 +22910,16 @@
 <h2 id="_1">함수형 인터페이스<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>정의 : 하나의 메서드가 선언된 인터페이스를 정의하여 람다식을 다루는 기술</li>
-<li><strong>느낀점</strong></li>
+<li><strong>느낀점</strong><ul>
 <li>하나의 메서드를 가진 인터페이스를 정의하고, </li>
 <li>해당 메서드를 람다식으로 구체화 시켜 하나의 클래스로 구현하면, </li>
 <li>실질적으로는 이걸 결국 한번 호출해주는 로직이 필요함. </li>
-<li>
-<p>마치 객체 Call 하듯</p>
+<li>마치 객체 Call 하듯</li>
+</ul>
 </li>
-<li>
-<p><strong>써보기</strong>
+</ul>
+<ul>
+<li><strong>써보기</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Test</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Test!&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 내가 만든거</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">test</span><span class="p">.</span><span class="na">print</span><span class="p">();</span><span class="w"> </span><span class="c1">//메서드 하나는 호출해줘야하네?</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -22974,17 +22975,14 @@
 <a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rightAgain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rightWay</span><span class="p">.</span><span class="na">andThen</span><span class="p">(</span><span class="n">reverseWay</span><span class="p">).</span><span class="na">andThen</span><span class="p">(</span><span class="n">reverseWay</span><span class="p">);</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rightAgain</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;result = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>메서드 참조를 활용하여 람다식을 간단히 표현 가능 (from Java8)</p>
-</li>
-<li>
-<p><strong>Connectable에서는?</strong></p>
-</li>
+</code></pre></div></li>
+<li>메서드 참조를 활용하여 람다식을 간단히 표현 가능 (from Java8)</li>
+</ul>
+<ul>
+<li><strong>Connectable에서는?</strong><ul>
 <li>DTO 변환해주는 로직. 메서드 참조를 통해 구현함. </li>
 <li>그냥 TicketMetadataAttribute를 받아 TicketMetadataAttributeResponse로 변환해주는 함수형 인터페이스를 매개변수로 받음.
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">TicketMetadataAttributeResponse</span><span class="w"> </span><span class="nf">of</span><span class="p">(</span><span class="n">TicketMetadataAttribute</span><span class="w"> </span><span class="n">attribute</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">TicketMetadataAttributeResponse</span><span class="w"> </span><span class="nf">of</span><span class="p">(</span><span class="n">TicketMetadataAttribute</span><span class="w"> </span><span class="n">attribute</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TicketMetadataAttributeResponse</span><span class="p">(</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">            </span><span class="n">attribute</span><span class="p">.</span><span class="na">getTrait_type</span><span class="p">(),</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">            </span><span class="n">attribute</span><span class="p">.</span><span class="na">getValue</span><span class="p">()</span>
@@ -22997,23 +22995,28 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>독특하게도 map은 다음과 같이 구현되어있음</p>
-<ul>
-<li>왜 input은 super지?</li>
+<li>독특하게도 map은 다음과 같이 구현되어있음<ul>
+<li>왜 input은 super지?<ul>
 <li>해당 input은 본인과 부모 클래스만 인풋으로 받을 수 있다는 것인데...</li>
 <li>input을 부모로 받는 함수더라도, 자식을 부모가 품을 수 있기때문에 딱히 문제는 없겠구나</li>
 <li>function이 실행되는 시점에 input의 부모로 치환하여 함수를 실행할 수 있음</li>
-<li>왜 output은 extends지?</li>
+</ul>
+</li>
+<li>왜 output은 extends지?<ul>
 <li>해당 output은 본인과 자식들만 구현할 수 있다. </li>
 <li>반환하는 값이 결국 본인으로 매핑되니까, 함수를 수행하는 결과값이 자식이더라도 부모로 변경할 수 있어 괜찮은가보다</li>
 <li>부모가 자식을 품을 수 있으니, 반환값은 자식이더라도 부모로 싹 변환하여 처리가능
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mapper</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mapper</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>요런 괴랄한 로직도 가능</strong>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>요런 괴랄한 로직도 가능</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="c1">// 와일드카드를 활용하여 List&lt;? extends GrandParent&gt; 만들기</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">GrandParent</span><span class="o">&gt;</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GrandParent</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Parent</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Child</span><span class="p">());</span>
@@ -23041,10 +23044,10 @@
 <a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="p">}</span>
 <a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="c1">// collect = [playground.generic.family.Child@52d455b8, playground.generic.family.Child@4f4a7090, playground.generic.family.Parent@18ef96]</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>2트
+</code></pre></div></li>
+</ul>
+<ul>
+<li>2트
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">GrandParent</span><span class="o">&gt;</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GrandParent</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Parent</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Child</span><span class="p">());</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Parent</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toChild</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Parent</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -23065,8 +23068,7 @@
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="p">}</span>
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="c1">// collect = [playground.generic.family.Child@52d455b8, playground.generic.family.Child@4f4a7090, playground.generic.family.Parent@18ef96]</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

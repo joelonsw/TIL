@@ -22989,7 +22989,7 @@
 <p><em>참고: https://esbook.kimjmin.net/</em></p>
 <h3 id="1-elastic-stack">1. Elastic Stack 소개<a class="headerlink" href="#1-elastic-stack" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>ElasticSearch</strong></li>
+<li><strong>ElasticSearch</strong><ul>
 <li>Full Text Search 강점</li>
 <li>타 플랫폼 연동이 쉬움</li>
 <li>오픈 소스 (루씬 기반)</li>
@@ -23008,48 +23008,52 @@
 </ul>
 </li>
 <li>REST API 지원</li>
-<li>
-<p>멀티테넌시</p>
-<ul>
+<li>멀티테넌시<ul>
 <li>서로 다른 인덱스 별도 커넥션 없이 하나의 질의로 묶어서 검색/하나의 출력으로 도출</li>
 </ul>
 </li>
-<li>
-<p><strong>Logstash</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Logstash</strong><ul>
 <li>데이터 수집/저장을 위한 프로젝트</li>
 <li>데이터 수집의 도구가 필요했던 ElasticSearch가 입력 수단으로 Logstash 도입</li>
-<li>
-<p>LogStash의 데이터 처리 과정</p>
-<ul>
+<li>LogStash의 데이터 처리 과정<ul>
 <li><code>입력 -&gt; 필터 -&gt; 출력</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Kibana</strong></p>
+</ul>
 </li>
-<li>
-<p>ElasticSearch의 검색 결과 시각화</p>
+</ul>
 <ul>
+<li><strong>Kibana</strong><ul>
+<li>ElasticSearch의 검색 결과 시각화<ul>
 <li>Discover: 색인된 소스 데이터들의 검색, 시계열 기반 시간 히스토그램 그래프 출력</li>
 <li>Visualize: 집계 데이터를 통해 통계 차트로</li>
 <li>Dashboard: Visualize로 만들어진 시각화 도구 조합 =&gt; 대시보드 화면 </li>
 </ul>
 </li>
-<li>
-<p><strong>Beats</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Beats</strong><ul>
 <li>Logstash의 데이터 수집이 부피가 커짐으로써 자원을 많이 요하게 됨</li>
 <li>모든 단말에 Logstash 도입? =&gt; 부담스러움</li>
 <li>Beats를 통해 가볍게 데이터 수집할 수 있도록 지원</li>
 </ul>
+</li>
+</ul>
 <h3 id="2-elasticsearch">2. ElasticSearch 시작하기<a class="headerlink" href="#2-elasticsearch" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>데이터 색인</strong></li>
+<li><strong>데이터 색인</strong><ul>
 <li>색인(indexing): 데이터가 <strong>검색될 수 있는 구조</strong>로 변경하기 위해 원본 문서를 <strong>검색어 토큰</strong>들로 변환해 저장하는 과정</li>
 <li>인덱스(index): 색인 과정을 거친 결과물, 색인된 데이터가 저장되는 저장소. </li>
 <li>검색(search): 인덱스에 들어있는 검색어 토큰들을 포함하고 있는 문서 찾아가기</li>
 <li>질의(query): 사용자</li>
+</ul>
+</li>
 </ul>
 <h2 id="mysql-full-text-index">MySQL Full-Text Index<a class="headerlink" href="#mysql-full-text-index" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://interconnection.tistory.com/95</em>
@@ -23064,7 +23068,7 @@
        - "나는 김치찌개가 좋습니다" =&gt; 나는|는 | 김|김치|치찌|찌개|개가|가 | 좋|좋습|습니|니다|다
          - 위의 분류 중 token 2가 아닌 (는 ),( 김), (가 ), ( 좋), (다 ) 제거</p>
 <ul>
-<li><strong>N-gram Full-Text Index 생성 과정</strong></li>
+<li><strong>N-gram Full-Text Index 생성 과정</strong><ol>
 <li>인덱스 대상 문서를 n보다 큰 값의 토큰으로 <strong>서브그룹</strong> 나눔<ul>
 <li>각 문서에 대한 4글자 토큰 서브 그룹을 생성</li>
 <li><img alt="" src="../../images/2024-03-07-%EC%83%9D%EC%84%B11.png" /></li>
@@ -23086,34 +23090,34 @@
 <li><img alt="" src="../../images/2024-03-07-%EC%83%9D%EC%84%B14.png" /></li>
 </ul>
 </li>
-<li>
-<p>2-gram 방식으로 토크나이징한 서브그룹 정보를 통해 <strong>프론트엔드</strong> 인덱스 생성</p>
-<ul>
+<li>2-gram 방식으로 토크나이징한 서브그룹 정보를 통해 <strong>프론트엔드</strong> 인덱스 생성<ul>
 <li>여기서 생성된 프론트엔드 인덱스는 백엔드 인덱스의 (서브그룹번호, 서브그룹열번호)로 구성</li>
 <li><img alt="" src="../../images/2024-03-07-%EC%83%9D%EC%84%B15.png" /></li>
 </ul>
 </li>
-<li>
-<p><strong>N-gram Full-Text Index 검색 과정</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>N-gram Full-Text Index 검색 과정</strong><ol>
 <li>인덱스의 검색은 생성되는 반대로 n-gram의 n바이트 단위로 동일하게 자름<ul>
 <li>ex) "마바사" 검색 시, "마바", "바사" 동일하게 자름</li>
 </ul>
 </li>
 <li>동일하게 자른 검색용 n-gram 토큰을 통해 프론트엔드 인덱스 검색</li>
-<li>
-<p>검색된 결과 정보를 백엔드 인덱스 검색 대상 후보 리스트로 두고, 백엔드 인덱스를 통해 최종 확인 거쳐 일치 결과 가져옴</p>
+<li>검색된 결과 정보를 백엔드 인덱스 검색 대상 후보 리스트로 두고, 백엔드 인덱스를 통해 최종 확인 거쳐 일치 결과 가져옴</li>
+</ol>
 </li>
-<li>
-<p><strong>Built-in vs N-gram</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Built-in vs N-gram</strong><ul>
 <li>검색어가 많을수록, N-gram이 빠름</li>
-<li>
-<p>저장 데이터 바이트 수가 많을수록, 스토리지 엔진 사용량은, N-gram이 많음</p>
+<li>저장 데이터 바이트 수가 많을수록, 스토리지 엔진 사용량은, N-gram이 많음</li>
+</ul>
 </li>
-<li>
-<p><strong>검색 모드 종류</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>검색 모드 종류</strong><ol>
 <li>자연어 검색<ul>
 <li>검색 문자열을 단어 단위로 분리한 후, 해당 단어 중 하나라도 포함되는 행 찾음</li>
 </ul>
@@ -23125,6 +23129,8 @@
 </ul>
 </li>
 <li>쿼리 확장 검색</li>
+</ol>
+</li>
 </ul>
 
 

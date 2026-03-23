@@ -22975,241 +22975,153 @@
 <h3 id="2021-03-26">2021-03-26<a class="headerlink" href="#2021-03-26" title="Permanent link">&para;</a></h3>
 <h2 id="sql-1-sql">SQL 첫걸음 [1장. 데이터베이스와 SQL]<a class="headerlink" href="#sql-1-sql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>데이터베이스란?</strong></p>
+<li><strong>데이터베이스란?</strong>
+    - 특정 데이터를 확인하고 싶을 때 간단하게 찾아낼 수 있도록 정리된 형태
+    - 날라가면 안되니까, 하드디스크/SSD 등 비휘발성 저장장치에 저장하자~</li>
+</ul>
 <ul>
-<li>특정 데이터를 확인하고 싶을 때 간단하게 찾아낼 수 있도록 정리된 형태</li>
-<li>날라가면 안되니까, 하드디스크/SSD 등 비휘발성 저장장치에 저장하자~</li>
+<li><strong>DBMS(Database Management System)란?</strong>
+    - DB를 관리하는 SW로, 사용 목적은 생산성 향상과 기능성, 신뢰성 확보에 있음
+    - 어떤 시스템이던 데이터에 대한 CRUD 기능은 필요
+        - 이와 같은 기본 기능을 DBMS에서 제공!
+        - 밑바닥 부터 구현해서 쓰지말고, DB에 접근은 DBMS를 통해 해보자~</li>
 </ul>
-</li>
-<li>
-<p><strong>DBMS(Database Management System)란?</strong></p>
 <ul>
-<li>DB를 관리하는 SW로, 사용 목적은 생산성 향상과 기능성, 신뢰성 확보에 있음</li>
-<li>어떤 시스템이던 데이터에 대한 CRUD 기능은 필요<ul>
-<li>이와 같은 기본 기능을 DBMS에서 제공!</li>
-<li>밑바닥 부터 구현해서 쓰지말고, DB에 접근은 DBMS를 통해 해보자~</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>SQL이란?</strong></p>
-<ul>
-<li>위에서 언급한 DBMS와의 대화에 필요한게 SQL!<ul>
-<li>SQL이 대화할 수 있는 DBMS는 RDBMS!<ul>
-<li>RDBMS: Relational Database Management System</li>
-</ul>
-</li>
-<li>SQL은 Relational Database에서 사용한다!</li>
-</ul>
-</li>
-<li>SQL의 명령의 종류는 총 3가지!<ul>
-<li><em>참고: https://server-talk.tistory.com/159</em></li>
-<li>DML: DB내의 데이터 조작 <em>(내부 데이터 CRUD)</em><ul>
-<li>SELECT</li>
-<li>INSERT</li>
-<li>UPDATE</li>
-<li>DELETE</li>
-</ul>
-</li>
-<li>DDL: 테이블과 같은 데이터 구조 정의 <em>(DB 데이터 구조 CRUD)</em><ul>
-<li>CREATE</li>
-<li>ALTER</li>
-<li>DROP</li>
-<li>TRUNCATE</li>
-</ul>
-</li>
-<li>DCL: 데이터베이스 제어 <em>(트랜잭션(?)제어, 접근 권한 제어)</em><ul>
-<li>GRANT</li>
-<li>REVOKE</li>
-<li>COMMIT</li>
-<li>ROLLBACK</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>SQL이란?</strong>
+    - 위에서 언급한 DBMS와의 대화에 필요한게 SQL!
+        - SQL이 대화할 수 있는 DBMS는 RDBMS!
+            - RDBMS: Relational Database Management System
+        - SQL은 Relational Database에서 사용한다!
+    - SQL의 명령의 종류는 총 3가지!
+        - <em>참고: https://server-talk.tistory.com/159</em>
+        - DML: DB내의 데이터 조작 <em>(내부 데이터 CRUD)</em>
+            - SELECT
+            - INSERT
+            - UPDATE
+            - DELETE
+        - DDL: 테이블과 같은 데이터 구조 정의 <em>(DB 데이터 구조 CRUD)</em>
+            - CREATE
+            - ALTER
+            - DROP
+            - TRUNCATE
+        - DCL: 데이터베이스 제어 <em>(트랜잭션(?)제어, 접근 권한 제어)</em>
+            - GRANT
+            - REVOKE
+            - COMMIT
+            - ROLLBACK</li>
 </ul>
 <h2 id="sql-2">SQL 첫걸음 [2장. 테이블에서 데이터 검색]<a class="headerlink" href="#sql-2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>테이블</strong></p>
+<li><strong>테이블</strong>
+    - 행과 열로 구성된 표 형식의 데이터
+        - 지원하는 데이터 타입
+            - 수치형: 숫자만으로 구성된 데이터
+            - 문자열형: 임의의 문자로 구성
+            - 날짜시간형: 날짜와 시각 나타냄
+            - NULL: 값이 없는 데이터</li>
+</ul>
 <ul>
-<li>행과 열로 구성된 표 형식의 데이터<ul>
-<li>지원하는 데이터 타입<ul>
-<li>수치형: 숫자만으로 구성된 데이터</li>
-<li>문자열형: 임의의 문자로 구성</li>
-<li>날짜시간형: 날짜와 시각 나타냄</li>
-<li>NULL: 값이 없는 데이터</li>
+<li><strong>SELECT</strong>
+    - '질의', '쿼리'로 불리는 명령
+    - 테이블의 열 <em>(Column)</em> 데이터를 읽어오기</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>SELECT</strong></p>
 <ul>
-<li>'질의', '쿼리'로 불리는 명령</li>
-<li>테이블의 열 <em>(Column)</em> 데이터를 읽어오기</li>
+<li><strong>DESC</strong>
+    - SQL 명령은 아님
+    - 테이블에 어떤 열이 정의(Field, Type 등) 되어 있는지 알 수 있음</li>
 </ul>
-</li>
-<li>
-<p><strong>DESC</strong></p>
 <ul>
-<li>SQL 명령은 아님</li>
-<li>테이블에 어떤 열이 정의(Field, Type 등) 되어 있는지 알 수 있음</li>
-</ul>
-</li>
-<li>
-<p><strong>WHERE</strong></p>
-<ul>
-<li>테이블의 행 데이터를 읽어오기<ul>
-<li>많은 행 속에서 필요한 데이터만 검색하기 위함<ul>
-<li>조건식을 통해서 "필요한 데이터"를 추출해보자!</li>
-<li>ex) SELECT 열 FROM 테이블명 WHERE 조건식</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>조건식<ul>
-<li>= : 값이 같다면</li>
-<li>&lt;&gt; : 값이 다르다면</li>
-<li><strong>IS NULL</strong> : 값이 NULL 이라면</li>
-<li><strong>IS NOT NULL</strong> : 값이 NULL 아니라면</li>
-</ul>
-</li>
-<li>조건 조합하기<ul>
-<li><strong>AND</strong>, <strong>OR</strong>, <strong>NOT</strong></li>
-<li>AND가 OR 보다 우선순위 높아서 괄호 사용을 권장한다~</li>
-</ul>
-</li>
-<li>패턴 매칭<ul>
-<li><strong>LIKE</strong> 술어를 통해 패턴 매칭을 해보자!<ul>
-<li>ex) WHERE text LIKE 'SQL%'<ul>
-<li>해석: SQL~~~~~ 형식의 text를 뽑아와주세요!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>복잡한 패턴이라면 정규 표현식 사용을 검토해보자~</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>WHERE</strong>
+    - 테이블의 행 데이터를 읽어오기
+        - 많은 행 속에서 필요한 데이터만 검색하기 위함
+            - 조건식을 통해서 "필요한 데이터"를 추출해보자!
+            - ex) SELECT 열 FROM 테이블명 WHERE 조건식
+    - 조건식
+        - = : 값이 같다면
+        - &lt;&gt; : 값이 다르다면
+        - <strong>IS NULL</strong> : 값이 NULL 이라면
+        - <strong>IS NOT NULL</strong> : 값이 NULL 아니라면
+    - 조건 조합하기
+        - <strong>AND</strong>, <strong>OR</strong>, <strong>NOT</strong>
+        - AND가 OR 보다 우선순위 높아서 괄호 사용을 권장한다~
+    - 패턴 매칭
+        - <strong>LIKE</strong> 술어를 통해 패턴 매칭을 해보자!
+            - ex) WHERE text LIKE 'SQL%'
+                - 해석: SQL~~~~~ 형식의 text를 뽑아와주세요!
+        - 복잡한 패턴이라면 정규 표현식 사용을 검토해보자~</li>
 </ul>
 <h2 id="sql-3">SQL 첫걸음 [3장. 정렬과 연산]<a class="headerlink" href="#sql-3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>ORDER BY</strong></p>
+<li><strong>ORDER BY</strong>
+    - 검색 결과의 행 순서를 바꾸는 명령
+    - 서버에서 클라이언트로 행 순서를 바꾸어 결과를 반환하는 것 뿐, 저장장치에 저장된 데이터의 행 순서 변경 X
+    - ex) SELECT 열명 FROM 테이블명 WHERE 조건식 ORDER BY 열명
+    - 순서
+        - DESC: 내림차순으로 정렬하기
+        - ASC: 오름차순으로 정렬하기 
+    - 복수의 열에 순서 부여가능!
+        - ex) SELECT name FROM student ORDER BY age DESC, id ASC
+    - MySQL의 경우, NULL 값을 가장 작은 값으로 취급한다</li>
+</ul>
 <ul>
-<li>검색 결과의 행 순서를 바꾸는 명령</li>
-<li>서버에서 클라이언트로 행 순서를 바꾸어 결과를 반환하는 것 뿐, 저장장치에 저장된 데이터의 행 순서 변경 X</li>
-<li>ex) SELECT 열명 FROM 테이블명 WHERE 조건식 ORDER BY 열명</li>
-<li>순서<ul>
-<li>DESC: 내림차순으로 정렬하기</li>
-<li>ASC: 오름차순으로 정렬하기 </li>
+<li><strong>LIMIT</strong>
+    - 결과의 최대 행수를 제한하는 방법
+    - 표준 SQL은 아님. <em>(MySQL, PostgreSQL에서 사용)</em>
+    - OFFSET과 조합해 pagination 처럼 알맞은 위치에, 필요한 사이즈의 정보를 가져올 수 있음</li>
 </ul>
-</li>
-<li>복수의 열에 순서 부여가능!<ul>
-<li>ex) SELECT name FROM student ORDER BY age DESC, id ASC</li>
-</ul>
-</li>
-<li>MySQL의 경우, NULL 값을 가장 작은 값으로 취급한다</li>
-</ul>
-</li>
-<li>
-<p><strong>LIMIT</strong></p>
 <ul>
-<li>결과의 최대 행수를 제한하는 방법</li>
-<li>표준 SQL은 아님. <em>(MySQL, PostgreSQL에서 사용)</em></li>
-<li>OFFSET과 조합해 pagination 처럼 알맞은 위치에, 필요한 사이즈의 정보를 가져올 수 있음</li>
+<li><strong>AS</strong>
+    - 해당 열에 대해 별명을 부과할 수 있다. 
+    - 가령 두가지 column을 연산하여 새로운 column을 만들때, 별명을 부여해 가져오면 보기 좋음
+    - 다만, SQL의 구 처리 순서에 따라 반영 시점이 달라서, 잘 알고 쓰자!
+        - ex) SELECT *, price * quantity AS amount FROM sample<br />
+              WHERE amount &gt;= 2000; // 오류오류! ==&gt; WHERE구 -&gt; SELECT구 순서로 처리!</li>
 </ul>
-</li>
-<li>
-<p><strong>AS</strong></p>
 <ul>
-<li>해당 열에 대해 별명을 부과할 수 있다. </li>
-<li>가령 두가지 column을 연산하여 새로운 column을 만들때, 별명을 부여해 가져오면 보기 좋음</li>
-<li>다만, SQL의 구 처리 순서에 따라 반영 시점이 달라서, 잘 알고 쓰자!<ul>
-<li>ex) SELECT *, price * quantity AS amount FROM sample<br />
-      WHERE amount &gt;= 2000; // 오류오류! ==&gt; WHERE구 -&gt; SELECT구 순서로 처리!</li>
+<li><strong>문자열 연산</strong>
+    - CHARACTER_LENGTH: 문자열의 길이를 계산해 돌려주는 함수
+    - OCTET_LENGTH: 문자열의 길이를 바이트 단위로 계산해 돌려주는 함수</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>문자열 연산</strong></p>
 <ul>
-<li>CHARACTER_LENGTH: 문자열의 길이를 계산해 돌려주는 함수</li>
-<li>OCTET_LENGTH: 문자열의 길이를 바이트 단위로 계산해 돌려주는 함수</li>
-</ul>
-</li>
-<li>
-<p><strong>CASE</strong></p>
-<ul>
-<li>간단한 데이터 처리는 CASE로도 가능하다!</li>
-<li>ex) SELECT a AS "코드",<br />
-      CASE a<br />
-          WHEN 1 THEN '남자'<br />
-          WHEN 2 THEN '여자'<br />
-          ELSE '미지정'<br />
-      END AS "성별" FROM sample;</li>
-</ul>
-</li>
+<li><strong>CASE</strong>
+    - 간단한 데이터 처리는 CASE로도 가능하다!
+    - ex) SELECT a AS "코드",<br />
+          CASE a<br />
+              WHEN 1 THEN '남자'<br />
+              WHEN 2 THEN '여자'<br />
+              ELSE '미지정'<br />
+          END AS "성별" FROM sample;</li>
 </ul>
 <h2 id="sql-4">SQL 첫걸음 [4장. 데이터의 추가, 삭제, 갱신]<a class="headerlink" href="#sql-4" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>INSERT</strong></p>
+<li><strong>INSERT</strong>
+    - RBDMS에서 INSERT 명령을 통해 테이블의 행 단위로 데이터를 추가한다!
+    - 행의 데이터는 다음과 같이 "VALUES" 구를 통해 지정하자
+    - ex) INSERT INTO sample VALUES(1, 'ABC', '2014-01-25')
+    - ex) INSERT INTO sample (열1, 열2) VALUES(값1, 값2)</li>
+</ul>
 <ul>
-<li>RBDMS에서 INSERT 명령을 통해 테이블의 행 단위로 데이터를 추가한다!</li>
-<li>행의 데이터는 다음과 같이 "VALUES" 구를 통해 지정하자</li>
-<li>ex) INSERT INTO sample VALUES(1, 'ABC', '2014-01-25')</li>
-<li>ex) INSERT INTO sample (열1, 열2) VALUES(값1, 값2)</li>
+<li><strong>DELETE</strong>
+    - RBDMS에서 DELETE 명령을 통해 행 단위로 데이터 삭제 가능
+    - 조건식 "WHERE"를 통해 해당 조건을 만족하는 행을 삭제하자
+        - 다만! 조건을 만족하는 모든 행을 삭제하니 주의 요망
+    - ex) DELETE FROM sample WHERE no=3;</li>
 </ul>
-</li>
-<li>
-<p><strong>DELETE</strong></p>
 <ul>
-<li>RBDMS에서 DELETE 명령을 통해 행 단위로 데이터 삭제 가능</li>
-<li>조건식 "WHERE"를 통해 해당 조건을 만족하는 행을 삭제하자<ul>
-<li>다만! 조건을 만족하는 모든 행을 삭제하니 주의 요망</li>
+<li><strong>UPDATE</strong>
+    - RDBMS에서 UPDATE 명령을 통해 데이터를 갱신할 수 있다
+    - ex) UPDATE 테이블명 SET 열1 = 값1, 열2 = 값2, WHERE 조건식;
+        - <em>ex) UPDATE sample SET a = 'xxx' WHERE no = 2;</em>
+    - ex) UPDATE 테이블명 SET 열명=값 WHERE 조건식
+        - <em>ex) UPDATE sample SET a = 'xxx', b = '2014-01-01' WHERE no = 2;</em></li>
 </ul>
-</li>
-<li>ex) DELETE FROM sample WHERE no=3;</li>
-</ul>
-</li>
-<li>
-<p><strong>UPDATE</strong></p>
 <ul>
-<li>RDBMS에서 UPDATE 명령을 통해 데이터를 갱신할 수 있다</li>
-<li>ex) UPDATE 테이블명 SET 열1 = 값1, 열2 = 값2, WHERE 조건식;<ul>
-<li><em>ex) UPDATE sample SET a = 'xxx' WHERE no = 2;</em></li>
-</ul>
-</li>
-<li>ex) UPDATE 테이블명 SET 열명=값 WHERE 조건식<ul>
-<li><em>ex) UPDATE sample SET a = 'xxx', b = '2014-01-01' WHERE no = 2;</em></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>물리삭제와 논리삭제</strong></p>
-<ul>
-<li>물리삭제: 직접 데이터를 DB에서 ㄹㅇ 삭제<ul>
-<li>ex) 개인 정보 삭제 등 </li>
-</ul>
-</li>
-<li>논리삭제: 삭제 플래그를 통해서 논리적으로 삭제되었음을 표시<ul>
-<li>ex) 쇼핑 주문 취소 등... 주문 데이터 자체는 갖고있는게 유리할 수도!</li>
-</ul>
-</li>
-<li>상황에 따라, 용도에 따라 데이터 삭제 방법을 선택하자!    </li>
-</ul>
-</li>
+<li><strong>물리삭제와 논리삭제</strong>
+    - 물리삭제: 직접 데이터를 DB에서 ㄹㅇ 삭제
+        - ex) 개인 정보 삭제 등 
+    - 논리삭제: 삭제 플래그를 통해서 논리적으로 삭제되었음을 표시
+        - ex) 쇼핑 주문 취소 등... 주문 데이터 자체는 갖고있는게 유리할 수도!
+    - 상황에 따라, 용도에 따라 데이터 삭제 방법을 선택하자!    </li>
 </ul>
 
 

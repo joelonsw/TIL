@@ -22990,13 +22990,17 @@
 <ul>
 <li>Proxy처럼 트래픽을 처리하는 로드밸런서</li>
 <li>OSI 7번째 계층에서 동작</li>
-<li>L7에서 Policy 기반으로 트래픽 제어 가능</li>
+<li>L7에서 Policy 기반으로 트래픽 제어 가능<ul>
 <li>클라이언트 요청에 따라 특정 Pool로 트래픽 전달, 경로 redirect, 요청 거부 가능</li>
 <li>설정 가능한 L7 Policy <ul>
 <li>Prefix 변경 -&gt; redirect</li>
 <li>Https redirect</li>
-<li>Path, Cookie/Header로 처리</li>
+<li>Path, Cookie/Header로 처리<ul>
 <li>regex, contains, starts with 등등으로</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>SSL 인증서를 LB에서 처리 가능</li>
@@ -23020,7 +23024,7 @@
     - 서브넷 안의 IP가 아니라면 L4 수용 어려움
     - 하나의 포트에서 여러가지 리얼 포트 전달하는 멀티포트 X</p>
 <ul>
-<li><strong>INLINE</strong></li>
+<li><strong>INLINE</strong><ul>
 <li>Client -&gt; L4 -&gt; Server -&gt; L4 -&gt; Client</li>
 <li>장점<ul>
 <li>같은 서브넷 아닌 IP 대역 L4 수용 가능</li>
@@ -23030,6 +23034,8 @@
 <li>단점<ul>
 <li>모든 트래픽 L4 경유 -&gt; 부하에 장비</li>
 <li>Client IP 전달을 위해서는 L4에서 HTTP 헤더값 추가하여 가이드를 촤르륵 따라야 함</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

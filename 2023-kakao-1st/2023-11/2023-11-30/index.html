@@ -23002,23 +23002,23 @@
 - <strong>용어</strong>
   - npm: node.js로 만들어진 프로그램을 쉽게 설치할 수 있게해주는 앱스토어 (node.js 설치시 자동으로 설치 됨)</p>
 <ul>
-<li><code>npm run build</code></li>
+<li><code>npm run build</code><ul>
 <li>빌드 완료시 <code>build</code> 폴더가 생성됨</li>
 <li>css/js/html/image 등 정적 리소스 생성 (minify 과정도 거침)</li>
-<li>
-<p>하지만 실제로 index.html 실행해서 열어보면 끝인줄 알았으나...</p>
+<li>하지만 실제로 index.html 실행해서 열어보면 끝인줄 알았으나...</li>
+</ul>
 </li>
-<li>
-<p><code>serve -s build</code></p>
-</li>
+</ul>
+<ul>
+<li><code>serve -s build</code><ul>
 <li><code>You may serve it with a static server</code></li>
 <li><code>build</code> 폴더의 정적 파일을 실행시키기 위해서는 웹서버가 필요하다</li>
-<li>
-<p><code>serve</code> 패키지가 정적 사이트를 제공하거나, SPA를 사용하기에 좋은 초이스라고 함</p>
+<li><code>serve</code> 패키지가 정적 사이트를 제공하거나, SPA를 사용하기에 좋은 초이스라고 함</li>
+</ul>
 </li>
-<li>
-<p><strong>왜 웹서버가 필요하지?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>왜 웹서버가 필요하지?</strong><ul>
 <li>index.html을 파일로 그냥 바로 열면, 다른 파일은 가져올 때 <code>file:</code> 프로토콜을 써<ul>
 <li>근데 이 <code>file:</code> 프로토콜이란 친구는 AJAX, Routing 이런거 하나도 이해못해. </li>
 <li>그래서 <code>http:</code> 프로토콜로 해당 파일을 가져올 수 있어야 해</li>
@@ -23027,8 +23027,10 @@
 <li>그러다보니까.. 우리는 웹서버가 살짝 필요해지는거야. <ul>
 <li>nginx/apache 같은걸로도 서브할 수 있어</li>
 <li>serve 같은 간단한 웹서버도 가능하고</li>
-<li>SPA 라우팅, 리다이렉트 등... </li>
+<li>SPA 라우팅, 리다이렉트 등... <ul>
 <li>그저 정적파일이긴 하지만, 파일시스템에서 바로 가져다가 쓸수는 없어요</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>해당 문제는 Client Side Rendering을 사용한다면 꼭 발생할 수 있어요<ul>
@@ -23038,23 +23040,25 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="js">JS 라이브러리 사용하기<a class="headerlink" href="#js" title="Permanent link">&para;</a></h2>
 <ul>
-<li>두가지 방법으로 사용할 수 있게 지원하기</li>
-<li>
-<p>npm, script형 설치</p>
+<li>두가지 방법으로 사용할 수 있게 지원하기<ul>
+<li>npm, script형 설치</li>
+</ul>
 </li>
-<li>
-<p><strong>npm</strong></p>
+</ul>
+<ul>
+<li><strong>npm</strong><ul>
+<li>npm으로 install 하면 코드베이스 거의 전체가 다 가다보니 interface로 야무지게 추출해서 제공할 수 있을 것 같고...</li>
+</ul>
 </li>
-<li>
-<p>npm으로 install 하면 코드베이스 거의 전체가 다 가다보니 interface로 야무지게 추출해서 제공할 수 있을 것 같고...</p>
-</li>
-<li>
-<p><strong>script</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>script</strong><ul>
 <li>스크립트는 이런식으로 임포트해서 가져오면, script 태그에서 쓸 수 있도록 지원받을 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
@@ -23081,6 +23085,8 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="babel-webpack">Babel &amp; Webpack<a class="headerlink" href="#babel-webpack" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://velog.io/@dbsbest10/Webpack-%EA%B3%BC-Babel%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C</em>
 - <strong>웹팩 (모듈 번들러)</strong>
@@ -23089,9 +23095,11 @@
   - 여러개로 나눠진 js 파일을 html이 실행할 수 있는 하나의 js 파일로 합쳐줌
   - 많은 파일을 다운받아와 네트워크 부하가 커지는 현상 + 같은 이름의 변수/함수 충돌 가능성 해결 위해 등장</p>
 <ul>
-<li><strong>바벨 (트랜스파일러)</strong></li>
+<li><strong>바벨 (트랜스파일러)</strong><ul>
 <li>특정 언어로 작성된 코드를 비슷한 다른 언어로 변환시키는 트랜스파일러</li>
 <li>모든 브라우저가 ES6 최신 기능을 제공하지 않기에 ES5 구기능으로 변환시키는 과정이 필요</li>
+</ul>
+</li>
 </ul>
 <h2 id="webpack">Webpack<a class="headerlink" href="#webpack" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://wonsss.github.io/webpack/webpack-all-in-one/</em>
@@ -23103,23 +23111,25 @@
   - node_modules만 봐도 상당히 많은 모듈이 들어가게됨
   - 모듈 종속성 : 서로다른 js 파일이 서로 다른 js 파일을 import 하게되면 에러 추적도 어려워... 병합도 어려워</p>
 <ul>
-<li><strong>1. 모듈 번들러, 웹팩이란?</strong></li>
+<li><strong>1. 모듈 번들러, 웹팩이란?</strong><ul>
 <li>위의 문제를 해결해 짧은 시간 최상의 성능을 위해 최적화</li>
 <li>모듈 번들러: 웹 어플리케이션을 동작시키기 위한 구성자원 (static resources)을 모두 각각의 모듈로 보고 이들의 의존성을 묶고 조합해 합친 하나의 결과물 (static 자원) 만드는 도구</li>
 <li>사용자가 웹사이트 접속시, 모든 파일 네트워크 통신으로 가져오는데, 하나하나 가져오면 느려. </li>
 <li>브라우저 HTTP 연결수도 최대 6건으로 제한. 너무 많으면 병목됨</li>
 <li>웹팩을 통해 여러 리소스를 번들링해 로딩 속도 개선</li>
 <li>웹서비스 개발 + 배포 =&gt; {HTML/CSS/JS/이미지} 압축/CSS 전처리기 변환 등 추가 작업 모두 대신해줌</li>
-<li>
-<p>엔트리 포인트를 시작으로 연결되어있는 모든 모듈을 합쳐 아웃풋 포인트로 결과물 저장. </p>
+<li>엔트리 포인트를 시작으로 연결되어있는 모든 모듈을 합쳐 아웃풋 포인트로 결과물 저장. </li>
+</ul>
 </li>
-<li>
-<p><strong>2. 웹팩이 해결하고자 하는것</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>2. 웹팩이 해결하고자 하는것</strong><ul>
 <li>js 변수 유효범위</li>
 <li>브라우저별 http 요청 숫자의 제약</li>
 <li>사용하지 않는 코드의 관리</li>
 <li>dynamic loading, lazy loading 미지원</li>
+</ul>
+</li>
 </ul>
 <h2 id="commonjs-vs-es6">CommonJs vs ES6<a class="headerlink" href="#commonjs-vs-es6" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://commnetall.tistory.com/46</em>
@@ -23128,22 +23138,23 @@
   - 클라이언트단 프레임워크와 서버단 프레임워크 모듈을 불러오는 키워드가 다르다고 생각하면 좋음
   - 다만 둘다 js를 사용해서 혼란이 생겨버림</p>
 <ul>
-<li><strong>CommonJs</strong></li>
+<li><strong>CommonJs</strong><ul>
 <li>Node.js에서 모듈 불러오기 위해 require, exports 키워드 사용</li>
 <li>2009년 표준, JS 모듈을 만들기 위한 법칙. </li>
-<li>
-<p>오로지 서버사이드 모듈을 만들고 불러오기 위해 개발됨</p>
+<li>오로지 서버사이드 모듈을 만들고 불러오기 위해 개발됨</li>
+</ul>
 </li>
-<li>
-<p><strong>ES6</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ES6</strong><ul>
 <li>ECMA 국제기구 표준문서 스펙</li>
 <li>표준으로 만들어서 통일시키려고 ECMA 등장</li>
-<li>
-<p>클라이언트가 단순한 기능넘어 클래스도 추가되어 CommonJS와 혼동</p>
+<li>클라이언트가 단순한 기능넘어 클래스도 추가되어 CommonJS와 혼동</li>
+</ul>
 </li>
-<li>
-<p><strong>코드 비교</strong>
+</ul>
+<ul>
+<li><strong>코드 비교</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//CommonJS</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">module</span><span class="p">.</span><span class="k">export</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">variable</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">modul1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./example.js&#39;</span><span class="p">)</span>
@@ -23151,13 +23162,14 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">//ES6</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">module</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">import</span><span class="w"> </span><span class="nx">module2</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./example.js&#39;</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>그럼 뭐써?</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>그럼 뭐써?</strong><ul>
 <li>ES6식 모듈 권장</li>
 <li>"strict mode" + ECMAScript 차기 버전 정의 문법 금지해줘서 좋음</li>
+</ul>
+</li>
 </ul>
 
 

@@ -22931,101 +22931,73 @@
 <h3 id="2021-07-06">2021-07-06<a class="headerlink" href="#2021-07-06" title="Permanent link">&para;</a></h3>
 <h2 id="git">GIT 브랜치 전략<a class="headerlink" href="#git" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>왜 필요하지?</strong></p>
-<ul>
-<li>어디서 에러가 터졌지?<ul>
-<li>찾기도 어려움</li>
-<li>기적적으로 찾아도 이후 개발한 신규 기능 배포 어려워!</li>
+<li><strong>왜 필요하지?</strong>
+    - 어디서 에러가 터졌지?
+        - 찾기도 어려움
+        - 기적적으로 찾아도 이후 개발한 신규 기능 배포 어려워!</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>새로운 기능의 개발</strong></p>
 <ul>
-<li>메인 하나만 두고 있었어</li>
-<li>최신 기능 "Feature Branch"
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; git branch feature/new-function
+<li><strong>새로운 기능의 개발</strong>
+    - 메인 하나만 두고 있었어
+    - 최신 기능 "Feature Branch"
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; git branch feature/new-function
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&gt; git checkout feature/new-function
-</code></pre></div></li>
-<li>에러 제보 "Hotfix Branch"
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; git checkout -b hotfix/server-error
-</code></pre></div></li>
-<li>작업 통합 후 푸시
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt; git checkout main
+</code></pre></div>
+    - 에러 제보 "Hotfix Branch"
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; git checkout -b hotfix/server-error
+</code></pre></div>
+    - 작업 통합 후 푸시
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt; git checkout main
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt; git merge hotfix/server-error
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&gt; git push
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>태그 관리</strong></p>
 <ul>
-<li>메인에 버전 명시하고 싶어!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt; git tag -a v0.1 -m &quot;최초 배포 버전&quot;
+<li><strong>태그 관리</strong>
+    - 메인에 버전 명시하고 싶어!
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt; git tag -a v0.1 -m &quot;최초 배포 버전&quot;
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&gt; git tag -a v0.1.1 1e2098 -m &quot;지난 커밋의 해시값에 태그 붙임&quot;
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>&gt; git show v0.1 
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>&gt; git push origin v0.1:v0.1
-</code></pre></div><ul>
-<li>버전 명시하면 release note 작성 가능</li>
+</code></pre></div>
+        - 버전 명시하면 release note 작성 가능</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>깃 브랜치 전략 정하기</strong></p>
 <ul>
-<li>git-flow, github-flow</li>
-<li>브랜치 역할, 규칙 정하기</li>
-<li>커밋 메시지 포맷 정하기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>main: 주 브랜치
+<li><strong>깃 브랜치 전략 정하기</strong>
+    - git-flow, github-flow
+    - 브랜치 역할, 규칙 정하기
+    - 커밋 메시지 포맷 정하기
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>main: 주 브랜치
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>feature: 신규 기능 개발
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>hotfix: 에러 수정
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>release: 배포 브랜치
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="_1">현업 깃 플로우 전략<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://techblog.woowahan.com/2553/</em></li>
-<li>
-<p><strong>Git Repository 구성</strong></p>
+<li><strong>Git Repository 구성</strong>
+    - Upstream Remote Repository (최종 서비스가 공유)
+    - Origin Remote Repository (각 개발자 별로)
+    - Local Repository (각 개발자 별로)
+    - 미션 코드 PR 날리는 구조랑 비슷한데?</li>
+</ul>
 <ul>
-<li>Upstream Remote Repository (최종 서비스가 공유)</li>
-<li>Origin Remote Repository (각 개발자 별로)</li>
-<li>Local Repository (각 개발자 별로)</li>
-<li>미션 코드 PR 날리는 구조랑 비슷한데?</li>
-</ul>
-</li>
-<li>
-<p><strong>Git-flow 전략 살펴보기</strong></p>
-<ul>
-<li>master: 제품으로 출시될 브랜치<ul>
-<li>release에서 넘어온 커밋 기준 태그 붙여서 머지</li>
-</ul>
-</li>
-<li>develop: 다음 출시 버전 개발 브랜치<ul>
-<li>master에서 파생한 개발 브랜치</li>
-<li>상시로 버그 수정한 커밋</li>
-</ul>
-</li>
-<li>feature: 기능 개발 브랜치<ul>
-<li>develop에서 파생해 새로운 기능 추가 작업</li>
-<li>기능 개발이 완료되었다면 develop으로 머지</li>
-</ul>
-</li>
-<li>release: 이번 출시 버전 준비 브랜치<ul>
-<li>기능 개발이 완료된 develop에서 파생</li>
-<li>QA를 위함</li>
-<li>다 하면 master와 develop으로 머지</li>
-</ul>
-</li>
-<li>hotfix: 출시 버전에서 발생한 버그 수정 브랜치
-<img alt="" src="https://techblog.woowahan.com/wp-content/uploads/img/2017-10-30/git-flow_overall_graph.png" /></li>
-</ul>
-</li>
+<li><strong>Git-flow 전략 살펴보기</strong>
+    - master: 제품으로 출시될 브랜치
+        - release에서 넘어온 커밋 기준 태그 붙여서 머지
+    - develop: 다음 출시 버전 개발 브랜치
+        - master에서 파생한 개발 브랜치
+        - 상시로 버그 수정한 커밋
+    - feature: 기능 개발 브랜치
+        - develop에서 파생해 새로운 기능 추가 작업
+        - 기능 개발이 완료되었다면 develop으로 머지
+    - release: 이번 출시 버전 준비 브랜치
+        - 기능 개발이 완료된 develop에서 파생
+        - QA를 위함
+        - 다 하면 master와 develop으로 머지
+    - hotfix: 출시 버전에서 발생한 버그 수정 브랜치
+    <img alt="" src="https://techblog.woowahan.com/wp-content/uploads/img/2017-10-30/git-flow_overall_graph.png" /></li>
 </ul>
 
 

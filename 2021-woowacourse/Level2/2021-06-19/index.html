@@ -22933,117 +22933,73 @@
 <ul>
 <li><em>참고 1: https://gmlwjd9405.github.io/2018/10/28/servlet.html</em></li>
 <li><em>참고 2: https://mangkyu.tistory.com/14</em></li>
-<li>
-<p><strong>정의</strong></p>
+<li><strong>정의</strong>
+    - 웹 기반 요청에 대한 동적인 처리가 가능한 Server Side에서 돌아가는 Java Program
+    - 웹 서버가 동적인 페이지를 제공할 수 있도록 도와주는 어플리케이션으로, 동적인 페이지를 생성하는 어플리케이션이 CGI
+    - Java 코드 안에 HTML 코드가 있음</li>
+</ul>
 <ul>
-<li>웹 기반 요청에 대한 동적인 처리가 가능한 Server Side에서 돌아가는 Java Program</li>
-<li>웹 서버가 동적인 페이지를 제공할 수 있도록 도와주는 어플리케이션으로, 동적인 페이지를 생성하는 어플리케이션이 CGI</li>
-<li>Java 코드 안에 HTML 코드가 있음</li>
+<li><strong>동작 과정</strong>
+    1. Web Server는 HTTP request를 Web Container에게 위임 
+        - web.xml 설정에서 어떤 url과 매핑되어 있는지 확인
+        - 클라이언트의 요청 url 보고 적절한 Servlet 실행
+    2. Web Container는 service() 메서드 호출 전, Servlet 객체를 메모리에 올림
+        - Web Container는 적절한 Servlet 파일을 컴파일
+        - .class 파일을 메모리에 올려 Servlet 객체를 만듦
+        - 메모리 로드될 때 Servlet 객체를 초기화하는 init() 메서드 실행
+    3. Web Container는 Request가 올 때 마다 thread를 생성하여 처리
+        - 각 thread는 Servlet의 단일 객체에 대한 service() 메서드 실행
+            - doGet(), doPost() 호출
+        - Web Container가 thread 생성과 제거를 담당함
+            - 이게 오버헤드가 큰 작업이라 Thread Pool에 thread 쟁여둠</li>
 </ul>
-</li>
-<li>
-<p><strong>동작 과정</strong></p>
-<ol>
-<li>Web Server는 HTTP request를 Web Container에게 위임 <ul>
-<li>web.xml 설정에서 어떤 url과 매핑되어 있는지 확인</li>
-<li>클라이언트의 요청 url 보고 적절한 Servlet 실행</li>
-</ul>
-</li>
-<li>Web Container는 service() 메서드 호출 전, Servlet 객체를 메모리에 올림<ul>
-<li>Web Container는 적절한 Servlet 파일을 컴파일</li>
-<li>.class 파일을 메모리에 올려 Servlet 객체를 만듦</li>
-<li>메모리 로드될 때 Servlet 객체를 초기화하는 init() 메서드 실행</li>
-</ul>
-</li>
-<li>Web Container는 Request가 올 때 마다 thread를 생성하여 처리<ul>
-<li>각 thread는 Servlet의 단일 객체에 대한 service() 메서드 실행<ul>
-<li>doGet(), doPost() 호출</li>
-</ul>
-</li>
-<li>Web Container가 thread 생성과 제거를 담당함<ul>
-<li>이게 오버헤드가 큰 작업이라 Thread Pool에 thread 쟁여둠</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p><strong>Servlet 동작 방식</strong></p>
-<ol>
-<li>클라이언트가 URL 입력하면 HTTP Request가 Servlet Container로 전송</li>
-<li>요청을 전송받은 Servlet Container는 HttpServletRequest, HttpServletResponse 객체를 생성</li>
-<li>web.xml을 기반으로 사용자가 요청한 URL이 어느 서블릿에 대한 요청인지 찾음</li>
-<li>해당 서블릿에서 service 메서드 호출한 후, 클라이언트 Http method에 따라 doGet()/doPost() 를 호출</li>
-<li>doGet()/doPost() 메서드는 동적 페이지 생성하여 HttpServletResponse에 응답 보냄</li>
-<li>응답 끝나면 HttpServletRequest, HttpServletResponse 두 객체 소멸</li>
-</ol>
-</li>
-<li>
-<p><strong>Servlet Container</strong></p>
 <ul>
-<li>서블릿 컨테이너는 클라이언트의 요청을 받아주고 응답할 수 있게, 웹 서버와 소켓으로 통신함<ul>
-<li>Tomcat이 대표적</li>
-<li>실제로 웹 서버와 통신하여 JSP와 Servlet이 작동하는 환경 제공</li>
+<li><strong>Servlet 동작 방식</strong>
+    1. 클라이언트가 URL 입력하면 HTTP Request가 Servlet Container로 전송
+    2. 요청을 전송받은 Servlet Container는 HttpServletRequest, HttpServletResponse 객체를 생성
+    3. web.xml을 기반으로 사용자가 요청한 URL이 어느 서블릿에 대한 요청인지 찾음
+    4. 해당 서블릿에서 service 메서드 호출한 후, 클라이언트 Http method에 따라 doGet()/doPost() 를 호출
+    5. doGet()/doPost() 메서드는 동적 페이지 생성하여 HttpServletResponse에 응답 보냄
+    6. 응답 끝나면 HttpServletRequest, HttpServletResponse 두 객체 소멸</li>
 </ul>
-</li>
-<li>역할<ol>
-<li>웹 서버와의 통신 지원 (소켓 만들어서 listen, accept등을 생략)</li>
-<li>서블릿 생명주기 관리</li>
-<li>멀티 쓰레드 지원 및 관리</li>
-<li>선언적인 보안 관리</li>
-</ol>
-</li>
+<ul>
+<li><strong>Servlet Container</strong>
+    - 서블릿 컨테이너는 클라이언트의 요청을 받아주고 응답할 수 있게, 웹 서버와 소켓으로 통신함
+        - Tomcat이 대표적
+        - 실제로 웹 서버와 통신하여 JSP와 Servlet이 작동하는 환경 제공
+    - 역할
+        1. 웹 서버와의 통신 지원 (소켓 만들어서 listen, accept등을 생략)
+        2. 서블릿 생명주기 관리
+        3. 멀티 쓰레드 지원 및 관리
+        4. 선언적인 보안 관리</li>
 </ul>
-</li>
-<li>
-<p><strong>Servlet Life Cycle</strong></p>
-<ol>
-<li>클라이언트의 요청 들어오면 WAS는 해당 요청에 맞는 Servlet이 메모리에 있는지 확인<ul>
-<li>메모리에 없다면 Servlet 객체 init() 생성 후 메모리에 올림<ul>
-<li>이후 service() 실행</li>
-</ul>
-</li>
-<li>메모리에 있다면 Servlet 객체 service() 실행</li>
-</ul>
-</li>
-<li>Servlet(request, response) 실행<ul>
-<li>HttpServlet을 상속받은 Servlet에서 service() 메서드 오버라이드 하지 않았다면 부모 클래스 HttpServlet에서 service() 호출</li>
-<li>service() 메서드는 request의 type에 따라 doGet, doPost, doPut, doDelete 등 호출</li>
-</ul>
-</li>
-</ol>
-</li>
+<ul>
+<li><strong>Servlet Life Cycle</strong>
+    1. 클라이언트의 요청 들어오면 WAS는 해당 요청에 맞는 Servlet이 메모리에 있는지 확인
+        - 메모리에 없다면 Servlet 객체 init() 생성 후 메모리에 올림
+            - 이후 service() 실행
+        - 메모리에 있다면 Servlet 객체 service() 실행
+    2. Servlet(request, response) 실행
+        - HttpServlet을 상속받은 Servlet에서 service() 메서드 오버라이드 하지 않았다면 부모 클래스 HttpServlet에서 service() 호출
+        - service() 메서드는 request의 type에 따라 doGet, doPost, doPut, doDelete 등 호출</li>
 </ul>
 <h2 id="jsp">JSP<a class="headerlink" href="#jsp" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://gmlwjd9405.github.io/2018/11/04/servlet-vs-jsp.html</em></li>
-<li>
-<p><strong>정의</strong></p>
+<li><strong>정의</strong>
+    - JavaServer Pages의 줄임말
+    - 웹 서버에서 동적으로 웹 페이지를 생성하여 웹 브라우저에 돌려주는 서버 사이드 스크립트 언어
+    - JSP는 실행시에는 자바 서블릿으로 변환된 후 실행됨 (서블릿과 유사함)
+        - HTML 표준에 따라 작성되기에 웹 디자인에 편리</li>
+</ul>
 <ul>
-<li>JavaServer Pages의 줄임말</li>
-<li>웹 서버에서 동적으로 웹 페이지를 생성하여 웹 브라우저에 돌려주는 서버 사이드 스크립트 언어</li>
-<li>JSP는 실행시에는 자바 서블릿으로 변환된 후 실행됨 (서블릿과 유사함)<ul>
-<li>HTML 표준에 따라 작성되기에 웹 디자인에 편리</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>특징</strong></p>
-<ul>
-<li>서블릿은 자바 소스코드 속에 HTML 들어감</li>
-<li>JSP는 HTML 소스코드 속에 자바 소스코드가 들어감<ul>
-<li>HTML 속에서 &lt;% 소스코드 %&gt;, &lt;%= 소스코드 =%&gt; 형태로 들어감</li>
-</ul>
-</li>
-<li>Servlet을 보완하고 기술을 확장한 스크립트 방식 표준<ul>
-<li>Servlet의 모든 기능 + 추가적인 기능</li>
-</ul>
-</li>
-<li>JSP는 WAS에 의해 서블릿 클래스로 변환되어 사용됨</li>
-</ul>
-</li>
+<li><strong>특징</strong>
+    - 서블릿은 자바 소스코드 속에 HTML 들어감
+    - JSP는 HTML 소스코드 속에 자바 소스코드가 들어감
+        - HTML 속에서 &lt;% 소스코드 %&gt;, &lt;%= 소스코드 =%&gt; 형태로 들어감
+    - Servlet을 보완하고 기술을 확장한 스크립트 방식 표준
+        - Servlet의 모든 기능 + 추가적인 기능
+    - JSP는 WAS에 의해 서블릿 클래스로 변환되어 사용됨</li>
 </ul>
 
 

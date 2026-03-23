@@ -23019,59 +23019,43 @@
 <h3 id="2021-06-04">2021-06-04<a class="headerlink" href="#2021-06-04" title="Permanent link">&para;</a></h3>
 <h2 id="atdd-subway-fare">atdd-subway-fare 피드백 사안<a class="headerlink" href="#atdd-subway-fare" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>단위 테스트 작성하기</strong></p>
+<li><strong>단위 테스트 작성하기</strong>
+    - 인수 테스트와 무관하게 작성하자
+    - 해당 기능이 변경되었을 때 빠르게 피드백 받아야함
+        - 인수 테스트는 이게 힘듦</li>
+</ul>
 <ul>
-<li>인수 테스트와 무관하게 작성하자</li>
-<li>해당 기능이 변경되었을 때 빠르게 피드백 받아야함<ul>
-<li>인수 테스트는 이게 힘듦</li>
+<li><strong>Domain에서 검증하기 VS RequestDto에서 검증하기</strong>
+    - 각 Layer 별로 적절한 유효성 검사는 필요
+    - 확장성을 고려하여 각자 Validation의 기준을 잡자
+        - 그리고 앞단에서 valid 된 것은 신뢰하고 사용하자</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Domain에서 검증하기 VS RequestDto에서 검증하기</strong></p>
 <ul>
-<li>각 Layer 별로 적절한 유효성 검사는 필요</li>
-<li>확장성을 고려하여 각자 Validation의 기준을 잡자<ul>
-<li>그리고 앞단에서 valid 된 것은 신뢰하고 사용하자</li>
+<li><strong>ArgumentResolver에서 Optional을 사용하기 보다는 다형성을 통해 상황을 분리하자</strong></li>
 </ul>
-</li>
+<ul>
+<li><strong>NamedParameterJdbcTemplate 사용해보기</strong></li>
 </ul>
-</li>
-<li>
-<p><strong>ArgumentResolver에서 Optional을 사용하기 보다는 다형성을 통해 상황을 분리하자</strong></p>
-</li>
-<li>
-<p><strong>NamedParameterJdbcTemplate 사용해보기</strong></p>
-</li>
-<li>
-<p><strong>도메인 필드 값에 대해 원시값 포장</strong></p>
-</li>
-<li>
-<p><strong>디미터의 법칙 준수</strong></p>
-</li>
-<li>
-<p><strong>매직 넘버 상수화</strong></p>
-</li>
+<ul>
+<li><strong>도메인 필드 값에 대해 원시값 포장</strong></li>
+</ul>
+<ul>
+<li><strong>디미터의 법칙 준수</strong></li>
+</ul>
+<ul>
+<li><strong>매직 넘버 상수화</strong></li>
 </ul>
 <h2 id="namedparameterjdbctemplate">NamedParameterJdbcTemplate<a class="headerlink" href="#namedparameterjdbctemplate" title="Permanent link">&para;</a></h2>
 <ul>
-<li>기존 jdbc는 변수 매핑 "?" 로 했지만, NamedParameterJdbcTemplate은 변수명으로 매핑 가능<ul>
-<li>:variable로 구분</li>
-</ul>
-</li>
+<li>기존 jdbc는 변수 매핑 "?" 로 했지만, NamedParameterJdbcTemplate은 변수명으로 매핑 가능
+    - :variable로 구분</li>
 <li>기본적으로 변수를 Map 객체를 통해 받아서 적용</li>
-<li>Map 객체를 통해 받아서 적용시킴<ul>
-<li>NamedParameterJdbcTemplate.queryForObject(sql, params(Map), rowMapper) : 한 줄의 열 처리</li>
-<li>NamedParameterJdbcTemplate.update(sql, params, rowMapper) : Delete, Insert, Update 처리</li>
-</ul>
-</li>
-<li>NamedParameterJdbcTemplate<ul>
-<li>sql문에 파라미터 매핑 시 이름을 기반으로 해서 매핑시킬 수 있음</li>
-<li>Map을 생성해서 key로 이름, value에 넣을 값 투척</li>
-</ul>
-</li>
+<li>Map 객체를 통해 받아서 적용시킴
+    - NamedParameterJdbcTemplate.queryForObject(sql, params(Map), rowMapper) : 한 줄의 열 처리
+    - NamedParameterJdbcTemplate.update(sql, params, rowMapper) : Delete, Insert, Update 처리</li>
+<li>NamedParameterJdbcTemplate
+    - sql문에 파라미터 매핑 시 이름을 기반으로 해서 매핑시킬 수 있음
+    - Map을 생성해서 key로 이름, value에 넣을 값 투척</li>
 </ul>
 <h2 id="beanpropertysqlparametersource">BeanPropertySqlParameterSource<a class="headerlink" href="#beanpropertysqlparametersource" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23083,23 +23067,17 @@
 </ul>
 <h2 id="dao-vs">Dao 메서드 파라미터로 필드를 넘겨주기 VS 도메인을 넘겨주기<a class="headerlink" href="#dao-vs" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Dao 메서드들의 파라미터에 테이블과 1:1로 대응되는 변수들을 넘겨주기</strong></p>
-<ul>
-<li>해당 방식의 장점으로는 파라미터 자체로 Dao에 필요한 정보를 강제하기 때문에, Dao단에서 필요한 정보가 없어 실수할 일이 없었음  </li>
-<li>DB로의 접근 쿼리와 실행로직만 필요했고, 비즈니스 로직이 없었기에 Dao를 얇게 유지할 수 있었음 </li>
-<li>DB 접근의 실수를 최소화 할 수 있을 것 같음</li>
+<li><strong>Dao 메서드들의 파라미터에 테이블과 1:1로 대응되는 변수들을 넘겨주기</strong>
+    - 해당 방식의 장점으로는 파라미터 자체로 Dao에 필요한 정보를 강제하기 때문에, Dao단에서 필요한 정보가 없어 실수할 일이 없었음<br />
+    - DB로의 접근 쿼리와 실행로직만 필요했고, 비즈니스 로직이 없었기에 Dao를 얇게 유지할 수 있었음 
+    - DB 접근의 실수를 최소화 할 수 있을 것 같음</li>
 </ul>
-</li>
-<li>
-<p><strong>도메인 자체를 Dao의 파라미터로 넘겨주기</strong></p>
 <ul>
-<li>Dao 메서드 내부에서 필요한 정보를 도메인에서 추출하여 사용하게 됨</li>
-<li>이렇다면 테이블의 필드와 도메인의 필드가 일치해야 할 것</li>
-<li>이렇게 된다면, Dao의 메서드 파라미터를 통해 DB에 필요한 정보를 노출시키는 일이 없을 것  </li>
-<li>도메인의 필드만 수정하면 되니 유지보수에도 어쩌면 더 유리할 수 있음</li>
-</ul>
-</li>
+<li><strong>도메인 자체를 Dao의 파라미터로 넘겨주기</strong>
+    - Dao 메서드 내부에서 필요한 정보를 도메인에서 추출하여 사용하게 됨
+    - 이렇다면 테이블의 필드와 도메인의 필드가 일치해야 할 것
+    - 이렇게 된다면, Dao의 메서드 파라미터를 통해 DB에 필요한 정보를 노출시키는 일이 없을 것<br />
+    - 도메인의 필드만 수정하면 되니 유지보수에도 어쩌면 더 유리할 수 있음</li>
 </ul>
 <h2 id="controller">Controller 테스트 하면서 힘들었던 점<a class="headerlink" href="#controller" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23112,20 +23090,14 @@
 <ul>
 <li><em>참고 1: https://johngrib.github.io/wiki/spring-annotation-profile/</em></li>
 <li><em>참고 2: https://2ham-s.tistory.com/259</em></li>
-<li>하나 이상의 지정된 profile이 활성화되어 있다면 해당 profile의 설정을 등록할 수 있음<ul>
-<li>ConfigurableEnvironment.setActive~~ 이걸로 프로그래밍 방식으로 활성화</li>
-<li>spring.profiles.active 속성을 JVM 시스템 속성이나 환경 변수로 지정</li>
-<li>web.xml에서 servlet context 파라미터 설정</li>
-</ul>
-</li>
-<li>스프링 부트 애플리케이션의 런타임 환경 관리<ul>
-<li>테스트 환경에서 실행? 프로덕션 환경에서 실행?</li>
-</ul>
-</li>
-<li><strong><code>@Profile</code>에 인자로 들어가는 값은 Profile이 현재 인자값과 일치할 시 아래 코드에서 명시한 스프링 빈 등록하라는 뜻!</strong>    <ul>
-<li>각 환경에 맞게 Spring의 Bean들을 올릴 수 있도록!!!</li>
-</ul>
-</li>
+<li>하나 이상의 지정된 profile이 활성화되어 있다면 해당 profile의 설정을 등록할 수 있음
+    - ConfigurableEnvironment.setActive~~ 이걸로 프로그래밍 방식으로 활성화
+    - spring.profiles.active 속성을 JVM 시스템 속성이나 환경 변수로 지정
+    - web.xml에서 servlet context 파라미터 설정</li>
+<li>스프링 부트 애플리케이션의 런타임 환경 관리
+    - 테스트 환경에서 실행? 프로덕션 환경에서 실행?</li>
+<li><strong><code>@Profile</code>에 인자로 들어가는 값은 Profile이 현재 인자값과 일치할 시 아래 코드에서 명시한 스프링 빈 등록하라는 뜻!</strong>  <br />
+    - 각 환경에 맞게 Spring의 Bean들을 올릴 수 있도록!!!</li>
 </ul>
 
 

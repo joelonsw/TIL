@@ -18850,50 +18850,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#2-ruby" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. ruby 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 소스 복사
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-gem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Gem 패키지 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-sinatra" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Sinatra 서버 실행
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -22953,50 +22909,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#2-ruby" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. ruby 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 소스 복사
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-gem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Gem 패키지 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-sinatra" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Sinatra 서버 실행
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -23014,116 +22926,102 @@
 
 
 
+  <h1>2021 07 17</h1>
+
 <h3 id="2021-07-17">2021-07-17<a class="headerlink" href="#2021-07-17" title="Permanent link">&para;</a></h3>
 <h2 id="powershell-aws">Powershell에서 AWS 인스턴스 접근 자동화<a class="headerlink" href="#powershell-aws" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>동기</strong><ul>
-<li>매번 pem키 있는 폴더 들어가고, ssh -i ~~~ 명령어 치는게 번잡스러움</li>
-<li>많은 인스턴스들을 사용하면서, 접속하는 ip들이 다양해짐<ul>
-<li>기도메타로 WAS겠지, DB겠지 하는 것에 대한 피로도 증가</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>해결 방법</strong><ul>
-<li><em>참고 1: https://superuser.com/questions/1183386/setting-up-an-alias-for-ssh-command-in-windows-powershell</em></li>
-<li><em>참고 2: https://www.howtogeek.com/50236/customizing-your-powershell-profile/</em></li>
-<li>Alias로 ssh 명령을 쟁여두자<ul>
-<li>안타깝게도 다음과 같은 에러메시지 출력<ul>
-<li><code>Set-Alias : 매개 변수 이름 'i'이(가) 모호하므로 매개 변수를 처리할 수 없습니다. 일치하는 항목은 다음과 같습니다.  -InformationAction -InformationVariable.</code></li>
-</ul>
-</li>
-<li>전체 문자열 자체를 커맨드로 실행시키려고 해서 그럼<ul>
-<li>ssh -i "pemkey" user@ip &lt;- 여기서 ssh만 커맨드임</li>
-<li>"-i" 이런건 파라미터라서 별명 지정이 불가</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>function을 통해 ssh 연결 과정을 정의하기<ul>
-<li>function nolto-was {ssh -i "pemkey" user@ip} 와 같이 함수로 지정</li>
-<li>성공적으로 실행됨!</li>
-<li>하지만 파워쉘 끄면 날라감</li>
-</ul>
-</li>
-<li>powershell script (ps1) 파일에 function 정의해두고, 파워쉘 키면 자동 실행되게 하기<ul>
-<li><code>New-Item -path $profile -type file -force</code>로 ps1 생성</li>
-<li>다음과 같이 작성하기
-<code>shell script
-set-location c:
-function nolto-ws {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}
-function nolto-was {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}
-function nolto-db {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4} 
-function joel-test {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}
-function joel-web-hosting {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}</code></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>동기</strong>
+    - 매번 pem키 있는 폴더 들어가고, ssh -i ~~~ 명령어 치는게 번잡스러움
+    - 많은 인스턴스들을 사용하면서, 접속하는 ip들이 다양해짐
+        - 기도메타로 WAS겠지, DB겠지 하는 것에 대한 피로도 증가</li>
+<li><strong>해결 방법</strong>
+    - <em>참고 1: https://superuser.com/questions/1183386/setting-up-an-alias-for-ssh-command-in-windows-powershell</em>
+    - <em>참고 2: https://www.howtogeek.com/50236/customizing-your-powershell-profile/</em>
+    1. Alias로 ssh 명령을 쟁여두자
+        - 안타깝게도 다음과 같은 에러메시지 출력
+            - <code>Set-Alias : 매개 변수 이름 'i'이(가) 모호하므로 매개 변수를 처리할 수 없습니다. 일치하는 항목은 다음과 같습니다.  -InformationAction -InformationVariable.</code>
+        - 전체 문자열 자체를 커맨드로 실행시키려고 해서 그럼
+            - ssh -i "pemkey" user@ip &lt;- 여기서 ssh만 커맨드임
+            - "-i" 이런건 파라미터라서 별명 지정이 불가
+    2. function을 통해 ssh 연결 과정을 정의하기
+        - function nolto-was {ssh -i "pemkey" user@ip} 와 같이 함수로 지정
+        - 성공적으로 실행됨!
+        - 하지만 파워쉘 끄면 날라감
+    3. powershell script (ps1) 파일에 function 정의해두고, 파워쉘 키면 자동 실행되게 하기
+        - <code>New-Item -path $profile -type file -force</code>로 ps1 생성
+        - 다음과 같이 작성하기
+        <code>shell script
+        set-location c:
+        function nolto-ws {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}
+        function nolto-was {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}
+        function nolto-db {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4} 
+        function joel-test {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}
+        function joel-web-hosting {ssh -i "C:\Directory\PEMKEY\real.pem" ubuntu@1.2.3.4}</code></li>
 </ul>
 <h2 id="-">도커 - 이미지 만들고 배포하기<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://subicura.com/2017/02/10/docker-guide-for-beginners-create-image-and-deploy.html</em></li>
-<li><strong>서버에 코드를 받고, 배포하는 과정을 하나로 합침! 쉘 스크립트와 도커 파일은 유사한게 많다!</strong><ul>
-<li>
-<p>쉘 스크립트
-    ```shell script
-    # 1. ubuntu 설치 (패키지 업데이트)
-    apt-get update</p>
-<h1 id="2-ruby">2. ruby 설치<a class="headerlink" href="#2-ruby" title="Permanent link">&para;</a></h1>
-<p>apt-get install ruby
-gem install bundler</p>
-<h1 id="3">3. 소스 복사<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
-<p>mkdir -p /usr/src/app
-scp Gemfile app.rb root@ubuntu:/usr/src/app  # From host</p>
-<h1 id="4-gem">4. Gem 패키지 설치<a class="headerlink" href="#4-gem" title="Permanent link">&para;</a></h1>
-<p>bundle install</p>
-<h1 id="5-sinatra">5. Sinatra 서버 실행<a class="headerlink" href="#5-sinatra" title="Permanent link">&para;</a></h1>
-<p>bundle exec ruby app.rb
-<code>``
-    - 도커 파일
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># 1. ubuntu 설치 (패키지 업데이트 + 만든사람 표시)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>#<span class="w"> </span>FROM:<span class="w"> </span>베이스<span class="w"> </span>이미지<span class="w"> </span>지정!
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">FROM</span><span class="w">       </span><span class="s">ubuntu:16.04</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>#<span class="w"> </span>MAINTAINER:<span class="w"> </span>관리하는<span class="w"> </span>사람의<span class="w"> </span>이메일<span class="w"> </span>정보
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">MAINTAINER</span><span class="w"> </span><span class="s">subicura@subicura.com</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>#<span class="w"> </span>RUN:<span class="w"> </span>명령어를<span class="w"> </span>내부적으로<span class="w"> </span>실행
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">RUN</span><span class="w">        </span>apt-get<span class="w"> </span>-y<span class="w"> </span>update
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c"># 2. ruby 설치</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>ruby
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">RUN</span><span class="w"> </span>gem<span class="w"> </span>install<span class="w"> </span>bundler
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c"># 3. 소스 복사</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span>#<span class="w"> </span>COPY:<span class="w"> </span>파일이나<span class="w"> </span>디렉토리<span class="w"> </span>이미지로<span class="w"> </span>복사,<span class="w"> </span>주로<span class="w"> </span>소스<span class="w"> </span>복사에<span class="w"> </span>쓰임
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/usr/src/app
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="c"># 4. Gem 패키지 설치 (실행 디렉토리 설정)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span>#<span class="w"> </span>WORKDIR:<span class="w"> </span>RUN,<span class="w"> </span>CMD,<span class="w"> </span>ADD,<span class="w"> </span>COPY등이<span class="w"> </span>이루어질<span class="w"> </span>기본<span class="w"> </span>디렉토리<span class="w"> </span>설정
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/usr/src/app</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="k">RUN</span><span class="w">     </span>bundle<span class="w"> </span>install
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="c"># 5. Sinatra 서버 실행 (Listen 포트 정의)</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">  </span>#<span class="w"> </span>EXPOSE:<span class="w"> </span>도커<span class="w"> </span>컨테이너<span class="w"> </span>실행시<span class="w"> </span>요청을<span class="w"> </span>기다릴<span class="w"> </span>포트<span class="w"> </span>지정
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">4567</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">  </span>#<span class="w"> </span>CMD:<span class="w"> </span>도커<span class="w"> </span>컨테이너가<span class="w"> </span>실행되었을<span class="w"> </span>때<span class="w"> </span>실행되는<span class="w"> </span>명령어<span class="w"> </span>정의
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="k">CMD</span><span class="w">    </span>bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ruby<span class="w"> </span>app.rb<span class="w"> </span>-o<span class="w"> </span><span class="m">0</span>.0.0.0
+<li><strong>서버에 코드를 받고, 배포하는 과정을 하나로 합침! 쉘 스크립트와 도커 파일은 유사한게 많다!</strong>
+    - 쉘 스크립트
+        ```shell script
+        # 1. ubuntu 설치 (패키지 업데이트)
+        apt-get update<div class="highlight"><pre><span></span><code>  # 2. ruby 설치
+  apt-get install ruby
+  gem install bundler
+
+  # 3. 소스 복사
+  mkdir -p /usr/src/app
+  scp Gemfile app.rb root@ubuntu:/usr/src/app  # From host
+
+  # 4. Gem 패키지 설치
+  bundle install
+
+  # 5. Sinatra 서버 실행
+  bundle exec ruby app.rb
+  ```
 </code></pre></div>
-- 이후</code>docker build -t app .<code>를 통해 도커파일 생성
--</code>docker run -d -p 8080:4567 app<code>,</code>docker run -d -p 80:4567 app` 등으로 웹 서버 동작이 가능!! (세상에)
+<p>- 도커 파일
+      <code>dockerfile
+      # 1. ubuntu 설치 (패키지 업데이트 + 만든사람 표시)
+        # FROM: 베이스 이미지 지정!
+      FROM       ubuntu:16.04
+        # MAINTAINER: 관리하는 사람의 이메일 정보
+      MAINTAINER subicura@subicura.com
+        # RUN: 명령어를 내부적으로 실행
+      RUN        apt-get -y update
+
+      # 2. ruby 설치
+      RUN apt-get -y install ruby
+      RUN gem install bundler
+
+      # 3. 소스 복사
+        # COPY: 파일이나 디렉토리 이미지로 복사, 주로 소스 복사에 쓰임
+      COPY . /usr/src/app
+
+      # 4. Gem 패키지 설치 (실행 디렉토리 설정)
+        # WORKDIR: RUN, CMD, ADD, COPY등이 이루어질 기본 디렉토리 설정
+      WORKDIR /usr/src/app
+      RUN     bundle install
+
+      # 5. Sinatra 서버 실행 (Listen 포트 정의)
+        # EXPOSE: 도커 컨테이너 실행시 요청을 기다릴 포트 지정
+      EXPOSE 4567
+        # CMD: 도커 컨테이너가 실행되었을 때 실행되는 명령어 정의
+      CMD    bundle exec ruby app.rb -o 0.0.0.0</code>
+      - 이후 <code>docker build -t app .</code>를 통해 도커파일 생성
+      - <code>docker run -d -p 8080:4567 app</code>, <code>docker run -d -p 80:4567 app</code> 등으로 웹 서버 동작이 가능!! (세상에)
 - <strong>도커 빌드</strong>
-    - 임시 컨테이서 생성 &gt; 명령어 수행 &gt; 이미지로 저장 &gt; 임시 컨테이너 삭제 &gt; <br />
-      새로 만든 이미지 기반 임시 컨테이너 생성 &gt; 이미지로 저장 &gt; 임시 컨테이너 삭제... 의 루틴을 반복하여 빌드!
+  - 임시 컨테이서 생성 &gt; 명령어 수행 &gt; 이미지로 저장 &gt; 임시 컨테이너 삭제 &gt; <br />
+    새로 만든 이미지 기반 임시 컨테이너 생성 &gt; 이미지로 저장 &gt; 임시 컨테이너 삭제... 의 루틴을 반복하여 빌드!
 - <strong>이미지 저장소</strong>
-    - 서버에 배포하기 위해 "도커 레지스트리"라는 이미지 저장소를 사용
-- Docker Hub
+  - 서버에 배포하기 위해 "도커 레지스트리"라는 이미지 저장소를 사용
+      - Docker Hub
 - <strong>배포</strong>
-    - 기존 어플리케이션 배포
-- 언어/프레임워크/웹서버/WAS/리눅스 배포판 등 다양한 설정 세팅 필요
-    - 컨테이너 배포
-- 그냥 이미지 다운받고, 컨테이너 실행하면 끝</p>
-</li>
-</ul>
+  - 기존 어플리케이션 배포
+      - 언어/프레임워크/웹서버/WAS/리눅스 배포판 등 다양한 설정 세팅 필요
+  - 컨테이너 배포
+      - 그냥 이미지 다운받고, 컨테이너 실행하면 끝</p>
 </li>
 </ul>
 

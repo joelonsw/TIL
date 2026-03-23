@@ -22912,24 +22912,18 @@
 <li><em>참고: https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html</em></li>
 <li><em>참고: https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/device_naming.html</em></li>
 <li><em>참고: https://m.blog.naver.com/jogilsang/221370362752</em></li>
-<li>
-<p><strong>과정</strong></p>
-<ol>
-<li>EC2 디스크 볼륨 수정 들어가서 크기 증설</li>
-<li><code>lsblk</code>로 디스크 볼륨 확인<ul>
-<li>볼륨은 늘었지만, 파티션이 이전 상태로만 사용중인 상태</li>
+<li><strong>과정</strong>
+    1. EC2 디스크 볼륨 수정 들어가서 크기 증설
+    2. <code>lsblk</code>로 디스크 볼륨 확인
+        - 볼륨은 늘었지만, 파티션이 이전 상태로만 사용중인 상태
+    3. <code>sudo growpart /dev/xvda 1</code> 를 통해 파티션 확장
+    4. <code>sudo resize2fs /dev/xvda1</code> 을 통해 파일 시스템 재할당</li>
 </ul>
-</li>
-<li><code>sudo growpart /dev/xvda 1</code> 를 통해 파티션 확장</li>
-<li><code>sudo resize2fs /dev/xvda1</code> 을 통해 파일 시스템 재할당</li>
-</ol>
-</li>
-<li>
-<p><strong>EC2 인스턴스랑 리눅스 파일 시스템 파티션이 다른데요?</strong></p>
 <ul>
-<li>아마존에서는 /dev/sda1</li>
-<li>EC2에서는 /dev/xvda1
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>커널의 블록 디바이스 드라이버에 따라 디바이스는 사용자가 지정한 것과는 다른 이름에 연결될 수 있습니다. 
+<li><strong>EC2 인스턴스랑 리눅스 파일 시스템 파티션이 다른데요?</strong>
+    - 아마존에서는 /dev/sda1
+    - EC2에서는 /dev/xvda1
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>커널의 블록 디바이스 드라이버에 따라 디바이스는 사용자가 지정한 것과는 다른 이름에 연결될 수 있습니다. 
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>예를 들어 /dev/sdh라는 디바이스 이름을 지정할 경우 디바이스 이름이 /dev/xvdh 또는 /dev/hdh로 바뀔 수 있습니다. 대부분의 경우 뒤에 오는 문자는 그대로 유지됩니다. 
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Red Hat Enterprise Linux의 일부 버전과 CentOS와 같은 Red Hat Enterprise Linux의 변형 버전에서는 뒤에 오는 문자가 변경될 수 있습니다 (즉 /dev/sda가 /dev/xvde로 바뀔 수 있음). 
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>이 경우 각 디바이스 이름에서 뒤에 오는 문자는 같은 수로 늘어납니다. 
@@ -22937,8 +22931,6 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Amazon Linux에서는 이름이 바뀐 디바이스에 사용자가 지정한 이름에 대한 심볼 링크가 생성됩니다. 
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>운영 체제가 다를 경우 다르게 작동할 수 있습니다.
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

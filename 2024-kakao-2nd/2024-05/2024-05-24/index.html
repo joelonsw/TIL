@@ -22934,25 +22934,25 @@
     - XML 기반의 벡터 그래픽을 표현하는 포맷
     - 픽셀 단위로 이미지를 구성하는 jpg/png와 달리 벡터 기반으로 이미지를 표현함</p>
 <ul>
-<li><strong>장점</strong></li>
+<li><strong>장점</strong><ul>
 <li>벡터 기반의 이미지는 확대/축소에도 깨지지 않고, 용량이 작음</li>
-<li>
-<p>웹상에서 주로 사용하는 이미지 형식</p>
+<li>웹상에서 주로 사용하는 이미지 형식</li>
+</ul>
 </li>
-<li>
-<p><strong><code>&lt;SVG&gt; 태그</code></strong></p>
-</li>
-<li>웹상에서 벡터 이미지를 구현하기 위해 사용하는 마크업 태그</li>
-<li>
-<p><code>&lt;svg&gt;</code> 태그로 시작하여 width/height 를 통해 이미지의 가로/세로 조절 가능</p>
+</ul>
 <ul>
+<li><strong><code>&lt;SVG&gt; 태그</code></strong><ul>
+<li>웹상에서 벡터 이미지를 구현하기 위해 사용하는 마크업 태그</li>
+<li><code>&lt;svg&gt;</code> 태그로 시작하여 width/height 를 통해 이미지의 가로/세로 조절 가능<ul>
 <li>이미지를 따로 로드하지 않아도 됨 (http 요청 필요없음) -&gt; 빠름</li>
 <li>다만 이미지가 아니다 보니 캐싱 불가 -&gt; 매번 그림</li>
 </ul>
 </li>
-<li>
-<p><strong>예시</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>예시</strong><ul>
 <li>원: <code>&lt;circle /&gt;</code><ul>
 <li>cx: x좌표</li>
 <li>cy: y좌표</li>
@@ -22987,6 +22987,8 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="recharts-svg">Recharts -&gt; SVG<a class="headerlink" href="#recharts-svg" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://recharts.org/en-US/</em>
 - Recharts 라이브러리는 차트를 SVG를 통해 그려준다. 해당 라이브러리가 차트를 SVG로 변환할 때, 사용하는 태그를 알아보자
@@ -22994,28 +22996,26 @@
   - <em>https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g</em>
   - SVG 엘리멘트인데 타 SVG 엘리멘트를 그룹화할 때 사용</p>
 <ul>
-<li><strong><code>&lt;line&gt;</code></strong></li>
+<li><strong><code>&lt;line&gt;</code></strong><ul>
 <li><em>https://developer.mozilla.org/en-US/docs/Web/SVG/Element/line</em></li>
-<li>
-<p>두개의 점을 연결하는 직선을 그릴 때 사용</p>
+<li>두개의 점을 연결하는 직선을 그릴 때 사용</li>
+</ul>
 </li>
-<li>
-<p><strong><code>&lt;text&gt;</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>&lt;text&gt;</code></strong><ul>
 <li><em>https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text</em></li>
-<li>
-<p>텍스트로 구성된 그래픽 요소를 그려냄</p>
+<li>텍스트로 구성된 그래픽 요소를 그려냄</li>
+</ul>
 </li>
-<li>
-<p><strong><code>&lt;path&gt;</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>&lt;path&gt;</code></strong><ul>
 <li><em>https://developer.mozilla.org/ko/docs/Web/SVG/Tutorial/Paths</em></li>
 <li>SVG 기본 도형 라이브러리에서 가장 강력한 엘리먼트</li>
 <li>선/곡선/호 등 다양한 형태 그릴 수 있음</li>
 <li>여러개의 직선/곡선을 합쳐 복잡한 도형을 그릴 수 있게 해줌</li>
-<li>
-<p>모양은 "d" 속성으로 정의 (속성 안에 특정한 알파벳들이 있음)</p>
-<ul>
+<li>모양은 "d" 속성으로 정의 (속성 안에 특정한 알파벳들이 있음)<ul>
 <li>M -&gt; Move To</li>
 <li>L -&gt; Line To</li>
 <li>H -&gt; Horizontal Line To</li>
@@ -23024,32 +23024,36 @@
 <li>Z -&gt; Close Path</li>
 </ul>
 </li>
-<li>
-<p><strong><code>&lt;use&gt;</code></strong></p>
+</ul>
 </li>
-<li>
-<p>x, y, width, height 속성으로 문서 전반에 걸쳐 요소 재사용 가능</p>
+</ul>
+<ul>
+<li><strong><code>&lt;use&gt;</code></strong><ul>
+<li>x, y, width, height 속성으로 문서 전반에 걸쳐 요소 재사용 가능</li>
+</ul>
 </li>
-<li>
-<p><strong><code>&lt;def&gt;</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>&lt;def&gt;</code></strong><ul>
 <li><em>https://developer.mozilla.org/en-US/docs/Web/SVG/Element/defs</em></li>
 <li>그래픽 요소를 정의하고 나중에 참조할 수 있게 해줌</li>
-<li>
-<p>참조를 해야 그제서야 그려줌</p>
-<ul>
+<li>참조를 해야 그제서야 그려줌<ul>
 <li>use 요소를 통한 참조하면 그려주는 듯!</li>
 </ul>
 </li>
-<li>
-<p><strong><code>&lt;clipPath&gt;</code></strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong><code>&lt;clipPath&gt;</code></strong><ul>
 <li><em>https://developer.mozilla.org/en-US/docs/Web/SVG/Element/clipPath</em></li>
 <li>ClipPath를 통해서 특정 엘리멘트가 짤려서 보여져야할 곳이 있다면 짤라서 보여줌<ul>
 <li>여기 안의 요소는 보여주도록, 밖에는 짤라서 안보여줌</li>
 </ul>
 </li>
 <li>clipPath 엘리먼트 안에 다른 그래픽 요소를 넣어서 그래픽 요소를 잘라냄</li>
+</ul>
+</li>
 </ul>
 
 

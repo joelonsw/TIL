@@ -22936,52 +22936,32 @@
     - A Service Layer defines an application's boundary [Cockburn PloP] and its set of available operations from the perspective of interfacing client layers.<br />
     - It encapsulates the application's business logic, controlling transactions and coor-dinating responses in the implementation of its operations.</p>
 <ul>
-<li>
-<p><strong>애초에 Layer가 왜 필요해?</strong></p>
+<li><strong>애초에 Layer가 왜 필요해?</strong>
+    - Layer를 통해 추상화를 할 수 있다
+    - 다른 계층끼리 부품을 갈아 끼우듯 변경할 수 있음
+    - 컴포넌트들의 서로 의존 계층 관계를 깔끔히 유지할 수 있다!</li>
+</ul>
 <ul>
-<li>Layer를 통해 추상화를 할 수 있다</li>
-<li>다른 계층끼리 부품을 갈아 끼우듯 변경할 수 있음</li>
-<li>컴포넌트들의 서로 의존 계층 관계를 깔끔히 유지할 수 있다!</li>
-</ul>
-</li>
-<li>
-<p><strong>무슨 Layer가 있는데?</strong></p>
-<ul>
-<li>\<Presentation Layer><ul>
-<li>UI Layer</li>
-</ul>
-</li>
-<li>\<Service Layer><ul>
-<li>Application Layer</li>
-<li>Domain 모델을 묶어서 SW에서 사용 가능한 핵심 작업 집합을 설정</li>
-<li>핵심에 가까운 API를 제공하는 계층</li>
-</ul>
-</li>
-<li>\<Business Layer><ul>
-<li>Data와 그와 관련된 비즈니스 로직을 가지고 있는 객체</li>
-<li>"책임"과 "응집도"를 고려하여 Model Class에서 로직을 가지고 있도록 하자</li>
-</ul>
-</li>
-<li>\<Persistence Layer><ul>
-<li>Data Source 추상화</li>
-<li>요청/응답 데이터를 비즈니스 로직에서 필요한 데이터로 가공하여 비즈니스 레이어로 넘겨줘야 함</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>무슨 Layer가 있는데?</strong>
+    - \<Presentation Layer>
+        - UI Layer
+    - \<Service Layer>
+        - Application Layer
+        - Domain 모델을 묶어서 SW에서 사용 가능한 핵심 작업 집합을 설정
+        - 핵심에 가까운 API를 제공하는 계층
+    - \<Business Layer>
+        - Data와 그와 관련된 비즈니스 로직을 가지고 있는 객체
+        - "책임"과 "응집도"를 고려하여 Model Class에서 로직을 가지고 있도록 하자
+    - \<Persistence Layer>
+        - Data Source 추상화
+        - 요청/응답 데이터를 비즈니스 로직에서 필요한 데이터로 가공하여 비즈니스 레이어로 넘겨줘야 함</li>
 </ul>
 <h2 id="_2">체스 피드백<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>멀티쓰레드로 동작하게 하려면, WebChessController가 특정한 상태를 유지하지 않도록 해야한다<ul>
-<li>멀리쓰레드로 동작하게 한다는게 무슨뜻 일까?</li>
-</ul>
-</li>
-<li>
-<p>Controller, Service Layer, DAO는 Stateless하게 구성하면 좋을 것이다!</p>
-<ul>
-<li>stateless, 즉 인스턴스 변수가 없다면 thread safe하다!</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">역시</span><span class="w"> </span><span class="n">가장</span><span class="w"> </span><span class="n">쉬운</span><span class="w"> </span><span class="n">건</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">라고</span><span class="w"> </span><span class="n">생각해요</span>
+<li>멀티쓰레드로 동작하게 하려면, WebChessController가 특정한 상태를 유지하지 않도록 해야한다
+    - 멀리쓰레드로 동작하게 한다는게 무슨뜻 일까?</li>
+<li>Controller, Service Layer, DAO는 Stateless하게 구성하면 좋을 것이다!
+    - stateless, 즉 인스턴스 변수가 없다면 thread safe하다!<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">역시</span><span class="w"> </span><span class="n">가장</span><span class="w"> </span><span class="n">쉬운</span><span class="w"> </span><span class="n">건</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">라고</span><span class="w"> </span><span class="n">생각해요</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">각</span><span class="w"> </span><span class="n">체스게임의</span><span class="w"> </span><span class="n">식별</span><span class="w"> </span><span class="n">번호를</span><span class="w"> </span><span class="nf">안다면</span><span class="w"> </span><span class="p">(</span><span class="n">room_id</span><span class="p">)</span><span class="w"> </span><span class="n">해당</span><span class="w"> </span><span class="n">식별</span><span class="w"> </span><span class="n">번호를</span><span class="w"> </span><span class="n">통해서</span><span class="w"> </span><span class="n">게임들을</span><span class="w"> </span><span class="n">식별</span><span class="w"> </span><span class="n">할</span><span class="w"> </span><span class="n">수</span><span class="w"> </span><span class="n">있을</span><span class="w"> </span><span class="n">것</span><span class="w"> </span><span class="n">같아요</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">그럼</span><span class="w"> </span><span class="n">엔드포인트에</span><span class="w"> </span><span class="n">변화가</span><span class="w"> </span><span class="n">좀</span><span class="w"> </span><span class="n">생길것</span><span class="w"> </span><span class="n">같은데</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">/</span><span class="n">room</span><span class="o">/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="o">/</span><span class="n">move</span>

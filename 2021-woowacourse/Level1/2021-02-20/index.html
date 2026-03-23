@@ -22955,44 +22955,22 @@
 <h2 id="upcasting-downcasting">UpCasting, DownCasting<a class="headerlink" href="#upcasting-downcasting" title="Permanent link">&para;</a></h2>
 <ul>
 <li>참고 1: https://mommoo.tistory.com/51</li>
-<li>
-<p>참고 2: https://mommoo.tistory.com/41</p>
-</li>
-<li>
-<p><strong>정의</strong></p>
+<li>참고 2: https://mommoo.tistory.com/41</li>
+</ul>
 <ul>
-<li>
-<p>UpCasting: Parent parent = new Child();</p>
+<li><strong>정의</strong>
+    - UpCasting: Parent parent = new Child();
+        - 변수가 원하는 정보를, 인스턴스가 모두 갖고 있다면 형변환 기호 없이 Compile 뚝딱<p>- DownCasting: Child child = new Parent();
+      - 변수가 원하는 정보를, 인스턴스가 모두 채워주지 못함
+      - Compile 오류!</p>
+</li>
+</ul>
 <ul>
-<li>변수가 원하는 정보를, 인스턴스가 모두 갖고 있다면 형변환 기호 없이 Compile 뚝딱</li>
-</ul>
-</li>
-<li>
-<p>DownCasting: Child child = new Parent();</p>
-<ul>
-<li>변수가 원하는 정보를, 인스턴스가 모두 채워주지 못함</li>
-<li>Compile 오류!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>그렇다면...?</strong></p>
-<ul>
-<li>
-<p>Child child = (Child)new Parent();</p>
-<ul>
-<li>Compile 가능!</li>
-<li>하지만 런타임 에러 JVM 에서 발생<ul>
-<li>속성, 성질이 정해져 있지 않는 참조형 데이터의 빈 정보를 JVM은 알 길이 없음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>하지만, UpCasting이 선행된 변수의 경우, DownCasting을 허용한다</p>
-</li>
-</ul>
+<li><strong>그렇다면...?</strong>
+    - Child child = (Child)new Parent();
+        - Compile 가능!
+        - 하지만 런타임 에러 JVM 에서 발생
+            - 속성, 성질이 정해져 있지 않는 참조형 데이터의 빈 정보를 JVM은 알 길이 없음<p>- 하지만, UpCasting이 선행된 변수의 경우, DownCasting을 허용한다</p>
 </li>
 </ul>
 <h2 id="hashtable">HashTable<a class="headerlink" href="#hashtable" title="Permanent link">&para;</a></h2>

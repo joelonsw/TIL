@@ -22909,11 +22909,10 @@
 <h3 id="2025-04-18">2025-04-18<a class="headerlink" href="#2025-04-18" title="Permanent link">&para;</a></h3>
 <h2 id="elk-filebeat">ELK + Filebeat<a class="headerlink" href="#elk-filebeat" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Filebeat</strong></li>
+<li><strong>Filebeat</strong><ul>
 <li>여러 종류의 로그 파일을 수집하자. input을 통해 로그 파일 경로 지정 가능</li>
-<li>
-<p>이후 logstash 서버로 전송하자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">filebeat.inputs</span><span class="p">:</span>
+<li>이후 logstash 서버로 전송하자
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">filebeat.inputs</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/deploy/project-api*/current/log/access.log</span>
@@ -22941,11 +22940,12 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="nt">output.logstash</span><span class="p">:</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logstash-server:5100</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">  </span><span class="nt">loadbalance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>logstash</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>logstash</strong><ul>
 <li>로그 데이터 필터링 + 처리<ul>
 <li>로그 타입 별 다른 처리 로직 적용</li>
 <li>필드 추출/변환</li>
@@ -22954,11 +22954,12 @@
 </ul>
 </li>
 <li>로그 타입별로 다른 ES 인덱스에 저장: <code>{환경}-{로그타입}-{날짜}</code> 포맷</li>
-<li>
-<p>logstash.yaml 예시</p>
+<li>logstash.yaml 예시</li>
+</ul>
 </li>
-<li>
-<p>input: 로그스태시 데이터 어디서 - 어떻게 받을지 정의
+</ul>
+<ul>
+<li>input: 로그스태시 데이터 어디서 - 어떻게 받을지 정의
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="l l-Scalar l-Scalar-Plain">input {</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">beats {</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">port =&gt; 7000</span><span class="w">  </span><span class="c1"># 로그데이터 7000에서 수신</span>
@@ -22967,17 +22968,17 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">type =&gt; &quot;heartbeat&quot;</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">}</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="l l-Scalar l-Scalar-Plain">}</span>
-</code></pre></div></p>
-</li>
-<li>filter: 수신한 로그 가공</li>
+</code></pre></div></li>
+<li>filter: 수신한 로그 가공<ul>
 <li>grok 파싱: 로그에서 타임스탬프/추적ID/HTTP/referer/domain/ip addr 등</li>
 <li>데이터 변환: elapsedTime -&gt; Integer</li>
 <li>시간 처리: 추출한 timestamp 기반</li>
-<li>
-<p>헤더 처리, URL 파싱, 불필요한 필드 제거 등</p>
+<li>헤더 처리, URL 파싱, 불필요한 필드 제거 등</li>
+</ul>
 </li>
-<li>
-<p>output: 가공한 로그를 ES의 특정 인덱스로 보내거나, 파일에 기록하거나
+</ul>
+<ul>
+<li>output: 가공한 로그를 ES의 특정 인덱스로 보내거나, 파일에 기록하거나
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="l l-Scalar l-Scalar-Plain">output {</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">if [type] == &quot;nginx-access&quot; {</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch {</span>
@@ -23000,8 +23001,7 @@
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">}</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">}</span>
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="l l-Scalar l-Scalar-Plain">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

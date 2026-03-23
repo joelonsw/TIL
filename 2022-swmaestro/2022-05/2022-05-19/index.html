@@ -22909,53 +22909,51 @@
 <h3 id="2022-05-19">2022-05-19<a class="headerlink" href="#2022-05-19" title="Permanent link">&para;</a></h3>
 <h2 id="effective-java-item-1">Effective Java Item 1. 생성자 대신 정적 팩토리 메서드를 고려하라<a class="headerlink" href="#effective-java-item-1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>클라이언트는 그동안 public 생성자를 통해 인스턴스를 획득하곤 했음</li>
 <li>정적 팩토리 메서드를 클래스가 제공해서, 클래스의 인스턴스를 반환하는 정적 메서드를 만들어보자</li>
 <li>정적 팩토리 메서드 != 팩토리 메서드 패턴<ul>
 <li>디자인 패턴이랑 정적 팩터리 메서드 노상관</li>
 </ul>
 </li>
-<li>
-<p>생성자 대신 정적 팩토리 메서드 제공하는 것은 장단점이 있음</p>
+<li>생성자 대신 정적 팩토리 메서드 제공하는 것은 장단점이 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>장점 1. 이름이 생긴다</strong></p>
-</li>
-<li>코드의 가독성을 높여줌</li>
-<li>
-<p>각 생성자는 별도의 시그니처를 가지는데, 이 제약에서 벗어나고자 눈가림하듯 순서만 바꾸면 쓰레기 코드</p>
+</ul>
 <ul>
+<li><strong>장점 1. 이름이 생긴다</strong><ul>
+<li>코드의 가독성을 높여줌</li>
+<li>각 생성자는 별도의 시그니처를 가지는데, 이 제약에서 벗어나고자 눈가림하듯 순서만 바꾸면 쓰레기 코드<ul>
 <li>여러 시그니처를 갖는 생성자가 필요하다면 정적 팩터리 메서드 써보자</li>
 </ul>
 </li>
-<li>
-<p><strong>장점 2. 생성자와 달리 매번 새로운 객체를 만들지 않아도 된다</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>장점 2. 생성자와 달리 매번 새로운 객체를 만들지 않아도 된다</strong><ul>
 <li>생성자는 리턴값을 가질 수 없음. 따라서 발생하는 몇가지 불편함이 있음 </li>
 <li>불변 객체라면 그거 쓰면되고, </li>
 <li>미리 만들어둔것 캐싱해두고 쓰면 될 듯!</li>
 <li>객체를 만드는 비용이 크다면 성능 크게 개선 가능</li>
-<li>
-<p>어떤 시점에 어떤 객체가 얼마나 존재하는지를 정밀하게 제어할 수 있다는 것이 장점 =&gt; 생성자에겐 없던 객체 통제 능력 (instance-controlled class)</p>
-<ul>
+<li>어떤 시점에 어떤 객체가 얼마나 존재하는지를 정밀하게 제어할 수 있다는 것이 장점 =&gt; 생성자에겐 없던 객체 통제 능력 (instance-controlled class)<ul>
 <li>Singleton 만들기 쉬워짐</li>
 <li>객체 생성 불가능하게 만들수도 있음</li>
 <li>불변 객체 제공도 가능</li>
 </ul>
 </li>
-<li>
-<p><strong>장점 3. 하위 자료형을 반환할 수 있다</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>장점 3. 하위 자료형을 반환할 수 있다</strong><ul>
 <li>반환되는 객체의 클래스를 훨씬 유연하게 결정 가능<ul>
 <li>기존 생성자가 클래스의 관리자로써 못하던 일을 가능케 해줌</li>
 </ul>
 </li>
-<li>
-<p>구현의 세부사항을 감출 수 있는 좋은 코드 작성 가능</p>
-<ul>
+<li>구현의 세부사항을 감출 수 있는 좋은 코드 작성 가능<ul>
 <li>interface-based-framework에서 좋음</li>
-<li>Java 8 이전에는 인터페이스에 정적 메서드 X</li>
+<li>Java 8 이전에는 인터페이스에 정적 메서드 X<ul>
 <li>JCF에서 45개의 utility implementation of interfaces가 있었는데 공통적으로 다음을 제공<ul>
 <li>unmodifiable</li>
 <li>synchronized </li>
@@ -22963,30 +22961,32 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>장점 4. input 파라미터에 따라 다른 인스턴스를 반환할 수 있다</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>장점 4. input 파라미터에 따라 다른 인스턴스를 반환할 수 있다</strong><ul>
 <li>ex. EnumSet<ul>
 <li>long =&gt; RegularEnumSet</li>
 <li>long array =&gt; JumboEnumSet</li>
 </ul>
 </li>
-<li>
-<p>이렇게 하면 추후에 EnumSet을 상속받은 구현체가 생겼을 때 손쉽게 붙일 수 있겠지?</p>
-<ul>
+<li>이렇게 하면 추후에 EnumSet을 상속받은 구현체가 생겼을 때 손쉽게 붙일 수 있겠지?<ul>
 <li>유지/보수/확장에 유리한 코드 작성 가능</li>
 </ul>
 </li>
-<li>
-<p><strong>장점 5. 반환하고자 하는 클래스가 런타임에 생겨도 괜찮음</strong></p>
+</ul>
 </li>
-<li>정적 팩터리 메서드가 반환하는 객체의 클래스는 정적 팩터리 메서드가 정의된 클래스의 코드가 작성된 순간에 없어도 OK</li>
-<li>
-<p>서비스 제공자 프레임워크 (ex. JDBC)</p>
+</ul>
 <ul>
+<li><strong>장점 5. 반환하고자 하는 클래스가 런타임에 생겨도 괜찮음</strong><ul>
+<li>정적 팩터리 메서드가 반환하는 객체의 클래스는 정적 팩터리 메서드가 정의된 클래스의 코드가 작성된 순간에 없어도 OK</li>
+<li>서비스 제공자 프레임워크 (ex. JDBC)<ul>
 <li>다양한 서비스 제공자들이 하나의 서비스를 구성하는 시스템</li>
 <li>클라이언트는 실제 구현된 서비스를 이용</li>
-<li>핵심 컴포넌트</li>
+<li>핵심 컴포넌트<ol>
 <li>서비스 인터페이스 (Connection)<ul>
 <li>서비스 제공자가 구현</li>
 </ul>
@@ -23004,8 +23004,10 @@
 <li>구현체는 클래스 이름으로 등록되며, <strong>리플렉션</strong>을 통해 만들어짐</li>
 </ul>
 </li>
+</ol>
+</li>
 <li>서비스 접근은 결국 유연한 정적 팩토리 메서드
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 서비스 인터페이스</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 서비스 인터페이스</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Service</span><span class="w"> </span><span class="p">{}</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// 서비스 제공자 인터페이스</span>
@@ -23047,37 +23049,41 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>단점 1. 정적 팩터리 메서드만 있는 클래스라면, public/protected로 선언된 생성자가 없기에 하위 클래스 못 만듦</strong></p>
+</ul>
 </li>
-<li>
-<p>오히려 좋은 부분 : 상속보다 컴포지션 유도</p>
+</ul>
+<ul>
+<li><strong>단점 1. 정적 팩터리 메서드만 있는 클래스라면, public/protected로 선언된 생성자가 없기에 하위 클래스 못 만듦</strong><ul>
+<li>오히려 좋은 부분 : 상속보다 컴포지션 유도</li>
+</ul>
 </li>
+</ul>
+<ul>
 <li>
 <p><strong>단점 2. 다른 정팩메와 완전한 구분이 어려움</strong></p>
-</li>
+<ul>
 <li>따라서 정팩메 이름 지을 때 잘 지어라</li>
 <li>valueOf: 주어진 값과 같은 값을 갖는 객체 반환, 형변환 메서드</li>
 <li>of: valueOf의 축약</li>
 <li>getInstance: 싱글턴이라면, 항상 같은 객체 반환</li>
 <li>newInstance: getInstance와 같지만,  호출될 때 마다 다른 인스턴스</li>
 <li>getType: getInstance와 같지만, Type 형을 반환해야하는 경우</li>
-<li>
-<p>newType: newInstance와 같지만, Type 형을 반환해야하는 경우</p>
-</li>
+<li>newType: newInstance와 같지만, Type 형을 반환해야하는 경우</li>
+</ul>
+<ul>
 <li>
 <p><strong>내 생각</strong></p>
 <ul>
-<li>결국 Java의 생성자가 충분히 강력하지 않아서 발생하는 문제를 해결하고자 정팩메 사용</li>
-<li>
-<p>생성자는 클래스의 생명주기를 충분히 관리하고, 완전한 중앙 통제형 집권자여야함. </p>
-<ul>
+<li>결국 Java의 생성자가 충분히 강력하지 않아서 발생하는 문제를 해결하고자 정팩메 사용<ul>
+<li>생성자는 클래스의 생명주기를 충분히 관리하고, 완전한 중앙 통제형 집권자여야함. <ul>
 <li>어떤 시기에 어떤 객체가 있고, 몇 개가 있고 등등...</li>
 </ul>
 </li>
-<li>
-<p>난 정팩메를 언제 많이 쓰지? 나는 정팩메를 똑바로 쓰고 있는가?</p>
+</ul>
 </li>
+</ul>
+<ul>
+<li>난 정팩메를 언제 많이 쓰지? 나는 정팩메를 똑바로 쓰고 있는가?<ul>
 <li>그냥 생성자마냥 쓰는거 아닌가? 빌더 패턴 마냥 쓰는거 아닌가? 그냥 필드 추출해서 DTO로 감쌀때만 쓰지 않는가?</li>
 <li>Enum에서 조건에 맞는 인스턴스를 반환해주는 경우<ul>
 <li>https://github.com/CryptoHows/cryptohows-web-backend/blob/master/src/main/java/xyz/cryptohows/backend/filtering/FilterStrategyFactory.java</li>
@@ -23094,7 +23100,9 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">            </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;발생할 수 없는 로직입니다.&quot;</span><span class="p">));</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>도메인 받아서 필드 추출해서 쓱 DTO 만들때도 많이 씀</li>
+</ul>
+</li>
+<li>도메인 받아서 필드 추출해서 쓱 DTO 만들때도 많이 씀<ul>
 <li>https://github.com/CryptoHows/cryptohows-web-backend/blob/master/src/main/java/xyz/cryptohows/backend/project/ui/dto/CoinResponse.java</li>
 <li>새로운 객체를 그냥 만드는 것에 대한 책임을 넘겨주는 느낌<ul>
 <li>사실 꼭 정팩메일 필요가 없어보이긴 함</li>
@@ -23132,11 +23140,15 @@
 </li>
 </ul>
 </li>
-<li>
-<p>Question </p>
+</ul>
+</li>
+</ul>
 <ul>
+<li>Question <ul>
 <li>정적 팩터리 메서드 vs 빌더 패턴</li>
 <li>싱글턴의 단점?</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

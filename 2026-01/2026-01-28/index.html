@@ -22907,22 +22907,21 @@
 <h3 id="2026-01-28">2026-01-28<a class="headerlink" href="#2026-01-28" title="Permanent link">&para;</a></h3>
 <h2 id="elk">ELK 수집 지연 개선<a class="headerlink" href="#elk" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Filebeat(Sidecar) -&gt; Logstash -&gt; Elasticsearch</li>
 <li>어플리케이션에서 로그 찍히고 30~60초 후에 키바나에서 조회 가능 -&gt; 개선 후 2~3초 조회로 개선</li>
 <li>준 실시간성으로 해당 로그를 확인해야 하는 요구사항</li>
-<li>
-<p><code>@timestamp</code> vs <code>logstashTimestamp</code> vs <code>ES 조회시점</code> 비교하여 병목 지점 개선</p>
+<li><code>@timestamp</code> vs <code>logstashTimestamp</code> vs <code>ES 조회시점</code> 비교하여 병목 지점 개선</li>
+</ul>
 </li>
-<li>
-<p><strong>병목 1. 수집</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>병목 1. 수집</strong><ul>
 <li>Filebeat의 수집 및 전송 지연</li>
 <li>Polling 주기: <code>scan_frequency</code> 설정 값이 없으면 기본 10초마다 로그 파일을 감지</li>
 <li>Buffering: 로그 양이 적은 경우, <code>queue</code> 찰 때까지 기다리거나 타임아웃 될 때 까지 전송 대기</li>
-<li>
-<p>configmap 내 filebeat.yml 수정
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>data:
+<li>configmap 내 filebeat.yml 수정
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>data:
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  filebeat.yml: |
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    filebeat.inputs:
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    - type: log
@@ -22937,20 +22936,21 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      events: 4096
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>      flush.min_events: 0  # 0개여도 즉시 전송
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>      flush.timeout: 0.5s  # 0.5초 경과시 무조건 전송
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>병목 2. 조회</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>병목 2. 조회</strong><ul>
 <li>검색 갱신 주기 <code>refresh_interval</code> 1초로 단축 (기존 60초)</li>
 <li>현재 인덱스는 바로 변경
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PUT /application-*/_settings
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PUT /application-*/_settings
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>{
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  &quot;index&quot;: { &quot;refresh_interval&quot;: &quot;1s&quot; }
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>}
 </code></pre></div></li>
 <li>인덱스 템플릿 수정
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PUT /_template/application
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PUT /_template/application
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>{
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;order&quot;: 9,
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;index_patterns&quot;: [&quot;application-*&quot;],
@@ -22960,6 +22960,8 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  # ... (기존 mappings 유지)
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>}
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

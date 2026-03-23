@@ -22953,10 +22953,10 @@
 <h3 id="2021-07-07">2021-07-07<a class="headerlink" href="#2021-07-07" title="Permanent link">&para;</a></h3>
 <h2 id="jpa">영속성 컨텍스트로 보는 JPA<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>JDBC -&gt; JPA</strong><ul>
-<li>JDBC: connection-query-close</li>
-<li>JPA
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">EntityManager</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entityManagerFactory</span><span class="p">.</span><span class="na">createEntityManager</span><span class="p">();</span>
+<li><strong>JDBC -&gt; JPA</strong>
+    - JDBC: connection-query-close
+    - JPA
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">EntityManager</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entityManagerFactory</span><span class="p">.</span><span class="na">createEntityManager</span><span class="p">();</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">//INSERT</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">em</span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">//SELECT</span>
@@ -22967,38 +22967,26 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1">//DELETE</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">em</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
 </code></pre></div></li>
+<li><strong>엔티티 생명주기</strong>
+    - 비영속 --persist()--&gt; 영속 --remove()--&gt; 삭제<br />
+    - 비영속 --persist()--&gt; 영속 --detach()--&gt; 준영속
+    - 준영속 --merge()--&gt; 영속
+    - 영속 --detach()--&gt; 준영속</li>
 </ul>
-</li>
-<li>
-<p><strong>엔티티 생명주기</strong></p>
 <ul>
-<li>비영속 --persist()--&gt; 영속 --remove()--&gt; 삭제  </li>
-<li>비영속 --persist()--&gt; 영속 --detach()--&gt; 준영속</li>
-<li>준영속 --merge()--&gt; 영속</li>
-<li>영속 --detach()--&gt; 준영속</li>
+<li><strong>엔티티 매니저 팩토리 &amp; 엔티티 매니저</strong></li>
 </ul>
-</li>
-<li>
-<p><strong>엔티티 매니저 팩토리 &amp; 엔티티 매니저</strong></p>
-</li>
-<li>
-<p><strong>영속성 컨텍스트</strong></p>
 <ul>
-<li><img alt="" src="../../image/2021-07-08-context.PNG" /></li>
-<li>제공 기능<ul>
-<li>쓰기 지연 SQL</li>
-<li>자동 변경 감지</li>
-<li>1차 캐시</li>
-<li>엔티티 동일성</li>
-<li>지연 로딩</li>
-</ul>
-</li>
-<li>트랜잭션 단위에서 동작<ul>
-<li>commit() 호출 전 flush()</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>영속성 컨텍스트</strong>
+    - <img alt="" src="../../image/2021-07-08-context.PNG" />
+    - 제공 기능
+        - 쓰기 지연 SQL
+        - 자동 변경 감지
+        - 1차 캐시
+        - 엔티티 동일성
+        - 지연 로딩
+    - 트랜잭션 단위에서 동작
+        - commit() 호출 전 flush()</li>
 </ul>
 <h2 id="applicationproperties">application.properties 설정<a class="headerlink" href="#applicationproperties" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23012,43 +23000,29 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="na">spring.jpa.properties.hibernate.dialect</span><span class="o">=</span><span class="s">org.hibernate.dialect.H2Dialect</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="na">logging.level.org.hibernate.type.descriptor.sql.BasicBinder</span><span class="o">=</span><span class="s">TRACE</span>
-</code></pre></div><ul>
-<li>어라 나는 왜 그 동안 인메모리 디비가 안댔지?<ul>
-<li>spring.datasource.url=jdbc:h2:mem:testdb;</li>
-<li>이거 할 때는 DB dialect를 H2로 설정해둬야 하는구나?</li>
-</ul>
-</li>
-<li>DB 방언 설정<ul>
-<li>spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 어라 나는 왜 그 동안 인메모리 디비가 안댔지?
+        - spring.datasource.url=jdbc:h2:mem:testdb;
+        - 이거 할 때는 DB dialect를 H2로 설정해둬야 하는구나?
+    - DB 방언 설정
+        - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect</li>
 </ul>
 <h2 id="db">DB 방언?<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://goodgid.github.io/What-is-Dialect/</em></li>
 <li>표준 SQL == ANSI SQL</li>
-<li>각 DBMS 벤더에서 (MySQL, PostgreSQL, Oracle, MSSQL 등) 자신만의 방언을 추가<ul>
-<li>독자적인 기능을 추가해줌<ul>
-<li>MSSQL T-SQL</li>
-<li>Oracle PL/SQL</li>
-<li>MySQL AUTO_INCREMENT</li>
-<li>Oracle SEQUENCE</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>JPA에서는 어플리케이션이 직접 SQL 작성하고 실행<ul>
-<li>DBMS마다 종류별로 사용하는 SQL 문법이 다름</li>
-<li>JPA에서 Dialect라는 추상화된 방언 클래스 제공 + 각 벤더에 맞는 구현체 제공<ul>
-<li>Dialect 설정해주면, 해당 Dialect를 참고하여 그에 맞는 쿼리 생성</li>
-</ul>
-</li>
-<li>H2: spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect</li>
-<li>MySQL: spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL57Dialect</li>
-</ul>
-</li>
+<li>각 DBMS 벤더에서 (MySQL, PostgreSQL, Oracle, MSSQL 등) 자신만의 방언을 추가
+    - 독자적인 기능을 추가해줌
+        - MSSQL T-SQL
+        - Oracle PL/SQL
+        - MySQL AUTO_INCREMENT
+        - Oracle SEQUENCE</li>
+<li>JPA에서는 어플리케이션이 직접 SQL 작성하고 실행
+    - DBMS마다 종류별로 사용하는 SQL 문법이 다름
+    - JPA에서 Dialect라는 추상화된 방언 클래스 제공 + 각 벤더에 맞는 구현체 제공
+        - Dialect 설정해주면, 해당 Dialect를 참고하여 그에 맞는 쿼리 생성
+    - H2: spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+    - MySQL: spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL57Dialect</li>
 </ul>
 
 

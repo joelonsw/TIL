@@ -22909,23 +22909,25 @@
 <h3 id="2023-05-24">2023-05-24<a class="headerlink" href="#2023-05-24" title="Permanent link">&para;</a></h3>
 <h2 id="action-vs-actionasync">Action vs Action.async<a class="headerlink" href="#action-vs-actionasync" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Action</strong></li>
+<li><strong>Action</strong><ul>
 <li>동기적으로 동작. 결과를 즉시 반환</li>
-<li>
-<p>비동기적인 액션을 포함하지 않는 task에 적합</p>
-<ul>
+<li>비동기적인 액션을 포함하지 않는 task에 적합<ul>
 <li>간단한 DB 쿼리나</li>
 <li>간단한 계산 등</li>
 </ul>
 </li>
-<li>
-<p><strong>Action.async</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Action.async</strong><ul>
 <li>비동기적으로 동작.</li>
 <li>Future를 반환</li>
 <li>비동기적인 액션을 포함하는 task에 적합<ul>
 <li>외부 API를 호출하거나</li>
 <li>논블러킹 태스크를 수행하거나 등</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

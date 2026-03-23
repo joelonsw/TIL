@@ -23000,30 +23000,28 @@
 <em>참고: https://heropy.blog/2018/01/31/sass/</em>
 <em>참고: https://sass-lang.com/</em></p>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>css를 보다 편리하게 사용할 수 있도록 추가 기능을 지원하는 확장판 스크립트 언어</li>
 <li>css의 기능 부재 단점을 보완한 다양한 기능 제공</li>
 <li>중괄호 + 세미콜론 형식으로 css를 작성해보자<ul>
 <li>중첩으로 들여쓰기를 사용, 세미콜론으로 속성을 구분</li>
 </ul>
 </li>
-<li>
-<p>scss가 sass 보다 css와의 호환성이 더 좋음</p>
+<li>scss가 sass 보다 css와의 호환성이 더 좋음</li>
+</ul>
 </li>
-<li>
-<p><strong>CSS가 뭐가 문제였는디?</strong></p>
-</li>
-<li>프로젝트 크기 커질수록 유지보수가 어려워짐</li>
-<li>
-<p>불필요한 Selector, 연산 기능의 한계, 구문의 부재 등의 단점 부각</p>
-</li>
-<li>
-<p><strong>사용방법</strong></p>
-</li>
-<li>scss 문법으로 코드 작성 -&gt; 컴파일 -&gt; Css로 변환됨</li>
-<li>
-<p>컴파일 방법...</p>
+</ul>
 <ul>
+<li><strong>CSS가 뭐가 문제였는디?</strong><ul>
+<li>프로젝트 크기 커질수록 유지보수가 어려워짐</li>
+<li>불필요한 Selector, 연산 기능의 한계, 구문의 부재 등의 단점 부각</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>사용방법</strong><ul>
+<li>scss 문법으로 코드 작성 -&gt; 컴파일 -&gt; Css로 변환됨</li>
+<li>컴파일 방법...<ul>
 <li>SassMeister</li>
 <li>node-sass</li>
 <li>Gulp</li>
@@ -23031,12 +23029,16 @@
 <li>parcel</li>
 </ul>
 </li>
-<li>
-<p><strong>제공하는 기능/예시</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>제공하는 기능/예시</strong><ol>
 <li>변수 할당<ul>
-<li>변수 이름 앞에는 항상 <code>$</code>를 붙이도록 하자!</li>
+<li>변수 이름 앞에는 항상 <code>$</code>를 붙이도록 하자!<ul>
 <li>기본 스코프는 {} 안에서</li>
+</ul>
+</li>
 <li><code>!global</code> 플래그를 통해 변수의 유효범위를 전역으로 설정할 수 있음!
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">font</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="w"> </span><span class="n">Halventica</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
@@ -23054,7 +23056,7 @@
 </ul>
 </li>
 <li>중첩 구문
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">nav</span><span class="w"> </span><span class="nt">ul</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">nav</span><span class="w"> </span><span class="nt">ul</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
@@ -23067,7 +23069,7 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">nav</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">nav</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">ul</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">margin</span><span class="nd">:</span><span class="w"> </span><span class="nt">0</span><span class="o">;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">padding</span><span class="nd">:</span><span class="w"> </span><span class="nt">0</span><span class="o">;</span>
@@ -23101,7 +23103,7 @@
 </ul>
 </li>
 <li>모듈화
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">font</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="w"> </span><span class="n">Halventica</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">aqua</span><span class="p">;</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
@@ -23111,7 +23113,7 @@
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span>
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// base.scss</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// base.scss</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">$font-stack</span><span class="o">:</span><span class="w"> </span><span class="n">Helvetica</span><span class="o">,</span><span class="w"> </span><span class="no">sans-serif</span><span class="p">;</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">$primary-color</span><span class="o">:</span><span class="w"> </span><span class="ni">aqua</span><span class="p">;</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -23128,9 +23130,9 @@
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span><span class="nt">color</span><span class="nd">:</span><span class="w"> </span><span class="nt">white</span><span class="o">;</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>Mixin</li>
-<li>default 파라미터 지정 가능, 파라미터 받아서 속성 부여 가능
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">.</span><span class="nc">info</span><span class="w"> </span><span class="p">{</span>
+<li>Mixin
+- default 파라미터 지정 가능, 파라미터 받아서 속성 부여 가능
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">.</span><span class="nc">info</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="kc">gray</span><span class="p">;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">black</span><span class="p">;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">}</span>
@@ -23145,7 +23147,7 @@
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="p">}</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">@mixin</span><span class="nf"> theme</span><span class="p">(</span><span class="nv">$theme</span><span class="o">:</span><span class="w"> </span><span class="ni">gray</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">@mixin</span><span class="nf"> theme</span><span class="p">(</span><span class="nv">$theme</span><span class="o">:</span><span class="w"> </span><span class="ni">gray</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">background</span><span class="nd">:</span><span class="w"> </span><span class="err">$</span><span class="nt">theme</span><span class="o">;</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">color</span><span class="nd">:</span><span class="w"> </span><span class="nt">black</span><span class="o">;</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">}</span>
@@ -23163,7 +23165,7 @@
 <a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>확장 &amp; 상속
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">.</span><span class="nc">message</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">success</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">error</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">warning</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">.</span><span class="nc">message</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">success</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">error</span><span class="o">,</span><span class="w"> </span><span class="p">.</span><span class="nc">warning</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="kc">black</span><span class="p">;</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">aqua</span><span class="p">;</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">}</span>
@@ -23180,7 +23182,7 @@
 <a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="kc">yellow</span><span class="p">;</span>
 <a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="p">}</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="err">%</span><span class="nt">message-shared</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="err">%</span><span class="nt">message-shared</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">border</span><span class="nd">:</span><span class="w"> </span><span class="nt">1px</span><span class="w"> </span><span class="nt">solid</span><span class="w"> </span><span class="nt">black</span><span class="o">;</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">color</span><span class="nd">:</span><span class="w"> </span><span class="nt">aqua</span><span class="o">;</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">}</span>
@@ -23210,7 +23212,7 @@
 <a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>연산자(Operators)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -23223,7 +23225,7 @@
 <a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
 <a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="p">}</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">@use</span><span class="w"> </span><span class="s2">&quot;sass:math&quot;</span><span class="o">;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">@use</span><span class="w"> </span><span class="s2">&quot;sass:math&quot;</span><span class="o">;</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nc">.container</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">display</span><span class="nd">:</span><span class="w"> </span><span class="nt">flex</span><span class="o">;</span>
@@ -23241,9 +23243,13 @@
 <li>파일 분할 (Partial)<ul>
 <li>프로젝트 규모가 커지면 <code>header</code>, <code>side-menu</code> 등으로 각 기능과 부분으로 나뉘어 유지보수가 쉽도록 관리!</li>
 <li>파일이 너무 많이지면... 관리나 성능 차원에서 문제 생길 수 있어</li>
-<li>Scss는 Partial 기능을 지원함</li>
+<li>Scss는 Partial 기능을 지원함<ul>
 <li>파일 이름 앞에 <code>_</code>를 붙여 <code>@import</code>로 가져오면 컴파일시 <code>~.css</code>로 컴파일하지 않음*</li>
 </ul>
+</li>
+</ul>
+</li>
+</ol>
 </li>
 </ul>
 <h2 id="future">Future<a class="headerlink" href="#future" title="Permanent link">&para;</a></h2>

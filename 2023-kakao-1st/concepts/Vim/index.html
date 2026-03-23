@@ -23010,16 +23010,16 @@
 <p><em>참고: https://www.youtube.com/watch?v=cY0JxzENBJg</em></p>
 <h4 id="_1">기본사용<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <ul>
-<li>입력 모드</li>
+<li>입력 모드<ul>
 <li><code>i</code>: 커서 앞에 입력</li>
 <li><code>a</code>: 커서 뒤에 입력</li>
 <li><code>I</code>: 문장 시작에 입력</li>
-<li>
-<p><code>A</code>: 문장 끝에 입력</p>
+<li><code>A</code>: 문장 끝에 입력</li>
+</ul>
 </li>
-<li>
-<p>명령 모드</p>
-</li>
+</ul>
+<ul>
+<li>명령 모드<ul>
 <li><code>esc</code>: 입력 모드 -&gt; 명령 모드</li>
 <li><code>:q</code>: 그냥 종료</li>
 <li><code>:q!</code>: 강제 종료</li>
@@ -23028,81 +23028,89 @@
 <li><code>:wq</code>: 저장하고 종료</li>
 <li><code>:wq!</code>: 강제 저장하고 종료</li>
 </ul>
+</li>
+</ul>
 <h4 id="_2">네비게이션 (명령 모드)<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li>방향키</li>
+<li>방향키<ul>
 <li>H | J | K | L</li>
-<li>
-<p>왼쪽 | 아래 | 위 | 오른쪽</p>
+<li>왼쪽 | 아래 | 위 | 오른쪽</li>
+</ul>
 </li>
-<li>
-<p>문장 이동</p>
-</li>
+</ul>
+<ul>
+<li>문장 이동<ul>
 <li><code>0</code>: 문장 앞으로 이동</li>
 <li><code>$</code>: 문장 뒤로 이동</li>
 <li><code>w</code>: 한단어씩 앞으로<ul>
 <li><code>3w</code>: 3단어씩 앞으로</li>
 </ul>
 </li>
-<li>
-<p><code>b</code>: 한단어씩 뒤로</p>
-<ul>
+<li><code>b</code>: 한단어씩 뒤로<ul>
 <li><code>3b</code>: 3단어씩 뒤로</li>
 </ul>
 </li>
-<li>
-<p>화면 커서 이동</p>
+</ul>
 </li>
+</ul>
+<ul>
+<li>화면 커서 이동<ul>
 <li><code>H</code>: 화면 위</li>
 <li><code>M</code>: 화면 중간</li>
-<li>
-<p><code>L</code>: 화면 끝</p>
+<li><code>L</code>: 화면 끝</li>
+</ul>
 </li>
-<li>
-<p>파일 커서 이동</p>
-</li>
+</ul>
+<ul>
+<li>파일 커서 이동<ul>
 <li><code>gg</code>: 파일 앞</li>
 <li><code>G</code>: 파일 끝</li>
-<li>
-<p><code>20G</code>: 20번째 줄로 이동</p>
+<li><code>20G</code>: 20번째 줄로 이동</li>
+</ul>
 </li>
-<li>
-<p>스크롤링</p>
-</li>
+</ul>
+<ul>
+<li>스크롤링<ul>
 <li><code>ctrl u</code>: 위로 스크롤</li>
 <li><code>ctrl d</code>: 아래로 스크롤</li>
 <li><code>{</code>: 한문단 위로</li>
-<li>
-<p><code>}</code>: 한문단 아래로</p>
+<li><code>}</code>: 한문단 아래로</li>
+</ul>
 </li>
-<li>
-<p>편집</p>
-</li>
+</ul>
+<ul>
+<li>편집<ul>
 <li><code>x</code>: 커서 아래 글자 삭제</li>
 <li><code>dd</code>: 문장 삭제</li>
 <li><code>yy</code>: 문장 복사</li>
 <li><code>p</code>: 붙여 넣기</li>
 <li><code>*p</code>: 클립보드 붙여 넣기</li>
 </ul>
+</li>
+</ul>
 <h4 id="_3">반복 수행<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>Command</code> + <code>Object</code> 두가지를 조합하여 명령과 그 대상자를 반복적으로 수행할 수 있음</li>
-<li>명령어 반복</li>
+<li>명령어 반복<ul>
 <li><code>.</code>: 이전 명령 반복</li>
 <li><code>u</code>: 되감기</li>
-<li>
-<p><code>ctrl R</code>: 앞감기</p>
+<li><code>ctrl R</code>: 앞감기</li>
+</ul>
 </li>
-<li>
-<p>예시</p>
-</li>
+</ul>
+<ul>
+<li>예시<ul>
 <li><code>dt(</code>: 현 커서부터 가장 빠른 ( 까지 삭제</li>
 <li><code>df(</code>: 현 커서부터 가장 빠른 ( 앞 까지 삭제</li>
 </ul>
+</li>
+</ul>
 <h4 id="_4">검색<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>/</code>: 검색 모드로 진입</li>
+<li><code>/</code>: 검색 모드로 진입<ul>
 <li>검색어 입력하고...</li>
+</ul>
+</li>
 <li><code>n</code>: 다음 검색 단어로 이동</li>
 <li><code>?</code>: 그 전 단어로 이동</li>
 </ul>

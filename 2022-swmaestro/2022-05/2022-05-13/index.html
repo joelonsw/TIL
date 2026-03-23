@@ -22911,54 +22911,56 @@
 <ul>
 <li><em>참고: https://process-mining.tistory.com/42</em></li>
 <li><em>참고: https://process-mining.tistory.com/106</em></li>
-<li><strong>Decision Tree</strong></li>
+<li><strong>Decision Tree</strong><ul>
 <li>데이터를 이용하여 이를 분류하거나 원하는 어떤 결과값을 예측하는 분석 방법</li>
 <li>Terminal node가 가장 섞이지 않은 상태로 완전히 분류되는 것<ul>
 <li>즉 복잡성(entropy)이 낮도록 만드는 것</li>
 </ul>
 </li>
-<li>
-<p>각 subset의 복잡성이 가장 낮은 방향으로, 가장 덜 섞인 방향으로 decision tree 발전시켜 나가는 것!</p>
+<li>각 subset의 복잡성이 가장 낮은 방향으로, 가장 덜 섞인 방향으로 decision tree 발전시켜 나가는 것!</li>
+</ul>
 </li>
-<li>
-<p><strong>Impurity</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Impurity</strong><ul>
 <li>각 노드들의 복잡성</li>
 <li>해당 노드안에서 섞여있는 정도가 높을수록 복잡성이 높고, 덜 섞일수록 복잡성이 낮다</li>
-<li>
-<p>결과 노드 안에서 섞여있는 정도가 낮은 tree 만드는 것이 목표</p>
+<li>결과 노드 안에서 섞여있는 정도가 낮은 tree 만드는 것이 목표</li>
+</ul>
 </li>
-<li>
-<p><strong>Entropy</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Entropy</strong><ul>
 <li><img alt="" src="../../images/2022-05-13-entropy.png" /></li>
 <li>각 노드의 엔트로피를 다음과 같은 식으로 구할 수 있음</li>
 <li>약간 분산의 정도를 수식으로 표현하는 듯</li>
-<li>
-<p><img alt="" src="../../images/2022-05-13-entropy2.png" /></p>
+<li><img alt="" src="../../images/2022-05-13-entropy2.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>GINI Index</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>GINI Index</strong><ul>
 <li><img alt="" src="../../images/2022-05-13-gini.png" /></li>
-<li>
-<p><img alt="" src="../../images/2022-05-13-gini-2.png" /></p>
+<li><img alt="" src="../../images/2022-05-13-gini-2.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>Information gain</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Information gain</strong><ul>
 <li>Impurity 지표를 바탕으로 impurity가 얼마나 개선되었는지를 계산할 수 있는 것이 Information gain</li>
 <li>Split을 많이 할수록 node의 impurity가 낮아, information gain에서 더 좋은 성능 보임<ul>
 <li>이를 보완하기 위해 만들어진 개념 Inforamtion Gain Ratio</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-05-13-information-gain-example.png" /></p>
+<li><img alt="" src="../../images/2022-05-13-information-gain-example.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>Information Gain Ratio</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Information Gain Ratio</strong><ul>
 <li><img alt="" src="../../images/2022-05-13-information-gain.png" /></li>
+</ul>
+</li>
 </ul>
 
 

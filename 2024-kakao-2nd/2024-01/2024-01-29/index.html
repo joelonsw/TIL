@@ -22959,55 +22959,57 @@
   - 논리적으로는 하나의 테이블이기에, 조회 쿼리문을 특별히 수정할 필요 X
     - 그 와중에 데이터는 물리적으로 다른 세그먼트에 저장되어 관리 측면 굿</p>
 <ul>
-<li><strong>장점</strong></li>
+<li><strong>장점</strong><ul>
 <li>Select Query 퍼포먼스 향상 (Full Table Scan의 범위가 작아짐)</li>
 <li>디스크 장애시 해당 파티션만 손상됨</li>
 <li>개별 Partition 단위의 관리가 가능</li>
 <li>개발되어 있는 기존 쿼리문 수정할 필요 X</li>
 <li>조인 시 파티션간 병렬 처리 및 파티션 내의 병렬 처리 수행</li>
-<li>
-<p>데이터 액세스 범위를 줄여 성능 향상 + 테이블 파티션 단위로 디스크 I/O 분산해 부하 감소</p>
+<li>데이터 액세스 범위를 줄여 성능 향상 + 테이블 파티션 단위로 디스크 I/O 분산해 부하 감소</li>
+</ul>
 </li>
-<li>
-<p><strong>단점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>단점</strong><ul>
 <li>파티션 키 값 변경에 대한 별도 관리 필요</li>
 <li>파티션에 기준을 컬럼의 일부로 잡는다면, 정상적인 파티셔닝이 안됨 -&gt; 오버헤드 칼럼이 필요할 수도</li>
 <li>Insert 속도 느려짐</li>
-<li>
-<p>Join 비용 증가</p>
+<li>Join 비용 증가</li>
+</ul>
 </li>
-<li>
-<p><strong>When to Use</strong></p>
-</li>
-<li>데이터 양이 많고, Insert가 지속적으로 일어나는 테이블</li>
-<li>
-<p>ex. 로깅 테이블</p>
+</ul>
 <ul>
+<li><strong>When to Use</strong><ul>
+<li>데이터 양이 많고, Insert가 지속적으로 일어나는 테이블</li>
+<li>ex. 로깅 테이블<ul>
 <li>insert 많음</li>
 <li>몇 달 지나면 보지도 않음</li>
 <li>필요없어진 거 그냥 띡하고 버릴수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>파티션 키 컬럼(파티셔닝 키)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>파티션 키 컬럼(파티셔닝 키)</strong><ul>
 <li>Range Partition Table에서 물리적으로 테이블이 나뉘는 기준이 되는 컬럼으로 많이 지정<ul>
 <li>날짜 컬럼으로 많이 지정</li>
 </ul>
 </li>
-<li>
-<p>Range Partitioning 시, Load balancing은 파티션 키에 의존!!!</p>
-<ul>
-<li>여러 파티션에 대한 조회는 한 테이블로 구성시보다 효율 떨어짐 =&gt; 기준 키를 잘 구성하자!</li>
+<li>Range Partitioning 시, Load balancing은 파티션 키에 의존!!!<ul>
+<li>여러 파티션에 대한 조회는 한 테이블로 구성시보다 효율 떨어짐 =&gt; 기준 키를 잘 구성하자!<ul>
 <li>PK 처럼 뭔 데이터인지 모르겠는 건 피해</li>
 <li>데이터가 어디에 있는지 직관적으로 알 수 있어야해</li>
 <li>I/O 부하 잘 분산할 수 있도록 분포도 적당해야 해</li>
 </ul>
 </li>
-<li>
-<p><strong>파티션 테이블의 종류</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>파티션 테이블의 종류</strong><ol>
 <li>Range Partitioning<ul>
 <li>일/월/분기 등 특정 컬럼의 정렬값 기준 분할</li>
 <li>관리 용이, 이력 데이터에 적합</li>
@@ -23023,6 +23025,8 @@
 <li>순서에 맞지 않는 데이터의 그루핑 쉽게 할 수 있다네...</li>
 <li>오로지 하나의 칼럼만으로 파티션 키 생성 가능하다네...</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 <h2 id="scala-foldleft">Scala foldLeft (마음에 와닿게)<a class="headerlink" href="#scala-foldleft" title="Permanent link">&para;</a></h2>
@@ -23047,22 +23051,22 @@
 </code></pre></div></p>
 <h2 id="scala-fold">Scala Fold<a class="headerlink" href="#scala-fold" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>Fold: 주어진 결합함수를 데이터 구조에 대해 재귀적으로 호출하여 결과값을 만들어내는 HOF</p>
+<li><strong>개요</strong><ul>
+<li>Fold: 주어진 결합함수를 데이터 구조에 대해 재귀적으로 호출하여 결과값을 만들어내는 HOF</li>
+</ul>
 </li>
-<li>
-<p><strong>FoldLeft</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>FoldLeft</strong><ul>
 <li>Fold를 왼쪽 방향으로 적용하겠습니다. </li>
-<li>
-<p>마지막 요소를 제외한 요소들을 재귀적으로 처리한 결과와 마지막 요소를 결합</p>
+<li>마지막 요소를 제외한 요소들을 재귀적으로 처리한 결과와 마지막 요소를 결합</li>
+</ul>
 </li>
-<li>
-<p><strong>Scala 내부에서는?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Scala 내부에서는?</strong><ul>
 <li>재귀함수적으로 처리할법도 한데, 그냥 성능을 위해 while문 때려버림
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foldLeft</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">foldLeft</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="n">these</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">this</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">these</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23074,6 +23078,8 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">foldRight</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="w"> </span><span class="nc">B</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reverse</span><span class="p">.</span><span class="n">foldLeft</span><span class="p">(</span><span class="n">z</span><span class="p">)((</span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">op</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">))</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

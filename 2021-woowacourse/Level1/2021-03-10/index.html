@@ -22909,36 +22909,26 @@
 <h3 id="2021-03-10">2021-03-10<a class="headerlink" href="#2021-03-10" title="Permanent link">&para;</a></h3>
 <h2 id="vs">깊은 복사 vs 얕은 복사<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>고민의 시작</p>
+<li>고민의 시작
+    - new ArrayList&lt;&gt;(); 의 인자로 List를 넘겨주면, 새로운 ArrayList가 생성된단 말이지?
+    - 두 개의 주소값을 출력해보면 확실히 다르단 말이지?
+    - 따라서 그 두 List에서 각각 add()/remove() 등의 연산을 수행해주면 각자 처리가 된단 말이지?
+    - 하지만 두 List 안에 있는 객체의 주소는 동일하네? 
+        - 어라? List 내의 하나의 객체를 조작하면 다른 List의 객체도 조작이 되네?
+    - "뇌절"
+        - 뇌절의 이유는 Class 안에 Class를 저장해놨기 때문!
+        - 첫 클래스(List)는 "깊은 복사"로써 새로운 참조값을 할당 받았지만,
+        - 그 안에 Class들은 "얕은 복사"를 통해 복사되며, 이는 참조값을 공유하게 된다.</li>
+</ul>
 <ul>
-<li>new ArrayList&lt;&gt;(); 의 인자로 List를 넘겨주면, 새로운 ArrayList가 생성된단 말이지?</li>
-<li>두 개의 주소값을 출력해보면 확실히 다르단 말이지?</li>
-<li>따라서 그 두 List에서 각각 add()/remove() 등의 연산을 수행해주면 각자 처리가 된단 말이지?</li>
-<li>하지만 두 List 안에 있는 객체의 주소는 동일하네? <ul>
-<li>어라? List 내의 하나의 객체를 조작하면 다른 List의 객체도 조작이 되네?</li>
+<li>참고 1: https://coding-factory.tistory.com/548</li>
+<li>참고 2: https://javacan.tistory.com/entry/31</li>
 </ul>
-</li>
-<li>"뇌절"<ul>
-<li>뇌절의 이유는 Class 안에 Class를 저장해놨기 때문!</li>
-<li>첫 클래스(List)는 "깊은 복사"로써 새로운 참조값을 할당 받았지만,</li>
-<li>그 안에 Class들은 "얕은 복사"를 통해 복사되며, 이는 참조값을 공유하게 된다.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>참고 1: https://coding-factory.tistory.com/548</p>
-</li>
-<li>
-<p>참고 2: https://javacan.tistory.com/entry/31</p>
-</li>
-<li>
-<p>얕은 복사</p>
 <ul>
-<li>객체 복사시, 주소값을 복사한다</li>
-<li>"=" 연산자는 얕은 복사를 수행한다. 즉 주소를 이어준다
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">transient</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">elementData</span><span class="p">;</span><span class="w"> </span><span class="c1">// non-private to simplify nested class access</span>
+<li>얕은 복사
+    - 객체 복사시, 주소값을 복사한다
+    - "=" 연산자는 얕은 복사를 수행한다. 즉 주소를 이어준다
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">transient</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">elementData</span><span class="p">;</span><span class="w"> </span><span class="c1">// non-private to simplify nested class access</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="nf">ArrayList</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">toArray</span><span class="p">();</span>
@@ -22953,71 +22943,53 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="n">elementData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EMPTY_ELEMENTDATA</span><span class="p">;</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>결국 ArrayList는 배열에 요소를 저장하는 것<ul>
-<li>넘겨 받는 인자가 ArrayList라면, "elementData = a" 라며 "얕은 복사!"를 하는 것을 볼 수 있다</li>
-<li>아하 내가 여기서 뇌절을 했구만</li>
+</code></pre></div>
+    - 결국 ArrayList는 배열에 요소를 저장하는 것
+        - 넘겨 받는 인자가 ArrayList라면, "elementData = a" 라며 "얕은 복사!"를 하는 것을 볼 수 있다
+        - 아하 내가 여기서 뇌절을 했구만</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p>깊은 복사</p>
 <ul>
-<li>주소값 참조가 아닌, 새로운 메모리 공간에 값을 복사하는 것</li>
-<li>해당 객체와 인스턴스 변수까지 복사하는 방식</li>
-<li>참조를 공유하지 않음</li>
-<li>Java에서는 객체 자체를 복사할 때에는 Cloneable 인터페이스를 기반으로 구현할 것을 권고한다<ul>
-<li>clone()을 구현할 때에는 어떤 인스턴스 필드를 복사해줄지 정의해줘야 깊은 복사가 가능하다<ul>
-<li>primitive 타입 같은 경우는 상관이 없겠지만, 클래스라면 복사 하나하나 지정 필수</li>
+<li>깊은 복사
+    - 주소값 참조가 아닌, 새로운 메모리 공간에 값을 복사하는 것
+    - 해당 객체와 인스턴스 변수까지 복사하는 방식
+    - 참조를 공유하지 않음
+    - Java에서는 객체 자체를 복사할 때에는 Cloneable 인터페이스를 기반으로 구현할 것을 권고한다
+        - clone()을 구현할 때에는 어떤 인스턴스 필드를 복사해줄지 정의해줘야 깊은 복사가 가능하다
+            - primitive 타입 같은 경우는 상관이 없겠지만, 클래스라면 복사 하나하나 지정 필수
+        - 기본 자료형, Enum, Immutable과 같이 clone을 지원하는 객체가 아니라면 clone 별도 지정 필수</li>
 </ul>
-</li>
-<li>기본 자료형, Enum, Immutable과 같이 clone을 지원하는 객체가 아니라면 clone 별도 지정 필수</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>배열을 복사하는 방법</p>
 <ul>
-<li>Arrays.copyOf()</li>
-<li>Arrays.copyOfRange()</li>
-<li>System.arraycopy()</li>
-<li>Object.clone()</li>
-<li>등이 배열의 깊은 복사를 <em>(즉 새로운 배열을 생성하고, 안의 내용물을 "="을 통해 얕은 복사)</em> 지원</li>
+<li>배열을 복사하는 방법
+    - Arrays.copyOf()
+    - Arrays.copyOfRange()
+    - System.arraycopy()
+    - Object.clone()
+    - 등이 배열의 깊은 복사를 <em>(즉 새로운 배열을 생성하고, 안의 내용물을 "="을 통해 얕은 복사)</em> 지원</li>
 </ul>
-</li>
-<li>
-<p>Object.clone()</p>
 <ul>
-<li>객체 구조를 복사하지만, 객체 레퍼런스의 경우 레퍼런스만 복사<ul>
-<li>즉, 실제 객체는 복사하지 않음 <em>(shallow cloning)</em></li>
-<li>이런 클로닝은 shallow cloning으로 필드 멤버가 전부 primitive 타입인 경우에 유용</li>
-</ul>
-</li>
-<li>clone() 기본 동작 과정    <ul>
-<li>Cloneable 인터페이스가 구현되어 있다면 원본과 같은 객체를 생성, 모든 필드 멤버들을 원본의 필드와 동일하게 초기화</li>
-<li>내용을 새로 생성하지 않고, 단지 대입에 의해 복사됨 <em>(shallow cloning)</em></li>
-</ul>
-</li>
-<li>기본적으로 배열은 Cloneable 인터페이스를 구현했음<ul>
-<li>따라서, 새로운 배열을 만들면 주소값은 달라지지만,</li>
-<li>보다시피 안에 원소들은 "="를 통해 얕은 복사로 할당되어,</li>
-<li>참조를 공유하게 된다</li>
-</ul>
-</li>
-<li>그래서 우리가 정의한 객체에서 복사를 위해 clone()을 오버라이딩해서 써야하는 것은 알겠어. <ul>
-<li>왜냐하면, 실제 객체에 깊은 복사를 하기 위해서는 clone()이라는 메서드를 재정의해야하기 때문이야</li>
-<li>여기서 주의해주어야 할 점이 무엇이냐면!</li>
-<li>클래스 안에 다른 배열/클래스가 인스턴스 변수로 있는 경우인데,<ul>
-<li>기본적으로 super.clone()을 통해 Object.clone()을 호출하게 되면,</li>
-<li>primitive 값 같은 경우에는 어차피 값의 복사이고, 메모리에 해당 자료형을 나타내는 1010이 저장되기에 상관이 없지만,</li>
-<li>객체 레퍼런스가 인스턴스 변수로 저장되어 있는 경우, 해당 레퍼런스만 복사해서 새로운 객체에 할당해줘</li>
-<li>이는 곧, shallow cloning이 일어났다는 뜻이며,</li>
-<li>복사하기 전 객체에서 해당 인스턴스 변수를 조작하면,</li>
-<li>복사해놨다고 생각했던 친구도 똑같이 달라질 거야</li>
-<li>따라서 다음과 같이 해결하도록 해요
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//참고: https://javacan.tistory.com/entry/31</span>
+<li>Object.clone()
+    - 객체 구조를 복사하지만, 객체 레퍼런스의 경우 레퍼런스만 복사
+        - 즉, 실제 객체는 복사하지 않음 <em>(shallow cloning)</em>
+        - 이런 클로닝은 shallow cloning으로 필드 멤버가 전부 primitive 타입인 경우에 유용
+    - clone() 기본 동작 과정  <br />
+        - Cloneable 인터페이스가 구현되어 있다면 원본과 같은 객체를 생성, 모든 필드 멤버들을 원본의 필드와 동일하게 초기화
+        - 내용을 새로 생성하지 않고, 단지 대입에 의해 복사됨 <em>(shallow cloning)</em>
+    - 기본적으로 배열은 Cloneable 인터페이스를 구현했음
+        - 따라서, 새로운 배열을 만들면 주소값은 달라지지만,
+        - 보다시피 안에 원소들은 "="를 통해 얕은 복사로 할당되어,
+        - 참조를 공유하게 된다
+    - 그래서 우리가 정의한 객체에서 복사를 위해 clone()을 오버라이딩해서 써야하는 것은 알겠어. 
+        - 왜냐하면, 실제 객체에 깊은 복사를 하기 위해서는 clone()이라는 메서드를 재정의해야하기 때문이야
+        - 여기서 주의해주어야 할 점이 무엇이냐면!
+        - 클래스 안에 다른 배열/클래스가 인스턴스 변수로 있는 경우인데,
+            - 기본적으로 super.clone()을 통해 Object.clone()을 호출하게 되면,
+            - primitive 값 같은 경우에는 어차피 값의 복사이고, 메모리에 해당 자료형을 나타내는 1010이 저장되기에 상관이 없지만,
+            - 객체 레퍼런스가 인스턴스 변수로 저장되어 있는 경우, 해당 레퍼런스만 복사해서 새로운 객체에 할당해줘
+            - 이는 곧, shallow cloning이 일어났다는 뜻이며,
+            - 복사하기 전 객체에서 해당 인스턴스 변수를 조작하면,
+            - 복사해놨다고 생각했던 친구도 똑같이 달라질 거야
+            - 따라서 다음과 같이 해결하도록 해요
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">//참고: https://javacan.tistory.com/entry/31</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyClass</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Cloneable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="n">MyData</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -23031,14 +23003,8 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">myObj</span><span class="p">;</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">   </span><span class="p">}</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span><span class="w">      </span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>따라서... 어떤 클래스를 완전히 deep cloning하기 위해서는 그 클래스로 부터 참조되는 모든 클래스를 추적/복사 하여야 함</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+        - 따라서... 어떤 클래스를 완전히 deep cloning하기 위해서는 그 클래스로 부터 참조되는 모든 클래스를 추적/복사 하여야 함</li>
 </ul>
 
 

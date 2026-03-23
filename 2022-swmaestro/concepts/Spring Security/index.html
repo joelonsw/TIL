@@ -22988,83 +22988,85 @@
 <h3 id="_1">인증과 인가<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>참고: https://www.okta.com/kr/identity-101/authentication-vs-authorization/</em></li>
-<li><strong>인증 (Authentication)</strong></li>
+<li><strong>인증 (Authentication)</strong><ul>
 <li>사용자의 신원을 검증하는 행위</li>
 <li>비밀번호/일회용 핀/인증 앱/생체인식</li>
 <li>자격 증명 확인</li>
-<li>
-<p>내가 누군지 식별하고, 입증하는 과정</p>
+<li>내가 누군지 식별하고, 입증하는 과정</li>
+</ul>
 </li>
-<li>
-<p><strong>인가 (권한 부여) (Authorization)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>인가 (권한 부여) (Authorization)</strong><ul>
 <li>사용자에게 특정 리소스나 기능에 액세스할 수 있는 권한을 부여</li>
 <li>액세스 제어나 클라이언트 권한을 서로 대체하여 사용되기도 함</li>
 <li>권한 허가/거부</li>
 <li>인증이 완료된 사용자의 권한을 설정하는 과정</li>
 </ul>
+</li>
+</ul>
 <h3 id="spring-security_1">Spring Security가 뭔데?<a class="headerlink" href="#spring-security_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>참고: https://spring.io/projects/spring-security</em></li>
 <li><em>참고: https://jiwondev.tistory.com/203?category=891823</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>강력하고, 커스텀이 가능한 인증/인가 프레임워크</li>
-<li>
-<p>특징</p>
-<ul>
+<li>특징<ul>
 <li>인증/인가 확장 지원</li>
 <li>Session Fixation, Clickjacking, CSRF 등에 대한 보호</li>
 <li>서블릿 API 통합</li>
 <li>Spring Web MVC와 통합</li>
 </ul>
 </li>
-<li>
-<p><strong>서블릿 &amp; 필터</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>서블릿 &amp; 필터</strong><ul>
 <li>인증/인가 담당 코드를 기존의 서비스 로직과 작성하는 것은 좋지 않음 =&gt; 관심사의 분리 필요함</li>
 <li>서블릿 2.3 부터 필터라는 개념이 도입되었고, 필터에서 Request/Response 조작 할 수 있었음<ul>
 <li>요청이 서블릿에 도달하기 전에 (Spring에서는 DispatcherServlet) 필터체인을 거치면서 인증/인가 뚝딱</li>
 </ul>
 </li>
-<li>
-<p>스프링에서 필터</p>
-<ul>
+<li>스프링에서 필터<ul>
 <li>스프링부트에서는 implements Filter를 통해 필터 객체를 구현하자!</li>
 </ul>
 </li>
-<li>
-<p><strong>스프링 인터셉터</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>스프링 인터셉터</strong><ul>
 <li>인터셉터는 스프링 MVC에서만 제공하는 기능</li>
 <li>Dispatcher Servlet에서 컨트롤러에 가기전에 실행됨 </li>
 <li>요청 흐름도<ul>
 <li>HTTP 요청 =&gt; WAS =&gt; 필터 =&gt; 서블릿(Dispatcher Servlet) =&gt; 스프링 인터셉터 =&gt; 컨트롤러</li>
 </ul>
 </li>
-<li>
-<p>preHandle/postHandle/afterCompletion 요청으로 처리</p>
+<li>preHandle/postHandle/afterCompletion 요청으로 처리</li>
+</ul>
 </li>
-<li>
-<p><strong>서블릿 vs 인터셉터</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>서블릿 vs 인터셉터</strong><ul>
 <li>WebApp 전역적으로 처리해야하는 기능은 <strong>필터</strong>로!</li>
 <li>클라이언트에 들어오는 디테일한 처리는 <strong>인터셉터</strong>로!</li>
-<li>
-<p><img alt="" src="../../images/2022-08-09-mvc-request.jpeg" /></p>
+<li><img alt="" src="../../images/2022-08-09-mvc-request.jpeg" /></li>
+</ul>
 </li>
-<li>
-<p><strong>그러면 스프링이 필터는 어떻게 건드리는거임?</strong></p>
-</li>
-<li>스프링에서 "DelegationFilterProxy"를 통해 ApllicationContext와 서블릿 요청을 연결한다</li>
-<li>
-<p>DelegationFilterProxy를 통해 스프링 빈으로 구현한 필터를 등록 =&gt; 이는 서블릿 표준 필터처럼 동작함!</p>
+</ul>
 <ul>
+<li><strong>그러면 스프링이 필터는 어떻게 건드리는거임?</strong><ul>
+<li>스프링에서 "DelegationFilterProxy"를 통해 ApllicationContext와 서블릿 요청을 연결한다</li>
+<li>DelegationFilterProxy를 통해 스프링 빈으로 구현한 필터를 등록 =&gt; 이는 서블릿 표준 필터처럼 동작함!<ul>
 <li><img alt="" src="../../images/2022-08-09-delegation-filter-proxy.png" /></li>
 </ul>
 </li>
-<li>
-<p><strong>그래서 다시,,, Spring Security란?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>그래서 다시,,, Spring Security란?</strong><ul>
 <li>스프링을 기반으로 한 보안 프레임워크</li>
 <li>자체적으로 세션 체크, 리다이렉트하던것을 추상화하여 구현</li>
 <li>스프링 의존성을 없애기 위해 Filter 기반 동작</li>
@@ -23074,23 +23076,23 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="spring-security_2">Spring Security 아키텍쳐<a class="headerlink" href="#spring-security_2" title="Permanent link">&para;</a></h3>
 <p><img alt="" src="../../images/2022-08-09-security.png" /></p>
 <ul>
 <li><em>참고: https://jiwondev.tistory.com/244</em></li>
 <li><em>참고: https://jiwondev.tistory.com/245</em></li>
 <li><em>참고: https://jiwondev.tistory.com/246</em></li>
-<li><strong>Servlet Container</strong></li>
+<li><strong>Servlet Container</strong><ul>
 <li>Request를 받고 Filter 여러개를 거치게 됨</li>
-<li>
-<p>그 중 DelegatingFilterProxy에서 스프링 스큐리티의 설정들이 처리가 됨</p>
-<ul>
+<li>그 중 DelegatingFilterProxy에서 스프링 스큐리티의 설정들이 처리가 됨<ul>
 <li>요 필터가 Spring Container 측에 위임이 됨</li>
 <li>이렇게 하는 이유는 스프링의 기술 (IoC/AOP) 등이 인가/인증 처리에 필요하기 때문</li>
-<li>Spring Bean에게 요청을 위임하여 Spring Filter를 태움</li>
+<li>Spring Bean에게 요청을 위임하여 Spring Filter를 태움<ul>
 <li>서블릿 필터는 스프링에서 정의된 빈을 주입해서 사용할 수 없음</li>
 <li>특정 이름을 가진 스프링 빈을 찾아 그 빈에게 요청을 위임<ul>
-<li>springSecurityFilterChain 이름으로 생성된 빈을 ApplicationContext에서 찾아 요청을 위임</li>
+<li>springSecurityFilterChain 이름으로 생성된 빈을 ApplicationContext에서 찾아 요청을 위임<ol>
 <li>springSecurityFilterChain의 이름으로 생성되는 필터 빈<ul>
 <li>WebAsyncManagerIntegrationFilter</li>
 <li>SecurityContextPersistenceFilter</li>
@@ -23104,9 +23106,11 @@
 <li>RequestCacheAwareFilter</li>
 <li>SecurityContextHolderAwareRequestFilter</li>
 <li>AnonymousAuthenticationFilter</li>
-<li>SessionManagementFilter</li>
+<li>SessionManagementFilter<ul>
 <li>하나의 계정당 몇개의 세션까지 허용할 것인가? </li>
 <li>계정당 3대만 사용가능 이런 정책 보다 쉽게 가능</li>
+</ul>
+</li>
 <li>ExceptionTranslationFilter</li>
 <li>FilterSecurityInterceptor</li>
 </ul>
@@ -23123,20 +23127,28 @@
 </ul>
 </li>
 <li>마지막 필터까지 인증/인가 예외 발생 안하면 보안 통과</li>
+</ol>
+</li>
 <li>실제 보안 처리 x</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>Spring Container</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Spring Container</strong><ul>
 <li>Application Context 안에서 구동</li>
 <li><code>@EnableWebSecurity</code>를 통해 구동</li>
 <li>WebSecurityConfigurerAdapter에서 모든 초기화가 진행됨<ul>
-<li>FilterChainProxy에서 springSecurityFilterChain 진행</li>
+<li>FilterChainProxy에서 springSecurityFilterChain 진행<ul>
 <li>FilterChainProxy가 요청을 filter들에게 전달하면서 실제 인증/인가 처리</li>
-<li>HttpSecurity</li>
+</ul>
+</li>
+<li>HttpSecurity<ul>
 <li>인증 API<ul>
 <li>http.formLogin()</li>
 <li>http.logout()</li>
@@ -23161,15 +23173,19 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
 <li>SecurityContext / SecurityContextHolder<ul>
-<li>SecurityContext</li>
+<li>SecurityContext<ul>
 <li>Authentication 객체가 저장되는 보관소로 필요시 언제든지 Authentication 객체를 꺼내어 쓸 수 있도록 제공되는 클래스</li>
 <li>ThreadLocal에 저장되어 아무곳에서나 참조될 수 있도록 설계됨<ul>
 <li>어차피 인증/인가를 거친 쓰레드가 계속 서블릿 안으로 들어가서 Rest 처리할 거니까 해당 쓰레드의 변수로 넣어두는 듯!</li>
 </ul>
 </li>
 <li>인증이 완료되면 HttpSession에 저장되어 어플리케이션 전반에 걸쳐 전역적인 참조가 가능</li>
-<li>SecurityContextHolder</li>
+</ul>
+</li>
+<li>SecurityContextHolder<ul>
 <li>SecurityContext 객체 저장방식<ul>
 <li>MODE_THREADLOCAL: 스레드당 SecurityContext 객체를 할당. 기본값</li>
 <li>MODE_INHERITABLETHREADLOCAL: 메인 스레드와 자식 스레드에 관하여 동일한 Security Context 유지</li>
@@ -23180,17 +23196,21 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
 <p><img alt="" src="../../images/2022-08-09-security-2.png" /></p>
 <h3 id="spring-security_3">Spring Security 예외처리<a class="headerlink" href="#spring-security_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><em>참고: https://blog.naver.com/PostView.nhn?blogId=qjawnswkd&amp;logNo=222303477758</em></li>
-<li><strong>개요</strong></li>
-<li>
-<p>Spring Security는 인증/인가 실패시 FilterSecurityInterceptor가 2가지의 예외를 발생시킴</p>
+<li><strong>개요</strong><ul>
+<li>Spring Security는 인증/인가 실패시 FilterSecurityInterceptor가 2가지의 예외를 발생시킴</li>
+</ul>
 </li>
-<li>
-<p><strong>인증/인가 예외처리 방식</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>인증/인가 예외처리 방식</strong><ol>
 <li>인증<ul>
 <li>인증 예외가 생기면 <strong>AuthenticationException</strong>을 호출시킴</li>
 <li>AuthenticationEntryPoint 인터페이스로 커스텀이 가능함
@@ -23217,9 +23237,7 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>인가</p>
-<ul>
+<li>인가<ul>
 <li>인가 예외가 생기면 <strong>AccessDeniedException</strong>을 호출시킴</li>
 <li>AccessDeniedHandler 인터페이스로 커스텀 가능
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Component</span>
@@ -23245,11 +23263,13 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>설정 등록</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>설정 등록</strong><ul>
 <li>SpringConfig에서 exceptionHandling() 뒤에 장착해둘 것!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Override</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Override</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">http</span><span class="p">.</span><span class="na">httpBasic</span><span class="p">().</span><span class="na">disable</span><span class="p">()</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="p">.</span><span class="na">csrf</span><span class="p">().</span><span class="na">disable</span><span class="p">()</span>
@@ -23262,6 +23282,8 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="p">.</span><span class="na">authenticationEntryPoint</span><span class="p">(</span><span class="n">jwtAuthenticationEntryPoint</span><span class="p">);</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

@@ -22943,11 +22943,15 @@
 <ul>
 <li>스칼라에서는 불변형 자료구조와 함수형 프로그래밍 구문뿐만 아니라 병렬 컬렉션에 대해서도 기본 지원</li>
 <li>병렬로 실행되는 코드가 제대로 동작하게 만들때 자바보다 유리</li>
-<li>클래스에서 생성자 파라미터 필드로 가지게 하려면 변수 이름 옆에 <code>val</code>, <code>var</code> 써야함</li>
+<li>클래스에서 생성자 파라미터 필드로 가지게 하려면 변수 이름 옆에 <code>val</code>, <code>var</code> 써야함<ul>
 <li><code>class Money(val amount: Int)</code></li>
+</ul>
+</li>
 <li>케이스 클래스는 new 키워드를 사용하지 않고도 인스턴스를 생성하는 팩토리 메서드 제공</li>
-<li>스칼라에서느 클래스의 필드에 대한 스코프 default로 public</li>
+<li>스칼라에서느 클래스의 필드에 대한 스코프 default로 public<ul>
 <li>따라서 private으로 지정해 막던가 해라</li>
+</ul>
+</li>
 <li>여러개의 파라미터에 대해 값 지정할 때에는 파라미터 이름을 일일히 명시하는게 좋다</li>
 <li>불변형 컬렉션(스칼라 기본)을 통해 덧셈, 업데이트, 삭제 등의 연산을 수행할 때 직접 수정하지 않고, 이러한 연산 적용한 컬렉션 새로 만들어 리턴</li>
 <li>람다는 파라미터로 전달할 수 있는 함수
@@ -22955,15 +22959,17 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  input =&gt; body
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>}
 </code></pre></div></li>
-<li>스칼라 컬렉션 기본으로 불변</li>
+<li>스칼라 컬렉션 기본으로 불변<ul>
 <li>멀티프로세서 아키텍처 환경에서 의도한 대로 코드 정확히 동작</li>
 <li>병렬 처리 기본 지원</li>
+</ul>
+</li>
 <li>리스트 병합시 특이 코드 (모든 결과가 같다)
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">list1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">list2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nc">Nil</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">list3</span><span class="o">=</span><span class="w"> </span><span class="nc">Nil</span><span class="p">.</span><span class="n">::</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="n">::</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">::</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></li>
-<li>Any</li>
+<li>Any<ul>
 <li>AnyVal<ul>
 <li>Int</li>
 <li>Byte</li>
@@ -22977,44 +22983,48 @@
 <li>List</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>리스트 순회시 <code>_</code>는 현재 원소를 뜻함</li>
 <li>스코프 내에 있는 변수는 모두 스트링 안에 담아서 처리 가능</li>
 </ul>
 <h3 id="2">2. 코드 연동<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>생성자</strong></li>
+<li><strong>생성자</strong><ul>
 <li>보조 생성자는 반드시 this(...)로 기본 생성자를 호출할 것</li>
-<li>
-<p>마지막에 기본 생성자를 호출해 모든 파라미터 초기화 할 것</p>
+<li>마지막에 기본 생성자를 호출해 모든 파라미터 초기화 할 것</li>
+</ul>
 </li>
-<li>
-<p><strong>trait</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>trait</strong><ul>
 <li>일부 메서드에 대해서 구현 코드 담을 수 있어 재사용성 좋음</li>
 <li>클래스에 특정한 동작을 추가하고 싶다면 고려해볼것</li>
 <li>trait extends class 와 같은 문법도 가능 ㄷㄷ</li>
-<li>
-<p>with으로 trait 나타내는데, &lt;- 방향으로 호출됨</p>
+<li>with으로 trait 나타내는데, &lt;- 방향으로 호출됨</li>
+</ul>
 </li>
-<li>
-<p><strong>object</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>object</strong><ul>
 <li>static 개념을 대신하여 사용</li>
 <li>싱글톤 인스턴스 만들 수 있음</li>
-<li>
-<p>인터페이스/trait 상속 가능</p>
+<li>인터페이스/trait 상속 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>컴패니언 오브젝트</strong></p>
+</ul>
+<ul>
+<li><strong>컴패니언 오브젝트</strong><ul>
+<li>클래스와 이름이 같은 싱글톤 오브젝트 at 동일한 패키지와 파일</li>
+</ul>
 </li>
-<li>
-<p>클래스와 이름이 같은 싱글톤 오브젝트 at 동일한 패키지와 파일</p>
-</li>
-<li>
-<p><strong>Java vs Scala 코딩 컨벤션</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Java vs Scala 코딩 컨벤션</strong><ul>
 <li>자바: 순차적 상태변경 명령형 스타일</li>
 <li>스칼라: 표현식으로 코드 구성하는 선언적 방식</li>
+</ul>
+</li>
 </ul>
 
 

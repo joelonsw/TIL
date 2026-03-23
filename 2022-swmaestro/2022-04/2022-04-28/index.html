@@ -22933,53 +22933,57 @@
 <ul>
 <li><em>참고 : https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%A7%95</em></li>
 <li><em>참고 : https://wogh8732.tistory.com/271</em></li>
-<li><strong>정의</strong></li>
+<li><strong>정의</strong><ul>
 <li>소프트웨어 테스팅 기법 중 하나로, 컴퓨터 프로그램에 예상치 않은 무작위 데이터를 입력하는 것</li>
 <li>프로그램은 충돌이나 빌트인 코드 검증의 실패, 메모리 누수 발견 등 예외 감시 이루어짐</li>
 <li>주로 컴퓨터 시스템의 보안 문제를 테스팅하기 위함</li>
-<li>
-<p>fuzzing을 통해 프로그램에 들어가는 입력을 변조시켜 정상 동작이 아닌, 크래시 유발이나 메모리 Corruption 일으키는 사례 기록</p>
+<li>fuzzing을 통해 프로그램에 들어가는 입력을 변조시켜 정상 동작이 아닌, 크래시 유발이나 메모리 Corruption 일으키는 사례 기록</li>
+</ul>
 </li>
-<li>
-<p><strong>Fuzzing 왜 필요한가?</strong></p>
-</li>
-<li>버그를 자동으로 찾을 수 있음 (동적 분석)</li>
-<li>
-<p>정적 분석은 찾는 사람의 실력에 따라 버그 찾는게 달라짐</p>
-</li>
-<li>
-<p><strong>Fuzzing은 모든 버그를 찾을 수 있는가?</strong></p>
-</li>
-<li>
-<p>이론적으로는 모든 버그 유형 탐색 가능</p>
+</ul>
 <ul>
+<li><strong>Fuzzing 왜 필요한가?</strong><ul>
+<li>버그를 자동으로 찾을 수 있음 (동적 분석)</li>
+<li>정적 분석은 찾는 사람의 실력에 따라 버그 찾는게 달라짐</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Fuzzing은 모든 버그를 찾을 수 있는가?</strong><ul>
+<li>이론적으로는 모든 버그 유형 탐색 가능<ul>
 <li>heap, stack, integer OF/UF</li>
 <li>format string bug</li>
 </ul>
 </li>
-<li>
-<p><strong>Fuzzing 아키텍쳐</strong></p>
+</ul>
 </li>
-<li><img alt="" src="https://user-images.githubusercontent.com/35132299/91274499-bdf2e680-e7b9-11ea-952e-7d5166ed681d.png" /></li>
-<li>TestCase Generator : 타겟 프로그램에 들어갈 입력 만듦</li>
-<li>Logger : 퍼징 돌리는 중 버그 분석에 필요한 정보 기록</li>
-<li>Worker : 주어진 입력으로 예기치 않은 동작 인식</li>
-<li>Server/Master : 1,2,3 컨트롤 및 상호작용 관리</li>
+</ul>
+<ul>
+<li><strong>Fuzzing 아키텍쳐</strong><ul>
+<li><img alt="" src="https://user-images.githubusercontent.com/35132299/91274499-bdf2e680-e7b9-11ea-952e-7d5166ed681d.png" />
+1. TestCase Generator : 타겟 프로그램에 들어갈 입력 만듦
+2. Logger : 퍼징 돌리는 중 버그 분석에 필요한 정보 기록
+3. Worker : 주어진 입력으로 예기치 않은 동작 인식
+4. Server/Master : 1,2,3 컨트롤 및 상호작용 관리</li>
+</ul>
+</li>
 </ul>
 <h2 id="afl">AFL<a class="headerlink" href="#afl" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 : https://github.com/google/AFL</em></li>
 <li><em>참고 : https://wogh8732.tistory.com/272</em></li>
-<li><strong>동작 원리</strong></li>
+<li><strong>동작 원리</strong><ul>
 <li>Instrumentation-guided genetic algorithm과 결합된 Fuzzer</li>
 <li>커버리지를 넓혀가며 프로그램 제어 흐름에 대한 변경 사항 기록 -&gt; 이를 로깅하여 Unique한 Crash 발견</li>
-<li>
-<p><strong>커버리지 기반 Fuzzer</strong></p>
+<li><strong>커버리지 기반 Fuzzer</strong></li>
+</ul>
 </li>
-<li>
-<p><strong>동작 로직</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>동작 로직</strong><ul>
 <li><img alt="" src="https://user-images.githubusercontent.com/35132299/91274776-293cb880-e7ba-11ea-8492-6d2d03983483.png" /></li>
+</ul>
+</li>
 </ul>
 
 

@@ -22995,51 +22995,51 @@
 <h3 id="2026-01-05">2026-01-05<a class="headerlink" href="#2026-01-05" title="Permanent link">&para;</a></h3>
 <h2 id="semi-join-exists">Semi-Join &amp; Exists<a class="headerlink" href="#semi-join-exists" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개념</strong></li>
+<li><strong>개념</strong><ul>
 <li>두 테이블을 조인할 때, 데이터를 실제로 합치는 것이 아닌, "존재 여부만 확인" 하는 기법</li>
 <li>데이터를 가져올 필요 없이 있는지만 궁금할 때에는 <code>EXISTS</code>가 훨씬 빠르다. MySQL은 Semi-Join으로 이를 해결</li>
-<li>
-<p>중복 제거 자동 적용</p>
+<li>중복 제거 자동 적용</li>
+</ul>
 </li>
-<li>
-<p><strong>Semi-Join (반쪽 조인)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Semi-Join (반쪽 조인)</strong><ul>
 <li>일반적인 Inner Join은 교집합 데이터를 모두 만듦</li>
 <li>Semi-Join은 "Outer 테이블의 행이 Inner 테이블에 존재하는가"만 판단<ul>
 <li>판단 후 즉히 Outer 테이블의 행으로 넘어감</li>
 </ul>
 </li>
-<li>
-<p>왼쪽 테이블에서 오른쪽 테이블과 매칭되는 행만 반환 + 오른쪽 테이블의 데이터는 가져오지 않음</p>
+<li>왼쪽 테이블에서 오른쪽 테이블과 매칭되는 행만 반환 + 오른쪽 테이블의 데이터는 가져오지 않음</li>
+</ul>
 </li>
-<li>
-<p><strong>문제</strong></p>
+</ul>
+<ul>
+<li><strong>문제</strong><ul>
+<li><code>JOIN</code> + <code>GROUP BY</code>는, 데이터를 모두 펼쳐놓고 조인하고, 다시 묶어서 그룹핑 갯수를 세기에 메모리를 많이 먹고 느림</li>
+</ul>
 </li>
-<li>
-<p><code>JOIN</code> + <code>GROUP BY</code>는, 데이터를 모두 펼쳐놓고 조인하고, 다시 묶어서 그룹핑 갯수를 세기에 메모리를 많이 먹고 느림</p>
-</li>
-<li>
-<p><strong>개선</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>개선</strong><ul>
 <li>MySQL은 <code>IN</code> 혹은 <code>EXISTS</code> 서브 쿼리를 만났을 때, 내부적으로 Semi-Join 최적화 진행</li>
-<li>
-<p>FirstMatch, Materialization, Duplicate Weedout</p>
+<li>FirstMatch, Materialization, Duplicate Weedout</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예시</strong><ul>
 <li><code>Users</code>: 10,000명</li>
 <li><code>Orders</code>: 1,000,000건</li>
-<li>
-<p>한 번이라도 주문한 적 있는 회원 목록 추출</p>
-<ul>
+<li>한 번이라도 주문한 적 있는 회원 목록 추출<ul>
 <li>[Bad Case]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">name</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="n">u</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">JOIN</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">user_id</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">user_id</span><span class="p">;</span>
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>회원 A가 주문했는지는 첫번째만 봐도 아는데, 굳이 100번 가량 조인</li>
+</ul>
+</li>
 <li>[Good Case]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">name</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="n">u</span>
@@ -23048,16 +23048,22 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="n">o</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">user_id</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">)</span>
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>Outer Loop: <code>Users</code> 테이블에서 회원 A가져옴</li>
 <li>Inner Loop: <code>Orders</code> 테이블의 인덱스 타고 회원 A의 주문을 찾음</li>
 <li>Short-circuit: 주문 내역 하나라도 발견시 (First Match), 회원 A의 주문 찾지 않고 멈춤</li>
 </ul>
 </li>
-<li>
-<p><strong>MySQL 옵티마이저</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>MySQL 옵티마이저</strong><ul>
 <li>MySQL 8.0 이후 부터는 <code>IN</code>, <code>EXIST</code> 쿼리 작성시, 옵티마이저가 자동으로 Semi-Join 최적화 수행함</li>
+</ul>
+</li>
 </ul>
 <h2 id="_1">스칼라 서브쿼리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23075,10 +23081,10 @@
 <ul>
 <li>MySQL 실행계획 EXPLAIN type 중 하나 (eq_ref)</li>
 <li>Join 시, Primary Key/Unique Key를 사용해 단 1건의 데이터만 조회한다는 뜻</li>
-<li>예시)</li>
+<li>예시)<ul>
 <li>현재 enrollment 테이블의 PK는 (user_id, company_id)</li>
 <li>서브쿼리 돌릴 필요 없이, PK로 콕 찍어서 확인 (<code>eq_ref</code>)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">AND</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">AND</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">enrollment</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">id</span>
@@ -23086,18 +23092,24 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">)</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="_2">쿼리 최적화 여정<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Short-Circuit Evaluation</li>
+<li>Short-Circuit Evaluation<ul>
 <li>앞의 조건이 False면 뒤의 조건은 실행하지 않도록</li>
 <li><code>EXISTS (조건A) AND EXISTS (조건B)</code></li>
-<li>인덱스 explain <code>type</code></li>
+</ul>
+</li>
+<li>인덱스 explain <code>type</code><ol>
 <li><code>system</code>/<code>const</code>: 테이블에 데이터 1건이거나 상수로 PK 조회하는 경우</li>
 <li><code>eq_ref</code>: 테이블 조인할 때 딱 PK/Unique Key로 1건만 읽음</li>
 <li><code>ref</code>: 인덱스를 타지만, 결과 여러개일 수 있음</li>
 <li><code>range</code>: 범위 검색 </li>
 <li><code>index</code>: 인덱스 전체 스캔</li>
 <li><code>ALL</code>: 테이블 전체 스캔</li>
+</ol>
+</li>
 </ul>
 
 

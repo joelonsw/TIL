@@ -22998,73 +22998,49 @@
 <h2 id="gc">밸덩 GC<a class="headerlink" href="#gc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/java-gc-cyclic-references</em></li>
-<li>
-<p><strong>개요</strong></p>
+<li><strong>개요</strong>
+    - JVM 구현마다 GC 전략 다 달라. 만드는 놈 마음이야
+    - HotSpot JVM을 기준으로 살펴볼게요</li>
+</ul>
 <ul>
-<li>JVM 구현마다 GC 전략 다 달라. 만드는 놈 마음이야</li>
-<li>HotSpot JVM을 기준으로 살펴볼게요</li>
+<li><strong>Reference Counting</strong>
+    - 스위프트가 이 방식 씀
+    - JVM에서는 이런 GC 알고리즘 안써 안써!
+        - <code>Also, there is no GC algorithm based on reference counting in the JVM.</code>
+    - JavaScript에서도 Mark-And-Sweep 방식 쓴다하네
+    - 이건 너무 나태한 구현이야
+    - 순환참조도 해결하지 못하는걸?
+        - 더블링크드리스트도 가비지로 처리하지 못하는걸?</li>
 </ul>
-</li>
-<li>
-<p><strong>Reference Counting</strong></p>
 <ul>
-<li>스위프트가 이 방식 씀</li>
-<li>JVM에서는 이런 GC 알고리즘 안써 안써!<ul>
-<li><code>Also, there is no GC algorithm based on reference counting in the JVM.</code></li>
-</ul>
-</li>
-<li>JavaScript에서도 Mark-And-Sweep 방식 쓴다하네</li>
-<li>이건 너무 나태한 구현이야</li>
-<li>순환참조도 해결하지 못하는걸?<ul>
-<li>더블링크드리스트도 가비지로 처리하지 못하는걸?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Trading GC</strong></p>
-<ul>
-<li>GC root로 부터 reachability 판단<ul>
-<li>직/간접적으로 루트와 연결되있다면 살아있는 것으로 판단</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Trading GC</strong>
+    - GC root로 부터 reachability 판단
+        - 직/간접적으로 루트와 연결되있다면 살아있는 것으로 판단</li>
 </ul>
 <h2 id="jdbc-api">JDBC API<a class="headerlink" href="#jdbc-api" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Java DataBase Connectivity</strong></p>
+<li><strong>Java DataBase Connectivity</strong>
+    - 자바 프로그램 내에서 DB 종류에 상관없이 DB 관련작업 처리할 수 있도록 도와주는 API</li>
+</ul>
 <ul>
-<li>자바 프로그램 내에서 DB 종류에 상관없이 DB 관련작업 처리할 수 있도록 도와주는 API</li>
-</ul>
-</li>
-<li>
-<p><strong>JDBC로 SQL 처리</strong></p>
-<ul>
-<li><em>참고: https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html</em></li>
-<li>연결 설정<ul>
-<li>Datasource와의 연결 설정</li>
-<li>Connection 객체로 표시</li>
-</ul>
-</li>
-<li>Statement 만들기<ul>
-<li>Statement == SQL을 나타내는 인터페이스</li>
-<li>ResultSet을 통해 DB 결과 집합을 나타내는 객체 생성</li>
-<li>stmt = con.createStatement();</li>
-<li>Statement: 매개 변수 없는 단순 SQL문</li>
-<li>PreparedStatement: 입력 매개변수 포함할 수 있는 SQL문</li>
-<li>CallableStatement: 입력 및 출력 매개변수 모두를 저장하는 SQL 문</li>
-</ul>
-</li>
-<li>쿼리문 실행하기<ul>
-<li>execute: returns <code>true</code> if the first object that the query return is a ResultSet object</li>
-<li>executeQuery: 하나의 ResultSet 객체 반환</li>
-<li>executeUpdate: returns <code>Integer</code> when INSERT, UPDATE, DELETE</li>
-</ul>
-</li>
-<li>ResultSet 처리하기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+<li><strong>JDBC로 SQL 처리</strong>
+    - <em>참고: https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html</em>
+    1. 연결 설정
+        - Datasource와의 연결 설정
+        - Connection 객체로 표시
+    2. Statement 만들기
+        - Statement == SQL을 나타내는 인터페이스
+        - ResultSet을 통해 DB 결과 집합을 나타내는 객체 생성
+        - stmt = con.createStatement();
+        - Statement: 매개 변수 없는 단순 SQL문
+        - PreparedStatement: 입력 매개변수 포함할 수 있는 SQL문
+        - CallableStatement: 입력 및 출력 매개변수 모두를 저장하는 SQL 문
+    3. 쿼리문 실행하기
+        - execute: returns <code>true</code> if the first object that the query return is a ResultSet object
+        - executeQuery: 하나의 ResultSet 객체 반환
+        - executeUpdate: returns <code>Integer</code> when INSERT, UPDATE, DELETE
+    4. ResultSet 처리하기
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">coffeeName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;COF_NAME&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">supplierID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;SUP_ID&quot;</span><span class="p">);</span>
@@ -23074,19 +23050,15 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">coffeeName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">supplierID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">                       </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sales</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">total</span><span class="p">);</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>연결 종료<ul>
-<li>Connection, Statement, ResultSet 다 쓰고나면 close 메서드 호출해주자</li>
-<li>try-with-resources를 사용하면 자동으로 close 가능</li>
+</code></pre></div>
+    5. 연결 종료
+        - Connection, Statement, ResultSet 다 쓰고나면 close 메서드 호출해주자
+        - try-with-resources를 사용하면 자동으로 close 가능</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JDBC 코드 보기</strong></p>
 <ul>
-<li>일반적인 코드 구성
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Connection</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<li><strong>JDBC 코드 보기</strong>
+    - 일반적인 코드 구성
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Connection</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">jdbcDriver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;jdbc:mysql://localhost:3306/test&quot;</span><span class="p">;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">dbUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;joel&quot;</span><span class="p">;</span>
@@ -23098,9 +23070,9 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">conn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>Statement를 이용한 쿼리 실행
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Statement</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</code></pre></div>
+    - Statement를 이용한 쿼리 실행
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Statement</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="na">createStatement</span><span class="p">();</span>
@@ -23113,17 +23085,11 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stmt</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>Connection.createStatement()를 통해 Statement 생성!</li>
-<li>Statement가 제공하는 메서드로 쿼리 실행!<ul>
-<li>SELECT: ResultSEt executeQuery(String query)</li>
-<li>INSERT, UPDATE, DELETE: int executeUpdate(String query)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+        - Connection.createStatement()를 통해 Statement 생성!
+        - Statement가 제공하는 메서드로 쿼리 실행!
+            - SELECT: ResultSEt executeQuery(String query)
+            - INSERT, UPDATE, DELETE: int executeUpdate(String query)</li>
 </ul>
 <h2 id="jdbctemplate">JdbcTemplate 기억나니?<a class="headerlink" href="#jdbctemplate" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Repository</span>
@@ -23179,22 +23145,17 @@
 </code></pre></div>
 <h2 id="3">토비의 스프링 3장. 템플릿<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>JDBC try/catch/finally의 문제점</strong></p>
-<ul>
-<li>복잡한 try/catch/finally가 중첩으로 매 메서드 마다 반복됨</li>
-<li>제대로 자원 해제 못할 수도 있어</li>
+<li><strong>JDBC try/catch/finally의 문제점</strong>
+    - 복잡한 try/catch/finally가 중첩으로 매 메서드 마다 반복됨
+    - 제대로 자원 해제 못할 수도 있어</li>
 </ul>
-</li>
-<li>
-<p><strong>전략 패턴으로의 분리</strong></p>
 <ul>
-<li>DAO 메서드 마다 새로운 StatementStrategy 구현 클래스 만들기</li>
-<li>DAO 메서드에서 StatementStrategy에 전달할 User와 같은 부가정보 있는 경우, 생성자 주입 필요</li>
+<li><strong>전략 패턴으로의 분리</strong>
+    - DAO 메서드 마다 새로운 StatementStrategy 구현 클래스 만들기
+    - DAO 메서드에서 StatementStrategy에 전달할 User와 같은 부가정보 있는 경우, 생성자 주입 필요</li>
 </ul>
-</li>
-<li>
-<p><strong>JDBC 작업 흐름으로의 분리</strong>
+<ul>
+<li><strong>JDBC 작업 흐름으로의 분리</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">JdbcContext</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
@@ -23239,30 +23200,23 @@
 <a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a><span class="w">        </span><span class="p">);</span><span class="w">  </span>
 <a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>템플릿과 콜백</strong></p>
+</code></pre></div></li>
+</ul>
 <ul>
-<li>템플릿<ul>
-<li>전략 패턴의 컨텍스트</li>
-</ul>
-</li>
-<li>콜백<ul>
-<li>익명 내부 클래스</li>
-<li>하나의 메서드를 가진 인터페이스를 구현</li>
-</ul>
-</li>
-<li>작업 흐름<ul>
-<li>클라이언트가 실행 로직을 담은 콜백 오브젝트 만듦</li>
-<li>콜백이 참조할 정보를 제공</li>
-<li>템플릿 정해진 흐름에 따라 작업 진행</li>
-<li>내부 생성한 참조 정보 가지고 콜백 메서드 호출</li>
-<li>템플릿은 콜백이 돌려준 정보 활용해 작업 마주 수행</li>
-</ul>
-</li>
-<li>아래와 같이 쿼리문을 호출하는 로직을 분리할 수 있다!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteAll</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
+<li><strong>템플릿과 콜백</strong>
+    - 템플릿
+        - 전략 패턴의 컨텍스트
+    - 콜백
+        - 익명 내부 클래스
+        - 하나의 메서드를 가진 인터페이스를 구현
+    - 작업 흐름
+        - 클라이언트가 실행 로직을 담은 콜백 오브젝트 만듦
+        - 콜백이 참조할 정보를 제공
+        - 템플릿 정해진 흐름에 따라 작업 진행
+        - 내부 생성한 참조 정보 가지고 콜백 메서드 호출
+        - 템플릿은 콜백이 돌려준 정보 활용해 작업 마주 수행
+    - 아래와 같이 쿼리문을 호출하는 로직을 분리할 수 있다!
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteAll</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">executeSql</span><span class="p">(</span><span class="s">&quot;delete from users&quot;</span><span class="p">);</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
@@ -23275,9 +23229,9 @@
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">        </span><span class="p">}</span><span class="w">   </span>
 <a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="p">);</span>
 <a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>해당 코드는 이제 JdbcContext 안으로 옮길 수 있음
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">classs</span><span class="w"> </span><span class="n">JdbcContext</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+        - 해당 코드는 이제 JdbcContext 안으로 옮길 수 있음
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">classs</span><span class="w"> </span><span class="n">JdbcContext</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="p">...</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">executeSql</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="n">workWithStatementStrategy</span><span class="w"> </span><span class="p">(</span>
@@ -23289,19 +23243,14 @@
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="p">);</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>성격은 다르지만, 하나의 목적으로 위해서로 긴밀하게 연관되어 동작하는 "응집력"이 강한 코드 -&gt; 한 곳에 있는게 유리!</li>
-</ul>
-</li>
+</code></pre></div>
+    - 성격은 다르지만, 하나의 목적으로 위해서로 긴밀하게 연관되어 동작하는 "응집력"이 강한 코드 -&gt; 한 곳에 있는게 유리!</li>
 </ul>
 <h2 id="_1">템플릿 콜백 패턴<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://limkydev.tistory.com/85</em></li>
 <li><em>참고 2: https://western-sky.tistory.com/41</em></li>
-<li>
-<p>전략 패턴의 변형으로, 전략 패턴에 익명 내부 클래스를 가미해서 사용하는 방법
+<li>전략 패턴의 변형으로, 전략 패턴에 익명 내부 클래스를 가미해서 사용하는 방법
     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Strategy</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">runStrategy</span><span class="p">();</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
@@ -23343,23 +23292,16 @@
 <a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="n">시작</span>
 <a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="n">통통통</span><span class="o">!</span>
 <a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="n">끝</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>템플릿 콜백 패턴</strong></p>
+</code></pre></div></li>
+</ul>
 <ul>
-<li>전략 패턴의 기본 구조에 인터페이스를 상속하는 클래스를 만들지 않고, 익명 내부 클래스를 활용하는 방식</li>
-<li>템플릿<ul>
-<li>정해져 있는 "틀", 전략 사용자 (Context)</li>
-</ul>
-</li>
-<li>콜백<ul>
-<li>실행되는 특정 로직. 콜백을 매개변수로 주고받기 위해 "오브젝트"에 담아 전달</li>
-<li>단일 메서드 인터페이스 활용</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>템플릿 콜백 패턴</strong>
+    - 전략 패턴의 기본 구조에 인터페이스를 상속하는 클래스를 만들지 않고, 익명 내부 클래스를 활용하는 방식
+    - 템플릿
+        - 정해져 있는 "틀", 전략 사용자 (Context)
+    - 콜백
+        - 실행되는 특정 로직. 콜백을 매개변수로 주고받기 위해 "오브젝트"에 담아 전달
+        - 단일 메서드 인터페이스 활용</li>
 </ul>
 
 

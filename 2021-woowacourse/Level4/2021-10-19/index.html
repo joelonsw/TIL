@@ -22949,16 +22949,14 @@
 - 그러다 보니 Comment가 한개도 없는 피드들은 해당 쿼리로는 못가져옴. </p>
 <ul>
 <li>이러면 커멘트가 한개도 없는 feed들도 추출하고 싶다면 left join을 활용하자</li>
-<li>feed를 중심으로 집합을 때려버리는 걸로 해야함<ul>
-<li>left join 하면서 댓글 없는 피드들의 comment 관련 필드들은 null로 채워지면서 엔티티 조회가 될 것임
+<li>feed를 중심으로 집합을 때려버리는 걸로 해야함
+    - left join 하면서 댓글 없는 피드들의 comment 관련 필드들은 null로 채워지면서 엔티티 조회가 될 것임
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Query</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;select distinct feed &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">        </span><span class="s">&quot;from Feed as feed &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="s">&quot;join fetch feed.author &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="s">&quot;left join fetch feed.comments&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">Feed</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAllWithFetchJoin</span><span class="p">();</span>
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

@@ -22996,21 +22996,19 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nc">Thumb</span><span class="p">,</span><span class="w"> </span><span class="nc">Index</span><span class="p">,</span><span class="w"> </span><span class="nc">Middle</span><span class="p">,</span><span class="w"> </span><span class="nc">Ring</span><span class="p">,</span><span class="w"> </span><span class="nc">Little</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>Enumeration 클래스는 Value라는 타입을 제공해 각 Enum 값을 나타냄</li>
-<li>
-<p>한번 만든 Enum에 대해 값 추가하는 것은 쓰레드 세이프 하지 않음</p>
+<li>한번 만든 Enum에 대해 값 추가하는 것은 쓰레드 세이프 하지 않음</li>
+</ul>
 </li>
-<li>
-<p><strong>Value</strong></p>
-</li>
-<li>
-<p>Value 생성자는 여러개가 있음 (사실 결국 생성은 후술할 Val 임)</p>
+</ul>
 <ul>
-<li>id/name으로 구성됨</li>
+<li><strong>Value</strong><ul>
+<li>Value 생성자는 여러개가 있음 (사실 결국 생성은 후술할 Val 임)<ul>
+<li>id/name으로 구성됨<ul>
 <li>id: Int (auto_inc default 0)</li>
 <li>name: String
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">Value</span><span class="p">:</span><span class="w"> </span><span class="nc">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span><span class="p">(</span><span class="n">nextId</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">Value</span><span class="p">:</span><span class="w"> </span><span class="nc">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span><span class="p">(</span><span class="n">nextId</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="cm">/** Creates a fresh value, part of this enumeration, identified by the</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="cm">    *  integer `i`.</span>
@@ -23038,7 +23036,7 @@
 <a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="cm">      */</span>
 <a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">      </span><span class="k">protected</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">Value</span><span class="p">(</span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Val</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Fingers</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Enumeration</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Fingers</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Enumeration</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Finger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nc">Thumb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Thumb Finger&quot;</span><span class="p">)</span>
@@ -23050,12 +23048,16 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>그럼 값을 2개밖에 못 써?</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>그럼 값을 2개밖에 못 써?</strong><ul>
 <li>Enumeration Class에서는 Val이라는 inner 클래스가 존재.<ul>
 <li>이게 extend 되면서 추가 속성을 가질 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/** A class implementing the [[scala.Enumeration.Value]] type. This class</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/** A class implementing the [[scala.Enumeration.Value]] type. This class</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm"> *  can be overridden to change the enumeration&#39;s naming and integer</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm"> *  identification behaviour.</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cm"> */</span>
@@ -23084,11 +23086,13 @@
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="p">}</span>
 </code></pre></div>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">protected</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">FingerDetails</span><span class="p">(</span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">protected</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">FingerDetails</span><span class="p">(</span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">extends</span><span class="w"> </span><span class="bp">super</span><span class="p">.</span><span class="nc">Val</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">heightInCms</span><span class="p">():</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2.54</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

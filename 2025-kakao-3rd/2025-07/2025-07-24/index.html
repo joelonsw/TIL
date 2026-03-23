@@ -22971,57 +22971,61 @@
    - 해당 방식 추천</p>
 <h2 id="akka-actor-rabbitmq">Akka actor 대신 RabbitMQ<a class="headerlink" href="#akka-actor-rabbitmq" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Akka Actor에서 초당 100건 처리하면 어려울까?</strong></li>
+<li><strong>Akka Actor에서 초당 100건 처리하면 어려울까?</strong><ul>
 <li>경량 쓰레드를 통해 동시성/분산처리 지원하지만 한계가 있음</li>
 <li>Blocking 작업에 취약</li>
 <li>Actor 메시지 큐 과부하 (메모리 사용량이 늘어남)</li>
 <li>Backpressure 한계: 처리속도 제어가 어려움</li>
 <li>장기간 Blocking 발생시 전체 처리 지연도 가능. 하나가 18초 지연되면 actor pool 충분히 큰게 아니라면 성능 저하 가능</li>
-<li>
-<p>Akka로만 처리하려면 actor pool tuning, backpressure 조치가 필요할 듯</p>
+<li>Akka로만 처리하려면 actor pool tuning, backpressure 조치가 필요할 듯</li>
+</ul>
 </li>
-<li>
-<p><strong>RabbitMQ</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>RabbitMQ</strong><ul>
 <li>큐잉 기반 버퍼링: 메시지가 큐에 남아 순차 처리되어, publisher/client </li>
 <li>prefetchCount 등 소비자 속도 조절: rabbitMQ 플로우 조절 가능</li>
 <li>워크로드 분산: 병렬처리하여 scale-out에 용이</li>
 <li>생산자/소비자 서비스 분리도 가능: 개발 언어 무관, 타 시스템 연동도 가능</li>
-<li>
-<p>비동기/이벤트 기반 구조: 전체 서비스 응답성 해치지 않고 처리 가능</p>
+<li>비동기/이벤트 기반 구조: 전체 서비스 응답성 해치지 않고 처리 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>차이</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>차이</strong><ul>
 <li>Akka Actor: 어플리케이션 내부의 동시성/상태캡슐화/이벤트 수신-응답-복구에 초점<ul>
 <li>복잡한 병렬/분산 상태관리/격리/장애 복구/선언적 동시성 제어가 필수인 시스템에 더 강력</li>
 </ul>
 </li>
 <li>MQ: 시스템간 비동기적 데이터 전달에 최적화</li>
 </ul>
+</li>
+</ul>
 <h2 id="vectordb-elasticsearch">VectorDB, ElasticSearch<a class="headerlink" href="#vectordb-elasticsearch" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>VectorDB</strong></li>
+<li><strong>VectorDB</strong><ul>
 <li>고차원의 벡터 데이터(숫자 배열)을 효율적으로 저장 + 유사도 기반 검색할 수 있도록 특화된 DB</li>
 <li>RDB는 정확한 일치로 데이터 찾지만...</li>
 <li>VectorDB는 이미지/문장/오디오 등 비정형 데이터를 임베딩으로 벡터화 -&gt; 수십~수천 차원의 숫자 리스트 변환 -&gt; 벡터 거리/유사도로 기준 가장 비슷한 항목 찾음</li>
-<li>
-<p>주요 특징</p>
-<ul>
+<li>주요 특징<ul>
 <li>대용량, 고차원 벡터 데이터 저장/관리 최적화</li>
 <li>빠른 유사도 기반 검색 (k-Nearest Neighbor Search)</li>
 <li>RAG, AI 기반 추천, 의미 검색 등에서 최신 AI 활용 분야에서 많이 사용</li>
 <li>메타데이터, 벡터값 함께 관리</li>
 </ul>
 </li>
-<li>
-<p><strong>ES</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ES</strong><ul>
 <li>ES는 텍스트 기반 검색엔진이지만, 최근에는 벡터 데이터 타입도 지원하여 VectorDB 역할 수행도 가능<ul>
 <li>비정형 텍스트 데이터를 대상으로 빠르고 정확하게 원하는 정보 추출하도록 설계</li>
 </ul>
 </li>
 <li><code>dense_vector</code>: 고차원 벡터 데이터 저장 가능</li>
+</ul>
+</li>
 </ul>
 
 

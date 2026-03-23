@@ -22921,21 +22921,22 @@
   - 노드 진영에서 PM2라는 Node.js 프로세스 매니저를 사용
   - 포그라운드 아닌, 백그라운드 실행 지원</p>
 <ul>
-<li><strong>PM2</strong></li>
+<li><strong>PM2</strong><ul>
 <li>장점) <ul>
 <li>서비스를 제공하고 있는 도중 갑자기 서버가 중지되어도 서버를 다시 켜줌</li>
 <li>Node.js는 싱글 스레드 기반이지만, 멀티코어 or 하이퍼스레딩 사용 지원</li>
 <li>클라이언트로 오는 요청 로드밸런싱</li>
 </ul>
 </li>
-<li>
-<p>단점) </p>
-<ul>
+<li>단점) <ul>
 <li>메모리 공유 X =&gt; 세선 힘듦 =&gt; 주로 mem-cache, redis</li>
 </ul>
 </li>
-<li>
-<p><strong>명령어</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>명령어</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>## 설치
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ npm install -g pm2
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>$ pm2 -version
@@ -22952,25 +22953,26 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>pm2 show app_name_or_id
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>pm2 delete app_name_or_id
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>pm2 monit
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>PM2 Fork</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>PM2 Fork</strong><ul>
 <li>코드 3 처럼 아무 옵션없이 어플리케이션 실행 시, 기본모드인 <strong>fork</strong> 모드로 실행</li>
 <li>PM2는 새로운 프로세스를 기존의 것을 fork하면서 시작함 (새로운 v8 인스턴스로)</li>
 <li>다른 노드버전 운용도 가능</li>
 <li>CPU intensive에 사용하기 좋음</li>
-<li>
-<p>각 프로세스 고유한 메모리 공간을 가짐. 메모리 이슈가 타 인스턴스에 영향 X</p>
+<li>각 프로세스 고유한 메모리 공간을 가짐. 메모리 이슈가 타 인스턴스에 영향 X</li>
+</ul>
 </li>
-<li>
-<p><strong>PM2 Cluster</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>PM2 Cluster</strong><ul>
 <li>코드 변경 없이 scale가능 (http, server, express 등등)</li>
 <li>memory intensive에 사용하기 좋음</li>
 <li>마스터 프로세스 감독, 리소스 공유 및 작업 분배 조정<ul>
 <li>한 프로세스가 종료되면, 마스터 프로세스가 다른 프로세스 생성해 무중단 서비스 제공</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

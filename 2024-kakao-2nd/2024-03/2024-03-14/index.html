@@ -23074,7 +23074,7 @@
     3. 새로고침 불가
     4. SEO 불가</p>
 <ul>
-<li><strong>Router 종류</strong></li>
+<li><strong>Router 종류</strong><ol>
 <li>HashRouter<ul>
 <li>주소에 해시(#)가 붙음</li>
 <li>검색 엔진이 읽지 못함</li>
@@ -23082,18 +23082,18 @@
 <li>history API 사용 X. 동적 페이지에 불리</li>
 </ul>
 </li>
-<li>
-<p>BrowserRouter</p>
-<ul>
+<li>BrowserRouter<ul>
 <li>history API 사용</li>
 <li>별도 서버 설정 없으면 404</li>
 <li>큰 프로젝트에 적합</li>
 <li>서버가 있고, SEO 필요하다면 BrowserRouter를 쓰자</li>
 </ul>
 </li>
-<li>
-<p><strong>자주쓰는 기능 살펴보기</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>자주쓰는 기능 살펴보기</strong><ul>
 <li>[BrowserRouter]<ul>
 <li>history API를 통해 history 객체 생성</li>
 <li>stack 자료 구조로, url 기록 차곡차곡</li>
@@ -23136,6 +23136,8 @@
 <li><code>searchParams.getAll(key)</code>: key에 해당하는 모든 value 가져옴</li>
 <li><code>searchParams.set(key, value)</code>: 전달한 key값을 value로 설정</li>
 <li><code>searchParams.append(key, value)</code>: 기존 값 변경/삭제하지 않고 추가</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23237,9 +23239,9 @@
 <a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>
 <a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">TwmRoot</span><span class="p">;</span>
 </code></pre></div></li>
-<li><code>TwmServiceLayout.tsx</code><ul>
-<li>여기서 Outlet이 <strong>child route의 element</strong>를 렌더링해준다
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">Outlet</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-router-dom&#39;</span><span class="p">;</span>
+<li><code>TwmServiceLayout.tsx</code>
+    - 여기서 Outlet이 <strong>child route의 element</strong>를 렌더링해준다
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">Outlet</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-router-dom&#39;</span><span class="p">;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">TwmServiceLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span><span class="w"> </span><span class="nx">setIsLoading</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
@@ -23256,8 +23258,6 @@
 <a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="react-usecallback">React useCallback()<a class="headerlink" href="#react-usecallback" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://www.daleseo.com/react-hooks-use-callback/</em>
 - <strong>함수 메모이제이션</strong>
@@ -23269,7 +23269,7 @@
     <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCallback</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">])</span><span class="w"> </span><span class="c1">// x, y가 바뀌어야 그제서야 add를 계산하는 함수의 값이 바뀐다</span>
 </code></pre></div></p>
 <ul>
-<li><strong>When To Use</strong></li>
+<li><strong>When To Use</strong><ul>
 <li>자바스크립트 함수의 동등성 : 특정 함수를 넘길때, callback으로 선언한 add를 넘겨보면 동등성이 확보된다. </li>
 <li>dependency array에 함수를 넘길 때<ul>
 <li>정신나간 예시같지만... 이 경우, 함수의 참조값은 컴포넌트 렌더링 될 때마다 바뀜
@@ -23310,6 +23310,8 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="react">React 커스텀 훅 만들기<a class="headerlink" href="#react" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://react.vlpt.us/basic/21-custom-hook.html</em>
 - 반복되는 로직을 없애고 추상화 하기 위함!
@@ -23322,16 +23324,16 @@
   - 특정한 요소를 <code>target</code>으로 설정하여 <code>observer</code>가 그 <code>target</code>이 상위 요소 혹은 뷰포트와 교차가 발생하는지를 비동기적으로 <code>observe</code> 하는 API
   - <code>target</code> 요소가 <code>root</code>요소와 교차가 일어나는지를 판단하여 콜백함수 실행 가능</p>
 <ul>
-<li><strong>사용하기</strong></li>
+<li><strong>사용하기</strong><ol>
 <li>관찰자가 관찰할 <code>target</code> 생성</li>
-<li>
-<p><code>target</code>을 관찰할 새로운 <code>IntersectionObserver</code> 객체 생성</p>
+<li><code>target</code>을 관찰할 새로운 <code>IntersectionObserver</code> 객체 생성</li>
+</ol>
 </li>
-<li>
-<p><strong>React 예시로 알아보기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>React 예시로 알아보기</strong><ol>
 <li><code>target</code> 생성: 교차 상태를 판별할 대상인 target. 요소 지정으로 교차상태 판별 더 쉽게
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">setTarget</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">setTarget</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">targetStyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100%&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;200%&quot;</span><span class="p">};</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">return</span><span class="w"> </span><span class="p">(</span>
@@ -23343,7 +23345,7 @@
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="p">);</span>
 </code></pre></div></li>
 <li><code>observer</code> 생성
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">observer</span><span class="p">;</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="nx">observer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">IntersectionObserver</span><span class="p">();</span>
@@ -23352,7 +23354,7 @@
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">target</span><span class="p">])</span>
 </code></pre></div></li>
 <li>콜백함수 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">onIntersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">([</span><span class="nx">entry</span><span class="p">],</span><span class="w"> </span><span class="nx">observer</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">onIntersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">([</span><span class="nx">entry</span><span class="p">],</span><span class="w"> </span><span class="nx">observer</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">isIntersecting</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="nx">observer</span><span class="p">.</span><span class="nx">unobserve</span><span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">fetchData</span><span class="p">;</span>
@@ -23360,26 +23362,30 @@
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
 </code></pre></div></li>
+</ol>
+</li>
 </ul>
 <h2 id="localstorage-vs-sessionstorage">LocalStorage vs SessionStorage<a class="headerlink" href="#localstorage-vs-sessionstorage" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://bo5mi.tistory.com/213</em>
 - <strong>공통점</strong>
   - 둘 모두 웹 브라우저에 데이터를 저장하는 객체</p>
 <ul>
-<li><strong>LocalStorage</strong></li>
+<li><strong>LocalStorage</strong><ul>
 <li>key-value 쌍으로 구성</li>
 <li>사용자 세션 데이터 유지 가능</li>
 <li>탭을 여러개 열어도 공유됨</li>
 <li>브라우저를 닫았다가 다시 열어도 지속됨</li>
-<li>
-<p>명시적 삭제하기 전까지 지속됨 =&gt; <strong>소멸 타이밍이 없음!!</strong></p>
+<li>명시적 삭제하기 전까지 지속됨 =&gt; <strong>소멸 타이밍이 없음!!</strong></li>
+</ul>
 </li>
-<li>
-<p><strong>SessionStorage</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>SessionStorage</strong><ul>
 <li>세션 끝나면 다 날라감 (탭 닫히면 다 날라감)</li>
 <li>새로고침해도 유지됨</li>
 <li>대신 세션이 종료되면/탭이 닫히면 바로 소멸!</li>
+</ul>
+</li>
 </ul>
 <h2 id="fts-query-exceeds-result-cache-limit">FTS query exceeds result cache limit<a class="headerlink" href="#fts-query-exceeds-result-cache-limit" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://grip.news/archives/1538</em>

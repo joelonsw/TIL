@@ -22909,29 +22909,31 @@
 <h3 id="2022-06-01">2022-06-01<a class="headerlink" href="#2022-06-01" title="Permanent link">&para;</a></h3>
 <h2 id="libfuzzer">libFuzzer<a class="headerlink" href="#libfuzzer" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>AFL Fuzzer와 달리, libFuzzer는 무작위의 API에 대해 Fuzzing을 할 수 있음</li>
 <li><code>clang</code> 컴파일러를 딸고 나옴</li>
-<li>
-<p>coverage-guided mutational fuzzer 라고 하네...?</p>
-<ul>
+<li>coverage-guided mutational fuzzer 라고 하네...?<ul>
 <li>coverage-guided: 새롭게 발견된 code path를 비교하여 어떤 input이 더 좋은지 판별</li>
 <li>mutational fuzzer: 랜덤으로 존재하는 input을 변경해 새로운 input을 만들어 냄</li>
 </ul>
 </li>
-<li>
-<p><strong>Sanitization</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Sanitization</strong><ul>
 <li>memory allocation 측정 / memory bug 예방</li>
-<li>
-<p>libFuzzer는 sanitizers를 딸고 나옴</p>
+<li>libFuzzer는 sanitizers를 딸고 나옴</li>
+</ul>
 </li>
-<li>
-<p><strong>Setup</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Setup</strong><ul>
 <li>AFL과 달리 libFuzzer는 약간의 setup이 필요함</li>
 <li>유저가 테스트하고자 하는 인터페이스에 대해 <strong>fuzzing stubs</strong>을 만들어야 함<ul>
 <li>해당 stub은 fuzzer로 부터 random input을 받고, 테스트될 API에다가 테스트 진행시킴</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -22909,13 +22909,15 @@
 <h3 id="2025-01-02">2025-01-02<a class="headerlink" href="#2025-01-02" title="Permanent link">&para;</a></h3>
 <h2 id="slick-2x-3x-transaction">Slick 2.x -&gt; 3.x Transaction<a class="headerlink" href="#slick-2x-3x-transaction" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Slick2.x 세션 기반 쿼리</strong></li>
+<li><strong>Slick2.x 세션 기반 쿼리</strong><ol>
 <li>세션 기반 구조<ul>
 <li><code>withTransaction</code> / <code>withDynTransaction</code></li>
 <li>Database 객체에서 세션을 열고, 그 세션 범위 내에서 <code>.list</code>, <code>.first</code> 등 동기 메서드로 쿼리 실행</li>
-<li>트랜잭션의 세션 중심 동작</li>
+<li>트랜잭션의 세션 중심 동작<ul>
 <li>블록 내부의 모든 쿼리를 하나의 트랜잭션으로 처리</li>
 <li>블록 성공 시 commit, 예외 발생 시 rollback</li>
+</ul>
+</li>
 <li>직접 세션을 열고 닫으며 DB 자원을 관리하는 구조!</li>
 <li>쿼리 호출 시, 현재 세션이 유효한지/트랜잭션 범위 안인지 실행 &amp; 체크</li>
 </ul>
@@ -22925,18 +22927,18 @@
 <li><code>withDynTransaction</code> : 동적으로 세션 열고, 필요하면 내부적으로 세션 새로 생성. 여러 DAO나 비동기 흐름에서 세션 가져올 때 사용</li>
 </ul>
 </li>
-<li>
-<p>예시
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">db</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">withDynSession</span><span class="w"> </span><span class="p">{</span>
+<li>예시
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">db</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">withDynSession</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">withDynTransaction</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nc">ApiAllowIps</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nc">Active</span><span class="p">).</span><span class="n">list</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ol>
 </li>
-<li>
-<p><strong>Session?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Session?</strong><ul>
 <li>DB와의 연결(커넥션)을 관리하고 쿼리를 실행할 수 있는 핸들</li>
 <li>DB 커넥션 + 트랜잭션 범위를 묶어 표현하는 Slick 내부 개념</li>
 <li>세션)<ul>
@@ -22949,16 +22951,16 @@
 <li>예외시 롤백, 정상시 커밋</li>
 </ul>
 </li>
-<li>
-<p>Slick 3.x 부터는 <code>Session</code> 직접 다루지 않고 <code>DBIOAction + db.run(...)</code></p>
-<ul>
+<li>Slick 3.x 부터는 <code>Session</code> 직접 다루지 않고 <code>DBIOAction + db.run(...)</code><ul>
 <li>세션/트랜잭션 Slick 내부적으로 자동 처리 </li>
 <li>어떤 액션을 실행하지만 선언적으로 작성 (<code>.result</code>, <code>.transactionally</code>)</li>
 </ul>
 </li>
-<li>
-<p><strong>Slick 3.x DBIO Action, transactionally 개선</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Slick 3.x DBIO Action, transactionally 개선</strong><ol>
 <li>DBIO Action 기반 비동기<ul>
 <li>세션 직접 X, DBIO Action 비동기 연산으로 다룸</li>
 <li><code>db.run(someAction)</code> =&gt; <code>Future</code> 반환</li>
@@ -22974,6 +22976,8 @@
 <li><code>withDynTransaction</code> -&gt; <code>.transactionally</code> 대체<ul>
 <li>DBIO 체인으로 명확히 트랜잭션 범위 표현</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 

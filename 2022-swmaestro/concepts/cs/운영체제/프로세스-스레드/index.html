@@ -23024,40 +23024,44 @@
 <h2 id="process-vs-thread">코다의 Process vs Thread<a class="headerlink" href="#process-vs-thread" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: youtube.com/watch?v=1grtWKqTn50&amp;t=67s</em></li>
-<li><strong>키워드</strong></li>
+<li><strong>키워드</strong><ol>
 <li>실행 단위 : CPU Core에서 실행하는 하나의 단위로 프로세스와 쓰레드를 포괄하는 개념</li>
 <li>(부연 설명이 없는) 프로세스 : 하나의 쓰레드만 가지고 있는 단일 쓰레드 프로세스</li>
-<li>
-<p>동시성 : 한 순간에 여러개의 일이 일어나는게 아닌, 짧은 전환으로 여러가지 일을 동시에 처리하는 것처럼 보이는 것</p>
+<li>동시성 : 한 순간에 여러개의 일이 일어나는게 아닌, 짧은 전환으로 여러가지 일을 동시에 처리하는 것처럼 보이는 것</li>
+</ol>
 </li>
-<li>
-<p><strong>Process 사전 지식</strong></p>
-</li>
-<li>
-<p>메모리</p>
+</ul>
 <ul>
-<li>정적 영역</li>
+<li><strong>Process 사전 지식</strong><ul>
+<li>메모리<ul>
+<li>정적 영역<ul>
 <li>Code: 실행 명령을 포함하는 코드들</li>
 <li>Data: Static 변수 혹은 Global 변수들</li>
-<li>동적 영역</li>
+</ul>
+</li>
+<li>동적 영역<ul>
 <li>Stack: 지역변수, 매개변수, 반환값 등의 일시적인 데이터 </li>
 <li>Heap: 동적으로 활용되는 영역</li>
 </ul>
 </li>
-<li>
-<p><strong>Process &amp; Thread</strong></p>
+</ul>
 </li>
-<li>
-<p>쓰레드: 경량화된 프로세스</p>
+</ul>
+</li>
+</ul>
 <ul>
+<li><strong>Process &amp; Thread</strong><ul>
+<li>쓰레드: 경량화된 프로세스<ul>
 <li>쓰레드는 프로세스의 코드/데이터/힙 영역을 공통된 자원으로 사용함</li>
 <li>스택만 따로 있음</li>
 <li>컨텍스트 스위칭이 발생할 때 캐싱 적중률이 올라가 가벼움</li>
 </ul>
 </li>
-<li>
-<p><strong>Multi-process &amp; Multi-thread</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Multi-process &amp; Multi-thread</strong><ul>
 <li>Multi-Process<ul>
 <li>각 프로세스는 독립적</li>
 <li>IPC를 사용한 통신</li>
@@ -23079,43 +23083,45 @@
 <li>구글 크롬은 그래서 멀티 프로세스 채택</li>
 </ul>
 </li>
-<li>
-<p>멀티 쓰레드 왜 필요하지?</p>
-<ul>
+<li>멀티 쓰레드 왜 필요하지?<ul>
 <li>한 어플리케이션 내에서 작업의 단위가 나누어지면 멀티 쓰레드 구조로 처리하는 경우 많음</li>
 <li>인텔리제이에서 코드 수정하면서, 테스트도 돌리면서, 추천 코드도 보여줘야하고...</li>
 </ul>
 </li>
-<li>
-<p><strong>Multi-core</strong></p>
+</ul>
 </li>
-<li>
-<p>동시성 / 병렬처리</p>
+</ul>
+<ul>
+<li><strong>Multi-core</strong><ul>
+<li>동시성 / 병렬처리</li>
+</ul>
 </li>
-<li>
-<p><strong>리눅스에서 Process와 Thread</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>리눅스에서 Process와 Thread</strong><ul>
 <li>리눅스 커널에서는 프로세스와 쓰레드를 동일하게 봅니당</li>
 <li>리눅스에서는 유저 쓰레드 : 커널 쓰레드 = 1:1</li>
 <li><img alt="" src="../../images/linux-process-thread.png" /></li>
 </ul>
+</li>
+</ul>
 <h2 id="_2">프로세스의 메모리 구조<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>동적 영역</strong></li>
+<li><strong>동적 영역</strong><ul>
 <li>스택<ul>
 <li>지역변수, 매개변수, 함수가 저장되고 컴파일시에 크기가 결정</li>
 <li>함수가 함수를 재귀적으로 호출하면서 동적으로 크기가 늘어날 수 있음 </li>
 </ul>
 </li>
-<li>
-<p>힙</p>
-<ul>
+<li>힙<ul>
 <li>동적 할당할 때 사용되며 런타임 시 크기가 결정</li>
 </ul>
 </li>
-<li>
-<p><strong>정적 영역</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>정적 영역</strong><ul>
 <li>데이터 영역<ul>
 <li>전역변수/정적변수가 저장되고 정적인 특징을 갖는 프로그램이 종료되면 사라지는 변수가 들어있는 영역</li>
 </ul>
@@ -23125,10 +23131,12 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="pcb">PCB<a class="headerlink" href="#pcb" title="Permanent link">&para;</a></h2>
 <ul>
 <li>프로세스에 대한 메타데이터를 저장한 데이터</li>
-<li>데이터</li>
+<li>데이터<ul>
 <li>프로세스 스케줄링 상태</li>
 <li>프로세스 ID</li>
 <li>프로세스 권한</li>
@@ -23138,42 +23146,50 @@
 <li>계정 정보</li>
 <li>I/O 상태 정보</li>
 </ul>
+</li>
+</ul>
 <h2 id="_3">교착 상태<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li>두 개 이상의 프로세스들이 서로가 가진 자원을 기다리며 중단된 상태</li>
-<li><strong>원인</strong></li>
+<li><strong>원인</strong><ul>
 <li>상호 배제: 한 프로세스가 자원 독점, 딴 프로세스는 접근 못함</li>
 <li>점유 대기: 특정 프로세스가 점유한 자원을 다른 프로세스가 요청하는 상태</li>
 <li>비선점: 다른 프로세스의 자원을 강제적으로 가져올 수 없음</li>
-<li>
-<p>환형 대기: 프로세스 A는 프로세스 B의 자원을, 프로세스 B는 프로세스 A의 자원을 요청</p>
+<li>환형 대기: 프로세스 A는 프로세스 B의 자원을, 프로세스 B는 프로세스 A의 자원을 요청</li>
+</ul>
 </li>
-<li>
-<p><strong>해결 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>해결 방법</strong><ol>
 <li>자원 할당시 교착 상태 조건이 성립되지 않도록 설계</li>
 <li>교착 상태 가능성이 없을 때만 자원 할당되며, 프로세스당 요청할 자원들의 최대치를 통해 자원 할당 가능 여부 판단하는 '은행원 알고리즘' 사용</li>
 <li>교착 상태가 발생하면 사이클이 있는지 찾아보고 이와 관련된 프로세스를 한 개씩 지움</li>
 <li>교착 상태 드물게 일어나기에 사용자가 직접 프로세스 종료시키도록 하였음</li>
+</ol>
+</li>
 </ul>
 <h2 id="ipc">IPC<a class="headerlink" href="#ipc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://jwprogramming.tistory.com/54</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>독립되어 있는 만큼 프로세스 간 통신이 어려움</li>
 <li>따라서 커널 영역에서 IPC를 제공하게 됨</li>
-<li>
-<p>프로세스는 커널이 제공하는 IPC 설비를 통해 프로세스간 통신을 할 수 있음</p>
+<li>프로세스는 커널이 제공하는 IPC 설비를 통해 프로세스간 통신을 할 수 있음</li>
+</ul>
 </li>
+</ul>
+<ul>
 <li>
 <p><strong>IPC의 다양한 설비들</strong></p>
-</li>
+<ol>
 <li>
 <p>PIPE</p>
 <ul>
-<li>두 개의 명확하게 알 수 있는 프로세스를 연결</li>
+<li>두 개의 명확하게 알 수 있는 프로세스를 연결<ul>
 <li>즉, 부모-자식 간 프로세스 통신</li>
 <li>같은 부모를 가지는 자식 프로세스의 통신</li>
+</ul>
+</li>
 <li>하나의 프로세스는 데이터를 쓰기만, 다른 하나는 데이터를 읽기만</li>
 <li>한쪽으로만 통신 가능</li>
 <li>양쪽으로 할라면 파이프 2개 필요</li>
@@ -23224,55 +23240,59 @@
 <li>프로세스간 데이터 동기화에 목적있음</li>
 </ul>
 </li>
+</ol>
+</li>
 </ul>
 <h2 id="mutex-vs-semaphore">Mutex vs Semaphore<a class="headerlink" href="#mutex-vs-semaphore" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=oazGbhBCOfU</em></li>
-<li><strong>교착 상태</strong></li>
+<li><strong>교착 상태</strong><ul>
 <li>서로 점유하고 있는 자원을 놓아줄 생각은 없고 자원 요청을 무한정 대기하고 있는 상태</li>
 <li>임계 영역: 교착 상태가 발생할 수 있는 영역</li>
-<li>
-<p>교착 상태가 발생할 수 있는 4가지 조건</p>
-<ul>
+<li>교착 상태가 발생할 수 있는 4가지 조건<ul>
 <li>상호 배제</li>
 <li>점유 대기</li>
 <li>비선점</li>
 <li>순환 대기</li>
 </ul>
 </li>
-<li>
-<p><strong>상호 배제</strong></p>
+</ul>
 </li>
-<li>
-<p>하나의 프로세스가 공유 자원 사용시, 다른 프로세스가 해당 자원 접근 못하게 통제</p>
-</li>
-<li>
-<p><strong>Mutex(Mutual Exclusion)</strong></p>
-</li>
-<li>여러 쓰레드를 실행하는 환경에서 자원에 대한 접근에 제한을 강제하기 위한 동기화 매커니즘</li>
-<li>"대기큐" 를 생성해두고</li>
-<li>임계 영역에 쓰레드가 있으면 </li>
-<li>
-<p>다른 쓰레드가 공유자원을 사용하려 한다면 해당 "쓰레드 Block" + "대기큐에 Sleep"</p>
-</li>
-<li>
-<p><strong>SpinLock</strong></p>
-</li>
-<li>대기하는 손님이 쉬지않고 자리가 생겼냐고 물어보는 방식</li>
-<li>
-<p>"Busy-waiting" -&gt; 보통 비효율적임</p>
+</ul>
 <ul>
+<li><strong>상호 배제</strong><ul>
+<li>하나의 프로세스가 공유 자원 사용시, 다른 프로세스가 해당 자원 접근 못하게 통제</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Mutex(Mutual Exclusion)</strong><ul>
+<li>여러 쓰레드를 실행하는 환경에서 자원에 대한 접근에 제한을 강제하기 위한 동기화 매커니즘
+1. "대기큐" 를 생성해두고
+2. 임계 영역에 쓰레드가 있으면 
+3. 다른 쓰레드가 공유자원을 사용하려 한다면 해당 "쓰레드 Block" + "대기큐에 Sleep"</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>SpinLock</strong><ul>
+<li>대기하는 손님이 쉬지않고 자리가 생겼냐고 물어보는 방식</li>
+<li>"Busy-waiting" -&gt; 보통 비효율적임<ul>
 <li>컨텍스트 스위칭하는 시간보다 기다렸다가 자원 할당 받는게 더 빠르리라 예상하면 Busy-Waiting</li>
 <li>멀티코어 프로세스라면 조금 더 유리</li>
 </ul>
 </li>
-<li>
-<p><strong>Semaphore</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Semaphore</strong><ul>
 <li>멀티 프로그래밍 환경에서 다수의 프로세스나 쓰레드의 여러개의 공유 자원에 대한 접근을 제한하는 방법</li>
 <li>세마포어 변수를 통해 wait/signal 관리, 0 이상의 정수형 변수를 가짐</li>
 <li>계수 세마포어로 사용할 수 있으며, 접근 가능한 공유 자원의 수가 1개일 시, 이진 세마포어로 뮤텍스 처럼 활용 가능</li>
 <li>Lock 걸지 않은 쓰레드도 Signal을 보내 Lock 해제 가능</li>
+</ul>
+</li>
 </ul>
 
 

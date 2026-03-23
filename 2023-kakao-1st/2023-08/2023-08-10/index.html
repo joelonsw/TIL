@@ -22984,49 +22984,56 @@
   - <code>go()</code>
     - 매개변수 만큼 왔다갔다, 마이너스 뒤로 플러스 앞으로</p>
 <ul>
-<li><strong>pushState(), replaceState()</strong></li>
+<li><strong>pushState(), replaceState()</strong><ul>
 <li>주소창 url 조작</li>
 <li><code>pushState()</code><ul>
-<li>stateObj, title, url</li>
+<li>stateObj, title, url<ul>
 <li>stateObj가 스택에 들어가요!</li>
 <li>이걸 적절히 나중에 빼서 쓰기 좋아요</li>
+</ul>
+</li>
 <li>스택에 푸시 새로 넣어!</li>
 </ul>
 </li>
-<li>
-<p><code>replaceState()</code></p>
-<ul>
-<li>stateObj, title, url</li>
+<li><code>replaceState()</code><ul>
+<li>stateObj, title, url<ul>
 <li>stateObj가 스택에 들어가요!</li>
 <li>이걸 적절히 나중에 빼서 쓰기 좋아요</li>
-<li>현재 state만 바꿔줘!</li>
+</ul>
+</li>
+<li>현재 state만 바꿔줘!<ul>
 <li>pop &amp; push </li>
 </ul>
 </li>
-<li>
-<p><strong>window.onpopstate</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>window.onpopstate</strong><ul>
 <li>callback function
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">window</span><span class="p">.</span><span class="nx">onpopstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">window</span><span class="p">.</span><span class="nx">onpopstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="nx">state</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">event</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span>
 </code></pre></div></li>
-<li>
-<p><strong>같은 웹사이트</strong>에서 이동할때 이게 호출됩니다!</p>
-<ul>
+<li><strong>같은 웹사이트</strong>에서 이동할때 이게 호출됩니다!<ul>
 <li>window가 달라지면 무용지물이겠지?</li>
 </ul>
 </li>
-<li>
-<p><strong>state, length</strong></p>
+</ul>
 </li>
-<li>
-<p>history 객체의 변수</p>
+</ul>
+<ul>
+<li><strong>state, length</strong><ul>
+<li>history 객체의 변수</li>
+</ul>
 </li>
-<li>
-<p><strong>뒤로가기 막기</strong>
+</ul>
+<ul>
+<li><strong>뒤로가기 막기</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// 스택 추가</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">history</span><span class="p">.</span><span class="nx">pushState</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -23034,8 +23041,7 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">window</span><span class="p">.</span><span class="nx">onpopstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nx">history</span><span class="p">.</span><span class="nx">go</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="popstate">popstate<a class="headerlink" href="#popstate" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event</em>
@@ -23044,26 +23050,28 @@
   - 현재의 history entry를 유저가 방문한 마지막 페이지로 변동시킨다. 
   - 혹은 <code>history.pushState()</code>를 통해 히스토리 엔트리가 히스토리 스택에 쌓였다면, 해당 엔트리가 사용된다. </p>
 <ul>
-<li><strong>History Stack</strong></li>
+<li><strong>History Stack</strong><ul>
 <li>히스토리 엔트리가 <code>history.pushState()</code>를 통해 활성화되었거나, <code>history.replaceState()</code>를 통해 활성화 되었다면</li>
 <li><code>history.pushState()</code> 혹은 <code>history.replaceState()</code>를 호출하는 것만으로 <code>popstate</code> 이벤트가 호출되진 않아</li>
 <li><code>popstate</code> 이벤트는 브라우저 액션 (백버튼, 앞버튼)을 통해서 발생해</li>
-<li>
-<p>브라우저마다 다르게 <code>popstate</code> 액션을 다르게 처리하는 경향이 있어</p>
-<ul>
+<li>브라우저마다 다르게 <code>popstate</code> 액션을 다르게 처리하는 경향이 있어<ul>
 <li>크롬/사파리는 <code>popstate</code>를 페이지 로드 시점에 항상 발생시키지만, 파폭은 안그래</li>
 </ul>
 </li>
-<li>
-<p><strong>언제 popstate가 호출되는가</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>언제 popstate가 호출되는가</strong><ul>
 <li>사용자가 인터랙션이 없었던, 원하지 않는 팝업들은 브라우저가 popstate를 호출하지 않을 수 있어</li>
 <li>인터랙션이 있어야 popstate가 호출된다는 점...<ul>
 <li>navigation이 호출되면, popstate는 새로운 로케이션으로 이동하는 거의 마지막 단계에 있어. </li>
-<li>이는 다음과 같은 일들이 발생하고 호출돼</li>
+<li>이는 다음과 같은 일들이 발생하고 호출돼<ul>
 <li>new location has loaded</li>
 <li>displayed</li>
 <li>made visible</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>popstate</code> 이벤트가 언제 호출되는지를 이해하기 위해 다음과 같은 간소화된 순서를 따라가보자. (유저가 갔던, 프로그래밍적으로 이동을 했던)<ul>
@@ -23073,6 +23081,8 @@
 </li>
 <li></li>
 </ul>
+</li>
+</ul>
 <h2 id="react-router-navigate">react-router navigate<a class="headerlink" href="#react-router-navigate" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://stackoverflow.com/questions/72794430/what-does-usenavigate-replace-option-do</em>
 - <strong>replace</strong>
@@ -23080,31 +23090,11 @@
     - 현재 엔트리를 히스토리 스택에 두지 않고 </p>
 <h2 id="replace-href">replace 와 href<a class="headerlink" href="#replace-href" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>replace</strong></li>
-<li>다음과 같은 플로우<ol>
-<li>네이버 페이지</li>
-<li>서비스 페이지</li>
-<li>여기서 본인인증 페이지를 window.location.replace로 이동</li>
-<li>본인인증 페이지</li>
-</ol>
-</li>
-<li>
-<p>qs) 3. 본인인증 페이지에서 백버튼을 누르면?</p>
-<ul>
-<li>
-<ol>
-<li>서비스 페이지에 대한 히스토리는 쌓이지 않기에 1. 네이버 페이지로 이동한다. </li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>href</strong></p>
-<ul>
+<li><strong>replace</strong><ul>
 <li>다음과 같은 플로우<ol>
 <li>네이버 페이지</li>
 <li>서비스 페이지<ul>
-<li>여기서 본인인증 페이지를 window.location.href로 이동</li>
+<li>여기서 본인인증 페이지를 window.location.replace로 이동</li>
 </ul>
 </li>
 <li>본인인증 페이지</li>
@@ -23113,13 +23103,23 @@
 <li>qs) 3. 본인인증 페이지에서 백버튼을 누르면?<ul>
 <li>
 <ol>
-<li>서비스 페이지에 대한 히스토리는 쌓여 있지롱 2. 서비스 페이지로 이동한다. </li>
+<li>서비스 페이지에 대한 히스토리는 쌓이지 않기에 1. 네이버 페이지로 이동한다. </li>
 </ol>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<ul>
+<li><strong>href</strong>
+    - 다음과 같은 플로우
+        1. 네이버 페이지
+        2. 서비스 페이지
+            - 여기서 본인인증 페이지를 window.location.href로 이동
+        3. 본인인증 페이지
+    - qs) 3. 본인인증 페이지에서 백버튼을 누르면?
+        - 2. 서비스 페이지에 대한 히스토리는 쌓여 있지롱 2. 서비스 페이지로 이동한다. </li>
 </ul>
 
 

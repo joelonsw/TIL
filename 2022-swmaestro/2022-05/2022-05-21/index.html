@@ -22943,27 +22943,29 @@
 <ul>
 <li><em>참고: https://klee.github.io/tutorials/testing-function/</em></li>
 <li><em>참고: https://klee.github.io/tutorials/testing-regex/</em></li>
-<li><strong>Input을 Symbolic으로 바꾸기</strong></li>
+<li><strong>Input을 Symbolic으로 바꾸기</strong><ul>
 <li>KLEE로 함수를 테스트하기 위해서는 symbolic input으로 돌려야 해</li>
 <li>변수를 symbolic하게 만들기 위해선 <code>klee_make_symbolic()</code> 함수를 사용해야해<ul>
-<li>세가지 변수를 받음</li>
+<li>세가지 변수를 받음<ol>
 <li>변수의 주소</li>
 <li>변수의 사이즈</li>
 <li>변수의 이름</li>
+</ol>
+</li>
 </ul>
 </li>
-<li>
-<p>아래 예시와 같이 a를 symbolic으로 만들어 get_sign() 에서 symbolic input으로 사용하도록 할 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>int main() {
+<li>아래 예시와 같이 a를 symbolic으로 만들어 get_sign() 에서 symbolic input으로 사용하도록 할 수 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>int main() {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  int a;
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  klee_make_symbolic(&amp;a, sizeof(a), &quot;a&quot;);
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  return get_sign(a);
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>}
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Compiling to LLVM bitcode</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Compiling to LLVM bitcode</strong><ul>
 <li>KLEE는 LLVM bitcode에서 수행됨</li>
 <li><code>clang -emit-llvm</code>을 활용하여 LLVM bitcode를 만들자 </li>
 <li><code>clang -I ../../include -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone get_sign.c</code><ul>
@@ -22972,15 +22974,13 @@
 <li><code>--optimize</code> : 최적화 가능하도록</li>
 </ul>
 </li>
-<li>
-<p>그냥 디버그랑 최적화 신경 안쓴다면 <code>clang -emit-llvm -c get_sign.c</code>로도 충분</p>
+<li>그냥 디버그랑 최적화 신경 안쓴다면 <code>clang -emit-llvm -c get_sign.c</code>로도 충분</li>
+</ul>
 </li>
-<li>
-<p><strong>Running KLEE</strong></p>
-</li>
-<li>
-<p>bitcode 파일을 KLEE에서 돌리는 법...</p>
+</ul>
 <ul>
+<li><strong>Running KLEE</strong><ul>
+<li>bitcode 파일을 KLEE에서 돌리는 법...<ul>
 <li>커맨드 : <code>klee get_sign.bc</code></li>
 <li>결과물
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>KLEE: output directory = &quot;klee-out-0&quot;
@@ -22989,7 +22989,7 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>KLEE: done: completed paths = 3
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>KLEE: done: partially completed paths = 0
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>KLEE: done: generated tests = 3
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>KLEE가 3개의 path를 다녀오셨음 (해당 예시는 3개면 다 한거)<ul>
 <li>프로그램 크다면, 각 path 시간상, 메모리상 다 돌진 못했을 수도</li>
 <li>이렇다면 인터럽트가 몇개의 path에서 발생했는지 기록해둠</li>
@@ -23001,29 +23001,34 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>Executing the code with KLEE</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Executing the code with KLEE</strong><ul>
 <li><code>klee --only-output-states-covering-new Regexp.bc</code></li>
 <li>중간 중간 중요한 이벤트가 발생한다면, 상태를 출력해줌. <ul>
 <li>가령 invalid memory access</li>
 </ul>
 </li>
-<li>
-<p><code>--only-output-states-covering-new</code> 옵션을 통해서 테스트를 돌리면 새롭게 커버되는 코드에 대한 테스트만 써줌</p>
-<ul>
-<li>이 옵션이 없다면 모든 path에 대한 테스트는 아니라도 많은 path에 대한 테스트 만들어줌</li>
+<li><code>--only-output-states-covering-new</code> 옵션을 통해서 테스트를 돌리면 새롭게 커버되는 코드에 대한 테스트만 써줌<ul>
+<li>이 옵션이 없다면 모든 path에 대한 테스트는 아니라도 많은 path에 대한 테스트 만들어줌<ul>
 <li>전부다가 아닌 이유는, 에러 하나 발견하면 그 path에 대한 실패테스트 케이스는 한개만 놔둠</li>
 <li><code>--emit-all-errors</code> 옵션으로 모두 다 케이스 돌릴 수 있긴 함</li>
 </ul>
 </li>
-<li>
-<p><strong>KLEE-generated test cases</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>KLEE-generated test cases</strong><ul>
 <li>KLEE가 생성한 Test Case는 .ktest 확장자 가짐</li>
-<li>
-<p>ktest-tool을 통해 테스트 볼 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ ktest-tool klee-last/test000003.ktest
+<li>ktest-tool을 통해 테스트 볼 수 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ ktest-tool klee-last/test000003.ktest
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ktest file : &#39;klee-last/test000003.ktest&#39;
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>args       : [&#39;get_sign.bc&#39;]
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>num objects: 1
@@ -23034,14 +23039,13 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>object 0: int : -2147483648
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>object 0: uint: 2147483648
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>object 0: text: ....
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>KLEE error reports</strong></p>
-</li>
-<li>
-<p>KLEE가 detect하는 에러는 다음과 같음</p>
+</ul>
 <ul>
+<li><strong>KLEE error reports</strong><ul>
+<li>KLEE가 detect하는 에러는 다음과 같음<ul>
 <li>ptr : Invalid memory 주소에 대해 store/load</li>
 <li>free : double free/invalid free</li>
 <li>abort : 프로그램이 abort() 실행</li>
@@ -23052,16 +23056,18 @@
 <li>model : full precision 못지킴</li>
 </ul>
 </li>
-<li>
-<p><strong>Changing the test harness</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Changing the test harness</strong><ul>
 <li>KLEE가 Regex 라이브러리에 대해 많은 에러를 찾은 이유는, <ul>
 <li>regex function에 버그가 있어서가 아닌, 테스트 드라이버가 문제 있어서</li>
 <li>regex buffer를 symbolic하게 만들고 있지만, match function은 null로 끝나는 string이길 바람</li>
 </ul>
 </li>
 <li>해결책은 다음과 같이 \0을 그냥 char array에 박아버리는 방법과
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>int main() {
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>int main() {
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    // The input regular expression.
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    char re[SIZE];
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -23091,6 +23097,8 @@
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    return 0;
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>}
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

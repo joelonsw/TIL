@@ -22955,33 +22955,25 @@
 <ul>
 <li><em>참고 1: https://lion-king.tistory.com/entry/JPA-JPA-Id-GenerationTypeAUTO-IDENTITY</em></li>
 <li><em>참고 2: https://jojoldu.tistory.com/295</em></li>
-<li>
-<p><strong>GenerationType.IDENTITY</strong></p>
-<ul>
-<li><em>참고: https://dundung.tistory.com/220</em></li>
-<li>영속성 컨텍스트에서 관리하려면 ID값이 필요해</li>
-<li>근데 우리가 만든 객체는 Id값이 읎자나?</li>
-<li>그러면 DB에서 조회해 와야겠지?</li>
-<li>인서트 쿼리를 우선 날려서 Id 값을 조회해와 (쓰기지연 없이)</li>
-<li>당연히 커밋한건 아니라서 롤백할 수는 있어</li>
+<li><strong>GenerationType.IDENTITY</strong>
+    - <em>참고: https://dundung.tistory.com/220</em>
+    - 영속성 컨텍스트에서 관리하려면 ID값이 필요해
+    - 근데 우리가 만든 객체는 Id값이 읎자나?
+    - 그러면 DB에서 조회해 와야겠지?
+    - 인서트 쿼리를 우선 날려서 Id 값을 조회해와 (쓰기지연 없이)
+    - 당연히 커밋한건 아니라서 롤백할 수는 있어</li>
 </ul>
-</li>
-<li>
-<p><strong>GenerationType.AUTO</strong></p>
 <ul>
-<li>여기서는 우선 또 다른 트랜잭션을 열어서 ID 값을 디비한테 물어보고 조회해와</li>
-<li>그다음에 영속성 컨텍스트에 Id 값 매칭해줘</li>
-<li>트랜잭션 끝나면 Id값까지 다 곁들여서 인서트 쿼리를 날려</li>
+<li><strong>GenerationType.AUTO</strong>
+    - 여기서는 우선 또 다른 트랜잭션을 열어서 ID 값을 디비한테 물어보고 조회해와
+    - 그다음에 영속성 컨텍스트에 Id 값 매칭해줘
+    - 트랜잭션 끝나면 Id값까지 다 곁들여서 인서트 쿼리를 날려</li>
 </ul>
-</li>
-<li>
-<p><strong>GenerationType.SEQUENCE</strong></p>
 <ul>
-<li>시퀀스를 지원하는 디비라면 그냥 그거 쓰고</li>
-<li>지원하지 않는다면 테이블 만든다</li>
-<li>시퀀스 테이블이 있다면 모든 테이블의 ID를 해당 시퀀스 테이블에서 관리</li>
-</ul>
-</li>
+<li><strong>GenerationType.SEQUENCE</strong>
+    - 시퀀스를 지원하는 디비라면 그냥 그거 쓰고
+    - 지원하지 않는다면 테이블 만든다
+    - 시퀀스 테이블이 있다면 모든 테이블의 ID를 해당 시퀀스 테이블에서 관리</li>
 </ul>
 <h2 id="db">DB 스토리지 엔진<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <ul>

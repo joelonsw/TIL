@@ -22909,18 +22909,18 @@
 <h3 id="2024-12-30">2024-12-30<a class="headerlink" href="#2024-12-30" title="Permanent link">&para;</a></h3>
 <h2 id="actionbuilder-vs-actiontransformer">ActionBuilder vs ActionTransformer<a class="headerlink" href="#actionbuilder-vs-actiontransformer" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Play에서 커스텀 Action을 만들때 두가지 경우로 만듦<ol>
 <li><code>ActionBuilder[UserRequest, AnyContent]</code>를 직접 상속하여 만드는 방식</li>
 <li><code>ActionTransformer[Request, UserRequest]</code>를 활용해 이미 존재하는 Action에 요청 변환만 추가</li>
 </ol>
 </li>
-<li>
-<p>둘 다 타고 올라가면 <code>ActionFunction</code>을 사용</p>
+<li>둘 다 타고 올라가면 <code>ActionFunction</code>을 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>ActionBuilder</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ActionBuilder</strong><ul>
 <li>최종적인 Action을 만들어서 컨트롤러와 바로 연결하는 큰 틀을 제공한다. </li>
 <li>요청(Request) -&gt; 커스텀 요청(UserRequest) + 바디 파싱(BodyParser) -&gt; 결과</li>
 <li>새로운 Action을 직접 만들어내는 뿌리 역할<ul>
@@ -22939,15 +22939,15 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><code>내가 원하는 대로 새로운 Action</code>을 만드는 목적</p>
-<ul>
+<li><code>내가 원하는 대로 새로운 Action</code>을 만드는 목적<ul>
 <li>BodyParser가 필요하거나, 새로운 Request 타입을 정의하여 처음~끝 까지 조정하고자 할 때 많이 사용</li>
 </ul>
 </li>
-<li>
-<p><strong>ActionTransformer</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ActionTransformer</strong><ul>
 <li>이미 존재하는 ActionFunction 체인에 추가 변환 로직을 삽입한다. (중간 단계)</li>
 <li>요청(Request) -&gt; 추가/변환된 요청(UserRequest)</li>
 <li>기존의 <code>ActionFunction</code>(ex. <code>ActionBuilder</code>)의 파이프라인 중간에 끼워, Request를 부분적으로 변환하는 "특화" 기능</li>
@@ -22963,17 +22963,19 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>특징</p>
-<ul>
+<li>특징<ul>
 <li><code>Action</code>, <code>ActionBuilder</code>를 확장하여 요청 변환만 추가하면 <code>ActionTransformer</code>가 적합</li>
 <li>Body 파싱 자체는 원래 <code>ActionBuilder</code>가 맡고, 여기서는 단순히 Request의 타입 바꿔치기만 할 수도 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>권장</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>권장</strong><ul>
 <li>필요에 따라 <code>ActionBuilder</code>를 만들고, <code>ActionTransformer</code>를 중간에 끼워 확장해 사용하는 구조 권장. </li>
+</ul>
+</li>
 </ul>
 
 

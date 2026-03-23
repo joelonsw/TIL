@@ -23109,44 +23109,48 @@
 <ul>
 <li><em>참고: https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-client</em></li>
 <li><em>참고: https://gngsn.tistory.com/198</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Spring 5.0에서 추가된 Non-Blocking 방식의 HTTP 클라이언</li>
 <li>리액터 베이스의 functional, fluent API</li>
 <li>선언적, 비동기적 로직 구현 가능 (쓰레드나 동시성 상관없이)</li>
 <li>넌블럭킹</li>
 <li>스트리밍 지원</li>
-<li>
-<p>외부 API 요청시 리액티브 타입의 전송과 수신 (Mono, Flux)</p>
+<li>외부 API 요청시 리액티브 타입의 전송과 수신 (Mono, Flux)</li>
+</ul>
 </li>
-<li>
-<p><strong>특징</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>특징</strong><ul>
 <li>싱글 스레드 방식을 사용</li>
 <li>Non-Blocking 방식을 사용</li>
-<li>
-<p>JSON, XML 쉽게 응답 받음</p>
+<li>JSON, XML 쉽게 응답 받음</li>
+</ul>
 </li>
-<li>
-<p><strong>생성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>생성</strong><ul>
 <li>정적 팩터리 메서드 사용</li>
 <li><code>WebClient.create()</code></li>
 <li><code>WebClient.builder()</code></li>
-<li>
-<p>한번 생성된 WebClient는 불변 객체</p>
+<li>한번 생성된 WebClient는 불변 객체</li>
+</ul>
 </li>
-<li>
-<p><strong>동기적 사용</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>동기적 사용</strong><ul>
 <li>마지막에 .block()을 사용하여 막기</li>
+</ul>
+</li>
 </ul>
 <h2 id="retrieve">retrieve()<a class="headerlink" href="#retrieve" title="Permanent link">&para;</a></h2>
 <ul>
 <li>어떻게 응답을 추출할 것인가</li>
-<li>.retrieve()</li>
+<li>.retrieve()<ul>
 <li>.toEntity(Person.class);</li>
 <li>.bodyToMono(Person.class);</li>
 <li>.bodyToFlux(Quote.class);</li>
+</ul>
+</li>
 <li>body를 받아 디코딩하는 간단한 메서드</li>
 <li>받은 응답을 bodyToFlux, bodyToMono 형태로 각각 Flux, Mono 객체로 바꿔줌
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="n">Mono</span><span class="o">&lt;</span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">ResDTO</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">retrievePostForMono</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">body</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23169,37 +23173,39 @@
 </ul>
 <h2 id="blocking-vs-non-blocking">Blocking vs Non-Blocking<a class="headerlink" href="#blocking-vs-non-blocking" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Blocking</strong></li>
+<li><strong>Blocking</strong><ul>
 <li>어플리케이션이 커널로 작업 요청을 할 때, 커널에서 요청에 대한 로직을 처리</li>
 <li>어플리케이션은 요청에 대한 응답을 받을 때 까지 대기</li>
-<li>
-<p>어플리케이션은 커널이 작업을 끝냈는지 백그라운드에서 지속적으로 확인</p>
+<li>어플리케이션은 커널이 작업을 끝냈는지 백그라운드에서 지속적으로 확인</li>
+</ul>
 </li>
-<li>
-<p><strong>Non-Blocking</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Non-Blocking</strong><ul>
 <li>어플리케이션이 커널로 작업 요청을 하고, 바로 제어권을 받음</li>
 <li>그리고 다른 로직이 실행이 됨</li>
 </ul>
+</li>
+</ul>
 <h2 id="sync-vs-asynnc">Sync vs Asynnc<a class="headerlink" href="#sync-vs-asynnc" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Sync</strong></li>
-<li>
-<p>작업 결과값을 직접 받아 처리하는 형식</p>
+<li><strong>Sync</strong><ul>
+<li>작업 결과값을 직접 받아 처리하는 형식</li>
+</ul>
 </li>
-<li>
-<p><strong>Async</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Async</strong><ul>
 <li>결과값을 받을 때 어떻게 처리할 지 "콜백함수"를 미리 정의해둠</li>
+</ul>
+</li>
 </ul>
 <h2 id="blockingnon-blocking-syncasync">Blocking/Non-Blocking &amp; Sync/Async 조합<a class="headerlink" href="#blockingnon-blocking-syncasync" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://gngsn.tistory.com/154</em></li>
 <li><img alt="" src="../../images/2022-09-08-blocking-sync.png" /></li>
-<li><strong>Sync-Blocking</strong></li>
-<li>
-<p>동기 방식의 블로킹은 수행한대로 순서에 맞게 수행</p>
-<ul>
+<li><strong>Sync-Blocking</strong><ul>
+<li>동기 방식의 블로킹은 수행한대로 순서에 맞게 수행<ul>
 <li>Application: 커널아 처리좀!</li>
 <li>Kernel: 작업동안 기다려봐</li>
 <li>Application: ㅇㅇ 기다릴게</li>
@@ -23208,12 +23214,12 @@
 <li>Kernel: 끝났다. 여기 결과!</li>
 </ul>
 </li>
-<li>
-<p><strong>Sync-NonBlocking</strong></p>
+</ul>
 </li>
-<li>
-<p>동기 방식의 넌블로킹은 작업을 시작하고 제어권을 돌려주기에 다른 작업 수행할 수 있음</p>
+</ul>
 <ul>
+<li><strong>Sync-NonBlocking</strong><ul>
+<li>동기 방식의 넌블로킹은 작업을 시작하고 제어권을 돌려주기에 다른 작업 수행할 수 있음<ul>
 <li>Application: 커널아 처리좀!</li>
 <li>Kernel: 작업할게!</li>
 <li>Application: 다함?</li>
@@ -23224,12 +23230,12 @@
 <li>Kernel: 응 다했다! 여기 결과!</li>
 </ul>
 </li>
-<li>
-<p><strong>Async-Blocking</strong></p>
+</ul>
 </li>
-<li>
-<p>비동기에 블로킹 방식</p>
+</ul>
 <ul>
+<li><strong>Async-Blocking</strong><ul>
+<li>비동기에 블로킹 방식<ul>
 <li>Application: 커널아 여기 처리좀! 결과 나오면 알려줘~</li>
 <li>Kernel: 작업동안 기다려봐</li>
 <li>Application: ㅇㅇ 기다릴게</li>
@@ -23238,9 +23244,11 @@
 <li>Kernel: 끝났다. 여기 결과!</li>
 </ul>
 </li>
-<li>
-<p><strong>Async-NonBlocking</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Async-NonBlocking</strong><ul>
 <li>비동기 방식의 넌블로킹<ul>
 <li>Application: 커널아 여기 처리좀! 결과 나오면 알려줘~</li>
 <li>Kernel: 그래 다하면 알려줄게. 너 할거 하고 있어봐바</li>
@@ -23250,19 +23258,21 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="monoflux">Mono/Flux<a class="headerlink" href="#monoflux" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://github.com/gngsn/Gngsn-Spring-Lab/blob/master/concept-note/Reactor.md</em></li>
-<li><strong>Reactor</strong></li>
+<li><strong>Reactor</strong><ul>
 <li>리액티브 스트림을 구현하는 라이브러리</li>
 <li>Flux, Mono 두가지 타입으로 스트림 정의</li>
 <li>일련의 작업 단계를 기술하는 것이 아닌, 데이터가 전달될 파이프라인을 구성</li>
-<li>
-<p>파이프라인을 통해 데이터가 전달되는 동안 어떤 형태로든 변경/사용 가능</p>
+<li>파이프라인을 통해 데이터가 전달되는 동안 어떤 형태로든 변경/사용 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Mono/Flux</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Mono/Flux</strong><ul>
 <li>500개 이상의 오퍼레이션<ul>
 <li>생성</li>
 <li>조합</li>
@@ -23274,35 +23284,36 @@
 <li>0개 or 1개의 데이터 항목과 에러를 가짐</li>
 </ul>
 </li>
-<li>
-<p><strong>Flux</strong></p>
-<ul>
+<li><strong>Flux</strong><ul>
 <li>0개 or 여러개의 데이터 항목과 에러를 가</li>
 </ul>
 </li>
-<li>
-<p><strong>타입 생성</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>타입 생성</strong><ul>
 <li>객체 -&gt; 리액터<ul>
 <li>just() 메러드를 통해 리액티브 타입 생성</li>
 <li>subscribe() 를 통해 리액티브 타입 전달받을 때 사용하는 메서드</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="webclient-with-countdownlatch">WebClient with CountDownLatch<a class="headerlink" href="#webclient-with-countdownlatch" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>현재 동기적으로 동작하는 코드</strong>
+<li><strong>현재 동기적으로 동작하는 코드</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">ContractItemsResponse</span><span class="w"> </span><span class="nf">getMyContracts</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endPointGenerator</span><span class="p">.</span><span class="na">contractBaseUrl</span><span class="p">();</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">Mono</span><span class="o">&lt;</span><span class="n">ContractItemsResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">            </span><span class="n">kasWebClient</span><span class="p">.</span><span class="na">getForObject</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">ContractItemsResponse</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">block</span><span class="p">();</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>이러면 비동기적으로 동작하나?</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>이러면 비동기적으로 동작하나?</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">ContractItemsResponse</span><span class="w"> </span><span class="nf">getMyContracts</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">ContractItemsResponse</span><span class="w"> </span><span class="n">contractItemsResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ContractItemsResponse</span><span class="p">();</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endPointGenerator</span><span class="p">.</span><span class="na">contractBaseUrl</span><span class="p">();</span>
@@ -23324,45 +23335,50 @@
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="connectable-webclient">Connectable에서 WebClient 사용하기<a class="headerlink" href="#connectable-webclient" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://findmypiece.tistory.com/276</em></li>
-<li>하나의 API Call 하면서 CountDownLatch 쓰는거는 피차일반 성능상으로</li>
+<li>하나의 API Call 하면서 CountDownLatch 쓰는거는 피차일반 성능상으로<ul>
 <li>어차피 메인쓰레드 블락해야해</li>
-<li>하지만, 여러개의 API이 발생하면 병렬적으로 처리되는 장점이 있음!</li>
+</ul>
+</li>
+<li>하지만, 여러개의 API이 발생하면 병렬적으로 처리되는 장점이 있음!<ul>
 <li>컬렉션에 담아서 CountDownLatch로 대기해서 뚝딱 처리가 가능하구나!</li>
+</ul>
+</li>
 </ul>
 <h2 id="countdownlatch">CountDownLatch<a class="headerlink" href="#countdownlatch" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://codechacha.com/ko/java-countdownlatch/</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>어떤 쓰레드가 다른 쓰레드에서 작업이 완료될 때 까지 기다릴 수 있게 해주는 클래스</li>
 <li>Main 쓰레드에서 5개의 쓰레드를 생성하여 작업 병렬 처리 지시<ul>
 <li>Main 쓰레드는 다른 쓰레드 종료되는 것 기다리지 않고 다음 코드 실행</li>
 </ul>
 </li>
 <li>CountDownLatch를 쓰면 다음코드 실행하지 않고 기다리게 할 수 있음</li>
-<li>
-<p>쓰레드를 N개 실행시 일정 개수의 쓰레드가 모두 끝날 때 까지 기다리는 경우</p>
+<li>쓰레드를 N개 실행시 일정 개수의 쓰레드가 모두 끝날 때 까지 기다리는 경우</li>
+</ul>
 </li>
-<li>
-<p><strong>사용법</strong>
+</ul>
+<ul>
+<li><strong>사용법</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">CountDownLatch</span><span class="w"> </span><span class="n">countDownLatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CountDownLatch</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">  </span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">countDownLatch</span><span class="p">.</span><span class="na">countDown</span><span class="p">();</span><span class="w"> </span><span class="c1">//Latch의 숫자가 1씩 감소</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">countDownLatch</span><span class="p">.</span><span class="na">await</span><span class="p">();</span><span class="w"> </span><span class="c1">//Latch의 숫자가 0이 될때까지 기다림</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="hashmap">HashMap 동시성<a class="headerlink" href="#hashmap" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://woooongs.tistory.com/67</em></li>
 <li><em>참고: https://javaconceptoftheday.com/hashmap-vs-concurrenthashmap-in-java/</em></li>
 <li>자바의 HashMap은 Thread Safe 하지 않기 때문에 "동시에 여러 쓰레드"가 접근할 경우 synchronized 처리가 필요!</li>
-<li>ConcurrentHashMap은 내부적으로 synchronized 되어있기 때문에 쓰레드 safe하다!</li>
+<li>ConcurrentHashMap은 내부적으로 synchronized 되어있기 때문에 쓰레드 safe하다!<ul>
 <li>add, delete synchronized 처리되어있음</li>
+</ul>
+</li>
 <li>HashMap은 그렇지 않음</li>
 <li>Connectable 테스트코드에서 HashMap을 사용한 경우 똑바로 Map에 저장안된 경우 있음</li>
 <li>로그상으로는 WebClient Call은 되었는데 저장이 안됨! &lt;- 동시성 이슈</li>

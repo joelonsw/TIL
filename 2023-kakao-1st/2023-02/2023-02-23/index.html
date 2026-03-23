@@ -22953,77 +22953,83 @@
 <h3 id="2023-02-23">2023-02-23<a class="headerlink" href="#2023-02-23" title="Permanent link">&para;</a></h3>
 <h2 id="nosql">NoSQL<a class="headerlink" href="#nosql" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>등장 배경</strong></li>
+<li><strong>등장 배경</strong><ul>
 <li>데이터 패러다임의 변화: 복잡+소규모 -&gt; 단순+대규모</li>
-<li>
-<p>기존 RDB와 다른 DB의 필요성이 대두됨</p>
+<li>기존 RDB와 다른 DB의 필요성이 대두됨</li>
+</ul>
 </li>
-<li>
-<p><strong>특징</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>특징</strong><ul>
 <li>대용량</li>
 <li>분산</li>
 <li>No Relation, No Schema</li>
-<li>
-<p>No SQL, Not Only SQL</p>
+<li>No SQL, Not Only SQL</li>
+</ul>
 </li>
-<li>
-<p><strong>종류</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>종류</strong><ul>
 <li>Key-Value: Redis</li>
 <li>Document: MongoDB</li>
 <li>Wide-Column: Hbase</li>
 <li>Graph: neo4j</li>
 </ul>
+</li>
+</ul>
 <h2 id="mongodb">MongoDB<a class="headerlink" href="#mongodb" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>계층 구조</strong></li>
-<li>
-<p>Database &gt; Collections(rdb의 table) &gt; Documents(rdb의 row) &gt; Fields(rdb의 column)</p>
+<li><strong>계층 구조</strong><ul>
+<li>Database &gt; Collections(rdb의 table) &gt; Documents(rdb의 row) &gt; Fields(rdb의 column)</li>
+</ul>
 </li>
-<li>
-<p><strong>Schema 구조</strong>
+</ul>
+<ul>
+<li><strong>Schema 구조</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  customer_id: 1,
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  first_name: &quot;Mark&quot;,
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>}
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Query 형태</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Query 형태</strong><ul>
 <li>MQL(MongoDB Query Language)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>db.TABLE.Find(
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>db.TABLE.Find(
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    {Field3:{$gt:Value3}}, 
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    {Field1:1, Field2:1}
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>).limit(10)
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="mongodb_1">MongoDB<a class="headerlink" href="#mongodb_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Index</strong></li>
+<li><strong>Index</strong><ul>
 <li>Regular Index: 일반적으로 사용하는 인덱스</li>
 <li>Geospatial Index: 지구 공간 정보 저장</li>
 <li>Text Index: 문자열 내용에 대한 텍스트 검색 쿼리 지원</li>
 <li>Hashed Index: 해싱된 값 저장</li>
 <li>Multikey Index: 배열의 각 요소에 대한 검색 지원</li>
-<li>
-<p>TTL Index: 보관 기간 지난 도큐먼트 자동 삭제</p>
+<li>TTL Index: 보관 기간 지난 도큐먼트 자동 삭제</li>
+</ul>
 </li>
-<li>
-<p><strong>Architecture</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Architecture</strong><ol>
 <li>Dynamic Document Schema: 스키마 저장</li>
 <li>Native Language Drivers: MQL 이해할 수 있도록</li>
 <li>High Availability: 레플리카셋</li>
 <li>High Performance: 데이터 지역성, 인덱스, RAM 사용</li>
-<li>
-<p>Horizontal Scalability: 샤딩</p>
+<li>Horizontal Scalability: 샤딩</li>
+</ol>
 </li>
-<li>
-<p><strong>Sharding</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Sharding</strong><ul>
 <li>분산시스템의 꽃</li>
+</ul>
+</li>
 </ul>
 
 

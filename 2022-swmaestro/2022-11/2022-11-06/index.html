@@ -22954,49 +22954,54 @@
 <h2 id="threaddump">ThreadDump 떠보기<a class="headerlink" href="#threaddump" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://d2.naver.com/helloworld/10963</em></li>
-<li><strong>Java &amp; Thread</strong></li>
+<li><strong>Java &amp; Thread</strong><ul>
 <li>수십~수백개의 쓰레드를 사용하여 처리</li>
 <li>두 개 이상의 쓰레드가 같은 자원 경합시 데드락 발생할 수도<ul>
 <li>Log 기록하는 것도 공유자원 접근과 비슷</li>
 </ul>
 </li>
-<li>
-<p>Thread Dump를 통해 각 쓰레드의 상태를 알 수 있음</p>
+<li>Thread Dump를 통해 각 쓰레드의 상태를 알 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>쓰레드 동기화</strong></p>
-</li>
-<li>Java에서는 Monitor를 활용해 쓰레드 동기화 진행</li>
-<li>
-<p>모든 Java 객체가 하나의 Monitor를 가짐 =&gt; Monitor는 하나의 쓰레드만 소유함</p>
+</ul>
 <ul>
+<li><strong>쓰레드 동기화</strong><ul>
+<li>Java에서는 Monitor를 활용해 쓰레드 동기화 진행</li>
+<li>모든 Java 객체가 하나의 Monitor를 가짐 =&gt; Monitor는 하나의 쓰레드만 소유함<ul>
 <li>어떤 쓰레드가 소유한 Monitor를 다른 쓰레드가 획득하려면 이미 들고 있는 쓰레드가 Monitor 놔줄때까지 Wait Queue 대기!</li>
 </ul>
 </li>
-<li>
-<p><strong>스레드 상태</strong></p>
+</ul>
 </li>
-<li>
-<p>java.lang.Thread 클래스엔 State 변수가 있음</p>
+</ul>
 <ul>
-<li>Enum으로 정의되어 있으며...</li>
+<li><strong>스레드 상태</strong><ul>
+<li>java.lang.Thread 클래스엔 State 변수가 있음<ul>
+<li>Enum으로 정의되어 있으며...<ul>
 <li>NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING</li>
 </ul>
 </li>
-<li>
-<p><strong>스레드 종류</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>스레드 종류</strong><ul>
 <li>Daemon Thread<ul>
 <li>다른 Non-daemon Thread가 없다면 동작 중지</li>
-<li>사용자가 직접 스레드 생성 안하더라도, Java 어플리케이션이 기본적으로 여러개의 쓰레드 생성</li>
+<li>사용자가 직접 스레드 생성 안하더라도, Java 어플리케이션이 기본적으로 여러개의 쓰레드 생성<ul>
 <li>대부분이 Daemon Thread =&gt; GC, JMX 등의 처리를 하기 위함</li>
 </ul>
 </li>
-<li>
-<p>Non-daemon Thread</p>
+</ul>
 </li>
-<li>
-<p><strong>스레드 덤프 획득해보기 - jstack</strong>
+<li>Non-daemon Thread</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>스레드 덤프 획득해보기 - jstack</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">[</span>DEV<span class="o">][</span><span class="m">15</span>:23:26<span class="o">][</span>ubuntu@ip-172-31-34-52<span class="w"> </span>~/deploy<span class="o">]</span><span class="w"> </span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$<span class="w"> </span>jstack<span class="w"> </span><span class="m">10034</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="m">2022</span>-11-06<span class="w"> </span><span class="m">15</span>:23:30
@@ -23389,8 +23394,7 @@
 <a id="__codelineno-0-390" name="__codelineno-0-390" href="#__codelineno-0-390"></a><span class="s2">&quot;VM Periodic Task Thread&quot;</span><span class="w"> </span><span class="nv">os_prio</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">cpu</span><span class="o">=</span><span class="m">37230</span>.87ms<span class="w"> </span><span class="nv">elapsed</span><span class="o">=</span><span class="m">59481</span>.65s<span class="w"> </span><span class="nv">tid</span><span class="o">=</span>0x00007fcaa8108000<span class="w"> </span><span class="nv">nid</span><span class="o">=</span>0x273c<span class="w"> </span>waiting<span class="w"> </span>on<span class="w"> </span>condition<span class="w">  </span>
 <a id="__codelineno-0-391" name="__codelineno-0-391" href="#__codelineno-0-391"></a>
 <a id="__codelineno-0-392" name="__codelineno-0-392" href="#__codelineno-0-392"></a>JNI<span class="w"> </span>global<span class="w"> </span>refs:<span class="w"> </span><span class="m">30</span>,<span class="w"> </span>weak<span class="w"> </span>refs:<span class="w"> </span><span class="m">0</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>해당 프로세스에 대응되는 쓰레드들이 돌아가고 있음</li>
 <li>Java Runtime (GC 등) 관련 쓰레드?<ul>
 <li>Reference Handler</li>
@@ -23404,55 +23408,63 @@
 <li>http-nio-8080-exec-1 ~ http-nio-8080-exec-10 // min-spare 스레드가 10개인가보군</li>
 </ul>
 </li>
-<li>
-<p>Spring Database Connection 쓰레드</p>
-<ul>
+<li>Spring Database Connection 쓰레드<ul>
 <li>HikariPool-1 housekeeper</li>
 </ul>
 </li>
-<li>
-<p><strong>스레드 덤프 문제상황</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>스레드 덤프 문제상황</strong><ul>
 <li>락을 획득하지 못하는 경우 (Blocked)</li>
 <li>데드락 상태인 경우</li>
 <li>socketReadThread가 메시지 수신을 위해 계속 대기하는 경우</li>
 <li>스레드가 계속 WAIT 인 경우</li>
 <li>스레드 리소스를 정상적으로 정리를 못하는 경우</li>
 </ul>
+</li>
+</ul>
 <h2 id="springboot">SpringBoot가 다중 유저 요청을 처리하는 방식<a class="headerlink" href="#springboot" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://sihyung92.oopy.io/spring/18</em></li>
-<li><strong>과정</strong></li>
+<li><strong>과정</strong><ol>
 <li>SpringBoot는 내장 서블릿 컨테이너인 tomcat을 사용한다</li>
 <li>Tomcat은 다중 요청을 처리하기 위해, 부팅할 때 쓰레드의 컬렉션인 Thread Pool을 생성</li>
 <li>유저 요청 들어오면 Thread Pool에서 하나씩 Thread 할당. 해당 Thread에서 스프링부트에서 작성한 Dispatcher Servlet 거쳐 유저 요청 처리</li>
-<li>
-<p>작업 모두 수행 완료시, 쓰레드풀로 반환됨</p>
+<li>작업 모두 수행 완료시, 쓰레드풀로 반환됨</li>
+</ol>
 </li>
-<li>
-<p><strong>BIO Connector &amp; NIO Connector</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>BIO Connector &amp; NIO Connector</strong><ul>
 <li>[Connector]<ol>
 <li>소켓 연결 수립</li>
 <li>데이터 패킷 획득해 HttpServletRequest 객체로 변환</li>
-<li>Servlet 객체에 전달</li>
-<li>Acceptor에서 while 문으로 대기하며 port listen을 통해 Socket Connection 얻음</li>
-<li>Socket Connection으로 데이터 획득 =&gt; 패킷 파싱 후 HttpServletRequest 객체 생성</li>
-<li>Servlet Container에 해당 요청객체 전달 =&gt; Servlet Container에서 알맞은 MVC 흐름 뚝딱</li>
+<li>Servlet 객체에 전달
+- Acceptor에서 while 문으로 대기하며 port listen을 통해 Socket Connection 얻음
+- Socket Connection으로 데이터 획득 =&gt; 패킷 파싱 후 HttpServletRequest 객체 생성
+- Servlet Container에 해당 요청객체 전달 =&gt; Servlet Container에서 알맞은 MVC 흐름 뚝딱</li>
 </ol>
 </li>
 <li>[BIO Connector]<ul>
 <li>블록킹 방식으로 Connection &lt;-&gt; Thread 연결해서 처리해주면...</li>
-<li>동시 사용되는 쓰레드 수가 동시 접속하는 사용자 수가 될 것</li>
+<li>동시 사용되는 쓰레드 수가 동시 접속하는 사용자 수가 될 것<ul>
 <li>idle 상태의 쓰레드 많아졌어</li>
 <li>효율적인 관리 위해 NIO 등장</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>[NIO Connector]<ul>
-<li>Poller라는 별도의 쓰레드가 커넥션 처리</li>
+<li>Poller라는 별도의 쓰레드가 커넥션 처리<ul>
 <li>Socket을 캐시로 들고있다가 Socket에서 data 처리가 가능한 순간에만 thread 할당하는 방식 =&gt; idle 최소화</li>
+</ul>
+</li>
 <li>Java Nio Selector를 통해 data가 처리 가능할 때만 Thread를 사용하기에 idle로 낭비되는 Thread가 줄어듦</li>
 <li>셀렉터를 통해 채널을 관리하기에 작업큐 사이즈와 관계없이 추가로 커넥션 거절하지 않고 받을 수 있음</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

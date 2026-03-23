@@ -23003,26 +23003,26 @@
 <em>참고: https://www.inflearn.com/course/%EC%98%88%EC%A0%9C%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%ED%95%B5%EC%8B%AC-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%EC%B9%98/dashboard</em>  </p>
 <h4 id="_1">배치 프로젝트란?<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>정해진 시간마다 데이터 가공이 필요한 경우 써보자!</strong></li>
+<li><strong>정해진 시간마다 데이터 가공이 필요한 경우 써보자!</strong><ul>
 <li>가끔 집계를 위해 하루에 한번 수행되어야 하는 작업들</li>
 <li>어디서 부터 실패한지 기록해둬 그 다음부터 집계할 수 있도록</li>
 <li>같은 파라미터로 함수 실행했으면, 중복 실행이라고 알려줘 2배 데이터 뻥튀기 되는 것 막도록</li>
-<li>
-<p>Quartz와 함께 같이 사용될 수 있음</p>
+<li>Quartz와 함께 같이 사용될 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>배치 어플리케이션의 조건</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>배치 어플리케이션의 조건</strong><ul>
 <li>대용량 데이터 : 대량의 데이터를 가져오거나, 전달하거나, 계산하는 등의 처리</li>
 <li>자동화 : 심각한 문제 해결 외는 사용자 개입없이 실행될 것</li>
 <li>견고성 : 잘못된 데이터를 충돌/중단 없이 처리할 것</li>
 <li>신뢰성 : 무엇이 잘못되었는지 추적할 수 있을 것 (로깅, 알림)</li>
-<li>
-<p>성능 : 지정한 시간 안에 처리 완료하거나 다른 어플리케이션 방해하지 않도록 수행</p>
+<li>성능 : 지정한 시간 안에 처리 완료하거나 다른 어플리케이션 방해하지 않도록 수행</li>
+</ul>
 </li>
-<li>
-<p><strong>배치 작업이 필요한 예시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>배치 작업이 필요한 예시</strong><ul>
 <li>이메일 쿠폰 발송</li>
 <li>가맹점 정산</li>
 <li>거래 명세서 생성</li>
@@ -23031,9 +23031,11 @@
 <li>특정한 시점에 스케쥴러를 통해 자동화된 작업이 필요한 경우 (ex. 푸시알림, 월별 리포트)</li>
 <li>대용량 데이터의 포맷을 변경, 유효성 검사 등의 작업을 트랜잭션 안에서 처리 후 기록해야하는 경우</li>
 </ul>
+</li>
+</ul>
 <h3 id="spring-batch_1">Spring Batch<a class="headerlink" href="#spring-batch_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>스프링 배치로 작업이 필요한 이유</strong></li>
+<li><strong>스프링 배치로 작업이 필요한 이유</strong><ul>
 <li>엔터프라이즈 시스템 운영에 있어 대용량 일괄 처리의 편의를 위해 설계된 가볍고 포괄적인 배치 프레임워크<ul>
 <li>Accenture의 배치 노하우 + Spring 프레임워크의 철학 (DI, AOP, 서비스 추상화)</li>
 </ul>
@@ -23043,15 +23045,15 @@
 <li>최적화 및 파티셔닝 기술을 통해 대용량/고성능 일괄 작업을 가능하게 지원</li>
 </ul>
 </li>
-<li>
-<p>일관성 있는 코드</p>
-<ul>
+<li>일관성 있는 코드<ul>
 <li>기존 서비스가 스프링 프레임워크라면 호환이 가능함</li>
 </ul>
 </li>
-<li>
-<p><strong>Reader &amp; Writer</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Reader &amp; Writer</strong><ul>
 <li>Reader: 데이터를 읽어오는 모듈</li>
 <li>Writer: 데이터를 쓰는 모듈<ul>
 <li>Database =&gt; JDBC, Hibernate, JPA</li>
@@ -23059,9 +23061,11 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h4 id="_2">스프링 배치 아키텍쳐<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>아키텍쳐 살펴보기</strong></li>
+<li><strong>아키텍쳐 살펴보기</strong><ul>
 <li><img alt="" src="../../images/2023-08-30-spring-batch.png" /></li>
 <li>[Application]<ul>
 <li>스프링 배치 사용해 개발자가 작성한 모든 배치 작업과 사용자 정의 코드</li>
@@ -23073,15 +23077,15 @@
 <li>배치의 동작과 관련된 것은 Batch Core에 있는 클래스를 이용하여 제어</li>
 </ul>
 </li>
-<li>
-<p>[Batch Infrastructure]</p>
-<ul>
+<li>[Batch Infrastructure]<ul>
 <li>개발자와 어플리케이션에서 사용하는 일반적인 Reader, Writer, RetryTemplate</li>
 </ul>
 </li>
-<li>
-<p><strong>배치 Job이 돌아가려면...</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>배치 Job이 돌아가려면...</strong><ul>
 <li><img alt="" src="../../images/2023-08-30-spring-batch-architecture.png" /></li>
 <li>[JobRepository]<ul>
 <li>다양한 배치 수행과 관련된 "수치 데이터"와 "잡의 상태"를 유지 및 관리</li>
@@ -23103,15 +23107,21 @@
 </li>
 <li>[Step]<ul>
 <li>배치에서 일반적으로 상태를 보여주는 단위 (Tasklet, Chunk)</li>
-<li>Tasklet</li>
+<li>Tasklet<ul>
 <li>Step이 중지될 때까지 execute 메서드가 계속 반복해서 수행하고 수행할 때마다 독립적인 트랜잭션이 얻어짐</li>
 <li>ex) 초기화, 저장 프로시저 실행, 알림 전송</li>
-<li>Chunk</li>
+</ul>
+</li>
+<li>Chunk<ul>
 <li>한 번에 하나씩 데이터(row)를 읽어 Chunk라는 덩어리를 만든 뒤, Chunk 단위로 트랜잭션을 다루는 것</li>
 <li>Chunk 단위로 트랜잭션 수행하기에, 실패할 경우 Chunk 만큼 롤백</li>
 <li>ItemReader, ItemProcessor, ItemWriter 3개 주요 부분으로 구성<ul>
 <li>ItemReader/ItemProcessor: 데이터 1건씩 다뤄짐</li>
 <li>ItermWriter: Chunk 단위로 처리</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -22980,37 +22980,21 @@
         - 서브 시스템을 조금 더 사용하기 편하게 하기 위해 높은 수준의 인터페이스를 정의
     - 코드 중복과 직접적인 의존을 해결하는데 도움을 주는 패턴</p>
 <ul>
-<li>
-<p><strong>참여 객체</strong></p>
+<li><strong>참여 객체</strong>
+    - Facade
+        - 단순하고 일관된 통합 인터페이스를 제공
+        - 서브 시스템을 구현하는 어떤 클래스가 어떤 요청을 처리해야 하는지를 알고있음
+            - 클라이언트의 요청을 서브시스템 객체에게 전달
+    - Subsystem Classes
+        - 서브 시스템의 기능을 구현
+        - Facade 객체에 의해 할당된 작업을 실제로 처리
+            - but, Facade의 존재를 모름</li>
+</ul>
 <ul>
-<li>Facade<ul>
-<li>단순하고 일관된 통합 인터페이스를 제공</li>
-<li>서브 시스템을 구현하는 어떤 클래스가 어떤 요청을 처리해야 하는지를 알고있음<ul>
-<li>클라이언트의 요청을 서브시스템 객체에게 전달</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Subsystem Classes<ul>
-<li>서브 시스템의 기능을 구현</li>
-<li>Facade 객체에 의해 할당된 작업을 실제로 처리<ul>
-<li>but, Facade의 존재를 모름</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>장점</strong></p>
-<ul>
-<li>Facade에게 얻고자 하는 정보에 대한 요청을 보내면 되니, 클라이언트의 코드가 간결해진다</li>
-<li>클라이언트와 서브 시스템 간의 직접적인 의존을 제거한다<ul>
-<li>이는 클라이언트의 변경 없이 서브 시스템의 변경을 가능케 한다</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>장점</strong>
+    - Facade에게 얻고자 하는 정보에 대한 요청을 보내면 되니, 클라이언트의 코드가 간결해진다
+    - 클라이언트와 서브 시스템 간의 직접적인 의존을 제거한다
+        - 이는 클라이언트의 변경 없이 서브 시스템의 변경을 가능케 한다</li>
 </ul>
 <h2 id="_2">추상 팩토리 패턴<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="facade" src="../../image/abstract_factory_2021_03_22.jpg" />
@@ -23018,23 +23002,17 @@
     - 구체적인 클래스를 지정하지 않고, 관련성을 갖는 객체들의 집합을 새로 생성하거나, 서로 독립적인 객체들의 집합을 생성할 수 있는 인터페이스를 제공
     - 다양한 구성 요소 별로 "객체의 집합"을 생성해야 할 때 유용</p>
 <ul>
-<li>
-<p><strong>장점</strong></p>
-<ul>
-<li>클라이언트에게 영향을 주지 않으면서 사용할 제품(객체)군을 교체할 수 있음</li>
+<li><strong>장점</strong>
+    - 클라이언트에게 영향을 주지 않으면서 사용할 제품(객체)군을 교체할 수 있음</li>
 </ul>
-</li>
-<li>
-<p><strong>프로토타입 방식의 팩토리</strong></p>
 <ul>
-<li>팩토리가 생성하는 객체가 늘 동일한 상태를 가진다면, 프로토타입 방식의 팩토리를 사용해보자</li>
-<li>프로토타입이란?<ul>
-<li>생성할 객체들의 타입이 프로토타입인 인스턴스로부터 결정되도록 하며, 인스턴스는 새 객체를 만들기 위해 자신을 복제</li>
-</ul>
-</li>
-<li>Object.clone()<ul>
-<li>객체가 유지하고 있는 상태값들을 그대로 복사
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtoFactory</span><span class="w"> </span><span class="p">{</span>
+<li><strong>프로토타입 방식의 팩토리</strong>
+    - 팩토리가 생성하는 객체가 늘 동일한 상태를 가진다면, 프로토타입 방식의 팩토리를 사용해보자
+    - 프로토타입이란?
+        - 생성할 객체들의 타입이 프로토타입인 인스턴스로부터 결정되도록 하며, 인스턴스는 새 객체를 만들기 위해 자신을 복제
+    - Object.clone()
+        - 객체가 유지하고 있는 상태값들을 그대로 복사
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtoFactory</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">productProto</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ProtoFactory</span><span class="p">(</span><span class="n">Product</span><span class="w"> </span><span class="n">proto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23047,153 +23025,89 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="null">Null 객체 패턴<a class="headerlink" href="#null" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>정의</strong></p>
-<ul>
-<li>Null 검사 코드 누락에 따른 문제를 없애 주는 패턴</li>
-<li>Null을 리턴하는 것이 아닌, Null을 대신할 객체를 리턴한다</li>
+<li><strong>정의</strong>
+    - Null 검사 코드 누락에 따른 문제를 없애 주는 패턴
+    - Null을 리턴하는 것이 아닌, Null을 대신할 객체를 리턴한다</li>
 </ul>
-</li>
-<li>
-<p><strong>방법</strong></p>
 <ul>
-<li>null 대신 사용할 클래스를 구현. 상위 타입을 상속받고, 아무 기능도 수행 안 함</li>
-<li>null 리턴 대신, null 대체할 클래스의 객체를 리턴</li>
-</ul>
-</li>
+<li><strong>방법</strong>
+    - null 대신 사용할 클래스를 구현. 상위 타입을 상속받고, 아무 기능도 수행 안 함
+    - null 리턴 대신, null 대체할 클래스의 객체를 리턴</li>
 </ul>
 <h2 id="solid">설계원칙 SOLID<a class="headerlink" href="#solid" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>1. 단일 책임 원칙 (Single Responsibility Principle)</strong></p>
+<li><strong>1. 단일 책임 원칙 (Single Responsibility Principle)</strong>
+    - [정의]
+        - 클래스는 단 한 개의 책임을 가져야 한다
+        - 클래스를 변경하는 이유도 단 한 개여야 한다
+        - What is "한 개의 책임?"
+            - 메서드를 실행하는 것이 누구인지?
+    - [특징]
+        - 책임의 갯수가 많아질수록 한 책임의 기능 변화가 다른 책임에 주는 영향은 비례해서 증가
+            - 코드를 절차 지향적으로 만든다
+            - 다른 클래스가 변하면, 망가지는 가능성이 높음
+        - 재사용에도 용이</li>
+</ul>
 <ul>
-<li>[정의]<ul>
-<li>클래스는 단 한 개의 책임을 가져야 한다</li>
-<li>클래스를 변경하는 이유도 단 한 개여야 한다</li>
-<li>What is "한 개의 책임?"<ul>
-<li>메서드를 실행하는 것이 누구인지?</li>
+<li><strong>2. 개방 폐쇄 원칙 (Open Closed Principle)</strong>
+    - [정의]  <br />
+        - 확장에는 열려 있되, 변경에는 닫혀 있어라
+        - 기능을 변경하거나 확장 할 수 있어야 한다
+            - Interface를 주입하는 방식 (전략 패턴)
+            - Interface를 필드로 가지는 방식 (상태 패턴)
+        - 그 기능을 사용하는 코드는 수정하지 않는다
+        - 방법
+            - 변화되는 부분 <em>(확장되는 부분)</em> 을 추상화해서 표현하기
+            - 상속을 이용하기
+                - 상위 클래스 기능 이용하면서, 하위 클래스에서 일부 구현을 오버라이딩
+    - [OCP 위반 신호]
+        - 다운 캐스팅 &amp; isInstanceOf
+            - 특정 타입에 대해 별도 처리를 하도록 메서드를 구현한다면, 부모 클래스의 확장시, 함께 수정됨
+                - 변경에 닫혀있지 않음 == 기능을 사용하는 코드에 수정이 필수적임
+        - 비슷한 if-else 블록 존재
+    - [특징]
+        - OCP는 "유연함"에 대한 원칙
+        - 새로운 기능 추가에 부담이 없어야해
+        - 변화가 예상이 되는 것을 추상화하여, 변경의 유연함을 얻도록 해줌
+            - 변화되는 부분을 추상화하지 못하면, OCP가 위배되어, 시간 지날 수록 기능 변경/확장 힘듦
+    - 변화 요구가 발생하면, 변화 관련 구현을 추상화 하여 OCP에 맞게 수정할 수 있게 습관화하자</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>[특징]<ul>
-<li>책임의 갯수가 많아질수록 한 책임의 기능 변화가 다른 책임에 주는 영향은 비례해서 증가<ul>
-<li>코드를 절차 지향적으로 만든다</li>
-<li>다른 클래스가 변하면, 망가지는 가능성이 높음</li>
-</ul>
-</li>
-<li>재사용에도 용이</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>2. 개방 폐쇄 원칙 (Open Closed Principle)</strong></p>
 <ul>
-<li>[정의]    <ul>
-<li>확장에는 열려 있되, 변경에는 닫혀 있어라</li>
-<li>기능을 변경하거나 확장 할 수 있어야 한다<ul>
-<li>Interface를 주입하는 방식 (전략 패턴)</li>
-<li>Interface를 필드로 가지는 방식 (상태 패턴)</li>
-</ul>
-</li>
-<li>그 기능을 사용하는 코드는 수정하지 않는다</li>
-<li>방법<ul>
-<li>변화되는 부분 <em>(확장되는 부분)</em> 을 추상화해서 표현하기</li>
-<li>상속을 이용하기<ul>
-<li>상위 클래스 기능 이용하면서, 하위 클래스에서 일부 구현을 오버라이딩</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>[OCP 위반 신호]<ul>
-<li>다운 캐스팅 &amp; isInstanceOf<ul>
-<li>특정 타입에 대해 별도 처리를 하도록 메서드를 구현한다면, 부모 클래스의 확장시, 함께 수정됨<ul>
-<li>변경에 닫혀있지 않음 == 기능을 사용하는 코드에 수정이 필수적임</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>비슷한 if-else 블록 존재</li>
-</ul>
-</li>
-<li>[특징]<ul>
-<li>OCP는 "유연함"에 대한 원칙</li>
-<li>새로운 기능 추가에 부담이 없어야해</li>
-<li>변화가 예상이 되는 것을 추상화하여, 변경의 유연함을 얻도록 해줌<ul>
-<li>변화되는 부분을 추상화하지 못하면, OCP가 위배되어, 시간 지날 수록 기능 변경/확장 힘듦</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>변화 요구가 발생하면, 변화 관련 구현을 추상화 하여 OCP에 맞게 수정할 수 있게 습관화하자</li>
-</ul>
-</li>
-<li>
-<p><strong>3. 리스코프 치환 원칙(Liskov Substitution Principle)</strong></p>
-<ul>
-<li>OCP... <em>(확장에는 열리고 / 변경에는 닫히고)</em> 를 뒷받침하는 "다형성"에 관한 원칙</li>
-<li>[정의]<ul>
-<li>상위 타입의 객체를 하위 타입의 객체로 치환해도, 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">someMethod</span><span class="p">(</span><span class="n">SuperClass</span><span class="w"> </span><span class="n">sc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li><strong>3. 리스코프 치환 원칙(Liskov Substitution Principle)</strong>
+    - OCP... <em>(확장에는 열리고 / 변경에는 닫히고)</em> 를 뒷받침하는 "다형성"에 관한 원칙
+    - [정의]
+        - 상위 타입의 객체를 하위 타입의 객체로 치환해도, 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">someMethod</span><span class="p">(</span><span class="n">SuperClass</span><span class="w"> </span><span class="n">sc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">sc</span><span class="p">.</span><span class="na">someMothod</span><span class="p">();</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">someMethod</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SubClass</span><span class="p">());</span><span class="w"> </span><span class="c1">//해당 코드가 정상 작동해야함</span>
-</code></pre></div></li>
-<li>해당 클래스가 명확한 is-a 관계일 경우에만 상속할 것<ul>
-<li>상속은 정제이지, 확장이면 안된다. </li>
-<li>클래스의 메서드를 상속받아 구현하기 위해 사용할 것</li>
-</ul>
-</li>
-<li>상위 타입에서 지정한 리턴 값의 범위에 해당되지 않는 값을 리턴하는 것<ul>
-<li>-1 을 반환해야 loop 탈출</li>
-<li>그러고 부른 함수가 최하 0을 반환</li>
-<li>그냥 무한루프행</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>[LCP 위반 신호]<ul>
-<li>하위 타입이 명세에서 벗어난 동작을 하면, 상위 타입이 비정상적으로 동작할 수 있다. <ul>
-<li>명시된 명세에서 벗어난 값을 리턴</li>
-<li>명시된 명세에서 벗어난 익셉션 발생</li>
-<li>명시된 명세에서 벗어난 기능 수행</li>
-</ul>
-</li>
-<li>하위 타입은 상위 타입에서 정의한 명세를 벗어나지 말자!            </li>
-</ul>
-</li>
-<li>[특징]<ul>
-<li>LSP는 기능의 명세/계약에 대한 것</li>
-<li>isInstanceOf는 전형적인 LCP 위반 증상<ul>
-<li>상위 타입이 하위 타입의 인스턴스인지 검사하는 것 자체가, 상위 타입으로 프로그램을 정상적으로 동작시킬 수 없다는 것</li>
-<li>LSP를 안지키면, 향후 기능 변경/확장에 더 많은 코드를 수정할 가능성이 UP</li>
-</ul>
-</li>
-<li>이를 해결하려면, 상위 타입을 더 "추상화" 시켜보자<ul>
-<li>추상화<ul>
-<li>한단계 더 흐리게 만드는 작업. 구체적~흐리멍텅 사이</li>
-<li>"변화하는 기능"을 상위타입에 추가하자!<ul>
-<li>"구체적 구현에 따라 변화하는 기능"이니까,</li>
-<li>상위 클래스에서 적어 놓는 것은 <strong>한 단계 흐리게 만드는 작업</strong> 이라는 표현이 등장</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+        - 해당 클래스가 명확한 is-a 관계일 경우에만 상속할 것
+            - 상속은 정제이지, 확장이면 안된다. 
+            - 클래스의 메서드를 상속받아 구현하기 위해 사용할 것
+        - 상위 타입에서 지정한 리턴 값의 범위에 해당되지 않는 값을 리턴하는 것
+            - -1 을 반환해야 loop 탈출
+            - 그러고 부른 함수가 최하 0을 반환
+            - 그냥 무한루프행
+    - [LCP 위반 신호]
+        - 하위 타입이 명세에서 벗어난 동작을 하면, 상위 타입이 비정상적으로 동작할 수 있다. 
+            - 명시된 명세에서 벗어난 값을 리턴
+            - 명시된 명세에서 벗어난 익셉션 발생
+            - 명시된 명세에서 벗어난 기능 수행
+        - 하위 타입은 상위 타입에서 정의한 명세를 벗어나지 말자!          <br />
+    - [특징]
+        - LSP는 기능의 명세/계약에 대한 것
+        - isInstanceOf는 전형적인 LCP 위반 증상
+            - 상위 타입이 하위 타입의 인스턴스인지 검사하는 것 자체가, 상위 타입으로 프로그램을 정상적으로 동작시킬 수 없다는 것
+            - LSP를 안지키면, 향후 기능 변경/확장에 더 많은 코드를 수정할 가능성이 UP
+        - 이를 해결하려면, 상위 타입을 더 "추상화" 시켜보자
+            - 추상화
+                - 한단계 더 흐리게 만드는 작업. 구체적~흐리멍텅 사이
+                - "변화하는 기능"을 상위타입에 추가하자!
+                    - "구체적 구현에 따라 변화하는 기능"이니까,
+                    - 상위 클래스에서 적어 놓는 것은 <strong>한 단계 흐리게 만드는 작업</strong> 이라는 표현이 등장</li>
 </ul>
 
 

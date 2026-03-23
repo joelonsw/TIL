@@ -22996,124 +22996,132 @@
 <h2 id="how-netty-uses-thread-pools">How Netty uses thread pools?<a class="headerlink" href="#how-netty-uses-thread-pools" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://sungjk.github.io/2016/11/08/NettyThread.html</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>네티는 비동기 이벤트 네트워크 어플리케이션 프레임워크</li>
 <li>유지보수를 고려한 고성능 프로토콜 서버와 클라이언트를 안정적/빠르게 개발 가능</li>
-<li>
-<p>동시접속자 수, 퍼포먼스 모두 만족하는 네트워크 프로그램 설계 가능</p>
-</li>
-<li>
-<p><strong>Event-Driven</strong></p>
-</li>
-<li>일반적인 이벤트 드리븐 어플리케이션은 두가지 방식 중 하나로 동작함</li>
-<li>이벤트 리스너와 이벤트 처리 쓰레드에 기반한 방법<ul>
-<li>이벤츠를 처리하는 로직을 가진 "이벤트 메서드"를 대상 객체의 "이벤트 리스너"에 등록 </li>
-<li>객체에 이벤트 발생 시 "이벤트 처리 쓰레드"에서 등록된 메서드 수행</li>
-<li>이때 이벤트 처리 쓰레드는 대부분 단일 쓰레드</li>
+<li>동시접속자 수, 퍼포먼스 모두 만족하는 네트워크 프로그램 설계 가능</li>
 </ul>
 </li>
-<li>
-<p>이벤트 큐에 이벤트를 등록하고 이벤트 루프가 이벤트 큐에 접근하여 처리하는 방법</p>
+</ul>
 <ul>
+<li><strong>Event-Driven</strong><ul>
+<li>일반적인 이벤트 드리븐 어플리케이션은 두가지 방식 중 하나로 동작함
+1. 이벤트 리스너와 이벤트 처리 쓰레드에 기반한 방법<ul>
+<li>이벤츠를 처리하는 로직을 가진 "이벤트 메서드"를 대상 객체의 "이벤트 리스너"에 등록 </li>
+<li>객체에 이벤트 발생 시 "이벤트 처리 쓰레드"에서 등록된 메서드 수행<ul>
+<li>이때 이벤트 처리 쓰레드는 대부분 단일 쓰레드
+2. 이벤트 큐에 이벤트를 등록하고 이벤트 루프가 이벤트 큐에 접근하여 처리하는 방법</li>
+</ul>
+</li>
 <li>이벤트 루프가 다중 쓰레드일 때 이벤트 큐는 여러개의 쓰레드에서 공유됨</li>
 <li>가장 먼저 이벤트 큐에 접근한 쓰레드가 첫번째 이벤트를 가져와서 이벤트를 수행</li>
 <li>이벤트 큐에 입력된 이벤트를 처리하고자 이벤트 루프 쓰레드 사용</li>
 </ul>
 </li>
-<li>
-<p><strong>Netty</strong></p>
-</li>
-<li>단일 쓰레드 이벤트 루프 + 다중 쓰레드 이벤트 루프 모두 사용 가능</li>
-<li><img alt="" src="../../images/2022-09-29-netty-thread-event-loop.png" /></li>
-<li>
-<p>이벤트 루프 쓰레드가 이벤트 큐를 각각 가지고 있어서 이벤트의 수행 순서가 보장됨</p>
-</li>
-<li>
-<p><strong>NIO 기반의 Netty =&gt; NioServerSocketChannelFactory 구현함</strong></p>
-</li>
-<li>2가지 타입의 쓰레드</li>
-<li>Boss Threads<ul>
-<li>ChannelHandlers 포트 별로 "접속을 허용해주는" 보스 쓰레드를 가짐</li>
-<li>커넥션이 성공적으로 이루어지면 보스 쓰레드는 승인된 채널을 하나의 워커 쓰레드로 전달</li>
 </ul>
 </li>
-<li>Worker Threads<ul>
+</ul>
+<ul>
+<li><strong>Netty</strong><ul>
+<li>단일 쓰레드 이벤트 루프 + 다중 쓰레드 이벤트 루프 모두 사용 가능</li>
+<li><img alt="" src="../../images/2022-09-29-netty-thread-event-loop.png" /></li>
+<li>이벤트 루프 쓰레드가 이벤트 큐를 각각 가지고 있어서 이벤트의 수행 순서가 보장됨</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>NIO 기반의 Netty =&gt; NioServerSocketChannelFactory 구현함</strong><ul>
+<li>2가지 타입의 쓰레드
+1. Boss Threads<ul>
+<li>ChannelHandlers 포트 별로 "접속을 허용해주는" 보스 쓰레드를 가짐</li>
+<li>커넥션이 성공적으로 이루어지면 보스 쓰레드는 승인된 채널을 하나의 워커 쓰레드로 전달
+2. Worker Threads</li>
 <li>개발자가 명시한 갯수만큼 워커 쓰레드 풀을 유지함</li>
 <li>워커 쓰레드는 Non-Blocking 모드에서 채널에 읽기와 쓰기 작업 Non-Blocking 처리 가능</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="_1">인프라 구조에 대한 고민<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Nginx + WAS를 한 인스턴스에 두는 것</strong></li>
+<li><strong>Nginx + WAS를 한 인스턴스에 두는 것</strong><ul>
 <li>야 이렇게되면 생각해보자<ul>
-<li>Nginx는 이벤트 기반이라면서?</li>
+<li>Nginx는 이벤트 기반이라면서?<ul>
 <li>http 요청이 오면 nginx가 커널측에 I/O 발생시켜서 was http 연결 부탁한다고 할거고, nginx 다시 제어권 돌려받아서 그 다음 http 요청 처리하려고 할거야</li>
-<li>요청 넘겨받은 WAS는? </li>
+</ul>
+</li>
+<li>요청 넘겨받은 WAS는? <ul>
 <li>Tomcat에 default Thread Pool 200개 만들어뒀겠지? </li>
 <li>이중에 하나 남는게 http 요청을 처리해주러 나설거야. </li>
-<li>응답 뚝딱 다 하면 nginx가 요청한 커널 I/O 끝나는 거고, EventListener 한테 끝났다고 nginx 한테 알려주겠지?</li>
+</ul>
+</li>
+<li>응답 뚝딱 다 하면 nginx가 요청한 커널 I/O 끝나는 거고, EventListener 한테 끝났다고 nginx 한테 알려주겠지?<ul>
 <li>이때 nginx가 응답 클라이언트한테 할거야</li>
 </ul>
 </li>
-<li>
-<p>그런데 말입니다. </p>
-<ul>
+</ul>
+</li>
+<li>그런데 말입니다. <ul>
 <li>EC2 딱 하나에서 이걸 쓴다고 하면</li>
 <li>CPU, memory 이런거 싹다 제한걸려있고, </li>
 <li>그러면 쓰레드 많이 만들면 어차피 컨텍스트 스위칭 일어나야 처리가 되는 걸텐데, </li>
 <li>아무리 nginx가 더 빠르게 비동기적으로 요청을 받아들여도 WAS에서 병목이 발생하면 그대로 있다가 응답해야하는거 아니야? </li>
 </ul>
 </li>
-<li>
-<p><strong>그래서 로드 밸런서로 분리하고 다중 EC2를 쓴거같군</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>그래서 로드 밸런서로 분리하고 다중 EC2를 쓴거같군</strong><ul>
 <li>nginx가 앞단에 있고, 뒤에 다른 인스턴스 두 개 띄워서 라운드 로빈 방식으로 트래픽 분산시켜준다고 해보자고</li>
 <li>nginx는 항상 이벤트 기반으로 비동기적으로 http 요청 뒷단으로 보낼꺼야<ul>
 <li>nginx가 커널측에 I/O 발생시켜서 뒷단의 WAS의 private IP로 http 요청 보낼거고</li>
 <li>바로 제어권 가져와서 nginx가 다음 요청 받으려고 대기타고 있을 듯</li>
 </ul>
 </li>
-<li>
-<p>WAS는 각각 200개의 thread pool 생성해두고 동접 200개의 요청을 유연하게 처리할 수 있다고 생각한다면, </p>
-<ul>
+<li>WAS는 각각 200개의 thread pool 생성해두고 동접 200개의 요청을 유연하게 처리할 수 있다고 생각한다면, <ul>
 <li>WAS가 2개라면 400개의 동접을 처리할 수 있겠네. 물론 각 쓰레드 별로 요청에 대한 응답의 시간이 다르겠지만</li>
 </ul>
 </li>
-<li>
-<p><strong>그래서 쿠버네티스 같은거 쓰나보군</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>그래서 쿠버네티스 같은거 쓰나보군</strong><ul>
 <li>우선 was같은거 도커라이제이션 해버리면 자바 버전 올리거나, 외부 라이브러리 쓸 때 보다 효율적으로 패키징을 할 수 있겠지? <ul>
 <li>놀토할 때 ffmpeg같은 라이브러리로 삽질했던거 기억나지?</li>
 <li>서버에서 매번 새로운 버전 깔고, 지우고 롤백하고 이런거 좀 많이 빡셀것이여</li>
 <li>도커헙 같은데서 버전관리도 쉽게할 수 있고, 롤백하기도 좋고, 업데이트 하기도 좋겠네 도커를 쓰면</li>
 </ul>
 </li>
-<li>
-<p>근데 이 도커 컨테이너에 was를 하나 돌린다고 하면 200개의 쓰레드풀, 동접 200개 요청 처리할 수 있다고 생각해보자</p>
-<ul>
+<li>근데 이 도커 컨테이너에 was를 하나 돌린다고 하면 200개의 쓰레드풀, 동접 200개 요청 처리할 수 있다고 생각해보자<ul>
 <li>그러면 동접 10000개 요청오면 50개의 도커 컨테이너 필요하겠네?</li>
 <li>이거 그러면 어떻게 뚝딱 띄우냐? </li>
 <li>쿠버네티스로 트래픽 몰리면 뚝딱 띄워줄 수 있겠네. </li>
 <li>nginx 같이 이벤트 루프 기반의 웹서버가 앞단에서 로드 밸런싱해주고, ssl termination 해주고, 하면 보다 빠른 처리가 가능하겠고만</li>
 </ul>
 </li>
-<li>
-<p><strong>의문</strong></p>
+</ul>
 </li>
-<li>
-<p>하나의 EC2에 도커 컨테이너 was를 여러개 띄우면 더 많은 동접자를 처리할 수 있는가?</p>
+</ul>
 <ul>
+<li><strong>의문</strong><ul>
+<li>하나의 EC2에 도커 컨테이너 was를 여러개 띄우면 더 많은 동접자를 처리할 수 있는가?<ul>
 <li>어차피 같은 CPU/memory 하드웨어 자원쓰는거면 그닥 성능향상 없을 것 같기도한데...?</li>
-<li>쓰레드 풀 * 2개니까 미리 쓰레드 더 만들어놨으니 좀 더 많이 처리해줄 수 있을라나? 원래 큐에 들어갈 요청들도 딴 컨테이너에서 처리할 수 있으니?</li>
+<li>쓰레드 풀 * 2개니까 미리 쓰레드 더 만들어놨으니 좀 더 많이 처리해줄 수 있을라나? 원래 큐에 들어갈 요청들도 딴 컨테이너에서 처리할 수 있으니?<ul>
 <li>아니 그러면 EC2 하나에 컨테이너 백만개 띄워두는게 이득아닌가?</li>
 </ul>
 </li>
-<li>
-<p><strong>그래서 정리해본 질문</strong><br />
-스프링부트 실행 파일(jar 파일, 그니까 WAS)을 도커로 컨테이너화 해서 구동시킬때의 질문인데요. 
-하나의 EC2에 여러개의 WAS 컨테이너를 포트를 다르게 해서 띄워두고, 앞의 로드밸런서(nginx 등)로 부터 여러개의 포트를 번갈아가면서 요청을 처리하도록 인프라를 설계하면, 더 많은 트래픽을 처리할 수 있나요?</p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>그래서 정리해본 질문</strong><br />
+스프링부트 실행 파일(jar 파일, 그니까 WAS)을 도커로 컨테이너화 해서 구동시킬때의 질문인데요. 
+하나의 EC2에 여러개의 WAS 컨테이너를 포트를 다르게 해서 띄워두고, 앞의 로드밸런서(nginx 등)로 부터 여러개의 포트를 번갈아가면서 요청을 처리하도록 인프라를 설계하면, 더 많은 트래픽을 처리할 수 있나요?</li>
 </ul>
 <p>EC2#1          EC2#2<br />
 nginx           WAS<br />

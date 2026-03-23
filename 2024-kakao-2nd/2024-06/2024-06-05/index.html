@@ -22915,39 +22915,39 @@
   - 코드에서 특정 변수의 이름을 치환하고 싶은 경우
   - 특정 조건과 위치에 따른 문자열 공백/특수문자 제거</p>
 <ul>
-<li><strong>정규식 구성</strong></li>
-<li>
-<p><code>/regexr/i</code></p>
-<ul>
+<li><strong>정규식 구성</strong><ul>
+<li><code>/regexr/i</code><ul>
 <li><code>/</code> : 시작, 종료 기호</li>
 <li><code>regexr</code> : 패턴</li>
 <li><code>i</code> : 플래그</li>
 </ul>
 </li>
-<li>
-<p><strong>정규식 메서드</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>정규식 메서드</strong><ul>
 <li><code>("문자열").match(/regexr/i)</code> : "문자열"에서 regexr에 매칭되는 항목을 배열로 반환</li>
 <li><code>("문자열").replace(/regexr/, "대체문자열")</code> : regexr에 매칭되는 항목을 "대체문자열"로 변환</li>
 <li><code>("문자열").split(regexr)</code> : "문자열"을 regexr에 매칭되는 항목으로 쪼개 배열로 반환</li>
 <li><code>regexr.test("문자열")</code> : "문자열"이 regexr에 매칭되면 true, 아니라면 false</li>
-<li>
-<p><code>regexr.exec("문자열")</code> : "문자열"에서 regexr에 매칭되는 첫 항목만 반환 (match와 비슷)</p>
+<li><code>regexr.exec("문자열")</code> : "문자열"에서 regexr에 매칭되는 첫 항목만 반환 (match와 비슷)</li>
+</ul>
 </li>
-<li>
-<p><strong>정규식 플래그</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>정규식 플래그</strong><ul>
 <li><code>i</code>(Ignore case) : 대소문자를 구별하지 않고 검색</li>
 <li><code>g</code>(Global) : 문자열 내의 모든 패턴 검색</li>
 <li><code>m</code>(Multiline) : 문자열의 행이 바뀌더라도 검색 계속</li>
 <li><code>u</code>(Unicode) : 유니코드 문자 지원</li>
 <li><code>y</code>(Sticky) : 문자 내 특정 위치에서 검색을 진행하는 sticky 모드 활성화</li>
-<li>
-<p><code>s</code>(DotAll) : .(모든 문자 정규식)이 개행 문자 \n도 포함하도록</p>
+<li><code>s</code>(DotAll) : .(모든 문자 정규식)이 개행 문자 \n도 포함하도록</li>
+</ul>
 </li>
-<li>
-<p><strong>정규식 기호 모음</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>정규식 기호 모음</strong><ul>
 <li><code>a-zA-Z</code>: 영어 알파벳</li>
 <li><code>ㄱ-ㅎ가-힣</code>: 한글</li>
 <li><code>0-9</code>: 숫자</li>
@@ -22968,39 +22968,41 @@
 <li><code>\f</code>: 폼 피드 문자에 일치</li>
 <li><code>\n</code>: 줄 바꿈 문자에 일치</li>
 <li><code>\r</code>: 캐리지 리턴 문자에 일치</li>
-<li>
-<p><code>\t</code>: 탭 문자에 일치</p>
+<li><code>\t</code>: 탭 문자에 일치</li>
+</ul>
 </li>
-<li>
-<p><strong>정규식 검색 기준 패턴</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>정규식 검색 기준 패턴</strong><ul>
 <li><code>^문자열</code>: 특정 문자열로 시작 (시작점)</li>
 <li><code>문자열$</code>: 특정 문자열로 마무리 (종착점)</li>
 <li><code>[^문자]</code>: 괄호 안의 문자를 제외한 것</li>
 <li><code>|</code>: 또는</li>
-<li>
-<p><code>[]</code>: 괄호안의 문자들 중 하나</p>
+<li><code>[]</code>: 괄호안의 문자들 중 하나</li>
+</ul>
 </li>
-<li>
-<p><strong>정규식 갯수 반복 패턴</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>정규식 갯수 반복 패턴</strong><ul>
 <li><code>?</code>: 없거나, 최대 한개만</li>
 <li><code>*</code>: 있거나 or 없거나</li>
 <li><code>+</code>: 최소 한개 or 여러개</li>
 <li><code>{n}</code>: n개</li>
 <li><code>{n,}</code>: 최소 n개 이상</li>
-<li>
-<p><code>{n,m}</code>: 최소 n개 이상, 최대 m개 이하</p>
+<li><code>{n,m}</code>: 최소 n개 이상, 최대 m개 이하</li>
+</ul>
 </li>
-<li>
-<p><strong>정규식 그룹 패턴</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>정규식 그룹 패턴</strong><ul>
 <li><code>()</code>: 그룹화 및 캡쳐</li>
 <li><code>(?:패턴)</code>: 그룹화 (캡쳐 X)</li>
 <li><code>(?=)</code>: Lookahead - 앞쪽 일치</li>
 <li><code>(?!)</code>: Negative Lookahead - 부정 앞쪽 일치</li>
 <li><code>(?&lt;=)</code>: Lookbehind - 뒤쪽 일치</li>
 <li><code>(?&lt;!)</code>: Negative Lookbehind - 부정 뒤쪽 일치</li>
+</ul>
+</li>
 </ul>
 
 

@@ -23198,20 +23198,22 @@
 - Connection Provider : https://github.com/reactor/reactor-netty/issues/1774</p>
 <h2 id="_1">유의미한 에러 로그<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Operator called default onErrorDropped</strong></li>
+<li><strong>Operator called default onErrorDropped</strong><ul>
 <li><em>참고: https://tacogrammer.com/onerrordropped-explained/</em></li>
 <li>높은 동시성을 처리하려고 리액티브 쓰는건데... 비동기로 여러 장소에서 데이터 수신하면 해당 에러 발생할 수도</li>
-<li>
-<p>이미 <strong>다른 스레드에서 onError가 발생</strong>해 <strong>전체 스트림이 terminated</strong>된 상황인 경우</p>
+<li>이미 <strong>다른 스레드에서 onError가 발생</strong>해 <strong>전체 스트림이 terminated</strong>된 상황인 경우</li>
+</ul>
 </li>
-<li>
-<p><strong>The connection observed an error, the request cannot be retried as the headers/body were sent
+</ul>
+<ul>
+<li><strong>The connection observed an error, the request cannot be retried as the headers/body were sent
   io.netty.channel.unix.Errors$NativeIoException: 
-  readAddress(..) failed: Connection reset by peer</strong></p>
-</li>
+  readAddress(..) failed: Connection reset by peer</strong><ul>
 <li><em>참고: https://stackoverflow.com/questions/55233216/spring-webflux-webclient-logs-connection-reset-by-peer</em><ul>
-<li>문제: Client goes away after connecting to it once and the next request fails - then retries</li>
+<li>문제: Client goes away after connecting to it once and the next request fails - then retries<ul>
 <li>클라이언트가 한번 커넥트 시도하고 그다음 리퀘스트가 fail 한 경우 사라짐</li>
+</ul>
+</li>
 <li>해결: Connection pooling을 없애보는건 어떠니? 
  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Bean</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">WebClient</span><span class="w"> </span><span class="nf">webClient</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -23231,45 +23233,51 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="connection-reset-by-peer">Connection reset by Peer<a class="headerlink" href="#connection-reset-by-peer" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://groups.google.com/g/vertx/c/3o_DEwIK9dY</em></li>
-<li>커넥션이 다른 쪽에서 끊어진 경우 호출됨</li>
+<li>커넥션이 다른 쪽에서 끊어진 경우 호출됨<ul>
 <li>타 웹서버에서 connection을 끊은경우 호출됨</li>
 <li>타 웹서버는 idle connection을 몇초 후에 끊어버리는것이 일반적</li>
+</ul>
+</li>
 </ul>
 <h2 id="keep-alive">Keep-Alive<a class="headerlink" href="#keep-alive" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive</em></li>
 <li><em>참고: https://etloveguitar.tistory.com/137</em></li>
 <li><em>참고: https://goodgid.github.io/HTTP-Keep-Alive/</em></li>
-<li><code>Keep-Alive: timeout=x, max=y</code></li>
+<li><code>Keep-Alive: timeout=x, max=y</code><ul>
 <li>각각 등호로 구분되는 식별자와 값으로 구성됨</li>
 <li>timeout: 유휴 연결이 계속 열려있어야 되는 최소한의 시간</li>
 <li>max: 연결이 닫히기 이전에 전송될 수 있는 최대 요청 수</li>
-<li>
-<p>HTTP/1.0+ 부터 지원</p>
+<li>HTTP/1.0+ 부터 지원</li>
+</ul>
 </li>
-<li>
-<p><strong>Persistent Connection</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Persistent Connection</strong><ul>
 <li>Persistent Connection: 요청 처리 이후에도 connection 유지하는 것<ul>
 <li>site locality: 서버에 연속적으로 동일한 클라이언트가 여러 요청을 보낼 가능성이 높은 경우</li>
 <li>HTTP/1.1 부터 HTTP 어플리케이션이 TCP Connection을 요청마다 close하지 않고 재사용할 수 있는 방법 제공</li>
 </ul>
 </li>
-<li>
-<p>왜 필요하지?</p>
-<ul>
-<li>TCP 연결 맺기 위해 SYN-ACK 3-way handshake 매 요청마다 맺을 필요가 없어짐</li>
+<li>왜 필요하지?<ul>
+<li>TCP 연결 맺기 위해 SYN-ACK 3-way handshake 매 요청마다 맺을 필요가 없어짐<ol>
 <li>네트워크 혼잡 감소: TCP, SSL/TCP connection request 수 줄어듦</li>
 <li>네트워크 비용 감소: 여러개의 connection으로 하나의 client 요청 serving하는 것 보다는 한개의 client 요청 서빙하는게 효율적</li>
 <li>latency 감소: 3-way-handshake round-trip 줄어듦</li>
+</ol>
+</li>
 </ul>
 </li>
-<li>
-<p><strong>Keep-Alive 옵션 규칙들</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Keep-Alive 옵션 규칙들</strong><ul>
 <li>클라이언트 측에서 모든 요청에 위에 언급한 헤더를 담아 보내야 함<ul>
 <li>그게 아니라면 서버는 연결을 close 함</li>
 </ul>
@@ -23277,27 +23285,33 @@
 <li>서버 또한 persistent 하게 요청 주고받다가 response에 keep-alive 관련 헤더 안 담겨오면 클라이언트 측에서 서버가 persistent connection 맺고 있지 않다고 판단</li>
 <li>정확한 Content-Length 사용할 것</li>
 <li><strong>Connection 헤더를 지원하지 않는 Proxy에서는 사용할 수 없음</strong></li>
-<li>
-<p>클라이언트는 언제든 connection close 될 수 있으니 retry 로직 준비해 둘 것</p>
+<li>클라이언트는 언제든 connection close 될 수 있으니 retry 로직 준비해 둘 것</li>
+</ul>
 </li>
-<li>
-<p><strong>Keep-Alive &amp; 멍청한 Proxy</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Keep-Alive &amp; 멍청한 Proxy</strong><ul>
 <li><img alt="" src="../../images/2022-09-27-keep-alive-proxy.png" /></li>
 <li>Proxy : 전 Keep-Alive 몰라요!</li>
 <li>Client &lt;-&gt; Proxy &lt;-&gt; Server<ul>
-<li>Client -&gt; Proxy : Keep-Alive</li>
+<li>Client -&gt; Proxy : Keep-Alive<ul>
 <li>Proxy -&gt; Server : Keep-Alive<ul>
 <li>서버 입장 : "어 Proxy"가 Keep-Alive 지원하네? 커넥션 켜놔야지~</li>
 </ul>
 </li>
 <li>Server -&gt; Proxy : Keep-Alive<ul>
-<li>프록시 입장 : Keep-Alive가 뭐여... 일단 전달. </li>
+<li>프록시 입장 : Keep-Alive가 뭐여... 일단 전달. <ul>
 <li>삭제하지 않고 요청 그대로를 전달하는게 문제!</li>
 </ul>
 </li>
-<li>Proxy -&gt; Client : Keep-Alive</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Proxy -&gt; Client : Keep-Alive<ul>
 <li>오케이 연결됐다!</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Client 동일한 Connection에 request<ul>
@@ -23305,6 +23319,8 @@
 <li>Client 입장에서 다음 요청을 보내기 시작할 때 커넥션이 유지되고 있는 프록시에 요청을 보냄</li>
 <li>프록시는 같은 커넥션상에서 다른 요청이 오는 경우는 예상하지 못하기 때문에 해당 요청은 프록시로 부터 무시됨</li>
 <li>Client는 무한정 대기하다 타임아웃 나서 커넥션이 끊김</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23316,15 +23332,19 @@
 <h2 id="kas-keep-alive">KAS Keep-Alive<a class="headerlink" href="#kas-keep-alive" title="Permanent link">&para;</a></h2>
 <ul>
 <li><img alt="" src="../../images/2022-09-27-kas-connection.png" /></li>
-<li>일단 KAS는 Connection 관련한 헤더를 응답해주지 않음</li>
+<li>일단 KAS는 Connection 관련한 헤더를 응답해주지 않음<ul>
 <li>요청에 Connection = Keep-Alive, Proxy-Connection=Keep-Alive 보내도 똑같음</li>
+</ul>
+</li>
 <li>뭐 프록시를 쓰던, 그냥 서버던 Connection 응답이 없다는 건 Keep-Alive </li>
 </ul>
 <h2 id="kas">그럼 KAS 모듈 어떻게 해야지..?<a class="headerlink" href="#kas" title="Permanent link">&para;</a></h2>
 <ul>
-<li>우선 매번 HTTP 요청을 단독으로 할 수 있도록 하자. (3-way-handshake 하고 연결 수립)</li>
+<li>우선 매번 HTTP 요청을 단독으로 할 수 있도록 하자. (3-way-handshake 하고 연결 수립)<ul>
 <li>이렇게 하면 요청에 대한 Connection을 재활용 안하니까 Timeout 이 안날 것 같아</li>
 <li>Timeout보다만 빠르면 우선 현 상황보단 발전한거니까</li>
+</ul>
+</li>
 </ul>
 <h2 id="webclient-timeout-connection-pool">WebClient Timeout &amp; Connection Pool<a class="headerlink" href="#webclient-timeout-connection-pool" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23339,7 +23359,7 @@
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="p">).</span><span class="na">addHandlerLast</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">WriteTimeoutHandler</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="p">).</span><span class="na">responseTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
 <li>ChannelOption.CONNECT_TIMEOUT_MILLIS<ul>
 <li>서버와 커넥션 맺는데 기다리는 시간. http client level</li>
 </ul>
@@ -23348,17 +23368,18 @@
 <li>idle 커넥션을 맺거나 하는 시간을 고려하지 않은 순수 http 요청/응답 시간에 대한 timout</li>
 </ul>
 </li>
-<li>
-<p>ReadTimeoutHandler/WriteTimeoutHandler</p>
-<ul>
+<li>ReadTimeoutHandler/WriteTimeoutHandler<ul>
 <li>TCP level에서 적용되기에, TLS handshake 기간도 포함</li>
 <li>HTTP 응답에 대해 원하는 것 보다 timeout 높게 설정할 것</li>
 <li>HTTP와 관련 없음</li>
 <li>다른 read 작업들 사이에 시간 체크하는 표준 네티 핸들러</li>
 </ul>
 </li>
-<li>
-<p><strong>WebClient Connection Pool</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>WebClient Connection Pool</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">ConnectionProvider</span><span class="w"> </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConnectionProvider</span><span class="p">.</span><span class="na">builder</span><span class="p">(</span><span class="s">&quot;ybs-pool&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="p">.</span><span class="na">maxConnections</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="p">.</span><span class="na">pendingAcquireTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
@@ -23366,11 +23387,12 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="p">.</span><span class="na">maxIdleTime</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">8000L</span><span class="p">))</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="p">.</span><span class="na">maxLifeTime</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">8000L</span><span class="p">))</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>maxLifeTime: 커넥션 풀에서 살아있을 수 있는 커넥션의 최대 수명시간</li>
 <li>maxIdleTime: 커넥션 풀에서 idle 상태의 커넥션 유지하는 시간</li>
 <li>PendingAcquireTimeout: 커넥션 풀에서 커넥션 얻기위해 기다리는 최대 시간</li>
+</ul>
+</li>
 </ul>
 <h2 id="reactor-http-epoll-">reactor-http-epoll-<a class="headerlink" href="#reactor-http-epoll-" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23390,9 +23412,11 @@
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>By default, there is no idle time specified for the channels in the pool.
 </code></pre></div></li>
 <li>그런데...</li>
-<li>디폴트로, TcpClient는 고정된 Connection Pool을 사용합니다. </li>
+<li>디폴트로, TcpClient는 고정된 Connection Pool을 사용합니다. <ul>
 <li>맥시멈 500의 액티브 채널 (Channel)</li>
 <li>1000개까지 채널 acquisition 가능 (Queue)</li>
+</ul>
+</li>
 </ul>
 <h2 id="webclient-netty">왜 WebClient는 netty를 사용하는거지?<a class="headerlink" href="#webclient-netty" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23404,17 +23428,19 @@
 <h2 id="tomcat-vs-netty">Tomcat vs Netty<a class="headerlink" href="#tomcat-vs-netty" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: http://www.mastertheboss.com/jboss-frameworks/netty/netty-vs-tomcat-explained/</em></li>
-<li><strong>Netty</strong></li>
+<li><strong>Netty</strong><ul>
 <li>비동기 이벤트 기반 네트워크 어플리케이션 프레임워크</li>
 <li>빠르고 쉬운 네트워크 관련 개발</li>
-<li>
-<p>많은 네트워크 프로토콜과 non-blocking 환경 필요하다면 이거 쓰시고</p>
+<li>많은 네트워크 프로토콜과 non-blocking 환경 필요하다면 이거 쓰시고</li>
+</ul>
 </li>
-<li>
-<p><strong>Tomcat</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Tomcat</strong><ul>
 <li>HTTP request/response를 처리하는 자바 서블릿 API 처리하는 것</li>
 <li>자바 컨테이너 서블릿 같은거 처리할 때 이거 쓰시고</li>
+</ul>
+</li>
 </ul>
 
 

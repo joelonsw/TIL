@@ -22910,34 +22910,32 @@
 <h2 id="css">CSS 셀렉터<a class="headerlink" href="#css" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://poiemaweb.com/css3-selector</em></li>
-<li><strong>1. 전체 셀렉터</strong></li>
-<li>
-<p><code>*</code></p>
+<li><strong>1. 전체 셀렉터</strong><ul>
+<li><code>*</code></li>
+</ul>
 </li>
-<li>
-<p><strong>2. 태그 셀렉터</strong></p>
-</li>
-<li>
-<p><code>태그명</code> ex) <code>p</code></p>
-</li>
-<li>
-<p><strong>3. ID 셀렉터</strong></p>
-</li>
-<li>
-<p><code>#id</code></p>
-</li>
-<li>
-<p><strong>4. 클래스 셀렉터</strong></p>
-</li>
-<li>
-<p><code>.class</code></p>
-</li>
-<li>
-<p><strong>5. 어트리뷰트 셀렉터</strong></p>
-</li>
-<li>
-<p><code>셀렉터[어트리뷰트]</code> </p>
+</ul>
 <ul>
+<li><strong>2. 태그 셀렉터</strong><ul>
+<li><code>태그명</code> ex) <code>p</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>3. ID 셀렉터</strong><ul>
+<li><code>#id</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>4. 클래스 셀렉터</strong><ul>
+<li><code>.class</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>5. 어트리뷰트 셀렉터</strong><ul>
+<li><code>셀렉터[어트리뷰트]</code> <ul>
 <li><code>a[href]</code> : a 태그 중 href 어트리뷰트 갖는 요소</li>
 <li><code>a[target="_blank"]</code> : a 태그 중에 target 어트리뷰트가 "_blank" 인 요소</li>
 <li><code>h1[title ~= "first"]</code> : h1 요소 중에 title 어트리뷰트 값에 "first"를 단어로 포함하는 요소</li>
@@ -22947,18 +22945,20 @@
 <li><code>div[class*="test"]</code> : div 요소 중에서 class 값에 "test"를 포함하는 요소</li>
 </ul>
 </li>
-<li>
-<p><strong>6. 복합 셀렉터</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>6. 복합 셀렉터</strong><ul>
 <li>후손 셀렉터 : <code>div p</code> - div 요소의 후손 요소 중 p (자식, 손자, 그아래 다 포함)</li>
 <li>자식 셀렉터 : <code>div &gt; p</code> - div 요소의 자식 요소 중 p</li>
 <li>인접 형제 셀렉터 : <code>p + ul</code> - p 요소의 형제 요소 중 p 요소 바로 뒤에 위치하는 ul 요소 선택</li>
-<li>
-<p>일반 형제 셀렉터 : <code>p ~ ul</code> - p 요소의 형제 요소 중 p 요소 뒤에 위치하는 ul 요소 모조리 선택</p>
+<li>일반 형제 셀렉터 : <code>p ~ ul</code> - p 요소의 형제 요소 중 p 요소 뒤에 위치하는 ul 요소 모조리 선택</li>
+</ul>
 </li>
-<li>
-<p><strong>7. 가상 클래스 셀렉터</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>7. 가상 클래스 셀렉터</strong><ul>
 <li>요소의 특정 상태에 따른 스타일 적용시 사용</li>
 <li><code>:link</code> : 방문하지 않은 링크인 경우</li>
 <li><code>:visited</code> : 방문한 링크인 경우</li>
@@ -22971,6 +22971,8 @@
 <li><code>:not(셀렉테)</code> : 셀렉터에 해당하지 않는 모든 요소</li>
 <li><code>:first-child</code> : 셀렉터 해당 요소 중 첫번째</li>
 <li><code>:last-child</code> : 셀렉터 해당 요소 중 마지막</li>
+</ul>
+</li>
 </ul>
 
 

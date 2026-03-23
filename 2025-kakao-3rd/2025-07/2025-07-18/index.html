@@ -22953,13 +22953,14 @@
 <h3 id="2025-07-18">2025-07-18<a class="headerlink" href="#2025-07-18" title="Permanent link">&para;</a></h3>
 <h2 id="k8s-job">k8s Job<a class="headerlink" href="#k8s-job" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>하나 이상의 Pod를 지정하고, 지정된 수의 Pod를 성공적으로 실행하도록 하는 설정</li>
-<li>
-<p>백업/배치 등 한번 실행하고 종료되는 성격의 작업에 사용될 수 있음</p>
+<li>백업/배치 등 한번 실행하고 종료되는 성격의 작업에 사용될 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Job</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -22973,21 +22974,22 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;perl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-Mbignum=bpi&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-wle&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;print</span><span class="nv"> </span><span class="s">bpi(2000)&quot;</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="nt">backoffLimit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li><code>restartPolicy</code>: 재시작 유무 (Always, OnFailure, Never)</li>
 <li><code>backoffLimit</code>: 잡에 실패할 경우 다시 실행시킬 재시도 횟수 지정</li>
 </ul>
+</li>
+</ul>
 <h2 id="k8s-pod-container-crictl-rm-f-containerid">k8s pod에서 container를 지우면 (crictl rm -f CONTAINERID)?<a class="headerlink" href="#k8s-pod-container-crictl-rm-f-containerid" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Pod 수준에서도 Self-heal을 제공.</li>
-<li>
-<p>Pod의 restartPolicy는 Always가 기본값</p>
+<li>Pod의 restartPolicy는 Always가 기본값</li>
+</ul>
 </li>
-<li>
-<p><strong>특징</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>특징</strong><ol>
 <li>kubelet에 의한 자동 복구<ul>
 <li>Pod와 그 내부 컨테이너의 상태를 주기적으로 점검</li>
 <li>kubelet은 원하는 상태로 맞추기 위해 즉시 동일한 컨테이너 생성</li>
@@ -23001,17 +23003,23 @@
 <li>Pod 내부에 여러 컨테이너 존재할 때, 해당 컨테이너만 재생성</li>
 </ul>
 </li>
+</ol>
+</li>
 </ul>
 <h2 id="k8s-daemonset-vs-staticpod">k8s DaemonSet vs StaticPod<a class="headerlink" href="#k8s-daemonset-vs-staticpod" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>DaemonSet</strong></li>
+<li><strong>DaemonSet</strong><ul>
 <li>모든 노드에 똑같이 실행되어야 하는 에이전트</li>
 <li>노드가 추가될 때마다 자동으로 Pod가 배포됨. 스케일/운영 편의성 높음</li>
 <li>API 서버를 통한 선언적 관리. 롤링 업데이트 등 강력한 관리 지원</li>
-<li><strong>StaticPod</strong></li>
+</ul>
+</li>
+<li><strong>StaticPod</strong><ul>
 <li>API 서버나 컨트롤러가 정상적이지 않은 초기 클러스터 부트스트랩 단계의 필수 컴포넌트 운영에 쓰임</li>
 <li>kubelet이 직접 관리하며, API 서버 장애나도 Pod 기동</li>
 <li>클러스터 기반 관리가 불필요하거나, 특정 노드 전용 시스템 서비스가 필수적일 때 사용</li>
+</ul>
+</li>
 </ul>
 
 

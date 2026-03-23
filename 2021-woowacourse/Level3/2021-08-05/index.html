@@ -23021,39 +23021,28 @@
 <ul>
 <li><em>참고: https://apalsl.github.io/2019/11/14/SpringJpaFlushClear/</em></li>
 <li>하는 일: DB에 데이터를 반영하고, 영속성 컨텍스트 지움</li>
-<li>springboot에서 persist(), flush(), clear() 가능<ul>
-<li>트랜잭션 시작되고 끝나기 직전가지 내가 날린 데이터는 영속성 컨텍스트에 저장</li>
-</ul>
-</li>
-<li>flush()하면 영속성 컨텍스트에 있는 데이터 DB까지 접근 시킴<ul>
-<li>commit 되는 것 아님, 따라서 DB에 반영 안대!</li>
-<li>실제 어떤 쿼리 날리는지 확인할 수는 있음</li>
-</ul>
-</li>
-<li>clear()하면 영속성 컨텍스트에 저장한 데이터 지워버림<ul>
-<li>DB에 저장된 데이터 지우는 것은 아님</li>
-</ul>
-</li>
+<li>springboot에서 persist(), flush(), clear() 가능
+    - 트랜잭션 시작되고 끝나기 직전가지 내가 날린 데이터는 영속성 컨텍스트에 저장</li>
+<li>flush()하면 영속성 컨텍스트에 있는 데이터 DB까지 접근 시킴
+    - commit 되는 것 아님, 따라서 DB에 반영 안대!
+    - 실제 어떤 쿼리 날리는지 확인할 수는 있음</li>
+<li>clear()하면 영속성 컨텍스트에 저장한 데이터 지워버림
+    - DB에 저장된 데이터 지우는 것은 아님</li>
 </ul>
 <h2 id="saveandflush">saveAndFlush()<a class="headerlink" href="#saveandflush" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://ramees.tistory.com/36</em></li>
 <li><em>참고 2: https://www.baeldung.com/spring-data-jpa-save-saveandflush</em></li>
-<li>
-<p><strong><code>@Transactional</code>없이 save() vs saveAndFlush()</strong></p>
-<ul>
-<li>둘 모두 save/saveAndFlush 이후에 .setName() 한 것 반영 안 됨</li>
+<li><strong><code>@Transactional</code>없이 save() vs saveAndFlush()</strong>
+    - 둘 모두 save/saveAndFlush 이후에 .setName() 한 것 반영 안 됨</li>
 </ul>
-</li>
-<li>
-<p><strong><code>@Transactional</code>있이 save() vs saveAndFlush()</strong></p>
 <ul>
-<li>둘 모두 save/saveAndFlush 이후에 .setName() 한 것 "함수 종료시까지는" 반영안댐</li>
-<li>"함수 종료후에" 뚝딱 업데이트 댐</li>
+<li><strong><code>@Transactional</code>있이 save() vs saveAndFlush()</strong>
+    - 둘 모두 save/saveAndFlush 이후에 .setName() 한 것 "함수 종료시까지는" 반영안댐
+    - "함수 종료후에" 뚝딱 업데이트 댐</li>
 </ul>
-</li>
-<li>
-<p><strong><code>@Transactional</code>있이 save() vs saveAndFlush() 후 set 여러번하기</strong>
+<ul>
+<li><strong><code>@Transactional</code>있이 save() vs saveAndFlush() 후 set 여러번하기</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Transactional</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">Member</span><span class="w"> </span><span class="nf">saveMember</span><span class="p">(</span><span class="n">MemberDTO</span><span class="w"> </span><span class="n">memberDTO</span><span class="p">){</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Member</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">memberDTO</span><span class="p">);</span>
@@ -23077,62 +23066,41 @@
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="n">member</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;TaeHyun3&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">member</span><span class="p">;</span><span class="w">  </span>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">}</span><span class="w">   </span><span class="c1">//UPDATE QUERY 출력 &amp; DB 뚝딱 변경</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 <li>saveAndFlush()는 우리의 비즈니스로직에서 변경된 점을 사용해야하기 때문</li>
 </ul>
 <h2 id="_1">영속성 컨텍스트<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://lollolzkk.tistory.com/27</em></li>
 <li><em>참고 2: https://stackoverflow.com/questions/14581865/hibernate-flush-and-commit</em></li>
-<li>
-<p><strong>영속성 컨텍스트</strong></p>
+<li><strong>영속성 컨텍스트</strong>
+    - Entity를 영구적으로 저장하는 환경
+    - Entity Manager를 하나 생성할 때 영속성 컨텍스트 하나가 생성됨
+    - 특징
+        1. 1차 캐시
+            - Map&lt;<code>@Id</code>, Entity&gt; 로 저장
+        2. 동일성 보장
+            - 싱글톤
+        3. 쓰기지연 수행
+            - 트랜잭션 범위 안에서 동작
+            - 트랜잭션 commit 전, 영속성 컨텍스트의 sql 저장소에 생성 쿼리 저장
+            - flush() 수행 후, 저장했던 생성쿼리를 DB에 반영 (DB 동기화)
+            - 트랜잭션 commit
+        4. 변경 감지
+            - 영속성 컨텍스트에 있는 모든 엔티티를 스냅샷과 비교하여 수정된 엔티티 찾음
+            - 수정된 엔티티 확인하여 sql 저장소에 저장
+            - flush() 수행후 수정 쿼리 DB에 반영
+            - 트랜잭션 커밋</li>
+</ul>
 <ul>
-<li>Entity를 영구적으로 저장하는 환경</li>
-<li>Entity Manager를 하나 생성할 때 영속성 컨텍스트 하나가 생성됨</li>
-<li>특징<ol>
-<li>1차 캐시<ul>
-<li>Map&lt;<code>@Id</code>, Entity&gt; 로 저장</li>
-</ul>
-</li>
-<li>동일성 보장<ul>
-<li>싱글톤</li>
-</ul>
-</li>
-<li>쓰기지연 수행<ul>
-<li>트랜잭션 범위 안에서 동작</li>
-<li>트랜잭션 commit 전, 영속성 컨텍스트의 sql 저장소에 생성 쿼리 저장</li>
-<li>flush() 수행 후, 저장했던 생성쿼리를 DB에 반영 (DB 동기화)</li>
-<li>트랜잭션 commit</li>
-</ul>
-</li>
-<li>변경 감지<ul>
-<li>영속성 컨텍스트에 있는 모든 엔티티를 스냅샷과 비교하여 수정된 엔티티 찾음</li>
-<li>수정된 엔티티 확인하여 sql 저장소에 저장</li>
-<li>flush() 수행후 수정 쿼리 DB에 반영</li>
-<li>트랜잭션 커밋</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>flush vs commit</strong></p>
-<ul>
-<li>flush는 영속성 컨텍스트에 있는 엔티티 정보를 DB에 동기화<ul>
-<li>하지만 commit 된건 아니라서 rollback 가능!</li>
-</ul>
-</li>
-<li>commit 된다면 롤백할 수 없는 상태!!</li>
-<li>flush 왜 해야하지...?<ul>
-<li>쓰기 지연 sql도 이게 메모리 차지한단 말이지?</li>
-<li>동기화를 우선해주고 쓰기지연 sql 비워줘야 해!</li>
-<li>아니면 메모리 터져!</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>flush vs commit</strong>
+    - flush는 영속성 컨텍스트에 있는 엔티티 정보를 DB에 동기화
+        - 하지만 commit 된건 아니라서 rollback 가능!
+    - commit 된다면 롤백할 수 없는 상태!!
+    - flush 왜 해야하지...?
+        - 쓰기 지연 sql도 이게 메모리 차지한단 말이지?
+        - 동기화를 우선해주고 쓰기지연 sql 비워줘야 해!
+        - 아니면 메모리 터져!</li>
 </ul>
 <h2 id="dirtiescontext"><code>@DirtiesContext</code>의 동작과정?<a class="headerlink" href="#dirtiescontext" title="Permanent link">&para;</a></h2>
 <h2 id="static">빈을 Static으로?<a class="headerlink" href="#static" title="Permanent link">&para;</a></h2>

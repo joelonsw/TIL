@@ -22931,34 +22931,40 @@
 <h3 id="2023-06-28">2023-06-28<a class="headerlink" href="#2023-06-28" title="Permanent link">&para;</a></h3>
 <h2 id="noclassdeffounderror-scoverageinvoker">NoClassDefFoundError: scoverage/Invoker$<a class="headerlink" href="#noclassdeffounderror-scoverageinvoker" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>scoverage</strong></li>
+<li><strong>scoverage</strong><ul>
 <li>스칼라 코드 커버리지 툴</li>
 <li>스칼라 코드를 컴파일 타임에 분석하고 어디가 테스트 시간에 훑고 지나갔는지 검증</li>
 <li>statement, branch, expression 기반 분석</li>
 <li>ScalaTest, specs2 와 호환이 좋음</li>
 <li>HTML, XML 등으로 리포트 작성해줌</li>
-<li>
-<p>SBT, CI/CD로 모니터링 하세요</p>
+<li>SBT, CI/CD로 모니터링 하세요</li>
+</ul>
 </li>
-<li>
-<p><strong>트러블슈팅</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>트러블슈팅</strong><ul>
 <li><em>참고: https://github.com/scoverage/sbt-scoverage/issues/115</em></li>
+</ul>
+</li>
 </ul>
 <h2 id="select-insert">SELECT + INSERT 꼭 묶어야하나?<a class="headerlink" href="#select-insert" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Select 된 정보가 insert 할 때 사용이된다면 하나로 묶는게 좋아</li>
-<li>데이터 일관성이 유지되고, failure/success가 한번에 관리되는게 무조건 좋긴하거든</li>
+<li>데이터 일관성이 유지되고, failure/success가 한번에 관리되는게 무조건 좋긴하거든<ul>
 <li>혹시 모를 데이터 일관성 깨지는거 해결해야지</li>
-<li>그니까 트랜잭션을 원자성 관점에서만 보지말고 아래 3가지를 다 생각하고 검토해보자</li>
+</ul>
+</li>
+<li>그니까 트랜잭션을 원자성 관점에서만 보지말고 아래 3가지를 다 생각하고 검토해보자<ol>
 <li>Data Integrity<ul>
 <li>데이터가 일관성이 있어야해</li>
 <li>Read/Write가 일관성있는 상태에서 일어날 수 있도록 보장해보자</li>
 </ul>
 </li>
 <li>Concurrency Issue<ul>
-<li>트랜잭션은 isolation을 제공해줘</li>
+<li>트랜잭션은 isolation을 제공해줘<ul>
 <li>비동기로 여러 오퍼레이션이 일어나는 걸 특히 더 잘 제어해주지</li>
+</ul>
+</li>
 <li>트랜잭션 없이는 Race Condition도 보다 일어나기 좋아</li>
 <li>동시성 이슈까지 신경쓰고 싶지않다면 깝치지 말고 트랜잭션으로 묶어</li>
 </ul>
@@ -22966,6 +22972,8 @@
 <li>Error handling &amp; rollback<ul>
 <li>당연한거지만, 트랜잭션은 이걸 잘 관리해주자나</li>
 </ul>
+</li>
+</ol>
 </li>
 </ul>
 

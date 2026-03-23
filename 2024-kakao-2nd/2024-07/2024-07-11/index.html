@@ -22935,11 +22935,9 @@
 - <strong>1. 개요</strong>
   - 액터를 통한 기본 기능 구현 + 어떻게 생성/kill 하는지</p>
 <ul>
-<li><strong>2. 액터 모델</strong></li>
+<li><strong>2. 액터 모델</strong><ul>
 <li>액터는 독립적인 computation unit을 구현</li>
-<li>
-<p>액터의 특징</p>
-<ul>
+<li>액터의 특징<ul>
 <li>독립적인 상태, 어플리케이션 로직 캡슐화</li>
 <li>비동기적으로 메시지로만 통신 가능. 직접 메서드 호출로 통신 불가</li>
 <li>각 액터는 고유한 주소값과 메일박스가 있음</li>
@@ -22948,21 +22946,23 @@
 <li>액터는 타 액터를 생성할 수 있음. </li>
 </ul>
 </li>
-<li>
-<p><strong>3. 장점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>3. 장점</strong><ul>
 <li>아카 액터를 통해 쉽게 비동기적인 코드를 쓸 수 있음</li>
 <li>메시지를 전달한 쓰레드는 블락킹되어 타 액터로 부터 응답을 기다리지 않음<ul>
 <li>메시지를 교류하는 방식으로만 소통 가능</li>
 </ul>
 </li>
 <li>메시지가 순차적으로 처리되기에 멀티 쓰레드 환경에서 동기화 이슈 생각할 필요 없음</li>
-<li>
-<p>명확한 트리구조로 되어 있기에 자식이 실패하면 부모에게 전달해 부모가 제어 가능 -&gt; error handling 장점</p>
+<li>명확한 트리구조로 되어 있기에 자식이 실패하면 부모에게 전달해 부모가 제어 가능 -&gt; error handling 장점</li>
+</ul>
 </li>
-<li>
-<p><strong>4. 액터 생성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>4. 액터 생성</strong><ul>
 <li>액터 시스템이라는 큰 configuration 설정을 따름<ul>
 <li><code>ActorSystem system = ActorSystem.create("test-system")</code></li>
 </ul>
@@ -22973,9 +22973,8 @@
 <li>System guardian actor가 "/system" 주소를 가지고 있음. 아카 시스템의 최상위 부모 액터</li>
 </ol>
 </li>
-<li>
-<p>모든 아카 액터는 AbstractActor를 상속하여 생성. createReceive()로 메시지 처리방식 정의
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyActor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractActor</span><span class="w"> </span><span class="p">{</span>
+<li>모든 아카 액터는 AbstractActor를 상속하여 생성. createReceive()로 메시지 처리방식 정의
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyActor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractActor</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Receive</span><span class="w"> </span><span class="nf">createReceive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">receiveBuilder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
@@ -22984,11 +22983,12 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// 이후 ActorSystem에 등록</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">ActorSystem</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ActorSystem</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;test-system&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">ActorRef</span><span class="w"> </span><span class="n">readingActorRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="na">actorOf</span><span class="p">(</span><span class="n">Props</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">MyActor</span><span class="p">.</span><span class="na">class</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;my-actor&quot;</span><span class="p">);</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>4.1 액터 Configuration</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>4.1 액터 Configuration</strong><ul>
 <li>Props 클래스가 액터의 설정을 전부 가지고 있음<ul>
 <li>dispatcher, mailbox, deployment 설정 전부!</li>
 <li>이 클래스는 불변+쓰레드세이프 =&gt; 새 액터 생성시에 공유가 가능함</li>
@@ -23007,9 +23007,8 @@
 </ol>
 </li>
 <li>이렇게 생성된 <code>Props</code>를 <code>Context.ActorOf()</code> 호출 전달 =&gt; <code>ActorSystem</code> 레시피 읽음 =&gt; 새 액터 생성</li>
-<li>
-<p>Best Practice 액터 객체 내부에 팩터리 메서드를 하나 정의해 Props 생성을 제어
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReadingActor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractActor</span><span class="w"> </span><span class="p">{</span>
+<li>Best Practice 액터 객체 내부에 팩터리 메서드를 하나 정의해 Props 생성을 제어
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReadingActor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractActor</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Props</span><span class="w"> </span><span class="nf">props</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23018,23 +23017,26 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">ActorRef</span><span class="w"> </span><span class="n">readingActorRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="na">actorOf</span><span class="p">(</span><span class="n">ReadingActor</span><span class="p">.</span><span class="na">props</span><span class="p">(</span><span class="n">TEXT</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;readingActor&quot;</span><span class="p">);</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>5. 액터 메시징</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>5. 액터 메시징</strong><ul>
 <li>불변 타입의 그 어떤것도 메시지가 될 수 있어. </li>
-<li>
-<p>다만, 메시지를 액터 클래스 안에서 정의하세요!</p>
+<li>다만, 메시지를 액터 클래스 안에서 정의하세요!</li>
+</ul>
 </li>
-<li>
-<p><strong>5.1 메시지 전송</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>5.1 메시지 전송</strong><ul>
 <li>tell()<ul>
 <li>메시지 전송 + 응답 필요없음</li>
-<li><code>readingActorRef.tell(new ReadingActor.ReadLines(), ActorRef.noSender())</code></li>
+<li><code>readingActorRef.tell(new ReadingActor.ReadLines(), ActorRef.noSender())</code><ul>
 <li>메시지: new ReadingActor.ReadLines()</li>
 <li>받는 사람: ActorRef.noSender()</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>ask()<ul>
@@ -23042,37 +23044,37 @@
 <li><code>CompletableFuture&lt;Object&gt; future = ask(wordCounterActorRef, new WordCounterActor.CountWords(line), 1000).toCompletableFuture()</code></li>
 </ul>
 </li>
-<li>
-<p>forward()</p>
-<ul>
+<li>forward()<ul>
 <li>메시지의 original sender가 저장되어, 포워딩 하는 액터는 중간 프록시 액터마냥 동작할 수 있음</li>
 <li><code>printerActorRef.forward(new PrinterActor.PrintFinalResult(totalNumberOfWords), getContext())</code></li>
 </ul>
 </li>
-<li>
-<p><strong>5.2 메시지 수신</strong></p>
+</ul>
 </li>
-<li>
-<p><code>createReceive()</code> 방식으로 메세지 수신해보자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">Receive</span><span class="w"> </span><span class="nf">createReceive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>5.2 메시지 수신</strong><ul>
+<li><code>createReceive()</code> 방식으로 메세지 수신해보자
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">Receive</span><span class="w"> </span><span class="nf">createReceive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">receiveBuilder</span><span class="p">().</span><span class="na">matchEquals</span><span class="p">(</span><span class="s">&quot;printit&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;The address of this actor is : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getSelf</span><span class="p">());</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">}).</span><span class="na">build</span><span class="p">()</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>6. 액터 Kill</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>6. 액터 Kill</strong><ul>
 <li>액터 stop()을 통해서 kill 가능</li>
 <li>현재 처리중이던 메시지까진 처리함.</li>
 <li>부모 액터 죽이면 child actor 모두 죽음</li>
-<li>
-<p>PoisonPill 이라는 메시지를 주면, 그 메시지 기점으로 죽음 ㄷㄷ</p>
+<li>PoisonPill 이라는 메시지를 주면, 그 메시지 기점으로 죽음 ㄷㄷ</li>
+</ul>
 </li>
-<li>
-<p><strong>7. 결론</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>7. 결론</strong><ul>
 <li>퍼포먼스 : tell() &gt; ask() </li>
 <li>ask()는 항상 Failure 메시지를 통해 exception 핸들링 필요</li>
 <li>액터는 변경 가능한 상태를 공유하지 마세요</li>
@@ -23082,20 +23084,24 @@
 </li>
 <li>메시지는 불변이여야 함!</li>
 </ul>
+</li>
+</ul>
 <h2 id="akka-spring">Akka + Spring<a class="headerlink" href="#akka-spring" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://www.baeldung.com/akka-with-spring</em>
 - <strong>1. 개요</strong>
   - 스프링에서 아카 액터 써보자!</p>
 <ul>
-<li><strong>2. 아카 DI</strong></li>
+<li><strong>2. 아카 DI</strong><ul>
 <li>스프링 + 아카 통합의 문제점은 <strong>Spring의 Bean과 Akka의 Actor 라이프사이클이 다름!</strong></li>
 <li>액터는 액터 자체로 쪼개질 수 있는데, 이는 스프링의 관리대상이 될 수 없음</li>
-<li>
-<p>하지만 Akka extension을 활용하면 DI가 좀 수월해진다</p>
+<li>하지만 Akka extension을 활용하면 DI가 좀 수월해진다</li>
+</ul>
 </li>
+</ul>
+<ul>
 <li>
 <p><strong>3. 스프링 빈과 아카 액터의 조합</strong></p>
-</li>
+<ul>
 <li>하나의 액터가 사람에게 인사하는 서비스</li>
 <li>다른 인사 로직들은 서로다른 서비스로 찢어짐</li>
 <li>액터 인스턴스로 넣을 예정?</li>
@@ -23123,6 +23129,8 @@
 <a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="p">}</span>
 </code></pre></div>
+</li>
+</ul>
 
 
 

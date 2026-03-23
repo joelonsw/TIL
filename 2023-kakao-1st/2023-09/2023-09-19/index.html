@@ -22920,43 +22920,43 @@
   - SW, HW, 컨테이너화 된 것도 존재
   - 특정 서버가 죽어있다면, 고유의 Health Check 기능을 통해서 자동으로 서비스에서 서버를 제외함</p>
 <ul>
-<li><strong>사용자의 SLB 사용 플로우</strong></li>
+<li><strong>사용자의 SLB 사용 플로우</strong><ol>
 <li>Client가 DNS를 통해 도메인 주소의 IP를 얻어옴 (SLB의 VIP)</li>
 <li>VIP로 접속 시도</li>
-<li>
-<p>해당 VIP의 SLB는 SLB 방식에 따라 Client의 요청을 서버로 분배</p>
+<li>해당 VIP의 SLB는 SLB 방식에 따라 Client의 요청을 서버로 분배</li>
+</ol>
 </li>
-<li>
-<p><strong>SLB 고려사항</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>SLB 고려사항</strong><ul>
 <li>단일 서버의 부하를 분산</li>
 <li>하나의 서버로 받던 부하를 여러 서버로 부하 분산</li>
 <li>Fail-Over: Active/Standby</li>
-<li>
-<p>Fault-tolerance; Active/Active</p>
+<li>Fault-tolerance; Active/Active</li>
+</ul>
 </li>
-<li>
-<p><strong>SLB의 구성</strong></p>
-</li>
-<li>
-<p>LB를 이중화하여 구성할 수 있다 (Fail-Over 구조)</p>
-<ol>
+</ul>
+<ul>
+<li><strong>SLB의 구성</strong><ul>
+<li>LB를 이중화하여 구성할 수 있다 (Fail-Over 구조)<ol>
 <li>Active/StandBy LB를 구축한다</li>
 <li>클라이언트는 Active LB에 요청을 보낸다</li>
-<li>Active LB가 특정 이유로 뇌절한다</li>
+<li>Active LB가 특정 이유로 뇌절한다<ul>
 <li>ex) 네트워크 케이블이 끊어져 패킷을 받을 수 없는 경우</li>
+</ul>
+</li>
 <li>자동적으로 StandBy LB로 제어가 넘어가도록 한다</li>
 <li>기존 StandBy -&gt; Active, Active -&gt; StandBy로 역할 변경</li>
 </ol>
 </li>
-<li>
-<p><strong>L4 SLB의 동작방식</strong></p>
+</ul>
 </li>
-<li>
-<p>2가지 SLB Mode가 있음</p>
+</ul>
 <ul>
-<li><img alt="" src="../../images/2023-09-19-SLB.jpeg" /> </li>
-<li>DSR(Direct Server Return)</li>
+<li><strong>L4 SLB의 동작방식</strong><ul>
+<li>2가지 SLB Mode가 있음<ul>
+<li><img alt="" src="../../images/2023-09-19-SLB.jpeg" /> 
+1. DSR(Direct Server Return)<ul>
 <li>Client -&gt; L4 -&gt; Server -&gt; Client</li>
 <li>Client request는 SLB로 인입</li>
 <li>Server response는 SLB를 거치지 않고 직접 Client로 전달</li>
@@ -22965,47 +22965,57 @@
 <li>출발지/목적지 IP주소를 변조하지 않음</li>
 </ul>
 </li>
-<li><code>clientIp = request.getRemoteAddr();</code></li>
-<li>Inline(Proxy)</li>
+<li><code>clientIp = request.getRemoteAddr();</code>
+2. Inline(Proxy)</li>
 <li>Client -&gt; L4 -&gt; Server -&gt; L4 -&gt; Client</li>
 <li>프록시 형태처럼 request/response가 모두 SLB를 통해 전달된다</li>
 <li>Client IP 주소가 변경이 된다</li>
 <li><code>clientIp = request.getHeader("X-Forwarded-For")</code></li>
 </ul>
 </li>
-<li>
-<p><strong>GSLB</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>GSLB</strong><ul>
 <li>구성단위: 도메인</li>
 <li>도메인에 여러개의 서버 IP/VIP를 바인딩하는 형태</li>
 <li>도메인으로 들어오는 질의에 대해 GSLB에서 서버 IP/VIP를 응답</li>
 <li>도메인에 <strong>GSLB의 또 다른 도메인이 CNAME으로 등록되어 있음</strong></li>
-<li>
-<p>트래픽 흐름도</p>
-<ol>
+<li>트래픽 흐름도<ol>
 <li>클라이언트가 연결할 도메인 주소를 입력한다</li>
 <li>도메인 DNS 질의를 통해 GSLB 도메인 주소가 획득된다</li>
 <li>GSLB 도메인 DNS 질의를 통해 GSLB 메서드에 따라 VIP/서버 IP를 응답</li>
 <li>클라이언트는 GSLB의 도메인 질의를 통해 얻어온 VIP/서버 IP 접속</li>
 </ol>
 </li>
-<li>
-<p><strong>GSLB를 통해...</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>GSLB를 통해...</strong><ul>
 <li>흐름도<ol>
 <li>RoundRobin과 같이 LB Method 적용해 SLB 죽었는지 체크</li>
-<li>위치(topology) 기반으로 요청/응답 다르게</li>
+<li>위치(topology) 기반으로 요청/응답 다르게<ul>
 <li>지역/나라/대륙 기반으로 다른 IP 응답 가능</li>
 <li>Disaster Recovery의 개념으로도 활용됨</li>
 <li>최소 IDC, 데이터센터 레벨에서의 LB라고 보면 됨</li>
+</ul>
+</li>
 <li>Ratio를 줘서 비율적으로 처리 가능</li>
 </ol>
 </li>
 <li>장점<ul>
-<li>DNS + SLB 의 장점을 모두 사용할 수 있다!</li>
+<li>DNS + SLB 의 장점을 모두 사용할 수 있다!<ul>
 <li>DNS: 헬스체크 안대!</li>
 <li>캐싱되어 있기때문에, 바로바로 내려가지도 않아!</li>
 <li></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

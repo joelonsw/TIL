@@ -22975,85 +22975,101 @@
 <h3 id="2022-09-13">2022-09-13<a class="headerlink" href="#2022-09-13" title="Permanent link">&para;</a></h3>
 <h2 id="primary">Primary 어노테이션<a class="headerlink" href="#primary" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>문제상황</strong></li>
+<li><strong>문제상황</strong><ul>
 <li>테스트에서 쓸 URL generator 빈을 따로 생성해 Primary 어노테이션을 붙임<ul>
 <li>우선 테스트에서 작성한 Bean은 테스트에서만 동작하기 때문에 문제가 없을것이라고 판단하였음</li>
 </ul>
 </li>
-<li>
-<p>그런데 해당 Bean이 다른 테스트에도 영향을 줌</p>
-<ul>
+<li>그런데 해당 Bean이 다른 테스트에도 영향을 줌<ul>
 <li>다른 테스트는 원래 Production의 기존 Bean이 필요한 상태...</li>
 </ul>
 </li>
-<li>
-<p><strong>해결 방법</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>해결 방법</strong><ol>
 <li>KasService에 endpoint setter를 만든다. <ul>
 <li>엔드포인트를 동적으로 변경할 수 있도록 지원</li>
-<li>장점</li>
+<li>장점<ul>
 <li>동적으로 객체 교환 가능</li>
-<li>단점</li>
+</ul>
+</li>
+<li>단점<ul>
 <li>테스트를 위한 코드가 프로덕션에 낀다는 것</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>KasService를 Test에서 config 하는 파일 작성<ul>
 <li><code>@TestConfiguration</code></li>
-<li>장점</li>
+<li>장점<ul>
 <li>가장 깔끔! 테스트에서 쓰일 설정을 하나하나 여기서 재 설정해주고</li>
 <li>스프링 환경의 DI, IoC 혜택을 그대로 누릴 수 있음</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>Value 어노테이션이 붙은 값의 setter 작성<ul>
 <li>Value 값을 동적으로 변경할 수 있도록 지원</li>
-<li>장점</li>
+<li>장점<ul>
 <li>매핑이 제대로 안된거... 극복할 수 있음</li>
-<li>단점</li>
+</ul>
+</li>
+<li>단점<ul>
 <li>테스트를 위한 코드가 프로덕션에 낀다는 것</li>
 </ul>
+</li>
+</ul>
+</li>
+</ol>
 </li>
 </ul>
 <h2 id="testconfiguration">TestConfiguration<a class="headerlink" href="#testconfiguration" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://meetup.toast.com/posts/124</em></li>
 <li>기존 정의된 Configuration을 커스터마이징 하고자 하는 경우 TestConfiguration을 통해 사용 가능</li>
-<li>ComponentScan 과정에서 TestConfiguration 생성</li>
+<li>ComponentScan 과정에서 TestConfiguration 생성<ul>
 <li>해당 자신이 속한 테스트 실행될 시 정의된 빈을 생성하여 등록될 것</li>
-<li>직접 TestConfiguration을 추가해줘야해</li>
+</ul>
+</li>
+<li>직접 TestConfiguration을 추가해줘야해<ul>
 <li><code>@Import</code>를 사용하자</li>
+</ul>
+</li>
 </ul>
 <h2 id="when-to-mock">When to Mock<a class="headerlink" href="#when-to-mock" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://blog.cleancoder.com/uncle-bob/2014/05/10/WhenToMock.html</em></li>
-<li><strong>개요</strong></li>
-<li>
-<p>Mocking은 isolation, introspection을 지원하는 강력한 툴</p>
+<li><strong>개요</strong><ul>
+<li>Mocking은 isolation, introspection을 지원하는 강력한 툴</li>
+</ul>
 </li>
-<li>
-<p><strong>모킹을 안한다면 단점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>모킹을 안한다면 단점</strong><ul>
 <li>테스트 매우 느릴 것</li>
 <li>웹서버, DB, 서비스, 네트워크 싹다 느릴것</li>
-<li>
-<p>커버리지 낮아질 것</p>
-<ul>
+<li>커버리지 낮아질 것<ul>
 <li>파일 삭제나 이런거 모킹 없으면 구현하기 위험할 수도</li>
 </ul>
 </li>
-<li>
-<p><strong>너무 많은 모킹의 단점</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>너무 많은 모킹의 단점</strong><ul>
 <li>모킹 시스템 중 몇 개는 리플렉션에 너무 많이 의존 =&gt; 느림</li>
-<li>
-<p>모킹한 클래스가 다른 모킹 객체를 반환할수도 =&gt; 모든 데이터 패스를 모킹할래?</p>
-<ol>
+<li>모킹한 클래스가 다른 모킹 객체를 반환할수도 =&gt; 모든 데이터 패스를 모킹할래?<ol>
 <li>너무 복잡해짐</li>
 <li>너무 결합도가 높아져서 변경에 취약해짐</li>
 </ol>
 </li>
-<li>
-<p><strong>경험에 의한 인사이트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>경험에 의한 인사이트</strong><ul>
 <li>아키텍쳐의 바운더리를 모킹하되, 바운더리 안을 모킹하지 말 것</li>
 <li>DB, 웹서버, 외부 서비스를 모킹하는 것은 좋다<ol>
 <li>테스트 빨라짐</li>
@@ -23069,12 +23085,16 @@
 </li>
 <li>의존성 등에 대한 고민 =&gt; 좋은 소프트웨어 디자</li>
 </ul>
+</li>
+</ul>
 <h2 id="openfeign">OpenFeign<a class="headerlink" href="#openfeign" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://github.com/OpenFeign/feign</em></li>
 <li><em>참고: https://techblog.woowahan.com/2630/</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Java HTTP Client Binder</li>
+</ul>
+</li>
 </ul>
 
 

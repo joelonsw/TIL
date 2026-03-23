@@ -22980,19 +22980,21 @@
 <h2 id="big-o_1">Big-O란?<a class="headerlink" href="#big-o_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>알고리즘의 효율성을 나타내는 지표</li>
-<li><strong>시간 복잡도</strong></li>
+<li><strong>시간 복잡도</strong><ul>
 <li>해당 알고리즘으로 동작시, 점근적으로 실행시간이 어떻게 되는가?</li>
 <li>n개의 데이터가 input으로 주어질 경우, 얼마나 시간이 지나야 알고리즘이 완료되는가? </li>
-<li>
-<p>O(1), O(logN), O(N), O(NlogN), O(N^2), O(2^N) 등</p>
+<li>O(1), O(logN), O(N), O(NlogN), O(N^2), O(2^N) 등</li>
+</ul>
 </li>
-<li>
-<p><strong>공간 복잡도</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>공간 복잡도</strong><ul>
 <li>메모리를 얼마나 썼는가?</li>
 <li>n개의 데이터가 input으로 주어질 경우, 메모리는 얼마나 사용을 하는가? </li>
 <li>단지 n번 호출했다고 O(n)의 공간을 쓰는 건 아님<ul>
 <li>해당 함수들이 호출 스택에서 공간을 별도로 사용하지 않으면 O(1)일 수 있다</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23008,8 +23010,10 @@
 <h2 id="_2">주의할 점<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>같은 N을 서로 다른 두 가지 경우에 혼용해서 쓰지 않을 것</li>
-<li>시간 복잡도를 구할 때, 해당 코드의 목적이 무엇인지 생각해 볼 것</li>
+<li>시간 복잡도를 구할 때, 해당 코드의 목적이 무엇인지 생각해 볼 것<ul>
 <li>아무리 재귀라도, 2의 배수에서만 재귀 호출이 호출된다면 수행시간은 O(logN)이 된다</li>
+</ul>
+</li>
 </ul>
 
 

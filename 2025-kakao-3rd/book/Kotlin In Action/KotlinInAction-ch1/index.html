@@ -23011,7 +23011,7 @@
 <h2 id="kotlin-in-action-ch1">Kotlin In Action - ch1. 코틀린이란 무엇이며, 왜 필요한가?<a class="headerlink" href="#kotlin-in-action-ch1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 코틀린 맛보기<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>특징</strong></li>
+<li><strong>특징</strong><ul>
 <li>클래스 본문 지정 않고도 프로퍼티가 포함된 데이터 클래스 정의</li>
 <li>val을 통한 읽기 전용 프로퍼티 생성</li>
 <li>인자의 기본값 제공</li>
@@ -23020,32 +23020,36 @@
 <li>엘비스 연산자(?:)를 사용한 null에 대비한 값 제공</li>
 <li>데이터 클래스를 위해 컴파일러가 자동으로 생성해주는 toString 함수</li>
 </ul>
+</li>
+</ul>
 <h3 id="12">1.2 코틀린의 주요 특성<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>다중 패러다임 언어: 객체지향과 함수형 언어 조합, 비동기 코드 작성 방법 지원</strong></li>
-<li>
-<p>함수형 패러다임</p>
-<ul>
+<li><strong>다중 패러다임 언어: 객체지향과 함수형 언어 조합, 비동기 코드 작성 방법 지원</strong><ul>
+<li>함수형 패러다임<ul>
 <li>일급 시민인 함수</li>
 <li>불변성</li>
 <li>부수 효과 없음</li>
 <li>안전한 동기성 -&gt; 여러 행위자가 동기화 없이 데이터 변경시 문제 발생. 함수형에서는 불변 데이터 구조 + 순수함수로 애초에 방지</li>
 </ul>
 </li>
-<li>
-<p><strong>정적 타입 지정 언어: 컴파일 시점에 많은 오류 잡음</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>정적 타입 지정 언어: 컴파일 시점에 많은 오류 잡음</strong><ul>
 <li>모든 식의 타입을 컴파일 시점에 알 수 있다는 점</li>
 <li>메서드나 필드가 실제로 존재하는지 컴파일러가 검증 가능</li>
-<li>
-<p>장점: 성능, 신뢰성, 유지 보수성, 도구 지원</p>
+<li>장점: 성능, 신뢰성, 유지 보수성, 도구 지원</li>
+</ul>
 </li>
-<li>
-<p><strong>코루틴</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>코루틴</strong><ul>
 <li>동시성과 비동기 프로그램의 문제를 일시 중단 가능한 계산을 사용해 접근</li>
 <li>코루틴에서는 코드가 자신의 실행을 잠시 중단시킬 수 있고, 나중에 작업을 계속 수행할 수 있음</li>
 <li>I/O를 기다리는 쓰레드를 블로킹하지 않게 만들 수 있음 (Scala의 Future와 비슷)</li>
+</ul>
+</li>
 </ul>
 <h3 id="13">1.3 코틀린이 자주 쓰이는 분야<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <ul>
@@ -23053,21 +23057,21 @@
 </ul>
 <h3 id="14">1.4 코틀린의 철학<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>실용성</strong></li>
+<li><strong>실용성</strong><ul>
 <li>개발자 스스로에게 익숙한 프로그래밍 스타일 기법을 활용할 수 있음</li>
-<li>
-<p>코틀린의 강력한 특성을 적용하며 전형적인 코틀린 코드로 발전 가능</p>
+<li>코틀린의 강력한 특성을 적용하며 전형적인 코틀린 코드로 발전 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>간결성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>간결성</strong><ul>
 <li>객체지향 언어에 존재하는 여러 번거로운 준비 코드를 암시적으로 제공 (getter, setter, 생성자 파라미터 등)</li>
-<li>
-<p>lombok 여기저기 추가하듯 지저분한 것 애초에 제거</p>
+<li>lombok 여기저기 추가하듯 지저분한 것 애초에 제거</li>
+</ul>
 </li>
-<li>
-<p><strong>안정성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>안정성</strong><ul>
 <li>JVM 사용하여 메모리 안정성</li>
 <li>정적 타입 언어로써 타입 안정성</li>
 <li>val 예약어로 쓰레드 safe</li>
@@ -23077,14 +23081,18 @@
 </li>
 <li>타입 변환 에러도 방지. 코틀린에서는 타입 검사 + 캐스트 한번에</li>
 </ul>
+</li>
+</ul>
 <h3 id="15">1.5 코틀린 도구 사용<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>코틀린 컴파일 방식</strong></li>
+<li><strong>코틀린 컴파일 방식</strong><ul>
 <li>JVM은 자바/코틀린 어떤 언어인지 알지못해도 .class 파일 실행 가능</li>
 <li>코틀린 내장 클래스와 API는 의존관계로, "코틀린 런타임 라이브러리"라는 추가 정보가 필요<ul>
 <li><code>-include-runtime</code> 호출하여 결과로 생기는 JAR 파일 안에 런타임 라이브러리를 포함</li>
 <li>코틀린 런타임에 기본 클래스 정의 + 표준 자바 API에 대한 확장</li>
 <li>어플리케이션 배포시 런타임 라이브러리도 함께 배포할 것</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

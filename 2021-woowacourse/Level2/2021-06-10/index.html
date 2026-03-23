@@ -22931,44 +22931,32 @@
 <h3 id="2021-06-10">2021-06-10<a class="headerlink" href="#2021-06-10" title="Permanent link">&para;</a></h3>
 <h2 id="java-chess">java-chess 복습하기<a class="headerlink" href="#java-chess" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>복습</strong></p>
+<li><strong>복습</strong>
+    - SparkJava를 통한 개발
+    - Gson을 통한 JSON 통신
+        - 어라 이건 디폴트 생성자가 필요없나보네? 리플렉션을 안쓰...나?
+        - 그럴수도 있겠다 익명클래스로 모든 경우에 대해 코드를 작성해뒀네
+    - JdbcDriver 클래스를 직접 가져와서 Connection을 하드코딩</li>
+</ul>
 <ul>
-<li>SparkJava를 통한 개발</li>
-<li>Gson을 통한 JSON 통신<ul>
-<li>어라 이건 디폴트 생성자가 필요없나보네? 리플렉션을 안쓰...나?</li>
-<li>그럴수도 있겠다 익명클래스로 모든 경우에 대해 코드를 작성해뒀네</li>
+<li><strong>회고</strong>
+    - 생각보다 Java보다 JS에 더 공을 들였던 기억이...
+    - DB를 몰라서 그냥 코드를 복붙해왔던 기억이...</li>
 </ul>
-</li>
-<li>JdbcDriver 클래스를 직접 가져와서 Connection을 하드코딩</li>
-</ul>
-</li>
-<li>
-<p><strong>회고</strong></p>
 <ul>
-<li>생각보다 Java보다 JS에 더 공을 들였던 기억이...</li>
-<li>DB를 몰라서 그냥 코드를 복붙해왔던 기억이...</li>
+<li><strong>피드백 공유</strong>
+    - 관계형 DB를 만들자
+        - 데이터에 대한 쿼리가 가능해짐
+        - DB 마이그레이션에 용이함
+    - DB 자원 반환 잘 할 것</li>
 </ul>
-</li>
-<li>
-<p><strong>피드백 공유</strong></p>
 <ul>
-<li>관계형 DB를 만들자<ul>
-<li>데이터에 대한 쿼리가 가능해짐</li>
-<li>DB 마이그레이션에 용이함</li>
-</ul>
-</li>
-<li>DB 자원 반환 잘 할 것</li>
-</ul>
-</li>
-<li>
-<p><strong>개선 방향</strong></p>
-<ul>
-<li>Controller에서 try-catch를 통한 예외처리<ul>
-<li>컨트롤러를 호출하는 쪽에서 ControllerAdvice 처럼 모두 잡아줄 수 있지 않을까?</li>
-<li>아 SparkJava는 그냥 Route라는 익명클래스를 애초에 등록한 다음에 Router에 등록을 Http 메서드와 처리 방법들을 저장해두네?<ul>
-<li>익명클래스 안에 그러면 예외 처리에 대한 코드도 넣어주는게 맞겠구만...
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Routes</span><span class="w"> </span><span class="p">{</span>
+<li><strong>개선 방향</strong>
+    - Controller에서 try-catch를 통한 예외처리
+        - 컨트롤러를 호출하는 쪽에서 ControllerAdvice 처럼 모두 잡아줄 수 있지 않을까?
+        - 아 SparkJava는 그냥 Route라는 익명클래스를 애초에 등록한 다음에 Router에 등록을 Http 메서드와 처리 방법들을 저장해두네?
+            - 익명클래스 안에 그러면 예외 처리에 대한 코드도 넣어주는게 맞겠구만...
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Routes</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RouteEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">routes</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -22981,11 +22969,9 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">RouteEntry</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>어허 이것봐라 나름 스파크도 싱글톤이네?
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Spark</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+        - 어허 이것봐라 나름 스파크도 싱글톤이네?
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Spark</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1">// Hide constructor</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="nf">Spark</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -23002,109 +22988,63 @@
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SingletonHolder</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">;</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>ChessService에서 transactional이 안 먹힐 것 같네?<ul>
-<li>Dao에 접근은 자주하는데 이게 한 큐에 안 돌아갈 듯</li>
-</ul>
-</li>
-<li>ChessGameDao에서 하나하나 다 써줬구나...<ul>
-<li>커넥션을 만들어 주는 코드, 패스워드, 유저네임, 자원반환 전부 다 직접해줬네</li>
-<li>흐음... Dao에서 비즈니스 로직이 꽤 많이 보이네?<ul>
-<li>Service에서 생성해서 주도록 하자</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - ChessService에서 transactional이 안 먹힐 것 같네?
+        - Dao에 접근은 자주하는데 이게 한 큐에 안 돌아갈 듯
+    - ChessGameDao에서 하나하나 다 써줬구나...
+        - 커넥션을 만들어 주는 코드, 패스워드, 유저네임, 자원반환 전부 다 직접해줬네
+        - 흐음... Dao에서 비즈니스 로직이 꽤 많이 보이네?
+            - Service에서 생성해서 주도록 하자</li>
 </ul>
 <h2 id="jwp-chess">jwp-chess 복습하기<a class="headerlink" href="#jwp-chess" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>복습</strong></p>
+<li><strong>복습</strong>
+    - SparkJava -&gt; Spring 전환
+    - Spring Web MVC를 접해보면서 필요한 지식들 공부
+    - Spring 의 JdbcTemplate을 사용해봄</li>
+</ul>
 <ul>
-<li>SparkJava -&gt; Spring 전환</li>
-<li>Spring Web MVC를 접해보면서 필요한 지식들 공부</li>
-<li>Spring 의 JdbcTemplate을 사용해봄</li>
+<li><strong>회고</strong>
+    - Mocking을 아무것도 모르고 따라침
+    - 테스트 코드 작성에 더 많은 시간을 쓴 듯?
+    - 배럴과의 페어프로그래밍이 매우 스무스하고 좋았음</li>
 </ul>
-</li>
-<li>
-<p><strong>회고</strong></p>
 <ul>
-<li>Mocking을 아무것도 모르고 따라침</li>
-<li>테스트 코드 작성에 더 많은 시간을 쓴 듯?</li>
-<li>배럴과의 페어프로그래밍이 매우 스무스하고 좋았음</li>
+<li><strong>피드백 공유</strong>
+    - REST API에 대해 공부해보기
+        - HTTP method로 행위를 표현, URL로 자원을 표현!
+    - <code>@Get/PostMapping()</code>에 필요한 것만 쓸 것 
+        - produces, consumes 제외
+            - <code>@RestController</code>붙어 있으면 알아서 JSON 반환
+    - <code>@ControllerAdvice</code> + <code>@ExceptionHandler</code>를 통해 예외 처리 가능
+    - final, 공백의 적절한 활용
+    - Map에서 entrySet을 활용하여 key-value를 동시에 사용할 수 있음 (key로 value 접근할 코드 작성 안써도됨)
+    - 생성 로직은 Dao에서 하지 말 것
+        - Dao 얇게 유지하자! 최소한의 DB Access만!
+            - Why....? 왜 그래야할까?!
+                - DB 기술에 의존적으로 Data Access를 해오게 되는데, 여기서 발생하는 예외는 개발자가 어떻게 할 수 없음
+                - 최소한의 DB 처리만 하는 코드만 작성하여 예외 발생하면 바로 예외 핸들링하도록
+    - Dao는 도메인 레이어가 아님, Persistence 레이어라서 비즈니스 로직은 상위 레이어에서 해줄것
+        - 비즈니스 로직이 수정 되었을 때, Dao를 수정하면 안대!
+    - Jackson의 ObjectMapper를 사용하여 JSON으로 변환하여 테스트 작성해볼 것</li>
 </ul>
-</li>
-<li>
-<p><strong>피드백 공유</strong></p>
 <ul>
-<li>REST API에 대해 공부해보기<ul>
-<li>HTTP method로 행위를 표현, URL로 자원을 표현!</li>
-</ul>
-</li>
-<li><code>@Get/PostMapping()</code>에 필요한 것만 쓸 것 <ul>
-<li>produces, consumes 제외<ul>
-<li><code>@RestController</code>붙어 있으면 알아서 JSON 반환</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>@ControllerAdvice</code> + <code>@ExceptionHandler</code>를 통해 예외 처리 가능</li>
-<li>final, 공백의 적절한 활용</li>
-<li>Map에서 entrySet을 활용하여 key-value를 동시에 사용할 수 있음 (key로 value 접근할 코드 작성 안써도됨)</li>
-<li>생성 로직은 Dao에서 하지 말 것<ul>
-<li>Dao 얇게 유지하자! 최소한의 DB Access만!<ul>
-<li>Why....? 왜 그래야할까?!<ul>
-<li>DB 기술에 의존적으로 Data Access를 해오게 되는데, 여기서 발생하는 예외는 개발자가 어떻게 할 수 없음</li>
-<li>최소한의 DB 처리만 하는 코드만 작성하여 예외 발생하면 바로 예외 핸들링하도록</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Dao는 도메인 레이어가 아님, Persistence 레이어라서 비즈니스 로직은 상위 레이어에서 해줄것<ul>
-<li>비즈니스 로직이 수정 되었을 때, Dao를 수정하면 안대!</li>
-</ul>
-</li>
-<li>Jackson의 ObjectMapper를 사용하여 JSON으로 변환하여 테스트 작성해볼 것</li>
-</ul>
-</li>
-<li>
-<p><strong>개선 방향</strong></p>
-<ul>
-<li>도메인 객체, Dto를 생성하는 과정을 모두 서비스에서 해줬네?<ul>
-<li>해당 과정을 각각 도메인/Dto 내부에서 해주는 것이 좋아보임</li>
-</ul>
-</li>
-<li>Spring 의 JdbcTemplate을 사용해봄<ul>
-<li>SpringBoot에서 주입시켜주는 것인데 당시에는 몰랐음?</li>
-<li>지금은 아니?<ul>
-<li>application.properties 이런 설정들이 JDBC 설정들을 적어놓은 것이자나?</li>
-<li>이게 어떻게 JdbcTemplate 빈 객체를 만드는지 조금 알아보자<ul>
-<li>디버깅 찍어보는 것도 괜찮지 않을까?</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Service에서 Transactional 처리를 조금 해주는 게 좋겠다<ul>
-<li>왜 Transactional 처리 해주는게 이득인지 아니? <ul>
-<li>원자성 보장?</li>
-<li>그러면 그냥 synchronized로 하는게 좋지 않을까?</li>
-<li>내부적으로 어떻게 돌아가는 걸까?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>세션 만드는 과정을 interceptor로 하는 것이 좋아보임</li>
-<li>MockMvc와 RestAssured의 차이?</li>
-</ul>
-</li>
+<li><strong>개선 방향</strong>
+    - 도메인 객체, Dto를 생성하는 과정을 모두 서비스에서 해줬네?
+        - 해당 과정을 각각 도메인/Dto 내부에서 해주는 것이 좋아보임
+    - Spring 의 JdbcTemplate을 사용해봄
+        - SpringBoot에서 주입시켜주는 것인데 당시에는 몰랐음?
+        - 지금은 아니?
+            - application.properties 이런 설정들이 JDBC 설정들을 적어놓은 것이자나?
+            - 이게 어떻게 JdbcTemplate 빈 객체를 만드는지 조금 알아보자
+                - 디버깅 찍어보는 것도 괜찮지 않을까?
+    - Service에서 Transactional 처리를 조금 해주는 게 좋겠다
+        - 왜 Transactional 처리 해주는게 이득인지 아니? 
+            - 원자성 보장?
+            - 그러면 그냥 synchronized로 하는게 좋지 않을까?
+            - 내부적으로 어떻게 돌아가는 걸까?
+    - 세션 만드는 과정을 interceptor로 하는 것이 좋아보임
+    - MockMvc와 RestAssured의 차이?</li>
 </ul>
 
 

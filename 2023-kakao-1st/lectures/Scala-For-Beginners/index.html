@@ -23551,24 +23551,24 @@
 <h2 id="the-absolute-basic">The Absolute Basic<a class="headerlink" href="#the-absolute-basic" title="Permanent link">&para;</a></h2>
 <h3 id="expressions">Expressions<a class="headerlink" href="#expressions" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
-<li>
-<p>Everything in scala is an Expression</p>
-<ul>
+<li><strong>개요</strong><ul>
+<li>Everything in scala is an Expression<ul>
 <li>IF는 Expression</li>
 <li>Code Block도 Expression</li>
 </ul>
 </li>
-<li>
-<p><strong>Expressions vs Instructions</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Expressions vs Instructions</strong><ul>
 <li>Instruction: 실행되는 것 (Java) - do sth</li>
-<li>
-<p>Expressions: 평가되는 것 (Scala) - give me the value of sth</p>
+<li>Expressions: 평가되는 것 (Scala) - give me the value of sth</li>
+</ul>
 </li>
-<li>
-<p><strong>Side Effect</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Side Effect</strong><ul>
 <li>함수의 리턴값이 아닌 값에 대한 상태를 변화시키는 것을 의미함<ul>
 <li>변수 조작, 파일/DB 읽기, 콘솔에 출력하기 등등을 의미함 (주로 Unit 반환)</li>
 </ul>
@@ -23579,6 +23579,8 @@
 <li>굉장히 작은, 잘 정제된 코드 부분에서 접근하도록 해야하며, 프로그램 전체에 영향을 미치지 않도록 해야함</li>
 <li>monad를 사용하여 많은 라이브러리들이 이를 캡슐화하도록 지원하고 있음</li>
 <li>purely functional 하도록 유도</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23597,7 +23599,7 @@
 <h3 id="recursion">Recursion<a class="headerlink" href="#recursion" title="Permanent link">&para;</a></h3>
 <ul>
 <li>반복문이 필요하다면 꼬리 재귀(tailrec)을 사용하세요!!</li>
-<li><strong>tailrec</strong></li>
+<li><strong>tailrec</strong><ul>
 <li>재귀를 써도 스택 오버플로우가 안 터지는 방법</li>
 <li>꼬리 재귀를 쓰면 새로운 스택 위에 쌓지 않아<ul>
 <li>don't need to save intermediate result</li>
@@ -23605,7 +23607,7 @@
 </ul>
 </li>
 <li>꼬리 재귀가 되려면 재귀 함수를 마지막 expression으로 사용하세요!!!!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">factHelper</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">accumulator</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">accumulator</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="n">factHelper</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">accumulator</span><span class="p">)</span>
@@ -23614,21 +23616,25 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="call-by-name-call-by-value">Call By Name &amp; Call By Value<a class="headerlink" href="#call-by-name-call-by-value" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Call By Value</strong></li>
+<li><strong>Call By Value</strong><ul>
 <li>파라미터로 넘어가는 "값" 그 자체!</li>
 <li>그 값을 아무리 호출해도 넘겨받은 값을 사용하게 됨</li>
-<li>
-<p>파라미터로 넘길 때 값을 평가해서 "값"을 줌</p>
+<li>파라미터로 넘길 때 값을 평가해서 "값"을 줌</li>
+</ul>
 </li>
-<li>
-<p><strong>Call By Name</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Call By Name</strong><ul>
 <li>파라미터로 넘어가는 "Expression"</li>
 <li>해당 "Expression"을 호출할 때마다 평가된다!</li>
 <li>파라미터로 넘길 때 호출할 "Expression"을 넘겨줌<ul>
 <li>따라서 호출이 되어야 평가를 하고 값을 반환함</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23659,24 +23665,23 @@
 </ul>
 <h3 id="string-operations-and-interpolations">String Operations and Interpolations<a class="headerlink" href="#string-operations-and-interpolations" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>S-Interpolations</strong>
+<li><strong>S-Interpolations</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;David&quot;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">s&quot;Hello, my name is </span><span class="si">$</span><span class="n">name</span><span class="s"> and I am </span><span class="si">$</span><span class="n">age</span><span class="s"> years old&quot;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">anotherGreeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">s&quot;Hello, my name is </span><span class="si">$</span><span class="n">name</span><span class="s"> and I will be turning </span><span class="si">${</span><span class="n">age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s"> years old&quot;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">println</span><span class="p">(</span><span class="n">anotherGreeting</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>F-Interpolations</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>F-Interpolations</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.2f</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">myth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">f&quot;Eat with </span><span class="si">$</span><span class="n">speed</span><span class="s">%2.2f burgers with minute&quot;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">println</span><span class="p">(</span><span class="n">myth</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Raw-Interpolations</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Raw-Interpolations</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">println</span><span class="p">(</span><span class="s">raw&quot;This is a \n newline&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="cm">/*</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="cm">* This is a \n newline</span>
@@ -23688,46 +23693,48 @@
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="cm">* This is a</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="cm">*  newline</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="cm">* */</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="oop-in-scala">OOP in Scala<a class="headerlink" href="#oop-in-scala" title="Permanent link">&para;</a></h2>
 <h3 id="oo-basics">OO Basics<a class="headerlink" href="#oo-basics" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>constructor의 <code>val</code>을 붙여야 멤버변수로써 활용 가능</li>
 <li>그냥 클래스 내부에서 <code>val</code>을 붙여도 멤버변수로 활용 가능</li>
-<li>
-<p>multiple constructor 활용 가능 =&gt; 너무 많다면 default parameter가 대안이 될 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li>multiple constructor 활용 가능 =&gt; 너무 많다면 default parameter가 대안이 될 수 있음
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="c1">// 멤버 변수로 활용 가능. 접근 가능</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="c1">// multiple constructor, default parameter도 대안이 될 수 있음</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">this</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">this</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">this</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">this</span><span class="p">(</span><span class="s">&quot;Joel&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>TIPS</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>TIPS</strong><ul>
 <li>불변성을 고려하여 만들자! (상태 패턴이랑 비슷해보이기도 함!)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">inc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">dec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="method-notations">Method Notations<a class="headerlink" href="#method-notations" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>다양한 기호들이 메서드의 이름으로 사용될 수 있음 =&gt; 가독성 향상 가능</li>
 <li>prefix, infix, postfix 방식으로 메서드가 여기저기에 낄 수 있도록 syntatic sugar 제공</li>
-<li>
-<p>파라미터가 0개/1개라면 보다 유연하게 호출할 수 있음</p>
+<li>파라미터가 0개/1개라면 보다 유연하게 호출할 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">favoriteMovie</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">likes</span><span class="p">(</span><span class="n">movie</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">):</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">movie</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">favoriteMovie</span><span class="p">)</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">+</span><span class="p">(</span><span class="n">person</span><span class="p">:</span><span class="w"> </span><span class="nc">Person</span><span class="p">):</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; +++++ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">person</span><span class="p">.</span><span class="n">name</span>
@@ -23742,22 +23749,20 @@
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">println</span><span class="p">(</span><span class="o">!</span><span class="n">joel</span><span class="p">)</span><span class="w"> </span><span class="c1">// prefix</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="n">println</span><span class="p">(</span><span class="n">joel</span><span class="w"> </span><span class="n">likes</span><span class="w"> </span><span class="s">&quot;Shall we dance?&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// infix</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="n">println</span><span class="p">(</span><span class="n">joel</span><span class="w"> </span><span class="n">isAlive</span><span class="p">)</span><span class="w"> </span><span class="c1">// postfix</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="scala-objects">Scala Objects<a class="headerlink" href="#scala-objects" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>스칼라는 class-level functionality, 즉 자바의 static 변수가 없음 =&gt; object를 통해서 대신할 수 있음</li>
-<li>
-<p>Scala Object는 싱글턴으로 기능함</p>
+<li>Scala Object는 싱글턴으로 기능함</li>
+</ul>
 </li>
-<li>
-<p><strong>Companions</strong></p>
-</li>
-<li>
-<p>class와 object의 이름이 같으면, Companions라고 칭한다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+</ul>
+<ul>
+<li><strong>Companions</strong><ul>
+<li>class와 object의 이름이 같으면, Companions라고 칭한다
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="c1">// class-level functionality</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="nc">N_EYES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">canFly</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
@@ -23767,30 +23772,35 @@
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="c1">// instance-level functionality</span>
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Companions 왜 필요한데?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Companions 왜 필요한데?</strong><ol>
 <li>Code Organizations: 오브젝트와 클래스에 필요한 코드를 그룹핑 시켜 이해하기 좋은 코드를 만들자</li>
 <li>Convenience: 클래스를 생성하는 팩토리 메서드를 오브젝트에 넣자. <code>apply()</code> syntatic sugar 쓰면 더 좋고</li>
 <li>Static Methods: 정적 메서드 사용하듯 사용할 수 있음. 간결하고 읽기 쉽게!</li>
 <li>Implicit Conversions: 다른 이름과 대표값이 있을때 변환을 쓱 하는데 지원</li>
 <li>Sharing state: 클래스가 공통적으로 공유하는 상태를 오브젝트에 만들자!</li>
+</ol>
+</li>
 </ul>
 <h3 id="abstract-class-and-inheritance">Abstract Class and Inheritance<a class="headerlink" href="#abstract-class-and-inheritance" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>오버라이딩 방지</strong></li>
+<li><strong>오버라이딩 방지</strong><ol>
 <li>final members</li>
 <li>final classes</li>
-<li>
-<p>sealed classes</p>
+<li>sealed classes</li>
+</ol>
 </li>
-<li>
-<p><strong>trait</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>trait</strong><ul>
 <li>constructor에 파라미터 가지면 안댐</li>
 <li>여러개의 trait 받아서 클래스 생성 가능</li>
+</ul>
+</li>
 </ul>
 <h3 id="anonymous-classes">Anonymous Classes<a class="headerlink" href="#anonymous-classes" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
@@ -23803,14 +23813,16 @@
 </code></pre></div>
 <h3 id="generics">Generics<a class="headerlink" href="#generics" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>자바의 제네릭과 비슷한 느낌이 많이 든다</li>
 <li>다만 Covariance, Invariance, Contravariance 등의 컨셉이 자바와 다름</li>
 <li>제네릭의 한정자 super와 extends 는 &lt;: 등으로 상한/하한 표현 가능</li>
 </ul>
+</li>
+</ul>
 <h3 id="case-classes">Case Classes<a class="headerlink" href="#case-classes" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ol>
 <li>CC에서는 파라미터가 필드다</li>
 <li>CC는 toString을 오버라이딩 해둔다</li>
 <li>equals &amp; hashCode가 필드가 같으면 같다</li>
@@ -23818,7 +23830,7 @@
 <li>CC는 companion object를 가진다. (apply() 가 호출되어 constructor 대체)</li>
 <li>CC는 serializable</li>
 <li>CC는 패턴 매칭에서도 자주 쓰임
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1">// 1. class parameters are fields</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">jim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="s">&quot;Jim&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span>
@@ -23843,15 +23855,18 @@
 <a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="c1">// 6. CC are serializable</span>
 <a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="c1">// 7. CC can be used in pattern matching</span>
 </code></pre></div></li>
+</ol>
+</li>
 </ul>
 <h3 id="handling-exceptions">Handling Exceptions<a class="headerlink" href="#handling-exceptions" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Exception 던지기</strong></li>
-<li>
-<p><code>val aWeirdValue: String = throw new NullPointerException</code></p>
+<li><strong>Exception 던지기</strong><ul>
+<li><code>val aWeirdValue: String = throw new NullPointerException</code></li>
+</ul>
 </li>
-<li>
-<p><strong>Exception 잡기</strong>
+</ul>
+<ul>
+<li><strong>Exception 잡기</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">getInt</span><span class="p">(</span><span class="n">withExceptions</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">withExceptions</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">RuntimeException</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="mi">50</span>
@@ -23863,17 +23878,18 @@
 <a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">  </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;finally&quot;</span><span class="p">)</span>
 <a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Exception 정의하기</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Exception 정의하기</strong><ul>
 <li>자바와 비슷!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyException</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Exception</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyException</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Exception</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">exception</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">MyException</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="k">throw</span><span class="w"> </span><span class="n">exception</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="packaging-and-imports">Packaging and Imports<a class="headerlink" href="#packaging-and-imports" title="Permanent link">&para;</a></h3>
 <ul>
@@ -23894,56 +23910,62 @@
 <h2 id="fp-in-scala">FP in Scala<a class="headerlink" href="#fp-in-scala" title="Permanent link">&para;</a></h2>
 <h3 id="whats-a-function">What's a Function?<a class="headerlink" href="#whats-a-function" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>JVM에서 함수를 일급 시민으로 쓸 수는 없을까?</li>
-<li>
-<p>JVM은 OOP 기반으로 설계 되어있음 =&gt; 함수형을 JVM 위에서 구동시키기 위해서는 함수형을 OOP 위에 구현시키려는 노력이 필요했음</p>
+<li>JVM은 OOP 기반으로 설계 되어있음 =&gt; 함수형을 JVM 위에서 구동시키기 위해서는 함수형을 OOP 위에 구현시키려는 노력이 필요했음</li>
+</ul>
 </li>
-<li>
-<p><strong>Function_x</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Function_x</strong><ul>
 <li>trait <code>Function_1</code> ~ <code>Function22</code> 까지 (1~22는 파라미터 갯수) 인스턴스화 시켜서 이를 사용토록</li>
 <li>이를 람다식으로 표현할 수 있도록 Syntatic Sugar 제공</li>
 <li>모든 스칼라의 Function은 JVM 위에서 동작한다는 것을 명심!</li>
 </ul>
+</li>
+</ul>
 <h3 id="anonymous-functions">Anonymous Functions<a class="headerlink" href="#anonymous-functions" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>익명 클래스 처럼, 익명 함수를 만들어보자</li>
-<li>
-<p>그냥 trait, abstract class를 변수에서 new 인스턴스화로 박아버리듯, 함수도 그렇게 람다식으로 박아버리자
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">doubler</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
+<li>그냥 trait, abstract class를 변수에서 new 인스턴스화로 박아버리듯, 함수도 그렇게 람다식으로 박아버리자
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">doubler</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">adder</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">justDoSth</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">3</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">println</span><span class="p">(</span><span class="n">justDoSth</span><span class="p">)</span><span class="w"> </span><span class="c1">// 이러면 함수 자체를 출력</span>
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">println</span><span class="p">(</span><span class="n">justDoSth</span><span class="p">())</span><span class="w"> </span><span class="c1">// 함수 실행을 원한다면 ()를 써주세요!</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Syntatic Sugar</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Syntatic Sugar</strong><ul>
 <li><code>_</code>를 활용해 함수에서 넘겨받은 매개변수를 표현할 수 있다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">niceIncrementer</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// x =&gt; x + 1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">niceIncrementer</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// x =&gt; x + 1</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">niceAdder</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="c1">// (a, b) =&gt; a + b</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="hof-and-curries">HOF and Curries<a class="headerlink" href="#hof-and-curries" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Higher Order Function(HOF)</strong></li>
+<li><strong>Higher Order Function(HOF)</strong><ul>
 <li>함수를 파라미터로, 리턴값으로 쓰는 경우, 이를 HOF라고 부른다</li>
-<li>
-<p>함수 합성, 중첩 등이 가능해진다. </p>
+<li>함수 합성, 중첩 등이 가능해진다. </li>
+</ul>
 </li>
-<li>
-<p><strong>Curried Functions</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Curried Functions</strong><ul>
 <li>함수의 재사용성을 높이기 위해 함수 자체를 반환하는 함수</li>
 <li><em>참고: https://itprogramming119.tistory.com/entry/Javascript-%EC%BB%A4%EB%A7%81Currying-%ED%95%A8%EC%88%98%EB%9E%80</em>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">superAdder</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">superAdder</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">addThree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">superAdder</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">println</span><span class="p">(</span><span class="n">addThree</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="collections-overview">Collections Overview<a class="headerlink" href="#collections-overview" title="Permanent link">&para;</a></h3>
 <ul>
@@ -23952,137 +23974,135 @@
 </ul>
 <h3 id="sequences">Sequences<a class="headerlink" href="#sequences" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>Seq</strong>
+<li><strong>Seq</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aSequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">println</span><span class="p">(</span><span class="n">aSequence</span><span class="p">)</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">println</span><span class="p">(</span><span class="n">aSequence</span><span class="p">.</span><span class="n">reverse</span><span class="p">)</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">println</span><span class="p">(</span><span class="n">aSequence</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="n">println</span><span class="p">(</span><span class="n">aSequence</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">))</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="n">println</span><span class="p">(</span><span class="n">aSequence</span><span class="p">.</span><span class="n">sorted</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Ranges</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Ranges</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aRange</span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">aRange</span><span class="p">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">println</span><span class="p">)</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10</span><span class="p">).</span><span class="n">foreach</span><span class="p">(</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">))</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>List</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>List</strong><ul>
 <li>Singly-Linked List</li>
 <li>O(1): head, tail, isEmpty</li>
 <li>o(n): 그 외 다수의 random access</li>
-<li>
-<p>앞 순서 변경에 강함
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<li>앞 순서 변경에 강함
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">println</span><span class="p">(</span><span class="n">aList</span><span class="p">.</span><span class="n">mkString</span><span class="p">(</span><span class="s">&quot;-|-&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// 1-|-2-|-3</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">prepend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">aList</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">append</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">+:</span><span class="w"> </span><span class="n">aList</span><span class="w"> </span><span class="o">:+</span><span class="w"> </span><span class="mi">100</span>
 <a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="kd">val</span><span class="w"> </span><span class="n">apple5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">5</span><span class="p">)(</span><span class="s">&quot;apple&quot;</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Vector</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Vector</strong><ul>
 <li>트리 기반의 데이터 구조</li>
 <li>트리의 노드는 32개의 element까지 수용할 수 있다</li>
 <li>Vector는 효율적인 random access, tail operation 보장 <em>O(logN)</em></li>
 <li>head insertion/deletion 느림</li>
-<li>
-<p>뒷 순서 변경에 강함</p>
+<li>뒷 순서 변경에 강함</li>
+</ul>
 </li>
-<li>
-<p><strong>Array</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Array</strong><ul>
 <li><code>Array.ofDim[T](n1, n2, ...)</code></li>
 <li>multidimensional array of type T 생성</li>
 <li><code>Array.ofDim[Int](3)</code>는 Int 타입의 3칸짜리 1차원 배열 <code>(0, 0, 0)</code></li>
 <li><code>Array.ofDim[String](3)</code>는 String 타입의 3칸짜리 1차원 배열 <code>(null, null, null)</code></li>
 <li>배열은 안의 요소 변경할 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">numbers</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="tuples-maps">Tuples &amp; Maps<a class="headerlink" href="#tuples-maps" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>Tuples</strong>
+<li><strong>Tuples</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aTuple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Tuple2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;helloScala&quot;</span><span class="p">)</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">println</span><span class="p">(</span><span class="n">aTuple</span><span class="p">.</span><span class="n">_1</span><span class="p">)</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">println</span><span class="p">(</span><span class="n">aTuple</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;goodbye Java&quot;</span><span class="p">))</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">println</span><span class="p">(</span><span class="n">aTuple</span><span class="p">.</span><span class="n">swap</span><span class="p">)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Maps</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Maps</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aMap</span><span class="p">:</span><span class="w"> </span><span class="nc">Map</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">()</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">aPhoneBook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">((</span><span class="s">&quot;Jim&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Joel&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">25</span><span class="p">)).</span><span class="n">withDefaultValue</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">println</span><span class="p">(</span><span class="n">aPhoneBook</span><span class="p">)</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">println</span><span class="p">(</span><span class="n">aPhoneBook</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;Joel&quot;</span><span class="p">))</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">println</span><span class="p">(</span><span class="n">aPhoneBook</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&quot;JIII&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// 원래 에러 던지는데 withDefaultValue로 방어적 코드 작성</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="map-filter-flatmap">map, filter, flatMap<a class="headerlink" href="#map-filter-flatmap" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>list, array, set을 조작하는 HOF</li>
-<li>
-<p>스칼라 FP, 간결하고, 효율적인 코드 작성 도와줌</p>
+<li>스칼라 FP, 간결하고, 효율적인 코드 작성 도와줌</li>
+</ul>
 </li>
-<li>
-<p><strong>map</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>map</strong><ul>
 <li>주어진 함수를 각 요소별로 수행시켜서, 기존 컬렉션을 새로운 같은 사이즈의 컬렉션으로 반환</li>
-<li>
-<p>여기서 새로운 컬렉션은 기존 컬렉션의 요소별 함수 수행 값
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">B</span><span class="p">]</span>
+<li>여기서 새로운 컬렉션은 기존 컬렉션의 요소별 함수 수행 값
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">B</span><span class="p">]</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">doubledNumbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="n">println</span><span class="p">(</span><span class="n">doubledNumbers</span><span class="p">)</span><span class="w"> </span><span class="c1">// List(2, 4, 6, 8, 10)</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>filter</strong></p>
-</li>
-<li>
-<p>기존 컬렉션에서 해당 predicate를 만족하는 새로운 컬렉션을 반환
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Boolean</span><span class="p">):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span>
+</ul>
+<ul>
+<li><strong>filter</strong><ul>
+<li>기존 컬렉션에서 해당 predicate를 만족하는 새로운 컬렉션을 반환
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Boolean</span><span class="p">):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">evenNumbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="n">println</span><span class="p">(</span><span class="n">evenNumbers</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>flatMap</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>flatMap</strong><ul>
 <li>map과 비슷하나!</li>
 <li>컬렉션을 반환하는 함수를 적용시키고, 이를 flattening 시켜 하나의 컬렉션으로 만들어버림
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flatMap</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">B</span><span class="p">]):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">B</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flatMap</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">B</span><span class="p">]):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">B</span><span class="p">]</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p">)</span>
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">letters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">word</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">word</span><span class="p">.</span><span class="n">toList</span><span class="p">)</span>
 <a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="n">println</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span><span class="w"> </span><span class="c1">// List(H, e, l, l, o, w, o, r, l, d)</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h3 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>값을 가질수도, 가지지 않을수도 있는 컨테이너</li>
 <li>Null 값을 핸들링하기 위함이며, type-safe way한 방식으로 다루기 위함</li>
-<li>
-<p>FP에서 성공할수도, 실패할수도 있는 계산을 수행할 때 많이 사용</p>
-<ul>
+<li>FP에서 성공할수도, 실패할수도 있는 계산을 수행할 때 많이 사용<ul>
 <li>실패 == null 이라는 공식에서 벗어나, Option 타입을 돌려주자</li>
-<li>Option</li>
+<li>Option<ul>
 <li>실패 == None</li>
 <li>성공 == Some(value)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Option</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">object</span><span class="w"> </span><span class="nc">Option</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="c1">// ~~</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="p">}</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
@@ -24100,8 +24120,13 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">findItem</span><span class="p">(</span><span class="n">list</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">],</span><span class="w"> </span><span class="n">target</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="n">indexOf</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
@@ -24112,17 +24137,17 @@
 <a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;Item found at index </span><span class="si">$</span><span class="n">index</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Item not found&quot;</span><span class="p">)</span>
 <a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Option의 메서드</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Option의 메서드</strong><ul>
 <li>[orElse]: <code>if (isEmpty) alternative else this</code></li>
-<li>
-<p>[flatMap]: <code>if (isEmpty) None else f(this.get)</code></p>
+<li>[flatMap]: <code>if (isEmpty) None else f(this.get)</code></li>
+</ul>
 </li>
-<li>
-<p><strong>예시</strong>
+</ul>
+<ul>
+<li><strong>예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">config</span><span class="p">:</span><span class="w"> </span><span class="nc">Map</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">String</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">(</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="s">&quot;host&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;182.12.34.3&quot;</span><span class="p">,</span>
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span><span class="s">&quot;port&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">80</span>
@@ -24143,14 +24168,13 @@
 <a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a><span class="kd">val</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">)</span>
 <a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a><span class="kd">val</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;port&quot;</span><span class="p">)</span>
 <a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a><span class="kd">val</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">host</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">port</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Connection</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)))</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h3 id="try">Try<a class="headerlink" href="#try" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>성공/실패에 대해 값을 가질 수 있도록 Try
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">util</span><span class="p">.{</span><span class="nc">Try</span><span class="p">,</span><span class="w"> </span><span class="nc">Success</span><span class="p">,</span><span class="w"> </span><span class="nc">Failure</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">util</span><span class="p">.{</span><span class="nc">Try</span><span class="p">,</span><span class="w"> </span><span class="nc">Success</span><span class="p">,</span><span class="w"> </span><span class="nc">Failure</span><span class="p">}</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">dividend</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">divisor</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Try</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">  </span><span class="nc">Try</span><span class="p">(</span><span class="n">dividend</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">divisor</span><span class="p">)</span>
@@ -24163,6 +24187,8 @@
 <a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Failure</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;An exception occurred: </span><span class="si">${</span><span class="n">exception</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 <a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

@@ -22910,24 +22910,24 @@
 <h2 id="mapstruct">MapStruct<a class="headerlink" href="#mapstruct" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/mapstruct</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>자동적으로 두개의 자바 빈을 매핑해줌</li>
-<li>
-<p>인터페이스만 정의한다면, 라이브러리가 구체 구현을 컴파일 타임에 뚝딱 내놓을 것</p>
+<li>인터페이스만 정의한다면, 라이브러리가 구체 구현을 컴파일 타임에 뚝딱 내놓을 것</li>
+</ul>
 </li>
-<li>
-<p><strong>MapStruct and Transfer Object Pattern</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>MapStruct and Transfer Object Pattern</strong><ul>
 <li>POJO &lt;--&gt; POJO</li>
 <li>Persistence Backed Entity &lt;--&gt; DTO</li>
-<li>
-<p>수동으로 빈 Mapper를 만드는것이 time-consuming 하니, 자동으로 만들자</p>
+<li>수동으로 빈 Mapper를 만드는것이 time-consuming 하니, 자동으로 만들자</li>
+</ul>
 </li>
-<li>
-<p><strong>기본 예시</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>기본 예시</strong><ul>
 <li>인터페이스만 다음과 같이 구현해두면 됨
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleSource</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleSource</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">description</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
@@ -22943,9 +22943,8 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">SimpleSource</span><span class="w"> </span><span class="nf">destinationToSource</span><span class="p">(</span><span class="n">SimpleDestination</span><span class="w"> </span><span class="n">destination</span><span class="p">);</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>빌드를 하게되면 <code>/target/generated-sources/annotations/</code> 에 다음과 같은 클래스 생성
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleSourceDestinationMapperImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SimpleSourceDestinationMapper</span><span class="w"> </span><span class="p">{</span>
+<li>빌드를 하게되면 <code>/target/generated-sources/annotations/</code> 에 다음과 같은 클래스 생성
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleSourceDestinationMapperImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SimpleSourceDestinationMapper</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SimpleDestination</span><span class="w"> </span><span class="nf">sourceToDestination</span><span class="p">(</span><span class="n">SimpleSource</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -22969,10 +22968,12 @@
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">simpleSource</span><span class="p">;</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>필드 이름이 다른 필드 매핑</strong>
+</ul>
+<ul>
+<li><strong>필드 이름이 다른 필드 매핑</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EmployeeDTO</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">employeeId</span><span class="p">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">employeeName</span><span class="p">;</span>
@@ -22997,8 +22998,7 @@
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="p">})</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="n">Employee</span><span class="w"> </span><span class="nf">employeeDTOtoEmployee</span><span class="p">(</span><span class="n">EmployeeDTO</span><span class="w"> </span><span class="n">dto</span><span class="p">);</span>
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

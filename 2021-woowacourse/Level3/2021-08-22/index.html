@@ -22911,64 +22911,44 @@
 <ul>
 <li><em>참고 1: https://www.youtube.com/watch?v=fqMOX6JJhGo</em></li>
 <li><em>참고 2: https://kodekloud.com/courses/labs-docker-for-the-absolute-beginner-hands-on/</em></li>
-<li>
-<p><strong>Docker intro</strong></p>
+<li><strong>Docker intro</strong>
+    - Linux OS Kernel 공유
+    - Linux 커널 자체는 공유하며 그 위의 SW만 다름
+        - 우분투, 페도라, CentOS등을 컨테이너화 시켜 사용할 수 있는 이유
+    - "Package and containerize application and to ship them and to run them anywhere, anytime"</li>
+</ul>
 <ul>
-<li>Linux OS Kernel 공유</li>
-<li>Linux 커널 자체는 공유하며 그 위의 SW만 다름<ul>
-<li>우분투, 페도라, CentOS등을 컨테이너화 시켜 사용할 수 있는 이유</li>
+<li><strong>Docker tips</strong>
+    - <code>alpine</code>: 경량화된 컨테이너
+    - <code>CMD</code>: 어떤 프로세스를 컨테이너 안에서 돌릴것인가?
+    - <code>ENTRYPOINT</code>: 컨테이너 시작할 때 돌릴 프로그램을 명시 (JSON format)
+    - Docker Engine
+        - 도커 설치한 host (Linux System): PID 1부터 시작
+            - 안의 컨테이너: PID 1부터 시작하는 척
+                - 원래는 그냥 host의 PID 중 하나</li>
 </ul>
-</li>
-<li>"Package and containerize application and to ship them and to run them anywhere, anytime"</li>
-</ul>
-</li>
-<li>
-<p><strong>Docker tips</strong></p>
 <ul>
-<li><code>alpine</code>: 경량화된 컨테이너</li>
-<li><code>CMD</code>: 어떤 프로세스를 컨테이너 안에서 돌릴것인가?</li>
-<li><code>ENTRYPOINT</code>: 컨테이너 시작할 때 돌릴 프로그램을 명시 (JSON format)</li>
-<li>Docker Engine<ul>
-<li>도커 설치한 host (Linux System): PID 1부터 시작<ul>
-<li>안의 컨테이너: PID 1부터 시작하는 척<ul>
-<li>원래는 그냥 host의 PID 중 하나</li>
+<li><strong>Docker run</strong>
+    - <code>-it</code>: stdin/stdout + terminal
+    - <code>-p</code>: 호스트:컨테이너 포트 매핑
+    - <code>-v</code>: 호스트:컨테이너 볼륨 마운팅
+    - <code>docker inspect ~</code>: 컨테이너의 구체적 정보
+    - <code>docker logs ~</code>: 컨테이너의 로그 찍어보기
+    - <code>--link</code>: 컨테이너끼리 연결</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Docker run</strong></p>
 <ul>
-<li><code>-it</code>: stdin/stdout + terminal</li>
-<li><code>-p</code>: 호스트:컨테이너 포트 매핑</li>
-<li><code>-v</code>: 호스트:컨테이너 볼륨 마운팅</li>
-<li><code>docker inspect ~</code>: 컨테이너의 구체적 정보</li>
-<li><code>docker logs ~</code>: 컨테이너의 로그 찍어보기</li>
-<li><code>--link</code>: 컨테이너끼리 연결</li>
-</ul>
-</li>
-<li>
-<p><strong>Docker Images</strong>    </p>
-<ul>
-<li><code>Dockerfile</code><ul>
-<li>Instruction + Argument
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">Ubuntu</span>
+<li><strong>Docker Images</strong>  <br />
+    - <code>Dockerfile</code>
+        - Instruction + Argument
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">Ubuntu</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>flask
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>flask-mysql
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/opt/source-code
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="nv">FLASK_APP</span><span class="o">=</span>/opt/source-code<span class="w"> </span>app.py<span class="w"> </span>flask-run
-</code></pre></div></li>
-</ul>
-</li>
-<li>앞선 레이어에서 뻑나면, 거기까진 저장해두고 그 이후 작업 수행</li>
-</ul>
-</li>
+</code></pre></div>
+    - 앞선 레이어에서 뻑나면, 거기까진 저장해두고 그 이후 작업 수행</li>
 </ul>
 
 

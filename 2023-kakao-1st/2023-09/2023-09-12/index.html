@@ -22920,62 +22920,72 @@
   - Throughput: 서버의 입장에서 시간당 얼마나 요청을 처리할 수 있는가
     - 도로가 넓어서 차들이 많이 지나다닐 수 있어</p>
 <ul>
-<li><strong>wrk이라는 파이썬 툴...</strong></li>
+<li><strong>wrk이라는 파이썬 툴...</strong><ul>
 <li>[wrk] =&gt; 얼마나 처리할 수 있는가? + 그때 Latency는 얼마인가? (서버가 몇 명의 Request를 처리할 수 있는가?)<ul>
 <li><img alt="" src="../../images/2023-09-12-wrk.png" /></li>
 <li><img alt="" src="../../images/2023-09-12-wrk%282%29.png" /></li>
-<li>Scenario #1</li>
+<li>Scenario #1<ul>
 <li>10개의 Connection, 5초의 Duration</li>
 <li>평균 10ms의 응답속도 (Latency)</li>
-<li>Scenario #2</li>
+</ul>
+</li>
+<li>Scenario #2<ul>
 <li>100개의 Connection, 5초의 Duration</li>
 <li>평균 100ms의 응답속도 (Latency)</li>
-<li>Scenario #3</li>
+</ul>
+</li>
+<li>Scenario #3<ul>
 <li>100개의 Connection, 5초의 Duration with latency 분포도</li>
 <li>99%가 몇 ms 걸렸는지 파악 가능</li>
+</ul>
+</li>
 <li>해당 정보는 서버의 한계치를 알 수는 있으나, 동시에 숫자를 몇 명 받을 수 있냐에 대한 정보는 줄 수 없음</li>
 </ul>
 </li>
-<li>
-<p>[wrk2] =&gt; 얼마나 처리하는지를 고정하고 + 그때 Latency는 얼마인가? (몇 명의 Request가 발생한 경우, 한 명 당 얼마나 쾌적한가?)</p>
-<ul>
-<li><img alt="" src="../../images/2023-09-12-wrk2.png" /></li>
-<li><img alt="" src="../../images/2023-09-12-wrk2%282%29.png" /> </li>
-<li>Scenario #1</li>
+<li>[wrk2] =&gt; 얼마나 처리하는지를 고정하고 + 그때 Latency는 얼마인가? (몇 명의 Request가 발생한 경우, 한 명 당 얼마나 쾌적한가?)
+    - <img alt="" src="../../images/2023-09-12-wrk2.png" />
+    - <img alt="" src="../../images/2023-09-12-wrk2%282%29.png" /> <ul>
+<li>Scenario #1<ul>
 <li>100개의 Connection, 1초에 100개씩 Request: 3~4ms의 응답시간 (Latency)</li>
-<li>Scenario #2</li>
+</ul>
+</li>
+<li>Scenario #2<ul>
 <li>100개의 Connection, 1초에 1000개씩 Request: 930ms~1000ms 응답시간 (Latency)</li>
+</ul>
+</li>
 <li>Request 10배 밀도 -&gt; 성능은 300배 느려짐</li>
 </ul>
 </li>
-<li>
-<p><strong>성능테스트</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>성능테스트</strong><ul>
 <li>부하 테스트: 병목 현상 확인하고 "목표치까지 개선"하는 것이 목적<ul>
 <li><img alt="" src="../../images/2023-09-12-load-test.png" /></li>
 </ul>
 </li>
-<li>
-<p>스트레스 테스트: "과부하 상태에서 어떻게 동작"하고 확 인하고 개선하는 것이 목적</p>
+<li>스트레스 테스트: "과부하 상태에서 어떻게 동작"하고 확 인하고 개선하는 것이 목적</li>
+</ul>
 </li>
-<li>
-<p><strong>Little's Law</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Little's Law</strong><ul>
 <li>Concurrent User = TPS X (Response Time + Think Time)</li>
 <li>Virtual User = TPS X (Response Time + Think Time)</li>
 <li>Ramp Up Test : 서서히 사용자를 늘리는 구조<ul>
 <li><img alt="" src="../../images/2023-09-12-ramp-up.png" /></li>
 </ul>
 </li>
-<li>
-<p>네트워크 환경 자체에서 병목이 발생하면 사실 좋은 환경에서 테스트가 되고 있다고 보기 어려워</p>
-<ul>
+<li>네트워크 환경 자체에서 병목이 발생하면 사실 좋은 환경에서 테스트가 되고 있다고 보기 어려워<ul>
 <li>Think Time 자체가 늘어나는 형식의 테스트 결과를 받는다면, 환경이 잘못되어있다고 봐야함</li>
 </ul>
 </li>
-<li>
-<p><strong>성능테스트 과정</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>성능테스트 과정</strong><ol>
 <li>성능테스트 시나리오 구상<ul>
 <li>시스템의 어느 부분에 어떻게 부하를 줄 것인지 결정</li>
 <li>부하 상황에서 시스템의 동작 예측</li>
@@ -22995,25 +23005,27 @@
 <li>부하 상황에서 모니터링 보드 지표 관측 및 기록</li>
 </ul>
 </li>
-<li>
-<p>테스트 결과 분석</p>
-<ul>
+<li>테스트 결과 분석<ul>
 <li>요청을 잘 처리 하는지</li>
 <li>시스템이 기대하던 대로 동작하였는지</li>
 </ul>
 </li>
-<li>
-<p><strong>성능테스트 과정을 보다보면...</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>성능테스트 과정을 보다보면...</strong><ul>
 <li>자동화가 가능한 부분 (파이프라인 구조) : 2. 테스트 환경 구축 -&gt; 3. 성능테스트 생성 및 수행 -&gt; 4. 테스트 결과 지표 관측 및 기록</li>
-<li>
-<p>개발자의 노력이 필요한 부분 : 1. 성능테스트 시나리오 구상, 5. 테스트 결과 분석</p>
+<li>개발자의 노력이 필요한 부분 : 1. 성능테스트 시나리오 구상, 5. 테스트 결과 분석</li>
+</ul>
 </li>
-<li>
-<p><strong>성능테스트를 통해...</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>성능테스트를 통해...</strong><ul>
 <li>다양한 시나리오에 대한 테스트를 수행하고 기록하여 자산으로 남길 것</li>
 <li>장애 상황에 대해 기록하고, 시뮬레이션을 해둘 것</li>
+</ul>
+</li>
 </ul>
 
 

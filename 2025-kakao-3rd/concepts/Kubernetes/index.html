@@ -23413,25 +23413,23 @@
 <p><img alt="" src="../../images/2025-05-03-kubernetes-architecture.png" /></p>
 <h4 id="_2">공통<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Container Runtime Engine</strong></li>
+<li><strong>Container Runtime Engine</strong><ul>
 <li>모든 노드에서는 docker, rkt 등 컨테이너 엔진이 필요</li>
+</ul>
+</li>
 </ul>
 <h4 id="master-node">Master Node<a class="headerlink" href="#master-node" title="Permanent link">&para;</a></h4>
 <ul>
-<li>
-<p>역할 - Manage / Plan / Schedule / Monitor</p>
-</li>
-<li>
-<p><strong>ETCD cluster</strong></p>
-</li>
+<li>역할 - Manage / Plan / Schedule / Monitor</li>
+</ul>
+<ul>
+<li><strong>ETCD cluster</strong><ul>
 <li>key-value 형식의 DB</li>
 <li>2379 포트에서 listening<ul>
 <li>클라이언트 요청용 (API 서버 등 컨트롤 플레인 구성 요소 여기에 연결)</li>
 </ul>
 </li>
-<li>
-<p>2380 포트</p>
-<ul>
+<li>2380 포트<ul>
 <li>etcd간 p2p 통신용 (etcd 클러스터 구성시 사용)</li>
 <li>클러스터가 혼자만으로 구성되어도 2380 포트에서 구동 가능
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>controlplane /etc/cni/net.d ✖ netstat -anp | grep etcd | grep 2380
@@ -23439,51 +23437,57 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>kube-scheduler</strong></p>
-</li>
-<li>
-<p>어떤 Pod가 어떤 Node에 들어갈지 결정 (실제 배치는 Kubelet에서 진행)</p>
-<ul>
-<li>적재할만큼 용량이 되는지, 올바른 dest 인지</li>
-<li>Scheduling</li>
-<li>Filter Nodes: Cpu/memory 하한 검증</li>
-<li>Rank Nodes: 0~10 점수 메겨서 어디가 적합할지 검증</li>
 </ul>
 </li>
-<li>
-<p><strong>kube-controller-manager</strong></p>
+</ul>
+<ul>
+<li><strong>kube-scheduler</strong><ul>
+<li>어떤 Pod가 어떤 Node에 들어갈지 결정 (실제 배치는 Kubelet에서 진행)<ul>
+<li>적재할만큼 용량이 되는지, 올바른 dest 인지</li>
+<li>Scheduling<ol>
+<li>Filter Nodes: Cpu/memory 하한 검증</li>
+<li>Rank Nodes: 0~10 점수 메겨서 어디가 적합할지 검증</li>
+</ol>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>kube-controller-manager</strong><ul>
 <li>node controller: 노드 상태 및 장애 감지</li>
 <li>replication controller: 파드 갯수 유지 및 복제 관리</li>
 <li>endpoint controller: 서비스-파드 간 연결 관리</li>
 <li>service account &amp; token controller: API 접근 위한 계정/토큰 관리</li>
-<li>
-<p>기타 역할 많음: deployment, namespace, endpoint, job, pv-protection, service-account, pv-binder, cronjob, stateful set, replicaset</p>
+<li>기타 역할 많음: deployment, namespace, endpoint, job, pv-protection, service-account, pv-binder, cronjob, stateful set, replicaset</li>
+</ul>
 </li>
-<li>
-<p><strong>kube-apiserver</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>kube-apiserver</strong><ul>
 <li>클러스터 구성요소 통신하는 중심 허브</li>
 <li><code>kubectl</code> 명령어 및 다른 클라이언트 요청 처리</li>
 <li>인증/인가</li>
 <li>etcd 통신하여 클러스터 상태 저장/조회</li>
 </ul>
+</li>
+</ul>
 <h4 id="worker-node">Worker Node<a class="headerlink" href="#worker-node" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>kubelet</strong></li>
+<li><strong>kubelet</strong><ul>
 <li><code>kube-apiserver</code>에게 현재 워커 노드 상태 보고</li>
-<li>
-<p>각 Container의 선장으로, 컨테이너 런타임을 통해 컨테이너 실행/모니터링</p>
-<ol>
+<li>각 Container의 선장으로, 컨테이너 런타임을 통해 컨테이너 실행/모니터링<ol>
 <li>Node Register</li>
 <li>Pod 생성</li>
 <li>Node/Pod 모니터</li>
 </ol>
 </li>
-<li>
-<p><strong>kube-proxy</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>kube-proxy</strong><ul>
 <li>네트워크 통신 관리 역할</li>
 <li>iptable/IPVS 통한 네트워크 트래픽 라우팅<ul>
 <li>iptable을 통해서 서비스 forwarding</li>
@@ -23491,22 +23495,23 @@
 </li>
 <li>클러스터 내/외부 서비스 접근을 위한 네트워크 규칙 설정</li>
 </ul>
+</li>
+</ul>
 <h2 id="kubernetes-workload-resource">Kubernetes Workload Resource<a class="headerlink" href="#kubernetes-workload-resource" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>ReplicaSet</strong></li>
+<li><strong>ReplicaSet</strong><ul>
 <li>특정 갯수의 Pod 갯수를 유지하는 역할</li>
 <li>파드 죽으면 새로운 파드 생성</li>
-<li>
-<p>직접 사용하기보단 Deployment에서 주로 관리</p>
+<li>직접 사용하기보단 Deployment에서 주로 관리</li>
+</ul>
 </li>
-<li>
-<p><strong>Deployment</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Deployment</strong><ul>
 <li>내부적으로 <code>ReplicaSet</code> 생성/관리</li>
 <li>어플리케이션 배포 및 업데이트 기능 제공</li>
-<li>
-<p>롤링 업데이트 및 롤백 가능
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<li>롤링 업데이트 및 롤백 가능
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-deployment</span>
@@ -23523,17 +23528,18 @@
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-container</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>DaemonSet</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DaemonSet</strong><ul>
 <li>클러스터의 모든(혹은 특정) 노드에 하나의 파드를 실행하도록 보장하는 리소스</li>
 <li>각 노드 별 하나의 파드로 배포하는 방식</li>
 <li>특징<ol>
 <li>모든 노드에 자동 배포</li>
 <li>노드마다 하나의 파드만 실행됨</li>
-<li>일반적인 사용 사례</li>
+<li>일반적인 사용 사례<ul>
 <li>로그수집 에이전트 (Fluentd, Logstash)</li>
 <li>모니터링 에이전트 (Prometheus Node Exporter, Datadog)</li>
 <li>네트워크 관리 도구 (CNI 플러그인, kube-proxy)</li>
@@ -23555,29 +23561,33 @@
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring-agent</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring-agent</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ol>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="kubernetes-pods">Kubernetes Pods<a class="headerlink" href="#kubernetes-pods" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Args</strong></li>
-<li>
-<p>Dockerfile에 있는 <code>ENTRYPOINT</code>, <code>CMD</code>는 쿠버 Pod의 <code>command</code>, <code>args</code> 필드로 오버라이딩 가능</p>
+<li><strong>Args</strong><ul>
+<li>Dockerfile에 있는 <code>ENTRYPOINT</code>, <code>CMD</code>는 쿠버 Pod의 <code>command</code>, <code>args</code> 필드로 오버라이딩 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Pod Priority, Preemption</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Pod Priority, Preemption</strong><ul>
 <li><em>참고: https://malwareanalysis.tistory.com/653</em> </li>
 <li><code>kube-scheduler</code>가 더 이상 pod를 스케줄링하지 못할 경우, 우선 순위가 낮은 pod를 제거하고 새로운 pod를 스케줄링</li>
 <li>ex) Node에 용량이 꽉 찼는데, 우선순위 높은 pod가 생성 요청 -&gt; 우선 순위 낮은 pod 종료/빈 자리에 pod 스케줄링
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scheduling.k8s.io/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scheduling.k8s.io/v1</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PriorityClass</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nt">globalDefault</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dummy-pod</span>
@@ -23591,39 +23601,34 @@
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">busybox</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">busybox</span>
 </code></pre></div></li>
-<li>
-<p>언제 사용하지?</p>
-<ul>
+<li>언제 사용하지?<ul>
 <li>대기 시간을 최소화하기 위해 우선순위가 낮은 pod 미리 생성하여 노드 추가하는 AWS 카펜터의 오버프로비저닝</li>
 </ul>
 </li>
-<li>
-<p><strong>Multi-container pod</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Multi-container pod</strong><ul>
 <li><em>참고: https://seongjin.me/kubernetes-multi-container-pod-design-patterns/</em></li>
 <li>하나의 Pod 안에 여러개의 Container가 있는 경우</li>
 <li>필요에 따라 메인 프로세스에 도움을 줄 수 있는 보조적인 역할의 컨테이너를 더해서 운영</li>
-<li>메인 프로세스를 네트워크/스토리지의 밀접한 공유가 필요한 다른 컨테이너와 함께 운영하고자 할 때</li>
-<li><code>Sidecar Pattern</code><ul>
+<li>메인 프로세스를 네트워크/스토리지의 밀접한 공유가 필요한 다른 컨테이너와 함께 운영하고자 할 때
+1. <code>Sidecar Pattern</code><ul>
 <li>하나의 컨테이너는 하나의 책임만 가져야 한다</li>
 <li>두 컨테이너는 하나의 파드에 떠있어 file system 공유</li>
-<li>ex) Log container(Sidecar), Webapp container(Main)</li>
-</ul>
-</li>
-<li><code>Adapter Pattern</code><ul>
+<li>ex) Log container(Sidecar), Webapp container(Main)
+2. <code>Adapter Pattern</code></li>
 <li>특정 어플리케이션의 출력물 규격을 필요에 맞게 다듬는 용도</li>
 <li>이질적인 어플리케이션으로부터 출력물의 상호 호환성을 만들어주는 용도</li>
-<li>ex) 오픈소스 어플리케이션 어떤건 포맷 <code>YYYY-MM-DD</code>, 어떤건 <code>DD/MM/YYYY</code></li>
-</ul>
-</li>
-<li><code>Ambassador Pattern</code><ul>
+<li>ex) 오픈소스 어플리케이션 어떤건 포맷 <code>YYYY-MM-DD</code>, 어떤건 <code>DD/MM/YYYY</code>
+3. <code>Ambassador Pattern</code></li>
 <li>파드 외부의 서비스에 대한 엑세스를 간소화하는 특수한 유형의 컨테이너</li>
 <li>ex) 메인 컨테이너의 네트워크를 전담하는 프록시 역할을 수행하는 컨테이너</li>
 </ul>
 </li>
-<li>
-<p>예시) sidecar 컨테이너에서 동일한 웹앱의 log-volume 볼륨을 마운팅하여 filebeat로 전송하는 구조
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>예시) sidecar 컨테이너에서 동일한 웹앱의 log-volume 볼륨을 마운팅하여 filebeat로 전송하는 구조
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
@@ -23649,11 +23654,12 @@
 <a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="nt">hostPath</span><span class="p">:</span>
 <a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/log/webapp</span>
 <a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryOrCreate</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Init Container</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Init Container</strong><ul>
 <li>파드의 메인 컨테이너 실행 전 초기화 역할을 담당하는 컨테이너</li>
 <li>파드에 메인 프로세스 구동하는데 필요한 사전작업/조건 걸어두고, 완료된 뒤에 메인 프로세스 시작토록</li>
 <li>일반 컨테이너와의 차이점<ol>
@@ -23664,16 +23670,17 @@
 </ol>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="kubernetes-service-ingress">Kubernetes Service &amp; Ingress<a class="headerlink" href="#kubernetes-service-ingress" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>여러개의 파드를 하나의 네트워크 엔드포인트 (고정 IP)로 묶어주는 역할</li>
 <li>파드가 동적으로 변해도 안정적인 네트워크 접근 제공</li>
 <li>로드밸런싱 가능</li>
 <li>내부/외부 트래픽 파드로 전달</li>
-<li>
-<p>관리할 파드를 지정하기 위해서는, Service selector에 정의한 라벨들을 Pod에서 <strong>모두</strong> 가지고 있어야 한다.
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>관리할 파드를 지정하기 위해서는, Service selector에 정의한 라벨들을 Pod에서 <strong>모두</strong> 가지고 있어야 한다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service</span>
@@ -23686,7 +23693,7 @@
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-pod</span>
@@ -23700,17 +23707,17 @@
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:latest</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ClusterIP</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ClusterIP</strong><ul>
 <li>클러스터 내부에서만 접근 가능한 가상 IP 부여</li>
 <li>외부 접근 X</li>
 <li><code>my-service.default.svc.cluster.local</code> 같은 내부 DNS 접근 가능</li>
-<li>
-<p>ex. 클러스터 내부에서만 사용되는 마이크로서비스간 통신
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>ex. 클러스터 내부에서만 사용되는 마이크로서비스간 통신
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend-service</span>
@@ -23722,17 +23729,17 @@
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w">          </span><span class="c1"># 서비스에서 노출할 포트</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span><span class="w">  </span><span class="c1"># 파드 내부에서 실행되는 포트</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>NodePort</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>NodePort</strong><ul>
 <li>각 노드의 특정 포트를 통해 외부에서 접근 가능</li>
 <li><code>&lt;노드IP&gt;:&lt;노드Port&gt;</code> 통해 외부에서 접근 가능</li>
 <li>포트 범위: 30000~32767</li>
-<li>
-<p>작은 규모 테스트/내부 네트워크 운영시 사용
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>작은 규모 테스트/내부 네트워크 운영시 사용
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">metadat</span><span class="p">:</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nodeport-service</span>
@@ -23745,18 +23752,18 @@
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30080</span>
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NodePort</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>LoadBalancer</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>LoadBalancer</strong><ul>
 <li>AWS/GCP/Azure에서 외부 로드 밸런서 자동 생성<ul>
 <li>클라우드 벤더가 제공하는 외부 로드 밸런서를 사용하여 트래픽을 파드로 전달 가능</li>
 </ul>
 </li>
-<li>
-<p><code>EXTERNAL-IP</code> 통해 클러스터 외부에서 직접 접근 가능 (클라우드 서비스에서만)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li><code>EXTERNAL-IP</code> 통해 클러스터 외부에서 직접 접근 가능 (클라우드 서비스에서만)
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lb-service</span>
@@ -23768,12 +23775,13 @@
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ExternalName</strong><br />
-<em>참고: https://velog.io/@rockwellvinca/kubernetes-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%85%B8%EC%B6%9C%EB%B2%95-Externalname</em>  </p>
-</li>
+</ul>
+<ul>
+<li><strong>ExternalName</strong><br />
+<em>참고: https://velog.io/@rockwellvinca/kubernetes-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%85%B8%EC%B6%9C%EB%B2%95-Externalname</em>  <ul>
 <li>클러스터 내부의 파드가 외부 서비스에 접속할 때, 네트워크 트래픽 제어, 보안 정책 등으로 어려움이 있을 수 있음</li>
 <li><code>ExternalName</code>을 활용함으로써, 클러스터 내부의 서비스에 접속하듯 외부 도메인에 접속할 수 있음</li>
 <li>클러스터 내부 서비스에서 외부 서비스에 도메인 이름을 통해 접근할 때 사용 (DNS 기반 라우팅)</li>
@@ -23787,9 +23795,8 @@
 <li>내부 DNS를 통해 외부 서비스로 트래픽 라우팅</li>
 </ul>
 </li>
-<li>
-<p>ex)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>ex)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ex-url-1</span>
@@ -23801,11 +23808,12 @@
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># k exec net -it -- /bin/bash</span>
 <a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="c1"># nslookup ex-url-1</span>
 <a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="c1"># -&gt; Name: sysnet4admin.github.io | Address: 185.199.108.153</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Ingress</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Ingress</strong><ul>
 <li>쿠버네티스 내부 서비스에 대한 HTTP/HTTPS 요청 관리하는 API Gateway</li>
 <li>쿠버 클러스터 외부에서 들어오는 HTTP/HTTPS 요청을 내부 서비스로 라우팅하는 역할 수행</li>
 <li>특징<ul>
@@ -23832,9 +23840,11 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="scheduling">Scheduling<a class="headerlink" href="#scheduling" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Taints &amp; Tolerations</strong></li>
+<li><strong>Taints &amp; Tolerations</strong><ul>
 <li><em>참고: https://gngsn.tistory.com/282</em></li>
 <li>특정 노드에서 특정 파드를 제한하거나 허용하는 메커니즘</li>
 <li>Pod가 적절치 않은 노드에 스케줄링 되지 않는 것을 보장</li>
@@ -23842,9 +23852,11 @@
 <li>특정 Node에 아무 Pod나 배치되지 않게 Taint 상태를 만들어줌</li>
 <li>등록 = <code>kubectl taint nodes {node-name} {key}={value}:{taint-effect}</code></li>
 <li>제거 = <code>kubectl taint nodes {node-name} {key}={value}:{taint-effect}-</code></li>
-<li>ex) <code>kubectl taint nodes node1 env=production:NoSchedule</code></li>
+<li>ex) <code>kubectl taint nodes node1 env=production:NoSchedule</code><ul>
 <li>NoSchedule: 일치하는 toleration이 없으면 node1에 스케줄하지 않는다</li>
-<li>Taint Effect)</li>
+</ul>
+</li>
+<li>Taint Effect)<ul>
 <li>NoSchedule: Pod가 Node에 스케줄되지 않음. 기존 실행되던 Pod는 유지.</li>
 <li>PreferNoSchedule: Pod가 Node에 스케줄되지 않도록 최대한 노력. but 보장은 아님</li>
 <li>NoExecute: 새로운 Pod는 해당 Node에 위치되지 않으며, 만약 Node에 존재했던 Pod가 있다면 아래 조건에 따라 처리<ul>
@@ -23855,9 +23867,11 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
 <li>[Toleration]: 파드가 특정 노드의 제한을 무시하고 실행될 수 있도록 허용하는 설정 (내성)<ul>
 <li>지정하고자 하는 Pod에 Toleration 규칙을 달아 특정 Node에 접근할 수 있도록 만듦 </li>
-<li>Toleration 조건 (Taint Node에 할당될 수 있는 조건)</li>
+<li>Toleration 조건 (Taint Node에 할당될 수 있는 조건)<ul>
 <li>
 <ol>
 <li>Key 동일할 것</li>
@@ -23899,26 +23913,28 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>Master Node에는 초기 설정부터 자동 taint 설정되어 있음</p>
-<ul>
+</ul>
+</li>
+<li>Master Node에는 초기 설정부터 자동 taint 설정되어 있음<ul>
 <li><code>&gt; k describe node kind-control-plane -n kube-system | grep Taint</code></li>
 <li><code>Taints: node-role.kubernetes.io/master:NoSchedule</code></li>
 </ul>
 </li>
-<li>
-<p><strong>nodeName</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>nodeName</strong><ul>
 <li>Pod의 <code>spec.nodeName</code> 필드를 활용하면 해당 Pod가 직접 특정 노드에 할당되도록 지정 가능</li>
 <li>nodeSelector/nodeAffinity 보다 더 직접적. </li>
 <li>스케줄러가 개입 X =&gt; 지정한 노드에 바로 Pod 배치</li>
 <li>해당 이름에 노드가 없으면 pending 상태로 유지</li>
-<li>
-<p><code>nodeName</code> &gt;&gt; <code>nodeSelector</code> || <code>nodeAffinity</code></p>
+<li><code>nodeName</code> &gt;&gt; <code>nodeSelector</code> || <code>nodeAffinity</code></li>
+</ul>
 </li>
-<li>
-<p><strong>nodeSelector</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>nodeSelector</strong><ul>
 <li>node Selector 조건 중 가장 간단. </li>
 <li>pod에서 타겟으로 삼고 싶은 노드가 가진 node labels 지정</li>
 <li>하지만, not ssd, ssd or hdd 이런 논리 연산자 등의 사용은 어려움<ul>
@@ -23926,13 +23942,15 @@
 </ul>
 </li>
 <li>노드 라벨 확인: <code>kubectl get node node01 --show-labels</code></li>
-<li>
-<p>예시)</p>
-<ol>
-<li>add label to node</li>
+<li>예시)<ol>
+<li>add label to node<ul>
 <li><code>kubectl label nodes node01 disktype=ssd</code></li>
-<li>node label 보기</li>
+</ul>
+</li>
+<li>node label 보기<ul>
 <li><code>kubectl get nodes --show-labels</code></li>
+</ul>
+</li>
 <li>해당 node로 pod 스케쥴링하기
    <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
@@ -23950,13 +23968,15 @@
 </code></pre></div></li>
 </ol>
 </li>
-<li>
-<p><strong>nodeAffinity</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>nodeAffinity</strong><ul>
 <li>특정 조건을 만족하는 노드에만 파드 배치하도록 강제 (nodeSelector의 확장)</li>
 <li>Pod에 직접 해당 조건을 쓰거나, Deployment의 Template에 해당 조건을 포함하자.</li>
 <li>강제 배치: <code>requiredDuringSchedulingIngnoredDuringExecution</code>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
@@ -23976,7 +23996,7 @@
 <a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="w">              </span><span class="nt">values</span><span class="p">:</span>
 <a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blue</span>
@@ -24003,9 +24023,8 @@
 <a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="w">                </span><span class="nt">values</span><span class="p">:</span>
 <a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blue</span>
 </code></pre></div></li>
-<li>
-<p>선호 배치: <code>preferredDuringSchedulingIgnoredDuringExecution</code>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>선호 배치: <code>preferredDuringSchedulingIgnoredDuringExecution</code>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gpu-pod-preferred</span>
@@ -24023,31 +24042,33 @@
 <a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
 <a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
 <a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app:latest</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Additional Scheduler</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Additional Scheduler</strong><ul>
 <li>커스텀 스케줄러가 생성 가능하다. </li>
 <li>yaml에 <code>schedulerName: ~</code> 으로 지정할 수 있음</li>
 </ul>
+</li>
+</ul>
 <h2 id="kubernetes-configuration">Kubernetes Configuration<a class="headerlink" href="#kubernetes-configuration" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Static Pods</strong></li>
+<li><strong>Static Pods</strong><ul>
 <li>kubelet이 스스로 만든 Pod (타 쿠버 클러스터 컴포넌트와 무관)</li>
 <li>특정 노드에서 직접 실행되는 파드</li>
 <li>kubelet에 의해 직접 관리되며, API 서버 등록되지 않아도 실행 가능</li>
 <li>쿠버네티스 스케줄러가 관여 X</li>
 <li>셋업 경로: <code>/etc/kubernetes/manifest</code></li>
-<li>
-<p>Control Plane(MasterNode)에 의존적이지 않기에, Control Plane 자체를 구성하는데 쓸 수 있음</p>
+<li>Control Plane(MasterNode)에 의존적이지 않기에, Control Plane 자체를 구성하는데 쓸 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>Multi-Container Pods</strong></p>
-</li>
-<li>
-<p>사이드카로 같이 하나의 pod에 올릴 container 등록 가능
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</ul>
+<ul>
+<li><strong>Multi-Container Pods</strong><ul>
+<li>사이드카로 같이 하나의 pod에 올릴 container 등록 가능
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple-webapp</span>
@@ -24061,16 +24082,15 @@
 <a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
 <a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log-agent</span>
 <a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">log-agent</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ConfigMap</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ConfigMap</strong><ol>
 <li>환경변수, 명령줄인자, 설정파일 등 저장 가능</li>
 <li>Pod와 독립적으로 관리됨</li>
-<li>
-<p>k-v 페어로, data 관리</p>
-<ul>
+<li>k-v 페어로, data 관리<ul>
 <li>configMap)
    <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
@@ -24099,18 +24119,20 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Secrets</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>Secrets</strong><ul>
 <li><em>참고: https://binux.tistory.com/176</em></li>
 <li>yaml <code>kind: Secret</code> 으로 생성하면, k-v BASE64 인코딩해서 저장 (깃헙에 푸시하지마...)<ul>
 <li>helm secret, vault 등을 추천</li>
 </ul>
 </li>
 <li>시크릿 역시 타 쿠버 리소스와 마찬가지로 etcd에 저장됨<ul>
-<li>Secret 저장해도 etcd에는 그냥 plaintext로 보임 =&gt; "etcd 암호화 가능하도록 만들자!"</li>
-<li><code>--encryption-provider-config</code> 활성화 여부 체크</li>
-<li>정적 키 암호화<ul>
+<li>Secret 저장해도 etcd에는 그냥 plaintext로 보임 =&gt; "etcd 암호화 가능하도록 만들자!"<ul>
+<li><code>--encryption-provider-config</code> 활성화 여부 체크
+1. 정적 키 암호화<ul>
 <li>Api Server에서 이를 바라보고 재시작되어야 함
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>kind: EncryptionConfiguration
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>apiVersion: apiserver.config.k8s.io/v1
@@ -24122,10 +24144,8 @@
 <a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>      keys:
 <a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>        - name: key1
 <a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>          secret: ${ENCRYPTION_KEY_1}
-</code></pre></div></li>
-</ul>
-</li>
-<li>봉투 암호화<ul>
+</code></pre></div>
+2. 봉투 암호화</li>
 <li>KMS(Key Management Service)와의 통합을 통해 Envelope encryption 가능
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>kind: EncryptionConfiguration
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>apiVersion: apiserver.config.k8s.io/v1
@@ -24143,13 +24163,17 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
 <li>유저에게 ClusterRoleBinding, ClusterRole을 함부로 주지 않을 것</li>
 <li>Secret은 Namespace 범위이기에, Secret이 존재하는 Namespace의 Pod에서만 사용 가능</li>
 <li>사용 방법<ol>
 <li>환경 변수 - 직접 yaml에 작성해 활용</li>
 <li>시크릿 볼륨 주입 - 직접 yaml에 작성해 활용</li>
-<li>쿠버네티스 API - 어플리케이션 실행 중 시크릿에 접근하는 방법</li>
+<li>쿠버네티스 API - 어플리케이션 실행 중 시크릿에 접근하는 방법<ul>
 <li>kube-api-server와 통신하며 시크릿 검색, 이를 주입/사용에 대한 책임을 어플리케이션에게 위임</li>
+</ul>
+</li>
 </ol>
 </li>
 <li>Vault<ul>
@@ -24158,16 +24182,16 @@
 <li>파드의 파일시스템에 주입되어, 파드에서 실행하는 모든 컨테이너에서 사용 가능</li>
 </ul>
 </li>
-<li>
-<p>시크릿 봉인 (Sealed Secret)</p>
-<ul>
+<li>시크릿 봉인 (Sealed Secret)<ul>
 <li>비대칭 암호화를 통해, gitops (yaml github으로 관리) 방식에서도 살아남도록</li>
 <li>시크릿을 공개키로 암호화해 커밋해, 데이터 노출 우려 X</li>
 </ul>
 </li>
-<li>
-<p><strong>logging/monitoring</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>logging/monitoring</strong><ul>
 <li>metrics server<ul>
 <li>클러스터 당 하나 설치 권장</li>
 <li>Node/Pod 정보 받아 인메모리에 저장: 히스토리 X</li>
@@ -24185,9 +24209,11 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Certificate Signing Requests</strong></li>
+<li><strong>Certificate Signing Requests</strong><ul>
 <li><em>참고: https://mr-zero.tistory.com/579</em></li>
 <li>클러스터의 오브젝트/서비스에 접근하기 위해 유저에 대한 인증/인가를 위한 인증서 사용</li>
 <li>인증서 생성하기 위한 작업의 일환으로 유저의 개인키에 대한 signing을 k8s의 CA에 요청시 CertificateSigningRequest API 사용</li>
@@ -24213,31 +24239,37 @@
 <a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="w">  </span><span class="nt">usage</span><span class="p">:</span>
 <a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">client auth</span>
 </code></pre></div></li>
-<li>CSR 승인: <code>k certificate approve [csr_name]</code></li>
+<li>CSR 승인: <code>k certificate approve [csr_name]</code><ul>
 <li>거부는: <code>k certificate deny [csr_name]</code></li>
+</ul>
+</li>
 <li>CSR로부터 CRT 생성: <code>k get csr [csr_name] -o yaml</code></li>
 </ol>
 </li>
-<li>
-<p><code>user</code>가 생성이 되었다는 것</p>
-<ul>
-<li>쿠버네티스에서 <code>user</code>는 쿠버 클러스터 내부의 오브젝트로 생성되지 않음</li>
+<li><code>user</code>가 생성이 되었다는 것<ul>
+<li>쿠버네티스에서 <code>user</code>는 쿠버 클러스터 내부의 오브젝트로 생성되지 않음<ul>
 <li><code>kubeconfig</code> 파일에 정의된 인증 정보에 따라 존재하는 개념</li>
 <li><code>kubectl</code>에서 <code>--as dev-user</code> 옵션을 사용하면, kubeconfig에 정의된 <code>dev-user</code>라는 사용자로 요청 보냄</li>
 </ul>
 </li>
-<li>
-<p><strong>kubeconfig</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>kubeconfig</strong><ul>
 <li><em>참고: https://nayoungs.tistory.com/entry/Kubernetes-Kubeconfig</em></li>
 <li>k8s의 설정파일로, 클러스터에 대한 접근을 구성하는데 사용하는 파일</li>
 <li><code>kubectl</code> 명령어로 apiserver에 접근할 때 사용할 인증 정보를 담음</li>
 <li>구조<ul>
 <li><code>clusters</code>: 쿠버네티스 API 서버 정보(IP, 도메인)로, 여러 클러스터 명시 가능</li>
 <li><code>users</code>: 쿠버네티스 API에 접속하기 위한 사용자 목록, 인증 방식에 따라 형태 다름</li>
-<li><code>context</code>: user와 cluster 사이의 관계를 매핑한 것으로, 어떤 context 사용하느냐에 따라 cluster와 user가 결정</li>
+<li><code>context</code>: user와 cluster 사이의 관계를 매핑한 것으로, 어떤 context 사용하느냐에 따라 cluster와 user가 결정<ul>
 <li>context 기반으로 어떤 Cluster에 어떤 User가 인증을 통해 쿠버를 사용한다</li>
 <li>context에는 여러 종류 있을 수 있으며, 현재 사용하는 context를 current-context라고 함</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>위치: <code>~/.kube/config</code><ul>
@@ -24247,16 +24279,16 @@
 <li><code>--kubeconfig</code> 옵션을 사용하여 타 kubeconfig 파일 사용할 수 있음</li>
 </ul>
 </li>
-<li>
-<p>context 확인</p>
-<ul>
+<li>context 확인<ul>
 <li><code>k config use-context myadmin@mycluster</code></li>
 <li><code>k config current-context</code></li>
 </ul>
 </li>
-<li>
-<p><strong>쿠버네티스의 사용자들</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>쿠버네티스의 사용자들</strong><ul>
 <li><em>참고: https://jonnung.dev/kubernetes/2020/06/18/kubernetes-user-authorizations/</em></li>
 <li>쿠버네티스 설정 (kubeconfig)는 3가지 부분으로 구성됨<ul>
 <li>clusters: 클러스터 명시. 쿠버네티스 API 서버 정보</li>
@@ -24276,42 +24308,47 @@
 </li>
 <li><code>Service Account</code><ul>
 <li>쿠버네티스 상에 존재하는 오브젝트, 네임스페이스마다 각각 정의 가능</li>
-<li>각 네임스페이스에는 기본적으로 <code>default</code> 서비스 어카운트가 자동으로 생성됨</li>
+<li>각 네임스페이스에는 기본적으로 <code>default</code> 서비스 어카운트가 자동으로 생성됨<ul>
 <li>서비스 어카운트 만들면 JWT 토큰이 자동으로 함께 생성되어 쿠버 시크릿에 저장</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>User</code><ul>
 <li>쿠버에는 User 개념은 있으나, 추상적인 의미</li>
 <li>내부에 저장되는 데이터가 아닌 단순히 문자열로 식별할 수 있는 값으로 사용</li>
-<li>ex) <code>X.509 인증서</code> 활용 시...</li>
+<li>ex) <code>X.509 인증서</code> 활용 시...<ul>
 <li>인증서 만들 때 CN='joel' 이라면, 이 인증서를 통해 인증된 사용자는 쿠버 상에 User=joel로 지징가능</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>Group</code><ul>
 <li>User와 마찬가지로 추상적인 개념</li>
 <li>User와 마찬가지로 문자열 형태로 표현</li>
-<li>쿠버에서 미리 정의해둔 그룹 <code>system:</code>으로 시작</li>
+<li>쿠버에서 미리 정의해둔 그룹 <code>system:</code>으로 시작<ul>
 <li><code>system:unauthenticated</code></li>
 <li><code>system:authenticated</code></li>
 <li><code>system:serviceaccounts</code></li>
 <li><code>system:serviceaccounts:&lt;네임스페이스이름&gt;</code></li>
 </ul>
 </li>
-<li>
-<p>RBAC</p>
-<ul>
+</ul>
+</li>
+<li>RBAC<ul>
 <li>위의 쿠버 사용자 식별 개념 3가지 (SA, User, Group)은 인증으로써의 기능</li>
 <li>쿠버 오브젝트 사용권한 검사, 인가는 RBAC을 통해 지정</li>
 </ul>
 </li>
-<li>
-<p><strong>Service Accounts</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Service Accounts</strong><ul>
 <li>pod 안에서 serviceAccount, serviceAccountName 정의할 수 있음</li>
 <li>이를 통해 pod 안에서 쿠버 API를 접근하게 할 수 있음</li>
-<li>
-<p>기본으로 정의 안하면 default가 SA로 매핑되는데, 이는 타 리소스 접근에 한계가 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>기본으로 정의 안하면 default가 SA로 매핑되는데, 이는 타 리소스 접근에 한계가 있음
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
@@ -24320,11 +24357,12 @@
 <a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
 <a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
 <a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-image</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Security Context</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Security Context</strong><ul>
 <li><em>참고: https://velog.io/@<em>zero</em>/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-SecurityContext-%EA%B0%9C%EB%85%90-%EB%B0%8F-%EC%84%A4%EC%A0%95</em></li>
 <li><em>참고: https://doitnow-man.tistory.com/entry/CKA-42-k8s-%EA%B0%81%EC%A2%85-%EB%B3%B4%EC%95%88-image</em></li>
 <li>개념<ul>
@@ -24342,13 +24380,13 @@
 <li>container security context<ul>
 <li>container 수준에서 설정하면, 특정 컨테이너에 대한 보안 설정을 개별적으로 정의 가능</li>
 <li>container 우선 순위가 pod 보다 더 높음</li>
-<li><a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities 설정 가능</a></li>
+<li><a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities 설정 가능</a><ul>
 <li>ex) CAP_SYS_TIME, CAP_LAST_CAP 등...</li>
 </ul>
 </li>
-<li>
-<p>적용</p>
-<ul>
+</ul>
+</li>
+<li>적용<ul>
 <li><img alt="" src="../../images/2025-05-18-securityContext.png" />
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
@@ -24368,9 +24406,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Custom Resource, Custom Resource Definition</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Custom Resource, Custom Resource Definition</strong><ul>
 <li><em>참고: https://frozenpond.tistory.com/111</em></li>
 <li>[Custom Resource Definition]<ul>
 <li>Custom Resource를 etcd에 등록하기 위해서는 CRD 혹은 AA 이용이 필요
@@ -24401,21 +24441,23 @@
 </li>
 <li>리소스가 등록/변경 되었을 때 쿠버 클러스터에게 특정한 operation을 주고 싶다면 custom controller 사용해야 함</li>
 </ul>
+</li>
+</ul>
 <h2 id="application-lifecycle-management">Application Lifecycle &amp; Management<a class="headerlink" href="#application-lifecycle-management" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Deployment Strategy</strong></li>
+<li><strong>Deployment Strategy</strong><ol>
 <li>Rolling Update<ul>
 <li>기본값 (명시 안하면 기본 이거)</li>
 <li>기존 파드 점진적으로 교체하여 어플리케이션 업데이트</li>
 <li>서비스 중단없이 고가용성 유지하며 배포</li>
-<li>설정할 수 있는 주요 옵션</li>
+<li>설정할 수 있는 주요 옵션<ul>
 <li><code>maxSurge</code>: 한번에 최대 몇개의 파드를 새롭게 생성할 수 있는지?</li>
 <li><code>maxUnavailable</code>: 업데이트 중 최소한으로 유지되어야 하는 파드 수 설정</li>
 </ul>
 </li>
-<li>
-<p>Recreate</p>
-<ul>
+</ul>
+</li>
+<li>Recreate<ul>
 <li>기존의 파드 종료한 뒤 새로운 버전의 파드 전부 시작</li>
 <li>서비스 중단 발생함
   <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
@@ -24440,19 +24482,23 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Lifecycle Management</strong></p>
+</ol>
 </li>
-<li>라이프사이클 훅과 조정방법으로 수명주기 관리 가능</li>
-<li>Pod Lifecycle<ul>
+</ul>
+<ul>
+<li><strong>Lifecycle Management</strong><ul>
+<li>라이프사이클 훅과 조정방법으로 수명주기 관리 가능
+1. Pod Lifecycle<ul>
 <li><code>Pending</code> -&gt; <code>Running</code> -&gt; <code>Success</code> | <code>Failed</code></li>
-<li>InitContainer</li>
+<li>InitContainer<ul>
 <li>Pod의 메인 컨테이너 실행 전 반드시 실행되어야 하는 준비 작업</li>
 <li>initContainer가 완료되어야 다음 InitConainer/MainContainer 실행</li>
-<li>Hooks</li>
+</ul>
+</li>
+<li>Hooks<ul>
 <li><code>postStart</code>: 컨테이너가 생성된 직후 실행. ENTRYPOINT와 병렬 실행될 수 있음</li>
 <li><code>preStart</code>: 컨테이너 종료되기 직전 실행되는 Hook. graceful shutdown을 위함
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+ <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joel</span>
@@ -24467,22 +24513,24 @@
 <a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a><span class="w">       </span><span class="nt">preStop</span><span class="p">:</span>
 <a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="w">         </span><span class="nt">exec</span><span class="p">:</span>
 <a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a><span class="w">           </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/bin/sh&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;nginx</span><span class="nv"> </span><span class="s">-s</span><span class="nv"> </span><span class="s">quit&quot;</span><span class="p p-Indicator">]</span>
-</code></pre></div></li>
+</code></pre></div>
+2. Horizontal Pod Autoscaler (HPA): 파드 수 부하에 맞게 리소스 할당
+3. Rolling Back</li>
 </ul>
 </li>
-<li>Horizontal Pod Autoscaler (HPA): 파드 수 부하에 맞게 리소스 할당</li>
-<li>
-<p>Rolling Back</p>
-<ul>
 <li>배포 중 문제가 발생하면 기존 버전 롤백 가능. </li>
-<li>Deployment 리소스에 대해 버전 관리 제공</li>
+<li>Deployment 리소스에 대해 버전 관리 제공<ul>
 <li><code>kubectl rollout undo deployment/my-app</code></li>
 <li><code>kubectl rollout undo deployment/my-app --to-revision=2</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Horizontal Pod Autoscaling (HPA)</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Horizontal Pod Autoscaling (HPA)</strong><ul>
 <li><em>참고: https://velog.io/@rockwellvinca/EKS-HPAHorizontal-Pod-Autoscaler%EC%99%80-VPAVertical-Pod-Autoscaler</em></li>
 <li>Vertical: CPU/Memory 더 많이 쓰자! 재구동이 필수</li>
 <li>Horizontal: 서버 댓수 더 끌어와서 Load Balance<ul>
@@ -24493,8 +24541,10 @@
 <li>HPA: 쿠버에서 리소스 사용량 기반으로 자동으로 Pod 갯수를 조절<ul>
 <li>주기적으로 메트릭 확인 -&gt; 설정 기준 초과/미만 시 ReplicaSet의 Pod 갯수 조절</li>
 <li>CPU 사용율, 메모리 사용율 기반 조정</li>
-<li>Custom Metrics 사용 가능 (ex. HTTP 요청, Kafka MQ 길이)</li>
+<li>Custom Metrics 사용 가능 (ex. HTTP 요청, Kafka MQ 길이)<ul>
 <li>다만 Custom Metrics 사용을 위해선 Prometheus Adapter 등 추가 설정 필요할 수 있음</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>HorizontalPodAutoscaler로 Deployment/ReplicaSet의 scale을 조절<ul>
@@ -24502,7 +24552,7 @@
 </ul>
 </li>
 <li>구성 
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autoscaling/v2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autoscaling/v2</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nt">king</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HorizontalPodAutoscaler</span>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app-hpa</span>
@@ -24522,9 +24572,7 @@
 <a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a><span class="w">        </span><span class="nt">averageUtilization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
 </code></pre></div></li>
 <li><code>kubectl get hpa</code></li>
-<li>
-<p>동작 과정</p>
-<ol>
+<li>동작 과정<ol>
 <li><code>HPA Controller</code>가 메트릭 쿼리를 통해 메트릭 서버로부터 정보 수집</li>
 <li>API 서버의 HPA는 <code>HPA Controller</code>에 수집된 정보 바탕 적절한 Replica 갯수 계산</li>
 <li><code>HPA Controller</code>가 적절한 Replicas 갯수 되도록 Deployment 업데이트</li>
@@ -24532,9 +24580,11 @@
 <li><code>Scheduler</code>와 <code>kubelet</code> 통해 실제 파드 수량 조절</li>
 </ol>
 </li>
-<li>
-<p><strong>Vertical Pod Autoscaler</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Vertical Pod Autoscaler</strong><ul>
 <li>파드의 리소스를 감시하여 파드의 리소스 부족한 경우, 파드 Restart하여 리소스 증가</li>
 <li>CPU/Memory 등의 스펙을 증가시키는 것 (Scale up/down)</li>
 <li>동작 과정<ol>
@@ -24548,7 +24598,7 @@
 </ol>
 </li>
 <li>예시)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autoscaling.k8s.io/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autoscaling.k8s.io/v1</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VerticalPodAutoscaler</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flask-app</span>
@@ -24585,9 +24635,11 @@
 <a id="__codelineno-32-35" name="__codelineno-32-35" href="#__codelineno-32-35"></a><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="api-access-control">API Access Control<a class="headerlink" href="#api-access-control" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Admission Controller</strong></li>
+<li><strong>Admission Controller</strong><ul>
 <li>리소스 요청이 승인될 때, 실제로 API 서버가 요청될 때 추가적인 검사 및 수정 작업 수행하는 컴포넌트</li>
 <li>리소스 생성/업데이트 전 마지막 검증 단계 + 클러스터 보안/정책/규칙 enforce<ul>
 <li>요청 수락/거부/수정</li>
@@ -24619,11 +24671,13 @@
 </li>
 <li><code>kube-apiserver --enable-admission-plugins=MutatingAdmissionWebhook,ValidatingAdmissionWebhook,PodSecurityPolicy</code></li>
 </ul>
+</li>
+</ul>
 <h2 id="cluster-maintenance">Cluster Maintenance<a class="headerlink" href="#cluster-maintenance" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>OS upgrade</strong></li>
+<li><strong>OS upgrade</strong><ul>
 <li>기본 명령어
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>&gt; k drain node-1      # 특정 노드 내 작업들을 타 노드로 이관. 노드 끔
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>&gt; k drain node-1      # 특정 노드 내 작업들을 타 노드로 이관. 노드 끔
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>&gt; k drain node-1 --ignore-daemonset
 <a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>&gt; k uncordon node-1   # 해당 노드 다시 스케줄링 대상으로 ON
 <a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>&gt; k cordon node-2     # 새로운 pod가 스케줄링 되지 않도록 마킹
@@ -24636,18 +24690,20 @@
 <li>StatefulSet</li>
 </ul>
 </li>
-<li>
-<p><code>kubectl drain</code>은 컨트롤러(ReplicaSet, Deployment, StatefulSet 등)에 의해 관리되지 않는 Pod, 즉 Standalone Pod를 기본적으로 삭제하지 않음</p>
-<ul>
+<li><code>kubectl drain</code>은 컨트롤러(ReplicaSet, Deployment, StatefulSet 등)에 의해 관리되지 않는 Pod, 즉 Standalone Pod를 기본적으로 삭제하지 않음<ul>
 <li>컨트롤러가 없어, 다시 생성할 수 없기 때문임. </li>
-<li>컨트롤러: 클러스터 상태 지속적으로 감시하여, Desired state를 유지해주는 자동화 도구</li>
+<li>컨트롤러: 클러스터 상태 지속적으로 감시하여, Desired state를 유지해주는 자동화 도구<ul>
 <li>Deployment, ReplicaSet, StatefulSet, DaemonSet, Job/CronJob</li>
+</ul>
+</li>
 <li>Pod를 standalone으로 쓰지말고, 컨트롤러와 함께 쓰자!</li>
 </ul>
 </li>
-<li>
-<p><strong>Cluster upgrade process</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Cluster upgrade process</strong><ul>
 <li><em>참고: https://v1-32.docs.kubernetes.io/ko/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/</em></li>
 <li>클러스터 최근 마이너 3버전 (ex. 1.11 ~ 1.13) 지원</li>
 <li>업그레이드 추천은 마이너 하나씩 올리기</li>
@@ -24661,10 +24717,8 @@
 <li><code>vim /etc/apt/sources.list.d/kubernetes.list</code></li>
 </ul>
 </li>
-<li>
-<p>Kubeadm을 통해 업그레이드를 모두 진행하고, systemctl 명령어 구동</p>
-<ul>
-<li><code>sudo systemctl daemon-reload</code>: 업그레이드로 변경된 systemd 설정을 다시 반영</li>
+<li>Kubeadm을 통해 업그레이드를 모두 진행하고, systemctl 명령어 구동<ul>
+<li><code>sudo systemctl daemon-reload</code>: 업그레이드로 변경된 systemd 설정을 다시 반영<ul>
 <li><code>systemd</code>: 리눅스에서 서비스와 프로세스를 관리하는 시스템</li>
 <li><code>systemd</code>는 모든 서비스에 대해 <code>.service</code> 설정 파일을 메모리에 로딩해놓고 관리</li>
 <li>kubelet 실행은 systemd가 <code>.service</code> 파일로 관리됨 (ex. <code>/etc/systemd/system/kubelet.service.d/10-kubeadm.conf</code>)<ul>
@@ -24675,19 +24729,27 @@
 <li>kubelet 업그레이드 했으나, systemd는 기존 바이너리 보고 있을꺼라, 업데이트된 바이너리로 구동하도록 daemon-reload 과정 필요</li>
 </ul>
 </li>
-<li><code>sudo systemctl restart kubelet</code>: 새 바이너리 설정 적용하여 다시 실행</li>
+</ul>
+</li>
+<li><code>sudo systemctl restart kubelet</code>: 새 바이너리 설정 적용하여 다시 실행<ul>
 <li>버전 업그레이드 이후 새 바이너리나 설정 반영되도록 재시작 필요</li>
 <li>kubelet은 쿠버 노드 중에서 가장 핵심</li>
 </ul>
 </li>
-<li>
-<p><strong>Backup and Restore Methods</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Backup and Restore Methods</strong><ul>
 <li>Backup 대상은 다음과 같음</li>
 <li>[Resource Config]<ul>
 <li>리소스가 선언형으로 yaml 파일로 되어 있다면, redeploy 쉬움 <code>&gt; k apply -f ~.yaml</code></li>
-<li>아니라면, kube-apiserver에서 모든 구성 가져올 수 있음</li>
+<li>아니라면, kube-apiserver에서 모든 구성 가져올 수 있음<ul>
 <li><code>&gt; k get all --all-namespace -o yaml &gt; all-deploy.yaml</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>[ETCD Cluster]<ul>
@@ -24703,9 +24765,11 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="kubernetes-security">Kubernetes Security<a class="headerlink" href="#kubernetes-security" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Authentication(인증)</strong></li>
+<li><strong>Authentication(인증)</strong><ul>
 <li>Files - Username/Password</li>
 <li>Files - Username/Tokens<ul>
 <li>csv와 같은 파일로 kube-apiserver에 사용자 설정 가능</li>
@@ -24714,29 +24778,31 @@
 </li>
 <li>Certificates</li>
 <li>External Authentication Providers - LDAP</li>
-<li>
-<p>Service Accounts: 유저 직관리</p>
+<li>Service Accounts: 유저 직관리</li>
+</ul>
 </li>
-<li>
-<p><strong>TLS in k8s</strong></p>
-</li>
-<li>
-<p>Server Certificates for Servers</p>
+</ul>
 <ul>
+<li><strong>TLS in k8s</strong><ul>
+<li>Server Certificates for Servers<ul>
 <li>kube-api server (apiserver.crt / apiserver.key)</li>
 <li>etcd server (etcdserver.crt / etcdserver.key)</li>
 <li>kubelet server (kubelet.crt / kubelet.key)</li>
 </ul>
 </li>
-<li>
-<p><strong>kubeconfig</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>kubeconfig</strong><ul>
 <li>kubeconfig을 통해 클러스터/사용자/네임스페이스/인증 메커니즘 정보 관리 가능<ul>
 <li>kubeconfig: 클러스터에 대한 접근을 구성하는데 사용되는 파일</li>
 <li>어떤 클러스터에, 어떤 인증 정보로, 어떤 네임스페이스에서 명령 실행할지 결정</li>
 <li><code>kubectl</code>은 <code>$HOME/.kube/config</code> 디렉토리에서 kubeconfig 파일 찾음</li>
-<li>우리가 kubeapi 서버(<code>kubectl</code>)에 tls 요청 없이 기본빵으로 요청할 수 있게 하는 요소</li>
+<li>우리가 kubeapi 서버(<code>kubectl</code>)에 tls 요청 없이 기본빵으로 요청할 수 있게 하는 요소<ul>
 <li>클러스터가 RBAC을 사용하면, <code>kubeconfig</code>에 서비스 계정 토큰 포함되어 있으면 TLS 없이 인증서 접속 가능</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>구성요소<ul>
@@ -24765,17 +24831,17 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>주요 명령어</p>
-<ul>
+<li>주요 명령어<ul>
 <li><code>&gt; k config view</code></li>
 <li><code>&gt; k config current-context</code></li>
 <li><code>&gt; k config use-context my-context</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Authorization(인가)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Authorization(인가)</strong><ul>
 <li>[Node Auth]<ul>
 <li>노드의 요청을 제한하는 특별한 권한 부여 모드</li>
 <li>자신이 호스팅하는 Pod와 관련된 리소스에 대해서만 접근 가능</li>
@@ -24784,12 +24850,12 @@
 </li>
 <li>[RBAC Auth]<ul>
 <li>사용자의 역할 기반으로 리소스 접근 제어</li>
-<li>구성요소</li>
+<li>구성요소<ul>
 <li>Role: 특정 네임스페이스에서 권한 설정</li>
 <li>RoleBinding: 특정 사용자/그룹에게 롤 부여</li>
 <li>ClusterRole: 클러스터 전체에서 권한 설정</li>
 <li>ClusterRoleBinding: 클러스터 전체에서 ClusterRole 부여
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Role</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Role</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
@@ -24799,6 +24865,8 @@
 <a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;pods&quot;</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="w">  </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;get&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;list&quot;</span><span class="p p-Indicator">]</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>[ABAC Auth]<ul>
@@ -24818,9 +24886,7 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p>[Webhook Mode]</p>
-<ul>
+<li>[Webhook Mode]<ul>
 <li>외부 서비스에서 관리할 때 유용</li>
 <li>방식: 요청 API 서버로 인입 &gt; API 서버가 Webhook 서버에 요청 전달 &gt; Webhook 서버가 allow/deny
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
@@ -24832,9 +24898,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>Role-Based Access Control</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Role-Based Access Control</strong><ul>
 <li><em>참고: https://kubernetes.io/docs/reference/access-authn-authz/rbac/</em></li>
 <li><code>rbac.authorization.k8s.io</code> 사용하여 API group 인가 결정할 수 있도록 보조</li>
 <li>RBAC은 인가 프로세스만 판단함 -&gt; 이 사람이 권한이 있는가? <ul>
@@ -24899,7 +24967,7 @@
 </li>
 <li>[ClusterRole]<ul>
 <li><strong>클러스터 전체</strong>에서 사용되는 Role</li>
-<li>ClusterRole을 통해서</li>
+<li>ClusterRole을 통해서<ol>
 <li>namespace 리소스의 특정 namespace에서의 grant</li>
 <li>namespace 리소스의 전체 namespace에서의 grant</li>
 <li>cluster-scope 리소스에 grant
@@ -24912,11 +24980,11 @@
 <a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;pods&quot;</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a><span class="w">  </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;get&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;list&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;watch&quot;</span><span class="p p-Indicator">]</span>
 </code></pre></div></li>
+</ol>
+</li>
 </ul>
 </li>
-<li>
-<p>[ClusterRoleBinding]</p>
-<ul>
+<li>[ClusterRoleBinding]<ul>
 <li>클러스터 전체에서 ClusterRole을 사용자, 그룹, 서비스 계정에 부여
 <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
@@ -24933,9 +25001,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>ServiceAccount</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ServiceAccount</strong><ul>
 <li>ServiceAccount는 파드가 쿠버네티스 API에 접근할 때 사용됨.<ul>
 <li>kube-system 네임스페이스 외의 서비스 계정에는 최소 권한만 부여</li>
 <li>각 Pod에 필요한 권한만 별도 Role/RoleBinding, ClusterRole/ClusterRoleBinding으로 부여하는 것이 안전</li>
@@ -24946,15 +25016,14 @@
 </ul>
 </li>
 <li><code>User</code>와 다르게 <code>ServiceAccount</code>는 Pod 내부에서 실행되는 어플리케이션이 쿠버 API 호출할 수 있도록 도와줌</li>
-<li>
-<p>예시) Deployment -&gt; ServiceAccount &lt;- ClusterRoleBinding -&gt; ClusterRole
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>예시) Deployment -&gt; ServiceAccount &lt;- ClusterRoleBinding -&gt; ClusterRole
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus</span>
 <a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus-role</span>
@@ -24969,7 +25038,7 @@
 <a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">endpoints</span>
 <a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;get&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;list&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;watch&quot;</span><span class="p p-Indicator">]</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus-binding</span>
@@ -24982,7 +25051,7 @@
 <a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus-role</span>
 <a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a><span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus</span>
@@ -25003,11 +25072,12 @@
 <a id="__codelineno-47-19" name="__codelineno-47-19" href="#__codelineno-47-19"></a><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prom/prometheus</span>
 <a id="__codelineno-47-20" name="__codelineno-47-20" href="#__codelineno-47-20"></a><span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
 <a id="__codelineno-47-21" name="__codelineno-47-21" href="#__codelineno-47-21"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9090</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Admission Controller</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Admission Controller</strong><ul>
 <li><em>참고: https://guide-to-devops.github.io/blog/Admission-Controller-%EC%86%8C%EA%B0%9C</em></li>
 <li><em>참고: https://coffeewhale.com/kubernetes/admission-control/2021/04/28/opa1/</em></li>
 <li><img alt="" src="../../images/2025-05-06-admission-controller.png" /></li>
@@ -25020,9 +25090,9 @@
 <li>k8s 클러스터에서 관리자가 정의한 정책(Policy)를 수행(Admission Control)하는 플러그인</li>
 <li>보안성/제어성 측면에 보강이 됨</li>
 <li>작동 방식<ul>
-<li>Authentication/Authorization 과정을 먼저 거친 후 Admission Control이 수행</li>
-<li><code>Mutate</code>: 해당 요청에서 변경되어야 하는 부분을 알려주는 값을 k8s API 서버로 반환</li>
-<li><code>Validate</code>: 해당 요청이 정책에 부합하는지에 대해 true/false 값 k8s API 서버로 반환</li>
+<li>Authentication/Authorization 과정을 먼저 거친 후 Admission Control이 수행
+1. <code>Mutate</code>: 해당 요청에서 변경되어야 하는 부분을 알려주는 값을 k8s API 서버로 반환
+2. <code>Validate</code>: 해당 요청이 정책에 부합하는지에 대해 true/false 값 k8s API 서버로 반환</li>
 </ul>
 </li>
 <li>사용법<ul>
@@ -25040,16 +25110,17 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="network">Network<a class="headerlink" href="#network" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Network Policy</strong></li>
+<li><strong>Network Policy</strong><ul>
 <li>기본적으로 Pod는 서로 통신 가능. 정책을 통해 트래픽 ingress/egress 제어 가능<ul>
 <li>ingress: 인입, egress: 반출</li>
 </ul>
 </li>
-<li>
-<p>네트워크 플러그인(CNI, Calico 등)이 지원해야 적용됨
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<li>네트워크 플러그인(CNI, Calico 등)이 지원해야 적용됨
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
 <a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db-policy</span>
@@ -25070,52 +25141,67 @@
 <a id="__codelineno-48-19" name="__codelineno-48-19" href="#__codelineno-48-19"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <a id="__codelineno-48-20" name="__codelineno-48-20" href="#__codelineno-48-20"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
 <a id="__codelineno-48-21" name="__codelineno-48-21" href="#__codelineno-48-21"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3306</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
+</ul>
+<ul>
 <li>
 <p><strong>리눅스 네트워크</strong></p>
-</li>
-<li>
-<p>기본 개념</p>
 <ul>
-<li>[Switching]</li>
+<li>기본 개념<ul>
+<li>[Switching]<ul>
 <li>LAN 내에서 사용되는 패킷을 전달하는 방식 중 하나</li>
 <li>MAC 주소 기반 목적지 포트로 전달</li>
 <li>Layer2(데이터 링크 계층) 에서 작동</li>
 <li>ex) 사무실에서 여러 컴퓨터 연결/인터넷 사용에는 스위치 사용</li>
-<li>[Routing]</li>
+</ul>
+</li>
+<li>[Routing]<ul>
 <li>네트워크 간의 패킷 전달 (2개 이상의 다른 네트워크 연결)</li>
 <li>라우터는 IP 주소를 기반으로 네트워크 간 패킷 전달</li>
 <li>Layer3(네트워크 계층) 에서 작동</li>
 <li>ex) 인터넷에 연결된 여러 네트워크 간 데이터 전달 역할</li>
-<li>[Gateway]</li>
+</ul>
+</li>
+<li>[Gateway]<ul>
 <li>다양한 네트워크 연결 장치. 서로 다른 프로토콜 사용하는 네트워크 간 데이터 통신 중계</li>
 <li>사설 네트워크 - 공인 인터넷 네트워크 연결 장치</li>
 <li>ex) 집/회사 네트워크에서 사용하는 인터넷 공유기는 게이트웨이</li>
-<li>[NAT(Network Address Translation)]</li>
+</ul>
+</li>
+<li>[NAT(Network Address Translation)]<ul>
 <li>내부 네트워크의 사설 IP 주소와 외부 네트워크 공인 IP 주소 변환 담당 기술</li>
 <li>주로 사설 네트워크 장치들이 공인 IP 주소 공유하여 외부와 통신</li>
 <li>NAT는 내부 네트워크에서 발신되는 패킷의 소스 IP 주소를 공인 IP 주소로 변환하여 외부 네트워크로 전송</li>
 </ul>
 </li>
-<li>
-<p>네트워크 인터페이스</p>
+</ul>
+</li>
+</ul>
 <ul>
-<li>[Bridge]</li>
+<li>네트워크 인터페이스<ul>
+<li>[Bridge]<ul>
 <li>두 개 이상의 네트워크 연결 장치. 동일 네트워크 내 패킷 전달</li>
 <li>분할된 네트워크 연결: 하나의 논리적 네트워크 처럼 연결</li>
 <li>스위치와 유사하게 동작. 여러 포트를 갖춘 스위치라고 봐도 무방</li>
-<li>[VLAN]</li>
+</ul>
+</li>
+<li>[VLAN]<ul>
 <li>물리적으로는 동일한 네트워크에 속하지만, 논리적으로는 다른 네트워크로 분리</li>
 </ul>
 </li>
-<li>
-<p>리눅스 호스트를 라우터로 사용하려면?</p>
-<ol>
-<li>IP 라우팅 활성화 + 네트워크 인터페이스간 트래픽 전달할 수 있는 구성</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>리눅스 호스트를 라우터로 사용하려면?<ol>
+<li>IP 라우팅 활성화 + 네트워크 인터페이스간 트래픽 전달할 수 있는 구성<ul>
 <li><code>ip route</code> 명령 사용해 라우팅 테이블 수정</li>
 <li>호스트가 네트워크 간 데이터 중계할 수 있도록 설정</li>
-<li>IP 포워딩 활성화</li>
+</ul>
+</li>
+<li>IP 포워딩 활성화<ul>
 <li>리눅스는 보안 때문에 기본적으로 패킷을 타 네트워크로 전달 X. 라우터로 쓰고 싶으면 기능을 키자</li>
 <li>다른 네트워크 간 데이터 전달 역할. </li>
 <li>리눅스 호스트가 타 네트워크 간 패킷 전달 가능</li>
@@ -25123,14 +25209,18 @@
 <li><code>/etc/sysctl.conf</code>에 <code>net.ipv4.ip_forward=1</code> 추가하고 <code>sysctl-p</code> 실행하면 영구적</li>
 </ul>
 </li>
-<li>라우팅 설정</li>
+</ul>
+</li>
+<li>라우팅 설정<ul>
 <li>어떤 트래픽이 어디로 가야하는지 설정</li>
 <li><code>ip route add</code> 명령을 통해 특정 네트워크로 향하는 라우트 추가 가능</li>
 <li>ex) <code>192.168.2.0/24</code> 네트워크로 향하는 트래픽을 <code>192.168.1.1</code> 게이트웨이를 통해 전달하기<ul>
 <li><code>ip route add 192.168.2.0/24 via 192.168.1.1</code></li>
 </ul>
 </li>
-<li>네트워크 인터페이스에 IP 할당</li>
+</ul>
+</li>
+<li>네트워크 인터페이스에 IP 할당<ul>
 <li>리눅스가 여러 네트워크에 연결되려면, 각 네트워크 인터페이스(랜카드)에 IP 주소를 줘야함</li>
 <li><code>ip addr add 192.168.1.1/24 dev eth0</code><ul>
 <li>내부 네트워크1 : <code>eth0</code> -&gt; 192.168.1.1</li>
@@ -25141,7 +25231,9 @@
 </ul>
 </li>
 <li>리눅스 머신이 두 네트워크에 동시 연결됨</li>
-<li>패킷 포워딩 규칙 설정</li>
+</ul>
+</li>
+<li>패킷 포워딩 규칙 설정<ul>
 <li>외부 네트워크(인터넷) 연결되기 위해선, 리눅스 서버가 내부 네트워크 <strong>사설 IP -&gt; 공인 IP 변경해주는 NAT 필요</strong></li>
 <li>리눅스를 통해 내부 네트워크에서 인터넷 사용하고 싶을 때 필요한 설정</li>
 <li><code>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</code><ul>
@@ -25157,12 +25249,14 @@
 </ul>
 </li>
 <li>[내부 PC] --(192.168.2.0/24)--[eth1:리눅스 라우터:eth0]--(192.168.1.0/24)--[공유기/인터넷]</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p>리눅스 호스트 라우터 =&gt; 마지막 더 쉬운 설명 with GPT</p>
-<ol>
-<li>상황 셋업 (우리집)</li>
+</ul>
+<ul>
+<li>리눅스 호스트 라우터 =&gt; 마지막 더 쉬운 설명 with GPT<ol>
+<li>상황 셋업 (우리집)<ul>
 <li>컴퓨터 A: 192.168.2.100 (우리집 안방 컴퓨터)</li>
 <li>컴퓨터 B: 192.168.2.101 (우리집 거실 컴퓨터)</li>
 <li>리눅스 PC: 라우터 역할을 할 머신 (두 개의 랜선이 꽂힘)<ul>
@@ -25171,46 +25265,56 @@
 </ul>
 </li>
 <li>인터넷 공유기: 192.168.1.1</li>
-<li>리눅스가 '중간 다리' 역할을 하게 하자</li>
+</ul>
+</li>
+<li>리눅스가 '중간 다리' 역할을 하게 하자<ul>
 <li>리눅스에게 "넌 이제 라우터야. 중개해줘" 부탁</li>
 <li><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code></li>
-<li>랜선 2개 꽂고, 각 랜카드에 주소 붙이기</li>
+</ul>
+</li>
+<li>랜선 2개 꽂고, 각 랜카드에 주소 붙이기<ul>
 <li>리눅스는 두개의 네트워크에 연결. (집안, 인터넷)</li>
 <li><code>ip addr add 192.168.2.1/24 dev eth1   # 집 안 쪽</code></li>
 <li><code>ip addr add 192.168.1.2/24 dev eth0   # 인터넷 쪽</code></li>
-<li>집 안 컴퓨터에게 "인터넷 나갈땐 리눅스에게 물어봐" 설정</li>
+</ul>
+</li>
+<li>집 안 컴퓨터에게 "인터넷 나갈땐 리눅스에게 물어봐" 설정<ul>
 <li>컴퓨터 A/B가 인터넷 쓰려면 리눅스를 통하도록, 리눅스를 GW로 설정하자</li>
 <li><code>sudo ip addr 192.168.2.100/24 dev eth0</code></li>
 <li><code>sudo ip route add default via 192.168.2.1</code></li>
-<li>리눅스 자신도 인터넷을 쓰자</li>
+</ul>
+</li>
+<li>리눅스 자신도 인터넷을 쓰자<ul>
 <li>어디로 나가야하지 -&gt; 공유기(192.168.1.1)을 기본 게이트웨이로 지정</li>
 <li><code>ip route add default via 192.168.1.1</code></li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p><code>ip route show default</code>: 패킷을 외부로 보낼때 어느 경로 사용하는지 결정. DNS 기본적으로 어디로 가는지도 결정</p>
+<li><code>ip route show default</code>: 패킷을 외부로 보낼때 어느 경로 사용하는지 결정. DNS 기본적으로 어디로 가는지도 결정</li>
+</ul>
 </li>
-<li>
-<p><strong>Pod Networking</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Pod Networking</strong><ul>
 <li>요구사항<ul>
 <li>각 Pod는 고유한 ip address 있을 것</li>
 <li>각 Pod는 같은 노드 내 다른 Pod와 소통할 수 있을 것</li>
 <li>각 Pod는 다른 노드 내 다른 Pod들과 NAT 설정 없이 소통할 수 있을 것</li>
 </ul>
 </li>
-<li>
-<p>Pod로 생성되는 시점에 network 설정을 담은 script들이 함께 실행되면서 도커 컨테이너 브릿지/쿠버 네트워크 필요 세팅 일어남</p>
-<ol>
+<li>Pod로 생성되는 시점에 network 설정을 담은 script들이 함께 실행되면서 도커 컨테이너 브릿지/쿠버 네트워크 필요 세팅 일어남<ol>
 <li>Create veth pair</li>
 <li>Attach veth pair</li>
 <li>Assign IP Address</li>
 <li>Bring up interface</li>
 </ol>
 </li>
-<li>
-<p><strong>CNI</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>CNI</strong><ul>
 <li><em>참고: https://themapisto.tistory.com/267</em></li>
 <li>컨테이너 네트워크 설정하고 관리하는 표준 인터페이스</li>
 <li>기능<ul>
@@ -25235,7 +25339,7 @@
 </ul>
 </li>
 <li><code>kubelet.service</code>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>ExecStart=/usr/local/bin/kubelet \\
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>ExecStart=/usr/local/bin/kubelet \\
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>  --config=/var/lib/kubelet/kubelet-config.yaml \\
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>  --container-runtime=remote \\
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>  --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \\
@@ -25258,25 +25362,23 @@
 <li>클러스터 외부에서 서비스 통한 통신 할 수 있어야 함</li>
 </ol>
 </li>
-<li>
-<p><img alt="" src="../../images/2025-05-20-flannel.png" /></p>
-<ul>
+<li><img alt="" src="../../images/2025-05-20-flannel.png" /><ul>
 <li><code>flannel.1</code>: flannel이 만든 오버레이 네트워크 (Pod간 통신을 위해 사용)</li>
 <li><code>cni0</code>: 컨테이너들이 붙는 가상 브릿지 (컨테이너 네트워크 인터페이스)</li>
 <li><code>vethXXXX</code>: 컨테이너와 호스트 사이를 잇는 가상 이더넷 쌍 (컨테이너용)</li>
 <li><code>eth0</code>: 실제 물리적 또는 가상 머신의 NW 인터페이스 (외부와 통신)</li>
 </ul>
 </li>
-<li>
-<p><strong>DNS</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>DNS</strong><ul>
 <li>coreDNS를 통한 DNS 관리<ul>
 <li>configMap을 통한 설정 관리</li>
 </ul>
 </li>
-<li>
-<p>역할</p>
-<ol>
+<li>역할<ol>
 <li>서비스 이름을 통한 서비스 디스커버리: <code>my-service.default.svc.cluster.local</code></li>
 <li>Pod 이름을 통한 통신: <code>my-pod.default.svc.cluster.local</code></li>
 <li>네임스페이스와 서비스 이름을 통한 통신</li>
@@ -25284,33 +25386,45 @@
 <li>DNS의 역할과 주요 리소스</li>
 </ol>
 </li>
-<li>
-<p><strong>Ingress</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Ingress</strong><ul>
 <li>개요<ul>
-<li>Ingress: 클러스터 내부의 서비스로 외부 트래픽을 라우팅 하는 역할</li>
+<li>Ingress: 클러스터 내부의 서비스로 외부 트래픽을 라우팅 하는 역할<ul>
 <li>쿠버 내부에서는 Service(내부 IP)를 통해 접근 가능하지만,</li>
 <li>쿠버 외부에서는 NodePort/LoadBalancer를 사용해야 함 (하지만 이 방식은 확장성 부족)</li>
+</ul>
+</li>
 <li>Ingress를 통해 도메인 기반 라우팅, SSL/TLS 관리, 다중 서비스 라우팅 기능 제공</li>
 </ul>
 </li>
 <li>주요 기능<ol>
-<li>도메인 기반 라우팅</li>
+<li>도메인 기반 라우팅<ul>
 <li>foo.example.com -&gt; service-a | bar.example.com -&gt; service-b</li>
-<li>path 기반 라우팅</li>
+</ul>
+</li>
+<li>path 기반 라우팅<ul>
 <li>/api -&gt; backend-service, /web -&gt; frontend-service</li>
-<li>TLS/SSL</li>
+</ul>
+</li>
+<li>TLS/SSL<ul>
 <li>Ingress를 통한 HTTPS 트래픽 관리</li>
 <li>kubectl을 통한 TLS 인증서 -&gt; HTTPS</li>
-<li>리버스 프로시</li>
+</ul>
+</li>
+<li>리버스 프로시<ul>
 <li>Ingress 내부 앞단에서 로드 밸런서 역할 수행가능</li>
-<li>다양한 Ingress 컨트롤러</li>
+</ul>
+</li>
+<li>다양한 Ingress 컨트롤러<ul>
 <li>Nginx/Traefik/HAProxy/AWS ALB Ingress Controller/GCE Ingress Controller</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p>예시</p>
-<ul>
+<li>예시<ul>
 <li><code>paths.backend</code> 는 HTTP 요청을 어디로 라우팅할지 정의한다. Ingress가 요청을 전달할 쿠버 서비스를 뜻함
 <div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
@@ -25337,9 +25451,11 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>LoadBalancer</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>LoadBalancer</strong><ul>
 <li>개요<ul>
 <li>쿠버에서 <code>LoadBalancer</code> 타입의 서비스를 사용하면, <strong>클라우드 제공자</strong>의 LB 자동 생성하여 외부에서 서비스 직접 접근할 수 있게 해줌</li>
 <li>AWS/GCP/Azure 등 클라우드 환경에서 사용 (기본 지원)</li>
@@ -25354,7 +25470,7 @@
 </ol>
 </li>
 <li>LoadBalancer 서비스 설정 방법
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
 <a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-service</span>
@@ -25371,6 +25487,8 @@
 <a id="__codelineno-52-15" name="__codelineno-52-15" href="#__codelineno-52-15"></a><span class="c1"># nginx-service   LoadBalancer   10.100.200.1    34.125.56.78      80:30201/TCP   5m</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="gateway-api">Gateway API<a class="headerlink" href="#gateway-api" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://themapisto.tistory.com/274</em><br />
 <em>참고: https://www.anyflow.net/sw-engineer/kubernetes-gateway-api-1</em>
@@ -25384,7 +25502,7 @@
     - 추가 기능: API 게이트웨이 보안, 트래픽 관리, 캐싱, 모니터링
     - 쿠버에 국한 X</p>
 <ul>
-<li><strong>Gateway API</strong></li>
+<li><strong>Gateway API</strong><ul>
 <li><em>참고: https://somaz.tistory.com/403</em> </li>
 <li>Ingress를 대체하는 기능<ul>
 <li>HTTP용으로 설계된 Ingress와 다르게, Gateway API는 TCP/UDP/TLS 등 여러 프로토콜 지원</li>
@@ -25398,22 +25516,22 @@
 <li>L4, 멀티 프로토콜, 고급 라우팅 제어 어려움</li>
 </ul>
 </li>
-<li>
-<p>이를 극복하고자 Gateway API</p>
+<li>이를 극복하고자 Gateway API</li>
+</ul>
 </li>
-<li>
-<p><strong>Gateway API의 목적</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Gateway API의 목적</strong><ol>
 <li>L4-L7 트래픽을 모두 지원하는 유연한 아키텍쳐</li>
 <li>멀티 테넌시 및 보안 분리 구조 지원</li>
 <li>컨트롤러 벤더 독립적인 표준화된 API</li>
 <li>Cloud Provider, Service Mesh, API Gateway 등 다양한 환경에서 통합 가능</li>
-<li>
-<p>선언적 구성(Helm/Kustomize)에 적합</p>
+<li>선언적 구성(Helm/Kustomize)에 적합</li>
+</ol>
 </li>
-<li>
-<p><strong>구성요소 (API Kinds)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>구성요소 (API Kinds)</strong><ul>
 <li>GatewayClass: 게이트웨이 세트 공통된 설정 + 클래스 구현으로 관리. 인프라 제공자가 정의하는 Gateway 구현 클래스</li>
 <li>Gateway: 클라우드 로드 밸런서와 같이, 인프라 트래픽 관리 설정. 실제 L4/L7 트래픽 수신하는 리소스</li>
 <li>Route: 서비스로 트래픽을 라우팅하는 규칙<ul>
@@ -25421,28 +25539,28 @@
 <li>TLSRoute, TCPRoute, GRPCRoute</li>
 </ul>
 </li>
-<li>
-<p>ReferencePolicy, BackendPolicy: 고급 권한과 정책 제어 리소스</p>
+<li>ReferencePolicy, BackendPolicy: 고급 권한과 정책 제어 리소스</li>
+</ul>
 </li>
-<li>
-<p><strong>컨트롤러</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>컨트롤러</strong><ul>
 <li>쿠버에서 컨트롤러: 리소스가 원하는 상태가 되도록 실제 반영되도록 자동 처리해주는 프로그램<ul>
 <li>ex) Deployment Controller: Deployment yaml 보고 계속 확인 후 유지</li>
 <li>watch -&gt; compare -&gt; act</li>
 <li>거의 deployment로 배포</li>
 </ul>
 </li>
-<li>
-<p>Gateway Controller</p>
-<ul>
+<li>Gateway Controller<ul>
 <li>리소스는 단순히 구성정보</li>
 <li>구성정보 읽고, 프록시 설정하거나, 네트워크 라우팅을 적용하는 실행 주체</li>
 </ul>
 </li>
-<li>
-<p><strong>Gateway API vs Ingress</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Gateway API vs Ingress</strong></li>
 </ul>
 <table>
 <thead>
@@ -25476,7 +25594,7 @@
 </tbody>
 </table>
 <ul>
-<li><strong>리소스 별 역할 분배</strong></li>
+<li><strong>리소스 별 역할 분배</strong><ul>
 <li><img alt="" src="../../images/2025-05-03-gateway-api.png" /></li>
 <li><code>GatewayClass</code><ul>
 <li>인프라 제공자가 정의하는 클러스터 범위의 리소스 (Cluster-Scoped)</li>
@@ -25519,7 +25637,7 @@
 </ul>
 </li>
 <li><code>HTTPRoute</code>: HTTP request를 서비스로 routing 위한 규칙
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1beta1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1beta1</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPRoute</span>
 <a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">httpbin</span>
@@ -25542,39 +25660,43 @@
 <a id="__codelineno-55-21" name="__codelineno-55-21" href="#__codelineno-55-21"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8000</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Docker Storage</strong></li>
+<li><strong>Docker Storage</strong><ul>
 <li>File System: <code>/var/lib/docker/volumes</code> 가 있음</li>
 <li>도커 Layered architecture<ul>
 <li>도커의 Dockerfile은 겹겹이 레이어로 저장되며, 재사용됨</li>
 </ul>
 </li>
-<li>
-<p>volumes(pv)</p>
-<ul>
-<li><code>&gt; docker volume create data-volume</code></li>
+<li>volumes(pv)<ul>
+<li><code>&gt; docker volume create data-volume</code><ul>
 <li>해당 명령어를 통해 <code>/var/lib/docker/data-volume</code>이 생김</li>
+</ul>
+</li>
 <li><code>&gt; docker run -v data_volume:/var/lib/mysql_mysql</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Volumes</strong></p>
+</ul>
 </li>
-<li>사실 도커 컨테이너는 잠깐 살다가 가는게 본질 (데이터도 같이 폐기)</li>
-<li>
-<p>쿠버에서도 Pod는 일시적. Volume 붙여 해결</p>
+</ul>
 <ul>
+<li><strong>Volumes</strong><ul>
+<li>사실 도커 컨테이너는 잠깐 살다가 가는게 본질 (데이터도 같이 폐기)</li>
+<li>쿠버에서도 Pod는 일시적. Volume 붙여 해결<ul>
 <li>다양한 File solution이 제공됨. </li>
 <li>NFS, ceph, flocker, scaleIO, AWS EBS, Azure Disk, google persistence disk 등</li>
 </ul>
 </li>
-<li>
-<p><strong>Persistent Volume</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Persistent Volume</strong><ul>
 <li>클러스터 전체에서 통용되는 storage volume</li>
 <li>스토리지(PV) 미리 생성해두고, 어플리케이션은 PVC를 통해 PV 요청하는 방식
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolume</span>
 <a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-pv</span>
@@ -25589,27 +25711,35 @@
 <a id="__codelineno-56-13" name="__codelineno-56-13" href="#__codelineno-56-13"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/exported/data</span><span class="w">                  </span><span class="c1"># NFS 서버의 경로</span>
 <a id="__codelineno-56-14" name="__codelineno-56-14" href="#__codelineno-56-14"></a><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.100</span><span class="w">                 </span><span class="c1"># NFS 서버 주소</span>
 </code></pre></div></li>
-<li>
-<p>Reclaim 정책: <code>persistentVolumeReclaimPolicy</code></p>
-<ul>
-<li>[Retain]</li>
+<li>Reclaim 정책: <code>persistentVolumeReclaimPolicy</code><ul>
+<li>[Retain]<ul>
 <li>PV 삭제되지 않고, 수동으로 클린업</li>
 <li>실제 저장된 데이터는 그대로 남김</li>
 <li>k8s는 해당 볼륨을 다른 pvc에 자동 연결하지 않음 =&gt; 수동으로 데이터 확인 or 초기화 후 재사용</li>
-<li>[Delete]</li>
+</ul>
+</li>
+<li>[Delete]<ul>
 <li>PVC 삭제시, 바인딩된 PV도 삭제</li>
 <li>임시 저장소/테스트 용도에 적합</li>
-<li>[Recycle (deprecated)]</li>
+</ul>
+</li>
+<li>[Recycle (deprecated)]<ul>
 <li>PV 데이터 삭제하고 초기화하여 다시 사용</li>
 </ul>
 </li>
-<li>
-<p><strong>Persistent Volume Claim</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Persistent Volume Claim</strong><ul>
 <li>pv는 어드민이 만든다. pvc는 유저가 하나의 pv와 1:1 관계</li>
 <li>pvc와 pv는 다음 조건이 서로 호환되면 쿠버에서 자동 바인딩!<ul>
-<li><code>storage</code>: pvc &lt;= pv</li>
+<li><code>storage</code>: pvc &lt;= pv<ul>
 <li>이때, <code>requests.storage</code>는 최소한 이정도 필요해요로, 실제 바인딩 Capacity는 pv의 용량으로 산정됨</li>
+</ul>
+</li>
 <li><code>accessModes</code> pvc == pv</li>
 <li><code>storageClassName</code>: 둘다 없거나, 같거나</li>
 <li>pvc 바인딩 되지 않음 &amp; pv 사용중 아님</li>
@@ -25624,7 +25754,7 @@
 </ol>
 </li>
 <li>PVC 선언
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolumeClaim</span>
 <a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-pvc</span>
@@ -25636,9 +25766,8 @@
 <a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
 <a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a><span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span><span class="w">    </span><span class="c1"># PVC가 바인딩될 PV 찾을 때 사용</span>
 </code></pre></div></li>
-<li>
-<p>Pod에 PVC 연결
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<li>Pod에 PVC 연결
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
 <a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-pod</span>
@@ -25653,11 +25782,12 @@
 <a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-volume</span>
 <a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a><span class="w">    </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span>
 <a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a><span class="w">      </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-pvc</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>StorageClass</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>StorageClass</strong><ul>
 <li><em>참고: https://velog.io/@<em>zero</em>/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-StorageClass-%EA%B0%9C%EB%85%90-%EB%B0%8F-%EC%84%A4%EC%A0%95</em></li>
 <li>pv로 사용할 볼륨을 수동으로 프로비저닝하는 불편함을 해결하고자, 자동으로 볼륨을 생성/할당하는 storageClass</li>
 <li><code>volumeBindingMode</code>: 볼륨이 언제 바운딩 될지 시기 설정하는 옵션<ul>
@@ -25671,7 +25801,7 @@
 </ul>
 </li>
 <li><code>parameters</code>: provisioner가 동적으로 볼륨 생성시 필요한 옵션
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storage.k8s.io/v1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storage.k8s.io/v1</span>
 <a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">StorageClass</span>
 <a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo-sc</span>
@@ -25683,16 +25813,18 @@
 <a id="__codelineno-59-10" name="__codelineno-59-10" href="#__codelineno-59-10"></a><span class="w">  </span><span class="nt">fsType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ext4</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="high-availability">High Availability<a class="headerlink" href="#high-availability" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Control Plane</strong></li>
+<li><strong>Control Plane</strong><ul>
 <li>한 대만 뒀다가 고장나면 답이 없음. SPOF 방지를 위한 클러스터 내 요소 중복 설치 권장</li>
-<li>
-<p>API 서버 앞단에 LB를 배치하는 것이 일반적</p>
+<li>API 서버 앞단에 LB를 배치하는 것이 일반적</li>
+</ul>
 </li>
-<li>
-<p><strong>ETCD</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ETCD</strong><ul>
 <li>Read 요청 O, Write 요청은 선택된 리더에게 몰빵<ul>
 <li>리더가 차후 타 노드에 Write 복사를 진행</li>
 <li>리더는 RAFT 알고리즘을 통해 선출</li>
@@ -25702,9 +25834,8 @@
 <li>etcd 노드를 짝수로 운영하면 낭비가 되니, 항상 홀수개로 운영하는 것이 일반적</li>
 </ul>
 </li>
-<li>
-<p>etcd static pod 설정 돌아보기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>spec.containers.command:
+<li>etcd static pod 설정 돌아보기
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>spec.containers.command:
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>- etcd
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a>- --advertise-client-urls=https://192.168.58.136:2379           # 다른 컴포넌트에게 etcd 서버의 주소를 알려줄때 사용
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>- --cert-file=/etc/kubernetes/pki/etcd/server.crt               # etcd 서버의 tls 인증서 (클라이언트가 etcd 접속시 이걸로 암호화/인증)
@@ -25725,15 +25856,16 @@
 <a id="__codelineno-60-19" name="__codelineno-60-19" href="#__codelineno-60-19"></a>- --peer-client-cert-auth=true
 <a id="__codelineno-60-20" name="__codelineno-60-20" href="#__codelineno-60-20"></a>- --snapshot-count=10000
 <a id="__codelineno-60-21" name="__codelineno-60-21" href="#__codelineno-60-21"></a>- --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt             # 클라이언트 인증서의 서명 검증할 때 사용 (클라이언트의 인증서가 믿을만한 CA가 발급해준건가?)
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>ETCD backup &amp; restore</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ETCD backup &amp; restore</strong><ul>
 <li><em>참고: https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/</em></li>
 <li>static pod 설정 파일에 들어가서, 클라이언트로써 접속하기 위한 ssl 인증서 설정들을 참고하여 다음과 같이 작성</li>
 <li>backup
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 <a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>  -- cacert=&lt;trusted-ca-file&gt; --cert=&lt;cert-file&gt; --key=&lt;key-file&gt; \
 <a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a>  snapshot save &lt;backup-file-location&gt;
 </code></pre></div></li>
@@ -25741,6 +25873,8 @@
 <li>data-dir-location으로 etcd를 복구하고, static-pod인 etcd가 해당 디렉토리에 volume 붙을 수 있도록 etcd.yaml 수정하여 재구동 필요
 <div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>ETCDCTL_API=3 etcdctl --data-dir &lt;data-dir-location&gt; snapshot restore snapshot.db
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -25758,11 +25892,11 @@
     - 버전 관리 : 어플리케이션 버전 관리 Helm으로 가능, 롤백도 쉬움
     - 의존성 관리 : <code>charts/</code> 하위 Helm Chart 포함하여 서비스 배포 가능</p>
 <ul>
-<li><strong>Helm Chart</strong></li>
+<li><strong>Helm Chart</strong><ul>
 <li>쿠버 어플리케이션 정의하는 패키지 템플릿</li>
 <li>YAML 파일 묶어서 재사용 가능하게 함</li>
 <li>환경별 변수 (values.yaml) 적용으로 중복 최소화
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>myapp/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>myapp/
 <a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a> ├── Chart.yaml          # Chart의 메타정보 (이름, 버전 등)
 <a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a> ├── values.yaml         # 기본 설정값 (사용자 입력 가능)
 <a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a> ├── templates/          # Kubernetes 리소스(YAML) 템플릿
@@ -25772,29 +25906,29 @@
 <a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a> │   └── _helpers.tpl    # 템플릿 함수 정의
 <a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a> └── charts/             # 다른 차트(의존성) 포함 가능
 </code></pre></div></li>
-<li>
-<p>차트 만들기
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>$ helm create mynginx
+<li>차트 만들기
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>$ helm create mynginx
 <a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>$ helm lint mynginx
 <a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a>$ helm install webserver ./mynginx
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Helm Install</strong>
+</ul>
+<ul>
+<li><strong>Helm Install</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>$ helm install webserver bitnami/nginx
 <a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>$ helm install webserver --set service.type=NodePort bitnami/nginx
 <a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a>$ helm install webserver -f nginx-value.yaml bitnami/nginx
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Helm Rolling Update &amp; Rollback</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Helm Rolling Update &amp; Rollback</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a># helm chart rolling update &amp; rollback
 <a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a>$ helm upgrade --set image.repository=httpd --set image.tag=2.2.34-alpine webserver mynginx
 <a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a>$ helm rollback webserver 1 &lt;- revision
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 <li></li>
-<li><strong>Helm Release</strong></li>
+<li><strong>Helm Release</strong><ul>
 <li>패키지화 하여 배포할 수 있다. (name-version.tgz)<ul>
 <li><code>$ helm package mynginx =&gt; mynginx-0.1.0.tgz</code></li>
 </ul>
@@ -25805,35 +25939,36 @@
 </li>
 <li>Chart를 기반으로 쿠버 클러스터에 실제 배포된 인스턴스</li>
 <li><code>helm install</code> 실행시, 차트 기반으로 쿠버 리소스 생성 =&gt; 이게 릴리즈</li>
-<li>
-<p>Helm은 배포된 릴리즈 추적/관리, 롤백 가능</p>
+<li>Helm은 배포된 릴리즈 추적/관리, 롤백 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>Helm Repository</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Helm Repository</strong><ul>
 <li>https://artifacthub.io/</li>
 <li>Helm Chart를 저장하는 곳이 따로 또 있음</li>
-<li>
-<p>강의 예시에서는 워드프레스를 그냥 앱 구동하듯 다운 받고 install 해서 설치해서 사용했음.
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>&gt; helm repo add bitnami https://~
+<li>강의 예시에서는 워드프레스를 그냥 앱 구동하듯 다운 받고 install 해서 설치해서 사용했음.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>&gt; helm repo add bitnami https://~
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>&gt; helm install my-release bitnami/wordpress
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a>&gt; helm list
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>&gt; helm uninstall my-release
 <a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a>&gt; helm upgrade my-release bitnami/wordpress --set replicaCount=5
 <a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a>&gt; helm rollback my-release 1
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Helm 사용처</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Helm 사용처</strong><ul>
 <li>CI/CD 파이프라인 자동 배포</li>
 <li>Prometheus/Grafana/Nginx Ingress 등 자주 사용하는 어플리케이션 배포</li>
 <li>MSA 환경에서 Helm Chart 적용</li>
-<li>
-<p>쿠버에서 어플리케이션 배포/업그레이드/롤백</p>
+<li>쿠버에서 어플리케이션 배포/업그레이드/롤백</li>
+</ul>
 </li>
-<li>
-<p><strong>Helm 명령어</strong>
+</ul>
+<ul>
+<li><strong>Helm 명령어</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a># REVISION 히스토리 보기
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>helm history chart-name
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a>
@@ -25845,8 +25980,7 @@
 <a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a>
 <a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a># 3번 REVISION 으로 롤백
 <a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a>helm rollback chart-name 3
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h2 id="kustomize">Kustomize<a class="headerlink" href="#kustomize" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://tommypagy.tistory.com/362</em><br />
@@ -25859,8 +25993,7 @@
   - Kustomize는 커스터마이징을 더 쉽게 구성하기 위해 제너레이터와 같은 여러 편리한 방법 제공
   - Kustomize는 패치 사용하여 기존 표준 구성 파일 방해하지 않고 환경별 변경 사항 도입함</p>
 <ul>
-<li>
-<p><strong>구조</strong>
+<li><strong>구조</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>~/someApp
 <a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>├── base
 <a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a>│   ├── deployment.yaml
@@ -25875,19 +26008,18 @@
 <a id="__codelineno-69-12" name="__codelineno-69-12" href="#__codelineno-69-12"></a>        ├── cpu_count.yaml
 <a id="__codelineno-69-13" name="__codelineno-69-13" href="#__codelineno-69-13"></a>        ├── kustomization.yaml
 <a id="__codelineno-69-14" name="__codelineno-69-14" href="#__codelineno-69-14"></a>        └── replica_count.yaml
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>kustomize 명령어</strong>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>kustomize 명령어</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a># 적용하기 (kustomization.yaml이 있는 디렉토리에서 적용)
 <a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>kubectl apply -k .
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>사용법</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>사용법</strong><ol>
 <li>Kustomization.yaml
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
 <a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kustomization</span>
 <a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a><span class="nt">resources</span><span class="p">:</span>
 <a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base/deployment.yaml</span>
@@ -25895,7 +26027,7 @@
 <a id="__codelineno-71-6" name="__codelineno-71-6" href="#__codelineno-71-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base/configmap.yaml</span>
 </code></pre></div></li>
 <li>Overlays
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="c1"># overlays/dev/kustomization.yaml</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="c1"># overlays/dev/kustomization.yaml</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kustomization</span>
 <a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a><span class="nt">resources</span><span class="p">:</span>
@@ -25908,14 +26040,14 @@
 <a id="__codelineno-72-11" name="__codelineno-72-11" href="#__codelineno-72-11"></a><span class="w">      </span><span class="no">- op: replace</span>
 <a id="__codelineno-72-12" name="__codelineno-72-12" href="#__codelineno-72-12"></a><span class="w">        </span><span class="no">path: /spec/replicas</span>
 <a id="__codelineno-72-13" name="__codelineno-72-13" href="#__codelineno-72-13"></a><span class="w">        </span><span class="no">value: 2</span>
-</code></pre></div></li>
-<li>기본 리소스 적용: <code>kubectl apply -k overlays/dev/</code></li>
-<li>
-<p>YAML 생성 미리보기: <code>kubectl kustomize overlays/dev/</code></p>
+</code></pre></div>
+- 기본 리소스 적용: <code>kubectl apply -k overlays/dev/</code>
+- YAML 생성 미리보기: <code>kubectl kustomize overlays/dev/</code></li>
+</ol>
 </li>
-<li>
-<p><strong>kustomize transformers</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>kustomize transformers</strong><ul>
 <li>transformers: 기존 필드 변경을 설정</li>
 <li>built-in transformer: 내장 변환기. kustomize가 기본 제공. 그외는 커스텀<ul>
 <li><code>commonLabels</code></li>
@@ -25927,7 +26059,7 @@
 </ul>
 </li>
 <li>예시)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
 <a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kustomization</span>
 <a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a><span class="nt">resources</span><span class="p">:</span>
 <a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db/</span>
@@ -25948,9 +26080,7 @@
 <li>모든 리소스 및 참조의 이름 앞에 값을 추가</li>
 </ul>
 </li>
-<li>
-<p><code>commonAnnotations</code></p>
-<ul>
+<li><code>commonAnnotations</code><ul>
 <li>모든 리소스에 공통으로 주석(annotation)추가
 <div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
 <a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kustomization</span>
@@ -25969,12 +26099,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>kubernetes patch</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>kubernetes patch</strong><ul>
 <li>특정 리소스를 직접 수정하기 위한 수단<ul>
-<li>overlay 안에서 사용되는 기술적인 방법</li>
-<li><code>patchesStrategicMerge</code>: 쿠버 리소스 구조 기준으로 병합. 일부 필드 명시 자동합침
+<li>overlay 안에서 사용되는 기술적인 방법
+1. <code>patchesStrategicMerge</code>: 쿠버 리소스 구조 기준으로 병합. 일부 필드 명시 자동합침
   <div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="nt">patchesStrategicMerge</span><span class="p">:</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patch.yaml</span>
 </code></pre></div>
@@ -25984,8 +26116,8 @@
 <a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
 <a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a><span class="nt">spec</span><span class="p">:</span>
 <a id="__codelineno-77-6" name="__codelineno-77-6" href="#__codelineno-77-6"></a><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-</code></pre></div></li>
-<li><code>patches</code> or <code>patchesJson6902</code>: 지정한 경로에 대해 명시적으로 JSON 스타일 패치 적용
+</code></pre></div>
+2. <code>patches</code> or <code>patchesJson6902</code>: 지정한 경로에 대해 명시적으로 JSON 스타일 패치 적용
   <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="nt">patches</span><span class="p">:</span>
 <a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span>
 <a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps</span>
@@ -26001,7 +26133,7 @@
 </ul>
 </li>
 <li>기본적으로 <code>kustomization.yaml</code> 패치를 사용하면, 있던 내용이면 수정, 없으면 추가됨
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
 <a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kustomization</span>
 <a id="__codelineno-80-3" name="__codelineno-80-3" href="#__codelineno-80-3"></a><span class="nt">resources</span><span class="p">:</span>
 <a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../base</span>
@@ -26015,7 +26147,7 @@
 <a id="__codelineno-80-12" name="__codelineno-80-12" href="#__codelineno-80-12"></a><span class="w">        </span><span class="no">value: 2</span>
 </code></pre></div></li>
 <li>yaml을 별도로 지정하고, 이를 import 하여 패치로 사용하는 경우도 다수
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-deployment</span>
@@ -26026,7 +26158,7 @@
 <a id="__codelineno-81-9" name="__codelineno-81-9" href="#__codelineno-81-9"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">memcached</span>
 <a id="__codelineno-81-10" name="__codelineno-81-10" href="#__codelineno-81-10"></a><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">memcached</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="nt">resources</span><span class="p">:</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="nt">resources</span><span class="p">:</span>
 <a id="__codelineno-82-2" name="__codelineno-82-2" href="#__codelineno-82-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongo-depl.yaml</span>
 <a id="__codelineno-82-3" name="__codelineno-82-3" href="#__codelineno-82-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-depl.yaml</span>
 <a id="__codelineno-82-4" name="__codelineno-82-4" href="#__codelineno-82-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongo-service.yaml</span>
@@ -26037,9 +26169,8 @@
 <a id="__codelineno-82-9" name="__codelineno-82-9" href="#__codelineno-82-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongo-patch.yaml</span>
 <a id="__codelineno-82-10" name="__codelineno-82-10" href="#__codelineno-82-10"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-patch.yaml</span>
 </code></pre></div></li>
-<li>
-<p>특정 컨테이너를 지우도록 패치하려면 <code>$patch: delete</code> 키워드 사용 필요
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<li>특정 컨테이너를 지우도록 패치하려면 <code>$patch: delete</code> 키워드 사용 필요
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <a id="__codelineno-83-2" name="__codelineno-83-2" href="#__codelineno-83-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
 <a id="__codelineno-83-3" name="__codelineno-83-3" href="#__codelineno-83-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-83-4" name="__codelineno-83-4" href="#__codelineno-83-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-deployment</span>
@@ -26049,14 +26180,15 @@
 <a id="__codelineno-83-8" name="__codelineno-83-8" href="#__codelineno-83-8"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
 <a id="__codelineno-83-9" name="__codelineno-83-9" href="#__codelineno-83-9"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$patch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">delete</span>
 <a id="__codelineno-83-10" name="__codelineno-83-10" href="#__codelineno-83-10"></a><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">memcached</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>kustomize overlay</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>kustomize overlay</strong><ul>
 <li>디렉토리 구조의 개념. <code>base</code> 재사용하여 환경별 설정 (dev/prod) 구조</li>
 <li>환경에 맞춘 패치 조합!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>my-app/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>my-app/
 <a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a>├── base/
 <a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a>│   ├── deployment.yaml
 <a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a>│   ├── kustomization.yaml
@@ -26069,7 +26201,7 @@
 <a id="__codelineno-84-11" name="__codelineno-84-11" href="#__codelineno-84-11"></a>│       └── patch.yaml
 </code></pre></div></li>
 <li>배포는 각 overlay/{env}/kustomization.yaml에서 수행! 각 환경별 kustomization.yaml은 다음과 같이 작성할 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="nt">bases</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="nt">bases</span><span class="p">:</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../base</span>
 <a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="nt">resources</span><span class="p">:</span>
 <a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis-depl.yaml</span>
@@ -26077,7 +26209,7 @@
 <a id="__codelineno-85-6" name="__codelineno-85-6" href="#__codelineno-85-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-patch.yaml</span>
 </code></pre></div></li>
 <li>overlay 환경 별로도, 각 <code>kustomization.yaml</code>에 patch 가능
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="nt">bases</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="nt">bases</span><span class="p">:</span>
 <a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../base</span>
 <a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a><span class="nt">commonLabels</span><span class="p">:</span>
 <a id="__codelineno-86-4" name="__codelineno-86-4" href="#__codelineno-86-4"></a><span class="w">  </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QA</span>
@@ -26091,33 +26223,35 @@
 <a id="__codelineno-86-12" name="__codelineno-86-12" href="#__codelineno-86-12"></a><span class="w">        </span><span class="no">value: caddy</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="kubernetes-failure">Kubernetes Failure<a class="headerlink" href="#kubernetes-failure" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Application Failure</strong></li>
+<li><strong>Application Failure</strong><ol>
 <li>접근 가능한지 보기 (curl -X GET https://web-service)</li>
 <li><code>k describe service web-service</code></li>
 <li><code>k get pods &amp;&amp; k describe pod web</code></li>
-<li>
-<p><code>k logs web</code></p>
+<li><code>k logs web</code></li>
+</ol>
 </li>
-<li>
-<p><strong>Control Plane Failure</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Control Plane Failure</strong><ol>
 <li><code>k logs kube-apiserver -n=kube-system</code></li>
 <li><code>sudo journalctl -n kube-apiserver</code><ul>
 <li>journalctl로 systemd 로깅을 할 수 있음</li>
 </ul>
 </li>
-<li>
-<p>static pod 확인</p>
-<ul>
+<li>static pod 확인<ul>
 <li>/etc/kubernetes/manifest</li>
 <li>Kubelet, CoreDNS, Etcd, Kubernetes API Server, Kube Proxy, Controller Manager, Scheduler</li>
 </ul>
 </li>
-<li>
-<p><strong>Worker Node Failure</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>Worker Node Failure</strong><ol>
 <li><code>k get nodes</code></li>
 <li><code>k describe node worker-1</code></li>
 <li>check nodes -&gt; online vs crash<ul>
@@ -26129,15 +26263,15 @@
 <li><code>sudo journalctl -u kubelet</code></li>
 </ul>
 </li>
-<li>
-<p>check certs</p>
-<ul>
+<li>check certs<ul>
 <li><code>openssl x509 -in /var/lib/kubelet/worker-1.crt -text</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Networking</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>Networking</strong><ol>
 <li>Network Plugin (Weave Net/Flannel/Calico)</li>
 <li>DNS: coreDNS 리소스<ul>
 <li>Service Account</li>
@@ -26153,6 +26287,8 @@
 <li>노드의 nw rule 설정</li>
 </ul>
 </li>
+</ol>
+</li>
 </ul>
 <h2 id="kubeadm">kubeadm<a class="headerlink" href="#kubeadm" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://velog.io/@moonblue/kubeadm-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0</em><br />
@@ -26161,40 +26297,42 @@
   - 설치형 쿠버네티스로서 서버간 클러스터링 환경 구성하고 관리하기 위한 공식 도구 중 하나
   - 온프레미스 환경에 직접 설치하고 운용할 목적으로 만들어짐</p>
 <ul>
-<li><strong>설치</strong></li>
+<li><strong>설치</strong><ul>
 <li><code>container runtime 설치</code><ul>
 <li>container를 pod에서 운용하기 위해서는, container runtime 필요</li>
 <li>runtime을 명시하지 않으면, kubeadm는 자동으로 설치된 container runtime을 감지 -&gt; 없거나 여러개라면 에러</li>
 <li>containerd: unix://var/run/containerd/containerd.sock</li>
 </ul>
 </li>
-<li>
-<p><code>kubeadm, kubelet, kubectl 설치</code> </p>
-<ul>
+<li><code>kubeadm, kubelet, kubectl 설치</code> <ul>
 <li><code>kubeadm</code>: 클러스터 부트스트랩 용도</li>
 <li><code>kubelet</code>: 해당 머신에서 돌아가며, pod/container 관리 선장</li>
 <li><code>kubectl</code>: 클러스터와 함께 소통 용도</li>
 <li>kubeadm이 자체적으로 kubelet/kubectl을 관리하지 않기 때문에, 각 버전이 호환되는 것 확인해야 함.</li>
 </ul>
 </li>
-<li>
-<p><strong>Control Plane Node 설치</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Control Plane Node 설치</strong><ol>
 <li>ifconfig에서 eth0 ip 확인</li>
 <li><code>kubeadm init --apiserver-cert-extra-sans=controlplane --apiserver-advertise-address 192.168.122.143 --pod-network-cidr=172.17.0.0/16 --service-cidr=172.20.0.0/16</code></li>
+</ol>
+</li>
 </ul>
 <h2 id="systemd">systemd 기반 리눅스 관리 명령어<a class="headerlink" href="#systemd" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>systemd</strong></li>
+<li><strong>systemd</strong><ul>
 <li>리눅스 OS에서 부팅/서비스 관리를 <code>systemd</code>로 하는 시스템</li>
 <li>PID 1번 프로세스</li>
 <li>로그 수집 (journald) -&gt; journalctl로 확인 가능</li>
-<li>
-<p>리소스 제한, 타이머 기능, 서비스 관리 등</p>
+<li>리소스 제한, 타이머 기능, 서비스 관리 등</li>
+</ul>
 </li>
-<li>
-<p><strong><code>systemctl</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>systemctl</code></strong><ul>
 <li>systemd의 시작/정지/상태 확인 등 시스템 전체 동작 제어<ul>
 <li>서비스 시작/중지/재시작</li>
 <li>서비스 상태 확인</li>
@@ -26202,9 +26340,7 @@
 <li>시스템 전체 상태 확인</li>
 </ul>
 </li>
-<li>
-<p>명령어</p>
-<ul>
+<li>명령어<ul>
 <li><code>systemctl start &lt;serviceName&gt;</code>: 서비스 시작</li>
 <li><code>systemctl stop &lt;serviceName&gt;</code>: 서비스 중지</li>
 <li><code>systemctl restart &lt;serviceName&gt;</code>: 서비스 재시작</li>
@@ -26216,9 +26352,11 @@
 <li><code>systemctl is-enabled &lt;serviceName&gt;</code>: 부팅 시 자동 시작 설정 여부 확인</li>
 </ul>
 </li>
-<li>
-<p><strong><code>journalctl</code></strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong><code>journalctl</code></strong><ul>
 <li>시스템 전반의 로그 확인</li>
 <li>특정 서비스의 로그 확인</li>
 <li>부팅 로그 확인</li>
@@ -26232,11 +26370,13 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="kubectl-jsonjsonpath">kubectl json/jsonpath<a class="headerlink" href="#kubectl-jsonjsonpath" title="Permanent link">&para;</a></h2>
 <ul>
-<li>yaml과 마찬가지로, kubectl 반환값을 json 형식으로 받을 수 있음</li>
+<li>yaml과 마찬가지로, kubectl 반환값을 json 형식으로 받을 수 있음<ul>
 <li><code>k get nodes -o=json</code>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>controlplane ~ ✖ k get node -o=json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>controlplane ~ ✖ k get node -o=json
 <a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>{
 <a id="__codelineno-87-3" name="__codelineno-87-3" href="#__codelineno-87-3"></a>    &quot;apiVersion&quot;: &quot;v1&quot;,
 <a id="__codelineno-87-4" name="__codelineno-87-4" href="#__codelineno-87-4"></a>    &quot;items&quot;: [
@@ -26261,37 +26401,41 @@
 <a id="__codelineno-87-23" name="__codelineno-87-23" href="#__codelineno-87-23"></a>    ]
 <a id="__codelineno-87-24" name="__codelineno-87-24" href="#__codelineno-87-24"></a>}
 </code></pre></div></li>
-<li>jsonpath</li>
-<li>
-<p><code>k get nodes -o=jsonpath='{.items[*].metadata.name}'</code>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>controlplane ~ ➜  k get nodes -o=jsonpath=&#39;{.items[*].metadata.name}&#39;
+</ul>
+</li>
+<li>jsonpath<ul>
+<li><code>k get nodes -o=jsonpath='{.items[*].metadata.name}'</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>controlplane ~ ➜  k get nodes -o=jsonpath=&#39;{.items[*].metadata.name}&#39;
 <a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a>controlplane node01
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p>sort-by 를 활용하여 k get 결과값을 정렬할 수 있음</p>
-</li>
-<li>
-<p><code>k get pv --sort-by=.spec.capacity.storage</code>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>controlplane ~ ➜  k get pv --sort-by=.spec.capacity.storage
+</ul>
+<ul>
+<li>sort-by 를 활용하여 k get 결과값을 정렬할 수 있음<ul>
+<li><code>k get pv --sort-by=.spec.capacity.storage</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>controlplane ~ ➜  k get pv --sort-by=.spec.capacity.storage
 <a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a>NAME       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
 <a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a>pv-log-4   40Mi       RWX            Retain           Available                          &lt;unset&gt;                          27m
 <a id="__codelineno-89-4" name="__codelineno-89-4" href="#__codelineno-89-4"></a>pv-log-1   100Mi      RWX            Retain           Available                          &lt;unset&gt;                          27m
 <a id="__codelineno-89-5" name="__codelineno-89-5" href="#__codelineno-89-5"></a>pv-log-2   200Mi      RWX            Retain           Available                          &lt;unset&gt;                          27m
 <a id="__codelineno-89-6" name="__codelineno-89-6" href="#__codelineno-89-6"></a>pv-log-3   300Mi      RWX            Retain           Available                          &lt;unset&gt;                          27m
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p>커스텀 칼럼값을 활용하여 필요한 칼럼만 추출하여 쓸 수 있음. </p>
-</li>
+</ul>
+<ul>
+<li>커스텀 칼럼값을 활용하여 필요한 칼럼만 추출하여 쓸 수 있음. <ul>
 <li><code>k get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage</code>
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>controlplane ~ ➜  k get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>controlplane ~ ➜  k get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage
 <a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a>NAME       CAPACITY
 <a id="__codelineno-90-3" name="__codelineno-90-3" href="#__codelineno-90-3"></a>pv-log-4   40Mi
 <a id="__codelineno-90-4" name="__codelineno-90-4" href="#__codelineno-90-4"></a>pv-log-1   100Mi
 <a id="__codelineno-90-5" name="__codelineno-90-5" href="#__codelineno-90-5"></a>pv-log-2   200Mi
 <a id="__codelineno-90-6" name="__codelineno-90-6" href="#__codelineno-90-6"></a>pv-log-3   300Mi
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

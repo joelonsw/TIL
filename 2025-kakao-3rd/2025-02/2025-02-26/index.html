@@ -22909,15 +22909,15 @@
 <h3 id="2025-02-26">2025-02-26<a class="headerlink" href="#2025-02-26" title="Permanent link">&para;</a></h3>
 <h2 id="_1">모나드<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>함수형 프로그래밍에서 계산을 추상화하고, 체이닝(연결)하기 위한 디자인 패턴</li>
 <li>모나드에서는 어떤 값 + 계산의 컨텍스트를 함께 다룸</li>
-<li>
-<p>여러 계산은 순차적으로 연결할 수 있도록 도와줌</p>
+<li>여러 계산은 순차적으로 연결할 수 있도록 도와줌</li>
+</ul>
 </li>
-<li>
-<p><strong>모나드 특성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>모나드 특성</strong><ol>
 <li>순수 값의 래핑<ul>
 <li>일반 값을 모나드 컨텍스트에 넣어줌.</li>
 <li>ex) Scala <code>Option</code>에서 <code>Some(5)</code></li>
@@ -22928,27 +22928,29 @@
 <li>ex) <code>Some(5).map(_ + 1)</code> =&gt; <code>Some(6)</code></li>
 </ul>
 </li>
-<li>
-<p><code>flatMap</code></p>
-<ul>
+<li><code>flatMap</code><ul>
 <li>모나드 내부의 값 꺼내서, 그 값을 이용해 새로운 모나드를 생성하는 함수에 넘겨줌</li>
 <li>과정에서 중첩된 모나드에 대해 flatten</li>
 </ul>
 </li>
-<li>
-<p><strong>강점</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>강점</strong><ul>
 <li>이렇게 감싸면, 에러처리/비동기 계산/DB 작업 등의 부수효과 -&gt; 순차적으로 안전히 연결 가능</li>
-<li>
-<p>계산의 순서를 정의하고, 그 계산 과정에서 발생하는 부수효과들을 관리하게 해줌</p>
+<li>계산의 순서를 정의하고, 그 계산 과정에서 발생하는 부수효과들을 관리하게 해줌</li>
+</ul>
 </li>
-<li>
-<p><strong>DBIO</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DBIO</strong><ul>
 <li>Slick에서 제공하는 모나드. DB와의 I/O 작업 추상화하여 표현</li>
 <li>DB와 상호작용 lazy evaluation으로 감싸서 안전하게 조합될 수 있도록 <code>map</code>, <code>flatMap</code> 제공</li>
 <li>순차체인, 병렬 처리 가능. </li>
 <li>DB 커넥션 통해 실행될 때 까지 실행 X</li>
+</ul>
+</li>
 </ul>
 
 

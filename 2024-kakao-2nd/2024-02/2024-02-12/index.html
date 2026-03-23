@@ -23004,9 +23004,9 @@
   - companion object 사용하세요! (오 Scala 같아!)
     - 하나의 클래스에 하나의 Companion Object 사용 가능</p>
 <ul>
-<li><strong>Java =&gt; Kotlin</strong></li>
+<li><strong>Java =&gt; Kotlin</strong><ul>
 <li>Java
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sayHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;hello!&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
@@ -23017,7 +23017,7 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>Kotlin
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">sayHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello!&quot;</span><span class="p">)</span>
@@ -23029,6 +23029,8 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="n">Person</span><span class="p">.</span><span class="na">sayHello</span><span class="p">()</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="jpa-spring-batch-jparepository-delete">JPA + Spring Batch - JpaRepository delete 쿼리가 안나감<a class="headerlink" href="#jpa-spring-batch-jparepository-delete" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://myvelop.tistory.com/116</em>
@@ -23042,24 +23044,30 @@
   - 현재 메서드에 트랜잭션을 열어주는 공간이 없다면, 변경에 대해서 DB에 커밋이 어려워
     - 주로 Spring Boot에서는 Service에서 해줬지만,,, 배치에서는 레포단이나 그냥 전체에서 해도 괜찮을 듯</p>
 <ol>
-<li><code>@Transactional</code> 붙임
+<li>
+<p><code>@Transactional</code> 붙임
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">NoticeRepository</span><span class="p">:</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Notice</span><span class="p">,</span><span class="w"> </span><span class="kt">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nd">@Transactional</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nd">@Modifying</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">deleteByIdBetween</span><span class="p">(</span><span class="n">startId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w"> </span><span class="n">endId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">)</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>이제 delete 쿼리 나감</li>
-<li>
-<p><code>@Modifying</code>은 무엇이고 하니...</p>
+</code></pre></div></p>
 <ul>
+<li>이제 delete 쿼리 나감</li>
+<li><code>@Modifying</code>은 무엇이고 하니...<ul>
 <li>Spring Data JPA에게 해당 쿼리가 DB의 레코드를 변경시킨다는 것을 알려주는 것</li>
 <li>그냥 디폴트로 쓰는 CRUD Operation의 경우 (알아서 JPQL 만들어 주는 것)은 <code>@Modifying</code> 없어도 OK</li>
-<li>하지만, <code>@Query</code> 써서 직접적으로 DB에 접근하는 경우, DELETE/UPDATE/INSERT 쓸 때에는 <code>@Modifying</code>을 써주세요!!</li>
+<li>하지만, <code>@Query</code> 써서 직접적으로 DB에 접근하는 경우, DELETE/UPDATE/INSERT 쓸 때에는 <code>@Modifying</code>을 써주세요!!<ul>
 <li>그래야 Spring Data JPA가 영속성 컨텍스트를 비워야겠구나~ 하는 시점을 알게 된 답니다</li>
-<li>참고로, <code>@Modifying</code> 쿼리는 <code>Entity</code>를 리턴할 수 없어</li>
+</ul>
+</li>
+<li>참고로, <code>@Modifying</code> 쿼리는 <code>Entity</code>를 리턴할 수 없어<ul>
 <li>왜냐면 해당 쿼리는 주로 영속성 컨텍스트에 엔티티 로딩하지 않고 수행되거든</li>
 <li>트랜잭션 컨텍스트랑 같이 써줘요!</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -23071,9 +23079,11 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">deleteByIdBetween</span><span class="p">(</span><span class="n">startId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w"> </span><span class="n">endId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">)</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
 </code></pre></div></p>
-</li>
+<ul>
 <li>이게 위에 처럼 쓰니까, 아니 delete 쿼리를 id별로 한개씩 내보내네;;;</li>
 <li>커스텀 JPQL로 쓰고, <code>@Modifying</code> 붙여주자!</li>
+</ul>
+</li>
 </ol>
 <h2 id="jpa">JPA 대량 데이터 삭제 주의할 점<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://jojoldu.tistory.com/235</em>
@@ -23083,13 +23093,15 @@
     - 삭제 대상은 <strong>1건씩</strong> 삭제된다
     - <code>cascase = CascadeType.DELETE</code>로 하위 엔티티와 관계가 있다면 1건씩 삭제됨</p>
 <ul>
-<li><strong>해결책</strong></li>
+<li><strong>해결책</strong><ul>
 <li>delete의 경우 직접 범위 조건의 삭제 쿼리를 생성하자!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>@Transactional
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>@Transactional
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>@Modifying
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>@Query(&quot;delete from Customer c where c.id in :ids&quot;)
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>void deleteAllByIdInQuery(@Param(&quot;ids&quot;) List&lt;Long&gt; ids);
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="jpa-spring-batch-saveall">JPA + Spring Batch - saveAll()이 벌크로 동작 안 하는 이유<a class="headerlink" href="#jpa-spring-batch-saveall" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://imksh.com/113</em>
@@ -23098,37 +23110,38 @@
 - <strong>개요</strong>
   - saveAll 메서드의 Entity는 왜 벌크로 동작하지 않는가?</p>
 <ul>
-<li><strong>saveAll() &amp; save()</strong></li>
+<li><strong>saveAll() &amp; save()</strong><ul>
 <li>saveAll()에 List<Entity> 넣게 되면 반복문 돌면서 결국 save()</li>
-<li>
-<p>List<Entity> 내가 돌면서 save()하나, 그냥 saveAll()에 박아두나 똑같음</p>
+<li>List<Entity> 내가 돌면서 save()하나, 그냥 saveAll()에 박아두나 똑같음</li>
+</ul>
 </li>
-<li>
-<p><strong>자 여기서 PK(id) 전략에 따라 save()가 좀 다른데...</strong></p>
-</li>
-<li>MySQL에서 직접 PK 관리하도록 IDENTITY 전략을 쓴다면?!</li>
-<li>
-<p>영속성 컨텍스트에서 Entity Id 가져오고</p>
+</ul>
 <ul>
-<li>ID = null -&gt; 아 새로운 엔티티구나!</li>
+<li><strong>자 여기서 PK(id) 전략에 따라 save()가 좀 다른데...</strong><ul>
+<li>MySQL에서 직접 PK 관리하도록 IDENTITY 전략을 쓴다면?!</li>
+<li>영속성 컨텍스트에서 Entity Id 가져오고<ul>
+<li>ID = null -&gt; 아 새로운 엔티티구나!<ul>
 <li>em.persist() 하려면 PK는 필수라서, 영속성 컨텍스트 등록을 위해 INSERT 쿼리가 바로 실행됨</li>
+</ul>
+</li>
 <li>ID != null -&gt; 아 있는 놈이구나!</li>
 </ul>
 </li>
-<li>
-<p><strong>그래서 결국 JPA에서는</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>그래서 결국 JPA에서는</strong><ul>
 <li>ID 전략이 IDENTITY 이면서 ID가 없는 친구는 일단 영속성 컨텍스트에 등록하려고만 해도 ID가 필요하니, </li>
 <li>INSERT가 그때그때 될것이야 (bulk 어려움)</li>
-<li>
-<p>Hibernate 자체에서 IDENTITY인 경우, Bulk Insert 안 되도록 막아뒀어!!</p>
+<li>Hibernate 자체에서 IDENTITY인 경우, Bulk Insert 안 되도록 막아뒀어!!</li>
+</ul>
 </li>
-<li>
-<p><strong>저는 벌크로 넣고 싶은데요?</strong></p>
-</li>
-<li>
-<p>JdbcTemplate의 rewriteBatchedStatements 옵션을 쓰란다
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Repository</span>
+</ul>
+<ul>
+<li><strong>저는 벌크로 넣고 싶은데요?</strong><ul>
+<li>JdbcTemplate의 rewriteBatchedStatements 옵션을 쓰란다
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Repository</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nd">@RequiredArgsConstructor</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BulkInsertRepository</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -23149,14 +23162,17 @@
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">            </span><span class="p">});</span>
 <a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>다시 정리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>다시 정리</strong><ul>
 <li>MySQL 사용 + ID auto_increment + JPA 사용 -&gt; JPA 철학에 의거, bulk insert 못함. 채번 전략 바꿔야 함<ul>
 <li>대안으로 채번 전략을 바꾸던가 (Sequence, Table)</li>
 <li>jdbc batchUpdate를 직접 쓰던가</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23167,19 +23183,19 @@
   - 브라우저의 요청 API들은 별도 옵션 없이 브라우저 쿠키와 같은 인증 데이터 함부로 담지 않음
   - 요청과 응답에 쿠키를 허용하고자 한다면, <strong>withCredentials</strong> 옵션으로 해결해보자!</p>
 <ul>
-<li><strong>withCredentials</strong></li>
-<li>
-<p>다른 도메인에 요청을 보낼 때 요청에 인증 정보를 담아서 보낼지를 결정하는 항목</p>
-<ul>
+<li><strong>withCredentials</strong><ul>
+<li>다른 도메인에 요청을 보낼 때 요청에 인증 정보를 담아서 보낼지를 결정하는 항목<ul>
 <li>클라이언트에서 <code>withCredentials</code>: <code>true</code></li>
 <li>서버에서 <code>Access-Control-Allow-Credentials</code>: <code>true</code></li>
 </ul>
 </li>
-<li>
-<p><strong>클라이언트 처리</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>클라이언트 처리</strong><ul>
 <li>axios
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// 1. axios 전역 설정</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// 1. axios 전역 설정</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">axios</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">withCredentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// withCredentials 전역 설정</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1">// 2. axios 옵션 객체로 넣기</span>
@@ -23192,21 +23208,23 @@
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="p">})</span>
 </code></pre></div></li>
-<li>
-<p>fetch
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;https://example.com:1234/users/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<li>fetch
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;https://example.com:1234/users/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nx">credentials</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;include&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 클라이언트와 서버가 통신할때 쿠키 값을 공유하겠다는 설정</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">})</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>서버 처리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>서버 처리</strong><ol>
 <li><code>Access-Control-Allow-Credentials</code>: <code>true</code></li>
 <li><code>Access-Control-Allow-Origin</code>: "*"는 안 됨! 보안상 취약!</li>
 <li><code>Access-Control-Allow-Methods</code>: "*"는 안 됨! 보안상 취약!</li>
 <li><code>Access-Control-Allow-Headers</code>: "*"는 안 됨! 보안상 취약!</li>
+</ol>
+</li>
 </ul>
 
 

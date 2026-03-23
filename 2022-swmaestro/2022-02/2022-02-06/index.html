@@ -22909,8 +22909,7 @@
 <h3 id="2022-02-05">2022-02-05<a class="headerlink" href="#2022-02-05" title="Permanent link">&para;</a></h3>
 <h2 id="-sorting-and-searching">알고리즘 문제풀이 - Sorting and Searching<a class="headerlink" href="#-sorting-and-searching" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>LinkedList remove() 주의사항</strong>
+<li><strong>LinkedList remove() 주의사항</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">cache</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -22921,22 +22920,19 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">// 원소를 삭제하고 싶다면 Reference Type으로 만들어 줄 것!</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">Integer</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">cache</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">element</span><span class="p">);</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>정렬을 했을 때 쉽게 풀리는 문제들이 있음</strong></p>
-</li>
-<li>원래 정렬되었는데 두개의 원소가 자리를 바꿨음</li>
-<li>
-<p>그냥 정렬다시시켜서 비교하는 방식을 생각해보자</p>
-</li>
-<li>
-<p><strong>좌표 정렬 문제는 Comparable 인터페이스 구현하기</strong></p>
-</li>
-<li>Comparable 인터페이스에서 compareTo를 구현해주자</li>
-<li>
-<p><strong>[this -- o]</strong> 순서대로 정렬하려면, 음수를 리턴해주면됨</p>
+</code></pre></div></li>
+</ul>
 <ul>
+<li><strong>정렬을 했을 때 쉽게 풀리는 문제들이 있음</strong><ul>
+<li>원래 정렬되었는데 두개의 원소가 자리를 바꿨음</li>
+<li>그냥 정렬다시시켜서 비교하는 방식을 생각해보자</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>좌표 정렬 문제는 Comparable 인터페이스 구현하기</strong><ul>
+<li>Comparable 인터페이스에서 compareTo를 구현해주자</li>
+<li><strong>[this -- o]</strong> 순서대로 정렬하려면, 음수를 리턴해주면됨<ul>
 <li>오름차순이라면 this = 10, o = 20이니 this - o 해주면 [this - o] 순서로 정렬이 되겠지?</li>
 <li>내림차순이라면 this = 20, o = 10이니 o - this 해주면 [this - o] 순서로 정렬이 될거야
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span>
@@ -22988,13 +22984,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>
-<p><strong>이분 탐색</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>이분 탐색</strong><ul>
 <li>O(logN)으로 뚝딱 탐색하자</li>
-<li>
-<p>lt, rt, mid로 뚝딱
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">solution</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li>lt, rt, mid로 뚝딱
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">solution</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">array</span><span class="p">);</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arrayLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">lt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -23012,22 +23009,25 @@
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>Stream을 사용해 최댓값/합을 구하기</strong>
+</ul>
+<ul>
+<li><strong>Stream을 사용해 최댓값/합을 구하기</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">lt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">array</span><span class="p">).</span><span class="na">max</span><span class="p">().</span><span class="na">getAsInt</span><span class="p">();</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">rt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">array</span><span class="p">).</span><span class="na">sum</span><span class="p">();</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>결정 알고리즘</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>결정 알고리즘</strong><ul>
 <li>범위 내의 답을 찾아나는 과정 (문제가 요구하는 답안으로 좁혀나가자!)<ul>
 <li>해당 답(mid) 이 정답이 될 수 있는가?</li>
 </ul>
 </li>
 <li>답의 범위가 lt ~ rt 사이에 있음이 확실시 될 때 고려해볼것!</li>
+</ul>
+</li>
 </ul>
 
 

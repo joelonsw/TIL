@@ -22919,17 +22919,19 @@
     - 다양한 여러대의 서버들은 공통된 '어딘가'를 보며, 자신이 critical section에 접근할 수 있는지 확인 (atomic 보장)
   - 레디스를 이용한 분산 락을 사용해보자!</p>
 <ul>
-<li><strong>언제 발생?</strong></li>
-<li>
-<p>Check-Then-Act : 검증시점의 정보가 행위 시점에 더 이상 유효하지 않아서 발생한 오류</p>
+<li><strong>언제 발생?</strong><ul>
+<li>Check-Then-Act : 검증시점의 정보가 행위 시점에 더 이상 유효하지 않아서 발생한 오류</li>
+</ul>
 </li>
-<li>
-<p><strong>로컬 스핀락 : 지속적으로 락 획득할 수 있을때 까지 확인</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>로컬 스핀락 : 지속적으로 락 획득할 수 있을때 까지 확인</strong><ol>
 <li>"락이 존재하는지 확인한다" &amp; "존재하지 않는다면 락을 획득한다" =&gt; atomic!<ul>
-<li><code>setnx</code>: 값이 존재하지 않으면 세팅한다, 값 세팅 여부를 리턴값으로 받아 락을 획득하는데 성공했는지 확인</li>
+<li><code>setnx</code>: 값이 존재하지 않으면 세팅한다, 값 세팅 여부를 리턴값으로 받아 락을 획득하는데 성공했는지 확인<ul>
 <li>해당 옵션으로 "락을 사용중인지 확인하고, 락을 획득하는 것"을 atomic 하게 묶음</li>
 <li><code>SET if Not eXists</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>try</code> 구문 안에서 락을 획득할 때 까지 시도<ul>
@@ -22937,9 +22939,8 @@
 </ul>
 </li>
 <li>락을 획득하면 연산 수행</li>
-<li>
-<p>락 사용한 뒤에는 꼭 해제할 수 있도록 <code>finally</code> 안에서 해제
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">void</span><span class="w"> </span><span class="n">doLocalSpinlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<li>락 사용한 뒤에는 꼭 해제할 수 있도록 <code>finally</code> 안에서 해제
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">void</span><span class="w"> </span><span class="n">doLocalSpinlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nc">String</span><span class="w"> </span><span class="n">lockKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;local&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
@@ -22962,11 +22963,12 @@
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">void</span><span class="w"> </span><span class="n">unlock</span><span class="p">(</span><span class="nc">String</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="n">command</span><span class="p">.</span><span class="n">del</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ol>
 </li>
-<li>
-<p><strong>위 코드의 문제점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>위 코드의 문제점</strong><ol>
 <li>Lock 타임아웃이 없음<ul>
 <li>사실상 락 획득 못하면 무한루프 도는 코드</li>
 <li>어플리케이션의 오류 때문에 종료되어 버리면, 영원히 락을 획득하지 못한채 무한루프 대기상태 =&gt; 장애</li>
@@ -22979,28 +22981,32 @@
 <li>Exception이 발생해도 unlock이 된다면, 동기화 보장이 어려움</li>
 </ul>
 </li>
-<li>
-<p>레디스에 많은 부하</p>
-<ul>
-<li>ex) 300ms 걸리는 요청 100개 오면...</li>
+<li>레디스에 많은 부하<ul>
+<li>ex) 300ms 걸리는 요청 100개 오면...<ul>
 <li>1개가 락 잡고, 99개는 레디스에 요청 50ms 마다 락 요청 (300/50 * 99 == 594)</li>
 </ul>
 </li>
-<li>
-<p><strong>Redisson은 분산락을 개선했다</strong></p>
+</ul>
 </li>
-<li><em>참고: https://github.com/redisson/redisson/</em></li>
-<li>Lock에 타임아웃 구현되어 있음</li>
-<li>스핀락 사용하지 않음. pubsub 채택</li>
-<li>
-<p>Lua 스크립트...? 란 것으로 atomic하게 연산을 수행할 수 있게 지원</p>
+</ol>
 </li>
-<li>
-<p><strong>Message Broker 활용</strong></p>
+</ul>
+<ul>
+<li><strong>Redisson은 분산락을 개선했다</strong><ul>
+<li><em>참고: https://github.com/redisson/redisson/</em>
+1. Lock에 타임아웃 구현되어 있음
+2. 스핀락 사용하지 않음. pubsub 채택
+3. Lua 스크립트...? 란 것으로 atomic하게 연산을 수행할 수 있게 지원</li>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Message Broker 활용</strong><ul>
 <li><code>SUBSCRIBE</code>: 특정 채널을 구독한다</li>
 <li><code>PUBLISH</code>: 특정 채널에 메시지를 발행한다</li>
 <li>대기중이던 프로세스에게 '락 획득 시도하세요~' 알려줄 수 있음 (Redisson에서 지원하는 방식)</li>
+</ul>
+</li>
 </ul>
 
 

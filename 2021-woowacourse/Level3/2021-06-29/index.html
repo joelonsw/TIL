@@ -22931,27 +22931,19 @@
 <h3 id="2021-06-29">2021-06-29<a class="headerlink" href="#2021-06-29" title="Permanent link">&para;</a></h3>
 <h2 id="6-aop">토비의 스프링 6장. AOP<a class="headerlink" href="#6-aop" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>6.1 트랜잭션 코드의 분리</strong><ul>
-<li>UserService는 비즈니스 로직만 나두고, 트랜잭션에 관련된 코드는 클래스 밖으로 뽑아내보자<ul>
-<li>이후 이를 간접적으로 접근토록 함 (DI)</li>
-<li>UserServiceTest ---&gt; UserServiceTx ---&gt; UserServiceImpl 의 의존관계 설정</li>
-</ul>
-</li>
-<li>트랜잭션 경계설정 코드를 분리함으로써,,,<ol>
-<li>비즈니스 로직을 담당하는 UserServiceImpl의 코드 작성시, 트랜잭션 걱정 필요 없음</li>
-<li>비즈니스 로직에 대한 테스트를 손쉽게 만들 수 있음</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><strong>6.2 고립된 단위 테스트</strong><ul>
-<li>UserService를 테스트 하려고 보니까 의존관계 따라 등장하는 객체, 서비스, 환경 등이 모두 합쳐져 테스트 대상이 됨<ul>
-<li>테스트 준비가 어렵고, 동일한 결과 보장이 어려우며, 테스트 작성&amp;실행 싸이클 느려짐</li>
-</ul>
-</li>
-<li>따라서 테스트를 의존 대상으로 부터 분리해 "테스트를 위한 대역"을 사용하자</li>
-<li>UserDao에 의존적인 UserService의 테스트 메서드
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="nd">@Test</span>
+<li><strong>6.1 트랜잭션 코드의 분리</strong>
+    - UserService는 비즈니스 로직만 나두고, 트랜잭션에 관련된 코드는 클래스 밖으로 뽑아내보자
+        - 이후 이를 간접적으로 접근토록 함 (DI)
+        - UserServiceTest ---&gt; UserServiceTx ---&gt; UserServiceImpl 의 의존관계 설정
+    - 트랜잭션 경계설정 코드를 분리함으로써,,,
+        1. 비즈니스 로직을 담당하는 UserServiceImpl의 코드 작성시, 트랜잭션 걱정 필요 없음
+        2. 비즈니스 로직에 대한 테스트를 손쉽게 만들 수 있음</li>
+<li><strong>6.2 고립된 단위 테스트</strong>
+    - UserService를 테스트 하려고 보니까 의존관계 따라 등장하는 객체, 서비스, 환경 등이 모두 합쳐져 테스트 대상이 됨
+        - 테스트 준비가 어렵고, 동일한 결과 보장이 어려우며, 테스트 작성&amp;실행 싸이클 느려짐
+    - 따라서 테스트를 의존 대상으로 부터 분리해 "테스트를 위한 대역"을 사용하자
+    - UserDao에 의존적인 UserService의 테스트 메서드
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="nd">@Test</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nd">@DirtiesContext</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">upgradeLevelsWithMailSending</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="c1">//DB 테스트 데이터 준비</span>
@@ -22977,10 +22969,10 @@
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">requests</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">getEmail</span><span class="p">());</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">requests</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="na">getEmail</span><span class="p">());</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div><ul>
-<li>UserDao를 테스트 대상의 코드가 정상적으로 수행되도록 도와주기만 하는 "스텁"이 아니라, 부가적인 검증까지 하는 "목"으로 만듦<ul>
-<li>Mock 객체 만들 때, 사용하지 않는 메서드는 UnsupportedOperationException 던져주자. 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="nd">@Test</span>
+</code></pre></div>
+        - UserDao를 테스트 대상의 코드가 정상적으로 수행되도록 도와주기만 하는 "스텁"이 아니라, 부가적인 검증까지 하는 "목"으로 만듦
+            - Mock 객체 만들 때, 사용하지 않는 메서드는 UnsupportedOperationException 던져주자. 
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="nd">@Test</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nd">@DirtiesContext</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">upgradeLevelsWithMailSendingOptionWithMockDao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="c1">//DB 테스트 데이터 준비</span>
@@ -23011,66 +23003,40 @@
 <a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">updatedUser</span><span class="p">.</span><span class="na">getName</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">expectedName</span><span class="p">);</span>
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">updatedUser</span><span class="p">.</span><span class="na">getLevel</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">expectedLevel</span><span class="p">);</span>
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>의존 관계가 너무 많은 테스트라면, Mock 프레임워크를 사용해보자! <em>(Mockito)</em><ul>
-<li>UserDao mockUserDao = mock(UserDao.class);</li>
-<li>mock(mockUserDao.getAll()).thenReturn(this.users);</li>
-<li>verify(mockUserDao, times(2)).update(any(User.class));</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>6.3 다이나믹 프록시와 팩토리 빈</strong><ul>
-<li>부가 기능의 분리... 핵심 기능은 부가 기능을 가진 클래스의 존재 자체를 모름</li>
-<li>프록시: 클라이언트가 사용하려고 하는 실제 대상인 것 처럼 위장해 클라이언트의 요청을 받아주는 것<ul>
-<li>특징<ul>
-<li>타깃과 같은 인터페이스를 구현함</li>
-<li>타깃을 제어할 수 있는 위치에 있음</li>
-</ul>
-</li>
-<li>목적<ul>
-<li>클라이언트가 타깃에 접근하는 방법 제어</li>
-<li>타깃에 부가적인 기능을 부여함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>데코레이터 패턴<ul>
-<li>타깃에 부가적인 기능을 런타임 시 다이나믹하게 부여해주기 위해 프록시를 사용하는 패턴</li>
-<li>하나의 타깃에 여러 개의 프록시를 사용할 수 있음</li>
-<li>DI를 통해 데코레이터 기능을 구현해주자!</li>
-<li>인터페이스를 통해 위임하는 구조이기에 어느 데코레이터에서 타깃으로 연결될지 코드레벨에서는 미리 알 수 없음</li>
-</ul>
-</li>
-<li>프록시 패턴<ul>
-<li>프록시를 사용하는 방법 중 타겟에 대한 접근 방법을 제어<ul>
-<li>프록시: 클라이언트와 사용 대상 사이에 대리 역할을 맡은 오브젝트를 두는 방법의 총칭</li>
-</ul>
-</li>
-<li>사용 예시<ul>
-<li>타깃 오브젝트를 생성하기가 복잡하거나, 당장 필요하지 않은 경우 꼭 필요한 시점까지 생성 안함<ul>
-<li>그저 레퍼런스가 필요하니, 이를 만들어 넘긴다</li>
-</ul>
-</li>
-<li>Collection의 UnmodifiableCollection() </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>다이나믹 프록시<ul>
-<li>프록시의 역할은 "위임"과 "부가작업"</li>
-<li>다이나믹 프록시는 <strong>프록시 팩토리</strong>에 의해 <strong>런타임</strong> 시 다이나믹하게 만들어지는 오브젝트<ul>
-<li>다이나믹 프록시 오브젝트는 타깃의 인터페이스와 같은 타입으로 만들어짐</li>
-<li>클라이언트는 다이나믹 프록시 오브젝트를 타깃 인터페이스를 통해 사용 가능</li>
-</ul>
-</li>
-<li>다이나믹 프록시가 인터페이스 구현 클래스의 오브젝트는 만들어 주지만, 프록시로서 필요한 부가기능 제공 코드는 직접 작성해야 함</li>
-<li>다이나믹 프록시로부터 요청 전달 받으려면 <strong>InvocationHandler</strong>를 구현해야함 <em>(어떤 타깃의 종류라도 상관 없음!)</em>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UppercaseHandler</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">InvocationHandler</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - 의존 관계가 너무 많은 테스트라면, Mock 프레임워크를 사용해보자! <em>(Mockito)</em>
+        - UserDao mockUserDao = mock(UserDao.class);
+        - mock(mockUserDao.getAll()).thenReturn(this.users);
+        - verify(mockUserDao, times(2)).update(any(User.class));</li>
+<li><strong>6.3 다이나믹 프록시와 팩토리 빈</strong>
+    - 부가 기능의 분리... 핵심 기능은 부가 기능을 가진 클래스의 존재 자체를 모름
+    - 프록시: 클라이언트가 사용하려고 하는 실제 대상인 것 처럼 위장해 클라이언트의 요청을 받아주는 것
+        - 특징
+            - 타깃과 같은 인터페이스를 구현함
+            - 타깃을 제어할 수 있는 위치에 있음
+        - 목적
+            - 클라이언트가 타깃에 접근하는 방법 제어
+            - 타깃에 부가적인 기능을 부여함
+    - 데코레이터 패턴
+        - 타깃에 부가적인 기능을 런타임 시 다이나믹하게 부여해주기 위해 프록시를 사용하는 패턴
+        - 하나의 타깃에 여러 개의 프록시를 사용할 수 있음
+        - DI를 통해 데코레이터 기능을 구현해주자!
+        - 인터페이스를 통해 위임하는 구조이기에 어느 데코레이터에서 타깃으로 연결될지 코드레벨에서는 미리 알 수 없음
+    - 프록시 패턴
+        - 프록시를 사용하는 방법 중 타겟에 대한 접근 방법을 제어
+            - 프록시: 클라이언트와 사용 대상 사이에 대리 역할을 맡은 오브젝트를 두는 방법의 총칭
+        - 사용 예시
+            - 타깃 오브젝트를 생성하기가 복잡하거나, 당장 필요하지 않은 경우 꼭 필요한 시점까지 생성 안함
+                - 그저 레퍼런스가 필요하니, 이를 만들어 넘긴다
+            - Collection의 UnmodifiableCollection() 
+    - 다이나믹 프록시
+        - 프록시의 역할은 "위임"과 "부가작업"
+        - 다이나믹 프록시는 <strong>프록시 팩토리</strong>에 의해 <strong>런타임</strong> 시 다이나믹하게 만들어지는 오브젝트
+            - 다이나믹 프록시 오브젝트는 타깃의 인터페이스와 같은 타입으로 만들어짐
+            - 클라이언트는 다이나믹 프록시 오브젝트를 타깃 인터페이스를 통해 사용 가능
+        - 다이나믹 프록시가 인터페이스 구현 클래스의 오브젝트는 만들어 주지만, 프록시로서 필요한 부가기능 제공 코드는 직접 작성해야 함
+        - 다이나믹 프록시로부터 요청 전달 받으려면 <strong>InvocationHandler</strong>를 구현해야함 <em>(어떤 타깃의 종류라도 상관 없음!)</em>
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UppercaseHandler</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">InvocationHandler</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="n">target</span><span class="p">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">UppercaseHandler</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23086,25 +23052,19 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">}</span>
-</code></pre></div><ul>
-<li>리플렉션을 사용하여 트랜잭션을 적용한 경우, 예외가 InvocationTargetException으로 포장되어 출력됨</li>
-</ul>
-</li>
-<li>이후 다이나믹 프록시는 Proxy.newProxyInstance()로 생성!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Hello</span><span class="w"> </span><span class="n">dynamicProxyHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Hello</span><span class="p">)</span><span class="w"> </span><span class="n">Proxy</span><span class="p">.</span><span class="na">newProxyInstance</span><span class="p">(</span>
+</code></pre></div>
+            - 리플렉션을 사용하여 트랜잭션을 적용한 경우, 예외가 InvocationTargetException으로 포장되어 출력됨
+        - 이후 다이나믹 프록시는 Proxy.newProxyInstance()로 생성!
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Hello</span><span class="w"> </span><span class="n">dynamicProxyHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Hello</span><span class="p">)</span><span class="w"> </span><span class="n">Proxy</span><span class="p">.</span><span class="na">newProxyInstance</span><span class="p">(</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="n">getClass</span><span class="p">().</span><span class="na">getClassLoader</span><span class="p">(),</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Class</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">Hello</span><span class="p">.</span><span class="na">class</span><span class="p">},</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">UppercaseHandler</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">HelloTarget</span><span class="p">()));</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>팩토리 빈<ul>
-<li>DI의 대상이 되는 다이나믹 프록시 오브젝트는 일반적인 스프링 빈으로는 등록할 방법이 없다!<ul>
-<li>내부적으로 다이나믹하게 새로 정의해서 사용하기 때문임</li>
-</ul>
-</li>
-<li>FactoryBean&lt;?&gt;을 구현하여 팩토리 빈을 만들어주자!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MessageFactoryBean</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">FactoryBean</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - 팩토리 빈
+        - DI의 대상이 되는 다이나믹 프록시 오브젝트는 일반적인 스프링 빈으로는 등록할 방법이 없다!
+            - 내부적으로 다이나믹하게 새로 정의해서 사용하기 때문임
+        - FactoryBean&lt;?&gt;을 구현하여 팩토리 빈을 만들어주자!
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MessageFactoryBean</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">FactoryBean</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MessageFactoryBean</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23126,15 +23086,15 @@
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 <a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>그리고 이걸 빈 등록을 해주면 놀랍게도 getObject()에 해당하는 친구가 빈으로 뚝딱 나옴
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Bean</span>
+</code></pre></div>
+        - 그리고 이걸 빈 등록을 해주면 놀랍게도 getObject()에 해당하는 친구가 빈으로 뚝딱 나옴
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Bean</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">MessageFactoryBean</span><span class="w"> </span><span class="nf">message</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MessageFactoryBean</span><span class="p">(</span><span class="s">&quot;Factory Bean&quot;</span><span class="p">);</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>어플리케이션 컨텍스트에서 해당 메서드로 찾으면 getObject로 빈 자체가, &amp;메서드를 통해 찾으면 팩토리 빈 그 자체가 반환
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Test</span>
+</code></pre></div>
+        - 어플리케이션 컨텍스트에서 해당 메서드로 찾으면 getObject로 빈 자체가, &amp;메서드를 통해 찾으면 팩토리 빈 그 자체가 반환
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Test</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getMessageFromFactoryBean</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">);</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">message</span><span class="p">).</span><span class="na">isInstanceOf</span><span class="p">(</span><span class="n">Message</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
@@ -23146,66 +23106,44 @@
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;&amp;message&quot;</span><span class="p">);</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">factory</span><span class="p">).</span><span class="na">isInstanceOf</span><span class="p">(</span><span class="n">MessageFactoryBean</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>프록시 팩토리 빈 방식<ul>
-<li>장점<ul>
-<li>다양한 클래스에 적용 가능!</li>
-<li>프록시 기법 아주 빠르고 효과적이게 적용 가능</li>
-<li>DI를 통해 효과적인 프록시 팩토리 사용이 가능했음</li>
-</ul>
-</li>
-<li>한계<ul>
-<li>메서드 단위를 벗어나면?</li>
-<li>클래스에 공통기능을 부여하려면?</li>
-<li>하나의 타깃에 여러 부가기능을 적용하려고 한다면?</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 프록시 팩토리 빈 방식
+        - 장점
+            - 다양한 클래스에 적용 가능!
+            - 프록시 기법 아주 빠르고 효과적이게 적용 가능
+            - DI를 통해 효과적인 프록시 팩토리 사용이 가능했음
+        - 한계
+            - 메서드 단위를 벗어나면?
+            - 클래스에 공통기능을 부여하려면?
+            - 하나의 타깃에 여러 부가기능을 적용하려고 한다면?</li>
 </ul>
 <h2 id="test-double">Test Double<a class="headerlink" href="#test-double" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://woowacourse.github.io/javable/post/2020-09-19-what-is-test-double/</em></li>
 <li>테스트 더블: 테스트를 진행하기 어려운 경우 이를 대신해 테스트를 진행할 수 있도록 만든 객체</li>
-<li><strong>Dummy</strong><ul>
-<li>인스턴스화 된 객체는 필요하지만 기능은 필요하지 않은 경우</li>
-<li>Dummy 객체의 메서드가 호출되었을 시 정상 동작 보장 X</li>
-<li>객체는 전달 되지만 사용 X</li>
-<li>동작하지 않아도 테스트에는 영향을 미치지 않는 객체    </li>
-<li>ex. 인터페이스 구현하여 아무일도 안함</li>
-</ul>
-</li>
-<li><strong>Fake</strong><ul>
-<li>복잡한 로직이나 객체 내부에서 필요로 하는 다른 외부 객체 동작을 단순화하여 구현한 객체</li>
-<li>동작의 구현 O, but 실제 프로덕션에 적합 X</li>
-<li>동작은 하지만 실제 사용되는 객체처럼 정교하게 동작은 X</li>
-<li>ex. Repository 테스트를 일급 컬렉션을 만들어서 수행하기</li>
-</ul>
-</li>
-<li><strong>Stub</strong><ul>
-<li>Dummy 객체가 실제로 동작하는 것 처럼 보이게 만든 객체<ul>
-<li>인터페이스가 최소한으로 구현된 상태</li>
-</ul>
-</li>
-<li>테스트에서 호출된 요청에 대해 "미리 준비해둔 결과" 제공</li>
-<li>프로그래밍된 내용에 대해서만 준비된 결과를 제공하는 객체</li>
-<li>ex. Mockito의 when(함수).thenReturn(결과)</li>
-</ul>
-</li>
-<li><strong>Spy</strong><ul>
-<li>Stub의 역할을 가지며, 호출된 내용에 대해 약간의 정보 기록</li>
-<li>동작을 지정할 수 있음</li>
-<li>ex. Mockito의 verify()</li>
-</ul>
-</li>
-<li><strong>Mock</strong> <ul>
-<li>호출에 대한 기대를 명세, 내용에 따라 동작하도록 프로그래밍 된 객체</li>
-</ul>
-</li>
+<li><strong>Dummy</strong>
+    - 인스턴스화 된 객체는 필요하지만 기능은 필요하지 않은 경우
+    - Dummy 객체의 메서드가 호출되었을 시 정상 동작 보장 X
+    - 객체는 전달 되지만 사용 X
+    - 동작하지 않아도 테스트에는 영향을 미치지 않는 객체  <br />
+    - ex. 인터페이스 구현하여 아무일도 안함</li>
+<li><strong>Fake</strong>
+    - 복잡한 로직이나 객체 내부에서 필요로 하는 다른 외부 객체 동작을 단순화하여 구현한 객체
+    - 동작의 구현 O, but 실제 프로덕션에 적합 X
+    - 동작은 하지만 실제 사용되는 객체처럼 정교하게 동작은 X
+    - ex. Repository 테스트를 일급 컬렉션을 만들어서 수행하기</li>
+<li><strong>Stub</strong>
+    - Dummy 객체가 실제로 동작하는 것 처럼 보이게 만든 객체
+        - 인터페이스가 최소한으로 구현된 상태
+    - 테스트에서 호출된 요청에 대해 "미리 준비해둔 결과" 제공
+    - 프로그래밍된 내용에 대해서만 준비된 결과를 제공하는 객체
+    - ex. Mockito의 when(함수).thenReturn(결과)</li>
+<li><strong>Spy</strong>
+    - Stub의 역할을 가지며, 호출된 내용에 대해 약간의 정보 기록
+    - 동작을 지정할 수 있음
+    - ex. Mockito의 verify()</li>
+<li><strong>Mock</strong> 
+    - 호출에 대한 기대를 명세, 내용에 따라 동작하도록 프로그래밍 된 객체</li>
 </ul>
 
 

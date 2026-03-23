@@ -22975,200 +22975,132 @@
 <h3 id="2021-03-02">2021-03-02<a class="headerlink" href="#2021-03-02" title="Permanent link">&para;</a></h3>
 <h2 id="_1">상속<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>중복을 제거하는 방법</strong></p>
+<li><strong>중복을 제거하는 방법</strong>
+    - 상속
+    - util 클래스로 분리
+    - 메서드를 분리해 클래스화</li>
+</ul>
 <ul>
-<li>상속</li>
-<li>util 클래스로 분리</li>
-<li>메서드를 분리해 클래스화</li>
+<li><strong>상속 Keyword</strong>
+    - extends: 부모 클래스의 모든 필드와 메서드를 자식 클래스가 상속하도록 지원
+    - protected: 자식만 해당 필드를 사용하도록 열어둔 것</li>
 </ul>
-</li>
-<li>
-<p><strong>상속 Keyword</strong></p>
 <ul>
-<li>extends: 부모 클래스의 모든 필드와 메서드를 자식 클래스가 상속하도록 지원</li>
-<li>protected: 자식만 해당 필드를 사용하도록 열어둔 것</li>
+<li><strong>추상화</strong>
+    - 공통적인, 중복되는, 비슷한 일을 하는 메서드는 없을까?
+    - 한 단계 흐리게 만드는 과정
+        - 흐리멍텅 ~ 구체적 사이에서 선택해야 함</li>
 </ul>
-</li>
-<li>
-<p><strong>추상화</strong></p>
 <ul>
-<li>공통적인, 중복되는, 비슷한 일을 하는 메서드는 없을까?</li>
-<li>한 단계 흐리게 만드는 과정<ul>
-<li>흐리멍텅 ~ 구체적 사이에서 선택해야 함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>abstract</strong></p>
-<ul>
-<li>클래스에 "추상 메서드"가 존재한다 == 미완성 메서드가 존재한다</li>
-<li>"추상 메서드"를 보유한 클래스는 "추상 클래스"라고 한다</li>
-<li>"추상 클래스"는 인스턴스화 시킬 수 없다<ul>
-<li>상속 받은 구현체로 인스턴스화 시킬 것</li>
-</ul>
-</li>
-<li>abstract로 선언한 메서드를 자식 클래스에서 반드시 구현해야 함<ul>
-<li>"추상 메서드"로만 이루어진 클래스가 interface</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>abstract</strong>
+    - 클래스에 "추상 메서드"가 존재한다 == 미완성 메서드가 존재한다
+    - "추상 메서드"를 보유한 클래스는 "추상 클래스"라고 한다
+    - "추상 클래스"는 인스턴스화 시킬 수 없다
+        - 상속 받은 구현체로 인스턴스화 시킬 것
+    - abstract로 선언한 메서드를 자식 클래스에서 반드시 구현해야 함
+        - "추상 메서드"로만 이루어진 클래스가 interface</li>
 </ul>
 <h2 id="_2">인터페이스<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>interface?</strong></p>
+<li><strong>interface?</strong>
+    - inter: 둘 사이의
+    - face: 면
+    - interface: 둘 사이의 면과 면이 만나는 것</li>
+</ul>
 <ul>
-<li>inter: 둘 사이의</li>
-<li>face: 면</li>
-<li>interface: 둘 사이의 면과 면이 만나는 것</li>
+<li><strong>DB interface 추상화</strong>
+    - 문제 상황
+        - DB에 대한 작업을 담당하는 자바 소스 코드가 MSSQL과 연관, 소스코드 변경시 비용 발생
+        - 많은 소스 코드가 변경되면서 서비스의 안정성 확보 X
+    - 해결 방법
+        - 자바 소스 코드와 DB 작업에 필요한 공통 부분을 추상화해 표준으로 만든다
+        - 각 DB 회사들이 이 표준에 따라 구현토록 한다
+    - 결과  <br />
+        - 자바를 기반으로 하는 소프트웨어는 추후 DB 종류 고려하지 않고 인터페이스 지키면서 구현하면, DB 변경에도 유연히 대체</li>
 </ul>
-</li>
-<li>
-<p><strong>DB interface 추상화</strong></p>
 <ul>
-<li>문제 상황<ul>
-<li>DB에 대한 작업을 담당하는 자바 소스 코드가 MSSQL과 연관, 소스코드 변경시 비용 발생</li>
-<li>많은 소스 코드가 변경되면서 서비스의 안정성 확보 X</li>
-</ul>
-</li>
-<li>해결 방법<ul>
-<li>자바 소스 코드와 DB 작업에 필요한 공통 부분을 추상화해 표준으로 만든다</li>
-<li>각 DB 회사들이 이 표준에 따라 구현토록 한다</li>
-</ul>
-</li>
-<li>결과    <ul>
-<li>자바를 기반으로 하는 소프트웨어는 추후 DB 종류 고려하지 않고 인터페이스 지키면서 구현하면, DB 변경에도 유연히 대체</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>인터페이스</strong></p>
-<ul>
-<li>상수(static final)와 추상 메서드(abstact method)의 집합</li>
-<li>모든 메서드는 추상 메서드, 일반 변수를 가질 수 없음</li>
-<li>interface는 자바에서 한 단계 더 높은 추상화를 위해 사용</li>
-<li>interface는 구현 로직 X, 메소드의 input/output만 정의</li>
-<li>interface를 활용해 SW에 변경이 발생할 경우 소스코드에...<ul>
-<li>변경을 최소화</li>
-<li>유지보수 비용 줄임</li>
-<li>변화에 빠르게 대응</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>인터페이스</strong>
+    - 상수(static final)와 추상 메서드(abstact method)의 집합
+    - 모든 메서드는 추상 메서드, 일반 변수를 가질 수 없음
+    - interface는 자바에서 한 단계 더 높은 추상화를 위해 사용
+    - interface는 구현 로직 X, 메소드의 input/output만 정의
+    - interface를 활용해 SW에 변경이 발생할 경우 소스코드에...
+        - 변경을 최소화
+        - 유지보수 비용 줄임
+        - 변화에 빠르게 대응</li>
 </ul>
 <h2 id="vs">추상 클래스 vs 인터페이스<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
 <ul>
 <li>참고 1: https://myjamong.tistory.com/150</li>
 <li>참고 2: https://mygumi.tistory.com/257</li>
 <li>참고 3: https://webdevtechblog.com/%EC%9E%90%EB%B0%94-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4%EC%99%80-%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4-6eecbe5d6350</li>
-<li>
-<p>참고 4: https://velog.io/@litien/%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4-%EC%99%80-%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4</p>
-</li>
-<li>
-<p><strong>인터페이스</strong></p>
+<li>참고 4: https://velog.io/@litien/%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4-%EC%99%80-%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4</li>
+</ul>
 <ul>
-<li>함수의 껍데기로, 함수의 구현을 강제하기 위함</li>
-<li>구체적인 약속, 협업에 필수적</li>
-<li>"be able to" == "~할 수 있는"<ul>
-<li>따라서 인터페이스 네이밍은 ~able과 같이 지음</li>
+<li><strong>인터페이스</strong>
+    - 함수의 껍데기로, 함수의 구현을 강제하기 위함
+    - 구체적인 약속, 협업에 필수적
+    - "be able to" == "~할 수 있는"
+        - 따라서 인터페이스 네이밍은 ~able과 같이 지음</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>추상 클래스</strong> </p>
 <ul>
-<li>추상 클래스를 상속받아 기능을 이용, 확장</li>
-<li>상속을 강제, 실 동작은 자식 클래스에서...</li>
-<li>정적 팩토리 메서드 패턴을 공부해보기</li>
-<li>"is a kind of" == "~의 한 종류"</li>
+<li><strong>추상 클래스</strong> 
+    - 추상 클래스를 상속받아 기능을 이용, 확장
+    - 상속을 강제, 실 동작은 자식 클래스에서...
+    - 정적 팩토리 메서드 패턴을 공부해보기
+    - "is a kind of" == "~의 한 종류"</li>
 </ul>
-</li>
-<li>
-<p><strong>문법 차이</strong></p>
 <ul>
-<li>인터페이스 상속은 "implements"</li>
-<li>추상 클래스 상속은 "extends"</li>
+<li><strong>문법 차이</strong>
+    - 인터페이스 상속은 "implements"
+    - 추상 클래스 상속은 "extends"</li>
 </ul>
-</li>
-<li>
-<p><strong>차이점</strong></p>
-<ol>
-<li>사용 의도 차이점<ul>
-<li>추상 클래스: "IS-A", "~이다"</li>
-<li>인터페이스: "HAS-A", "~을 할 수 있는"</li>
-<li>인터페이스는 IS-A 관계로도 볼수 있다. <ul>
-<li>Inheritance의 성격이 강하면 is-a</li>
-<li>Composition의 성격이 강하면 has-a</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>공통된 기능 사용 여부<ul>
-<li>인터페이스를 사용해서 기본 틀을 구성한다면 공통으로 필요한 기능들도 모든 클래스에서 오버라이딩 해야함</li>
-</ul>
-</li>
-</ol>
-</li>
+<ul>
+<li><strong>차이점</strong>
+    1. 사용 의도 차이점
+        - 추상 클래스: "IS-A", "~이다"
+        - 인터페이스: "HAS-A", "~을 할 수 있는"
+        - 인터페이스는 IS-A 관계로도 볼수 있다. 
+            - Inheritance의 성격이 강하면 is-a
+            - Composition의 성격이 강하면 has-a
+    2. 공통된 기능 사용 여부
+        - 인터페이스를 사용해서 기본 틀을 구성한다면 공통으로 필요한 기능들도 모든 클래스에서 오버라이딩 해야함</li>
 </ul>
 <h2 id="_3">로또 최종 피드백<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>링크: https://github.com/woowacourse/java-lotto/pull/331</p>
-</li>
-<li>
-<p><strong>전략 패턴</strong></p>
+<li>링크: https://github.com/woowacourse/java-lotto/pull/331</li>
+</ul>
 <ul>
-<li>랜덤한 값을 테스트하기 위해 인터페이스로 분리, 테스트 가능한 구조로 변경</li>
-<li>구조<ul>
-<li>Context: 갖고 있는 전략 콘크리트에 따라 행동이 달라짐</li>
-<li>Strategy: 제공하는 알고리즘에 대한 공통의 연산들을 interface로 정의</li>
-<li>Strategy Concrete Class: 실제 알고리즘</li>
+<li><strong>전략 패턴</strong>
+    - 랜덤한 값을 테스트하기 위해 인터페이스로 분리, 테스트 가능한 구조로 변경
+    - 구조
+        - Context: 갖고 있는 전략 콘크리트에 따라 행동이 달라짐
+        - Strategy: 제공하는 알고리즘에 대한 공통의 연산들을 interface로 정의
+        - Strategy Concrete Class: 실제 알고리즘
+    - 장점
+        - 상속을 사용하지 않음
+        - if문의 제거를 가능하게 한다
+        - 구현의 선택이 가능해진다
+    - 단점
+        - 객체 수 증가
+        - 서로 다른 전략을 이해해야 함</li>
 </ul>
-</li>
-<li>장점<ul>
-<li>상속을 사용하지 않음</li>
-<li>if문의 제거를 가능하게 한다</li>
-<li>구현의 선택이 가능해진다</li>
-</ul>
-</li>
-<li>단점<ul>
-<li>객체 수 증가</li>
-<li>서로 다른 전략을 이해해야 함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>응집도와 결합도</strong></p>
 <ul>
-<li>응집도: 모듈 내부의 기능적인 집중 정도</li>
-<li>결합도: 모듈과 모듈간의 상호 의존 정도</li>
-<li>독립적인 모듈이 되기 위해서는 응집도는 강하고, 결합도는 약해야 한다</li>
+<li><strong>응집도와 결합도</strong>
+    - 응집도: 모듈 내부의 기능적인 집중 정도
+    - 결합도: 모듈과 모듈간의 상호 의존 정도
+    - 독립적인 모듈이 되기 위해서는 응집도는 강하고, 결합도는 약해야 한다</li>
 </ul>
-</li>
-<li>
-<p><strong>getOrDefault()</strong></p>
 <ul>
-<li>Map에서 get() 메서드를 대신해 getOrDefault() 메서드를 사용</li>
-<li>Map에서 value값이 0인 친구들을 관리해줄 필요가 없어진다</li>
+<li><strong>getOrDefault()</strong>
+    - Map에서 get() 메서드를 대신해 getOrDefault() 메서드를 사용
+    - Map에서 value값이 0인 친구들을 관리해줄 필요가 없어진다</li>
 </ul>
-</li>
-<li>
-<p><strong>클래스 이름에서 의도가 나타났다면, 굳이 메서드에서 의도 또 보일 필요 X</strong></p>
 <ul>
-<li>LottoNumberGenerator 클래스 내의...<ul>
-<li>createLottoNumber (X) </li>
-<li>create (O)</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>클래스 이름에서 의도가 나타났다면, 굳이 메서드에서 의도 또 보일 필요 X</strong>
+    - LottoNumberGenerator 클래스 내의...
+        - createLottoNumber (X) 
+        - create (O)</li>
 </ul>
 
 

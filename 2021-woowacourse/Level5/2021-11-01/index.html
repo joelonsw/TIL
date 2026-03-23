@@ -22913,16 +22913,14 @@
 <li><em>참고 2: https://bgpark.tistory.com/156</em></li>
 <li><em>참고 3: https://galid1.tistory.com/592</em></li>
 <li>컬렉션 가공엔 일급 컬렉션!</li>
-<li>긴밀한 관계가 있다면 양방향 매핑을 하게되는데,,,<ul>
-<li>사실 양방향 매핑은 정말 필요한 곳 아니라면 하지마!</li>
-<li>관리 포인트가 늘어나고, 사실 단방향으로도 모든 관계 구현 가능하거든</li>
-</ul>
-</li>
-<li>엔티티의 컬렉션을 일급 컬렉션으로 포장하려면 <code>@Embeddable</code>을 사용하자!<ul>
-<li>나는 엔티티에 속한 객체입니다~~!!!</li>
-<li>실제 하나의 객체이지만, DB의 테이블에서는 해당 객체 내부에 있는 필드들이 풀어져서 만들어짐</li>
-<li>가독성이 올라감! 다음과 같이도 사용이 가능
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
+<li>긴밀한 관계가 있다면 양방향 매핑을 하게되는데,,,
+    - 사실 양방향 매핑은 정말 필요한 곳 아니라면 하지마!
+    - 관리 포인트가 늘어나고, 사실 단방향으로도 모든 관계 구현 가능하거든</li>
+<li>엔티티의 컬렉션을 일급 컬렉션으로 포장하려면 <code>@Embeddable</code>을 사용하자!
+    - 나는 엔티티에 속한 객체입니다~~!!!
+    - 실제 하나의 객체이지만, DB의 테이블에서는 해당 객체 내부에 있는 필드들이 풀어져서 만들어짐
+    - 가독성이 올라감! 다음과 같이도 사용이 가능
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nd">@Id</span>
@@ -22942,7 +22940,7 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address2</span><span class="p">;</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Getter</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Getter</span><span class="w"> </span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nd">@NoArgsConstructor</span><span class="p">(</span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AccessLevel</span><span class="p">.</span><span class="na">PROTECTED</span><span class="p">)</span><span class="w"> </span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nd">@Entity</span><span class="w"> </span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Orders</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseEntity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
@@ -22957,8 +22955,6 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">OrderDetail</span><span class="o">&gt;</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
 
 

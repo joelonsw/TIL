@@ -22953,78 +22953,56 @@
 <h3 id="2021-10-20">2021-10-20<a class="headerlink" href="#2021-10-20" title="Permanent link">&para;</a></h3>
 <h2 id="sql">SQL 최적화 미션 피드백<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>레코드의 문자열은 대소문자를 구분하지 않는다!</strong></p>
-<ul>
-<li><em>참고: https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql/56283818</em></li>
-<li>구분하려면 <code>BINARY</code> 키워드를 사용해라!</li>
-<li>ex. SELECT * FROM <code>table</code> WHERE BINARY <code>column</code> = <code>value</code></li>
+<li><strong>레코드의 문자열은 대소문자를 구분하지 않는다!</strong>
+    - <em>참고: https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql/56283818</em>
+    - 구분하려면 <code>BINARY</code> 키워드를 사용해라!
+    - ex. SELECT * FROM <code>table</code> WHERE BINARY <code>column</code> = <code>value</code></li>
 </ul>
-</li>
-<li>
-<p><strong>쿼리에서 대소문자를 통일할 것</strong></p>
 <ul>
-<li>예약어 같은 경우 대문자로!</li>
-<li>테이블과 칼럼은 소문자로!</li>
+<li><strong>쿼리에서 대소문자를 통일할 것</strong>
+    - 예약어 같은 경우 대문자로!
+    - 테이블과 칼럼은 소문자로!</li>
 </ul>
-</li>
-<li>
-<p><strong>인라인뷰란?</strong></p>
 <ul>
-<li>SELECT 절의 결과를 FROM 절에서 하나의 테이블처럼 사용하고 싶은 경우</li>
+<li><strong>인라인뷰란?</strong>
+    - SELECT 절의 결과를 FROM 절에서 하나의 테이블처럼 사용하고 싶은 경우</li>
 </ul>
-</li>
-<li>
-<p><strong>미리 where 조건을 판별한 후 JOIN vs 우선 JOIN을 끝내고 WHERE 판</strong></p>
 <ul>
-<li><code>미리 WHERE 조건을 판별하고 JOIN</code>의 장점으로는, 정말 조회 쿼리에서 필요한 필드만 가져와 사용할 수 있다는 것에 있다고 생각해요.  </li>
-<li>
-<p><code>우선 JOIN을 모두 끝낸 후 WHERE 조건을 판별하는 것</code>은 제가 느끼기엔 쿼리문 자체의 가독성이 좋다고 판단했어요. (조건을 한번에 보여줘서...?)</p>
-</li>
-<li>
-<p>사실 모수를 줄여 테이블을 조인시키라는 CU의 강의를 토대로 <code>미리 WHERE 조건을 판별하고 JOIN</code>를 기반으로 쿼리 작성도 해봤는데, 생각보다 둘의 시간이 차이가 별로 없더라고요,,, <br />
-    내가 인덱스를 잘 구축을 못했나 싶기도한데...<br />
-    아니면 mysql에서 알아서 쿼리를 최적화 시켜 필요한 필드만 가져와서 조인하고 그러나 싶더라고요 (Driving &amp; Driven 테이블은 쿼리에 쓴 순서와 상관없이 mysql이 알아서 효율적일 수 있도록 테이블들으르 배치해서 조인시키더라고요) <br />
-    우선 제 생각은 그렇습니다!<br />
-    (mysql에서 알아서 쿼리를 최적화 시켜 필요한 필드만 가져와서 조인하고 그러나) =&gt; 이건 조금 더 찾아볼게용</p>
-</li>
-</ul>
+<li><strong>미리 where 조건을 판별한 후 JOIN vs 우선 JOIN을 끝내고 WHERE 판</strong>
+    - <code>미리 WHERE 조건을 판별하고 JOIN</code>의 장점으로는, 정말 조회 쿼리에서 필요한 필드만 가져와 사용할 수 있다는 것에 있다고 생각해요.<br />
+    - <code>우선 JOIN을 모두 끝낸 후 WHERE 조건을 판별하는 것</code>은 제가 느끼기엔 쿼리문 자체의 가독성이 좋다고 판단했어요. (조건을 한번에 보여줘서...?)<p>- 사실 모수를 줄여 테이블을 조인시키라는 CU의 강의를 토대로 <code>미리 WHERE 조건을 판별하고 JOIN</code>를 기반으로 쿼리 작성도 해봤는데, 생각보다 둘의 시간이 차이가 별로 없더라고요,,, <br />
+      내가 인덱스를 잘 구축을 못했나 싶기도한데...<br />
+      아니면 mysql에서 알아서 쿼리를 최적화 시켜 필요한 필드만 가져와서 조인하고 그러나 싶더라고요 (Driving &amp; Driven 테이블은 쿼리에 쓴 순서와 상관없이 mysql이 알아서 효율적일 수 있도록 테이블들으르 배치해서 조인시키더라고요) <br />
+      우선 제 생각은 그렇습니다!<br />
+      (mysql에서 알아서 쿼리를 최적화 시켜 필요한 필드만 가져와서 조인하고 그러나) =&gt; 이건 조금 더 찾아볼게용</p>
 </li>
 </ul>
 <h2 id="join-on-and-vs-join-on-where">JOIN ON + AND vs JOIN ON + WHERE<a class="headerlink" href="#join-on-and-vs-join-on-where" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://stackoverflow.com/questions/354070/sql-join-where-clause-vs-on-clause</em></li>
-<li>left/right join의 경우, 둘의 결과값은 다르다. <ul>
-<li>두 가지 쿼리의 결과를 비교해보자. 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
+<li>left/right join의 경우, 둘의 결과값은 다르다. 
+    - 두 가지 쿼리의 결과를 비교해보자. 
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">      </span><span class="k">WHERE</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div><ul>
-<li><img alt="" src="../../image/2021-10-20-query-where.PNG" /></li>
-<li>테이블의 왼쪽 id, name이 hospital의 테이블, 그 뒤가 covid 테이블</li>
-<li>hospital_id 가 1인 레코드들이 where절에서 필터링되어 결과값으로 보여준다 (총 5249 row 반환)
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
+</code></pre></div>
+        - <img alt="" src="../../image/2021-10-20-query-where.PNG" />
+        - 테이블의 왼쪽 id, name이 hospital의 테이블, 그 뒤가 covid 테이블
+        - hospital_id 가 1인 레코드들이 where절에서 필터링되어 결과값으로 보여준다 (총 5249 row 반환)
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">      </span><span class="k">AND</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div></li>
-<li><img alt="" src="../../image/2021-10-20-query-on.PNG" /></li>
-<li>hospital을 기반으로 left join을 진행한다. <ul>
-<li>hospital의 해당 id가 hospital.id = 1이 아닌 hospital 튜플들은 covid 테이블이 null인 튜플들로 join된다. (총 hospital.id=1 인 5249 row + hospital.id=1아닌 31 row 반환)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>왜 이러지...?<ul>
-<li>나의 생각<ul>
-<li>우선 WHERE과 AND의 용도 자체가 다르다고 생각<ul>
-<li>WHERE는 조인해놓은 테이블을 조건걸어 필터링할 때 사용</li>
-<li>AND는 JOIN의 조건인 ON 절에서 조건을 더 걸어준 것이라 생각</li>
-</ul>
-</li>
-<li>근거로는 괄호로 묶었을때 하나는 에러나고, 하나는 에러나지 않는 쿼리들!!
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="w"> </span>
+</code></pre></div>
+        - <img alt="" src="../../image/2021-10-20-query-on.PNG" />
+        - hospital을 기반으로 left join을 진행한다. 
+            - hospital의 해당 id가 hospital.id = 1이 아닌 hospital 튜플들은 covid 테이블이 null인 튜플들로 join된다. (총 hospital.id=1 인 5249 row + hospital.id=1아닌 31 row 반환)</li>
+<li>왜 이러지...?
+    - 나의 생각
+        - 우선 WHERE과 AND의 용도 자체가 다르다고 생각
+            - WHERE는 조인해놓은 테이블을 조건걸어 필터링할 때 사용
+            - AND는 JOIN의 조건인 ON 절에서 조건을 더 걸어준 것이라 생각
+        - 근거로는 괄호로 묶었을때 하나는 에러나고, 하나는 에러나지 않는 쿼리들!!
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="w"> </span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -23040,38 +23018,24 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span>
 </code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>inner join 이라면 같은 결과값을 받아볼 것이다.<ul>
-<li>두 테이블의 교집합만 살아남으니 교집합으로 join 후 테이블 필터링을 하던, 조건을 걸어 이를 바탕으로 join을 하던 같은 결과값!</li>
-</ul>
-</li>
+<li>inner join 이라면 같은 결과값을 받아볼 것이다.
+    - 두 테이블의 교집합만 살아남으니 교집합으로 join 후 테이블 필터링을 하던, 조건을 걸어 이를 바탕으로 join을 하던 같은 결과값!</li>
 </ul>
 <h2 id="sql_1">다시 한 번 SQL 공부<a class="headerlink" href="#sql_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>커버링 인덱스란?</strong></p>
-<ul>
-<li><em>참고: https://gywn.net/2012/04/mysql-covering-index/</em></li>
-<li>원하는 데이터를 인덱스에서만 추출할 수 있는 인덱스<ul>
-<li>BTree 스캔만으로 원하는 데이터를 가져올 수 있다. </li>
-<li>굳이 칼럼 읽기 위해 데이터 블록 볼 필요 X</li>
-<li>인덱스만으로 원하는 데이터를 추출!<ul>
-<li>데이터 추출을 인덱스에서만 수행하는 것!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Explain의 Extra를 보면 어떻게 데이터를 추출해오는지 알 수 있다!    <ul>
-<li>Using where: Range 검색 이후 데이터는 직접 데이터 필드에 접근하여 추출</li>
-<li>Using index: 인덱스 만으로 원하는 데이터 추출</li>
-</ul>
-</li>
-<li>블로그 예시<ul>
-<li>테이블 생성
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">usertest</span><span class="w"> </span><span class="p">(</span>
+<li><strong>커버링 인덱스란?</strong>
+    - <em>참고: https://gywn.net/2012/04/mysql-covering-index/</em>
+    - 원하는 데이터를 인덱스에서만 추출할 수 있는 인덱스
+        - BTree 스캔만으로 원하는 데이터를 가져올 수 있다. 
+        - 굳이 칼럼 읽기 위해 데이터 블록 볼 필요 X
+        - 인덱스만으로 원하는 데이터를 추출!
+            - 데이터 추출을 인덱스에서만 수행하는 것!
+    - Explain의 Extra를 보면 어떻게 데이터를 추출해오는지 알 수 있다!  <br />
+        - Using where: Range 검색 이후 데이터는 직접 데이터 필드에 접근하여 추출
+        - Using index: 인덱스 만으로 원하는 데이터 추출
+    - 블로그 예시
+        - 테이블 생성
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">usertest</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w"> </span><span class="n">userno</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="n">auto_increment</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w"> </span><span class="n">userid</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w"> </span><span class="n">nickname</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -23080,186 +23044,128 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">userno</span><span class="p">),</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="p">(</span><span class="n">chgdate</span><span class="p">)</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">)</span><span class="w"> </span><span class="n">engine</span><span class="o">=</span><span class="n">innodb</span><span class="p">;</span>
-</code></pre></div></li>
-<li>커버링 인덱스 (select)
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">select</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">userno</span>
+</code></pre></div>
+        - 커버링 인덱스 (select)
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">select</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">userno</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">limit</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-</code></pre></div><ul>
-<li>Extra 필드: Using index</li>
-<li>인덱스만으로 원하는 데이터 추출하였음을 뜻함</li>
-</ul>
-</li>
-<li>커버링 인덱스 (where)
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
+</code></pre></div>
+            - Extra 필드: Using index
+            - 인덱스만으로 원하는 데이터 추출하였음을 뜻함
+        - 커버링 인덱스 (where)
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">where</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;2010%&#39;</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">limit</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-</code></pre></div><ul>
-<li>Extra 필드: Using where</li>
-<li>Range 검색 이후 직접 데이터 필드에 접근하여 추출</li>
-</ul>
-</li>
-<li>커버링 인덱스 쿼리
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="o">*</span>
+</code></pre></div>
+            - Extra 필드: Using where
+            - Range 검색 이후 직접 데이터 필드에 접근하여 추출
+        - 커버링 인덱스 쿼리
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="o">*</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">from</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">      </span><span class="k">select</span><span class="w"> </span><span class="n">userno</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="k">where</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;2012%&#39;</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="k">limit</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">usertest</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">userno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">userno</span>
-</code></pre></div><ul>
-<li>Extra 필드: Using where; Using index</li>
-<li>Where로 처리된 결과 셋이 일정 범위 추출되나, 추출되는게 pk값인 userno<ul>
-<li>innodb에서는 모든 인덱스값에는 pk를 값으로 가짐</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>커버링 인덱스 (order by)                <ul>
-<li>이미 정렬되어 있기에 full scan 방지 가능</li>
-<li>일반 쿼리
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
+</code></pre></div>
+            - Extra 필드: Using where; Using index
+            - Where로 처리된 결과 셋이 일정 범위 추출되나, 추출되는게 pk값인 userno
+                - innodb에서는 모든 인덱스값에는 pk를 값으로 가짐
+        - 커버링 인덱스 (order by)              <br />
+            - 이미 정렬되어 있기에 full scan 방지 가능
+            1. 일반 쿼리
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">chgdate</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">limit</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-</code></pre></div><ul>
-<li>인덱스 태워서 거기서 블록 읽는 것 보다, 무지성 풀스캔이 더 빨라!</li>
-</ul>
-</li>
-<li>커버링 인덱스 쿼리
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="o">*</span>
+</code></pre></div>
+                - 인덱스 태워서 거기서 블록 읽는 것 보다, 무지성 풀스캔이 더 빨라!
+            2. 커버링 인덱스 쿼리
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="o">*</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">from</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">      </span><span class="k">select</span><span class="w"> </span><span class="n">userno</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">chgdate</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="k">limit</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">usertest</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">userno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">userno</span>
-</code></pre></div><ul>
-<li>이렇게 진짜 인덱스의 정보만 요청할 경우 뚝딱 커버링 인덱스로 커버 가능</li>
+</code></pre></div>
+                - 이렇게 진짜 인덱스의 정보만 요청할 경우 뚝딱 커버링 인덱스로 커버 가능</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>InnoDB는 뭐야?</strong></p>
 <ul>
-<li>MySQL을 위한 데이터베이스 엔진</li>
-<li>경쟁자인 MyISAM 보다 더 많은 기능 지원<ul>
-<li>MVCC 지원</li>
-<li>ACID 트랜잭션 처리</li>
-<li>FK 지원</li>
-<li>row level lock 등</li>
+<li><strong>InnoDB는 뭐야?</strong>
+    - MySQL을 위한 데이터베이스 엔진
+    - 경쟁자인 MyISAM 보다 더 많은 기능 지원
+        - MVCC 지원
+        - ACID 트랜잭션 처리
+        - FK 지원
+        - row level lock 등
+    - 특징
+        - 대용량의 데이터 컨트롤하는 경우
+        - 트랜잭션의 관리가 필요한 경우
+        - 복구가 필요한 경우
+        - 정렬등의 구문이 들어가는 경우
+        - 높은 퍼포먼스가 필요한 대용량 사이트에 적합
+    - 장점
+        - 데이터 무결성 보장
+        - 동시적 제어 가능
+        - 제약 조건, FK 생성 가능
+        - Row Level Lock (행 단위 Lock) 사용하여 INSERT, UPDATE, DELETE 속도 빠름
+        - 트랜잭션을 지원해 transaction-safe 테이블 관리
+    - 단점
+        - 복구 방법이 어려움
+        - 데드락 가능성 O
+        - 여러기능 존재하기에 모델 디자인 시간 Up
+        - 시스템 자원 많이 차지함
+        - Full-text 인덱싱이 불가능 =&gt; 그래서 text를 varchar(255)로 바꿔서 인덱스 걸어준거구나</li>
 </ul>
-</li>
-<li>특징<ul>
-<li>대용량의 데이터 컨트롤하는 경우</li>
-<li>트랜잭션의 관리가 필요한 경우</li>
-<li>복구가 필요한 경우</li>
-<li>정렬등의 구문이 들어가는 경우</li>
-<li>높은 퍼포먼스가 필요한 대용량 사이트에 적합</li>
-</ul>
-</li>
-<li>장점<ul>
-<li>데이터 무결성 보장</li>
-<li>동시적 제어 가능</li>
-<li>제약 조건, FK 생성 가능</li>
-<li>Row Level Lock (행 단위 Lock) 사용하여 INSERT, UPDATE, DELETE 속도 빠름</li>
-<li>트랜잭션을 지원해 transaction-safe 테이블 관리</li>
-</ul>
-</li>
-<li>단점<ul>
-<li>복구 방법이 어려움</li>
-<li>데드락 가능성 O</li>
-<li>여러기능 존재하기에 모델 디자인 시간 Up</li>
-<li>시스템 자원 많이 차지함</li>
-<li>Full-text 인덱싱이 불가능 =&gt; 그래서 text를 varchar(255)로 바꿔서 인덱스 걸어준거구나</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Query Cost가 무엇인지?</strong></p>
 <ul>
-<li>Execution plan의 cost는 얼마나 많은 CPU와 I/O 자원들이 쿼리 수행에 들어갈지를 뜻함<ul>
-<li>다만 추정치라 틀릴 수도 있다. </li>
+<li><strong>Query Cost가 무엇인지?</strong>
+    - Execution plan의 cost는 얼마나 많은 CPU와 I/O 자원들이 쿼리 수행에 들어갈지를 뜻함
+        - 다만 추정치라 틀릴 수도 있다. </li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Explain의 filtered가 무엇인지?</strong></p>
 <ul>
-<li><em>참고: https://dba.stackexchange.com/questions/164251/what-is-the-meaning-of-filtered-in-mysql-explain</em></li>
-<li><code>filter</code>란 row의 set에 조건을 적용해, 해당 조건을 만족시키는 row만 남기는 것<ul>
-<li>MySQL은 인덱스를 먼저 쓸 거고 range 스캔등을 통해 해당 조건을 만족시키는 row를 추출할 거야</li>
+<li><strong>Explain의 filtered가 무엇인지?</strong>
+    - <em>참고: https://dba.stackexchange.com/questions/164251/what-is-the-meaning-of-filtered-in-mysql-explain</em>
+    - <code>filter</code>란 row의 set에 조건을 적용해, 해당 조건을 만족시키는 row만 남기는 것
+        - MySQL은 인덱스를 먼저 쓸 거고 range 스캔등을 통해 해당 조건을 만족시키는 row를 추출할 거야
+    - <code>filtered</code>란 추출된 row들에 where 절등의 최종 조건을 통해 찐으로 남은 것의 비율이야 
+        - (where 통해 찐으로 남은 것/인덱스로 추출된 row)
+        - 그니까 인덱스 태워서 range scan으로 174 row 뽑고, where 절 적용시켜 32 row가 남았어. 
+            - 32/174 = 18%가 filtered 인것이지
+    - 좋은 인덱스 탐색은 찐으로 필요한 것만 쭉 뽑아오는 거겠지? 
+        - <code>filtered=100%</code>
+    - 그렇다코 filtered가 100%라고 최고의 쿼리 최적화란건 아니야
+        - filesort를 없애는 것이 나을수도
+        - 제약 조건을 거는것이 나을수도</li>
 </ul>
-</li>
-<li><code>filtered</code>란 추출된 row들에 where 절등의 최종 조건을 통해 찐으로 남은 것의 비율이야 <ul>
-<li>(where 통해 찐으로 남은 것/인덱스로 추출된 row)</li>
-<li>그니까 인덱스 태워서 range scan으로 174 row 뽑고, where 절 적용시켜 32 row가 남았어. <ul>
-<li>32/174 = 18%가 filtered 인것이지</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>좋은 인덱스 탐색은 찐으로 필요한 것만 쭉 뽑아오는 거겠지? <ul>
-<li><code>filtered=100%</code></li>
-</ul>
-</li>
-<li>그렇다코 filtered가 100%라고 최고의 쿼리 최적화란건 아니야<ul>
-<li>filesort를 없애는 것이 나을수도</li>
-<li>제약 조건을 거는것이 나을수도</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Extra: Using Index Condition</strong></p>
 <ul>
-<li>배경 지식<ul>
-<li><img alt="" src="https://t1.daumcdn.net/cfile/tistory/999E8C475E40139317" /></li>
-<li>MySQL에서는 내부적으로 MySQL 엔진과 스토리지 엔진(InnoDB)로 구성<ul>
-<li>스토리지 엔진이 데이터 넘겨주면 &lt;= 얘가 인덱스 담당</li>
-<li>MySQL 엔진이 필터링 혹은 체크 조건으로 확인 &lt;= 얘가 where 담당</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>예시와 함께  <br />
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">temp_ad_offset</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_temp_ad_offset_2</span><span class="w"> </span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">offset_type</span><span class="p">);</span>
+<li><strong>Extra: Using Index Condition</strong>
+    - 배경 지식
+        - <img alt="" src="https://t1.daumcdn.net/cfile/tistory/999E8C475E40139317" />
+        - MySQL에서는 내부적으로 MySQL 엔진과 스토리지 엔진(InnoDB)로 구성
+            - 스토리지 엔진이 데이터 넘겨주면 &lt;= 얘가 인덱스 담당
+            - MySQL 엔진이 필터링 혹은 체크 조건으로 확인 &lt;= 얘가 where 담당
+    - 예시와 함께  <br />
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">temp_ad_offset</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_temp_ad_offset_2</span><span class="w"> </span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">offset_type</span><span class="p">);</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">from</span><span class="w"> </span><span class="n">temp_ad_offset</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">where</span><span class="w"> </span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">offset_type</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%LIST&#39;</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Using Index Condition<ul>
-<li>Extra: Using where<ul>
-<li>이렇게 스토리지 엔진 &amp; MySQL 엔진을 둘 다 타게되면 </li>
-<li>customer_id = 7인 데이터를 테이블에서 모두 찾아 MySQL 엔진에 줌 &lt;= by InnoDB</li>
-<li>MySQL 엔진에서 하나하나 <code>offset_type like '%LIST'</code> 확인</li>
-</ul>
-</li>
-<li><code>ALTER TABLE temp_ad_offset ADD INDEX idx_temp_ad_offset_2 (customer_id, offset_type);</code><ul>
-<li>근데 customer_id = 7를 통해 인덱스 읽은 상태인데 offset_type 비교를 테이블에서 또하는거 좀 비효율적이자나?</li>
-</ul>
-</li>
-<li>Extra: Using Index Condition<ul>
-<li>인덱스 혜택을 못보더라도 InnoDB한테 조건 넘겨!</li>
-<li>최대한 InnoDB에서 걸르고 걸러 MySQL 엔진에게 전달되도록 개선되었음</li>
-<li>이게 인덱스 푸시 다운</li>
-<li>MariaDB 5.3 이상, MySQL 5.6 이상 부터 돔</li>
-<li>MariaDB 10.x 버전이면 기본 옵션 ON</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - Using Index Condition
+        - Extra: Using where
+            - 이렇게 스토리지 엔진 &amp; MySQL 엔진을 둘 다 타게되면 
+            - customer_id = 7인 데이터를 테이블에서 모두 찾아 MySQL 엔진에 줌 &lt;= by InnoDB
+            - MySQL 엔진에서 하나하나 <code>offset_type like '%LIST'</code> 확인
+        - <code>ALTER TABLE temp_ad_offset ADD INDEX idx_temp_ad_offset_2 (customer_id, offset_type);</code>
+            - 근데 customer_id = 7를 통해 인덱스 읽은 상태인데 offset_type 비교를 테이블에서 또하는거 좀 비효율적이자나?
+        - Extra: Using Index Condition
+            - 인덱스 혜택을 못보더라도 InnoDB한테 조건 넘겨!
+            - 최대한 InnoDB에서 걸르고 걸러 MySQL 엔진에게 전달되도록 개선되었음
+            - 이게 인덱스 푸시 다운
+            - MariaDB 5.3 이상, MySQL 5.6 이상 부터 돔
+            - MariaDB 10.x 버전이면 기본 옵션 ON</li>
 </ul>
 
 

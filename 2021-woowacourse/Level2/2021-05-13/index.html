@@ -22933,74 +22933,54 @@
 <ul>
 <li><em>참고 1: https://galid1.tistory.com/521?category=783055</em></li>
 <li><em>참고 2: https://galid1.tistory.com/524?category=783055</em></li>
-<li>
-<p>Spring MVC : Servlet 기반의 웹 어플리케이션을 쉽게 만들 수 있게 도와주는 프레임워크</p>
-</li>
-<li>
-<p><strong>Listener</strong></p>
+<li>Spring MVC : Servlet 기반의 웹 어플리케이션을 쉽게 만들 수 있게 도와주는 프레임워크</li>
+</ul>
 <ul>
-<li>Servlet의 Listener는 웹 어플리케이션의 주요 변화를 감지하여, 해당 이벤트 발생시 특별한 작업 수행<ul>
-<li>ServletContextListener<ul>
-<li>Context의 생명주기 감시<ul>
-<li>contextInitialized() / contextDestroyed()</li>
+<li><strong>Listener</strong>
+    - Servlet의 Listener는 웹 어플리케이션의 주요 변화를 감지하여, 해당 이벤트 발생시 특별한 작업 수행
+        - ServletContextListener
+            - Context의 생명주기 감시
+                - contextInitialized() / contextDestroyed()</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Filter</strong></p>
 <ul>
-<li>Listener는 웹앱에 발생한 이벤트 감지 후 이벤트 이전에 특별 작업 수행</li>
-<li>Filter는 사용자 요청을 Servlet에 전달하기 전에 특별 처리<ul>
-<li>init()</li>
-<li>doFilter()</li>
-<li>destory()</li>
+<li><strong>Filter</strong>
+    - Listener는 웹앱에 발생한 이벤트 감지 후 이벤트 이전에 특별 작업 수행
+    - Filter는 사용자 요청을 Servlet에 전달하기 전에 특별 처리
+        - init()
+        - doFilter()
+        - destory()</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>ServletWebApplication에 Spring 도입</strong></p>
 <ul>
-<li>Spring에서 제공하는 IoC Container 사용</li>
-<li>Spring MVC 사용    </li>
-</ul>
-</li>
+<li><strong>ServletWebApplication에 Spring 도입</strong>
+    - Spring에서 제공하는 IoC Container 사용
+    - Spring MVC 사용    </li>
 </ul>
 <h2 id="_2">페어하면서 생긴 질문<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>ArgumentResolver</strong>에서 Service를 왜 호출하는가?</li>
 <li>
-<p>controller 들어가기 전 단계 아닌가??</p>
+<p><strong>ArgumentResolver</strong>에서 Service를 왜 호출하는가?</p>
+<ul>
+<li>controller 들어가기 전 단계 아닌가??</li>
+</ul>
 </li>
 <li>
 <p><strong>JwtTokenProvider</strong>는 어느 layer인가?</p>
-</li>
-<li>
-<p><code>presentation layer</code> vs <code>service layer</code></p>
+<ul>
+<li><code>presentation layer</code> vs <code>service layer</code></li>
+</ul>
 </li>
 <li>
 <p>어떤 필드를 <strong>token</strong>으로 만들어야 하는가?</p>
-</li>
+<ul>
 <li><code>id</code> vs <code>email</code></li>
 <li>클라이언트 입장에서는 email이 결국 이 웹사이트에서 id의 역할을 하는건데 당연히 수정불가능해야하는 것 아닌가?</li>
-<li>
-<p>수정 포인트</p>
-<ol>
-<li>email 불변<ul>
-<li>dao 쿼리문 수정해야함</li>
+<li>수정 포인트
+     1. email 불변
+        - dao 쿼리문 수정해야함
+     2. email 수정
+        - token 수정해야함
+        - loginmember 수정해야함, resolver 수정해야함</li>
 </ul>
-</li>
-<li>email 수정<ul>
-<li>token 수정해야함</li>
-<li>loginmember 수정해야함, resolver 수정해야함</li>
-</ul>
-</li>
-</ol>
 </li>
 <li>
 <p>현재 service 구현 에서는 response dto를 뱉는다. <br />

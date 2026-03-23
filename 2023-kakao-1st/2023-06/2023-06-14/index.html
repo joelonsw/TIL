@@ -22914,90 +22914,92 @@
 <em>참고: https://www.convertstring.com/ko/Hash/SHA256</em>
 <em>참고: https://losskatsu.github.io/blockchain/sha256/#4-sha-256-%EA%B3%BC%EC%A0%95</em></p>
 <ul>
-<li><strong>암호화와 해싱</strong></li>
+<li><strong>암호화와 해싱</strong><ul>
 <li>암호화: 양방향</li>
-<li>
-<p>해싱: 단방향</p>
-<ul>
+<li>해싱: 단방향<ul>
 <li>요건 복호화가 안대요!</li>
 </ul>
 </li>
-<li>
-<p><strong>단방향 해시 함수</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>단방향 해시 함수</strong><ul>
 <li>수학적 연산에 의해 원본 데이터를 매핑시켜 완전히 다른 암호화된 데이터로 변환시키는 것</li>
 <li>다이제스트: 해시에 의해 암호화된 데이터<ul>
 <li><img alt="" src="../../images/2023-06-14%20digest.png" /></li>
 </ul>
 </li>
-<li>
-<p>단방향 해시 함수의 종류들</p>
-<ul>
+<li>단방향 해시 함수의 종류들<ul>
 <li>SHA, SHA-256</li>
 <li>MD</li>
 <li>HAS</li>
 <li>WHIRLPOOL</li>
 </ul>
 </li>
-<li>
-<p><strong>단방향 해시 함수 깨는 방법</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>단방향 해시 함수 깨는 방법</strong><ol>
 <li>동일한 메시지는 동일한 다이제스트<ul>
 <li>솔트 없이 돌린 대표적인 SHA256 암호화문은 이런 사이트에서 해독이 가능할수도 (https://crackstation.net/)</li>
 <li>sha-256 rainbow table</li>
 </ul>
 </li>
-<li>
-<p>브루트포스</p>
-<ul>
+<li>브루트포스<ul>
 <li>물론 힘든데 가능은 함</li>
 <li>생일 문제(https://namu.wiki/w/%EC%83%9D%EC%9D%BC%20%EB%AC%B8%EC%A0%9C) 보면 직관보다 겹칠 수 있는 해시 암호화 값이 우리 생각보단 흔할 수도 있다는...?</li>
 </ul>
 </li>
-<li>
-<p><strong>단방향 해시 함수 보완</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>단방향 해시 함수 보완</strong><ol>
 <li>해시 함수 여러번 수행<ul>
 <li>SHA256 N번 돌려!</li>
 </ul>
 </li>
-<li>
-<p>Salt</p>
-<ul>
+<li>Salt<ul>
 <li>해시 함수 돌리기 전에 원문에 임의의 문자열을 덧붙이는 것</li>
 <li>사용자마다 다른 Salt를 뒤에 붙이는데...?</li>
-<li>가장 효과적인 방법</li>
+<li>가장 효과적인 방법<ul>
 <li>각 사용자별 고유의 솔트를 가질 것</li>
 <li>솔트의 길이는 32비트 이상될 것</li>
 </ul>
 </li>
-<li>
-<p><strong>Salt</strong></p>
+</ul>
 </li>
-<li>단방향 해시 함수에서 다이제스트 생성할 때 추가되는 바이트 단위의 임의 문자열</li>
-<li>
-<p>Salting: 원본 메시지 + 임의 문자열 ==&gt; 다이제스트</p>
+</ol>
+</li>
+</ul>
 <ul>
+<li><strong>Salt</strong><ul>
+<li>단방향 해시 함수에서 다이제스트 생성할 때 추가되는 바이트 단위의 임의 문자열</li>
+<li>Salting: 원본 메시지 + 임의 문자열 ==&gt; 다이제스트<ul>
 <li>ex) 원본 "hello" + 임의 문자열 솔트 ("9sd9fxcjv13djf") ==&gt; 다이제스트</li>
 </ul>
 </li>
-<li>
-<p><strong>인증 로직</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>인증 로직</strong><ul>
 <li>비밀번호 생성<ol>
 <li>임의의 Salt 값 생성 후 디비에 저장</li>
 <li>SHA-256(Salt + 패스워드) 해싱된 값을 디비에 기록</li>
 </ol>
 </li>
-<li>
-<p>비밀번호 인증</p>
-<ol>
+<li>비밀번호 인증<ol>
 <li>SHA-256(입력받은 비밀번호 + 디비에 저장된 Salt 값)과 유저 DB 해시값이 동일하면 인증 성공</li>
 </ol>
 </li>
-<li>
-<p><strong>SHA-256</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>SHA-256</strong><ul>
 <li>단방향 알고리즘의 한 종류</li>
 <li>해시값을 이용한 암호화 방식 중 하나</li>
 <li>256비트로 구성되며 64자리 문자열을 반환</li>
@@ -23017,6 +23019,8 @@
 </ol>
 </li>
 <li>해시 충돌 사례가 없다네 ㄷㄷ</li>
+</ul>
+</li>
 </ul>
 
 

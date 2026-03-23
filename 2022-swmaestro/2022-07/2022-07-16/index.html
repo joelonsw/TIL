@@ -22955,12 +22955,10 @@
 <ul>
 <li><em>참고: https://velog.io/@soosungp33/%EC%8A%A4%ED%94%84%EB%A7%81-RestTemplate-%EC%A0%95%EB%A6%AC%EC%9A%94%EC%B2%AD-%ED%95%A8</em></li>
 <li><em>참고: https://tecoble.techcourse.co.kr/post/2021-07-25-resttemplate-webclient/</em></li>
-<li><strong>RestTemplate의 동작 원리</strong></li>
+<li><strong>RestTemplate의 동작 원리</strong><ul>
 <li>HttpClient는 HTTP를 사용하여 통신하는 범용 라이브러리</li>
 <li>RestTemplate은 HttpClient를 추상화하여 제공</li>
-<li>
-<p>동작 원리</p>
-<ol>
+<li>동작 원리<ol>
 <li>RestTemplate을 생성해 URI, HTTP 메서드 등의 헤더를 담아 요청</li>
 <li>RestTemplate이 HttpMessageConverter를 사용해 requestEntity를 요청 메시지로 변환</li>
 <li>RestTemplate은 ClientHttpRequestFactory로 부터 ClientHttpRequest를 가져와서 요청 보냄</li>
@@ -22971,87 +22969,101 @@
 <li>어플리케이션에 반환</li>
 </ol>
 </li>
-<li>
-<p><strong>RestTemplate 처리방식</strong></p>
+</ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-07-16-rest-template.png" /></p>
+</ul>
 <ul>
+<li><strong>RestTemplate 처리방식</strong><ul>
+<li><img alt="" src="../../images/2022-07-16-rest-template.png" /><ul>
 <li>요청자 어플리케이션 구동시에 Thread pool 만들어 둠</li>
-<li>Request는 Queue에 쌓이고 가용한 쓰레드 있으면 그 쓰레드에 할당되어 처리됨</li>
+<li>Request는 Queue에 쌓이고 가용한 쓰레드 있으면 그 쓰레드에 할당되어 처리됨<ul>
 <li>1요청당 1스레드</li>
+</ul>
+</li>
 <li>Blocking 방식의 처리라 다른 요청에 할당 될 수 없음</li>
 <li>스레드가 다 차는 경우 Queue에 대기하게 됨</li>
 <li>네트워킹이나 DB와의 통신에서 병목 발생</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
 <li>
 <p><strong>RestTemplate vs WebClient</strong></p>
-</li>
-<li>
-<p>RestTemplate?</p>
 <ul>
+<li>RestTemplate?<ul>
 <li>HTTP 통신에 유용하게 쓰일 템플릿</li>
 <li>REST 서비스 호출에 용이</li>
-<li>특징</li>
+<li>특징<ul>
 <li>통신 단순화, RESTFUL</li>
 <li>멀티쓰레드 방식 사용</li>
 <li>블록킹 방식 사용</li>
-<li>사용</li>
+</ul>
+</li>
+<li>사용<ul>
 <li>어떤 HttpClient를 사용할 것인지 ClientHttpRequestfactory를 전달하여 지정 가능</li>
 <li>빈으로도 설정 가능함</li>
+</ul>
+</li>
 <li>Multi-Thread와 Blocking 방식 사용</li>
 </ul>
 </li>
-<li>
-<p>WebClient?</p>
+</ul>
 <ul>
+<li>WebClient?<ul>
 <li>싱글 스레드 방식</li>
 <li>넌블로킹 방식 사용</li>
 <li>JSON/XML 쉽게 응답 받음</li>
-<li>사용</li>
+<li>사용<ul>
 <li>WebClient.create()</li>
 <li>Builder 사용</li>
 </ul>
 </li>
-<li>
-<p>둘의 차이점?</p>
+</ul>
+</li>
+</ul>
 <ul>
-<li>Non-Blocking과 비동기화 가능 여부</li>
+<li>둘의 차이점?<ul>
+<li>Non-Blocking과 비동기화 가능 여부<ul>
 <li>Non-Blocking<ul>
 <li>시스템을 호출한 직후 프로그램으로 제어가 다시 돌아와 시스템 호출의 종료를 기다리지 않고 다음 동작 진행</li>
 <li>동시에 다른 작업 진행할 수 있어 작업속도 빨라짐</li>
 <li>네트워킹의 병목을 줄이고 성능 향상 가능</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>1000명의 사용자까지는 처리속도 비슷하지만, 규모 생기면 WebClient 압승</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h2 id="webclient">WebClient<a class="headerlink" href="#webclient" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://gngsn.tistory.com/154</em></li>
-<li><strong>원리</strong></li>
+<li><strong>원리</strong><ul>
 <li>Single Thread와 Non-Blocking 방식을 사용</li>
 <li>Core당 1개의 쓰레드</li>
-<li>
-<p><img alt="" src="../../images/2022-07-16-web-client.jpeg" /></p>
-<ul>
+<li><img alt="" src="../../images/2022-07-16-web-client.jpeg" /><ul>
 <li>Event Loop내에 Job으로 등록</li>
 <li>결과를 기다리지 않고 다른 Job 처리</li>
 <li>제공자로부터 Callback 응답오면 그 결과를 요청자에게 제공</li>
 </ul>
 </li>
-<li>
-<p><strong>사용법 생성 및 수정</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>사용법 생성 및 수정</strong><ul>
 <li>create()
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">WebClient</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">WebClient</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">// or</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">WebClient</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;http://localhost:8080&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>build()
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebClient</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebClient</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">        </span><span class="p">.</span><span class="na">baseUrl</span><span class="p">(</span><span class="s">&quot;http://localhost:8080&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="p">.</span><span class="na">defaultCookie</span><span class="p">(</span><span class="s">&quot;cookieKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cookieValue&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="p">.</span><span class="na">defaultHeader</span><span class="p">(</span><span class="n">HttpHeaders</span><span class="p">.</span><span class="na">CONTENT_TYPE</span><span class="p">,</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
@@ -23059,7 +23071,7 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Configuration
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">HttpClient</span><span class="w"> </span><span class="n">httpClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="na">create</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">HttpClient</span><span class="w"> </span><span class="n">httpClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="na">create</span><span class="p">()</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span><span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="n">ChannelOption</span><span class="p">.</span><span class="na">CONNECT_TIMEOUT_MILLIS</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="p">.</span><span class="na">responseTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">5000</span><span class="p">))</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="p">.</span><span class="na">doOnConnected</span><span class="p">(</span><span class="n">conn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span>
@@ -23070,19 +23082,19 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="p">.</span><span class="na">clientConnector</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ReactorClientHttpConnector</span><span class="p">(</span><span class="n">httpClient</span><span class="p">))</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
 </code></pre></div></li>
-<li>
-<p>mutate()
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">client1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebClient</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+<li>mutate()
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">client1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebClient</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">filterA</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">filterB</span><span class="p">).</span><span class="na">build</span><span class="p">();</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">client2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client1</span><span class="p">.</span><span class="na">mutate</span><span class="p">()</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">filterC</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">filterD</span><span class="p">).</span><span class="na">build</span><span class="p">();</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>GET</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>GET</strong><ol>
 <li>Flux
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Autowired</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Autowired</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">webClient</span><span class="p">;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kd">public</span><span class="w"> </span><span class="n">Flux</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -23093,7 +23105,7 @@
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
 </code></pre></div></li>
 <li>Mono
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Autowired</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Autowired</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">webClient</span><span class="p">;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kd">public</span><span class="w"> </span><span class="n">Mono</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findById</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23102,23 +23114,22 @@
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">       </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">       </span><span class="p">.</span><span class="na">bodyToMono</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>
-<p>쿼리스트링
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">uriBuilder</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">MultiValueMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+- 쿼리스트링
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">uriBuilder</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">MultiValueMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">UriComponentsBuilder</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">      </span><span class="p">.</span><span class="na">fromUriString</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span><span class="w">    </span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="p">.</span><span class="na">queryParams</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="p">.</span><span class="na">toUriString</span><span class="p">();</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ol>
 </li>
-<li>
-<p><strong>POST</strong></p>
-</li>
-<li>
-<p>Mono
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@Autowired</span>
+</ul>
+<ul>
+<li><strong>POST</strong><ol>
+<li>Mono
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@Autowired</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">WebClient</span><span class="w"> </span><span class="n">webClient</span><span class="p">;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kd">public</span><span class="w"> </span><span class="n">Mono</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">Employee</span><span class="w"> </span><span class="n">empl</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23128,11 +23139,12 @@
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="p">.</span><span class="na">bodyToMono</span><span class="p">(</span><span class="n">Employee</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ol>
 </li>
-<li>
-<p><strong>예외처리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>예외처리</strong><ul>
 <li>retrieve()
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Mono</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">get</span><span class="p">()</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;/persons/id&quot;</span><span class="p">)</span>
@@ -23143,12 +23155,14 @@
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span><span class="p">.</span><span class="na">bodyToMono</span><span class="p">(</span><span class="n">Person</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h2 id="vs-vs">블로킹 vs 넌블로킹 / 동기 vs 비동기<a class="headerlink" href="#vs-vs" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://velog.io/@nittre/%EB%B8%94%EB%A1%9C%ED%82%B9-Vs.-%EB%85%BC%EB%B8%94%EB%A1%9C%ED%82%B9-%EB%8F%99%EA%B8%B0-Vs.-%EB%B9%84%EB%8F%99%EA%B8%B0</em></li>
 <li><em>참고: https://www.youtube.com/watch?v=oEIoqGd-Sns</em></li>
 <li><em>참고: https://musma.github.io/2019/04/17/blocking-and-synchronous.html</em></li>
-<li><strong>Blocking vs Non-Blocking</strong></li>
+<li><strong>Blocking vs Non-Blocking</strong><ul>
 <li>다른 주체가 작업할때 자신에게 <strong>제어권</strong>이 있는가?</li>
 <li>행위 자체가 막혀버린, 제한된, 대기하는 상태</li>
 <li>Blocking<ul>
@@ -23156,16 +23170,16 @@
 <li>자신이 할 일을 모두 마칠 때까지 제어권을 계속 가지고서 호출한 함수에게 바로 돌려주지 않으면 Block</li>
 </ul>
 </li>
-<li>
-<p>Non-Blocking</p>
-<ul>
+<li>Non-Blocking<ul>
 <li>다른 주체의 작업에 관련없이 자신의 작업을 하는 것</li>
 <li>자신이 할 일을 채 마치지 않았더라도 바로 제어권을 건네주어 다른 일을 진행할 수 있도록 해줌</li>
 </ul>
 </li>
-<li>
-<p><strong>Sync vs Async</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Sync vs Async</strong><ul>
 <li>결과를 돌려주었을 때 순서와 결과에 관심이 있는지 아닌지로 판단할 수 있다</li>
 <li>동시에 발생하는 것들, 같이/함께 무엇인가가 이루어지는 두 개 이상의 개체 혹은 이벤트</li>
 <li>sync<ul>
@@ -23178,6 +23192,8 @@
 </ul>
 </li>
 <li><img alt="" src="../../images/2022-07-16-sync-blocking.png" /></li>
+</ul>
+</li>
 </ul>
 
 

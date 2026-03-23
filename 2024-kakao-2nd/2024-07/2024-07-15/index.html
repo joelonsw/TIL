@@ -22931,22 +22931,27 @@
 </code></pre></div>
   - 한정된 주제에서 반복적인 일 하는 것 보단 DSL을 만들어 제공하는게 좋다는데,,,</p>
 <ul>
-<li><strong>특징</strong></li>
+<li><strong>특징</strong><ul>
 <li>잘 정의된 DSL은 자연어와 비슷해 가독성을 높일 수 있음</li>
 <li>Scala/Kotlin에서는 다음과 같은 언어의 기능을 살림<ul>
-<li>람다식</li>
+<li>람다식<ul>
 <li><code>(Int, Int) -&gt; Int</code></li>
-<li>고차함수</li>
+</ul>
+</li>
+<li>고차함수<ul>
 <li>함수를 파라미터로 갖거나</li>
 <li>함수를 반환하거나</li>
+</ul>
+</li>
 <li>확장함수</li>
 </ul>
 </li>
-<li>
-<p>Scala에서는 .이 없이도 함수 호출이 가능하니까 유리한 면이 있어!</p>
+<li>Scala에서는 .이 없이도 함수 호출이 가능하니까 유리한 면이 있어!</li>
+</ul>
 </li>
-<li>
-<p><strong>예제</strong>
+</ul>
+<ul>
+<li><strong>예제</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">SqlDSLTest</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nd">@Test</span>
@@ -22961,8 +22966,7 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 
 

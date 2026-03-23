@@ -23105,7 +23105,7 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">col1</span><span class="w"> </span><span class="k">HAVING</span><span class="w"> </span><span class="n">col2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">;</span>
 </code></pre></div>
 <ul>
-<li><strong>쿼리 실행 순서</strong></li>
+<li><strong>쿼리 실행 순서</strong><ol>
 <li>FROM</li>
 <li>ON</li>
 <li>JOIN</li>
@@ -23114,25 +23114,27 @@
 <li>HAVING : GROUP BY의 조건절</li>
 <li>SELECT</li>
 <li>DISTINCT</li>
-<li>
-<p>ORDER BY</p>
+<li>ORDER BY</li>
+</ol>
 </li>
-<li>
-<p><strong>쿼리 실행 순서 예시</strong>
+</ul>
+<ul>
+<li><strong>쿼리 실행 순서 예시</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">도시</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">city</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">집계</span><span class="o">`</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">city</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">            </span><span class="k">HAVING</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s1">&#39;b&#39;</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">                </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">city</span><span class="p">;</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ol>
 <li>FROM 에서 데이터 집합을 만든다</li>
 <li>WHERE는 FROM에서 만든 데이터 집합을 조건에 맞게 걸러낸다</li>
 <li>GROUP BY는 WHERE에서 필터링한 데이터를 그룹화 한다</li>
 <li>HAVING은 GROUP BY에서 집계한 데이터 집합을 다시 조건에 맞게 필터링한다</li>
 <li>SELECT는 그룹화하고 필터링한 데이터 집합을 집계한다</li>
 <li>ORDER BY는 집계한 데이터 집합을 정렬한다</li>
+</ol>
+</li>
 </ul>
 <h2 id="update">Update (수정)<a class="headerlink" href="#update" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">col1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">col2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="p">;</span>
@@ -23160,39 +23162,41 @@
 </code></pre></div>
 <h2 id="_2">문자열<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>합치기</strong></li>
-<li>
-<p><code>CONCAT('a', 'b')</code></p>
+<li><strong>합치기</strong><ul>
+<li><code>CONCAT('a', 'b')</code></li>
+</ul>
 </li>
-<li>
-<p><strong>자르기</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>자르기</strong><ul>
 <li><code>SUBSTRING(STR, 1, 10)</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="datetime">DATETIME<a class="headerlink" href="#datetime" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>연/월/일/시/분/초</strong></li>
+<li><strong>연/월/일/시/분/초</strong><ul>
 <li><code>YEAR(DATETIME)</code></li>
 <li><code>MONTH(DATETIME)</code></li>
 <li><code>DAY(DATETIME)</code></li>
 <li><code>HOUR(DATETIME)</code></li>
 <li><code>MINUTE(DATETIME)</code></li>
-<li>
-<p><code>SECOND(DATETIME)</code></p>
+<li><code>SECOND(DATETIME)</code></li>
+</ul>
 </li>
-<li>
-<p><strong>DATE_FORMAT()</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>DATE_FORMAT()</strong><ul>
 <li><code>DATE_FORMAT(DATETIME, '%Y-%m-%d')</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="tip">TIP<a class="headerlink" href="#tip" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>COLUMN 중에 NULL이 있을 수도 있으니, IS NOT NULL 조건을 추가해줘야 하나 확인할 것</strong></p>
-</li>
-<li>
-<p><strong>문제의 조건을 읽고, 조건을 모두 노트에 옮겨 적어두는 것도 방법!</strong></p>
-</li>
+<li><strong>COLUMN 중에 NULL이 있을 수도 있으니, IS NOT NULL 조건을 추가해줘야 하나 확인할 것</strong></li>
+</ul>
+<ul>
+<li><strong>문제의 조건을 읽고, 조건을 모두 노트에 옮겨 적어두는 것도 방법!</strong></li>
 </ul>
 
 

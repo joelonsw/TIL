@@ -22918,15 +22918,16 @@
   - 리액트 컴포넌트는 새 props/state로 렌더링시 함수 내부 클로저도 최신 상태로 반영하지만, 
     - useCallback/useMemo 등을 쓸 때 의존성 배열 잘 못 관리하면 함수가 계쏙 같은 클로저 사용함</p>
 <ul>
-<li><strong>state closure 상황</strong></li>
+<li><strong>state closure 상황</strong><ul>
 <li>무한 스크롤에서 그 다음 페이지를 불러오지 못하는 문제 발생</li>
 <li>useCallback에 정의된 함수가 dependency array 항목에 따라 최신화되는데, 최신화되는 조건의 누락시 발생</li>
 <li>정의된 함수는 바뀌지 않으니 하염없이 같은 함수만 호출할 수 있음</li>
-<li>
-<p>함수가 생성될 때 사진을 찍는다고 생각하자. 함수 호출은 그냥 사진을 다시 가져오는거고. </p>
+<li>함수가 생성될 때 사진을 찍는다고 생각하자. 함수 호출은 그냥 사진을 다시 가져오는거고. </li>
+</ul>
 </li>
-<li>
-<p><strong>코드</strong>
+</ul>
+<ul>
+<li><strong>코드</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">lastElementRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCallback</span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">(</span><span class="nx">node</span><span class="o">:</span><span class="w"> </span><span class="nx">HTMLLIElement</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">loading</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
@@ -22940,11 +22941,12 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">},</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">[</span><span class="nx">hasNext</span><span class="p">]</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">);</span>
-</code></pre></div></p>
-</li>
+</code></pre></div><ul>
 <li>다음과 같이 콜백 함수가 hasNext에 대해서만 최신화됨. <ul>
 <li>이러다 보니 fetch 안의 여러 변수들의 값이 이미 정의된 대로 주구장창 사용중 (stale closure)</li>
 <li>dependency array에 getList 함수에 들어갈 변수들을 함께 정의해두자. </li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

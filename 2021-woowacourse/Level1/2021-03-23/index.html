@@ -22931,117 +22931,69 @@
 <h3 id="2021-03-23">2021-03-23<a class="headerlink" href="#2021-03-23" title="Permanent link">&para;</a></h3>
 <h2 id="with">엘레강트 오브젝트 수업 with 포비<a class="headerlink" href="#with" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>DI 위키피디아</strong></p>
+<li><strong>DI 위키피디아</strong>
+    - 참고: https://ko.wikipedia.org/wiki/%EC%9D%98%EC%A1%B4%EC%84%B1_%EC%A3%BC%EC%9E%85
+    - 정의
+        - 하나의 객체가 다른 객체의 의존성을 제공하는 테크닉
+            - "의존성": 서비스로 사용할 수 있는 객체
+            - 클라이언트에게 무슨 서비스를 사용할 것인지를 말하주는 것
+            - 서비스는 클라이언트 상태의 일부
+                - 서비스 구축/찾기 대신 서비스를 전달하는 것!
+        - 클라이언트가 주입자와 서비스 구성 방식, 현재 사용중인 서비스에 알 필요가 없어!
+            - 클라이언트는 서비스의 인터페이스만 알면 됨
+        - "구성"의 책임을 가진 서비스와 "사용"의 책임을 가진 클라이언트를 분리하는 것!
+    - 의도
+        - 객체를 필요로 하는 클래스 내에 직접 객체 생성하는 것 == 클래스를 특정 객체에 커밋하는 것<br />
+            == 클래스로 부터 독립적으로 인스턴스의 생성을 변경하는 것이 불가능
+            == 유연하지 않음
+    - 특징
+        - 결합도를 느슨하게 만든다
+        - 의존관계 역전 원칙 (Dependency Inversion Principle), 단일 책임 원칙 (Single Responsibility Principle) 따르도록 함</li>
+</ul>
 <ul>
-<li>참고: https://ko.wikipedia.org/wiki/%EC%9D%98%EC%A1%B4%EC%84%B1_%EC%A3%BC%EC%9E%85</li>
-<li>정의<ul>
-<li>하나의 객체가 다른 객체의 의존성을 제공하는 테크닉<ul>
-<li>"의존성": 서비스로 사용할 수 있는 객체</li>
-<li>클라이언트에게 무슨 서비스를 사용할 것인지를 말하주는 것</li>
-<li>서비스는 클라이언트 상태의 일부<ul>
-<li>서비스 구축/찾기 대신 서비스를 전달하는 것!</li>
+<li><strong>DI</strong>
+    - tightly coupling: test 하기 힘든 구조
+        - tightly coupling이란?
+            - 각각의 컴포넌트가 서로를 사용하기 위해 상세히 아는 것
+    - 유연한 코드를 작성해야한다!
+        - 하지만 이게 초보자 입장에선 어렵단 말이지?
+        - 그러면 테스트 가능한 코드를 만들어 보는 연습을 하자
+    - 생성자 DI vs 메서드 파라미터 DI
+        - 생성자 DI: 객체에 전달할 인자가 많다면, 생성자로 전달하는게 유리하다
+        - 메서드 DI: 장) API 명세가 명확해질 수 있음 단) 매번 전달해줘야 함</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>클라이언트가 주입자와 서비스 구성 방식, 현재 사용중인 서비스에 알 필요가 없어!<ul>
-<li>클라이언트는 서비스의 인터페이스만 알면 됨</li>
-</ul>
-</li>
-<li>"구성"의 책임을 가진 서비스와 "사용"의 책임을 가진 클라이언트를 분리하는 것!</li>
-</ul>
-</li>
-<li>의도<ul>
-<li>객체를 필요로 하는 클래스 내에 직접 객체 생성하는 것 == 클래스를 특정 객체에 커밋하는 것<br />
-    == 클래스로 부터 독립적으로 인스턴스의 생성을 변경하는 것이 불가능
-    == 유연하지 않음</li>
-</ul>
-</li>
-<li>특징<ul>
-<li>결합도를 느슨하게 만든다</li>
-<li>의존관계 역전 원칙 (Dependency Inversion Principle), 단일 책임 원칙 (Single Responsibility Principle) 따르도록 함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>DI</strong></p>
 <ul>
-<li>tightly coupling: test 하기 힘든 구조<ul>
-<li>tightly coupling이란?<ul>
-<li>각각의 컴포넌트가 서로를 사용하기 위해 상세히 아는 것</li>
+<li><strong>엘레강트 오브젝트 책에서의 추천</strong>
+    1. 5개 이하의 public 메서드를 만들자
+        - 유지보수에 좋은 객체는 작은 객체
+        - Error 탐지에도 용이
+        - SRP 준수도 용이
+    2. 불변 객체로 만들자
+        - Side Effect를 안 만든다
+        - 다만... 
+            - 상태가 변할때마다 새로운 인스턴스를 생성하니 성능이 저하됨
+            - 따라서 캐싱을 고려해보자
+            - 성능이 그래도 망하면 그땐 가변을 고려해보자
+                - 참고로 백엔드 서버에서 발생하는 성능 저하는, 자바 어플리케이션에서의 성능 저하보다 외부 NW API 호출에서 올 가능성이 높다
+    3. public 상수 구현 하지 말자!
+        - 대신 상수를 클래스로 만들자
+        - enum도 이런 면에서는 지양해야한다 (그저 상수의 모음이라는 것이 객체로써의 의미를 안 가져서 그런 것 아닐까?)
+            - 로직이 가득한 enum은 어떨까?
+    4. 인스턴스 필드의 수는 4개 이하로 유지할 것!</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>유연한 코드를 작성해야한다!<ul>
-<li>하지만 이게 초보자 입장에선 어렵단 말이지?</li>
-<li>그러면 테스트 가능한 코드를 만들어 보는 연습을 하자</li>
-</ul>
-</li>
-<li>생성자 DI vs 메서드 파라미터 DI<ul>
-<li>생성자 DI: 객체에 전달할 인자가 많다면, 생성자로 전달하는게 유리하다</li>
-<li>메서드 DI: 장) API 명세가 명확해질 수 있음 단) 매번 전달해줘야 함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>엘레강트 오브젝트 책에서의 추천</strong></p>
-<ol>
-<li>5개 이하의 public 메서드를 만들자<ul>
-<li>유지보수에 좋은 객체는 작은 객체</li>
-<li>Error 탐지에도 용이</li>
-<li>SRP 준수도 용이</li>
-</ul>
-</li>
-<li>불변 객체로 만들자<ul>
-<li>Side Effect를 안 만든다</li>
-<li>다만... <ul>
-<li>상태가 변할때마다 새로운 인스턴스를 생성하니 성능이 저하됨</li>
-<li>따라서 캐싱을 고려해보자</li>
-<li>성능이 그래도 망하면 그땐 가변을 고려해보자<ul>
-<li>참고로 백엔드 서버에서 발생하는 성능 저하는, 자바 어플리케이션에서의 성능 저하보다 외부 NW API 호출에서 올 가능성이 높다</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>public 상수 구현 하지 말자!<ul>
-<li>대신 상수를 클래스로 만들자</li>
-<li>enum도 이런 면에서는 지양해야한다 (그저 상수의 모음이라는 것이 객체로써의 의미를 안 가져서 그런 것 아닐까?)<ul>
-<li>로직이 가득한 enum은 어떨까?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>인스턴스 필드의 수는 4개 이하로 유지할 것!</li>
-</ol>
-</li>
-<li>
-<p><strong>질문</strong></p>
 <ul>
-<li>그냥 추상클래스 vs Interface를 구현한 추상클래스</li>
-<li>결합도가 느슨한게 뭔데?<ul>
-<li>각각의 구성요소(클래스/인터페이스/데이터/서비스)가 서로에 대해 아주 적거나 아예 모르는 상태로 서로를 사용하는 것</li>
-</ul>
-</li>
-<li>Side Effect가 뭔데?</li>
-</ul>
-</li>
+<li><strong>질문</strong>
+    - 그냥 추상클래스 vs Interface를 구현한 추상클래스
+    - 결합도가 느슨한게 뭔데?
+        - 각각의 구성요소(클래스/인터페이스/데이터/서비스)가 서로에 대해 아주 적거나 아예 모르는 상태로 서로를 사용하는 것
+    - Side Effect가 뭔데?</li>
 </ul>
 <h2 id="_1">리팩토링 하면서 느낀 점!<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>불변객체가 진짜 좋구나...</strong></p>
-<ul>
-<li>
-<p>문제상황</p>
-<ul>
-<li>최초 검은색/흰색 기물들의 Map<Position, Piece>를 캐싱해 두고 싶었음
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">Piece</span><span class="o">&gt;</span><span class="w"> </span><span class="n">blackInitPiecePosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<li><strong>불변객체가 진짜 좋구나...</strong>
+    - 문제상황
+        - 최초 검은색/흰색 기물들의 Map<Position, Piece>를 캐싱해 두고 싶었음
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">Piece</span><span class="o">&gt;</span><span class="w"> </span><span class="n">blackInitPiecePosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Position</span><span class="p">,</span><span class="w"> </span><span class="n">Piece</span><span class="o">&gt;</span><span class="w"> </span><span class="n">whiteInitPiecePosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
@@ -23069,36 +23021,18 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="n">whiteInitPiecePosition</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Position</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">WHITE_PIECE_COLUMN</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Knight</span><span class="p">());</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="n">whiteInitPiecePosition</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Position</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="n">WHITE_PIECE_COLUMN</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rook</span><span class="p">());</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>다음과 같이 캐싱해 두었음</li>
-<li>그래서 테스트 코드를 돌렸더니 뻑이남</li>
-</ul>
-</li>
-<li>
-<p>문제이유</p>
-<ul>
-<li>내가 캐싱해둔 것은, 각 기물들의 초기생성시 위치정보와 그에 대응하는 기물 객체이다. </li>
-<li>근데 게임을 진행한 후, 또 다시 해당 캐싱된 친구들을 받으면 발생하는 문제는...</li>
-<li>이미 저번 게임에서 Pawn 객체는 마르고 닳도록 쓴 객체인 것이다. <ul>
-<li>Pawn 객체에는 isFirstMove가 인스턴스 필드로 있고, 해당 필드가 움직임에 크게 관여하기에, 이게 훼손되었다면 큰일큰일 왕큰일이다. </li>
-<li>불변이였으면 문제를 몰랐을 것<ul>
-<li>오히려좋아</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>문제해결</p>
-<ul>
-<li>어쩔수없이, 해당 위치에 따르는 기물들을 매번 해당 위치에 새로 생성하여 반환<ul>
-<li>캐싱은 실패!</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</code></pre></div>
+        - 다음과 같이 캐싱해 두었음
+        - 그래서 테스트 코드를 돌렸더니 뻑이남<p>- 문제이유
+      - 내가 캐싱해둔 것은, 각 기물들의 초기생성시 위치정보와 그에 대응하는 기물 객체이다. 
+      - 근데 게임을 진행한 후, 또 다시 해당 캐싱된 친구들을 받으면 발생하는 문제는...
+      - 이미 저번 게임에서 Pawn 객체는 마르고 닳도록 쓴 객체인 것이다. 
+          - Pawn 객체에는 isFirstMove가 인스턴스 필드로 있고, 해당 필드가 움직임에 크게 관여하기에, 이게 훼손되었다면 큰일큰일 왕큰일이다. 
+          - 불변이였으면 문제를 몰랐을 것
+              - 오히려좋아</p>
+<p>- 문제해결
+      - 어쩔수없이, 해당 위치에 따르는 기물들을 매번 해당 위치에 새로 생성하여 반환
+          - 캐싱은 실패!</p>
 </li>
 </ul>
 

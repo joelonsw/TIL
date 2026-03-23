@@ -22931,18 +22931,18 @@
 <h3 id="2025-05-29">2025-05-29<a class="headerlink" href="#2025-05-29" title="Permanent link">&para;</a></h3>
 <h2 id="rabbitmq-connectionchannelconsumer">RabbitMQ Connection/Channel/Consumer<a class="headerlink" href="#rabbitmq-connectionchannelconsumer" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Connection</strong></li>
+<li><strong>Connection</strong><ul>
 <li>RabbitMQ의 물리적인 TCP 연결<ul>
 <li>producer &lt;-&gt; rabbitmq</li>
 <li>rabbitmq &lt;-&gt; consumer</li>
 </ul>
 </li>
-<li>
-<p>모든 trasnsport 레이어 커뮤니케이션에 대해서 담당</p>
+<li>모든 trasnsport 레이어 커뮤니케이션에 대해서 담당</li>
+</ul>
 </li>
-<li>
-<p><strong>Channel</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Channel</strong><ul>
 <li>논리적인 connection. 어플리케이션 레벨에서 존재</li>
 <li>"하나의 실제 TCP Connection"을 토대로 독립적인 여러 커뮤니케이션 스트림에 대한 멀티플렉싱 제공<ul>
 <li>독립적인 커넥션으로 열어, 병렬적으로 각기 다른 처리 가능 (message pub/consuming)</li>
@@ -22955,12 +22955,12 @@
 <li>connection 닫히면 channel도 다 닫힘</li>
 </ul>
 </li>
-<li>
-<p><code>Connection:Channel = 1:N</code></p>
+<li><code>Connection:Channel = 1:N</code></li>
+</ul>
 </li>
-<li>
-<p><strong>Consumer</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Consumer</strong><ul>
 <li>queue에 대한 구독 -&gt; 메시지 receive</li>
 <li>Consumer는 특정한 Channel에 등록되고, RabbitMQ는 메시지를 해당 Channel을 통해 Consumer로 보냄</li>
 <li>Consumer는 Channel에 바운드 되어 있음</li>
@@ -22970,6 +22970,8 @@
 </li>
 <li>Channel이 삭제되면, Consumer가 같이 사라짐</li>
 <li>Consumer에 여러 메시지 전송 확인 직후 Channel이 닫히면, ACK 못받은 메시지 requeue됨</li>
+</ul>
+</li>
 </ul>
 <p>[비교 분석]
 - <strong>Queue별로 Channel 만들기 (멀티 채널)</strong>
@@ -22996,7 +22998,7 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
 </code></pre></div></p>
 <ul>
-<li><strong>동일 Channel, Queue별 Consumer 만들기</strong></li>
+<li><strong>동일 Channel, Queue별 Consumer 만들기</strong><ul>
 <li>구조)<ul>
 <li><code>Queue A &lt;-&gt; Channel &lt;-&gt; Consumer A</code></li>
 <li><code>Queue B &lt;-&gt; Channel &lt;-&gt; Consumer B</code></li>
@@ -23012,7 +23014,7 @@
 </ul>
 </li>
 <li>basicQos 메서드에서 global = false로 두면 각 consumer 별로 prefetchCount를 다르게 가져갈 수 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">getConsumerQueueName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">durable</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">prefetchCount</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">actorRef</span><span class="p">:</span><span class="w"> </span><span class="nc">ActorRef</span><span class="p">):</span><span class="w"> </span><span class="nc">DefaultConsumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">getConsumerQueueName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">durable</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">prefetchCount</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">actorRef</span><span class="p">:</span><span class="w"> </span><span class="nc">ActorRef</span><span class="p">):</span><span class="w"> </span><span class="nc">DefaultConsumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">declareQueue</span><span class="p">(</span><span class="n">queueName</span><span class="p">,</span><span class="w"> </span><span class="n">durable</span><span class="p">,</span><span class="w"> </span><span class="n">prefetchCount</span><span class="p">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">consumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">CustomConsumer</span><span class="p">(</span><span class="n">queueName</span><span class="p">,</span><span class="w"> </span><span class="n">channel</span><span class="p">,</span><span class="w"> </span><span class="n">actorRef</span><span class="p">)</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">consumers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">consumer</span><span class="p">)</span>
@@ -23029,6 +23031,8 @@
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="n">channel</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="rabbitmq-clustering-mirroring">RabbitMQ Clustering &amp; Mirroring<a class="headerlink" href="#rabbitmq-clustering-mirroring" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://yonghyn.tistory.com/29</em>
@@ -23052,7 +23056,7 @@
     - 해당 Queue를 가진 RabbitMQ에 장애 발생 시 손실 무조건 발생
     - 이를 막고자 Mirroring</p>
 <ul>
-<li><strong>Mirroring</strong></li>
+<li><strong>Mirroring</strong><ul>
 <li>Cluster 안에 Message를 다수 RabbitMQ Queue안에 저장하는 기법</li>
 <li>Mirroring 구성시 Queue는 Master Queue와 Slave Queue로 구성. 1:N 관계<ul>
 <li>Master Queue 마다 Slave Queue 갯수 설정 가능</li>
@@ -23066,6 +23070,8 @@
 </li>
 <li>Slave 중간 추가시, Slave 시작된 시점부터 Master 미러링</li>
 <li>Master Queue가진 RabbitMQ에 장애 발생시, 가장 오래된 Slave Queue가 Master로 승격</li>
+</ul>
+</li>
 </ul>
 
 

@@ -22909,24 +22909,25 @@
 <h3 id="2025-02-21">2025-02-21<a class="headerlink" href="#2025-02-21" title="Permanent link">&para;</a></h3>
 <h2 id="future-andthen">Future <code>andThen</code><a class="headerlink" href="#future-andthen" title="Permanent link">&para;</a></h2>
 <ul>
-<li>원래의 Future가 완료된 뒤, 부수효과 실행을 위해 콜백 실행</li>
+<li>원래의 Future가 완료된 뒤, 부수효과 실행을 위해 콜백 실행<ul>
 <li>부수효과 정상 동작: 콜백이 완료되면, 기존의 결과 유지</li>
-<li>
-<p>부수효과 예외 동작: 예외가 최종 결과로 대체</p>
+<li>부수효과 예외 동작: 예외가 최종 결과로 대체</li>
+</ul>
 </li>
-<li>
-<p><strong>Play 비동기 처리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Play 비동기 처리</strong><ol>
 <li>라우팅 처리 : Future[Result]를 액션에 반환</li>
 <li>비동기 액션 실행</li>
 <li>Future 내에서 예외 발생 및 전파</li>
 <li>Play의 글로벌 에러 핸들러 호출</li>
-<li>에러 핸들러에 의한 처리</li>
-<li>
-<p>Play Framework는 액션 메서드가 반환한 Future[Result]가 완료될 때까지, 즉 이벤트 루프가 해당 Future의 완료를 기다리다가 콜백을 실행하는 구조로 동작</p>
+<li>에러 핸들러에 의한 처리
+-  Play Framework는 액션 메서드가 반환한 Future[Result]가 완료될 때까지, 즉 이벤트 루프가 해당 Future의 완료를 기다리다가 콜백을 실행하는 구조로 동작</li>
+</ol>
 </li>
-<li>
-<p><strong>Scala에서의 예시</strong>
+</ul>
+<ul>
+<li><strong>Scala에서의 예시</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">Future</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="nc">Implicits</span><span class="p">.</span><span class="n">global</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -22957,22 +22958,25 @@
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="cm">Future(Failure(java.lang.Exception: test))</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="cm">Future(Success(1))</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="cm">* */</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Play에서의 예시</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>Play에서의 예시</strong><ul>
 <li>콜백에서 실패했더라도 예외처리.</li>
 <li>테스트에서는 getTest2() 말고는 모두 예외 발생인줄 알았으나...<ul>
-<li><strong>getTest5()</strong></li>
+<li><strong>getTest5()</strong><ul>
 <li>함수 리터럴 대신 표현식이라, 평가 시점에 예외가 발생하여 Future 체인이 구성되지 않고 즉시 실패!!!!!!</li>
-<li><strong>getTest4()</strong></li>
+</ul>
+</li>
+<li><strong>getTest4()</strong><ul>
 <li>이건 정상적으로 동작. Future(1)으로 잘 처리되고, 정상 응답</li>
 <li>예외 던진거는 ExecutionContext에 reportFailure로 보고!</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>controller에서 map 후속 처리 진행하려고 할 때, Future 실패 상태가 되어 예외 전파
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">getTest2</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="p">.</span><span class="n">async</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">getTest2</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Action</span><span class="p">.</span><span class="n">async</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nc">Future</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Ok</span><span class="p">(</span><span class="nc">Json</span><span class="p">.</span><span class="n">obj</span><span class="p">(</span><span class="s">&quot;code&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;0000&quot;</span><span class="p">)))</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -22992,6 +22996,8 @@
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="n">test</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Ok</span><span class="p">(</span><span class="nc">Json</span><span class="p">.</span><span class="n">obj</span><span class="p">(</span><span class="s">&quot;code&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;0000&quot;</span><span class="p">)))</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

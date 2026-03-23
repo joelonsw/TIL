@@ -22910,51 +22910,51 @@
 <h2 id="connectable-route-53-alb">Connectable Route 53 &amp; ALB 연동<a class="headerlink" href="#connectable-route-53-alb" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=WS2n8mkrFaY</em></li>
-<li>
-<p><img alt="" src="../../images/2022-11-16-ALB-Route53.png" /></p>
-</li>
-<li>
-<p><strong>AWS Certificate Manager(ACM)을 활용한 SSL 인증서 발급</strong></p>
-</li>
+<li><img alt="" src="../../images/2022-11-16-ALB-Route53.png" /></li>
+</ul>
+<ul>
+<li><strong>AWS Certificate Manager(ACM)을 활용한 SSL 인증서 발급</strong><ul>
 <li><img alt="" src="../../images/2022-11-16-ACM-SSL.png" /></li>
 <li>무료로 사용할 수 있음</li>
-<li>
-<p>서울 리전에서 SSL 인증서 발급하였음</p>
+<li>서울 리전에서 SSL 인증서 발급하였음</li>
+</ul>
 </li>
-<li>
-<p><strong>Application Load Balancer 구축</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Application Load Balancer 구축</strong><ul>
 <li>[Target Group 만들기]<ul>
 <li>prod-connectable-tg 만들어 prod EC2 연결</li>
 <li>HTTP 프로토콜을 사용하여 소통하도록 설정</li>
 </ul>
 </li>
-<li>
-<p>[Application Load Balancer 만들기]</p>
-<ul>
+<li>[Application Load Balancer 만들기]<ul>
 <li>prod-connectable-alb 만들어 target group 연결</li>
 <li>리스너를 HTTPS로 설정하며, ACM을 통해 발급한 인증서 설정</li>
 </ul>
 </li>
-<li>
-<p><strong>Route 53에서 A 레코드를 활용해 ALB 연결</strong></p>
+</ul>
 </li>
-<li>
-<p>api.connectable.fans의 A레코드를 ALB에 연결</p>
+</ul>
+<ul>
+<li><strong>Route 53에서 A 레코드를 활용해 ALB 연결</strong><ul>
+<li>api.connectable.fans의 A레코드를 ALB에 연결</li>
+</ul>
 </li>
-<li>
-<p><strong>AWS 인프라 이용의 장점</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>AWS 인프라 이용의 장점</strong><ul>
 <li>무료</li>
 <li>유연성</li>
-<li>
-<p>AWS 기능 사용 가능</p>
+<li>AWS 기능 사용 가능</li>
+</ul>
 </li>
-<li>
-<p><strong>VPC 설정</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>VPC 설정</strong><ul>
 <li>Connectable VPC는 Default: Asia-Pacific-Northeast-2</li>
 <li>Subnet 역시 Default: ap-northeast-2a ~ ap-northeast-2d</li>
+</ul>
+</li>
 </ul>
 
 

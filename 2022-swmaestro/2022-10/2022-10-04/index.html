@@ -22933,59 +22933,65 @@
 <h2 id="regex">Regex<a class="headerlink" href="#regex" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=t3M6toIflyQ</em></li>
-<li><strong>문법</strong></li>
-<li>
-<p>총 4가지 그룹</p>
+<li><strong>문법</strong><ul>
+<li>총 4가지 그룹</li>
+</ul>
 </li>
-<li>
-<p><strong>Group and ranges</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Group and ranges</strong><ul>
 <li><code>|</code> : 또는</li>
 <li><code>()</code> : 그룹 <ul>
 <li><code>gr(e|a)y</code> : grey or gray</li>
 </ul>
 </li>
 <li><code>(?:)</code> : 그룹으로 찾지만, 그룹으로 묶지 않음</li>
-<li>
-<p><code>[]</code> : 괄호안의 어떤 문자든</p>
-<ul>
+<li><code>[]</code> : 괄호안의 어떤 문자든<ul>
 <li><code>[a-zA-Z0-9]</code> : 알파벳 대소문자, 숫자</li>
 <li><code>[^a-zA-Z0-9]</code> : 알파벳 대소문자, 숫자 제외해서</li>
 </ul>
 </li>
-<li>
-<p><strong>Quantifiers</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Quantifiers</strong><ul>
 <li><code>?</code> : 있거나 없거나</li>
 <li><code>*</code> : 있거나 없거나 많거나</li>
 <li><code>+</code> : 하나 또는 많이</li>
 <li><code>{n}</code> : n번 반복</li>
 <li><code>{min,}</code> : 최소</li>
-<li>
-<p><code>{min, max}</code> : 최소 그리고 최대</p>
+<li><code>{min, max}</code> : 최소 그리고 최대</li>
+</ul>
 </li>
-<li>
-<p><strong>Boundary type</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Boundary type</strong><ul>
 <li><code>\b</code> : 단어 경계<ul>
-<li><code>\bYa</code>: 단어 앞에 붙어있는 Ya</li>
+<li><code>\bYa</code>: 단어 앞에 붙어있는 Ya<ul>
 <li><strong>Ya</strong>YaYa</li>
-<li><code>Ya\b</code>: 단어 뒤에 붙어있는 Ya</li>
+</ul>
+</li>
+<li><code>Ya\b</code>: 단어 뒤에 붙어있는 Ya<ul>
 <li>YaYa<strong>Ya</strong></li>
 </ul>
 </li>
+</ul>
+</li>
 <li><code>\B</code> : 단어 경계가 아님<ul>
-<li><code>Ya\B</code> : 단어 뒤에 붙어있는 Ya 빼고</li>
+<li><code>Ya\B</code> : 단어 뒤에 붙어있는 Ya 빼고<ul>
 <li><strong>YaYa</strong>Ya</li>
 </ul>
 </li>
+</ul>
+</li>
 <li><code>^</code> : 문장의 시작</li>
-<li>
-<p><code>$</code> : 문장의 끝</p>
+<li><code>$</code> : 문장의 끝</li>
+</ul>
 </li>
-<li>
-<p><strong>Charater classes</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Charater classes</strong><ul>
 <li><code>\</code> : 특수 문자가 아닌 문자</li>
 <li><code>.</code> : 어떤 글자</li>
 <li><code>\d</code> : 숫자 선택</li>
@@ -22994,6 +23000,8 @@
 <li><code>\W</code> : 문자열 제외한 거 선택</li>
 <li><code>\s</code> : 공백 선택</li>
 <li><code>\S</code> : 공백 제외한 거 선택</li>
+</ul>
+</li>
 </ul>
 
 

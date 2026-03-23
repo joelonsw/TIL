@@ -23010,22 +23010,30 @@
 <p><em>참고: https://www.playframework.com/documentation/2.8.x/Home</em></p>
 <h4 id="configuration-api">Configuration API<a class="headerlink" href="#configuration-api" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Typesafe config library를 사용하나, <code>Configuration</code> 이라는 스칼라 래퍼를 사용</li>
+<li>Typesafe config library를 사용하나, <code>Configuration</code> 이라는 스칼라 래퍼를 사용<ul>
 <li><code>application.conf</code> 파일에 설정된 값들을 가져올 수 있음 </li>
 <li>https://www.playframework.com/documentation/2.8.x/ConfigFile</li>
 </ul>
+</li>
+</ul>
 <h4 id="actions-controllers-and-results">Actions, Controllers and Results<a class="headerlink" href="#actions-controllers-and-results" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Action</strong></li>
+<li><strong>Action</strong><ul>
 <li><code>play.api.mvc.Action</code> == <code>(play.api.mvc.Request =&gt; play.api.mvc.Result)</code></li>
-<li><strong>Controller</strong></li>
+</ul>
+</li>
+<li><strong>Controller</strong><ul>
 <li>Play에서 컨트롤러는 그저 Action 생성기</li>
+</ul>
+</li>
 </ul>
 <h4 id="http-routing">HTTP routing<a class="headerlink" href="#http-routing" title="Permanent link">&para;</a></h4>
 <ul>
 <li>들어오는 HTTP 요청을 Action으로 변경시켜주는 역할</li>
-<li>DI</li>
+<li>DI<ul>
 <li>플레이의 기본 라우터 <code>@Inject</code> 어노테이션이 붙은 컨트롤러 클래스 인스턴스를 받음</li>
+</ul>
+</li>
 </ul>
 <h4 id="dependency-injection">Dependency Injection<a class="headerlink" href="#dependency-injection" title="Permanent link">&para;</a></h4>
 <p><em>참고: https://www.playframework.com/documentation/2.8.x/ScalaDependencyInjection</em><br />
@@ -23033,37 +23041,37 @@
   - Dependency Graph가 생성되고, 연결되고, 검증되고
   - Guice 사용해 구현</p>
 <ul>
-<li><strong>왜 쓰는가?</strong></li>
+<li><strong>왜 쓰는가?</strong><ol>
 <li>쉽게 연결하여 같은 컴포넌트를 가진 다른 로직을 구현할 수 있음</li>
-<li>
-<p>전역 static 상태를 방지함.</p>
+<li>전역 static 상태를 방지함.</li>
+</ol>
 </li>
-<li>
-<p><strong>어떻게 동작하는가</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>어떻게 동작하는가</strong><ul>
 <li>Guice와 타 런타임 DI 프레임워크</li>
-<li>
-<p>GuiceApplicationLoader 사용</p>
+<li>GuiceApplicationLoader 사용</li>
+</ul>
 </li>
-<li>
-<p><strong>Component Lifecycle</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Component Lifecycle</strong><ul>
 <li>Singleton으로 마킹해두지 않는 이상, 새로운 인스턴스가 컴포넌트 필요시마다 생성됨</li>
 <li>인스턴스는 필요할때 lazy creation<ul>
 <li>Eager binding으로 생성도 가능</li>
 </ul>
 </li>
-<li>
-<p>Components는 아무데서도 참조 안되면 GC의 대상이 될 것 (프레임워크에선 아무것도 안해줌)</p>
-<ul>
+<li>Components는 아무데서도 참조 안되면 GC의 대상이 될 것 (프레임워크에선 아무것도 안해줌)<ul>
 <li>ApplicationLifecycle을 제공해주는데, 해당 것으로 어플리케이션 스탑시 셧다운 할 것 지정가능</li>
 </ul>
 </li>
-<li>
-<p><strong>Stopping/Cleaning up</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Stopping/Cleaning up</strong><ul>
 <li>Play 어플리케이션 사라질때 메모리에서도 사라지게! (GC에서 없애주세요오)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">Future</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">Future</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">javax</span><span class="p">.</span><span class="nn">inject</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">import</span><span class="w"> </span><span class="nn">play</span><span class="p">.</span><span class="nn">api</span><span class="p">.</span><span class="nn">inject</span><span class="p">.</span><span class="nc">ApplicationLifecycle</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -23078,6 +23086,8 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
 <h4 id="server-backends">Server Backends<a class="headerlink" href="#server-backends" title="Permanent link">&para;</a></h4>
 <p><em>참고: https://www.playframework.com/documentation/2.8.x/Server</em>
 <em>참고: https://www.playframework.com/documentation/2.8.x/AkkaHttpServer</em>
@@ -23088,7 +23098,7 @@
   - Akka HTTP (2.6.x 이상)
   - Netty (2.6.x 미만)</p>
 <ul>
-<li><strong>Akka HTTP Server</strong></li>
+<li><strong>Akka HTTP Server</strong><ul>
 <li>Akka Streams를 사용해서 구현</li>
 <li>Play의 서버 백엔드는 <a href="https://doc.akka.io/docs/akka-http/current/server-side/low-level-api.html?language=scala">low level server API</a> 사용하여 <code>HttpRequest</code> / <code>HttpResponse</code>를 다룸</li>
 <li>Play의 서버는 Akka의 <code>HttpRequest</code>를 Play HTTP 요청으로 변경함</li>
@@ -23099,6 +23109,8 @@
 <li>JDBC, HTTPURLConnection 등의 블락킹 연산이 문제<ul>
 <li>해당 블럭킹 연산을 처리할 때는 메인 렌더링 쓰레드랑 무관한 친구를 사용해주세요</li>
 <li><code>Future</code>, <code>CompletionStage</code>, <code>CustomExecutionContext</code>로 커스텀 쓰레드 풀을 써보세용</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

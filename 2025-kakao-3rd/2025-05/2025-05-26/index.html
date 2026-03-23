@@ -22909,19 +22909,21 @@
 <h3 id="2025-05-26">2025-05-26<a class="headerlink" href="#2025-05-26" title="Permanent link">&para;</a></h3>
 <h2 id="rabbitmq-envelope">RabbitMQ Envelope<a class="headerlink" href="#rabbitmq-envelope" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>RabbitMQ에서 메시지 consume할 때, 메시지 본문과 함께 전달되는 메타데이터 정보를 담고있는 객체</li>
 <li>어떤 경로로 왔는지, 어떤 처리가 필요한지 판단 가능. </li>
-<li>
-<p>RabbitMQ에서 메시지의 "컨텍스트" 정보를 전달</p>
+<li>RabbitMQ에서 메시지의 "컨텍스트" 정보를 전달</li>
+</ul>
 </li>
-<li>
-<p><strong>Envelope의 주요 정보</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Envelope의 주요 정보</strong><ul>
 <li><code>deliveryTag</code>: 메시지의 고유 식별자</li>
 <li><code>exchange</code>: 메시지가 발행된 exchange의 이름</li>
 <li><code>routingKey</code>: 메시지를 라우팅할 때 사용된 라우팅 키</li>
 <li><code>redeliver</code>: 메시지 이전에 전달됐다가 다시 전달되는 메시지 인지 여부</li>
+</ul>
+</li>
 </ul>
 
 

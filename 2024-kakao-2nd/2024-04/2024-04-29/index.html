@@ -22946,18 +22946,16 @@
       - <code>c</code>: 압축 실시하는 compress
     - 보안때매 openssh 8.0 부터는 deprecated 라네..?</p>
 <ul>
-<li><strong>rsync</strong><ul>
-<li>remote synchronization </li>
-<li>원격에 있는 파일과 디렉터리를 복사하고 동기화하는 방식</li>
-<li>변경된 파일들이 있다면 변경된 파일의 씽크를 맞춰줌</li>
-<li>로컬 -&gt; 원격</li>
-<li><code>rsync [옵션] [대상] [서버로그인아이디@도메인(아이피):목적지폴더]</code></li>
-<li>원격 -&gt; 로컬</li>
-<li><code>rsync [옵션] [서버로그인아이디@도메인(아이피):대상] [목적지폴더]</code></li>
-<li>최초에 모든 파일/폴더 복사하고 이후 변경된 파일만 복사</li>
-<li>차이가 발생한 부분만 복사하기에 보다 더 효율적이라고 함</li>
-</ul>
-</li>
+<li><strong>rsync</strong>
+    - remote synchronization 
+    - 원격에 있는 파일과 디렉터리를 복사하고 동기화하는 방식
+      - 변경된 파일들이 있다면 변경된 파일의 씽크를 맞춰줌
+    - 로컬 -&gt; 원격
+      - <code>rsync [옵션] [대상] [서버로그인아이디@도메인(아이피):목적지폴더]</code>
+    - 원격 -&gt; 로컬
+      - <code>rsync [옵션] [서버로그인아이디@도메인(아이피):대상] [목적지폴더]</code>
+    - 최초에 모든 파일/폴더 복사하고 이후 변경된 파일만 복사
+      - 차이가 발생한 부분만 복사하기에 보다 더 효율적이라고 함</li>
 </ul>
 <h2 id="amqp">AMQP<a class="headerlink" href="#amqp" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://ram2ram2.tistory.com/3</em>
@@ -22972,7 +22970,7 @@
       - Producer: 메시지를 전송하는 프로그램
       - Queue: Mailbox. RabbitMQ 시스템 내 위치, Consumer 대신 RabbitMQ가 보관하는 메시지 버퍼!</p>
 <ul>
-<li><strong>AMQP</strong></li>
+<li><strong>AMQP</strong><ul>
 <li>이전에는 대부분 플랫폼 종속적인 MQ 제품들이 많았음<ul>
 <li>다른 기종이 메시지를 교환하기 위해서는 메시지 포맷 컨버젼을 위한 메시지 브릿지 필요</li>
 <li>혹은 시스템 자체를 통일 시켜야하는 불편함</li>
@@ -22984,56 +22982,64 @@
 <li>이중 하나 RabbitMQ</li>
 </ul>
 </li>
-<li>
-<p>벤더에 종속되는 것을 방지하고자 AMQP는 하기 조건을 충족</p>
-<ul>
+<li>벤더에 종속되는 것을 방지하고자 AMQP는 하기 조건을 충족<ul>
 <li>모든 broker는 똑같은 방식으로 동작할 것</li>
 <li>모든 client들은 똑같은 방식으로 동작할 것</li>
 <li>네트워크상으로 전송되는 명령어들의 표준화</li>
 <li>프로그래밍 언어 중립적일 것</li>
 </ul>
 </li>
-<li>
-<p><strong>AMQP 구성요소/라우팅 알고리즘</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>AMQP 구성요소/라우팅 알고리즘</strong><ul>
 <li>Exchange: Producer 로 부터 수신한 메시지를 큐에 분배</li>
 <li>Queue: 메시지를 메모리/디스크에 저장했다 Consumer에게 전달</li>
 <li>Binding: Exchange &amp; Queue의 관계 정의<ul>
-<li>Exchange Type</li>
+<li>Exchange Type<ul>
 <li>Direct: Exchange:Queue = 1:1 관계</li>
 <li>Fanout: Exchange에 바인딩된 모든 Queue에 메시지 전달. 1:N. 브로드캐스트 용도</li>
 <li>Topic: Exchange에 바인딩 된 Queue 중에서 메시지의 라우팅 키가 패턴에 맞는 Queue에게 모두 메시지를 전달</li>
+</ul>
+</li>
 <li>Headers: 라우팅 키 대신 메시지 헤더에 여러 속성들을 더해 속성들이 매칭되는 큐에 메시지 전달</li>
 </ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2024-04-29-AMQP-routing.png" /></p>
-<ul>
-<li>[Exchange]</li>
+<li><img alt="" src="../../images/2024-04-29-AMQP-routing.png" /><ul>
+<li>[Exchange]<ul>
 <li>Publisher로 부터 수신한 메시지를 적절한 큐/다른 exchange로 분배하는 라우터의 기능</li>
 <li>각 queue/exchange는 binding을 사용해 exchange에 바인드 되어 있고, exchange는 수신한 메시지를 binding에 따라 queue/exchange에 라우팅</li>
 <li>브로커는 여러개의 exchange type 인스턴스 가질 수 있음</li>
 <li>exchange type은 메시지를 어떤 방법으로 라우팅 시킬지 결정할 수 있다. </li>
 <li>binding은 실제로 어떤 메시지를 어떤 큐에 보낼지 결정하는 라우팅 테이블</li>
-<li>[Queue]</li>
+</ul>
+</li>
+<li>[Queue]<ul>
 <li>메모리/디스크에 메시지 저장하고, consumer에게 전달하는 역할</li>
-<li>[Binding]</li>
+</ul>
+</li>
+<li>[Binding]<ul>
 <li>Exchange &lt;-&gt; Queue 관계를 정의한 라우팅 테이블</li>
-<li>[Routing Key]</li>
+</ul>
+</li>
+<li>[Routing Key]<ul>
 <li>Publisher에서 송신한 메시지에 포함되는 것으로, 일종의 가상 주소</li>
 <li>Exchange에서 이걸 보고 어떤 큐로 라우팅할지 결정</li>
-<li>[Standard Exchange Type]</li>
+</ul>
+</li>
+<li>[Standard Exchange Type]<ul>
 <li>대부분의 MQ에서 가능한 여러 상황에 대해 정의한 표준 라우팅 알고리즘
-  1) Direct Exchange<ul>
+1) Direct Exchange<ul>
 <li>메시지의 라우팅 키를 1:N으로 매칭</li>
 <li><img alt="" src="../../images/2024-04-29-direct-exchange.png" />
-  2) Topic Exchange</li>
+2) Topic Exchange</li>
 <li>와일드 카드를 통해 메시지를 큐에 매핑</li>
 <li><img alt="" src="../../images/2024-04-29-topic-exchange.png" />
-  3) Fanout Exchange</li>
+3) Fanout Exchange</li>
 <li>모든 메시지를 모든 큐로 라우팅</li>
 <li><img alt="" src="../../images/2024-04-29-fanout-exchange.png" />
-  4) Headers Exchange</li>
+4) Headers Exchange</li>
 <li>key-value로 정의된 헤더에 의해 라우팅 결정</li>
 <li>Queue에 정의된 x-match:all/any로 라우팅 받을지 결정</li>
 <li><img alt="" src="../../images/2024-04-29-headers-exchange.png" /></li>
@@ -23041,9 +23047,13 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>RabbitMQ</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>RabbitMQ</strong><ul>
 <li>AMQP를 구현한 오픈소스 메시지 브로커 소프트웨어</li>
 <li>Producer로 부터 메시지를 받아 Consumer에게 라우트 하는 것이 주된 역할</li>
 <li>장점<ol>
@@ -23055,6 +23065,8 @@
 <li>단점<ol>
 <li>Window OS에서는 Erlang, OpenSSL 설치 필요</li>
 </ol>
+</li>
+</ul>
 </li>
 </ul>
 

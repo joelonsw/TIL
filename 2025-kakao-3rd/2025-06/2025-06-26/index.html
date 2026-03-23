@@ -22913,7 +22913,7 @@
   - 쿠버에서 상태를 가지는 어플리케이션을 관리하기 위한 워크로드 오브젝트
   - 주로 DB, MQ, 분산 저장소 등 각 인스턴스가 고유한 신원(이름/네트워크/스토리지) 상태를 가져야 하는 서비스에 사용</p>
 <ul>
-<li><strong>Deployment를 왜 안쓰고...?</strong></li>
+<li><strong>Deployment를 왜 안쓰고...?</strong><ul>
 <li>Stateless 웹 서버/API 서버라면 deployment로 충분<ul>
 <li>파드 죽어도 상관없고, 아무파드나 요청 처리해도 상관 X</li>
 </ul>
@@ -22924,12 +22924,12 @@
 <li>파드 생성/종료/업데이트가 순서가 필요하다면</li>
 </ul>
 </li>
-<li>
-<p>해당 요구사항을 statefulSet이 해결</p>
+<li>해당 요구사항을 statefulSet이 해결</li>
+</ul>
 </li>
-<li>
-<p><strong>StatefulSet의 핵심 기능</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>StatefulSet의 핵심 기능</strong><ol>
 <li>자동화된 고유 식별자 관리<ul>
 <li>StatefulSet 컨트롤러가 Pod 생성시 <code>-0</code>, <code>-1</code> 같은 순차적 식별자 자동 부여</li>
 <li>DNS와 연동되어 안정적인 네트워크 접근 보장</li>
@@ -22940,19 +22940,19 @@
 <li>Pod 재생성 시, 동일 볼륨 자동 마운트</li>
 </ul>
 </li>
-<li>
-<p>순차적 오케스트레이션</p>
-<ul>
+<li>순차적 오케스트레이션<ul>
 <li>스케일링 시: <code>pod N</code> Running/Ready =&gt; <code>pod N+1</code> 생성</li>
 <li>업데이트 시: 역순 (<code>Pod2</code> -&gt; <code>Pod1</code> -&gt; <code>Pod0</code>) 롤링 업데이트</li>
 <li>삭제 시: 역순으로 종료 확인 후 다음 pod 종료</li>
 </ul>
 </li>
-<li>
-<p><strong>ACL을 위한 IP 대역 관리</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>ACL을 위한 IP 대역 관리</strong><ul>
 <li>고정 IP 할당
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">StatefulSet</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
@@ -22964,6 +22964,8 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="nt">annotations</span><span class="p">:</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="nt">ipam.antrea.io/ippools</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;db-ip-pool&#39;</span><span class="w">  </span><span class="c1"># 고정 IP 풀 지정</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 

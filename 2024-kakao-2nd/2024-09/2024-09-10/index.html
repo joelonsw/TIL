@@ -23179,11 +23179,13 @@
 <em>참고: https://esbook.kimjmin.net/05-search/5.2-bool</em></p>
 <h4 id="_1">개요<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <ul>
-<li>bool Query는 4개의 인자를 가지고 있고, 그 인자 안에 다른 쿼리들을 배열로 넣는 방식</li>
+<li>bool Query는 4개의 인자를 가지고 있고, 그 인자 안에 다른 쿼리들을 배열로 넣는 방식<ul>
 <li><code>must</code>: 쿼리가 참인 도큐먼트 검색</li>
 <li><code>must_not</code>: 쿼리가 거짓인 도큐먼트 검색</li>
 <li><code>should</code>: 검색 결과 중 이 쿼리에 해당하는 도큐먼트 점수 높임</li>
 <li><code>filter</code>: 쿼리가 참인 도큐먼트 검색. but 스코어 계산 X. must보다 빠르고 캐싱 가능</li>
+</ul>
+</li>
 <li>and 조건으로 검색 - <code>must</code> 안에 여러개의 조건을 추가</li>
 <li>or 조건으로 검색 - <code>must: [{match: "A B"}]</code> 로 조건</li>
 </ul>

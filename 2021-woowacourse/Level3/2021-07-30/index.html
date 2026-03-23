@@ -22954,22 +22954,14 @@
 <h2 id="cascadetyperemove-vs-orphanremoval">CascadeType.REMOVE vs OrphanRemoval<a class="headerlink" href="#cascadetyperemove-vs-orphanremoval" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.baeldung.com/jpa-cascade-remove-vs-orphanremoval</em></li>
-<li><strong>CascadeType.REMOVE</strong><ul>
-<li>Child 엔티티를 삭제하거나, Parent의 삭제에 따른 Child 엔티티들 삭제</li>
-<li>ex. OrderRequest가 ShipmentInfo를 포함함<ul>
-<li>OrderRequest가 지워지면 ShipmentInfo도 삭제함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>OrphanRemoval</strong><ul>
-<li>Orphaned 된 엔티티를 DB에서 지우는 용도<ul>
-<li>Orphaned: 부모에 더 이상 attached 되지 않은 엔티티</li>
-</ul>
-</li>
-<li><code>@OneToMany</code> 관계의 참조를 끊어버리는 경우 발생</li>
-</ul>
-</li>
+<li><strong>CascadeType.REMOVE</strong>
+    - Child 엔티티를 삭제하거나, Parent의 삭제에 따른 Child 엔티티들 삭제
+    - ex. OrderRequest가 ShipmentInfo를 포함함
+        - OrderRequest가 지워지면 ShipmentInfo도 삭제함</li>
+<li><strong>OrphanRemoval</strong>
+    - Orphaned 된 엔티티를 DB에서 지우는 용도
+        - Orphaned: 부모에 더 이상 attached 되지 않은 엔티티
+    - <code>@OneToMany</code> 관계의 참조를 끊어버리는 경우 발생</li>
 </ul>
 <h2 id="_1">연관관계 편의 메서드<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23001,20 +22993,16 @@
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>기존 관계들을 고려하면서 setter를 만들어주자<ul>
-<li>무지성으로 그냥 집어넣으면 다 깨져!</li>
-</ul>
-</li>
+<li>기존 관계들을 고려하면서 setter를 만들어주자
+    - 무지성으로 그냥 집어넣으면 다 깨져!</li>
 </ul>
 <h2 id="logging-timezone">Logging Timezone<a class="headerlink" href="#logging-timezone" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://blog.naver.com/tyboss/70102615639</em></li>
 <li>java -jar -Duser.timezone=Asia/Seoul </li>
-<li>JVM에서 시간을 설정하고 돌리는구나... 그러다 보니 로그에서 JVM 기본시간으로 찍혀<ul>
-<li>디폴트 상태로는 GMT라네 </li>
-<li>OS랑 JDK 벤더도 탄다네</li>
-</ul>
-</li>
+<li>JVM에서 시간을 설정하고 돌리는구나... 그러다 보니 로그에서 JVM 기본시간으로 찍혀
+    - 디폴트 상태로는 GMT라네 
+    - OS랑 JDK 벤더도 탄다네</li>
 </ul>
 
 

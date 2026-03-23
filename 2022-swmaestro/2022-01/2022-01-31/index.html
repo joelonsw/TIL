@@ -22931,64 +22931,64 @@
 <h3 id="2022-01-31">2022-01-31<a class="headerlink" href="#2022-01-31" title="Permanent link">&para;</a></h3>
 <h2 id="-two-pointers-sliding-window">알고리즘 문제풀이 - Two Pointers, Sliding Window<a class="headerlink" href="#-two-pointers-sliding-window" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>O(n^2) -&gt; O(n)으로 줄여보자!!!</strong></p>
-</li>
-<li>
-<p><strong>Two Pointers가 필요한 이유?</strong></p>
-</li>
+<li><strong>O(n^2) -&gt; O(n)으로 줄여보자!!!</strong></li>
+</ul>
+<ul>
+<li><strong>Two Pointers가 필요한 이유?</strong><ul>
 <li>Qs. 두 개의 배열을 오름차순으로 정렬해라<ul>
 <li>Sol1. 두 개의 배열을 합치고, Sorting으로 해결 -&gt; O(nlogn)</li>
 <li>Sol2. 두 개의 포인터를 통해, 순회하면서 비교로 해결 -&gt; O(n)</li>
 </ul>
 </li>
-<li>
-<p>n의 크기가 커질수록 O(nlogn)과 O(n)의 차이는 엄청 커진다!</p>
+<li>n의 크기가 커질수록 O(nlogn)과 O(n)의 차이는 엄청 커진다!</li>
+</ul>
 </li>
-<li>
-<p><strong>Sliding Window</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Sliding Window</strong><ul>
 <li>O(n)으로 연속된 합을 구할 수 있음<ul>
 <li>index 기점으로 for문 돌아서 O(n^2)로 검사하지 말고!</li>
 </ul>
 </li>
-<li>
-<p>이전의 값을 저장해두는 공간을 꼭 마련해둘 것!</p>
+<li>이전의 값을 저장해두는 공간을 꼭 마련해둘 것!</li>
+</ul>
 </li>
-<li>
-<p><strong>배열의 안에서 하나의 원소부터 몇 개까지 어떻게 하라</strong></p>
+</ul>
+<ul>
+<li><strong>배열의 안에서 하나의 원소부터 몇 개까지 어떻게 하라</strong><ul>
+<li>이런 문제 조건 만나면 투 포인터, 슬라이딩 윈도우 고려해볼 것!</li>
+</ul>
 </li>
-<li>
-<p>이런 문제 조건 만나면 투 포인터, 슬라이딩 윈도우 고려해볼 것!</p>
-</li>
-<li>
-<p><strong>투 포인터 활용 시 주의사항</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>투 포인터 활용 시 주의사항</strong><ul>
 <li>Array Out Of Bound 주의할 것</li>
 <li>확실한 순서를 세우고 들어갈 것<ul>
 <li>index를 더하고 array에 접근하는지, array에 접근하고 index를 더하는지!</li>
 </ul>
 </li>
-<li>
-<p>임시 저장소를 잘 활용할 것</p>
+<li>임시 저장소를 잘 활용할 것</li>
+</ul>
 </li>
-<li>
-<p><strong>투 포인터 문제 풀이 접근 방법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>투 포인터 문제 풀이 접근 방법</strong><ol>
 <li>lt, rt를 잡는다</li>
 <li>rt를 for문 순회하면서 하나씩 늘린다</li>
 <li>lt를 늘려줘야할 조건에 다다르면, while 문으로 lt를 따라잡는다</li>
 <li>임시변수, 답 등을 철저히 기록해둔다!</li>
+</ol>
+</li>
 </ul>
 <h2 id="jcf-list">JCF List의 구현체<a class="headerlink" href="#jcf-list" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://steady-coding.tistory.com/356</em></li>
-<li><strong>ArrayList</strong></li>
+<li><strong>ArrayList</strong><ul>
 <li>배열을 인스턴스 변수로 들고 있음</li>
 <li>따라서 접근에 O(1)</li>
 <li>원소를 add할 때 배열 용량을 넘어버리면 grow 함수를 호출하게 됨 (자동으로 배열의 사이즈 증가)<ul>
 <li>기존의 용량의 1/2을 추가하여 용량을 키우는 걸 알 수 있음
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minCapacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minCapacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">        </span><span class="c1">// overflow-conscious code</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elementData</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">newCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
@@ -23004,24 +23004,26 @@
 </ul>
 </li>
 <li>Thread Unsafe. 여러 쓰레드가 접근하면 뇌절. <code>Collections.synchronizedList(new ArrayList(...))</code> 사용 요망</li>
-<li>
-<p>정리</p>
-<ul>
+<li>정리<ul>
 <li>추가: add(object) - O(1), add(index, object) - O(n)</li>
 <li>삭제: remove() - O(1), remove(index) - O(n)</li>
 <li>탐색: contains(object) - O(n)</li>
 <li>반환: get() - O(1)</li>
 </ul>
 </li>
-<li>
-<p><strong>LinkedList</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>LinkedList</strong><ul>
 <li>양방향 포인터 구조 링크드 리스트</li>
 <li>정리<ul>
 <li>추가: add(object), add(index, object) - O(n) <em>(작업은 O(1)인데, 노드 탐색까지가 O(n))</em></li>
 <li>삭제: remove(), remove(index) - O(n) <em>(작업은 O(1)인데, 노드 탐색까지가 O(n))</em></li>
 <li>탐색: contains(object) - O(n)</li>
 <li>반환: get() - O(n)</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

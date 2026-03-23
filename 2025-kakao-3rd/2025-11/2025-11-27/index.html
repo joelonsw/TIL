@@ -23004,27 +23004,27 @@
     - 사용자 &lt;-&gt; LDAP/ServiceType &lt;-&gt; 권한
     - 사용자 &lt;-&gt; KAKAO/ServiceType &lt;-&gt; 권한</p>
 <ul>
-<li><strong>장점</strong></li>
+<li><strong>장점</strong><ul>
 <li>관리 효율성: 100명 들어와도 역할만 지정해주면 되기에 관리 쉬움</li>
 <li>오류 감소: 사용자마다 권한 부여보다 실수 줄임</li>
-<li>
-<p>보안 강화: 최소 권한의 원칙 지키기 쉬움</p>
+<li>보안 강화: 최소 권한의 원칙 지키기 쉬움</li>
+</ul>
 </li>
-<li>
-<p><strong>주요 규칙</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>주요 규칙</strong><ol>
 <li>역할 할당: 사용 권한 행사하려면 사용자에게 하나 이상의 활성 역할 할당</li>
 <li>역할 권한 부여: 사용자는 할당된 역할을 맡을 수 있는 권한이 있을 것</li>
 <li>권한 승인: 권한은 역할 할당을 통해 권한이 부여된 사용자에게만 부여</li>
+</ol>
+</li>
 </ul>
 <h2 id="vault-vso-vs-eso">Vault VSO vs ESO<a class="headerlink" href="#vault-vso-vs-eso" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>Vault에 저장된 Secret을 Pod가 안전하게 사용하도록 전달하자!</p>
-</li>
-<li>
-<p><strong>VSO(Vault Secrets Operator)</strong></p>
-</li>
+<li>Vault에 저장된 Secret을 Pod가 안전하게 사용하도록 전달하자!</li>
+</ul>
+<ul>
+<li><strong>VSO(Vault Secrets Operator)</strong><ul>
 <li><em>참고: https://developer.hashicorp.com/vault/docs/deploy/kubernetes/vso</em></li>
 <li>Vault의 기능을 쿠버네티스 네이티브한 방식으로 사용한다네... (CRD)</li>
 <li>Vault 경로의 어떤 정보를 쿠버 시크릿으로 만들지 CRD YAML에 선언하면 VSO가 Vault와 통신해 Secret 생성 + 동기화<ul>
@@ -23042,20 +23042,24 @@
 <li><code>VaultAuth</code>, <code>VaultStaticSecret</code>등 전용 CRD를 통한 Vault 통신</li>
 </ul>
 </li>
-<li>
-<p>절차)</p>
-<ol>
-<li>Namespace/ServiceAccount 생성</li>
+<li>절차)<ol>
+<li>Namespace/ServiceAccount 생성<ul>
 <li>Secret을 사용할 어플리케이션이 위치하는 Namespace 만들자. Namespace에서 사용할 ServiceAccount 만들고</li>
-<li>VSORole 생성</li>
+</ul>
+</li>
+<li>VSORole 생성<ul>
 <li>어떤 Vault에 접근할 수 있는지 정의</li>
+</ul>
+</li>
 <li>VSO CRD 배포</li>
 <li>Kubernetes Secret 최종 확인</li>
 </ol>
 </li>
-<li>
-<p><strong>ESO(External Secrets Operator)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ESO(External Secrets Operator)</strong><ul>
 <li>커뮤니티 주도 개발 프로젝트, Vault 뿐만 아니라 AWS/Google/Azure 등 다양한 외부 시크릿 저장소와 통합 가능</li>
 <li>특징)<ul>
 <li>범용성: Vault 외 여러 클라우드 벤터사의 시크릿 매니저 사용 가능</li>
@@ -23064,24 +23068,26 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h2 id="helm">Helm<a class="headerlink" href="#helm" title="Permanent link">&para;</a></h2>
 <ul>
 <li>패키지 매니저이지만, 실무에서는 템플릿 엔진처럼 씀 : 변수 <code>values.yaml</code>, 뼈대 <code>templates/</code> 분리하는 작업</li>
-<li><strong>Helm으로 만다는 것</strong></li>
+<li><strong>Helm으로 만다는 것</strong><ul>
 <li>쿠버 YAML을 매번 복붙하기 어려움</li>
-<li>
-<p>변하는 부분 (이미지 태그, 포트, 리소스 제한 등) 변수로 빼고, 나머지는 공통 템플릿
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>my-app-chart/
+<li>변하는 부분 (이미지 태그, 포트, 리소스 제한 등) 변수로 빼고, 나머지는 공통 템플릿
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>my-app-chart/
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|-- Chart.yaml          # 메타데이터
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>|-- values.yaml         # 기본 변수값들이 모임
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>|-- templates/          # 구멍 뚫린 YAML들
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    |-- deployment.yaml
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    |-- service.yaml
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>실무 전략</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>실무 전략</strong><ul>
 <li>환경별 <code>values.yaml</code> 분리 <ul>
 <li>환경별로 <code>values-dev.yaml</code> / <code>values-prod.yaml</code> 리소스 다르게</li>
 </ul>
@@ -23090,13 +23096,17 @@
 <li>개발자가 Git에 <code>values.yaml</code> 수정 (이미지 태그 변경)</li>
 <li>ArgoCD Git 변경 감지</li>
 <li>ArgoCD가 helm template 돌려서 쿠버에 Sync</li>
-<li>ArgoCD 같은 툴 쓰면 <code>helm install</code> 직접 칠일 거의 없음</li>
+<li>ArgoCD 같은 툴 쓰면 <code>helm install</code> 직접 칠일 거의 없음<ul>
 <li>ArgoCD가 <code>helm template</code> 수행해서, 완성된 YAML 뽑은 뒤 apply</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Chart.yaml 버전은 변경될 일이 있나?<ul>
 <li>데브옵스 엔지니어가 배포 방식을 바꾸는 (ex. 파드에 사이드카 붙이기) 일이 있을때나 Chart.yaml의 버전이 올라감. </li>
 <li>배포 템플릿 자체가 바뀔때만 Chart.yaml의 버전이 올라감 (이땐 올려줘)</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -23163,7 +23163,7 @@
 <h2 id="architecting-on-aws">Architecting on AWS<a class="headerlink" href="#architecting-on-aws" title="Permanent link">&para;</a></h2>
 <h3 id="_1">아키텍팅 기본 사항<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>AWS란?</strong></li>
+<li><strong>AWS란?</strong><ul>
 <li>가상화를 통한 리소스 생성</li>
 <li>가상화를 통한 리소스를 생성하는데 이를 서비스 형태로 제공해줌!<ul>
 <li>서비스 -&gt; 리소스</li>
@@ -23173,41 +23173,41 @@
 </ul>
 </li>
 <li>Pay as you go </li>
-<li>
-<p>인터넷 기반: "VPC &lt;- EC2"로 구성하자!</p>
+<li>인터넷 기반: "VPC &lt;- EC2"로 구성하자!</li>
+</ul>
 </li>
-<li>
-<p><strong>AWS API</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>AWS API</strong><ul>
 <li>REST API</li>
 <li>COnsole (GUI)</li>
 <li>CLI, SDK</li>
-<li>
-<p>CloudFormation</p>
+<li>CloudFormation</li>
+</ul>
 </li>
-<li>
-<p><strong>리소스 식별</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>리소스 식별</strong><ul>
 <li>ResourceId: EC2 에서 많이 사용 (i-xxxxxx, ami-xxxxxx)</li>
-<li>
-<p>ARN: Amazon Resource Name (IAM 정책 등에서 사용)</p>
+<li>ARN: Amazon Resource Name (IAM 정책 등에서 사용)</li>
+</ul>
 </li>
-<li>
-<p><strong>Managed Service : AWS가 많은 부분 관리</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Managed Service : AWS가 많은 부분 관리</strong><ol>
 <li>Instance 기반 서비스: OS 깔아주고, 필요한 app 깔아주고, volume storage 설치하고 다 묶어서 리소스로 뚝딱 제공 (ex. RDS)</li>
-<li>
-<p>Serverless 서비스: 대부분 공개가 되어있지 않음. 인프라가 어떻게 생겼는지 모르고 그냥 뚝딱 씀. 프로비져닝, 고가용성 -&gt; API 기능만 쓰면 됨 (ex. S3, DynamoDB, Lambda) </p>
+<li>Serverless 서비스: 대부분 공개가 되어있지 않음. 인프라가 어떻게 생겼는지 모르고 그냥 뚝딱 씀. 프로비져닝, 고가용성 -&gt; API 기능만 쓰면 됨 (ex. S3, DynamoDB, Lambda) </li>
+</ol>
 </li>
-<li>
-<p><strong>Global Infra</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Global Infra</strong><ul>
 <li><img alt="" src="../../images/2022-07-20-aws-%EA%B5%AC%EC%84%B1.png" /></li>
 <li><img alt="" src="../../images/2022-07-20-aws-%EA%B5%AC%EC%84%B1-2.png" /></li>
 <li>Region (Seoul) : ap-northeast-2<ul>
-<li>VPC를 만들어주면 여기서 뚝딱</li>
+<li>VPC를 만들어주면 여기서 뚝딱<ul>
 <li>AZ (Availablity Zone) : 가용영역 현재 서울에 4개 있음 (2a, 2b, 2c, 2d)<ul>
-<li>ELB : DNS 이름을 여기다가 붙이는 갬성 &lt;- 엔드유저가 여기에만 접근 뚝딱</li>
+<li>ELB : DNS 이름을 여기다가 붙이는 갬성 &lt;- 엔드유저가 여기에만 접근 뚝딱<ul>
 <li>DC (Data Center)<ul>
 <li>이 안에 EC2</li>
 </ul>
@@ -23216,9 +23216,11 @@
 </li>
 </ul>
 </li>
-<li>
-<p>Edge Location : 지연시간을 짧게, DDoS 방어 등등 410 개 정도...</p>
-<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>Edge Location : 지연시간을 짧게, DDoS 방어 등등 410 개 정도...<ul>
 <li>CloudFront</li>
 <li>Route 53</li>
 <li>Global Accelerator</li>
@@ -23226,26 +23228,30 @@
 <li>Shield</li>
 </ul>
 </li>
-<li>
-<p><strong>AWS Well-Architected Tool</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>AWS Well-Architected Tool</strong><ul>
 <li>특정한 리소스를 얼만큼 어떻게 쓰고 싶은지 정하면 서비스 둑딱 보고서로써 정해줌</li>
 <li>보안/성능/...</li>
+</ul>
+</li>
 <li>실습: AWS API를 사용한 EC2 인스턴스 배포 살펴보기</li>
 </ul>
 <h3 id="_2">계정 보안<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Account &amp; User(IAM)</strong></li>
+<li><strong>Account &amp; User(IAM)</strong><ul>
 <li>Account: Account ID 생성 (숫자 12개), e-mail/password로 가입 =&gt; Root User로 불림<ul>
-<li>Root User는 근데 쓰지 마세요! </li>
+<li>Root User는 근데 쓰지 마세요! <ul>
 <li>최대 권한 가지고 있고, 권한 제어가 불가능 함</li>
 <li>MFA를 가지고 인증을 받고 연결해서 쓰세요!</li>
 </ul>
 </li>
-<li>
-<p>User: IAM User 어카운트</p>
-<ul>
-<li>IAM 서비스는 계정 단위임</li>
+</ul>
+</li>
+<li>User: IAM User 어카운트<ul>
+<li>IAM 서비스는 계정 단위임<ol>
 <li>User <ul>
 <li>영구자격 증명 =&gt; 사원증</li>
 <li>username과 password 세트 =&gt; Console</li>
@@ -23261,33 +23267,37 @@
 </li>
 <li>Role<ul>
 <li>임시 자격 증명 (만료 기간이 있음) =&gt; 방문증</li>
-<li>권한을 위임한다</li>
+<li>권한을 위임한다<ul>
 <li>IAM, Federation User</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>Organizations</strong></p>
+</ol>
 </li>
-<li>통합결제/모든기능</li>
-<li>Organization</li>
-<li>Account<ul>
-<li>management</li>
-<li>member</li>
 </ul>
 </li>
-<li>OU</li>
-<li>
-<p>Policy</p>
+</ul>
+</li>
+</ul>
 <ul>
+<li><strong>Organizations</strong><ul>
+<li>통합결제/모든기능
+1. Organization
+2. Account<ul>
+<li>management</li>
+<li>member
+3. OU
+4. Policy</li>
 <li>scp</li>
 <li>tag policy</li>
 </ul>
 </li>
-<li>
-<p><strong>IAM</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>IAM</strong><ul>
 <li>Access Advisor를 통해 어떤 서비스를 언제 접근했는지 확인할 수 있다</li>
 <li>IAM 권한 경계<ul>
 <li>계층적 방어를 위해 정책을 사용한다</li>
@@ -23303,9 +23313,11 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="1">네트워킹 1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>VPC</strong></li>
+<li><strong>VPC</strong><ul>
 <li>외부 네트워크와 격리시켜 그 안에 EC2를 만든다</li>
 <li>VPC 내부의 인스턴스와는 통신 가능</li>
 <li>VPC 외부(인터넷, 다른 VPC)와는 통신이 불가능</li>
@@ -23318,22 +23330,24 @@
 <li>10.0.0.0/16 =&gt; 2^16개 사용가능</li>
 </ul>
 </li>
-<li>
-<p>다중 VPC의 이점</p>
-<ul>
+<li>다중 VPC의 이점<ul>
 <li>환경별로 VPC를 나눠서 운영할 수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>IP</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>IP</strong><ul>
 <li>IPv4: 8비트 4자리 (32비트)<ul>
-<li>172.31.0.0/16</li>
+<li>172.31.0.0/16<ul>
 <li>/prefix: CIDR (Classless Inter Domain Routing)<ul>
 <li>앞에서 부터 몇 비트가 고정이다</li>
 <li>예시에서는 172.31 이 고정이다</li>
 <li>0.0 은 유동적이다 (0-255, 0-255) </li>
 <li>이러면 2^16 개가 활용할 수 있어</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>필수</li>
@@ -23349,53 +23363,61 @@
 <li>10.22.33.44/32 : 10.22.33.44 특정 ip 지정</li>
 <li>10.22.33.0/24 : 10.22.33.* (2^8)</li>
 <li>10.22.0.0/16 : 10.22.<em>.</em> (2^16)</li>
-<li>될 수 있으면 ip를 많이 만들어두세요!</li>
+<li>될 수 있으면 ip를 많이 만들어두세요!<ul>
 <li>비용 더 나가는 것도 아니니, 큰 범위를 써보세요!</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>공인 ip 주소: 인터넷을 통해 연결 가능</li>
 <li>사설 ip 주소: 인터넷으로 연결 불가능<ul>
-<li>10.0.0.0/16 =&gt; 이거 다 사설!</li>
+<li>10.0.0.0/16 =&gt; 이거 다 사설!<ul>
 <li>10.0.<em>.</em> - 랜덤하게 할당이 된다</li>
+</ul>
+</li>
 <li>인터넷을 통해서 해당 ip를 접근할 수 없어 -&gt; 필요하면 공인 ip 받으세요</li>
 </ul>
 </li>
-<li>
-<p>Elastic IP : stop -&gt; start 해도 공인 ip 그대로 유지</p>
+<li>Elastic IP : stop -&gt; start 해도 공인 ip 그대로 유지</li>
+</ul>
 </li>
-<li>
-<p><strong>서브넷</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>서브넷</strong><ul>
 <li>퍼블릭 서브넷 : 인터넷과 통신이 가능하다</li>
 <li>프라이빗 서브넷 (앱 서브넷, 데이터 서브넷) : 인터넷과 통신이 불가능하다</li>
 <li>CIDR로 나눈 IP를 서브넷으로 나누어 소통할 수 있도록 분리/Grouping 함</li>
-<li>
-<p>서브넷을 통해 VPC 분리하기</p>
-<ul>
-<li>CIDR/22 =&gt; 32bit 중에서 22bit 고정 =&gt; 2^10개의 ip를 나눠쓸 수 있다 (1024개)</li>
+<li>서브넷을 통해 VPC 분리하기<ul>
+<li>CIDR/22 =&gt; 32bit 중에서 22bit 고정 =&gt; 2^10개의 ip를 나눠쓸 수 있다 (1024개)<ul>
 <li>서브넷1~서브넷4 각각 251개씩</li>
 <li>256개가 아닌 이유는 5개는 AWS가 내부적으로 쓰고 있어서 못씀</li>
 </ul>
 </li>
-<li>
-<p><strong>게이트웨이</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>게이트웨이</strong><ul>
 <li>인터넷 게이트웨이 (in/out 모두 가능하게)<ul>
 <li>기본적으로 수평 확장되고 중복되며 고가용성</li>
 </ul>
 </li>
 <li>인터넷 게이트웨이를 만들면 리소스id가 생겨</li>
-<li>
-<p>NAT 게이트웨이 (EIP 필수!)</p>
-<ul>
+<li>NAT 게이트웨이 (EIP 필수!)<ul>
 <li>퍼블릭 서브넷 &lt;-&gt; 프라이빗 서브넷</li>
-<li>프라이빗 서브넷에 다음과 같은 정보 추가</li>
+<li>프라이빗 서브넷에 다음과 같은 정보 추가<ul>
 <li>0.0.0.0/0 - nat-02031</li>
 </ul>
 </li>
-<li>
-<p><strong>라우팅 테이블</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>라우팅 테이블</strong><ul>
 <li>경로 규칙을 설정할 수 있음 (나 어디로 이동할거야!)</li>
 <li>VPC에서는 암시적 라우터가 있음</li>
 <li>라우팅 테이블<ul>
@@ -23412,66 +23434,74 @@
 </ul>
 </li>
 <li>퍼블릭 라우팅 서브넷</li>
-<li>
-<p>프라이빗 라우팅 서브넷</p>
-<ul>
+<li>프라이빗 라우팅 서브넷<ul>
 <li>인터넷 게이트웨이에 대한 정보 필요 X</li>
 </ul>
 </li>
-<li>
-<p><strong>가상 방화벽</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>가상 방화벽</strong><ul>
 <li>NACL (Network ACL)<ul>
 <li>상태 비저장</li>
 <li>허용되어 있음</li>
 </ul>
 </li>
-<li>
-<p>보안그룹 리소스당</p>
-<ul>
+<li>보안그룹 리소스당<ul>
 <li>상태 저장</li>
 <li>들어오는게 차단되어 있음 (허용 규칙 필수)</li>
 <li>허용 규칙만 허락해준다고 생각하면 됨</li>
 </ul>
 </li>
-<li>
-<p><strong>VPC 심층 방어</strong></p>
+</ul>
 </li>
-<li>
-<p>인터넷 게이트웨이 &lt;-&gt; 라우팅 테이블 &lt;-&gt; 네트워크 ACL &lt;-&gt; 퍼블릭 서브넷 &lt;-&gt; 보안 그룹 &lt;-&gt; 인스턴스</p>
+</ul>
+<ul>
+<li><strong>VPC 심층 방어</strong><ul>
+<li>인터넷 게이트웨이 &lt;-&gt; 라우팅 테이블 &lt;-&gt; 네트워크 ACL &lt;-&gt; 퍼블릭 서브넷 &lt;-&gt; 보안 그룹 &lt;-&gt; 인스턴스</li>
+</ul>
 </li>
-<li>
-<p><strong>사용자 지정 보안 그룹 규칙</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>사용자 지정 보안 그룹 규칙</strong><ul>
 <li>인바운드<ul>
 <li>0.0.0.0/0 - 80,443</li>
 </ul>
 </li>
-<li>
-<p>아웃바운드</p>
-<ul>
+<li>아웃바운드<ul>
 <li>db 연결</li>
 </ul>
 </li>
-<li>
-<p><strong>가용 영역</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>가용 영역</strong><ul>
 <li>웹 보안 그룹<ul>
-<li>인바운드 규칙</li>
+<li>인바운드 규칙<ul>
 <li>443 허용</li>
 <li>소스: 0.0.0.0/0</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>앱 보안 그룹<ul>
-<li>인바운드 규칙 </li>
+<li>인바운드 규칙 <ul>
 <li>80 허용</li>
 <li>소스: 웹 티어</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>데이터 보안 그룹<ul>
-<li>인바운드 규칙</li>
+<li>인바운드 규칙<ul>
 <li>3306 허용</li>
 <li>소스: 앱 티어</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23482,13 +23512,13 @@
 </ul>
 <h3 id="_3">컴퓨팅 서비스<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>AWS 컴퓨팅의 진화</strong></li>
-<li>
-<p>물리적 서버 -&gt; 가상화 -&gt; 컨테이너화 -&gt; 서버리스 -&gt; 서버리스 컨테이너화 -&gt; 특화 프로세서</p>
+<li><strong>AWS 컴퓨팅의 진화</strong><ul>
+<li>물리적 서버 -&gt; 가상화 -&gt; 컨테이너화 -&gt; 서버리스 -&gt; 서버리스 컨테이너화 -&gt; 특화 프로세서</li>
+</ul>
 </li>
-<li>
-<p><strong>EC2 인스턴스</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>EC2 인스턴스</strong><ul>
 <li>t3.micro등의 사양: cpu, network, memory 등 결정</li>
 <li>AMI<ul>
 <li>인스턴스 볼륨 템플릿</li>
@@ -23512,8 +23542,10 @@
 </ul>
 </li>
 <li>인스턴스 수명 주기<ul>
-<li>보류 중 -&gt; 실행 중 -&gt; 재부팅 중 -&gt; 중지 중 -&gt; 중지 됨</li>
+<li>보류 중 -&gt; 실행 중 -&gt; 재부팅 중 -&gt; 중지 중 -&gt; 중지 됨<ul>
 <li>-&gt; 종료 중 -&gt; 종료 됨</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>인스턴스 메타데이터<ul>
@@ -23531,48 +23563,50 @@
 <li>인스턴스 유형을 선택해서 만들면, 서버가 랜덤하게 선택되고, 원하는 크기만큼의 가상화를 해서 인스턴스가 제공받아짐</li>
 <li>인스턴스 유형에 따라 스토리지에 따라 제공되는 것이 있음</li>
 <li>stop이 되면 회수되었다가, start하면 또 랜덤하게 만들어짐 -&gt; 이게 ip가 바뀌는 이유</li>
-<li>
-<p>볼륨 영구적 저장을 위해서는 EBS를 쓰세요</p>
+<li>볼륨 영구적 저장을 위해서는 EBS를 쓰세요</li>
+</ul>
 </li>
-<li>
-<p><strong>Amazon EBS</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Amazon EBS</strong><ul>
 <li>볼륨이 EC2 인스턴스와 돌깁적으로 지속</li>
 <li>가용 영역 내에서 정의됨 </li>
 <li>99.999% 가용성</li>
 <li>네트워크를 통해 인스턴스의 볼륨을 연결해줌 (유실되지 않도록)</li>
 <li>인스턴스에 따라 볼륨 여러개 붙일 수 있음</li>
 </ul>
+</li>
+</ul>
 <h3 id="_4">스토리지<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>AWS 데이터 빌딩 블록</strong></li>
+<li><strong>AWS 데이터 빌딩 블록</strong><ul>
 <li>데이터 이동</li>
-<li>
-<p>데이터 보안 및 관리</p>
-<ul>
+<li>데이터 보안 및 관리<ul>
 <li>S3/EFS: 3개의 AZ에 걸쳐서 중복 저장됨</li>
 </ul>
 </li>
-<li>
-<p><strong>스토리지</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>스토리지</strong><ul>
 <li>Block(EC2): EBS, 파일을 스토리지에 저장, ~16TB, EC2의 디스크</li>
 <li>File(EC2): EFS, FSx, 트리구조, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 파일을 공유해서 저장</li>
-<li>
-<p>Object(http, https): S3, S3 Glacier, 파일의 키/메타데이터 등을 오브젝트로 저장, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 정적 데이터</p>
-<ul>
+<li>Object(http, https): S3, S3 Glacier, 파일의 키/메타데이터 등을 오브젝트로 저장, 무제한, AZ레벨의 서비스 (3개 AZ에 저장), 정적 데이터<ul>
 <li>AWS에서도 S3 많이 씀... 빅데이터, AMI 등등</li>
 </ul>
 </li>
-<li>
-<p><strong>EBS</strong></p>
+</ul>
 </li>
-<li>
-<p>EBS + EC2 =&gt; AutoScaling</p>
+</ul>
+<ul>
+<li><strong>EBS</strong><ul>
+<li>EBS + EC2 =&gt; AutoScaling</li>
+</ul>
 </li>
-<li>
-<p><strong>S3</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>S3</strong><ul>
 <li>버전 관리<ul>
 <li>동일한 버킷에 여러 객체 버전을 유지할 수 있음</li>
 <li>객체를 이전 버전 또는 특정 버전으로 복원 가능</li>
@@ -23603,26 +23637,30 @@
 <li>개별 조각에서 객체를 재생성할 수 있도록, 조각조각 나누어서 객체 전달 &amp; 저장</li>
 </ul>
 </li>
-<li>
-<p>비용 요소</p>
-<ul>
-<li>다음에 대해 사용한 만큼만 지불</li>
+<li>비용 요소<ul>
+<li>다음에 대해 사용한 만큼만 지불<ul>
 <li>다른 리전 또는 인터넷으로 전송</li>
-<li>다음에 대해선 지불 필요 없음</li>
+</ul>
+</li>
+<li>다음에 대해선 지불 필요 없음<ul>
 <li>동일 리전의 EC2, CloudFront로 전송</li>
 </ul>
 </li>
-<li>
-<p><strong>EFS</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>EFS</strong><ul>
 <li>확장 가능하고 탄력적인 파일 시스템을 위해 EFS 선택</li>
 <li>NFSv4 프로토콜을 사용하여 연결</li>
-<li>
-<p>EC2 인스턴스 전체의 파일 시스템에 동시에 액세스</p>
+<li>EC2 인스턴스 전체의 파일 시스템에 동시에 액세스</li>
+</ul>
 </li>
-<li>
-<p><strong>Snowball</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Snowball</strong><ul>
 <li>Snow Family -&gt; 우리 회사에 데이터 센터가 있는데, 이걸 AWS로 옮겨야 해. <ul>
 <li>많은 데이터들을 옮겨올라면 오래 걸리겠지? </li>
 <li>디바이스가 데이터센터로 가는거야 연결 뚝딱 해서 다 전달해서 AWS 데이터 센터로 오는 것 =&gt; s3에 저장</li>
@@ -23630,12 +23668,12 @@
 </li>
 <li>Snowcone</li>
 <li>Snowball</li>
-<li>
-<p>Snowmobile</p>
+<li>Snowmobile</li>
+</ul>
 </li>
-<li>
-<p><strong>VPC 복습</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>VPC 복습</strong><ul>
 <li><img alt="" src="../../images/2022-07-22-vpc.png" /></li>
 <li>VPC Endpoint: S3 버킷에 대해 인터넷을 통해 접근하는 것이 아닌 aws 네트워크로 접근 가능<ul>
 <li>NAT, 인터넷 게이트웨이 없어도 S3 접근이 가능함</li>
@@ -23644,7 +23682,7 @@
 <li>VPC를 만들어 우리의 "안전한" 서버를 구축해보자<ul>
 <li>인터넷 상에 EC2 만들어두면 공격당하기 딱 좋음</li>
 <li>VPC의 CIDR 지정 (10.0.0.0/16)</li>
-<li>서브넷을 상세로 만들자!</li>
+<li>서브넷을 상세로 만들자!<ul>
 <li>라우팅 테이블에 기본적으로 10.0.0.0/16 만 매핑되어 있기에 VPC 내부에서만 통신 가능</li>
 <li>따라서 public 서브넷으로 바꾸려면 인터넷 게이트웨이 정보를 매핑해주자<ul>
 <li>0.0.0.0/0 igw-id</li>
@@ -23659,30 +23697,34 @@
 </li>
 </ul>
 </li>
-<li>
-<p>VPC Endpoint</p>
-<ul>
+</ul>
+</li>
+<li>VPC Endpoint<ul>
 <li>Gateway Endpoint: S3, DynamoDB =&gt; Route Table</li>
 <li>Interface Endpoint: S3 =&gt; ENI (Private IP)</li>
 </ul>
 </li>
-<li>
-<p><strong>Transit Gateway</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Transit Gateway</strong><ul>
 <li>Route Table</li>
 <li>on-premise 트래픽 전송</li>
 </ul>
+</li>
+</ul>
 <h3 id="_5">데이터베이스 서비스<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>AWS 데이터베이스 서비스</strong></li>
+<li><strong>AWS 데이터베이스 서비스</strong><ul>
 <li>amazon redshift: 데이터웨어</li>
 <li>amazon elastiCache: 캐싱</li>
-<li>
-<p><img alt="" src="../../images/2022-07-21-sql-nosql.png" /></p>
+<li><img alt="" src="../../images/2022-07-21-sql-nosql.png" /></li>
+</ul>
 </li>
-<li>
-<p><strong>RDS</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>RDS</strong><ul>
 <li>다중 AZ 배포<ul>
 <li>다른 가용 영역의 대기 DB 인스턴스에 데이터를 복제</li>
 <li>읽기 전용 시나리오에서는 사용되지 않음</li>
@@ -23691,26 +23733,30 @@
 <li>endpoint(read) - 비동기</li>
 </ul>
 </li>
-<li>
-<p>읽기 전용 복제본</p>
-<ul>
+<li>읽기 전용 복제본<ul>
 <li>Read Replica를 적용하여 다음으로 복제 가능</li>
 </ul>
 </li>
-<li>
-<p><strong>DynamoDB(NoSQL)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>DynamoDB(NoSQL)</strong><ul>
 <li>Serverless</li>
 <li>3AZ에 걸쳐서 저장</li>
 <li>완전관리형 NoSQL</li>
 <li>임시 데이터 (온라인 장바구니 등)</li>
 <li>테이블<ul>
 <li>어트리뷰트 K-V</li>
-<li>복합 기본키: 파티션 키, 정렬 키</li>
+<li>복합 기본키: 파티션 키, 정렬 키<ul>
 <li>고르게 분포할 수 있는 파티션 키(PK)를 잡아주세요!</li>
+</ul>
+</li>
 <li>필수 키 값 액세스 패턴, 파티션 키가 데이터 분산을 결정, 정렬 키가 다양한 쿼리 기능을 제공</li>
-<li>Primary Key: 중복 x</li>
+<li>Primary Key: 중복 x<ul>
 <li>partition key</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>처리량: 서버리스다 보니 API 액세스별로 비용 발생</li>
@@ -23723,12 +23769,12 @@
 <li>글로벌 테이블 지원: 리전 간 복제를 자동화</li>
 </ul>
 </li>
-<li>
-<p>테이블이 key-value 속성으로 되어있음 -&gt; 아이템이라고 칭함 (key-value)</p>
+<li>테이블이 key-value 속성으로 되어있음 -&gt; 아이템이라고 칭함 (key-value)</li>
+</ul>
 </li>
-<li>
-<p><strong>Aurora</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Aurora</strong><ul>
 <li>설치형 EC2 DB</li>
 <li>스토리지는 3개의 가용영역에 분산된 수백개의 스토리지 노드에 스트라이프 됨</li>
 <li>3개의 가용 영역에서 각각 2개의 사본을 유지함</li>
@@ -23745,68 +23791,74 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="_6">모니터링 및 스케일링<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>아키텍처 모니터링 및 크기 조정</strong></li>
+<li><strong>아키텍처 모니터링 및 크기 조정</strong><ul>
 <li>Auto Scaling 그룹</li>
-<li>
-<p>ELB - Auto Scaling과 함께 쓴다</p>
+<li>ELB - Auto Scaling과 함께 쓴다</li>
+</ul>
 </li>
-<li>
-<p><strong>Cloudwatch</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Cloudwatch</strong><ul>
 <li>지표 및 로그를 거의 실시간으로 수집</li>
 <li>모니터링 데이터를 한 위치에서 액세스</li>
 <li>지표라고 하는 것을 쓴다 -&gt; CPU 백분율, 읽기 처리량, 쓰기 처리량 -&gt; 값들이 수집이 되어서 임계치를 설정할 수 있음 -&gt; 임계치 미만으로는 경보 울림</li>
 <li>지표와 경보!</li>
-<li>
-<p>로그 유형</p>
+<li>로그 유형</li>
+</ul>
 </li>
-<li>
-<p><strong>경보 구성 요소</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>경보 구성 요소</strong><ul>
 <li>네임스페이스/지표/타임스탬프/측정기준</li>
-<li>
-<p>AWS-EC2/CPUUtilization/dateTime/InstanceID</p>
+<li>AWS-EC2/CPUUtilization/dateTime/InstanceID</li>
+</ul>
 </li>
-<li>
-<p><strong>CloudWatch Events 및 EventBridge</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>CloudWatch Events 및 EventBridge</strong><ul>
 <li>메시지를 보내 환경에 대응</li>
 <li>함수를 활성화하거나 작업을 시작</li>
-<li>
-<p>상태 정보를 캡쳐</p>
+<li>상태 정보를 캡쳐</li>
+</ul>
 </li>
-<li>
-<p><strong>로드밸런서</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>로드밸런서</strong><ul>
 <li>로드밸런서 <ul>
-<li>로드밸런서가 어디에 있느냐에 따라 크게 두가지 분류</li>
+<li>로드밸런서가 어디에 있느냐에 따라 크게 두가지 분류<ul>
 <li>Internet Facing: Public Subnet</li>
 <li>Internal: Private Subnet</li>
-<li>어떤 트래픽을 분산시켜주느냐에 따라서 써야할 로드밸런서가 달라짐</li>
+</ul>
+</li>
+<li>어떤 트래픽을 분산시켜주느냐에 따라서 써야할 로드밸런서가 달라짐<ul>
 <li>ALB(L7), NLB(L4), GWLB(L3)</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>(규칙)리스너 -- (규칙)리스너(규칙)</li>
 <li>ALB(L7), NLB(L4), GWLB(L3), CLB(X)</li>
 <li>internet-facing, internet</li>
 <li>listener - protocol(port), 규칙</li>
-<li>
-<p>target group - ec2, ecs/eks, on-premise</p>
+<li>target group - ec2, ecs/eks, on-premise</li>
+</ul>
 </li>
-<li>
-<p><strong>ELB 기능</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>ELB 기능</strong><ul>
 <li>자동으로 트래픽을 여러 대상에 분산</li>
 <li>고가용성을 제공</li>
 <li>보안기능을 통합</li>
-<li>
-<p>상태확인을 실행</p>
+<li>상태확인을 실행</li>
+</ul>
 </li>
-<li>
-<p><strong>Auto Scaling</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Auto Scaling</strong><ul>
 <li>AWS Auto Scaling<ul>
 <li>EC2, DynamoDB, Aurora 등 여러 서비스에 걸쳐 짧은 간격으로 여러 리소스에 대한 어플리케이션 스케일링 제공</li>
 </ul>
@@ -23824,17 +23876,17 @@
 <li>어디서, 얼마나 필요한가? </li>
 <li>VPC 및 서브넷</li>
 <li>로드 밸런서</li>
-<li>정의</li>
+<li>정의<ul>
 <li>최소 인스턴스</li>
 <li>최대 인스턴스</li>
 <li>원하는 용량</li>
+</ul>
+</li>
 <li>예약 온디맨드</li>
 </ul>
 </li>
 <li>시작 템플릿(컴퓨팅 용량 등), 그룹 구성 요소(네트워크/min-max), 언제 얼마동안 필요한가</li>
-<li>
-<p>고려사항</p>
-<ul>
+<li>고려사항<ul>
 <li>여러 유형의 오토 스케일링을 결합할 수 있음</li>
 <li>아키텍처에서 다른 유형의 스케일링이 필요할 수 있음</li>
 <li>일부 아키텍처의 경우 둘 이상의 지표를 기준으로 스케일링 해야함</li>
@@ -23842,12 +23894,14 @@
 <li>Amazon EC2 Auto Scaling이 인스턴스를 시작/종료시 사용자 지정 작업을 자동화</li>
 </ul>
 </li>
-<li>
-<p><strong>VPC</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>VPC</strong><ul>
 <li><img alt="" src="../../images/2022-07-21-aws-infra.png" /></li>
 <li>Seoul Region<ul>
-<li>VPC(10.0.0.0/16) =&gt; 기본 라우팅 테이블 dest-target</li>
+<li>VPC(10.0.0.0/16) =&gt; 기본 라우팅 테이블 dest-target<ul>
 <li>Public Subnet =&gt; 서브넷마다 라우팅 테이블을 만들어주는 것을 추천 + 연결해주기<ul>
 <li>public r.t</li>
 <li>10.0.0.0/16 - local</li>
@@ -23862,27 +23916,31 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
 <li>VPC endpoint를 만들수도 있음</li>
 <li>On-premise와 소통하기 위해 On-premise는 CGW, VPC에는 VGW</li>
-<li>
-<p>Transit Gateway</p>
-<ul>
+<li>Transit Gateway<ul>
 <li>VPC/VPN/Direct Connect 게이트웨이/Transit Gateway 피어링</li>
 </ul>
 </li>
-<li>
-<p><strong>Route 53</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Route 53</strong><ol>
 <li>도메인 이름을 IP주소로 확인</li>
 <li>도메인 이름을 등록 또는 이전</li>
-<li>대기 시간, 상태 확인 및 기타 기준에 따라 요청을 라우팅</li>
-<li><img alt="" src="../../images/2022-07-21-route53.png" /></li>
-<li>ALB: Round Robin</li>
-<li>NLB: Hash Algorithm</li>
+<li>대기 시간, 상태 확인 및 기타 기준에 따라 요청을 라우팅
+- <img alt="" src="../../images/2022-07-21-route53.png" />
+- ALB: Round Robin
+- NLB: Hash Algorithm</li>
+</ol>
+</li>
 </ul>
 <h3 id="_7">자동화<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>배포 자동화(Infrastructure as Code)</strong></li>
+<li><strong>배포 자동화(Infrastructure as Code)</strong><ul>
 <li>AWS Elastic Beanstalk<ul>
 <li>EC2 정도만 자동화 해줌, VPC/IAM 이런거는 못함</li>
 <li>인프라를 프로비저닝하고 운영</li>
@@ -23895,15 +23953,15 @@
 <li>한땀한땀 만들자</li>
 </ul>
 </li>
-<li>
-<p>AWS Systems Manager</p>
-<ul>
+<li>AWS Systems Manager<ul>
 <li>patch를 쉽게 </li>
 </ul>
 </li>
-<li>
-<p><strong>AWS CloudFormation</strong> </p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>AWS CloudFormation</strong> <ul>
 <li>Infrastructure as Code -&gt; JSON, YAML</li>
 <li>IaC<ul>
 <li>아키텍처 템플릿 -&gt; CloudFormation 엔진 -&gt; 아키텍처 스택 -&gt; VPC/Subnet/SG/EC2</li>
@@ -23920,41 +23978,43 @@
 <li>중첩 스택 및 교차 스택 지원</li>
 </ul>
 </li>
-<li>
-<p>변경 세트</p>
-<ul>
+<li>변경 세트<ul>
 <li>원래 스택 --(변경 세트 생성)--&gt; 변경 세트 --(변경 세트 보기)--&gt; 변경 세트 --(변경 세트 구현)--&gt; CloudFormation</li>
 </ul>
 </li>
-<li>
-<p><strong>여러 템플릿 사용</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>여러 템플릿 사용</strong><ul>
 <li>프론트: 웹 인터페이스, 관리자 인터페이스, 분석 대시보드</li>
 <li>백엔드: 고객, 캠페인, 제품, 마케팅 자료, 분석</li>
 <li>공유: 데이터베이스, 일반 모니터링 또는 경보, 서브넷, 보안 그룹</li>
 <li>기본 네트워크: VPC, 인터넷 게이트웨이, VPN, NAT 게이트웨이</li>
-<li>
-<p>아이덴티티: IAM 사용자, 그룹, 역할</p>
+<li>아이덴티티: IAM 사용자, 그룹, 역할</li>
+</ul>
 </li>
-<li>
-<p><strong>CDK(Cloud Development Kit)</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>CDK(Cloud Development Kit)</strong><ul>
 <li>지원되는 언어를 사용하여 템플릿을 생성</li>
 <li>자동 완성 및 인라인 문서를 지원</li>
 <li>동일한 기본값 및 재사용 가능한 클래스</li>
-<li>
-<p>다양한 환경을 프로비저닝</p>
+<li>다양한 환경을 프로비저닝</li>
+</ul>
 </li>
-<li>
-<p><strong>AWS Systems Manager</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>AWS Systems Manager</strong><ul>
 <li>똑같은 ec2 인스턴스 몇백대 만들었어,,, 근데 patch도 해야하고, 실행하거나 해야한단 말이지? 수동으로 하기 쉽지가 않아</li>
 <li>각 ec2에 에이전트 만들어두고 적용</li>
 <li>한꺼번에 처리하기 </li>
 </ul>
+</li>
+</ul>
 <h3 id="_8">서버리스<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>마이크로 서비스</strong></li>
+<li><strong>마이크로 서비스</strong><ul>
 <li>모놀리식의 문제<ul>
 <li>데베 하나 씀 =&gt; 하나의 모듈에서 바꿔버리면 딴 모듈 뇌절</li>
 <li>배포주기 길어짐</li>
@@ -23965,53 +24025,59 @@
 <li>A 모듈을 만들때 가장 좋은 언어로 서비스-데베 뚝딱</li>
 <li>B 모듈을 만들때 가장 좋은 언어로 서비스-데베 뚝딱</li>
 <li>따로따로 배포</li>
-<li>같은 기능이 필요하다면 API 호출 뚝딱</li>
+<li>같은 기능이 필요하다면 API 호출 뚝딱<ul>
 <li>http 기반의 restapi</li>
 <li>api 게이트웨이 </li>
+</ul>
+</li>
 <li>배포주기가 짧아짐</li>
 <li>VM(EC2), Container(ECS/EKS), Serverless(Lambda)를 통해서 msa를 손쉽게 적용할 수 있음</li>
-<li>실행환경</li>
+<li>실행환경<ul>
 <li>App</li>
 <li>Runtime</li>
 <li>OS</li>
 <li>KVM</li>
-<li>호출시 </li>
+</ul>
+</li>
+<li>호출시 <ul>
 <li>runtime</li>
 <li>memory -&gt; cpu/network 비례</li>
 <li>timeout</li>
 <li>role</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>모놀리식 (3tier)<ul>
 <li>user -&gt; web-&gt;app-&gt;db</li>
 </ul>
 </li>
-<li>
-<p>msa</p>
-<ul>
+<li>msa<ul>
 <li>user -&gt; A-&gt;B-&gt;C-&gt;D-&gt;db</li>
 </ul>
 </li>
-<li>
-<p><strong>ec2 s3 마이크로서비스</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>ec2 s3 마이크로서비스</strong><ul>
 <li><img alt="" src="../../images/2022-07-22-ec2-se.png" /></li>
-<li>
-<p>EC2 App --(API with 인증/권한 IAM)--&gt; S3</p>
+<li>EC2 App --(API with 인증/권한 IAM)--&gt; S3</li>
+</ul>
 </li>
-<li>
-<p><strong>솔루션</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>솔루션</strong><ul>
 <li>API Gateway</li>
 <li>Amazon SQS: 1:1 message 전달 polling</li>
 <li>Amazon SNS: 1:N message 자동 전달 (구독자)</li>
 <li>Kinesis</li>
-<li>
-<p>Step Functions</p>
+<li>Step Functions</li>
+</ul>
 </li>
-<li>
-<p><strong>Amazon SNS</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Amazon SNS</strong><ul>
 <li>구독자에게 알려준다<ul>
 <li>Email</li>
 <li>SMS</li>
@@ -24022,18 +24088,18 @@
 <li>kinesis data firehose</li>
 </ul>
 </li>
-<li>
-<p>특성</p>
-<ul>
+<li>특성<ul>
 <li>게시된 단일 메시지</li>
 <li>회수 옵션이 없음</li>
 <li>http 또는 https 요청</li>
 <li>표준 또는 FIFO 주제</li>
 </ul>
 </li>
-<li>
-<p><strong>Amazon Simple Queue Service</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Amazon Simple Queue Service</strong><ul>
 <li>비동기식 처리를 사용<ul>
 <li>Loosely Coupled</li>
 </ul>
@@ -24042,25 +24108,25 @@
 <li>버퍼링 및 배치 작업</li>
 <li>요청 오프로딩</li>
 <li>오토 스케일링</li>
-<li>
-<p>긴폴링</p>
-<ul>
+<li>긴폴링<ul>
 <li>전체 샘플링해서 max =&gt; 10개 대기</li>
 </ul>
 </li>
-<li>
-<p><strong>Lambda (Serverless)</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Lambda (Serverless)</strong><ul>
 <li>직접 호출</li>
 <li>예약</li>
 <li>이벤트</li>
-<li>
-<p>call =&gt; function </p>
-<ul>
-<li>cloudwatch</li>
+<li>call =&gt; function <ul>
+<li>cloudwatch<ul>
 <li>metrics</li>
 <li>logs</li>
-<li>x-ray</li>
+</ul>
+</li>
+<li>x-ray<ul>
 <li>trace</li>
 <li>runtime-7가지</li>
 <li>memory-&gt; cpu, network비례</li>
@@ -24068,41 +24134,45 @@
 <li>role+알파</li>
 </ul>
 </li>
-<li>
-<p><strong>EC2 vs Lambda</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>EC2 vs Lambda</strong><ul>
 <li>EC2: 언제든지 비용이 발생 at Running status</li>
-<li>
-<p>Lambda: S3, DynamoDB, SQS, SNS</p>
+<li>Lambda: S3, DynamoDB, SQS, SNS</li>
+</ul>
 </li>
-<li>
-<p><strong>서버리스</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>서버리스</strong><ul>
 <li>프로비저닝하거나 관리할 인프라가 없음</li>
 <li>종량제 요금</li>
 <li>내장된 보안, 고가용성 보장</li>
-<li>
-<p>람다, 파게이트, API Gateway, S3, DynamoDB, AUrora, Kinesis, Step Functions</p>
+<li>람다, 파게이트, API Gateway, S3, DynamoDB, AUrora, Kinesis, Step Functions</li>
+</ul>
 </li>
-<li>
-<p><strong>API Gateway</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>API Gateway</strong><ul>
 <li>통합 API 프론트엔드 생성</li>
 <li>백엔드에 DDoS 보호 및 제한 기능 제공</li>
 <li>백엔드에 대한 요청을 인증 및 권한 부여</li>
 <li>서드 파티 개발자에 의해 api 사용을 조절, 측정 및 수익화</li>
-<li>
-<p>샘플 아키텍쳐</p>
-<ul>
+<li>샘플 아키텍쳐<ul>
 <li>POST /write =&gt; lambda1</li>
 <li>GET /list =&gt; lambda2</li>
 <li>DELETE / =&gt; lambda3</li>
 <li>makes serverless architecture</li>
 </ul>
 </li>
-<li>
-<p>Amazon SNS 및 Amazon SQS</p>
+</ul>
 </li>
+</ul>
+<ul>
+<li>Amazon SNS 및 Amazon SQS<ul>
 <li>Amazon SNS<ul>
 <li>메시지 지속성: 아니요</li>
 <li>전송 메커니즘: 푸시</li>
@@ -24110,18 +24180,18 @@
 <li>배포 모델: 일대다</li>
 </ul>
 </li>
-<li>
-<p>Amazon SQS</p>
-<ul>
+<li>Amazon SQS<ul>
 <li>메시지 지속성: 예</li>
 <li>전송 메커니즘: 폴링</li>
 <li>생산자 및 소비자: </li>
 <li>배포 모델: 일대일</li>
 </ul>
 </li>
-<li>
-<p><strong>Kinesis</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Kinesis</strong><ul>
 <li>실시간 데이터 수집 및 분석을 위한 서비스</li>
 <li>Amazon Kinesis Data Streams<ul>
 <li>분석을 위해 데이터 스트림을 수집 및 저장</li>
@@ -24143,67 +24213,75 @@
 <li>SQL 또는 Apache Flink로 데이터 스트림을 분석</li>
 </ul>
 </li>
-<li>
-<p>Amazon Kinesis Video Streams</p>
-<ul>
+<li>Amazon Kinesis Video Streams<ul>
 <li>분석을 위해 비디오 스트림을 수집 및 저장</li>
 </ul>
 </li>
-<li>
-<p><strong>Step Functions</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Step Functions</strong><ul>
 <li>시작 -&gt; StartState(lambda#1) -&gt; FinalState(lambda#2) -&gt; 종료</li>
 <li>실제 코드가 바뀌는게 아니라 실행 순서만 바꿔줌으로써 유연성 제공</li>
 <li>JSON 형태로 만들어 람다 연결</li>
 </ul>
+</li>
+</ul>
 <h3 id="_9">컨테이너<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>마이크로서비스</strong></li>
+<li><strong>마이크로서비스</strong><ul>
 <li>해당하는 기능을 독립 서비스로 구성한 어플리케이션<ul>
 <li>자율 개발을 지원</li>
 <li>전문화가 가능</li>
 </ul>
 </li>
 <li>마이크로서비스 아키텍팅<ul>
-<li>하나로 모든 것을 충족한다는 방식 따르지 않아! 언어, 인프라 각각 달라도 상관이 없어요!</li>
+<li>하나로 모든 것을 충족한다는 방식 따르지 않아! 언어, 인프라 각각 달라도 상관이 없어요!<ul>
 <li>example.com/users -&gt; Lambda</li>
 <li>example.com/topics -&gt; EC2</li>
 <li>example.com/messages -&gt; ECS</li>
 </ul>
 </li>
-<li>
-<p>문제는...</p>
-<ul>
+</ul>
+</li>
+<li>문제는...<ul>
 <li>어디서 문제가 발생했는지 찾기가 쉽지가 않아</li>
-<li>AWS X-Ray: 현대적 어플리케이션 분석 &amp; 디버깅</li>
+<li>AWS X-Ray: 현대적 어플리케이션 분석 &amp; 디버깅<ul>
 <li>데이터 수집</li>
 <li>트레이스 기록</li>
 <li>서비스 맵 확인</li>
 <li>문제 분석</li>
 </ul>
 </li>
-<li>
-<p><strong>컨테이너</strong></p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>컨테이너</strong><ul>
 <li>장점<ul>
 <li>반복 가능</li>
 <li>독립적 환경</li>
-<li>VM보다 더 빠른 가동/중단 속도</li>
+<li>VM보다 더 빠른 가동/중단 속도<ul>
 <li>VM은 하드웨어 가상화 with hypervisor</li>
+</ul>
+</li>
 <li>이동성</li>
 <li>확장성</li>
 </ul>
 </li>
-<li>
-<p>컨테이너와 가상 머신</p>
-<ul>
+<li>컨테이너와 가상 머신<ul>
 <li>가상 머신은 격리되어 있지만 동일한 OS 및 바이너리/라이브러리를 공유하지 않음</li>
 <li>컨테이너는 격리되어 있지만 OS를 공유하고 필요한 경우 바이너리/라이브러리를 공유</li>
 </ul>
 </li>
-<li>
-<p><strong>Container</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Container</strong><ul>
 <li>Container Image<ul>
 <li>(App Code/Runtime/Config/Library) =&gt; Image로 만들어두고 =&gt; 이를 기반으로 컨테이너 만들기</li>
 <li>여러개로 재사용 가능, 백업도 가능</li>
@@ -24213,43 +24291,49 @@
 </ul>
 </li>
 <li>Container Image --(Docker CLI)--&gt; Container--&gt; EC2<ul>
-<li>여전히 EC2 쓰는것은 똑같아 배포 방식 뚝딱 다 만들어야해</li>
+<li>여전히 EC2 쓰는것은 똑같아 배포 방식 뚝딱 다 만들어야해<ul>
 <li>CPU/Memory/Network 다 필요하자나!</li>
-<li>인프라 설정 싫어! 그러면 서버리스 써야겠지? =&gt; Fargate</li>
+</ul>
+</li>
+<li>인프라 설정 싫어! 그러면 서버리스 써야겠지? =&gt; Fargate<ul>
 <li>컨테이너 전용 서버리스 서비스</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>App Container - Log Container 인프라 설계<ul>
-<li>컨테이너 묶어서 관리하자! 오케스트레이션! ECS!</li>
+<li>컨테이너 묶어서 관리하자! 오케스트레이션! ECS!<ul>
 <li>ECS -&gt; Task, k8s -&gt; Pod 하고 EC2에 배치<ul>
 <li>[App Container] [Log Container]</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p>EKS </p>
-<ul>
+</ul>
+</li>
+<li>EKS <ul>
 <li>EC2에 많은 사람들이 쿠버네티스 설치해서 쓰더라...</li>
 <li>그럴거면 AWS가 관리포인트 줄어들게 해서 제공해줄게!</li>
 </ul>
 </li>
-<li>
-<p><strong>Amazon ECR</strong></p>
+</ul>
 </li>
-<li>
-<p>컨테이너 이미지를 저장해줌</p>
+</ul>
+<ul>
+<li><strong>Amazon ECR</strong><ul>
+<li>컨테이너 이미지를 저장해줌</li>
+</ul>
 </li>
-<li>
-<p><strong>Amazon ECS</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Amazon ECS</strong><ul>
 <li>컨테이너 만들어서 배포해줌</li>
-<li>
-<p>EC2 만들거나 Fargate에서 컨테이너 시작</p>
+<li>EC2 만들거나 Fargate에서 컨테이너 시작</li>
+</ul>
 </li>
-<li>
-<p><strong>쿠버네티스</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>쿠버네티스</strong><ul>
 <li>클러스터는 노드라고 하는 일련의 작업자 머신으로 컨테이너화된 어플리케이션 실행</li>
 <li>컨트롤 플레인<ul>
 <li>api 서버</li>
@@ -24259,29 +24343,31 @@
 </ul>
 </li>
 <li>데이터 플레인<ul>
-<li>작업자 노드</li>
+<li>작업자 노드<ul>
 <li>포드</li>
 <li>컨테이너 런타임 엔진</li>
 <li>kubelet</li>
 <li>kube-proxy</li>
 </ul>
 </li>
-<li>
-<p>EKS =&gt; 쿠버네티스 </p>
+</ul>
 </li>
-<li>
-<p><strong>AWS Fargate</strong></p>
+<li>EKS =&gt; 쿠버네티스 </li>
+</ul>
 </li>
-<li>
-<p>VPC도 필요없어 다 관리해줘 aws가!</p>
+</ul>
+<ul>
+<li><strong>AWS Fargate</strong><ul>
+<li>VPC도 필요없어 다 관리해줘 aws가!</li>
+</ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-07-22-computing.jpeg" /></p>
-</li>
+</ul>
+<ul>
+<li><img alt="" src="../../images/2022-07-22-computing.jpeg" /></li>
 </ul>
 <h3 id="_10">엣지 서비스<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>엣지 서비스 아키텍처</strong></li>
+<li><strong>엣지 서비스 아키텍처</strong><ul>
 <li>쉴드 스탠다드</li>
 <li>AWS WAF (L7)<ul>
 <li>API 설정</li>
@@ -24289,52 +24375,54 @@
 </li>
 <li>엣지 서비스는 IP를 계속 변경시킨다</li>
 <li>DDoS 공격을 방어하는 서비스를 제공한다</li>
-<li>
-<p>온프레미스에 장비가 들어감</p>
+<li>온프레미스에 장비가 들어감</li>
+</ul>
 </li>
-<li>
-<p><strong>AWS 엣지 정의</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>AWS 엣지 정의</strong><ul>
 <li>AWS 리전</li>
 <li>AWS 엣지 로케이션<ul>
 <li>410개 이상이 제공됨 =&gt; 늘어나는 속도가 매우 빠름</li>
 </ul>
 </li>
-<li>
-<p>AWS 아웃포스트</p>
+<li>AWS 아웃포스트</li>
+</ul>
 </li>
-<li>
-<p><strong>Amazon CloudFront</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Amazon CloudFront</strong><ul>
 <li>글로벌 컨텐츠 전송 네트워크</li>
 <li>와프와 쉴드 통합</li>
 <li>정적/동적 컨텐츠 캐싱</li>
 <li>내장된 보안 기능</li>
-<li>
-<p>유료/무료 회원 구분해서 엔드포인트에서 어디로 라우팅 시킬지 지정할 수도 있음</p>
+<li>유료/무료 회원 구분해서 엔드포인트에서 어디로 라우팅 시킬지 지정할 수도 있음</li>
+</ul>
 </li>
-<li>
-<p><strong>CloudFront 캐싱</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>CloudFront 캐싱</strong><ol>
 <li>요청이 최적의 엣지 로케이션으로 라우팅됨</li>
 <li>캐시되지 않은 콘텐츠가 오리진으로부터 검색</li>
 <li>오리진 컨텐츠가 캐싱을 위해 클라우드 프론트 엣지 로케이션으로 전송됨</li>
-<li>
-<p>데이터가 사용자에게 전송</p>
+<li>데이터가 사용자에게 전송</li>
+</ol>
 </li>
-<li>
-<p><strong>CloudFront 구성</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>CloudFront 구성</strong><ul>
 <li>오리진 선택<ul>
 <li>s3 버킷</li>
 <li>elb 로드 밸런서</li>
-<li>사용자 지정 오리진</li>
+<li>사용자 지정 오리진<ul>
 <li>ec2 인스턴스</li>
 <li>온프레미스 서버</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>배포 생성<ul>
-<li>캐시 동작 정의</li>
+<li>캐시 동작 정의<ul>
 <li>경로 패턴</li>
 <li>프로토콜 정책</li>
 <li>http 메서드</li>
@@ -24342,54 +24430,60 @@
 <li>캐시 정책</li>
 </ul>
 </li>
-<li>
-<p>선택 사항</p>
-<ul>
+</ul>
+</li>
+<li>선택 사항<ul>
 <li>함수 연결</li>
 <li>와프 웹 acl 연결</li>
 <li>사용자 지정 도메인 이름 추가</li>
 </ul>
 </li>
-<li>
-<p><strong>CloudFront 구성 요소: 오리진</strong></p>
+</ul>
 </li>
-<li>
-<p>CloudFront</p>
+</ul>
 <ul>
+<li><strong>CloudFront 구성 요소: 오리진</strong><ul>
+<li>CloudFront<ul>
 <li>S3 버킷</li>
-<li>로드밸런서 =&gt; 캐싱도 안되는데 왜쓰냐면...</li>
+<li>로드밸런서 =&gt; 캐싱도 안되는데 왜쓰냐면...<ul>
 <li>CloudFront 만 인터넷에 개방되고 (쉴드가 내장되어 있어서 더 안전, l3/l4 디도스 방어 가능)</li>
 <li>로드밸런서부터는 aws 네트워크</li>
 <li>동적 컨텐츠를 저장해 캐싱은 안되지만, 보안상의 이유로 권장됩니다!</li>
+</ul>
+</li>
 <li>사용자 지정 오리진</li>
 </ul>
 </li>
-<li>
-<p><strong>Global Accelerator</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Global Accelerator</strong><ul>
 <li>어플리케이션을 이용하기 위해 수많은 네트워크를 거칠 수 있음</li>
 <li>어플리케이션을 오가는 경로가 서로 다를 수 있음</li>
-<li>
-<p>각 홉이 성능에 영향을 미치며 위험을 초래함</p>
+<li>각 홉이 성능에 영향을 미치며 위험을 초래함</li>
+</ul>
 </li>
-<li>
-<p><strong>참고 자료</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>참고 자료</strong><ul>
 <li><img alt="" src="../../images/2022-07-22-cloudfront-acc.png" /></li>
 <li><img alt="" src="../../images/2022-07-22-shield.png" /></li>
-<li>
-<p><img alt="" src="../../images/2022-07-22-waf.jpeg" /></p>
+<li><img alt="" src="../../images/2022-07-22-waf.jpeg" /></li>
+</ul>
 </li>
-<li>
-<p><strong>DDoS 복원력이 뛰어난 아키텍처</strong></p>
+</ul>
+<ul>
+<li><strong>DDoS 복원력이 뛰어난 아키텍처</strong><ul>
+<li><img alt="" src="../../images/2022-07-22-ddos.jpeg" /></li>
+</ul>
 </li>
-<li>
-<p><img alt="" src="../../images/2022-07-22-ddos.jpeg" /></p>
-</li>
-<li>
-<p><strong>Outposts 솔루션</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Outposts 솔루션</strong><ul>
 <li>Outposts를 사용하여 AWS를 사용</li>
+</ul>
+</li>
 </ul>
 
 

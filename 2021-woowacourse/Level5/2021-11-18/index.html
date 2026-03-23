@@ -22909,44 +22909,30 @@
 <h3 id="2021-11-18">2021-11-18<a class="headerlink" href="#2021-11-18" title="Permanent link">&para;</a></h3>
 <h2 id="4">코어 자바스크립트 [4장. 콜백 함수]<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>1. 콜백 함수란?</strong></p>
+<li><strong>1. 콜백 함수란?</strong>
+    - 콜백 함수는 제어권과 관련이 깊음
+    - 콜백 함수: 다른 코드에게 인자로 넘겨줌으로써 그 제어권도 함께 위임한 함수
+        - 콜백 함수를 위임받은 코드는 자체적인 내부 로직에 의해 적절한 타이밍에 콜백 함수 실행</li>
+</ul>
 <ul>
-<li>콜백 함수는 제어권과 관련이 깊음</li>
-<li>콜백 함수: 다른 코드에게 인자로 넘겨줌으로써 그 제어권도 함께 위임한 함수<ul>
-<li>콜백 함수를 위임받은 코드는 자체적인 내부 로직에 의해 적절한 타이밍에 콜백 함수 실행</li>
+<li><strong>2. 제어권</strong>
+    - <code>setInterval</code> 이 콜백함수를 인자로 받는 대표적인 함수
+        - 콜백 함수 호출시점에 대한 제어권을 <code>setInterval</code> 이 가짐!
+    - 콜백에서 this?
+        - 보통은 그냥 함수로 전달되니까, 전역 객체가 this임
+        - call/apply 메서드로 this를 지정할 수 있음
+        - addEventListener 같은 함수는 이와 같은 원리로 HTML 엘리먼트를 this 로 가리키게 됨</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>2. 제어권</strong></p>
 <ul>
-<li><code>setInterval</code> 이 콜백함수를 인자로 받는 대표적인 함수<ul>
-<li>콜백 함수 호출시점에 대한 제어권을 <code>setInterval</code> 이 가짐!</li>
+<li><strong>3. 콜백 함수는 함수다</strong>
+    - 어떤 함수의 인자에 객체의 메서드를 전달하더라도, 이는 결국 메서드가 아닌 "함수" 일 뿐이야!</li>
 </ul>
-</li>
-<li>콜백에서 this?<ul>
-<li>보통은 그냥 함수로 전달되니까, 전역 객체가 this임</li>
-<li>call/apply 메서드로 this를 지정할 수 있음</li>
-<li>addEventListener 같은 함수는 이와 같은 원리로 HTML 엘리먼트를 this 로 가리키게 됨</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>3. 콜백 함수는 함수다</strong></p>
 <ul>
-<li>어떤 함수의 인자에 객체의 메서드를 전달하더라도, 이는 결국 메서드가 아닌 "함수" 일 뿐이야!</li>
-</ul>
-</li>
-<li>
-<p><strong>4. 콜백 함수 내부의 this에 다른 값 바인딩하기</strong> </p>
-<ul>
-<li>전통적으로는...<ul>
-<li>현재 스코프의 this를 다른 변수에 담아놓고, </li>
-<li>외부에서 호출시, 그 변수를 this 마냥 사용 (클로저인가 뭔가 쓴다는데...)
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<li><strong>4. 콜백 함수 내부의 this에 다른 값 바인딩하기</strong> 
+    - 전통적으로는...
+        - 현재 스코프의 this를 다른 변수에 담아놓고, 
+        - 외부에서 호출시, 그 변수를 this 마냥 사용 (클로저인가 뭔가 쓴다는데...)
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;obj1&#39;</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nx">func</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">self</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
@@ -22958,11 +22944,9 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="kd">var</span><span class="w"> </span><span class="nx">callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj1</span><span class="p">.</span><span class="nx">func</span><span class="p">();</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>ES5 부터는 bind!
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+    - ES5 부터는 bind!
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;obj1&#39;</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nx">func</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span><span class="w">        </span>
@@ -22974,42 +22958,24 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">obj1</span><span class="p">.</span><span class="nx">func</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">obj2</span><span class="p">),</span><span class="w"> </span><span class="mf">1500</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>5. 콜백 지옥과 비동기 제어</strong></p>
 <ul>
-<li>콜백 지옥: 콜백 함수를 익명 함수로 전달되는 과정이 반복되어, 코드의 들여쓰기 수준이 너무 깊어지는 현상<ul>
-<li>주로 이벤트 처리, 서버 통신등의 비동기 작업에 이런 형태 다수 발생</li>
-<li>가독성 low, 코드 수정 어려움</li>
-</ul>
-</li>
-<li>해결 방법<ol>
-<li>콜백 함수를 기명 함수로 전환<ul>
-<li>일회성 함수를 변수에 다 담는게 별로</li>
-<li>헷갈릴 여지도 있음</li>
-</ul>
-</li>
-<li>Promise<ul>
-<li>new 연산자와 함께 호출한 Promise의 인자로 넘겨준 콜백함수는 바로 실행</li>
-<li>내부에 resolve/reject 함수 있다면, 이거 호출할 때 까지 .then/.catch로 안 넘어감</li>
-</ul>
-</li>
-<li>Generator<ul>
-<li>Iterator와 Yield로 함수로 실행 가능</li>
-</ul>
-</li>
-<li>async/await<ul>
-<li>비동기 수행하고자 하는 함수 앞에 async</li>
-<li>함수 내부에서 실질적인 비동기 로직에 await<ul>
-<li>뒤의 내용을 Promise로 자동 전환하고, 해당 내용 resolve 된 뒤에 진행</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
+<li><strong>5. 콜백 지옥과 비동기 제어</strong>
+    - 콜백 지옥: 콜백 함수를 익명 함수로 전달되는 과정이 반복되어, 코드의 들여쓰기 수준이 너무 깊어지는 현상
+        - 주로 이벤트 처리, 서버 통신등의 비동기 작업에 이런 형태 다수 발생
+        - 가독성 low, 코드 수정 어려움
+    - 해결 방법
+        1. 콜백 함수를 기명 함수로 전환
+            - 일회성 함수를 변수에 다 담는게 별로
+            - 헷갈릴 여지도 있음
+        2. Promise
+            - new 연산자와 함께 호출한 Promise의 인자로 넘겨준 콜백함수는 바로 실행
+            - 내부에 resolve/reject 함수 있다면, 이거 호출할 때 까지 .then/.catch로 안 넘어감
+        3. Generator
+            - Iterator와 Yield로 함수로 실행 가능
+        4. async/await
+            - 비동기 수행하고자 하는 함수 앞에 async
+            - 함수 내부에서 실질적인 비동기 로직에 await
+                - 뒤의 내용을 Promise로 자동 전환하고, 해당 내용 resolve 된 뒤에 진행</li>
 </ul>
 
 

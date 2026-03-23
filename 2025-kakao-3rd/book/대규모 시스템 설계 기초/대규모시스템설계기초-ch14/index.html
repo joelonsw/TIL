@@ -23013,18 +23013,18 @@
 <p><img alt="" src="../../../images/2025-08-18-%EC%8B%9C%EC%8A%A4%ED%85%9C14%EC%9E%A5.jpg" /></p>
 <h3 id="1">1단계. 문제 이해 및 설계 범위 확정<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>요구사항</strong></li>
+<li><strong>요구사항</strong><ul>
 <li>빠른 비디오 업로드</li>
 <li>원활한 비디오 재생</li>
 <li>재생 품질 선택 기능</li>
 <li>낮은 인프라 비용</li>
 <li>높은 가용성과 규모 확장성, 그리고 안정성</li>
-<li>
-<p>지원 클라이언트: 모바일 앱, 웹 브라우저, 스마트 TV</p>
+<li>지원 클라이언트: 모바일 앱, 웹 브라우저, 스마트 TV</li>
+</ul>
 </li>
-<li>
-<p><strong>개략적 규모 측정</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>개략적 규모 측정</strong><ul>
 <li>DAU 5백만명</li>
 <li>사용자 한명에 하루 평균 5개의 비디오 시청</li>
 <li>10%의 사용자가 하루에 비디오 1개 업로드</li>
@@ -23040,46 +23040,52 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="2">2단계. 개략적 설계안 제시 및 동의 구하기<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>CDN과 BLOB 스토리지의 경우, 기존 클라우드 서비스 활용 (넷플릭스, 페이스북도 클라우드 서비스 활용)</li>
 <li>CDN: 비디오는 CDN에 저장. CDN으로부터 스트리밍</li>
-<li>
-<p>API 서버: 비디오 스트리밍 제외한 모든 요청 API 서버 처리. 피드 추천, 비디오 업로드 URL 생성, 메타데이터 DB/Cache 갱신, 사용자 가입 등</p>
+<li>API 서버: 비디오 스트리밍 제외한 모든 요청 API 서버 처리. 피드 추천, 비디오 업로드 URL 생성, 메타데이터 DB/Cache 갱신, 사용자 가입 등</li>
+</ul>
 </li>
-<li>
-<p><strong>비디오 업로드 절차</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>비디오 업로드 절차</strong><ul>
 <li><img alt="" src="../../../images/2025-08-18-%EB%B9%84%EB%94%94%EC%98%A4%EC%97%85%EB%A1%9C%EB%93%9C.jpg" /></li>
 <li>비디오 업로드)<ul>
 <li>1.비디오를 원본 저장소에 업로드</li>
 <li>2.트랜스코딩 서버는 원본 저장소에서 해당 비디오를 가져와 트랜스코딩 시작</li>
-<li>3.트랜스코딩 완료되면 아래 두 절차가 병렬적으로 수행</li>
+<li>3.트랜스코딩 완료되면 아래 두 절차가 병렬적으로 수행<ul>
 <li>3a. 완료된 비디오를 트랜스코딩 비디오 저장소로 업로드<ul>
 <li>3a-1. 트랜스코딩이 끝난 비디오 CDN에 업로드</li>
 </ul>
 </li>
 <li>3b. 트랜스코딩 완료 이벤트를 트랜스코딩 완료 큐에 넣는다<ul>
-<li>3b-1. 완료 핸들러가 이벤트 데이터를 큐에서 꺼냄</li>
+<li>3b-1. 완료 핸들러가 이벤트 데이터를 큐에서 꺼냄<ul>
 <li>3b-1-a/3b-1-b. 완료 핸들러가 메타데이터 데이터베이스와 캐시를 갱신</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>4.API 서버가 단말에게 비디오 업로드가 끝나서 스트리밍 준비가 되었음을 알림</li>
 </ul>
 </li>
-<li>
-<p>메타데이터 갱신)</p>
-<ul>
+<li>메타데이터 갱신)<ul>
 <li>원본 저장소에 파일 업로드 되는 동안, 단말은 병렬적으로 비디오 메타데이터 갱신 요청을 API에 보냄</li>
 </ul>
 </li>
-<li>
-<p><strong>비디오 스트리밍 절차</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>비디오 스트리밍 절차</strong><ul>
 <li>스트리밍 프로토콜마다 지원하는 비디오 인코딩이 다르고 플레이어도 다ㅏ름<ul>
 <li>서비스의 용례에 맞는 프로토콜을 잘 고를 것</li>
-<li>ex)</li>
+<li>ex)<ul>
 <li>MPEG-DASH</li>
 <li>HLS (Apple)</li>
 <li>Microsoft Smooth Streaming</li>
@@ -23087,9 +23093,13 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="3">3단계. 상세 설계<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>비디오 트랜스코딩</strong></li>
+<li><strong>비디오 트랜스코딩</strong><ul>
 <li>비디오 녹화 시, 특정 포맷으로 저장됨. 순조롭게 여러 단말에서 재생되려면 타 단말과 호환되는 비트레이트/포맷으로 저장할 것<ul>
 <li>비트레이트: 비트가 얼마나 빨리 처리되어야 하는지를 나타내는 단위. 높을수록 고화질 비디오</li>
 </ul>
@@ -23100,60 +23110,60 @@
 <li>끊임 없는 비디오를 사용자에게 제공하기 위해서는 네트워크 환경에 따라 화질을 조절할 수 있어야 함</li>
 </ul>
 </li>
-<li>
-<p>인코딩 포맷</p>
-<ul>
+<li>인코딩 포맷<ul>
 <li>컨테이너: 비디오/오디오/메타데이터 담는 바구니</li>
 <li>코덱: 압축/압축해제 알고리즘. 비디오 화질 보존 + 파일 크기 줄이기에 사용</li>
 </ul>
 </li>
-<li>
-<p><strong>Directed Acyclic Graph (DAG) 모델 소개</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Directed Acyclic Graph (DAG) 모델 소개</strong><ul>
 <li>DAG: Acyclic(방향성, 특정 방향을 가짐) + Acyclic(비순환성, 자기 자신으로 못 돌아옴)<ul>
 <li>데이터 처리 파이프라인에 많이 사용</li>
 </ul>
 </li>
-<li>
-<p>비디오 프로세싱 파이프라인 처리 과정의 병렬성을 높이기 위해, 각 작업을 단계별로 배열하여 순차/병렬 실행될 수 있도록 DAG를 사용하자.</p>
+<li>비디오 프로세싱 파이프라인 처리 과정의 병렬성을 높이기 위해, 각 작업을 단계별로 배열하여 순차/병렬 실행될 수 있도록 DAG를 사용하자.</li>
+</ul>
 </li>
-<li>
-<p><strong>비디오 트랜스코딩 아키텍쳐</strong></p>
-</li>
-<li><img alt="" src="../../../images/2025-08-18-DAG.jpg" /></li>
-<li>전처리기<ul>
+</ul>
+<ul>
+<li><strong>비디오 트랜스코딩 아키텍쳐</strong><ul>
+<li><img alt="" src="../../../images/2025-08-18-DAG.jpg" />
+1. 전처리기<ul>
 <li>비디오 분할: 비디오 스트림을 GOP(Group Of Pictures) 단위로 쪼갬. </li>
 <li>DAG 생성: 개발자가 작성한 파일에 따라 DAG 생성. </li>
-<li>데이터 캐시: GOP와 메타데이터를 임시 저장소에 보관. 인코딩 실패시, 보관된 데이터를 기반으로 인코딩 재개</li>
-</ul>
-</li>
-<li>DAG 스케줄러<ul>
+<li>데이터 캐시: GOP와 메타데이터를 임시 저장소에 보관. 인코딩 실패시, 보관된 데이터를 기반으로 인코딩 재개
+2. DAG 스케줄러</li>
 <li><img alt="" src="../../../images/2025-08-18-DAG%EC%8A%A4%EC%BC%80%EC%A4%84%EB%9F%AC.jpg" /></li>
 <li>DAG 그래프를 세부 스테이지로 분할, 해당 작업을 작업 큐에 publish</li>
-<li>ex)</li>
+<li>ex)<ul>
 <li>stage1. 비디오, 오디오, 메타데이터 분리</li>
-<li>stage2. 비디오 인코딩, 썸네일 추출, 오디오 인코딩</li>
+<li>stage2. 비디오 인코딩, 썸네일 추출, 오디오 인코딩
+3. 자원 관리자</li>
 </ul>
 </li>
-<li>자원 관리자<ul>
 <li><img alt="" src="../../../images/2025-08-18-%EC%9E%90%EC%9B%90%EA%B4%80%EB%A6%AC%EC%9E%90.jpg" /></li>
-<li>자원 배분을 효과적으로 수행하는 역할 담당</li>
+<li>자원 배분을 효과적으로 수행하는 역할 담당
+4. 작업 서버: 실제 작업 수행
+5. 임시 저장소: 작업 서버가 빈번히 참조하는 작은 정보들. 프로세싱 후 삭제 요망
+6. 인코딩된 비디오: 최종 결과물</li>
 </ul>
 </li>
-<li>작업 서버: 실제 작업 수행</li>
-<li>임시 저장소: 작업 서버가 빈번히 참조하는 작은 정보들. 프로세싱 후 삭제 요망</li>
-<li>
-<p>인코딩된 비디오: 최종 결과물</p>
+</ul>
 </li>
-<li>
-<p><strong>시스템 최적화</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>시스템 최적화</strong><ul>
 <li>속도 최적화<ul>
 <li>비디오 병렬 업로드: GOP를 병렬적으로 업로드</li>
 <li>업로드 센터 사용자 근거리에 지정: CDN을 업로드 센터로 활용</li>
-<li>모든 절차 병렬화</li>
+<li>모든 절차 병렬화<ul>
 <li>앞선 단계가 완료되어야 뒤의 절차를 진행할 수 있는 현재 구조를, MQ를 도입하여 시스템 결합도를 낮추자</li>
 <li><img alt="" src="../../../images/2025-08-18-MQ%EB%8F%84%EC%9E%85.jpg" /></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>안정성 최적화<ul>
@@ -23162,17 +23172,18 @@
 <li>워커마크</li>
 </ul>
 </li>
-<li>
-<p>비용 최적화</p>
-<ul>
+<li>비용 최적화<ul>
 <li>비디오 서비스는 롱테일 분포를 따름</li>
 <li>인기 없는 비디오 인코딩하지마</li>
 <li>특정 지역에서 인기있는 비디오는 지역에서만 캐싱</li>
 <li>ISP와 제휴</li>
 </ul>
 </li>
-<li>
-<p><strong>쿠팡플레이 예시 w. GEMINI</strong>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>쿠팡플레이 예시 w. GEMINI</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[Request]
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Request URL       https://vod02-cosmos.coupangstreaming.com/output/drm/2025/08/1a00cde8-5b71-4455-a294-39462a2fa9a3/avc/dash/1755266791/1b8a3f23415886d5c88918a77554201c08ff57aa-video-384_000000441.mp4
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Request Method    GET
@@ -23201,8 +23212,7 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>x-amz-meta-mediaconvert-jobid   1755266791252-2x5jis
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>x-amz-server-side-encryption    AES256
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>x-cache                         Miss from cloudfront
-</code></pre></div></p>
-</li>
+</code></pre></div><ol>
 <li>DRM (Digital Rights Management): 핵심적인 이유 🔒<ul>
 <li>영상 암호화: 쿠팡플레이의 원본 영상은 암호화된 상태로 서버(Amazon S3)에 저장됩니다. 요청 예시에서 받은 .mp4 파일은 단순한 영상 조각이 아니라, 암호가 걸려있는 영상 조각입니다.</li>
 <li>재생 허가 및 복호화 키: 쿠팡플레이 앱이나 웹 플레이어에서 영상을 재생하면, 플레이어는 쿠팡플레이의 DRM 라이선스 서버에 "나 정식 사용자인데, 이 영상 재생하게 해줘"라고 요청을 보냅니다.</li>
@@ -23215,26 +23225,30 @@
 <li>다운로드의 어려움: 설령 모든 조각의 URL을 알아내서 다운로드하더라도, 이것들을 순서에 맞게 합치는 것은 매우 번거롭습니다. 더 중요한 것은 위에서 설명한 것처럼 이 조각들 하나하나가 모두 DRM으로 암호화되어 있다는 점입니다.</li>
 </ul>
 </li>
-<li>
-<p>서명된 URL (Signed URL): 시간제한이 있는 주소 ⏱️</p>
-<ul>
+<li>서명된 URL (Signed URL): 시간제한이 있는 주소 ⏱️<ul>
 <li>일회성 주소: URL의 1b8a3f23415886d5c88918a77554201c08ff57aa 와 같은 긴 문자열은 인증 토큰일 가능성이 높습니다. 이 토큰은 현재 로그인한 사용자에게만 특정 시간(예: 몇 분 또는 몇 시간) 동안만 유효하도록 생성됩니다.</li>
 <li>재사용 불가: 따라서 시간이 지나거나 로그아웃하면 이 URL은 만료되어 더 이상 접근할 수 없게 됩니다. 다른 사람에게 이 URL을 공유해도 소용이 없습니다.</li>
 </ul>
 </li>
-<li>
-<p><strong>오류 처리</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>오류 처리</strong><ul>
 <li>회복 가능 오류: 재시도</li>
 <li>회복 불가능 오류: 클라이언트에게 적절한 오류 반환</li>
 </ul>
+</li>
+</ul>
 <h3 id="4">4단계. 마무리<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <ul>
-<li>더 논의해보면 좋을 내용들</li>
+<li>더 논의해보면 좋을 내용들<ul>
 <li>API 무상태 서버 수평적 확장 가능</li>
 <li>데이터베이스 계층 규모 확장성 확보 방안 (샤딩, 다중화)</li>
 <li>라이브 스트리밍은 어떻게?</li>
 <li>비디오 삭제: 저작권, 선정성, 불법적 어떻게?</li>
+</ul>
+</li>
 </ul>
 
 

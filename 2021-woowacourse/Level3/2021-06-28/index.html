@@ -22953,174 +22953,108 @@
 <h3 id="2021-06-28">2021-06-28<a class="headerlink" href="#2021-06-28" title="Permanent link">&para;</a></h3>
 <h2 id="jpa">JPA 제이슨<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>마음 한편에는,,,</strong></p>
+<li><strong>마음 한편에는,,,</strong>
+    - Dao가 서로 의존해서 객체를 만들어야 할지 고민
+    - 부모 자식 관계가 삭제되면 DB에 자동 반영될 수는 없나?</li>
+</ul>
 <ul>
-<li>Dao가 서로 의존해서 객체를 만들어야 할지 고민</li>
-<li>부모 자식 관계가 삭제되면 DB에 자동 반영될 수는 없나?</li>
+<li><strong>태초에,,,</strong>
+    - 객체 지향 패러다임
+        - 시스템을 구성하는 객체들에게 적절한 책임 할당
+            - 상속
+            - 연관관계
+        - 자유롭게 객체 그래프를 탐색할 수 있어야 함
+    - 테이블
+        - 방향성이 서로 없어 
+            - A JOIN B를 하던
+            - B JOIN A를 하던</li>
 </ul>
-</li>
-<li>
-<p><strong>태초에,,,</strong></p>
 <ul>
-<li>객체 지향 패러다임<ul>
-<li>시스템을 구성하는 객체들에게 적절한 책임 할당<ul>
-<li>상속</li>
-<li>연관관계</li>
+<li><strong>SQL을 직접 작성하는 것의 문제점,,,</strong>
+    - 반복 작업
+        - 새로운 필드 추가되면 SQL 다 추가해줘야해
+    - 신뢰성
+        - 개발자들이 Dao에서 조회해 온 엔티티 신뢰할 수 없다        </li>
 </ul>
-</li>
-<li>자유롭게 객체 그래프를 탐색할 수 있어야 함</li>
-</ul>
-</li>
-<li>테이블<ul>
-<li>방향성이 서로 없어 <ul>
-<li>A JOIN B를 하던</li>
-<li>B JOIN A를 하던</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>SQL을 직접 작성하는 것의 문제점,,,</strong></p>
 <ul>
-<li>반복 작업<ul>
-<li>새로운 필드 추가되면 SQL 다 추가해줘야해</li>
+<li><strong>JPA (ORM Framework)</strong>
+    - hibernate 구현체
+    - 장점
+        - DB 스키마 자동생성 (내가 만든 객체를 기준으로!)
+            - JPA가 보고 오? 이거 이런 테이블 만들면 되겠구나!
+                - "spring.jpa.hibernate.ddl-auto=create"
+                    - create: 기존 테이블 삭제 후 생성
+                    - create-drop: create와 같으나 종료시점에 테에블 DROP
+                    - update: 변경된 부분만 반영
+                    - validate: entity와 table이 정상 매핑되었는지만 확인
+                    - none: 사용하지 않음
+    - 실습
+        - 의존성
+            - implementation 'org.springframework.boot:spring-boot-starter-date-jpa'
+        - 사용법
+            - 객체에 <code>@Entity</code>를 추가
+            - 파라미터 없는 생성자 만듦 <em>(리플렉션과 비슷한 기술 사용함)</em>
+            - Entity에 PK를 등록해주기 + Auto-increment 설정
+                - <code>@Id</code> 어노테이션 붙여주기
+                - <code>@GeneratedValue()</code>를 통해 어떻게 Id값 관리할지 지정
+                    - strategy = GeneratedType.IDENTITY
+                    - strategy = GeneratedType.SEQUENCE // PK 값 관리 테이블 별도 지금
+                    - strategy = GeneratedType.AUTO // DB 벤더사에 의존적이라 위험함
+            - <code>@Table(name = "station")</code> 매핑할 테이블 이름 지정
+                - 안해주면 그냥 엔티티 이름이 테이블 이름
+            - <code>@Column(nullable = false)</code>
+                - 해당 필드는 not null!
+                - DB 스키마 상에서 null이 될 수 없다는겨
+                - <code>@NotNull</code> 이거랑은 달라</li>
 </ul>
-</li>
-<li>신뢰성<ul>
-<li>개발자들이 Dao에서 조회해 온 엔티티 신뢰할 수 없다        </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>JPA (ORM Framework)</strong></p>
 <ul>
-<li>hibernate 구현체</li>
-<li>장점<ul>
-<li>DB 스키마 자동생성 (내가 만든 객체를 기준으로!)<ul>
-<li>JPA가 보고 오? 이거 이런 테이블 만들면 되겠구나!<ul>
-<li>"spring.jpa.hibernate.ddl-auto=create"<ul>
-<li>create: 기존 테이블 삭제 후 생성</li>
-<li>create-drop: create와 같으나 종료시점에 테에블 DROP</li>
-<li>update: 변경된 부분만 반영</li>
-<li>validate: entity와 table이 정상 매핑되었는지만 확인</li>
-<li>none: 사용하지 않음</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>실습<ul>
-<li>의존성<ul>
-<li>implementation 'org.springframework.boot:spring-boot-starter-date-jpa'</li>
-</ul>
-</li>
-<li>사용법<ul>
-<li>객체에 <code>@Entity</code>를 추가</li>
-<li>파라미터 없는 생성자 만듦 <em>(리플렉션과 비슷한 기술 사용함)</em></li>
-<li>Entity에 PK를 등록해주기 + Auto-increment 설정<ul>
-<li><code>@Id</code> 어노테이션 붙여주기</li>
-<li><code>@GeneratedValue()</code>를 통해 어떻게 Id값 관리할지 지정<ul>
-<li>strategy = GeneratedType.IDENTITY</li>
-<li>strategy = GeneratedType.SEQUENCE // PK 값 관리 테이블 별도 지금</li>
-<li>strategy = GeneratedType.AUTO // DB 벤더사에 의존적이라 위험함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>@Table(name = "station")</code> 매핑할 테이블 이름 지정<ul>
-<li>안해주면 그냥 엔티티 이름이 테이블 이름</li>
-</ul>
-</li>
-<li><code>@Column(nullable = false)</code><ul>
-<li>해당 필드는 not null!</li>
-<li>DB 스키마 상에서 null이 될 수 없다는겨</li>
-<li><code>@NotNull</code> 이거랑은 달라</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Spring Data JPA</strong></p>
-<ul>
-<li>save(), findBy~()와 같은 반복작업을 <ul>
-<li>CRUDRepository를 만들어뒀어</li>
-<li>JpaRepository<Station, Long> // 객체와 ID의 형</li>
-</ul>
-</li>
-<li>findByName() 과 같은 기능도 자동완성 해줄수 있어
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">StationRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Station</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<li><strong>Spring Data JPA</strong>
+    - save(), findBy~()와 같은 반복작업을 
+        - CRUDRepository를 만들어뒀어
+        - JpaRepository<Station, Long> // 객체와 ID의 형
+    - findByName() 과 같은 기능도 자동완성 해줄수 있어
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">StationRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Station</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Station</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Station</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAllByName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>테스트 코드 작성<ul>
-<li><code>@DataJpaTest</code>를 통해 필요한 설정 해둘 수 있음</li>
+</code></pre></div>
+    - 테스트 코드 작성
+        - <code>@DataJpaTest</code>를 통해 필요한 설정 해둘 수 있음</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>영속성 컨텍스트</strong></p>
 <ul>
-<li>엔티티를 영구 저장하는 환경</li>
-<li>엔티티 매니저는 한 트랜잭션당 엔티티 매니저 생성함</li>
-<li>엔티티 매니저 팩토리는 하나만 생성</li>
-<li>엔티티 매니저로 엔티티 저장/조회 시 엔티티 매니저는 영속성 컨텍스트에 엔티티 보관/관리<ul>
-<li>1차 캐시</li>
-<li>동일서 보장</li>
-<li>트랜잭션 지원 쓰기 지연</li>
-<li>변경 감지 </li>
-<li>지연 로딩</li>
-</ul>
-</li>
-<li>id를 key값으로 Entity를 value로<ul>
-<li>캐시에 있으면 해당 Entity 반환</li>
-<li>캐시에 없으면 DB에 Entity 조회해서 반환</li>
-</ul>
-</li>
-<li>엔티티의 생명주기<ul>
-<li>비영속: 방금 인스턴스 생성한거 (메모리엔 있는데 DB/영속성 컨텍스트는 모름)</li>
-<li>영속: 영속성 컨텐스트에 저장한 상태</li>
-<li>준영속: 영속성 컨텍스트에 저장했다가 분리된 상태 (트랜잭션 벗어난 경우)</li>
-<li>삭제: 삭제된 상태</li>
-<li><img alt="" src="../../image/2021-06-28-%EC%98%81%EC%86%8D%EC%84%B1-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8.PNG" /></li>
-</ul>
-</li>
-<li>Transaction이 없으면 동작하지 않아!     <ul>
-<li>EmbeddedTomcat 하나의 요청 당 하나의 쓰레드, 하나의 트랜잭션<ul>
-<li>하나의 요청에 대해 캐싱 동작</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>@Transactional</code><ul>
-<li>트랜잭션 커밋하는 순간 영속성 컨텍스트 ---&gt; 데이터베이스</li>
-<li>commit &amp; flush</li>
-</ul>
-</li>
-<li>쓰기지연 SQL 저장소<ul>
-<li>INSERT QUERY 등</li>
-<li>여기에 쿼리를 쌓아 두었다가 commit() 되면 이거 촤르르 flush()<ul>
-<li>이게 쓰기지연</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>변경 감지<ul>
-<li>SNAPSHOT과 ENTITY를 비교하여 달라졌다면 update query 생성후 commit()</li>
-<li>마치 컬렉션을 다루듯이 DB를 사용하자
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Test</span>
+<li><strong>영속성 컨텍스트</strong>
+    - 엔티티를 영구 저장하는 환경
+    - 엔티티 매니저는 한 트랜잭션당 엔티티 매니저 생성함
+    - 엔티티 매니저 팩토리는 하나만 생성
+    - 엔티티 매니저로 엔티티 저장/조회 시 엔티티 매니저는 영속성 컨텍스트에 엔티티 보관/관리
+        - 1차 캐시
+        - 동일서 보장
+        - 트랜잭션 지원 쓰기 지연
+        - 변경 감지 
+        - 지연 로딩
+    - id를 key값으로 Entity를 value로
+        - 캐시에 있으면 해당 Entity 반환
+        - 캐시에 없으면 DB에 Entity 조회해서 반환
+    - 엔티티의 생명주기
+        - 비영속: 방금 인스턴스 생성한거 (메모리엔 있는데 DB/영속성 컨텍스트는 모름)
+        - 영속: 영속성 컨텐스트에 저장한 상태
+        - 준영속: 영속성 컨텍스트에 저장했다가 분리된 상태 (트랜잭션 벗어난 경우)
+        - 삭제: 삭제된 상태
+        - <img alt="" src="../../image/2021-06-28-%EC%98%81%EC%86%8D%EC%84%B1-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8.PNG" />
+    - Transaction이 없으면 동작하지 않아!   <br />
+        - EmbeddedTomcat 하나의 요청 당 하나의 쓰레드, 하나의 트랜잭션
+            - 하나의 요청에 대해 캐싱 동작
+    - <code>@Transactional</code>
+        - 트랜잭션 커밋하는 순간 영속성 컨텍스트 ---&gt; 데이터베이스
+        - commit &amp; flush
+    - 쓰기지연 SQL 저장소
+        - INSERT QUERY 등
+        - 여기에 쿼리를 쌓아 두었다가 commit() 되면 이거 촤르르 flush()
+            - 이게 쓰기지연
+    - 변경 감지
+        - SNAPSHOT과 ENTITY를 비교하여 달라졌다면 update query 생성후 commit()
+        - 마치 컬렉션을 다루듯이 DB를 사용하자
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Test</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">Station</span><span class="w"> </span><span class="n">station</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stations</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Station</span><span class="p">(</span><span class="s">&quot;잠실역&quot;</span><span class="p">));</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">station</span><span class="p">.</span><span class="na">changeName</span><span class="p">(</span><span class="s">&quot;잠실나루역&quot;</span><span class="p">);</span>
@@ -23129,74 +23063,51 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="na">isNotNull</span><span class="p">();</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1">// 여기서 트랜잭션 커밋</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>참고로 1차 캐시론 조회 안댐<ul>
-<li>1차 캐시 key값은 ID</li>
-<li>ID를 기반으로 1차 캐시 찌르기 가능</li>
-<li>ID 기반 아니면 바로 DB를 찔러</li>
-</ul>
-</li>
-<li>Id 기반으로 찌르지 않는 친구들을 "JPQL"이라고 함<ul>
-<li>직접 쿼리를 생성하는 것</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+        - 참고로 1차 캐시론 조회 안댐
+            - 1차 캐시 key값은 ID
+            - ID를 기반으로 1차 캐시 찌르기 가능
+            - ID 기반 아니면 바로 DB를 찔러
+        - Id 기반으로 찌르지 않는 친구들을 "JPQL"이라고 함
+            - 직접 쿼리를 생성하는 것</li>
 </ul>
 <h2 id="db">DB 관련 키워드<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Transaction</strong></p>
+<li><strong>Transaction</strong>
+    - <em>참고: https://mommoo.tistory.com/62</em>
+    - DB의 상태를 변화시키기 위해 수행하는 "쪼개질 수 없는 작업의 단위" 뜻함
+    - 특징
+        - 원자성: DB에 모두 반영되던가, 전혀 반영되지 않던가
+        - 일관성: 작업처리가 항상 일관성 있어야 함
+        - 독립성: 어떤 하나의 트랜잭션이라도, 다른 트랜잭션의 연산에 끼어 들 수 없음
+        - 지속성: 결과는 영구적으로 반영되어야 함
+        - Commit: 하나의 트랜잭션 성공적으로 끝남. DB 일관성있는 상태에 있음
+        - Rollback: 하나의 트랜잭션 처리가 비정상적으로 끝나 원자성이 깨진 경우, 트랜잭션 재시작 or 연산 취소</li>
+</ul>
 <ul>
-<li><em>참고: https://mommoo.tistory.com/62</em></li>
-<li>DB의 상태를 변화시키기 위해 수행하는 "쪼개질 수 없는 작업의 단위" 뜻함</li>
-<li>특징<ul>
-<li>원자성: DB에 모두 반영되던가, 전혀 반영되지 않던가</li>
-<li>일관성: 작업처리가 항상 일관성 있어야 함</li>
-<li>독립성: 어떤 하나의 트랜잭션이라도, 다른 트랜잭션의 연산에 끼어 들 수 없음</li>
-<li>지속성: 결과는 영구적으로 반영되어야 함</li>
-<li>Commit: 하나의 트랜잭션 성공적으로 끝남. DB 일관성있는 상태에 있음</li>
-<li>Rollback: 하나의 트랜잭션 처리가 비정상적으로 끝나 원자성이 깨진 경우, 트랜잭션 재시작 or 연산 취소</li>
+<li><strong>Primary Key</strong>
+    - <em>참고: https://docs.microsoft.com/ko-kr/sql/relational-databases/tables/primary-and-foreign-key-constraints?view=sql-server-ver15</em>
+    - 테이블에 일반적으로 테이블의 각 행을 고유하게 식별하는 값
+        - 데이터의 고유성 보장
+    - 두 개의 열을 섞어서 PK로 하는 경우도 있음</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Primary Key</strong></p>
 <ul>
-<li><em>참고: https://docs.microsoft.com/ko-kr/sql/relational-databases/tables/primary-and-foreign-key-constraints?view=sql-server-ver15</em></li>
-<li>테이블에 일반적으로 테이블의 각 행을 고유하게 식별하는 값<ul>
-<li>데이터의 고유성 보장</li>
+<li><strong>Foreign Key</strong>
+    - <em>참고: https://brunch.co.kr/@dan-kim/26</em>
+    - 두 테이블의 데이터 간 연결을 설정하고 강제 적용하여 외래 키 테이블에 저장될 수 있는 데이터를 제어하는 데 사용
+    - 한 테이블의 기본 키 값을 가지고 있는 열을 다른 테이블의 열이 참조할 때 두 테이블간의 연결 생성
+    - 다른 테이블의 기본키를 참조
+    - 중복된 데이터를 효율적으로 표현하기 위함
+        - 주문 테이블에서 사용자 아이디 정보를 활용해 사용자 테이블의 정보를 찾을 수 있음
+    - 외래키는 두 테이블을 연결하는 연결 다리로, 참조하는 테이블에 무결성 <em>(DB의 값이 정확함)</em> 을 높여주는 역할을 함</li>
 </ul>
-</li>
-<li>두 개의 열을 섞어서 PK로 하는 경우도 있음</li>
-</ul>
-</li>
-<li>
-<p><strong>Foreign Key</strong></p>
 <ul>
-<li><em>참고: https://brunch.co.kr/@dan-kim/26</em></li>
-<li>두 테이블의 데이터 간 연결을 설정하고 강제 적용하여 외래 키 테이블에 저장될 수 있는 데이터를 제어하는 데 사용</li>
-<li>한 테이블의 기본 키 값을 가지고 있는 열을 다른 테이블의 열이 참조할 때 두 테이블간의 연결 생성</li>
-<li>다른 테이블의 기본키를 참조</li>
-<li>중복된 데이터를 효율적으로 표현하기 위함<ul>
-<li>주문 테이블에서 사용자 아이디 정보를 활용해 사용자 테이블의 정보를 찾을 수 있음</li>
+<li><strong>CASCADE</strong>
+    - <em>참고: https://brownbears.tistory.com/182</em>
+    - 부모 테이블에서 해당 행이 업데이트/삭제 시, 참조 테이블에서도 해당 행이 업데이트/삭제</li>
 </ul>
-</li>
-<li>외래키는 두 테이블을 연결하는 연결 다리로, 참조하는 테이블에 무결성 <em>(DB의 값이 정확함)</em> 을 높여주는 역할을 함</li>
-</ul>
-</li>
-<li>
-<p><strong>CASCADE</strong></p>
 <ul>
-<li><em>참고: https://brownbears.tistory.com/182</em></li>
-<li>부모 테이블에서 해당 행이 업데이트/삭제 시, 참조 테이블에서도 해당 행이 업데이트/삭제</li>
-</ul>
-</li>
-<li>
-<p><strong>실습</strong>
+<li><strong>실습</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">parent</span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">bigint</span><span class="w"> </span><span class="n">auto_increment</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
@@ -23219,8 +23130,7 @@
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">Referential</span><span class="w"> </span><span class="n">integrity</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="n">violation</span><span class="p">:</span><span class="w"> </span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="ss">&quot;CONSTRAINT_3D: PUBLIC.CHILD FOREIGN KEY(PARENT_ID) REFERENCES PUBLIC.PARENT(ID) (&#39;1&#39;)&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">SQL</span><span class="w"> </span><span class="k">statement</span><span class="p">:</span>
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span>
-</code></pre></div></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">parent</span><span class="p">(</span>
+</code></pre></div><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">parent</span><span class="p">(</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">bigint</span><span class="w"> </span><span class="n">auto_increment</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
@@ -23246,32 +23156,22 @@
 <h2 id="stub-vs-mock">STUB vs MOCK<a class="headerlink" href="#stub-vs-mock" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://joont92.github.io/tdd/%EC%83%81%ED%83%9C%EA%B2%80%EC%A6%9D%EA%B3%BC-%ED%96%89%EC%9C%84%EA%B2%80%EC%A6%9D-stub%EA%B3%BC-mock-%EC%B0%A8%EC%9D%B4/</em></li>
-<li>
-<p>테스트 더블: 테스팅을 목적으로 진짜 객체 대신 사용되는 모든 종류의 위장 객체</p>
+<li>테스트 더블: 테스팅을 목적으로 진짜 객체 대신 사용되는 모든 종류의 위장 객체
+    - Dummy, Stub, Mock</li>
+</ul>
 <ul>
-<li>Dummy, Stub, Mock</li>
+<li><strong>STUB</strong>
+    - 호출되면 미리 준비된 답변으로 응답
+    - 테스트 시에 프로그램 된 것 외에는 응답 X
+    - 협력 객체의 특정 부분 힘들다면 stub을 사용해 수월한 테스트 가능
+    - 일반적으로 우리가 mock으로 잘못 알고 있음</li>
 </ul>
-</li>
-<li>
-<p><strong>STUB</strong></p>
 <ul>
-<li>호출되면 미리 준비된 답변으로 응답</li>
-<li>테스트 시에 프로그램 된 것 외에는 응답 X</li>
-<li>협력 객체의 특정 부분 힘들다면 stub을 사용해 수월한 테스트 가능</li>
-<li>일반적으로 우리가 mock으로 잘못 알고 있음</li>
-</ul>
-</li>
-<li>
-<p><strong>MOCK</strong></p>
-<ul>
-<li>행위 검증 사용을 추구<ul>
-<li>상태 검증: 메서드가 수행된 후 협력 객체의 "상태"를 살펴보고 올바로 작동했는지를 판단</li>
-<li>행위 검증: 특정 메서드가 호출되었는지의 "행위"를 검사하여 올바로 작동했는지를 판단</li>
-</ul>
-</li>
-<li>행위를 기록하는 식의 로직이 들어있음</li>
-</ul>
-</li>
+<li><strong>MOCK</strong>
+    - 행위 검증 사용을 추구
+        - 상태 검증: 메서드가 수행된 후 협력 객체의 "상태"를 살펴보고 올바로 작동했는지를 판단
+        - 행위 검증: 특정 메서드가 호출되었는지의 "행위"를 검사하여 올바로 작동했는지를 판단
+    - 행위를 기록하는 식의 로직이 들어있음</li>
 </ul>
 
 

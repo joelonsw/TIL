@@ -22931,117 +22931,75 @@
 <h3 id="2021-04-21">2021-04-21<a class="headerlink" href="#2021-04-21" title="Permanent link">&para;</a></h3>
 <h2 id="sql">SQL 첫걸음<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>6장. 데이터베이스 객체 작성과 삭제</strong></p>
+<li><strong>6장. 데이터베이스 객체 작성과 삭제</strong>
+    - 객체: DB 내에 실체를 가지는 어떤 것
+    - DELETE는 행단위로 내부처리하니까, 다 삭제할라면 TRUNCATE TABLE 써보렴
+    - 기본키: 테이블의 행 한 개를 특정할 수 있는 검색키
+    - 기본키 제약: 열을 기본키로 지정해 유일한 값을 가지도록 함
+        - 참고로 열이 복수로 기본키를 구성시킬 수 있음
+    - 인덱스: 테이블에 붙여진 색인
+        - 검색 속도 향상 가능 with Binary Search
+        - 작성한 인덱스의 열을 WHERE 구로 조건을 지정하여 SELECT 명령으로 처리하면 처리속도 향상
+        - 테이블에 인덱스를 작성하면, 테이블 데이터와 별개로 인덱스용 데이터가 저장장치에 만들어짐
+    - 뷰: 데이터베이스 객체로 등록할 수 없는 SELECT 명령을, 객체로서 이름 붙여 관리하도록 한 것
+        - 이름과 SELECT 명령 지정하여 정의
+        - SELECT 구문은 단독으로도 실행 할 수 있어야 함</li>
+</ul>
 <ul>
-<li>객체: DB 내에 실체를 가지는 어떤 것</li>
-<li>DELETE는 행단위로 내부처리하니까, 다 삭제할라면 TRUNCATE TABLE 써보렴</li>
-<li>기본키: 테이블의 행 한 개를 특정할 수 있는 검색키</li>
-<li>기본키 제약: 열을 기본키로 지정해 유일한 값을 가지도록 함<ul>
-<li>참고로 열이 복수로 기본키를 구성시킬 수 있음</li>
+<li><strong>7장. 복수의 테이블 다루기</strong>
+    - UNION: 두 개의 SELECT 명령을 하나로 연계해 질의 결과를 얻을 수 있다
+    - INNER JOIN: 두 개의 테이블을 가로로 결합 가능
+    - 관계형 데이터베이스: 관계형 모델을 기반으로 작성된 데이터 베이스
+        - 관계형 모델이 뭔뎨?
+        - 관계형 모델: 릴레이션 == 튜플의 집합, 릴레이션에 대한 연산이 집합에 대한 연산에 대응
+            - 하나 이상의 관계를 바탕으로 연산
+            - 연산한 결과, 반환되는 것 또한 관계
+            - 연산을 중첩 구조로 실행해도 상관 없음
+        - 솔직히 뭔지 잘 모르겠네?</li>
 </ul>
-</li>
-<li>인덱스: 테이블에 붙여진 색인<ul>
-<li>검색 속도 향상 가능 with Binary Search</li>
-<li>작성한 인덱스의 열을 WHERE 구로 조건을 지정하여 SELECT 명령으로 처리하면 처리속도 향상</li>
-<li>테이블에 인덱스를 작성하면, 테이블 데이터와 별개로 인덱스용 데이터가 저장장치에 만들어짐</li>
-</ul>
-</li>
-<li>뷰: 데이터베이스 객체로 등록할 수 없는 SELECT 명령을, 객체로서 이름 붙여 관리하도록 한 것<ul>
-<li>이름과 SELECT 명령 지정하여 정의</li>
-<li>SELECT 구문은 단독으로도 실행 할 수 있어야 함</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>7장. 복수의 테이블 다루기</strong></p>
 <ul>
-<li>UNION: 두 개의 SELECT 명령을 하나로 연계해 질의 결과를 얻을 수 있다</li>
-<li>INNER JOIN: 두 개의 테이블을 가로로 결합 가능</li>
-<li>관계형 데이터베이스: 관계형 모델을 기반으로 작성된 데이터 베이스<ul>
-<li>관계형 모델이 뭔뎨?</li>
-<li>관계형 모델: 릴레이션 == 튜플의 집합, 릴레이션에 대한 연산이 집합에 대한 연산에 대응<ul>
-<li>하나 이상의 관계를 바탕으로 연산</li>
-<li>연산한 결과, 반환되는 것 또한 관계</li>
-<li>연산을 중첩 구조로 실행해도 상관 없음</li>
-</ul>
-</li>
-<li>솔직히 뭔지 잘 모르겠네?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>8장. 데이터베이스 설계</strong></p>
-<ul>
-<li>정규화: 데이터베이스의 테이블을 규정된 올바른 형태로 개선해나가는 것<ul>
-<li>제1정규형<ul>
-<li>반복되는 부분을 세로(행) 방향으로 늘려나가는 것</li>
-<li>중복을 제거하는 테이블의 분할</li>
-<li>테이블의 분할과 기본키 지정!</li>
-</ul>
-</li>
-<li>제2정규형<ul>
-<li>데이터가 중복하는 부분을 찾아 테이블로 분할</li>
-<li>함수 종속성을 찾아 테이블을 분할</li>
-<li>ex) 주문번호/상품코드/상품명/갯수 ==&gt; 주문번호/상품코드/갯수 &amp;&amp; 상품코드/상품명</li>
-</ul>
-</li>
-<li>제3정규형<ul>
-<li>기본키 이외의 부분에서 중복이 없는가?</li>
-</ul>
-</li>
-<li>Why 정규화?<ul>
-<li>"하나의 데이터가 한 곳에 저장되도록 하기 위함!!"</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>트랜잭션: 몇 단계로 처리를 나누어 SQL 명령을 실행하는 경우 사용하자!<ul>
-<li>트랜잭션을 통해 데이터 추가하면, 에러가 발생해도 트랜잭션을 롤백해 종료할 수 있음</li>
-<li>롤백하면 트랜잭션 내에서 행해진 모든 변경사항 없던것으로 할 수 있어<ul>
-<li>물론 에러 안나면, 변경 적용하고 트랜잭션 종료하는데, 이때 "커밋"을 사용</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>트랜잭션 사용할라면 다음과 같은 명령어를 해주자<ul>
-<li>START TRANSACTION: 트랜잭션 시작</li>
-<li>COMMIT: 트랜잭션 내에서 실행한 명령을 적용한 후 종료</li>
-<li>ROLLBACK: 트랜잭션 내에서 실행한 명령을 파기한 후 종료</li>
-<li>@TRANSACTIONAL 어노테이션은 그러면 1,3번을 적용한건가?</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>8장. 데이터베이스 설계</strong>
+    - 정규화: 데이터베이스의 테이블을 규정된 올바른 형태로 개선해나가는 것
+        - 제1정규형
+            - 반복되는 부분을 세로(행) 방향으로 늘려나가는 것
+            - 중복을 제거하는 테이블의 분할
+            - 테이블의 분할과 기본키 지정!
+        - 제2정규형
+            - 데이터가 중복하는 부분을 찾아 테이블로 분할
+            - 함수 종속성을 찾아 테이블을 분할
+            - ex) 주문번호/상품코드/상품명/갯수 ==&gt; 주문번호/상품코드/갯수 &amp;&amp; 상품코드/상품명
+        - 제3정규형
+            - 기본키 이외의 부분에서 중복이 없는가?
+        - Why 정규화?
+            - "하나의 데이터가 한 곳에 저장되도록 하기 위함!!"
+    - 트랜잭션: 몇 단계로 처리를 나누어 SQL 명령을 실행하는 경우 사용하자!
+        - 트랜잭션을 통해 데이터 추가하면, 에러가 발생해도 트랜잭션을 롤백해 종료할 수 있음
+        - 롤백하면 트랜잭션 내에서 행해진 모든 변경사항 없던것으로 할 수 있어
+            - 물론 에러 안나면, 변경 적용하고 트랜잭션 종료하는데, 이때 "커밋"을 사용
+    - 트랜잭션 사용할라면 다음과 같은 명령어를 해주자
+        - START TRANSACTION: 트랜잭션 시작
+        - COMMIT: 트랜잭션 내에서 실행한 명령을 적용한 후 종료
+        - ROLLBACK: 트랜잭션 내에서 실행한 명령을 파기한 후 종료
+        - @TRANSACTIONAL 어노테이션은 그러면 1,3번을 적용한건가?</li>
 </ul>
 <h2 id="foreign-key">Foreign Key<a class="headerlink" href="#foreign-key" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><em>참고: https://www.w3schools.com/sql/sql_foreignkey.asp</em></p>
-</li>
-<li>
-<p>Foreign Key는 하나의 테이블의 필드로써, 다른 테이블의 Primary key를 지칭함</p>
-<ul>
-<li>Foreign Key를 포함하는 테이블은 child table이라고 부름</li>
-<li>Primary Key를 포함하는 테이블은 parent table이겠죠?</li>
+<li><em>참고: https://www.w3schools.com/sql/sql_foreignkey.asp</em></li>
 </ul>
-</li>
-<li>
-<p>Foreign Key 제약을 통해 invalid한 데이터가 foreign key column에 추가되는 것을 방지한다</p>
 <ul>
-<li>Parent Table의 하나의 값과 무조건 일치해야함</li>
+<li>Foreign Key는 하나의 테이블의 필드로써, 다른 테이블의 Primary key를 지칭함
+    - Foreign Key를 포함하는 테이블은 child table이라고 부름
+    - Primary Key를 포함하는 테이블은 parent table이겠죠?</li>
 </ul>
-</li>
-<li>
-<p><strong>예시</strong>
-<img alt="foreignKey" src="../../image/foreignKey_2021_04_21.PNG" /></p>
 <ul>
-<li>"PersonID"는 "Persons" 테이블에서 Primary Key이다</li>
-<li>"PersonID"는 "Orders" 테이블에서 Foreign Key이다</li>
+<li>Foreign Key 제약을 통해 invalid한 데이터가 foreign key column에 추가되는 것을 방지한다
+    - Parent Table의 하나의 값과 무조건 일치해야함</li>
 </ul>
-</li>
+<ul>
+<li><strong>예시</strong>
+<img alt="foreignKey" src="../../image/foreignKey_2021_04_21.PNG" />
+    - "PersonID"는 "Persons" 테이블에서 Primary Key이다
+    - "PersonID"는 "Orders" 테이블에서 Foreign Key이다</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">OrderID</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>

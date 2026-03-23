@@ -22955,16 +22955,16 @@
 <p><em>참고: https://leeeeeyeon-dev.tistory.com/43</em>
 <em>참고: https://escapefromcoding.tistory.com/694</em></p>
 <ul>
-<li><strong>Why Sentry?</strong></li>
+<li><strong>Why Sentry?</strong><ul>
 <li>슬랙같은걸로 에러로그 던져주긴 하는데, 그냥 메신저로 받다보니 로그 관리는 어려움</li>
-<li>
-<p>에러 트래킹 및 성능 모니터링 도구로 유명한 sentry를 써보자</p>
+<li>에러 트래킹 및 성능 모니터링 도구로 유명한 sentry를 써보자</li>
+</ul>
 </li>
-<li>
-<p><strong>Sentry로 에러보내는 법</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Sentry로 에러보내는 법</strong><ol>
 <li>직접 코드레벨에서 던지기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>import io.sentry.Sentry;
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>import io.sentry.Sentry;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>try {
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    aMethodThatMightFail();
@@ -22972,27 +22972,29 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    Sentry.captureException(e);
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>}
 </code></pre></div></li>
-<li>
-<p>logback 활용하기</p>
-<ul>
+<li>logback 활용하기<ul>
 <li><code>implementation 'io.sentry:sentry-logback:6.19.0'</code>  </li>
 </ul>
 </li>
-<li>
-<p><strong>logback을 활용한 sentry</strong></p>
+</ol>
 </li>
+</ul>
+<ul>
+<li><strong>logback을 활용한 sentry</strong><ol>
 <li>resources 디렉토리에 <code>sentry.properties</code> 만들고 DSN 주소 작성 (logback.xml에 dsn 주소가 없다면, sentry.properties에서 dsn 주소 읽어옴)<ul>
 <li><code>dsn={dsn 주소}</code></li>
 </ul>
 </li>
 <li>logback.xml에 센트리 어펜더 추가
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Sentry&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;io.sentry.logback.SentryAppender&quot;</span><span class="nt">&gt;</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Sentry&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;io.sentry.logback.SentryAppender&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">&lt;filter</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="nt">&lt;level&gt;</span>ERROR<span class="nt">&lt;/level&gt;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">&lt;/filter&gt;</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">&lt;/appender&gt;</span>
 </code></pre></div></li>
 <li>에러 발생 시 정상 트래킹 </li>
+</ol>
+</li>
 </ul>
 <h2 id="kamon-with-logback">Kamon with logback<a class="headerlink" href="#kamon-with-logback" title="Permanent link">&para;</a></h2>
 <p><em>참고: https://kamon.io/docs/latest/instrumentation/logback/#logging-with-context</em><br />
@@ -23009,9 +23011,9 @@
 - <strong>개요</strong>
   - AsyncAppender를 쓸 때, Context를 보관하며 로그 레벨별로 항목 계산하는 어펜더 제공</p>
 <ul>
-<li><strong>Logging with Context</strong></li>
+<li><strong>Logging with Context</strong><ul>
 <li>TraceIDConverter
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;conversionRule conversionWord=&quot;traceID&quot; converterClass=&quot;kamon.instrumentation.logback.tools.TraceIDConverter&quot;/&gt;
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;conversionRule conversionWord=&quot;traceID&quot; converterClass=&quot;kamon.instrumentation.logback.tools.TraceIDConverter&quot;/&gt;
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  &lt;file&gt;${appender.file.pathname}&lt;/file&gt;
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
@@ -23023,37 +23025,37 @@
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  &lt;/encoder&gt;
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>&lt;/appender&gt;
 </code></pre></div></li>
-<li>
-<p>어떻게 각 request가 공통의 traceId를 가지는거지?</p>
-<ul>
+<li>어떻게 각 request가 공통의 traceId를 가지는거지?<ul>
 <li>Kamon: Context propagation mechanism이 있음</li>
 </ul>
 </li>
-<li>
-<p><strong>Context Propagation</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Context Propagation</strong><ul>
 <li>카몬은 Context 라는 request-specific information 사용</li>
-<li>
-<p>Context는 immutable key-value set</p>
+<li>Context는 immutable key-value set</li>
+</ul>
 </li>
-<li>
-<p><strong>Automatic Instruction</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Automatic Instruction</strong><ul>
 <li>Kamon은 Play의 incoming/outcoming 요청에 대해 Context Propagation을 진행</li>
-<li>
-<p>각 HTTP 요청에 대해 kamon은...</p>
-<ol>
+<li>각 HTTP 요청에 대해 kamon은...<ol>
 <li>신규 unique traceId Context 생성</li>
 <li>해당 Context를 request 처리되는 시간동안 현재 Context에 담음</li>
 <li>해당 Context를 요청에 연관된 각기 다른 쓰레드에 propagate를 진행함</li>
 </ol>
 </li>
-<li>
-<p><strong>Thread-Local</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Thread-Local</strong><ul>
 <li>Kamon은 thread-local storage를 사용함!</li>
 <li>이거 트랜잭션할때 본건데...!
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Store a Context and get a Scope</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Store a Context and get a Scope</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">scope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Kamon</span><span class="p">.</span><span class="n">storeContext</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">// Run code with a specific Context</span>
@@ -23061,6 +23063,8 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="c1">// Your code here</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h2 id="akka-with-play-framework">Akka with play framework<a class="headerlink" href="#akka-with-play-framework" title="Permanent link">&para;</a></h2>
 

@@ -22976,12 +22976,10 @@
 <h2 id="jpa">JPA 순환 참조<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://velog.io/@chjh121/JPA-%EC%88%9C%ED%99%98-%EC%B0%B8%EC%A1%B0</em></li>
-<li>
-<p><strong>문제 상황</strong></p>
-<ul>
-<li>엔티티의 양방향 매핑이 되어있는 상황</li>
-<li>해당 엔티티를 직렬화하는 과정에서 무한 참조 발생
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
+<li><strong>문제 상황</strong>
+    - 엔티티의 양방향 매핑이 되어있는 상황
+    - 해당 엔티티를 직렬화하는 과정에서 무한 참조 발생
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nd">@Id</span>
@@ -23016,52 +23014,42 @@
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>
-<p><strong>직렬화 과정</strong></p>
 <ul>
-<li>Jackson에서 객체를 직렬화할 때 문제가 발생함!</li>
-<li>요청한 Post 객체 직렬화</li>
-<li>Post Entity내의 User를 직렬화</li>
-<li>User Entity내의 <code>List&lt;Post&gt;</code>를 직렬화</li>
+<li><strong>직렬화 과정</strong>
+    - Jackson에서 객체를 직렬화할 때 문제가 발생함!
+    1. 요청한 Post 객체 직렬화
+    2. Post Entity내의 User를 직렬화
+    3. User Entity내의 <code>List&lt;Post&gt;</code>를 직렬화</li>
 </ul>
-</li>
-<li>
-<p><strong>해결 방법</strong></p>
 <ul>
-<li><code>@JsonIgnore</code> : 해당 필드를 직렬화 대상에서 제거</li>
-<li>User에 <code>@JsonManagedReference</code>를, Post에 <code>@JsonBackReference</code>를 추가해주기</li>
-<li>DTO를 사용하기 &lt;= 추천</li>
-</ul>
-</li>
+<li><strong>해결 방법</strong>
+    - <code>@JsonIgnore</code> : 해당 필드를 직렬화 대상에서 제거
+    - User에 <code>@JsonManagedReference</code>를, Post에 <code>@JsonBackReference</code>를 추가해주기
+    - DTO를 사용하기 &lt;= 추천</li>
 </ul>
 <h2 id="easy-deploy-session">Easy Deploy 로그인 복습하기 (Session)<a class="headerlink" href="#easy-deploy-session" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>회원가입 + 로그인 과정</strong></p>
-<ol>
-<li>사용자가 구글 로그인 버튼 누르면 OAuth 로그인 창으로 리다이렉트 <code>GET /login/google</code></li>
-<li>사용자가 로그인 하면, 지정했던 리다이렉트 URL로 GET 요청을 구글에서 코드를 곁들여 보냄 <code>GET /login/oauth/google</code></li>
-<li>받은 Code를 가지고, Google로 부터 AccessToken을 발급받음</li>
-<li>발급받은 AccessToken을 가지고, Google에서 User 정보를 조회해옴</li>
-<li>User 정보를 저장하고, 유니크한 SocialId를 반환함</li>
-<li>"socialId"를 Key로, socialId를 Value로 Session을 만듦
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/login/oauth/{social}&quot;</span><span class="p">)</span>
+<li><strong>회원가입 + 로그인 과정</strong>
+    1. 사용자가 구글 로그인 버튼 누르면 OAuth 로그인 창으로 리다이렉트 <code>GET /login/google</code>
+    2. 사용자가 로그인 하면, 지정했던 리다이렉트 URL로 GET 요청을 구글에서 코드를 곁들여 보냄 <code>GET /login/oauth/google</code>
+    3. 받은 Code를 가지고, Google로 부터 AccessToken을 발급받음
+    4. 발급받은 AccessToken을 가지고, Google에서 User 정보를 조회해옴
+    5. User 정보를 저장하고, 유니크한 SocialId를 반환함
+    6. "socialId"를 Key로, socialId를 Value로 Session을 만듦
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/login/oauth/{social}&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">loginWithSocial</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">social</span><span class="p">,</span><span class="w"> </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">socialId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loginService</span><span class="p">.</span><span class="na">loginWithSocial</span><span class="p">(</span><span class="n">social</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">);</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getSession</span><span class="p">();</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">session</span><span class="p">.</span><span class="na">setAttribute</span><span class="p">(</span><span class="s">&quot;socialId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">socialId</span><span class="p">);</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;redirect:/&quot;</span><span class="p">;</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>메인페이지로 리다이렉트</li>
-</ol>
-</li>
-<li>
-<p><strong>로그인 이후 유저 권한으로 서비스 사용</strong></p>
+</code></pre></div>
+    7. 메인페이지로 리다이렉트</li>
+</ul>
 <ul>
-<li>ArgumentResolver에서 다음과 같이, 세션을 통해 socialId를 가져옴
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Override</span>
+<li><strong>로그인 이후 유저 권한으로 서비스 사용</strong>
+    - ArgumentResolver에서 다음과 같이, 세션을 통해 socialId를 가져옴
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Override</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">resolveArgument</span><span class="p">(</span><span class="n">MethodParameter</span><span class="w"> </span><span class="n">parameter</span><span class="p">,</span><span class="w"> </span><span class="n">ModelAndViewContainer</span><span class="w"> </span><span class="n">mavContainer</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">                            </span><span class="n">NativeWebRequest</span><span class="w"> </span><span class="n">webRequest</span><span class="p">,</span><span class="w"> </span><span class="n">WebDataBinderFactory</span><span class="w"> </span><span class="n">binderFactory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="w"> </span><span class="n">webRequest</span><span class="p">.</span><span class="na">getNativeRequest</span><span class="p">();</span>
@@ -23073,21 +23061,17 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findBySocialId</span><span class="p">((</span><span class="n">String</span><span class="p">)</span><span class="n">socialId</span><span class="p">)</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">            </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(</span><span class="n">NotLoggedInException</span><span class="p">::</span><span class="k">new</span><span class="p">);</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>조회한 User를 Controller의 파라미터로 넣어주고 사용</li>
+</code></pre></div>
+    - 조회한 User를 Controller의 파라미터로 넣어주고 사용</li>
 </ul>
-</li>
-<li>
-<p><strong>같은 socialId로 어떻게 특정 socialId를 가져온거야?</strong></p>
 <ul>
-<li>결국 Session도 쿠키의 일종이잖아요? 다음과 같이 반환되잖아요?<ul>
-<li>JSESSIONID = 고유한값 </li>
-</ul>
-</li>
-<li>사용자의 Http Request를 보면 Cookie: JESSIONID=고유한값 이렇게 요청이 갈거란 말이죠</li>
-<li>HttpSessions 라는 백엔드 전반에서 공유하고 있는 저장소에 Map&lt;고유값, ("socialId", socialId)&gt; 를 가지고 있다고 볼 수 있어요</li>
-<li>그래서 고유한값으로 ("socialId", socialId)를 가져오고, "socialId"를 통해 socialId를 가져올 수 있는 것이죠. 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HttpSessions</span><span class="w"> </span><span class="p">{</span>
+<li><strong>같은 socialId로 어떻게 특정 socialId를 가져온거야?</strong>
+    - 결국 Session도 쿠키의 일종이잖아요? 다음과 같이 반환되잖아요?
+        - JSESSIONID = 고유한값 
+    - 사용자의 Http Request를 보면 Cookie: JESSIONID=고유한값 이렇게 요청이 갈거란 말이죠
+    - HttpSessions 라는 백엔드 전반에서 공유하고 있는 저장소에 Map&lt;고유값, ("socialId", socialId)&gt; 를 가지고 있다고 볼 수 있어요
+    - 그래서 고유한값으로 ("socialId", socialId)를 가져오고, "socialId"를 통해 socialId를 가져올 수 있는 것이죠. 
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HttpSessions</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">HttpSession</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SESSIONS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addSession</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sessionId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">httpSession</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23142,155 +23126,89 @@
 <a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="dns">DNS는 어떻게 동작하는가?<a class="headerlink" href="#dns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://hwan-shell.tistory.com/320</em></li>
-<li>
-<p><strong>DNS란?</strong></p>
+<li><strong>DNS란?</strong>
+    - 문자를 IP주소로 변환시켜주는 시스템</li>
+</ul>
 <ul>
-<li>문자를 IP주소로 변환시켜주는 시스템</li>
+<li><strong>기지국 DNS 서버 (Local DNS Server)</strong>
+    - URL에 도메인 이름 입력했을 때, 해당 IP를 찾기 위해 가장 먼저 찾는 DNS
+    - LAN선을 통해 인터넷 연결시, 인터넷 사용할 수 있게 각 통신사 (SKT, KT, LG) 에 해당되는 통신사의 DNS 서버가 등록
+    - <code>nolto.app</code> IP 주소좀 알려줘!
+        - 있다면... "해당 IP 주소는 1.1.1.100" 이야!
+        - 없다면... "Root DNS 서버에 물어볼께 기다려봐!"</li>
 </ul>
-</li>
-<li>
-<p><strong>기지국 DNS 서버 (Local DNS Server)</strong></p>
 <ul>
-<li>URL에 도메인 이름 입력했을 때, 해당 IP를 찾기 위해 가장 먼저 찾는 DNS</li>
-<li>LAN선을 통해 인터넷 연결시, 인터넷 사용할 수 있게 각 통신사 (SKT, KT, LG) 에 해당되는 통신사의 DNS 서버가 등록</li>
-<li><code>nolto.app</code> IP 주소좀 알려줘!<ul>
-<li>있다면... "해당 IP 주소는 1.1.1.100" 이야!</li>
-<li>없다면... "Root DNS 서버에 물어볼께 기다려봐!"</li>
+<li><strong>루트 DNS 서버 (Root DNS Server)</strong>
+    - <img alt="" src="../../image/2021-11-09-dns.png" />
+    - 모든 DNS 서버는 Root DNS Server의 주소를 가짐
+    - Root DNS는 최상위 DNS 서버로 부터 아래 딸린 node DNS 서버에게로 차례차례 물어봄
+    - 여기서, Root DNS Server 목록에도 해당 Domain Name의 IP가 없을 수 있음
+        - 없다면 Local DNS에게 이렇게 알려줌
+        - "나한테 해당 도메인 주소가 없네. 대신 nolto.app의 주소중 .app의 주소 알고 있으니까, app DNS 주소에게 물어봐바"</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>루트 DNS 서버 (Root DNS Server)</strong></p>
 <ul>
-<li><img alt="" src="../../image/2021-11-09-dns.png" /></li>
-<li>모든 DNS 서버는 Root DNS Server의 주소를 가짐</li>
-<li>Root DNS는 최상위 DNS 서버로 부터 아래 딸린 node DNS 서버에게로 차례차례 물어봄</li>
-<li>여기서, Root DNS Server 목록에도 해당 Domain Name의 IP가 없을 수 있음<ul>
-<li>없다면 Local DNS에게 이렇게 알려줌</li>
-<li>"나한테 해당 도메인 주소가 없네. 대신 nolto.app의 주소중 .app의 주소 알고 있으니까, app DNS 주소에게 물어봐바"</li>
+<li><strong>최상위 도메인 (Top Level Domain)</strong>
+    - 다음과 같이 나뉨
+        1. 국가 코드 최상위 도메인 (.kr, .jp, .cn)
+        2. 일반 최상위 도메인 (.com, .net, .org)
+    - nolto.app은 다음과 같이 나뉩니다
+        - app: TLD
+        - nolto: 2차 도메인
+    - 재귀적으로 순환을 반복하여 IP를 찾을때까지 반복
+        - <img alt="" src="../../image/2021-11-09-recursive-query.png" /></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>최상위 도메인 (Top Level Domain)</strong></p>
 <ul>
-<li>다음과 같이 나뉨<ol>
-<li>국가 코드 최상위 도메인 (.kr, .jp, .cn)</li>
-<li>일반 최상위 도메인 (.com, .net, .org)</li>
-</ol>
-</li>
-<li>nolto.app은 다음과 같이 나뉩니다<ul>
-<li>app: TLD</li>
-<li>nolto: 2차 도메인</li>
-</ul>
-</li>
-<li>재귀적으로 순환을 반복하여 IP를 찾을때까지 반복<ul>
-<li><img alt="" src="../../image/2021-11-09-recursive-query.png" /></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>기타</strong></p>
-<ul>
-<li>DNS Cache: 힘겹게 찾았으니, 캐싱해둠</li>
-<li>프로토콜: DHCP 프로토콜 사용. UDP 기반. 53번 포트 사용</li>
-</ul>
-</li>
+<li><strong>기타</strong>
+    - DNS Cache: 힘겹게 찾았으니, 캐싱해둠
+    - 프로토콜: DHCP 프로토콜 사용. UDP 기반. 53번 포트 사용</li>
 </ul>
 <h2 id="tcpip">TCP/IP<a class="headerlink" href="#tcpip" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=BEK354TRgZ8&amp;t=125s</em></li>
-<li>
-<p><strong>TCP/IP</strong></p>
+<li><strong>TCP/IP</strong>
+    - 인터넷에서 컴퓨터들이 서로 정보를 주고 받는데 쓰이는 프로토콜의 집합
+    - 총 4개의 계층
+        - Application Layer: 특정 서비스를 제공하기 위해 어플리케이션끼리 정보 주고 받음
+            - FTP, HTTP, SSH, Telnet, DNS, SMTP
+        - Transport Layer: 송신된 데이터를 수신측 애플리케이션에 확실히 전달하게 함 (포트 번호 사용)
+            - TCP, UDP, RTP, RTCP
+        - Internet Layer: 수신측까지 데이터를 전달하기 위해 사용 (IP 주소 사용)
+            - IP, ARP, ICMP, RARP, OSPF
+        - Network Access Layer: 네트워크에 직접 연결된 기기 간 데이터 전송 (MAC 주소 사용)
+            - Ethernet, PPP, TokenRing </li>
+</ul>
 <ul>
-<li>인터넷에서 컴퓨터들이 서로 정보를 주고 받는데 쓰이는 프로토콜의 집합</li>
-<li>총 4개의 계층<ul>
-<li>Application Layer: 특정 서비스를 제공하기 위해 어플리케이션끼리 정보 주고 받음<ul>
-<li>FTP, HTTP, SSH, Telnet, DNS, SMTP</li>
-</ul>
-</li>
-<li>Transport Layer: 송신된 데이터를 수신측 애플리케이션에 확실히 전달하게 함 (포트 번호 사용)<ul>
-<li>TCP, UDP, RTP, RTCP</li>
-</ul>
-</li>
-<li>Internet Layer: 수신측까지 데이터를 전달하기 위해 사용 (IP 주소 사용)<ul>
-<li>IP, ARP, ICMP, RARP, OSPF</li>
-</ul>
-</li>
-<li>Network Access Layer: 네트워크에 직접 연결된 기기 간 데이터 전송 (MAC 주소 사용)<ul>
-<li>Ethernet, PPP, TokenRing </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>nolto.app 입력 시 무슨일이 일어날까?</strong></p>
-<ul>
-<li><img alt="" src="../../image/2021-11-09-http-wireshark.png" /></li>
-<li>
-<p>TCP는 연결지향이라 그전에 연결 수립이 필요!</p>
-<ul>
-<li>SYN, SYN+ACK, ACK 로 3-way handshaking 필요</li>
-<li>이후 소켓으로 연결 수립!</li>
-</ul>
-</li>
-<li>
-<p>HTTP 요청을 보내기 위해선 각각의 레이어에서 다음과 같은 정보를 적음</p>
-<ol>
-<li>Application Layer (HTTP) 에서 작성한 HTTP Request가 들어감</li>
-<li>Transport Layer (TCP) 에서 시작/목적지 포트번호를 적어줌 </li>
-<li>Internet Layer (IP) 에서 시작/목적지 IP번호를 적어줌<ul>
-<li>목적지 IP 번호는 DNS를 통해 조회해올 수 있음</li>
-<li>DHCP 프로토콜 (UDP 기반) 을 통해 IP 주소 받음</li>
-</ul>
-</li>
-<li>Network Access Layer (Ethernet)<ul>
-<li>바로 nolto.app의 MAC주소가 필요하진 않음</li>
-<li>우선 우리집 공유기의 MAC 주소부터 알아야 함<ul>
-<li>해당 공유기로 다른 네트워크와의 연결 가능 (따라서 게이트웨이라고 부름)</li>
-</ul>
-</li>
-<li>ARP 프로토콜을 통해서 우리집 공유기의 MAC 주소 알 수 있음</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p>라우팅을 거쳐 패킷을 전송</p>
-<ul>
-<li><em>참고: https://www.ibm.com/docs/ko/aix/7.1?topic=protocol-tcpip-routing</em></li>
-<li>라우트: 패킷을 대상에 전달할 수 있는 호스트의 경로 세그먼트만을 의미</li>
-<li>라우트 유형<ul>
-<li>호스트 라우트: 다른 NW의 특정 호스트에 패킷을 전달할 수 있는 게이트웨이 정의</li>
-<li>네트워크 라우트: 특정 NW의 호스트에 패킷을 전달할 수 있는 게이트웨이</li>
-<li>디폴트 라우트: 대상에 대한 호스트나 NW 라우트가 다르게 정의되지 않은 경우 사용할 게이트웨이</li>
-<li>루프백 라우트: 로컬 네트워크 주소로 전송된 모든 패킷에 대한 디폴트 라우트</li>
-<li>브로드캐스트 라우트: 모든 브로드캐스트 패킷에 대한 디폴트 라우트<ul>
-<li>두 개의 브로드캐스트 라우트가 NW에 IP가 있는 각 서브넷에 지정</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>TCP 이후에 연결 종료!</p>
-<ul>
-<li>SYN, SYN+ACK, ACK 로 3-way handshaking 필요</li>
-<li>이후 소켓으로 연결 수립!</li>
-</ul>
-</li>
-</ul>
+<li><strong>nolto.app 입력 시 무슨일이 일어날까?</strong>
+    - <img alt="" src="../../image/2021-11-09-http-wireshark.png" />
+    - TCP는 연결지향이라 그전에 연결 수립이 필요!
+        - SYN, SYN+ACK, ACK 로 3-way handshaking 필요
+        - 이후 소켓으로 연결 수립!<p>- HTTP 요청을 보내기 위해선 각각의 레이어에서 다음과 같은 정보를 적음
+      1. Application Layer (HTTP) 에서 작성한 HTTP Request가 들어감
+      2. Transport Layer (TCP) 에서 시작/목적지 포트번호를 적어줌 
+      3. Internet Layer (IP) 에서 시작/목적지 IP번호를 적어줌
+          - 목적지 IP 번호는 DNS를 통해 조회해올 수 있음
+          - DHCP 프로토콜 (UDP 기반) 을 통해 IP 주소 받음
+      4. Network Access Layer (Ethernet)
+          - 바로 nolto.app의 MAC주소가 필요하진 않음
+          - 우선 우리집 공유기의 MAC 주소부터 알아야 함
+              - 해당 공유기로 다른 네트워크와의 연결 가능 (따라서 게이트웨이라고 부름)
+          - ARP 프로토콜을 통해서 우리집 공유기의 MAC 주소 알 수 있음</p>
+<p>- 라우팅을 거쳐 패킷을 전송
+      - <em>참고: https://www.ibm.com/docs/ko/aix/7.1?topic=protocol-tcpip-routing</em>
+      - 라우트: 패킷을 대상에 전달할 수 있는 호스트의 경로 세그먼트만을 의미
+      - 라우트 유형
+          - 호스트 라우트: 다른 NW의 특정 호스트에 패킷을 전달할 수 있는 게이트웨이 정의
+          - 네트워크 라우트: 특정 NW의 호스트에 패킷을 전달할 수 있는 게이트웨이
+          - 디폴트 라우트: 대상에 대한 호스트나 NW 라우트가 다르게 정의되지 않은 경우 사용할 게이트웨이
+          - 루프백 라우트: 로컬 네트워크 주소로 전송된 모든 패킷에 대한 디폴트 라우트
+          - 브로드캐스트 라우트: 모든 브로드캐스트 패킷에 대한 디폴트 라우트
+              - 두 개의 브로드캐스트 라우트가 NW에 IP가 있는 각 서브넷에 지정</p>
+<p>- TCP 이후에 연결 종료!
+      - SYN, SYN+ACK, ACK 로 3-way handshaking 필요
+      - 이후 소켓으로 연결 수립!</p>
 </li>
 </ul>
 

@@ -22931,14 +22931,14 @@
 <h3 id="2024-12-31">2024-12-31<a class="headerlink" href="#2024-12-31" title="Permanent link">&para;</a></h3>
 <h2 id="play-framework-controller">Play Framework Controller<a class="headerlink" href="#play-framework-controller" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Controller는 추상 클래스, 트레이트로 구성되어 있음</li>
-<li>
-<p>Play 2.8 기준 다음과 같음</p>
+<li>Play 2.8 기준 다음과 같음</li>
+</ul>
 </li>
-<li>
-<p><strong>1. BaseController</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>1. BaseController</strong><ul>
 <li>Play에서 Controller가 가져야 할 기본 동작(Action 생성, request/response 헬퍼 메서드) 모아둔 트레이트<ul>
 <li>Controller의 가장 기본 베이스가 되는 트레이트</li>
 </ul>
@@ -22956,35 +22956,34 @@
 </code></pre></div></li>
 </ol>
 </li>
-<li>
-<p>특징</p>
-<ul>
+<li>특징<ul>
 <li>Play 제공 액션 메서드 사용 가능 (<code>Action</code>, <code>Action.async</code>)</li>
 <li>DI를 통해 <code>ControllerComponents</code> 받아올 것</li>
 <li><code>BaseController</code> 자체는 기본 골격만 제공, 다양한 편의 메서드는 타 트레이트나 추상 클래스를 통해 제공됨</li>
 </ul>
 </li>
-<li>
-<p><strong>2. AbstractController</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>2. AbstractController</strong><ul>
 <li>BaseController 상속 받고, 필요한 헬퍼들을 믹스인한 추상 클래스. </li>
 <li>생성자에서 <code>ControllerComponents</code> 주입 받아 보관
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AbstractController</span><span class="p">(</span><span class="k">protected</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">controllerComponents</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseController</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AbstractController</span><span class="p">(</span><span class="k">protected</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">controllerComponents</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseController</span>
 </code></pre></div></li>
-<li>
-<p>특징</p>
-<ul>
+<li>특징<ul>
 <li><code>ControllerComponents</code> 생성자에서 직접 주입받아 내부 필드로 보관. DI 간편</li>
 <li>Play 제공 헬퍼 메서드(<code>OK</code>, <code>NotFound</code>, <code>Redirect</code> 등) 바로 사용 가능</li>
 </ul>
 </li>
-<li>
-<p><strong>3. InjectedController</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>3. InjectedController</strong><ul>
 <li><code>BaseController</code> 상속, <code>@Inject()</code>로 <code>ControllerComponents</code>를 멤버로 자동 주입하는 추상 클래스</li>
-<li>
-<p><code>class MyController extends InjectedController</code> 형식으로 정의한 뒤, 별도 생성자 주입 없이 DI 프레임워크 설정에 따라 <code>controllerComponents</code>를 알아서 주입
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">play</span><span class="p">.</span><span class="nn">api</span><span class="p">.</span><span class="nn">mvc</span><span class="p">.</span><span class="n">_</span>
+<li><code>class MyController extends InjectedController</code> 형식으로 정의한 뒤, 별도 생성자 주입 없이 DI 프레임워크 설정에 따라 <code>controllerComponents</code>를 알아서 주입
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">play</span><span class="p">.</span><span class="nn">api</span><span class="p">.</span><span class="nn">mvc</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">javax</span><span class="p">.</span><span class="nn">inject</span><span class="p">.</span><span class="nc">Inject</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyController</span><span class="w"> </span><span class="nd">@Inject</span><span class="p">()()</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">InjectedController</span><span class="w"> </span><span class="p">{</span>
@@ -22992,18 +22991,20 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">      </span><span class="nc">Ok</span><span class="p">(</span><span class="s">&quot;hello InjectedController&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 </li>
-<li>
-<p><strong>4. (구 버전) Controller</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>4. (구 버전) Controller</strong><ul>
 <li>Play 2.7 이전에 쓰이던 trait. <code>BaseController</code> 및 추가 헬퍼를 섞어둔 형태</li>
 <li>Play 2.8 기준 deprecated 되었거나, 사용 권장되지 않음. </li>
-<li>
-<p><code>AbstractController</code>, <code>InjectedController</code> 사용이 권장됨</p>
+<li><code>AbstractController</code>, <code>InjectedController</code> 사용이 권장됨</li>
+</ul>
 </li>
-<li>
-<p><strong>정리</strong>
+</ul>
+<ul>
+<li><strong>정리</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/**</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm">  * Defines utility methods to generate `Action` and `Results` types.</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm">  *</span>
@@ -23039,14 +23040,13 @@
 <a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="n">_components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">components</span>
 <a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>ControllerComponents</strong></p>
-</li>
+</code></pre></div></li>
+</ul>
+<ul>
+<li><strong>ControllerComponents</strong><ul>
 <li>컨트롤러를 구성할 때 필요한 핵심 컴포넌트를 담은 객체</li>
 <li>컨트롤러가 HTTP 요청/응답을 처리하는데 필요한 다양한 요소를 한데 묶어, DI 방식으로 쉽게 전달 받을 수 있도록 함.
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="w"> </span><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">actionBuilder</span><span class="p">:</span><span class="w"> </span><span class="nc">ActionBuilder</span><span class="p">[</span><span class="nc">Request</span><span class="p">,</span><span class="w"> </span><span class="nc">AnyContent</span><span class="p">]</span><span class="w"> </span><span class="c1">// Action 생성할 때 인증/권한 체크 공통 로직을 ActionBuilder로 분리 - 재활용</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">parsers</span><span class="p">:</span><span class="w"> </span><span class="nc">PlayBodyParsers</span><span class="w">  </span><span class="c1">// JSON, XML, Form Data 파싱할 수 있는 parser</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">messagesApi</span><span class="p">:</span><span class="w"> </span><span class="nc">MessagesApi</span>
@@ -23055,82 +23055,98 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">executionContext</span><span class="p">:</span><span class="w"> </span><span class="n">scala</span><span class="p">.</span><span class="n">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="w">  </span><span class="c1">// 비동기 로직 실행 시 필요한 ExecutionContext. Play 논블로킹 I/O. 컨트롤러 내부에서 비동기 처리 시 필요</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>역할</p>
-<ol>
-<li><code>ActionBuilder</code>, <code>PlayBodyParsers</code> 등은 HTTP 요청을 실제로 처리하기 위한 필수 구성 요소</li>
+<li>역할<ol>
+<li><code>ActionBuilder</code>, <code>PlayBodyParsers</code> 등은 HTTP 요청을 실제로 처리하기 위한 필수 구성 요소<ul>
 <li><code>Action { implicit request =&gt; ... }</code> 형태에 대한 처리에서 내부적으로 <code>ActionBuilder</code>, <code>BodyParser</code>가 모두 필요함</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p><strong>Action</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Action</strong><ul>
 <li>HTTP 요청 받아서 처리, 그 결과로 HTTP 응답을 반환하는 하나의 함수 (컨트롤러 메서드를 감싸고 있은 요청 처리 로직)</li>
 <li>개념<ol>
-<li>요청 -&gt; 액션 -&gt; 응답</li>
+<li>요청 -&gt; 액션 -&gt; 응답<ul>
 <li>클라이언트가 보낸 HTTP 요청을 Action이 받아 처리하고, 최종적으로 HTTP 응답 반환</li>
-<li>함수형 인터페이스</li>
+</ul>
+</li>
+<li>함수형 인터페이스<ul>
 <li>Play Scala 기준, <code>Action</code>은 <code>Request =&gt; Result</code> 형태의 함수</li>
 <li>내부에서는 요청 파싱, 비즈니스 로직 수행, 응답 생성 과정을 거침</li>
-<li>ActionBuilder</li>
+</ul>
+</li>
+<li>ActionBuilder<ul>
 <li><code>Action</code>은 보통 <code>ActionBuilder</code> (ex. <code>DefaultActionBuilder</code>, <code>cc.actionBuilder</code> 등) 통해 생성</li>
 <li>인증/인가, 공통 로직 등 ActionBuilder 레벨에서 적용해 중복 코드 줄이고 일관성 있는 처리 가능</li>
+</ul>
+</li>
 </ol>
 </li>
-<li>
-<p>특장점</p>
-<ol>
-<li>간결한 선언</li>
+<li>특장점<ol>
+<li>간결한 선언<ul>
 <li><code>Action { ... }</code> 요청 처리로직 작성 -&gt; 컨트롤러 코드 간결</li>
-<li>미들웨어(필터) 역할</li>
+</ul>
+</li>
+<li>미들웨어(필터) 역할<ul>
 <li>인증/인가, 로깅, CORS 공통 로직 <code>ActionBuilder</code> 레벨에서 적용. 여러 개의 액션에 일괄적 반영 가능</li>
 <li>ex. <code>AuthenticatedAction { request =&gt; ... }</code> 같은 식으로 인증을 거친 액션만 따로 정의 가능</li>
-<li>비동기 지원</li>
+</ul>
+</li>
+<li>비동기 지원<ul>
 <li>액션 처리 과정에서 비동기 작업 수행 가능</li>
+</ul>
+</li>
 <li>리퀘스트 파싱 기능</li>
 </ol>
 </li>
-<li>
-<p><strong>Custom Action</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Custom Action</strong><ul>
 <li>인증/인가 등의 로직을 커스텀 액션으로 만들어 여러 컨트롤러 메서드에 손쉽게 적용 가능</li>
-<li><code>ActionBuilder</code>를 활용하여 구현하는 방식 사용</li>
-<li>커스텀 Request 타입 정의<ul>
+<li><code>ActionBuilder</code>를 활용하여 구현하는 방식 사용
+1. 커스텀 Request 타입 정의<ul>
 <li>Request를 확장한 WrappedRequest를 만들어, 인증 정보나 사용자 정보 등을 담아 컨트롤러로 전달
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">package</span><span class="w"> </span><span class="n">actions</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">import</span><span class="w"> </span><span class="nn">play</span><span class="p">.</span><span class="nn">api</span><span class="p">.</span><span class="nn">mvc</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">UserRequest</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">username</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">:</span><span class="w"> </span><span class="nc">Request</span><span class="p">[</span><span class="nc">A</span><span class="p">])</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">WrappedRequest</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">request</span><span class="p">)</span>
-</code></pre></div></li>
+</code></pre></div>
+2. 커스텀 ActionBuilder 구현</li>
+<li><code>ActionBuilder</code>를 상속받아 원하는 인증/인가 로직을 invokeBlock 메서드 안에 구현
+3. 컨트롤러에서 사용</li>
 </ul>
 </li>
-<li>커스텀 ActionBuilder 구현<ul>
-<li><code>ActionBuilder</code>를 상속받아 원하는 인증/인가 로직을 invokeBlock 메서드 안에 구현</li>
 </ul>
 </li>
-<li>컨트롤러에서 사용</li>
 </ul>
 <h2 id="slick-versions">Slick Versions<a class="headerlink" href="#slick-versions" title="Permanent link">&para;</a></h2>
 <p><em>play-slick 버전 참고 : https://github.com/playframework/play-slick</em>
   - 예전 센터 : slick 2.1.0 | play 2.5.19 | scala 2.11.7
   - 신규 센터 : play-slick 5.0.2 | play 2.8.x | slick 3.3.2 + | Scala 2.12.x, 2.13.x</p>
 <ul>
-<li><strong>Slick 2.x</strong></li>
+<li><strong>Slick 2.x</strong><ul>
 <li><code>.list</code>, <code>.first</code> -&gt; 동기/블록킹식 사용</li>
 <li>내부적으로 Session 사용해 동기적으로 DB 조회하여 결과 반환</li>
-<li>
-<p>스레드 블로킹하기에 동기로 리턴</p>
+<li>스레드 블로킹하기에 동기로 리턴</li>
+</ul>
 </li>
-<li>
-<p><strong>Slick 3.x</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>Slick 3.x</strong><ul>
 <li><code>.result</code>와 <code>Future</code> 기반 -&gt; 비동기/넌블러킹<ul>
 <li>비동기로 데이터를 받아온다 : 즉시 Future 반환. DB 처리는 백그라운드 진행. 나중에 결과 준비 완료 시 콜백/완료 상태 알림</li>
 </ul>
 </li>
 <li>DBIOAction 중심.<ul>
 <li><code>db.run(...)</code> 호출 시, <code>Future[T]</code> 반환</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

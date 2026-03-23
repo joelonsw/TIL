@@ -22927,7 +22927,7 @@
   - <code>User.unapply</code>는 스칼라 컴파일러에서 제공하는 Case class의 메서드
     - <code>User</code>의 필드를 <code>tuple</code> 옵션으로 변경</p>
 <ul>
-<li><strong>좀 더 <code>*</code>를 봐보자</strong></li>
+<li><strong>좀 더 <code>*</code>를 봐보자</strong><ul>
 <li><code>(id, firstName, lastName, email)</code> : 데이터베이스 테이블의 칼럼을 가지는 튜플</li>
 <li><code>&lt;&gt;</code> : <code>Tuple4</code> 타입과 case class <code>User</code>를 변환해주는 연산을 수행<ul>
 <li><code>def &lt;&gt;[R : ClassTag](f: (U =&gt; R), g: (R =&gt; Option[U])) = new MappedProjection[R, U](shape.toNode(value), MappedScalaType.Mapper(g.andThen(_.get).asInstanceOf[Any =&gt; Any], f.asInstanceOf[Any =&gt; Any], None), implicitly[ClassTag[R]])</code></li>
@@ -22941,31 +22941,31 @@
 <li>embedded DSL로써... Rep 가상 타입을 직접 접근 없이 오페레이션 수행토록</li>
 </ul>
 </li>
-<li>
-<p>Slick이 <code>Rep[Sth]</code> -&gt; <code>Sth</code> 으로 뒤에서 뚝딱 처리해줌.</p>
-<ul>
+<li>Slick이 <code>Rep[Sth]</code> -&gt; <code>Sth</code> 으로 뒤에서 뚝딱 처리해줌.<ul>
 <li>해당 과정은 <code>db.run(query)</code>를 통해 수행됨</li>
 </ul>
 </li>
-<li>
-<p><strong>Slick은 <code>JdbcTemplate</code>을 쓰는건가?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Slick은 <code>JdbcTemplate</code>을 쓰는건가?</strong><ul>
 <li>아님</li>
 <li>슬릭은 FRM</li>
 <li>스칼라 진영에서 DB 접근 기술이 별도로 있어</li>
 <li>컴파일 타임 Safety 하도록 지원</li>
-<li>
-<p>절차</p>
-<ol>
+<li>절차<ol>
 <li>테이블 정의 -&gt; 스키마는 슬릭의 타입세이프 방식을 사용 (칼럼, 타입 관계 매핑)</li>
 <li>슬릭은 스칼라로 써있는 데이터베이스 연산을 AST (Abstract Syntax Tree)로 만들어</li>
 <li>슬릭은 SQL 쿼리를 JDBC를 통해 디비에 보낸다. 이때, AST를 SQL로 변경</li>
 <li>데이터베이스로부터 결과값 받아서 정의된 타입으로 매핑해줌 (case class, tuple 등)</li>
 </ol>
 </li>
-<li>
-<p><strong>Slick vs QueryDSL</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>Slick vs QueryDSL</strong><ul>
 <li>공통점<ol>
 <li>타입 세이프</li>
 <li>데이터베이스에 구애받지 않음: SQL 방언에 따라 SQL 생성 가능</li>
@@ -22974,13 +22974,19 @@
 </li>
 <li>차이점<ol>
 <li>언어/생태계 : Slick은 implicit, case class 등 사용</li>
-<li>중심 사항 : </li>
+<li>중심 사항 : <ul>
 <li>Slick은 데이터베이스 쿼리 액세스 라이브러리. 기능적인 방식으로 DB와 연결. SQL 직접 표현 가능</li>
 <li>QueryDSL은 광범위한 데이터베이스 플랫폼 지원 (JPA, MongoDB, JDBC)</li>
-<li>데이터 처리: </li>
+</ul>
+</li>
+<li>데이터 처리: <ul>
 <li>Slick은 JDBC 기저 위에 reactive streams. 비동기 연산 최대한</li>
 <li>QueryDSL: 블락킹 연산임</li>
+</ul>
+</li>
 </ol>
+</li>
+</ul>
 </li>
 </ul>
 

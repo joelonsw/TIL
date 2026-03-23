@@ -22954,118 +22954,80 @@
 <h2 id="binlog">Binlog<a class="headerlink" href="#binlog" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://byedong.tistory.com/10</em></li>
-<li><strong>binlog 썰</strong><ul>
-<li>원래 binlog는 replication을 위함 but 복구용도로도 매우 훌륭!</li>
-<li>/etc/my.cnf에 log-bin 주석처리 되어있지 않다면, mysql은 기본적으로... <ul>
-<li>/usr/local/mysql/data 디렉토리에<ul>
-<li>Host명-bin.000001</li>
-<li>Host명-bin.000002</li>
-<li>Host명-bin.000003... 등을 생성<ul>
-<li>mysql 재시작할 때 마다 늘어나는 숫자!</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>binlog에는...<ul>
-<li>DDL (Create, Alter, Drop), DML (Insert, Update, Delete) 등이 기록</li>
-</ul>
-</li>
-<li>binlog는 바이너리라서 변환 좀 해야 읽을 수 있음<ul>
-<li><code>/usr/local/mysql/data/Host명-bin.0000001 &gt;&gt; 1.sql</code></li>
-</ul>
-</li>
-<li>이렇게 백업 받은 파일에서 1.sql의 50000번쨰 SQL 문이 장애를 일으킨놈이라면 이걸 주석처리하자</li>
-</ul>
-</li>
+<li><strong>binlog 썰</strong>
+    - 원래 binlog는 replication을 위함 but 복구용도로도 매우 훌륭!
+    - /etc/my.cnf에 log-bin 주석처리 되어있지 않다면, mysql은 기본적으로... 
+        - /usr/local/mysql/data 디렉토리에
+            - Host명-bin.000001
+            - Host명-bin.000002
+            - Host명-bin.000003... 등을 생성
+                - mysql 재시작할 때 마다 늘어나는 숫자!
+    - binlog에는...
+        - DDL (Create, Alter, Drop), DML (Insert, Update, Delete) 등이 기록
+    - binlog는 바이너리라서 변환 좀 해야 읽을 수 있음
+        - <code>/usr/local/mysql/data/Host명-bin.0000001 &gt;&gt; 1.sql</code>
+    - 이렇게 백업 받은 파일에서 1.sql의 50000번쨰 SQL 문이 장애를 일으킨놈이라면 이걸 주석처리하자</li>
 </ul>
 <h2 id="crontab">Crontab<a class="headerlink" href="#crontab" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://jdm.kr/blog/2</em></li>
 <li><em>참고 2: https://xrabcde.github.io/db-backup-auto/</em></li>
-<li>
-<p><strong>Crontab 기본</strong></p>
+<li><strong>Crontab 기본</strong>
+    - 윈도우의 스케줄러와 비슷
+    - "특정 시간에 특정 작업을 실행한다!"
+    - <code>$ crontab -e</code>
+        - 크론탭 설정할 수 있는 장소
+        - 각종 크론탭 명령 입력해두자
+    - <code>$ crontab -l</code>
+        - cat 명령어로 파일 읽어들인 것처럼 표준 출력으로 크론탭 내용
+    - <code>$ crontab -r</code>
+        - 크론탭 삭제
+    - 한 번 입력해볼까?
+        1. <code>$ crontab -e</code>
+        2. <code>* * * * * ls -al</code>
+        3. <code>:wq</code></li>
+</ul>
 <ul>
-<li>윈도우의 스케줄러와 비슷</li>
-<li>"특정 시간에 특정 작업을 실행한다!"</li>
-<li><code>$ crontab -e</code><ul>
-<li>크론탭 설정할 수 있는 장소</li>
-<li>각종 크론탭 명령 입력해두자</li>
-</ul>
-</li>
-<li><code>$ crontab -l</code><ul>
-<li>cat 명령어로 파일 읽어들인 것처럼 표준 출력으로 크론탭 내용</li>
-</ul>
-</li>
-<li><code>$ crontab -r</code><ul>
-<li>크론탭 삭제</li>
-</ul>
-</li>
-<li>한 번 입력해볼까?<ol>
-<li><code>$ crontab -e</code></li>
-<li><code>* * * * * ls -al</code></li>
-<li><code>:wq</code></li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>주기 설정</strong>
+<li><strong>주기 설정</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>*　　　　　　*　　　　　　*　　　　　　*　　　　　　*
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>분(0-59)　　시간(0-23)　일(1-31)　　월(1-12)　  요일(0-7)
-</code></pre></div></p>
-<ul>
-<li>숫자 범위로 입력하거나 * 로 입력하거나!</li>
-<li>예시들<ul>
-<li><code>* * * * * /home/script/test.sh</code> : 매분 test.sh 실행</li>
-<li><code>45 5 * * 5 /home/script/test.sh</code> : 매주 금요일 오전 5시 45분에 test.sh 실행</li>
-<li><code>0,20,40 * * * * /home/script/test.sh</code> : 매일 매시간 0분, 20분, 40분에 test.sh 실행</li>
-<li><code>0-30 1 * * * /home/script/test.sh</code> : 매일 1시 0분 ~ 30분 까지 매 분 test.sh 실행</li>
-<li><code>*/10 * * * * /home/script/test.sh</code> : 매 10분마다 test.sh 실행</li>
-<li><code>*/10  2,3,4 5-6 * * /home/script/test.sh</code> : 5일에서 6일까지 2,3,4시에 매 10분마다 tesh.sh 실행</li>
-</ul>
-</li>
-<li>기호들<ul>
-<li><code>*</code>: 매번</li>
-<li><code>-</code>: 부터 어디까지</li>
-<li><code>/</code>: 마다</li>
-</ul>
-</li>
-</ul>
-</li>
+</code></pre></div>
+    - 숫자 범위로 입력하거나 * 로 입력하거나!
+    - 예시들
+        - <code>* * * * * /home/script/test.sh</code> : 매분 test.sh 실행
+        - <code>45 5 * * 5 /home/script/test.sh</code> : 매주 금요일 오전 5시 45분에 test.sh 실행
+        - <code>0,20,40 * * * * /home/script/test.sh</code> : 매일 매시간 0분, 20분, 40분에 test.sh 실행
+        - <code>0-30 1 * * * /home/script/test.sh</code> : 매일 1시 0분 ~ 30분 까지 매 분 test.sh 실행
+        - <code>*/10 * * * * /home/script/test.sh</code> : 매 10분마다 test.sh 실행
+        - <code>*/10  2,3,4 5-6 * * /home/script/test.sh</code> : 5일에서 6일까지 2,3,4시에 매 10분마다 tesh.sh 실행
+    - 기호들
+        - <code>*</code>: 매번
+        - <code>-</code>: 부터 어디까지
+        - <code>/</code>: 마다</li>
 </ul>
 <h2 id="mariadb-binlog">MariaDB binlog<a class="headerlink" href="#mariadb-binlog" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고 1: https://mariadb.com/kb/en/overview-of-the-binary-log/</em></li>
 <li><em>참고 2: https://mariadb.com/kb/en/activating-the-binary-log/</em></li>
-<li>
-<p><em>참고 3: https://mariadb.com/kb/en/using-and-maintaining-the-binary-log/</em></p>
-</li>
-<li>
-<p><strong>Overview</strong></p>
+<li><em>참고 3: https://mariadb.com/kb/en/using-and-maintaining-the-binary-log/</em></li>
+</ul>
 <ul>
-<li>binlog는 DB 구조, 데이터 변경, 쿼리 등을 모두 저장<ul>
-<li>CREATE, ALTER, INSERT, UPDATE, DELETE는 로그 되지만, SELECT, SHOW는 로그 안 됨</li>
+<li><strong>Overview</strong>
+    - binlog는 DB 구조, 데이터 변경, 쿼리 등을 모두 저장
+        - CREATE, ALTER, INSERT, UPDATE, DELETE는 로그 되지만, SELECT, SHOW는 로그 안 됨
+    - binlog의 목적은 replication 사용. Master-Slave 구조
+    - MariaDB 서버에 binlog를 활성화 시키면 조금 느려짐
+    - binlog에도 민감한 정보가 포함될 수 있으니, 정보 보호가 매우 중요
+    - binlog는 binary로 저장됨. 따라서 에디터에서 보고 싶다면 mysqlbinlog를 활용해 변환해야함</li>
 </ul>
-</li>
-<li>binlog의 목적은 replication 사용. Master-Slave 구조</li>
-<li>MariaDB 서버에 binlog를 활성화 시키면 조금 느려짐</li>
-<li>binlog에도 민감한 정보가 포함될 수 있으니, 정보 보호가 매우 중요</li>
-<li>binlog는 binary로 저장됨. 따라서 에디터에서 보고 싶다면 mysqlbinlog를 활용해 변환해야함</li>
-</ul>
-</li>
-<li>
-<p><strong>Activating the Binary Log</strong></p>
 <ul>
-<li>binlog 활성화를 위해 <code>--log-bin[=name]</code> 옵션으로 서버를 시작할 것<ul>
-<li>name을 안쓰면 datadir/log-basename-bin, datadir/mysql-bin, datadir/mariadb-bin 중 하나</li>
-</ul>
-</li>
-<li><code>--log-basename</code> 옵션을 추가하여 filename을 명시해주는 것을 추천<ul>
-<li>binlog를 저장해두는 곳엔 binary log index가 포함되고, </li>
-<li>진행될수록 높은 번호의 binlog가 쌓임
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shell&gt; ls -l 
+<li><strong>Activating the Binary Log</strong>
+    - binlog 활성화를 위해 <code>--log-bin[=name]</code> 옵션으로 서버를 시작할 것
+        - name을 안쓰면 datadir/log-basename-bin, datadir/mysql-bin, datadir/mariadb-bin 중 하나
+    - <code>--log-basename</code> 옵션을 추가하여 filename을 명시해주는 것을 추천
+        - binlog를 저장해두는 곳엔 binary log index가 포함되고, 
+        - 진행될수록 높은 번호의 binlog가 쌓임
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>shell&gt; ls -l 
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>total 100
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>...
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>-rw-rw---- 1 mysql adm 2098 Apr 19 00:46 mariadb-bin.000079
@@ -23078,10 +23040,6 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>-rw-rw---- 1 mysql adm  398 Apr 21 21:24 mariadb-bin.000086
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>-rw-rw---- 1 mysql adm  816 Apr 21 17:05 mariadb-bin.index
 </code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
 

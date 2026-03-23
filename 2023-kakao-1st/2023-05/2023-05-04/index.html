@@ -23020,25 +23020,27 @@
 <h2 id="jmx">JMX<a class="headerlink" href="#jmx" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&amp;blogId=pcmola&amp;logNo=222061574743</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>자바 어플리케이션의 모니터링과 관리 기능 제공</li>
 <li>JDK 1.5 이상부터 기본적으로 탑재된 기능</li>
 <li>API를 외부로 노출해 application 설정 및 통계데이터를 수집할 수 있는 기능을 제공</li>
-<li>
-<p>MBean(Managed Bean)이라는 객체로 표현되어 응용 프로그램/객체/장치 등을 감사</p>
+<li>MBean(Managed Bean)이라는 객체로 표현되어 응용 프로그램/객체/장치 등을 감사</li>
+</ul>
 </li>
-<li>
-<p><strong>환경</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>환경</strong><ul>
 <li>3개의 아키텍쳐 티어 구성</li>
 <li><img alt="" src="../../images/2023-05-04-jmx.png" /></li>
 <li>Instrumental Level<ul>
 <li>JMX로 관리 가능한 리소스의 구현을 위한 스펙 제공</li>
-<li>자원을 다루는 수단은 Mbean으로</li>
+<li>자원을 다루는 수단은 Mbean으로<ul>
 <li>Standard MBean</li>
 <li>Dynamic MBean</li>
 <li>Model MBean</li>
 <li>Open MBean </li>
+</ul>
+</li>
 <li>Notification 메커니즘: Mbean이 Notification Event를 통해 다른 레벨에 존재하는 컴포넌트에게 이벤트를 보낸다</li>
 </ul>
 </li>
@@ -23047,15 +23049,15 @@
 <li>MBean 서버와 MBean을 다루기 위한 에이전트 서비스로 구성</li>
 </ul>
 </li>
-<li>
-<p>Remote Management Level</p>
-<ul>
+<li>Remote Management Level<ul>
 <li>어댑터와 커넥션의 프로토콜 지정함으로써 에이전트와 외부 커뮤니케이션 정의</li>
 </ul>
 </li>
-<li>
-<p><strong>사용방법</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>사용방법</strong><ul>
 <li>JDK에서 시스템 정보를 가져오는 MBean 제공</li>
 <li>Apache, Tomcat 등은 해당 서버 정보를 가져올 수 있는 MBean 제공</li>
 <li>MBeanServer에 접속하기 위해 Connector 또는 Adaptor 이용<ul>
@@ -23066,9 +23068,11 @@
 <li>특정 데이터 클래스의 인터페이스를 정의한다. 해당 인터페이스는 클래스의 getter, setter, 임의 사용 메서드를 작성, 서버 측에서 그 인터페이스에 대한 실질적인 내용을 작성함</li>
 <li>Server를 작동시키고 Connector를 통해 Client가 Server에 요청하면 Server는 해당 인터페이스의 기능 수행후 결과 반환</li>
 </ul>
+</li>
+</ul>
 <h2 id="sbt-dist-zip">Sbt dist를 통해 .zip 파일을 만든다는 것...<a class="headerlink" href="#sbt-dist-zip" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>sbt dist</strong></li>
+<li><strong>sbt dist</strong><ul>
 <li><code>sbt dist</code> 명령어는 프로젝트를 실행하기 위한 모든 필요한 파일들 배포 패키지로 묶어준다</li>
 <li>zip은 아래와 같은 컴포넌트를 가지고 있다<ul>
 <li><code>bin</code>: UNIX, Windows 포맷으로 작성된 시작 스크립트</li>
@@ -23076,12 +23080,12 @@
 <li><code>conf</code>: 어플리케이션 conf 파일들</li>
 </ul>
 </li>
-<li>
-<p>어플리케이션 실행하려면, bin의 시작 스크립트 추출해서 실행시키면, lib에서 필요한 디펜던시 땡겨와서 사용할 거다</p>
+<li>어플리케이션 실행하려면, bin의 시작 스크립트 추출해서 실행시키면, lib에서 필요한 디펜던시 땡겨와서 사용할 거다</li>
+</ul>
 </li>
-<li>
-<p><strong>bin 파일의 start script는 플랫폼 독립적일까?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>bin 파일의 start script는 플랫폼 독립적일까?</strong><ul>
 <li>기본적으로 플레이 어플리케이션이 만들어내는 쉘 스크립트는 Unix-based system. <ul>
 <li>start script 까보면 결국 JVM위에서 구동시키는 역할이 쓰여있긴함</li>
 <li>다만 쉘스크립트가 유닉스 계열일 뿐이지</li>
@@ -23091,44 +23095,48 @@
 <li>Cygwin 등의 툴로 돌리면 변환이 가능하다네...?</li>
 </ul>
 </li>
-<li>
-<p>도커와 같은 툴로 컨테이너 만들 수도 있어보이고</p>
+<li>도커와 같은 툴로 컨테이너 만들 수도 있어보이고</li>
+</ul>
 </li>
-<li>
-<p><strong>스프링 부트 처럼 jar로 돌릴라면?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>스프링 부트 처럼 jar로 돌릴라면?</strong><ul>
 <li>addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "1.2.0")</li>
-<li>
-<p>fat JAR 만들어주는 라이브러리 쓰세요</p>
+<li>fat JAR 만들어주는 라이브러리 쓰세요</li>
+</ul>
 </li>
-<li>
-<p><strong>시작 스크립트 vs jar</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>시작 스크립트 vs jar</strong><ul>
 <li>시작 스크립트는...<ul>
 <li>JVM 설정등에서 더 유연함을 가져갈 수 있다</li>
 <li>파인튜닝 등이 가능</li>
 </ul>
 </li>
-<li>
-<p>Jar는...</p>
-<ul>
+<li>Jar는...<ul>
 <li>어플리케이션 실행에 더 적은 스텝</li>
 <li>다른 툴들과 통합이 쉬움</li>
 </ul>
 </li>
-<li>
-<p><strong>시작 스크립트에서 준 JVM 옵션이 /lib의 jar 구동에도 적용될까?</strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong>시작 스크립트에서 준 JVM 옵션이 /lib의 jar 구동에도 적용될까?</strong><ul>
 <li>똑같이 적용되진 않음</li>
 <li><code>-Xbootclasspath/p:</code> 이런 옵션 주라네</li>
+</ul>
+</li>
 </ul>
 <h2 id="warmup">배포시 Warmup을 하는 이유<a class="headerlink" href="#warmup" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://www.youtube.com/watch?v=CQi3SS2YspY</em></li>
 <li><em>참고: https://velog.io/@qwerty1434/ifkakao-JVM-warm-up</em></li>
-<li><strong>JVM 위에서 돌아가는 코드</strong></li>
+<li><strong>JVM 위에서 돌아가는 코드</strong><ul>
 <li>Source Code --(compile)--&gt; Byte Code ----&gt; JVM<ul>
 <li>Byte Code로 컴파일 한다 (주로 jar, war)</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23136,24 +23144,30 @@
 <ul>
 <li><em>참고: https://mvnrepository.com/artifact/org.aspectj/aspectjweaver</em></li>
 <li>AspectJ weaver는 자바 클래스에 aspect를 적용한다</li>
-<li>자바 에이전트로 사용이 가능한데...</li>
+<li>자바 에이전트로 사용이 가능한데...<ul>
 <li>클래스 로딩 시점에 Load-Time Weaving(LTW)를 적용하거나</li>
 <li>AspectJ 런타임 클래스를 포함할 수 있음</li>
+</ul>
+</li>
 </ul>
 <h2 id="gateway">Gateway<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h2>
 <ul>
 <li>다른 서비스와 어플리케이션 중간에서 동작하는 SW</li>
 <li>주 목적은 각기 다른 컴포넌트들에게 획일화된 인터페이스를 제공함으로써 리퀘스트를 알맞은 종착지로 라우팅 해주는 것</li>
-<li>게이트웨이에서 다음과 같은 태스크를 맡길 수 있음</li>
+<li>게이트웨이에서 다음과 같은 태스크를 맡길 수 있음<ul>
 <li>인증/인가</li>
 <li>로드밸런싱</li>
 <li>캐싱</li>
 <li>프로토콜 전환 (아마 ssl termination일 듯?)</li>
 <li>보안 (방화벽/암호화)</li>
 <li>외부 위협으로부터의 안전</li>
-<li>마이크로서비스에서 게이트웨이는,,,</li>
+</ul>
+</li>
+<li>마이크로서비스에서 게이트웨이는,,,<ul>
 <li>API 트래픽을 관리</li>
 <li>외부 요청으로부터 중앙화된 엔트리포인트 제공</li>
+</ul>
+</li>
 </ul>
 <h2 id="lodash">lodash<a class="headerlink" href="#lodash" title="Permanent link">&para;</a></h2>
 <ul>

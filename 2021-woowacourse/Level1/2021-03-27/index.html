@@ -22953,19 +22953,15 @@
 <h3 id="2021-03-27">2021-03-27<a class="headerlink" href="#2021-03-27" title="Permanent link">&para;</a></h3>
 <h2 id="database-with">Database 기본 수업 복습 with 의식의 흐름<a class="headerlink" href="#database-with" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Database에 연결하는 과정</strong><ul>
-<li>자신의 로컬에 Docker로 사용할(?) 폴더를 만든다. <ul>
-<li>Docker가 뭐야?</li>
-</ul>
-</li>
-<li>docker-compose.yml 파일로, 필요한 SW를 명시한 yaml 파일을 생성한다..?<ul>
-<li>yaml 파일이 뭐야?</li>
-</ul>
-</li>
-<li>docker-compose up -d 라는 명령어를 git bash에 입력해준다..?<ul>
-<li>git bash가 뭐야?</li>
-<li>그러면 내 로컬 폴더에 db라는 폴더가 생기네...? <em>(많아서 간략하게 구조만 보면!)</em>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">|</span>--<span class="w"> </span>db
+<li><strong>Database에 연결하는 과정</strong>
+    - 자신의 로컬에 Docker로 사용할(?) 폴더를 만든다. 
+        - Docker가 뭐야?
+    - docker-compose.yml 파일로, 필요한 SW를 명시한 yaml 파일을 생성한다..?
+        - yaml 파일이 뭐야?
+    - docker-compose up -d 라는 명령어를 git bash에 입력해준다..?
+        - git bash가 뭐야?
+        - 그러면 내 로컬 폴더에 db라는 폴더가 생기네...? <em>(많아서 간략하게 구조만 보면!)</em>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">|</span>--<span class="w"> </span>db
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>mysql
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>data
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>auto.cnf
@@ -22985,38 +22981,32 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>host_summary.frm
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>init
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sb">`</span>--<span class="w"> </span>docker-compose.yml
-</code></pre></div></li>
-</ul>
-</li>
-<li>이제 Docker를 깔았으니(?) MySQL을 펼쳐보자</li>
-<li>MySQL Workbench를 켜본다</li>
-<li>docker-compose.yml에 입력한 연결 정보를 입력해 연결(?)을 해본다<ul>
-<li>localhost에 13306 포트를 docker가 listening하고 있는 것 같은데...?</li>
-<li>잠깐만 그러면 Docker를 통해 설치한 db 디렉토리가 SQL의 서버가 되는거고, </li>
-<li>workbench로 SQL명령을 보내는게 SQL의 클라이언트가 되는건가?<ul>
-<li>workbench의 역할이 뭐야?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>localhost:13306으로 연결이 되었다면 이제 SQL 구문들을 입력해 RDBMS인 MySQL과 소통을 시도해보자!
-    1) 유저 생성
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
 </code></pre></div>
-        - 무슨 유저인 것이여 이게...?
-    2) 생성한 유저에게 모든 db 및 테이블에 접근권한 부여
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+    - 이제 Docker를 깔았으니(?) MySQL을 펼쳐보자
+    - MySQL Workbench를 켜본다
+    - docker-compose.yml에 입력한 연결 정보를 입력해 연결(?)을 해본다
+        - localhost에 13306 포트를 docker가 listening하고 있는 것 같은데...?
+        - 잠깐만 그러면 Docker를 통해 설치한 db 디렉토리가 SQL의 서버가 되는거고, 
+        - workbench로 SQL명령을 보내는게 SQL의 클라이언트가 되는건가?
+            - workbench의 역할이 뭐야?
+    - localhost:13306으로 연결이 되었다면 이제 SQL 구문들을 입력해 RDBMS인 MySQL과 소통을 시도해보자!
+        1) 유저 생성
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
 </code></pre></div>
-        - 아 DB에 접근하려면 권한이 있는 유저가 필요한가봐?
-    3) 설정한 권한 적용
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">flush</span><span class="w"> </span><span class="k">privileges</span><span class="p">;</span>
+            - 무슨 유저인 것이여 이게...?
+        2) 생성한 유저에게 모든 db 및 테이블에 접근권한 부여
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
 </code></pre></div>
-    4) 데이터베이스 생성 (utf8 설정을 해줘야 한글과 관련한 문제가 발생하지 않습니다.)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">joelDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8_general_ci</span><span class="p">;</span>
+            - 아 DB에 접근하려면 권한이 있는 유저가 필요한가봐?
+        3) 설정한 권한 적용
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">flush</span><span class="w"> </span><span class="k">privileges</span><span class="p">;</span>
 </code></pre></div>
-        - 왜 utf8 문자 인코딩이 문제가 없는걸까? utf-16, euc-kr은? unicode는 또 뭐지?
-    5) user 테이블 생성/데이터 삽입/데이터 조회
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">USE</span><span class="w"> </span><span class="n">joelDB</span><span class="p">;</span><span class="w">  </span>
+        4) 데이터베이스 생성 (utf8 설정을 해줘야 한글과 관련한 문제가 발생하지 않습니다.)
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">joelDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8_general_ci</span><span class="p">;</span>
+</code></pre></div>
+            - 왜 utf8 문자 인코딩이 문제가 없는걸까? utf-16, euc-kr은? unicode는 또 뭐지?
+        5) user 테이블 생성/데이터 삽입/데이터 조회
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">USE</span><span class="w"> </span><span class="n">joelDB</span><span class="p">;</span><span class="w">  </span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span>
@@ -23030,9 +23020,9 @@
 <a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="p">(</span><span class="s1">&#39;sugarbrown&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brwon&#39;</span><span class="p">);</span><span class="w">  </span>
 <a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
 <a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="p">;</span><span class="w">  </span>
-</code></pre></div></li>
-<li>오호 그랬더니만 joelDB라는 DB(?)가 생긴듯하네! user라는 아마 내가 넣은 테이블 정보들이 .frm? .ibd? 이런건가본데?
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">|</span>--<span class="w"> </span>db
+</code></pre></div>
+    - 오호 그랬더니만 joelDB라는 DB(?)가 생긴듯하네! user라는 아마 내가 넣은 테이블 정보들이 .frm? .ibd? 이런건가본데?
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">|</span>--<span class="w"> </span>db
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>mysql
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>data
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>auto.cnf
@@ -23056,14 +23046,12 @@
 <a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>host_summary.frm
 <a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>init
 <a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="sb">`</span>--<span class="w"> </span>docker-compose.yml
-</code></pre></div></li>
-<li>이제 새로운 Java Gradle Project를 생성해 JDBC 드라이버를 통해 DB와 연결해보자<ul>
-<li>아니 JDBC는 또 뭐야?</li>
-<li>implementation("mysql:mysql-connector-java:8.0.16") // 우선 의존성 주입해주고...</li>
-</ul>
-</li>
-<li>UserDAO 클래스에서 DB 커넥션 진행한다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+</code></pre></div>
+    - 이제 새로운 Java Gradle Project를 생성해 JDBC 드라이버를 통해 DB와 연결해보자
+        - 아니 JDBC는 또 뭐야?
+        - implementation("mysql:mysql-connector-java:8.0.16") // 우선 의존성 주입해주고...
+    - UserDAO 클래스에서 DB 커넥션 진행한다.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.PreparedStatement</span><span class="p">;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.SQLException</span><span class="p">;</span>
@@ -23117,125 +23105,81 @@
 <a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h2 id="_1">수업 들으면서 몰랐던 용어<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Docker</strong></p>
+<li><strong>Docker</strong>
+    - 참고: https://ndb796.tistory.com/90
+    - 리눅스 컨테이너를 기반으로 한 서비스 패키징/배포에 유용한 오픈소스 SW
+    - 서버 환경에 우리의 서비스를 배포할라니까 갖가지 설정 필요... 이거 불편하자나?
+    - Docker는 Container에 Image를 담아서 구동시키는 방식으로 서비스 배포
+        - 그래서 yaml파일을 설정해서 Docker를 구동시키면 환경이 맞춰진다고 한 듯..?</li>
+</ul>
 <ul>
-<li>참고: https://ndb796.tistory.com/90</li>
-<li>리눅스 컨테이너를 기반으로 한 서비스 패키징/배포에 유용한 오픈소스 SW</li>
-<li>서버 환경에 우리의 서비스를 배포할라니까 갖가지 설정 필요... 이거 불편하자나?</li>
-<li>Docker는 Container에 Image를 담아서 구동시키는 방식으로 서비스 배포<ul>
-<li>그래서 yaml파일을 설정해서 Docker를 구동시키면 환경이 맞춰진다고 한 듯..?</li>
+<li><strong>yaml 파일</strong>
+    - 참고: https://ko.wikipedia.org/wiki/YAML
+    - '사람이 쉽게 읽을 수 있는' 데이터 직렬화 양식
+    - 데이터 교환 포맷</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>yaml 파일</strong></p>
 <ul>
-<li>참고: https://ko.wikipedia.org/wiki/YAML</li>
-<li>'사람이 쉽게 읽을 수 있는' 데이터 직렬화 양식</li>
-<li>데이터 교환 포맷</li>
+<li><strong>git bash</strong>
+    - 참고: https://www.atlassian.com/git/tutorials/git-bash
+    - Git
+        - 오픈소스계의 영원한 아이돌 리누스 토발즈는 리눅스 커널을 관리하는 기존 툴이 엉망인 것에 너무 빡친 바람에 git이라는 소스관리 툴을 만든다.<br />
+          리누스는 하도 빡친 나머지, 단 2주만에 완성하는 기염을 토했다.
+    - 등장 배경
+        - Git은 Unix 스타일 command line 환경에서 set of command line utility program을 실행하게 해줌
+        - macOS, Linux에는 기본적으로 command line terminal이 탑재
+            - 따라서 자동적으로 Git 사용이 가능
+        - 하지만 윈도우는 기본적으로 Windows command prompt 사용
+            - 이는 unix-terminal이 아니라 자동 Git 사용X
+        - 따라서 윈도우에서 git 쓸라면, GUI 앱을 썼어야함
+            - 근데 이게 한계가 있어서 git bash 등장
+    - 그래서 Git Bash란?
+        - 윈도우에게 Git command line 경험을 모방한 어플리케이션
+        - Bash는 Bourne Again Shell의 줄임말로, Shell은 CLI를 통해 OS와 소통하는 역할을 하는 사용자가 OS와 소통할 수 있는 최밑단의 SW
+            - 참고로 Bash는 리눅스의 기본 쉘이다. </li>
 </ul>
-</li>
-<li>
-<p><strong>git bash</strong></p>
 <ul>
-<li>참고: https://www.atlassian.com/git/tutorials/git-bash</li>
-<li>Git<ul>
-<li>오픈소스계의 영원한 아이돌 리누스 토발즈는 리눅스 커널을 관리하는 기존 툴이 엉망인 것에 너무 빡친 바람에 git이라는 소스관리 툴을 만든다.<br />
-  리누스는 하도 빡친 나머지, 단 2주만에 완성하는 기염을 토했다.</li>
+<li><strong>MySQL Workbench</strong>
+    - 참고: https://ko.wikipedia.org/wiki/MySQL_%EC%9B%8C%ED%81%AC%EB%B2%A4%EC%B9%98
+    - SQL 개발과 관리, DB설계, 생성, 유지를 위한 "단일 개발 통합 환경"을 제공하는 visual DB 설계 도구</li>
 </ul>
-</li>
-<li>등장 배경<ul>
-<li>Git은 Unix 스타일 command line 환경에서 set of command line utility program을 실행하게 해줌</li>
-<li>macOS, Linux에는 기본적으로 command line terminal이 탑재<ul>
-<li>따라서 자동적으로 Git 사용이 가능</li>
-</ul>
-</li>
-<li>하지만 윈도우는 기본적으로 Windows command prompt 사용<ul>
-<li>이는 unix-terminal이 아니라 자동 Git 사용X</li>
-</ul>
-</li>
-<li>따라서 윈도우에서 git 쓸라면, GUI 앱을 썼어야함<ul>
-<li>근데 이게 한계가 있어서 git bash 등장</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>그래서 Git Bash란?<ul>
-<li>윈도우에게 Git command line 경험을 모방한 어플리케이션</li>
-<li>Bash는 Bourne Again Shell의 줄임말로, Shell은 CLI를 통해 OS와 소통하는 역할을 하는 사용자가 OS와 소통할 수 있는 최밑단의 SW<ul>
-<li>참고로 Bash는 리눅스의 기본 쉘이다. </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>MySQL Workbench</strong></p>
 <ul>
-<li>참고: https://ko.wikipedia.org/wiki/MySQL_%EC%9B%8C%ED%81%AC%EB%B2%A4%EC%B9%98</li>
-<li>SQL 개발과 관리, DB설계, 생성, 유지를 위한 "단일 개발 통합 환경"을 제공하는 visual DB 설계 도구</li>
-</ul>
-</li>
-<li>
-<p><strong>JDBC</strong></p>
-<ul>
-<li>참고: https://ko.wikipedia.org/wiki/JDBC</li>
-<li>참고: https://dyjung.tistory.com/50</li>
-<li>Java에서 DB에 접속할 수 있도록 하는 자바 API<ul>
-<li>자료를 Query하거나, Update하는 방법을 제공</li>
-</ul>
-</li>
-<li>Java SE의 일부로 포함</li>
-<li>JDBC를 활용한 프로그램의 흐름<ul>
-<li>JDBC 드라이버 로드</li>
-<li>DB 연결</li>
-<li>DB에 데이터 읽거나 쓰기</li>
-<li>DB 연결 종료</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>JDBC</strong>
+    - 참고: https://ko.wikipedia.org/wiki/JDBC
+    - 참고: https://dyjung.tistory.com/50
+    - Java에서 DB에 접속할 수 있도록 하는 자바 API
+        - 자료를 Query하거나, Update하는 방법을 제공
+    - Java SE의 일부로 포함
+    - JDBC를 활용한 프로그램의 흐름
+        - JDBC 드라이버 로드
+        - DB 연결
+        - DB에 데이터 읽거나 쓰기
+        - DB 연결 종료</li>
 </ul>
 <h2 id="db">DB 설계<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>어떻게 설계할 것인가?</strong><ul>
-<li>설계 Cycle<ol>
-<li>테이블 설계</li>
-<li>테이블로 부터 객체 도출</li>
-<li>객체와 테이블 매핑</li>
-<li>DB 접근 로직 구현</li>
-<li>비즈니스 로직 구현</li>
-<li>객체 속성 추가 및 테이블 칼럼 추가</li>
-</ol>
-</li>
-<li>테이블 주도 설계<ul>
-<li>DB와 서버에 항상 의존관계 O</li>
-<li>객체 간의 관계 &lt;&lt; DB 처리에 집중하게 됨</li>
-</ul>
-</li>
-<li>도메인 주도 설계<ul>
-<li>DB 서버 없이 우선적으로 개발 가능!</li>
-<li>구현/피드백 사이클이 빨라 도메인에 최적화된 설계를 할 수 있다!</li>
-<li>요구 사항 변동에도 유연하게 대처 가능</li>
-</ul>
-</li>
-<li>DB 설계시 주의사항<ol>
-<li>필요한 데이터 + 자료형을 확실히 알 것</li>
-<li>중복으로 저장된 데이터 항목을 제거하자</li>
-<li>칼럼당 하나의 특성만 저장하자</li>
-<li>DB에 종속적인 설계를 지양하자</li>
-<li>모든 테이블에 기본키가 있는지 확인하자</li>
-</ol>
-</li>
-</ul>
-</li>
+<li><strong>어떻게 설계할 것인가?</strong>
+    - 설계 Cycle
+        1. 테이블 설계
+        2. 테이블로 부터 객체 도출
+        3. 객체와 테이블 매핑
+        4. DB 접근 로직 구현
+        5. 비즈니스 로직 구현
+        6. 객체 속성 추가 및 테이블 칼럼 추가
+    - 테이블 주도 설계
+        - DB와 서버에 항상 의존관계 O
+        - 객체 간의 관계 &lt;&lt; DB 처리에 집중하게 됨
+    - 도메인 주도 설계
+        - DB 서버 없이 우선적으로 개발 가능!
+        - 구현/피드백 사이클이 빨라 도메인에 최적화된 설계를 할 수 있다!
+        - 요구 사항 변동에도 유연하게 대처 가능
+    - DB 설계시 주의사항
+        1. 필요한 데이터 + 자료형을 확실히 알 것
+        2. 중복으로 저장된 데이터 항목을 제거하자
+        3. 칼럼당 하나의 특성만 저장하자
+        4. DB에 종속적인 설계를 지양하자
+        5. 모든 테이블에 기본키가 있는지 확인하자</li>
 </ul>
 
 

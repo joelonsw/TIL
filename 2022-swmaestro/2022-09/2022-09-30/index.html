@@ -22932,10 +22932,10 @@
 <h2 id="spring-security">Spring Security 테스팅<a class="headerlink" href="#spring-security" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://tecoble.techcourse.co.kr/post/2020-09-30-spring-security-test/</em></li>
-<li><strong>개요</strong></li>
+<li><strong>개요</strong><ul>
 <li>Spring Security 테스트 하려면 인증 정보를 미리 주입해야 하는 경우 종종 발생</li>
 <li>SecurityContext에 직접 Authentication 주입하는 방법도 있음
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@BeforeEach</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@BeforeEach</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setUp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">UserDetails</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createUserDetails</span><span class="p">();</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -22943,38 +22943,40 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">setAuthentication</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsernamePasswordAuthenticationToken</span><span class="p">());</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>
-<p>Spring Security가 인증 정보를 관리하는 방법</p>
-<ul>
+<li>Spring Security가 인증 정보를 관리하는 방법<ul>
 <li>인증 정보를 담은 Authentication 객체</li>
 <li>해당 정보를 SecurityContext에 보관</li>
 <li>이 SecurityContext는 SecurityContextHolder에 있는 ThreadLocal에 저장</li>
 <li>결과적으로 같은 Thread 내에서는 SecurityContextHolder를 통해 인증정보에 접근할 수 있음</li>
 </ul>
 </li>
-<li>
-<p><strong><code>@WithMockUser</code></strong></p>
+</ul>
 </li>
+</ul>
+<ul>
+<li><strong><code>@WithMockUser</code></strong><ul>
 <li>미리 인증된 사용자를 만들어두지 않아도 간단하게 인증이 필요한 메서드 테스트 가능</li>
-<li>
-<p>userName, password, role을 어노테이션에서 설정해줄 수 있음</p>
+<li>userName, password, role을 어노테이션에서 설정해줄 수 있음</li>
+</ul>
 </li>
-<li>
-<p><strong><code>@WithAnonymousUser</code></strong></p>
+</ul>
+<ul>
+<li><strong><code>@WithAnonymousUser</code></strong><ul>
+<li>인증되지 않은 사용자를 테스트에서 사용할 때 필요한 어노테이션</li>
+</ul>
 </li>
-<li>
-<p>인증되지 않은 사용자를 테스트에서 사용할 때 필요한 어노테이션</p>
-</li>
-<li>
-<p><strong><code>@WithUserDetails</code></strong></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>@WithUserDetails</code></strong><ul>
 <li>UserDetails를 구현한 CustomUser가 있고, 다음</li>
+</ul>
+</li>
 </ul>
 <h2 id="spring-mvc">쓰레드 관점에서 본 Spring MVC 요청과정<a class="headerlink" href="#spring-mvc" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: https://livenow14.tistory.com/59</em></li>
 <li><img alt="" src="../../images/2022-09-30-mvc.png" /></li>
-<li><strong>MVC FLOW</strong></li>
+<li><strong>MVC FLOW</strong><ol>
 <li>클라이언트가 HTTP 요청을 보냄</li>
 <li>서버측의 <code>welcome 소켓</code>이 요청을 듣고 있다가 클라이언트 요청오면 <code>연결 소켓</code> 생성</li>
 <li>WAS는 HTTP 메시지 파싱하여 웹서버에서만 필요한 정보면 정적 페이지 반환</li>
@@ -22982,20 +22984,24 @@
 <li>Filter에 등록된 내용(변경/체크/인증/인가 등) 로직 수행</li>
 <li>WAS에서 HttpServletRequest, HttpServletResponse 객체로 변환, 이를 DispatcherServlet에 넘겨줌</li>
 <li>DispatcherServlet내의 HandlerMapping, HandlerAdapter 인터페이스 구현체 실행</li>
-<li>
-<p>request의 내용 바탕으로 서비스 실행되고 서비스 결과 넘겨줌</p>
+<li>request의 내용 바탕으로 서비스 실행되고 서비스 결과 넘겨줌</li>
+</ol>
 </li>
-<li>
-<p><strong>각 과정은 공유되는걸까?</strong></p>
-</li>
+</ul>
+<ul>
+<li><strong>각 과정은 공유되는걸까?</strong><ul>
 <li>TCP 연결 쓰레드가 Servlet 쓰레드의 부모 쓰레드로 설정됨(?)</li>
 <li>요청이 들어오면 ThreadPool에서 여유 쓰레드가 있는지 확인<ul>
-<li>있다면 요청에 대한 쓰레드 할당해줌</li>
+<li>있다면 요청에 대한 쓰레드 할당해줌<ul>
 <li>이 쓰레드가 Servlet을 실행</li>
 <li>요청 끝나면 쓰레드는 쓰레드 풀에 반환</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>쓰레드가 미리 생성되어 있음으로, 쓰레드 생성/종료 비용이 절약, 응답 시간 빨라짐</li>
+</ul>
+</li>
 </ul>
 
 
