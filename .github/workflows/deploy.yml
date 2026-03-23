@@ -31,7 +31,7 @@ jobs:
             case "$dir" in docs|site|.git|.idea|.claude|.github) continue;; esac
             ln -s "../$dir" "docs/$dir"
           done
-          for f in *.md; do
+          for f in *.md .pages; do
             [ -f "$f" ] && ln -s "../$f" "docs/$f"
           done
 
