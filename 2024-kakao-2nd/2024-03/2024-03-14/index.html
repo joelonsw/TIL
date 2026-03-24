@@ -23180,7 +23180,9 @@
 </code></pre></div></li>
 </ul>
 <ul>
-<li><strong>Nested Routes</strong><ul>
+<li>
+<p><strong>Nested Routes</strong></p>
+<ul>
 <li>layout 코드 안에서 고민이 줄어듦</li>
 <li>route들은 다른 route안에 nest 될 수 있다</li>
 <li>자식 route의 path는 부모의 path 뒤에 붙어 사용된다</li>
@@ -23196,6 +23198,8 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">);</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>결과적으로 <code>/post/notice</code>는 다음과 같이 그려진다
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">&lt;</span><span class="nx">App</span><span class="o">&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="o">&lt;</span><span class="nx">Posts</span><span class="o">&gt;</span>
@@ -23203,6 +23207,8 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="o">&lt;</span><span class="err">/Posts&gt;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">&lt;</span><span class="err">/App&gt;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>부모의 route에서는 꼭 <code>&lt;Outlet&gt;</code>을 넣어줘 매칭되는 자식 route를 그려줄 수 있는 공간을 마련해주자
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Routes</span><span class="p">,</span><span class="w"> </span><span class="nx">Route</span><span class="p">,</span><span class="w"> </span><span class="nx">Outlet</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-router-dom&quot;</span><span class="p">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -23325,7 +23331,9 @@
 <ul>
 <li><strong>When To Use</strong><ul>
 <li>자바스크립트 함수의 동등성 : 특정 함수를 넘길때, callback으로 선언한 add를 넘겨보면 동등성이 확보된다. </li>
-<li>dependency array에 함수를 넘길 때<ul>
+<li>
+<p>dependency array에 함수를 넘길 때</p>
+<ul>
 <li>정신나간 예시같지만... 이 경우, 함수의 참조값은 컴포넌트 렌더링 될 때마다 바뀜
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
@@ -23343,6 +23351,8 @@
 <a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">fetchUser</span><span class="p">])</span>
 <a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>useCallback 정의하면 dep array에 함수를 넘겨도 안전한 참조를 진행할 수 있음
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">,</span><span class="w"> </span><span class="nx">useCallback</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
@@ -23391,8 +23401,11 @@
 </li>
 </ul>
 <ul>
-<li><strong>React 예시로 알아보기</strong><ol>
-<li><code>target</code> 생성: 교차 상태를 판별할 대상인 target. 요소 지정으로 교차상태 판별 더 쉽게
+<li>
+<p><strong>React 예시로 알아보기</strong></p>
+<ol>
+<li>
+<p><code>target</code> 생성: 교차 상태를 판별할 대상인 target. 요소 지정으로 교차상태 판별 더 쉽게
    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">setTarget</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">targetStyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100%&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;200%&quot;</span><span class="p">};</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
@@ -23403,8 +23416,10 @@
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
 <a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="p">);</span>
-</code></pre></div></li>
-<li><code>observer</code> 생성
+</code></pre></div></p>
+</li>
+<li>
+<p><code>observer</code> 생성
    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">observer</span><span class="p">;</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23412,8 +23427,10 @@
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span><span class="nx">observer</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">target</span><span class="p">])</span>
-</code></pre></div></li>
-<li>콜백함수 생성
+</code></pre></div></p>
+</li>
+<li>
+<p>콜백함수 생성
   <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">onIntersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">([</span><span class="nx">entry</span><span class="p">],</span><span class="w"> </span><span class="nx">observer</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">isIntersecting</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="nx">observer</span><span class="p">.</span><span class="nx">unobserve</span><span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
@@ -23421,7 +23438,8 @@
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="nx">observer</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ol>
 </li>
 </ul>

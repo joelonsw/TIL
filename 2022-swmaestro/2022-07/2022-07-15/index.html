@@ -23033,7 +23033,9 @@
 <h3 id="2022-07-15">2022-07-15<a class="headerlink" href="#2022-07-15" title="Permanent link">&para;</a></h3>
 <h2 id="kas-fee-payer-pools">KAS Fee-payer Pools<a class="headerlink" href="#kas-fee-payer-pools" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>문제 상황</strong><ul>
+<li>
+<p><strong>문제 상황</strong></p>
+<ul>
 <li>바오밥 네트워크에서는 KAS를 통해 NFT를 발행할 수 있었는데, 메인넷으로 넘어가니까 Unauthorized가 뜨며 안 됨
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Unauthorized
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>xyz.groundx.caver_ext_kas.rest_client.io.swagger.client.ApiException: Unauthorized
@@ -23043,6 +23045,8 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    at app//xyz.groundx.caver_ext_kas.rest_client.io.swagger.client.api.kip17.api.Kip17Api.deployContract(Kip17Api.java:581)
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    at app//xyz.groundx.caver_ext_kas.kas.kip17.KIP17.deploy(KIP17.java:77)
 </code></pre></div></li>
+</ul>
+<ul>
 <li>찾아보니까 KAS 무료 플랜에서는 Fee Payer Pool을 통해 수수료를 대납한다고 함<ul>
 <li><em>참고: <a href="https://forum.klaytn.foundation/t/kip-17/2666">https://forum.klaytn.foundation/t/kip-17/2666</a></em></li>
 <li>무료 플랜은 API에 대한 권한이 없음 =&gt; global fee payer를 위한 API</li>
@@ -23131,7 +23135,9 @@
 </ul>
 <h3 id="_2">컨트랙트<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>컨트랙트 배포</strong><ul>
+<li>
+<p><strong>컨트랙트 배포</strong></p>
+<ul>
 <li>요청<ul>
 <li>[POST] <a href="https://kip17-api.klaytnapi.com/v2/contract">https://kip17-api.klaytnapi.com/v2/contract</a>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
@@ -23150,6 +23156,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>응답
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;options&quot;</span><span class="p">:{</span>
@@ -23244,7 +23252,9 @@
 </ul>
 <h3 id="_3">토큰<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>토큰 발행 및 전송</strong><ul>
+<li>
+<p><strong>토큰 발행 및 전송</strong></p>
+<ul>
 <li>요청<ul>
 <li>[POST] <a href="https://kip17-api.klaytnapi.com/v2/contract/{contract-address-or-alias}/token">https://kip17-api.klaytnapi.com/v2/contract/{contract-address-or-alias}/token</a>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
@@ -23255,6 +23265,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>응답
   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Submitted&quot;</span><span class="p">,</span>
@@ -23319,7 +23331,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>토큰 전송</strong><ul>
+<li>
+<p><strong>토큰 전송</strong></p>
+<ul>
 <li>정해진 주소로 토큰을 전송할 것!</li>
 <li>Sender와 Owner가 다를 경우 Sender가 해당 토큰의 전송권한이 있을 것<ul>
 <li>Sender의 전송권한은 <code>v2/contract/{contract-address-or-alias}/approve/{token-id}</code> 로 부여 가능</li>
@@ -23335,6 +23349,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>응답
   <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Submitted&quot;</span><span class="p">,</span>

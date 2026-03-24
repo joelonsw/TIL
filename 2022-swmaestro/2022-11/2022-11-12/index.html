@@ -23105,13 +23105,17 @@
 </li>
 </ul>
 <ul>
-<li><strong>Prototype 스코프를 사용하는 방법</strong><ul>
+<li>
+<p><strong>Prototype 스코프를 사용하는 방법</strong></p>
+<ul>
 <li>정의하는 법
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Component</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Scope</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;prototype&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtoType</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>근데... 싱글톤 빈의 컴포넌트로 Prototype 스코프 빈을 쓰면 어쩌지? <ul>
 <li>싱글톤 스코프의 빈이 프로토타입 빈을 주입받으면 싱글톤 프로토타입 빈은 매번 바뀌지 않고 같은 빈이 쓰임
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Component</span>
@@ -23127,6 +23131,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>프록시 모드로 해결하기!<ul>
 <li>ApplicationContext가 빈을 처음 생성시, proto 빈을 주입받지 않고,</li>
 <li>proto 클래스 상속받은 프록시를 빈으로 등록해</li>
@@ -23330,16 +23336,20 @@
 <li>weak reference는 참조 대상인 객체를 캡슐화한 WeakReference 객체를 생성 =&gt; GC의 특별 취급 대상</li>
 </ul>
 </li>
-<li>코드를 통해 봅시다
+<li>
+<p>코드를 통해 봅시다
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Sample</span><span class="p">());</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">Sample</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wr</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li><img alt="" src="../../images/2022-11-12-weak-ref-1.png" />
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Sample</span><span class="p">());</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">Sample</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wr</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">// ...</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li><img alt="" src="../../images/2022-11-12-weak-ref-2.png" /></li>
 <li><code>new WeakReference()</code> : reference object</li>
 <li><code>new Sample()</code> : referent</li>
@@ -23460,7 +23470,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>참조 유형</strong><ul>
+<li>
+<p><strong>참조 유형</strong></p>
+<ul>
 <li><strong>Strong References</strong><ul>
 <li>기본 참조 유형</li>
 <li><code>MyClass obj = new MyClass();</code></li>
@@ -23481,6 +23493,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li><strong>Weak References</strong><ul>
 <li>대상 객체 참조하는 경우 WeakReference만 존재한다면 GC 대상 =&gt; 다음 GC에서 무조건 힙 메모리에서 제거
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">MyClass</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">();</span>
@@ -23495,6 +23509,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li><strong>Phantom References</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">MyClass</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">();</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span><span class="w"> </span><span class="n">refQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span><span class="p">();</span>

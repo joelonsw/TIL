@@ -22946,24 +22946,24 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
-</code></pre></div>
-    - Dependency (의존관계) 
-        - 일시적으로 해당 객체가 필요할 때
-        - 일시적인 연관관계
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div><p>- Dependency (의존관계) 
+      - 일시적으로 해당 객체가 필요할 때
+      - 일시적인 연관관계
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">B</span><span class="p">();</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
-</code></pre></div>
-    - Inheritance (상속관계)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></p>
+<p>- Inheritance (상속관계)
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">}</span>
-</code></pre></div>
-    - Realization (실체화관계)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></p>
+<p>- Realization (실체화관계)
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>패키지에 포함된 클래스 사이의 의존성</strong>
@@ -22981,21 +22981,23 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kd">class</span> <span class="nc">B</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 추천! OOO
+  ```java
+  class A {
+  }
+  class B {
+      private A a;
+  }
+  ```
 </code></pre></div>
-        - 추천! OOO
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">}</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">class</span> <span class="nc">B</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
-</code></pre></div>
-    - 의존성이 필요없다면 뺴세요!
-    - 패키지 사이의 의존성 사이클을 제거할 것
-    - 정리!
-        1. 양방향을 피해라!
-        2. 다중성이 적은 방향을 택해라!
-        3. 불필요한 의존관계 제거해라!
-        4. 패키지 사이의 의존성 제거해라!</li>
+<p>- 의존성이 필요없다면 뺴세요!
+  - 패키지 사이의 의존성 사이클을 제거할 것
+  - 정리!
+      1. 양방향을 피해라!
+      2. 다중성이 적은 방향을 택해라!
+      3. 불필요한 의존관계 제거해라!
+      4. 패키지 사이의 의존성 제거해라!</p>
+</li>
 </ul>
 <ul>
 <li><strong>개선할 설계 포인트</strong>

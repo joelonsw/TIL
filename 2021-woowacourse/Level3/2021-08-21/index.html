@@ -22969,9 +22969,9 @@
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker run -it -d --rm --name ubuntu1 ubuntu /bin/bash
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker run -it -d --rm --name ubuntu2 ubuntu /bin/bash
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docker run -it -d --rm --name ubuntu3 ubuntu /bin/bash
-</code></pre></div>
-    - ubuntu1, ubuntu2, ubuntu3 모두 다 각각 격리
-        - 서로의 파일시스템 모르고 공유도 불가</li>
+</code></pre></div><p>- ubuntu1, ubuntu2, ubuntu3 모두 다 각각 격리
+      - 서로의 파일시스템 모르고 공유도 불가</p>
+</li>
 </ul>
 <ul>
 <li><strong>컨테이너의 내용 공유/저장하고 싶을수도 있자나? (도커 볼륨)</strong>
@@ -22990,23 +22990,23 @@
         1. nvm으로 버전 뒤지게 바꿔가면서 테스트하기
         2. 각 버전별로 컨테이너 깔아서 테스트 각 컨테이서 안에서 돌려보기
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker run -it --rm --name node node:7.7.4-alpine
-</code></pre></div>
-    - 이제 실제로 웹서버 띄워보자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker run -it --rm --name node -d -v %CD%:/src -w /src node:7.7.4-alpine node app.js
-</code></pre></div>
-    - 이렇게 돌리면 오류나
-        - 포트 매핑 안해줘서 그래!
-    - <code>docker inspect 컨테이너이름</code>를 활용해서 도커 정보 알 수 있음
-        - 컨테이너 자체가 "ports": {} 포트가 읎어</li>
+</code></pre></div><p>- 이제 실제로 웹서버 띄워보자
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker run -it --rm --name node -d -v %CD%:/src -w /src node:7.7.4-alpine node app.js
+</code></pre></div></p>
+<p>- 이렇게 돌리면 오류나
+      - 포트 매핑 안해줘서 그래!
+  - <code>docker inspect 컨테이너이름</code>를 활용해서 도커 정보 알 수 있음
+      - 컨테이너 자체가 "ports": {} 포트가 읎어</p>
+</li>
 </ul>
 <ul>
 <li><strong>Port 바인딩 해보기</strong>
     - 포트 매핑해주자~!
     - 호스트_포트:컨테이너_포트
     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker run -it --rm --name node -d -v %CD%:/src -w /src -p 8080:3000 node:7.7.4-alpine node app.js
-</code></pre></div>
-    - <code>docker inspect 컨테이너이름</code>을 통해 정보 조회 가능
-    <img alt="" src="../../image/2021-08-21-docker-inspect.PNG" /></li>
+</code></pre></div><p>- <code>docker inspect 컨테이너이름</code>을 통해 정보 조회 가능
+  <img alt="" src="../../image/2021-08-21-docker-inspect.PNG" /></p>
+</li>
 </ul>
 <ul>
 <li><strong>Dockerfile</strong>
@@ -23021,11 +23021,11 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">COPY</span><span class="w"> </span>app.js<span class="w"> </span>/src
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">CMD</span><span class="w"> </span>node<span class="w"> </span>app.js
-</code></pre></div>
-    - 이제 도커파일로부터 도커 이미지를 만들어야해!
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker build -t nodejs-app . //현재 디렉토리의 Dockerfile을 찾아 nodejs-app으로 태그 달아서 이미지 생성!
+</code></pre></div><p>- 이제 도커파일로부터 도커 이미지를 만들어야해!
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker build -t nodejs-app . //현재 디렉토리의 Dockerfile을 찾아 nodejs-app으로 태그 달아서 이미지 생성!
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker run --rm -p 8080:3000 -d nodejs-app
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>Docker Compose</strong>
@@ -23037,20 +23037,22 @@
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>services:
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    node:
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        ports:
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>            - &quot;8080:3000&quot;
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        networks:
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>            - webnet
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        build:
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>            context: ./
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>            dockerfile: Dockerfile
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>//아이솔레이션 어찌할지 결정
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>networks:
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    webnet:
-</code></pre></div>
-    - 컨테이너 지어보자~
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker-compose -f ./docker-compose.yml up node
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>            - &quot;8080:3000&quot;
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        networks:
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>            - webnet
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        build:
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>            context: ./
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>            dockerfile: Dockerfile
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>//아이솔레이션 어찌할지 결정
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>networks:
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    webnet:
+</code></pre></div><p>- 컨테이너 지어보자~
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker-compose -f ./docker-compose.yml up node
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker-compose rm -f //프로세스 끝나면 그냥 다 삭제해버려
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>Run SQL Server with Docker</strong>
@@ -23064,30 +23066,33 @@
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>            dockerfile: Dockerfile
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        container_name: demoapp
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        networks:
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>            - web
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>            - db
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    sql:
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>        ports:
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>            - &quot;1433:1433&quot;
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>        image: microsoft/mssql-server-linux
-<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        environment:
-<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>            - ACCEPT_EULA=Y
-<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>            - SA_PASSWORD=yourStrongPassword
-<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>        container_name: demoapp_sql
-<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        networks: 
-<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>            db:
-<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>                aliases:
-<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>                    - sql
-<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>
-<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>networks:
-<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>    web:
-<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>    db:
-</code></pre></div>
-    - 닷넷코어로 만든 웹서버는 외부에서 접속이 가능해야함
-    - 하지만 디비 서버가 퍼블릭에게 공개되면 좋을게 없자나!
-        - 그냥 웹서버에서 접속만 할 수 있으면되는건데!
-    - 그래서 아래와 같이 sql ports를 빼버렸어
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>version: &#39;3&#39;
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>            - web
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>            - db
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    sql:
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>        ports:
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>            - &quot;1433:1433&quot;
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        image: microsoft/mssql-server-linux
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        environment:
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>            - ACCEPT_EULA=Y
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>            - SA_PASSWORD=yourStrongPassword
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>        container_name: demoapp_sql
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        networks: 
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>            db:
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>                aliases:
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>                    - sql
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>networks:
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>    web:
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>    db:
+</code></pre></div><p>- 닷넷코어로 만든 웹서버는 외부에서 접속이 가능해야함
+  - 하지만 디비 서버가 퍼블릭에게 공개되면 좋을게 없자나!
+      - 그냥 웹서버에서 접속만 할 수 있으면되는건데!
+  - 그래서 아래와 같이 sql ports를 빼버렸어
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>version: &#39;3&#39;
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>services: 
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    demoapp:
@@ -23097,26 +23102,30 @@
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            dockerfile: Dockerfile
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        container_name: demoapp
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>        networks:
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            - web
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>            - db
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>    sql:
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        image: microsoft/mssql-server-linux
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>        environment:
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>            - ACCEPT_EULA=Y
-<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>            - SA_PASSWORD=yourStrongPassword
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        container_name: demoapp_sql
-<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        networks: 
-<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>            db:
-<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>                aliases:
-<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>                    - sql
-<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>
-<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>networks:
-<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>    web:
-<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>    db:
-</code></pre></div>
-    - 도커 네트워크 안에서 포트로 듣고 있는거야
-        - 외부로 공개되진 않은 거고!
-    - 웹 서버는 외부로 공개되어 접속 가능하고, 디비 같은 경우 외부로 접속X</li>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>            - web
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>            - db
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    sql:
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>        image: microsoft/mssql-server-linux
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        environment:
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>            - ACCEPT_EULA=Y
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>            - SA_PASSWORD=yourStrongPassword
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>        container_name: demoapp_sql
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        networks: 
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>            db:
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>                aliases:
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>                    - sql
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>networks:
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>    web:
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    db:
+</code></pre></div></p>
+<p>- 도커 네트워크 안에서 포트로 듣고 있는거야
+      - 외부로 공개되진 않은 거고!
+  - 웹 서버는 외부로 공개되어 접속 가능하고, 디비 같은 경우 외부로 접속X</p>
+</li>
 </ul>
 
 

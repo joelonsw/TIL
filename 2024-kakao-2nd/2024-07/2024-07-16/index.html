@@ -23131,7 +23131,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>스칼라 ExecutorContext</strong><ol>
+<li>
+<p><strong>스칼라 ExecutorContext</strong></p>
+<ol>
 <li><code>scala.concurrent.ExecutionContext</code>는 자바 Executor와 비슷한 기능을 제공<ul>
 <li>주로 implicit 매개변수로 사용</li>
 <li>2개의 추상 메서드<ul>
@@ -23141,19 +23143,26 @@
 </li>
 </ul>
 </li>
-<li><code>ExecutionContext</code>에는 Java Executor/ExecutorService에서 ExecutionContext 객체를 만들기 위한 몇가지 메서드가 추가된 companion 객체 있음 
+<li>
+<p><code>ExecutionContext</code>에는 Java Executor/ExecutorService에서 ExecutionContext 객체를 만들기 위한 몇가지 메서드가 추가된 companion 객체 있음 
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fromExecutor</span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="nc">Executor</span><span class="p">,</span><span class="w"> </span><span class="n">reporter</span><span class="p">:</span><span class="w"> </span><span class="nc">Throwable</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Unit</span><span class="p">):</span><span class="w"> </span><span class="nc">ExecutionContextExecutor</span><span class="w"> </span><span class="o">=</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">impl</span><span class="p">.</span><span class="nc">ExecutionContextImpl</span><span class="p">.</span><span class="n">fromExecutor</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">reporter</span><span class="p">)</span>
-</code></pre></div></li>
-<li><code>ExecutionContext</code>의 companion 객체는 내부적으로 <strong>ForkJoinPool</strong> 사용하는 <strong>global</strong>이라는 실행 컨텍스트 포함!
+</code></pre></div></p>
+</li>
+<li>
+<p><code>ExecutionContext</code>의 companion 객체는 내부적으로 <strong>ForkJoinPool</strong> 사용하는 <strong>global</strong>이라는 실행 컨텍스트 포함!
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="nc">Implicits</span><span class="p">.</span><span class="n">global</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ol>
 </li>
 </ul>
 <ul>
-<li><strong>Thread -&gt; Java ExecutorService -&gt; Java ForkJoinPool -&gt; Scala ExecutorContext</strong><ol>
-<li>기본 쓰레드 생성
+<li>
+<p><strong>Thread -&gt; Java ExecutorService -&gt; Java ForkJoinPool -&gt; Scala ExecutorContext</strong></p>
+<ol>
+<li>
+<p>기본 쓰레드 생성
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Thread</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
@@ -23161,8 +23170,10 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">})</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">hello</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
-</code></pre></div></li>
-<li>Java ExecutorService 사용
+</code></pre></div></p>
+</li>
+<li>
+<p>Java ExecutorService 사용
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">net</span><span class="p">.{</span><span class="nc">Socket</span><span class="p">,</span><span class="w"> </span><span class="nc">ServerSocket</span><span class="p">}</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">util</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.{</span><span class="nc">ExecutorService</span><span class="p">,</span><span class="w"> </span><span class="nc">Executors</span><span class="p">}</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">util</span><span class="p">.</span><span class="nc">Date</span>
@@ -23193,31 +23204,38 @@
 <a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="p">}</span>
 <a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
 <a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">NetworkService</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)).</span><span class="n">run</span>
-</code></pre></div></li>
-<li>Java ForkJoinPool
+</code></pre></div></p>
+</li>
+<li>
+<p>Java ForkJoinPool
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">concurrent</span><span class="p">.</span><span class="nc">ForkJoinPool</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">executor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello fjp!&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">})</span>
-</code></pre></div></li>
-<li>Scala ExecutorContext.global
+</code></pre></div></p>
+</li>
+<li>
+<p>Scala ExecutorContext.global
   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">ec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">global</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">ec</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello ec!&quot;</span><span class="p">)</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">})</span>
-</code></pre></div></li>
-<li>ExecutorContext 생성
+</code></pre></div></p>
+</li>
+<li>
+<p>ExecutorContext 생성
   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">ec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">fromExecutorService</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">forkjoin</span><span class="p">.</span><span class="nc">ForkJoinPool</span><span class="p">)</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">ec</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Runnable</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello ec!&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">})</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ol>
 </li>
 </ul>

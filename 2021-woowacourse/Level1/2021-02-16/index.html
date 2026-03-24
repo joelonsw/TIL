@@ -23295,8 +23295,8 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">().</span><span class="na">ints</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">//크기가 5인 난수 스트림</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">().</span><span class="na">ints</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="p">);</span><span class="w"> </span><span class="c1">//크기가 6인 1~45 사이의 난수 스트림</span>
-</code></pre></div>
-  - <strong>[람다식 - iterate(), generate()]</strong>  <br />
+</code></pre></div></p>
+<p>- <strong>[람다식 - iterate(), generate()]</strong>  <br />
       - iterate()
           - seed로 지정된 값부터, 람다식 f에 의해 계산된 결과를 다시 seed값으로 해서 계산을 반복
               - ex) Stream<Integer> evenStream = Stream.iterate(0, n -&gt; n+2); //0, 2, 4, 6...
@@ -23350,12 +23350,13 @@
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">VS</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">IntStream</span><span class="w"> </span><span class="n">studentScoreStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StudentStream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Student</span><span class="p">::</span><span class="n">getTotalScore</span><span class="p">);</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">allTotalScore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">studentScoreStream</span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w"> </span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 기본형 스트림은 숫자를 다루는 메서드들이 지원됨
+      - sum(): 스트림 요소의 총합
+      - average(): sum() / (double)count()
+      - max(): 스트림 요소 중 제일 큰 값
+      - min(): 스트림 요소 중 제일 작은 값
 </code></pre></div>
-      - 기본형 스트림은 숫자를 다루는 메서드들이 지원됨
-          - sum(): 스트림 요소의 총합
-          - average(): sum() / (double)count()
-          - max(): 스트림 요소 중 제일 큰 값
-          - min(): 스트림 요소 중 제일 작은 값</p>
 </li>
 </ul>
 <ul>
@@ -23392,8 +23393,9 @@
 <li><strong>2.5 스트림의 최종연산</strong>
     - <strong>특징</strong>
         - 스트림의 요소를 소모해 결과를 만들어냄
-            &gt; 최종 연산 이후의 스트림은 사용할 수 없다!!
-        - 결과는 스트림 요소의 합과 같은 단일 값, 스트림의 요소가 담긴 배열, 컬렉션 등<p>- <strong>[forEach()]</strong>
+            &gt; 최종 연산 이후의 스트림은 사용할 수 없다!!<div class="highlight"><pre><span></span><code>  - 결과는 스트림 요소의 합과 같은 단일 값, 스트림의 요소가 담긴 배열, 컬렉션 등
+</code></pre></div>
+<p>- <strong>[forEach()]</strong>
       - 반환 타입이 void, 하나씩 수행</p>
 <p>- <strong>[조건 검사 - allMatch(), anyMatch(), nonMatch(), findFirst(), findAny()]</strong>
       - 스트림의 요소에 대해 지정된 조건에 "모두 일치" / "일부 일치" / "하나도 안 일치" 검증

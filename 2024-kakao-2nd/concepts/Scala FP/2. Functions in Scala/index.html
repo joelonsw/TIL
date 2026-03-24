@@ -23165,8 +23165,12 @@
 <li>함수 (A, B, C, D)를 (A =&gt; (B =&gt; (C =&gt; D)))</li>
 </ul>
 </li>
-<li>근데 이거 굳이 왜 함?<ol>
-<li>Future를 보면, apply 메서드가 커링 함수를 씀<ul>
+<li>
+<p>근데 이거 굳이 왜 함?</p>
+<ol>
+<li>
+<p>Future를 보면, apply 메서드가 커링 함수를 씀</p>
+<ul>
 <li>두번째 파라미터 그룹이 <code>implicit execution context</code> 를 받아서 넘김!
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">executionContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="n">fromExecutorService</span><span class="p">(</span><span class="nc">Executors</span><span class="p">.</span><span class="n">newCachedThreadPool</span><span class="p">())</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
@@ -23177,7 +23181,9 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>제네릴 쓸 때 유용<ul>
+<li>
+<p>제네릴 쓸 때 유용</p>
+<ul>
 <li>컴파일러는 다른 매개변수 그룹에 있어야 추론하여 컴파일 할 수 있음</li>
 <li>타입 추론은 매개변수 그룹 <code>왼 -&gt; 오</code>로 흐름. 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">withListItems</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">list</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">T</span><span class="p">],</span><span class="n">f</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Unit</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>

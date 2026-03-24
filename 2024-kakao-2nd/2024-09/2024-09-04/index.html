@@ -23052,7 +23052,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>RUN</strong><ul>
+<li>
+<p><strong>RUN</strong></p>
+<ul>
 <li>이미지를 빌드할 때 사용하는 커맨드를 설정</li>
 <li>이미지 생성 시 특정 명령어를 실행 (bash 쉘 입력과 동일)</li>
 <li>백슬래쉬를 활용하여 여러줄로 분할하세요
@@ -23062,17 +23064,19 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span>package-foo<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
 </code></pre></div></li>
+</ul>
+<ul>
 <li>이미지 빌드 이후에, 모든 레이어가 도커 캐시안에 들어감</li>
-<li>도커는 이전 명령어와 수정된 명령어가 동일할 때만 이전 단계의 캐시를 사용
+<li>
+<p>도커는 이전 명령어와 수정된 명령어가 동일할 때만 이전 단계의 캐시를 사용
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:18.04</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>nginx
-</code></pre></div><ul>
-<li>이런 빌드는 update한게 반영이 안되어 curl/nginx 예전꺼 될수도 있음</li>
-</ul>
-</li>
+</code></pre></div></p>
+<ul>
+<li>이런 빌드는 update한게 반영이 안되어 curl/nginx 예전꺼 될수도 있음<ul>
 <li>특정 버전을 명시하여 설치도 가능
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>automake<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>build-essential<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
@@ -23081,6 +23085,10 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nv">s3cmd</span><span class="o">=</span><span class="m">1</span>.1.*<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>
 </code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

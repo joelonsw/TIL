@@ -22989,12 +22989,13 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">)</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 이거 보면 Member의 orderList 안에 있는 객체들 하나하나 지워준거같자나?
+  - 근데 딜리트 쿼리가 안나가
+  - 왜?
+      - 자식 객체를 삭제시킨다고 부모 객체가 알아? 모르자나
+      - 트랜잭션 끝나고 부모 객체 FLUSH 할 때 딱 보니까 이제 영속화 할 거 없나~ 하고 보고 이미 영속화 되어있던 친구들은 그냥 내비둔다고 있구나 하고
 </code></pre></div>
-      - 이거 보면 Member의 orderList 안에 있는 객체들 하나하나 지워준거같자나?
-      - 근데 딜리트 쿼리가 안나가
-      - 왜?
-          - 자식 객체를 삭제시킨다고 부모 객체가 알아? 모르자나
-          - 트랜잭션 끝나고 부모 객체 FLUSH 할 때 딱 보니까 이제 영속화 할 거 없나~ 하고 보고 이미 영속화 되어있던 친구들은 그냥 내비둔다고 있구나 하고</p>
 <p>- 자식Repository에서 자식 삭제, 부모의 리스트에서는 자식 들고 있지 않음
       <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">orderList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23004,19 +23005,21 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">)</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 이제 orderList 안에 있는 주문들도 지웠어. 
+  - Member가 들고 있는 Order도 지워줬어
+  - 이제 딜리트쿼리가 나가
 </code></pre></div>
-      - 이제 orderList 안에 있는 주문들도 지웠어. 
-      - Member가 들고 있는 Order도 지워줬어
-      - 이제 딜리트쿼리가 나가</p>
 <p>- 자식Repository에서 자식 삭제하지 않음, 부모의 리스트에서 자식 들고있지 않음
       <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">orderList</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">)</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 딜리트문 당연히 안나감
+  - 멤버에서나 빠진거지 Order 객체 그 자체로는 아직 엄연히 존재하는 친구입니다.
 </code></pre></div>
-      - 딜리트문 당연히 안나감
-      - 멤버에서나 빠진거지 Order 객체 그 자체로는 아직 엄연히 존재하는 친구입니다.</p>
 <p>- 자식Repository에서 자식 삭제, 부모의 리스트는 고아객체 삭제옵션 있음
       <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">orderList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23025,20 +23028,22 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">,</span><span class="w"> </span><span class="n">orphanRemoval</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 딜리트 안나감
+  - Member가 지금 Order 들고있거든
+  - 삭제가 될라고 하고 보니까~ Member가 들고 있어서 이거 그냥 영속화시켜버리고 저장 메타
 </code></pre></div>
-      - 딜리트 안나감
-      - Member가 지금 Order 들고있거든
-      - 삭제가 될라고 하고 보니까~ Member가 들고 있어서 이거 그냥 영속화시켜버리고 저장 메타</p>
 <p>- 자식Repository에서 자식 삭제 안함, 부모의 리스트 비움, 부모의 리스트는 고아객체 삭제옵션 있음
       <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">//테스트코드</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">orderList</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">//멤버 엔티티</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">PERSIST</span><span class="p">,</span><span class="w"> </span><span class="n">orphanRemoval</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 이거 딜리트문 나감
+  - 부모가 영속화 시키는 입장에서 봤을 때 갈곳을 잃은 고아 객체들은 그냥 삭제 쿼리 날려버리는듯
+      - 여기서 생각해볼건 order가 다른 부모를 또 갖고 있다면 Member가 지맘대로 삭제할수 읎다는것!
 </code></pre></div>
-      - 이거 딜리트문 나감
-      - 부모가 영속화 시키는 입장에서 봤을 때 갈곳을 잃은 고아 객체들은 그냥 삭제 쿼리 날려버리는듯
-          - 여기서 생각해볼건 order가 다른 부모를 또 갖고 있다면 Member가 지맘대로 삭제할수 읎다는것!</p>
 </li>
 </ul>
 

@@ -23073,9 +23073,8 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="c1">// ...</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
-</code></pre></div>
-    - Spring Security를 사용중이라면, Spring Security level에서 CORS 사용토록 설정하자
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@EnableWebSecurity</span>
+</code></pre></div><p>- Spring Security를 사용중이라면, Spring Security level에서 CORS 사용토록 설정하자
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@EnableWebSecurity</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WebSecurityConfig</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">WebSecurityConfigurerAdapter</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nd">@Override</span>
@@ -23083,7 +23082,8 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="n">http</span><span class="p">.</span><span class="na">cors</span><span class="p">().</span><span class="na">and</span><span class="p">()...</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>전역에서 CORS configuration</strong>
@@ -23097,9 +23097,8 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="n">registry</span><span class="p">.</span><span class="na">addMapping</span><span class="p">(</span><span class="s">&quot;/**&quot;</span><span class="p">);</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
-</code></pre></div>
-    - 다음과 같이 특정 필드들에 대해 설정을 활성화 시킬 수 있음
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Override</span>
+</code></pre></div><p>- 다음과 같이 특정 필드들에 대해 설정을 활성화 시킬 수 있음
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Override</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCorsMappings</span><span class="p">(</span><span class="n">CorsRegistry</span><span class="w"> </span><span class="n">registry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">registry</span><span class="p">.</span><span class="na">addMapping</span><span class="p">(</span><span class="s">&quot;/api/**&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="p">.</span><span class="na">allowedOrigins</span><span class="p">(</span><span class="s">&quot;http://domain2.com&quot;</span><span class="p">)</span>
@@ -23108,11 +23107,12 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="p">.</span><span class="na">exposedHeaders</span><span class="p">(</span><span class="s">&quot;header1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;header2&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="p">.</span><span class="na">allowCredentials</span><span class="p">(</span><span class="kc">false</span><span class="p">).</span><span class="na">maxAge</span><span class="p">(</span><span class="mi">3600</span><span class="p">);</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
-</code></pre></div>
-    - <strong>addMapping</strong> : CORS를 적용할 URL 패턴 정의
-    - <strong>allowedOrigins</strong> : 자원 공유를 허락할 요청 주소(Origin) 지정 가능
-    - <strong>allowedMethods</strong> : 허용할 HTTP method를 지정할 수 있음
-    - <strong>maxAge</strong> : 원하는 시간 만큼 preflight 리퀘스트 캐싱해둠 (이 시간 동안은 preflight 검증 안해도 됨!)</li>
+</code></pre></div></p>
+<p>- <strong>addMapping</strong> : CORS를 적용할 URL 패턴 정의
+  - <strong>allowedOrigins</strong> : 자원 공유를 허락할 요청 주소(Origin) 지정 가능
+  - <strong>allowedMethods</strong> : 허용할 HTTP method를 지정할 수 있음
+  - <strong>maxAge</strong> : 원하는 시간 만큼 preflight 리퀘스트 캐싱해둠 (이 시간 동안은 preflight 검증 안해도 됨!)</p>
+</li>
 </ul>
 <ul>
 <li><strong>동작 원리</strong>

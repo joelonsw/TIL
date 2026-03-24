@@ -22967,10 +22967,10 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="n">elementData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EMPTY_ELEMENTDATA</span><span class="p">;</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">}</span>
-</code></pre></div>
-    - 결국 ArrayList는 배열에 요소를 저장하는 것
-        - 넘겨 받는 인자가 ArrayList라면, "elementData = a" 라며 "얕은 복사!"를 하는 것을 볼 수 있다
-        - 아하 내가 여기서 뇌절을 했구만</li>
+</code></pre></div><p>- 결국 ArrayList는 배열에 요소를 저장하는 것
+      - 넘겨 받는 인자가 ArrayList라면, "elementData = a" 라며 "얕은 복사!"를 하는 것을 볼 수 있다
+      - 아하 내가 여기서 뇌절을 했구만</p>
+</li>
 </ul>
 <ul>
 <li>깊은 복사
@@ -23027,8 +23027,9 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">myObj</span><span class="p">;</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">   </span><span class="p">}</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span><span class="w">      </span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 따라서... 어떤 클래스를 완전히 deep cloning하기 위해서는 그 클래스로 부터 참조되는 모든 클래스를 추적/복사 하여야 함
 </code></pre></div>
-        - 따라서... 어떤 클래스를 완전히 deep cloning하기 위해서는 그 클래스로 부터 참조되는 모든 클래스를 추적/복사 하여야 함</li>
+</li>
 </ul>
 
 

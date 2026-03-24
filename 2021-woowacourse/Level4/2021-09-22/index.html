@@ -23188,8 +23188,8 @@
       -XX:InitialHeapSize=536870912 -XX:MaxHeapSize=8589934592 -XX:+PrintCommandLineFlags -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC
       openjdk version "1.8.0_212"
       OpenJDK Runtime Environment (Zulu 8.38.0.13-CA-macosx) (build 1.8.0_212-b04)
-      OpenJDK 64-Bit Server VM (Zulu 8.38.0.13-CA-macosx) (build 25.212-b04, mixed mode)</code>
-  - Concurrent Mark Sweep (CMS) GC
+      OpenJDK 64-Bit Server VM (Zulu 8.38.0.13-CA-macosx) (build 25.212-b04, mixed mode)</code></p>
+<p>- Concurrent Mark Sweep (CMS) GC
       - <code>-XX:+UseConcMarkSweepGC</code>           <code>- 중단 시간을 매우 짧게 하기 위함!
       - 대부분의 GC 작업을 어플리케이션 쓰레드와 동시에 수행하며, STW 최소화를 위함!
   - G1 GC: 4기가 이상의 대용량 메모리 공간이 있는 멀티 프로세서 시스템에서 실행되는 응용 프로그램을 위해 설계
@@ -23258,15 +23258,14 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>+------+----+----+-----+-----------+--------+--------------+
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| Eden | S0 | S1 | Old | Metaspace | C Heap | Thread Stack |
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>+------+----+----+-----+-----------+--------+--------------+
-</code></pre></div>
-    - PermGen
-        - Used to store objects of methods and class
-        - Apps which have lots of classes loaded will have more permgen utilization
-        - Results in OOM error due to PermGen space
-        - 클래스 혹은 메서드 코드가 저장되는 영역
-        - Heap 영역에 속함
-        - Default 로 제한된 크기 가짐
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;----- Java Heap -----&gt;             &lt;--- Native Memory ---&gt;
+</code></pre></div><p>- PermGen
+      - Used to store objects of methods and class
+      - Apps which have lots of classes loaded will have more permgen utilization
+      - Results in OOM error due to PermGen space
+      - 클래스 혹은 메서드 코드가 저장되는 영역
+      - Heap 영역에 속함
+      - Default 로 제한된 크기 가짐
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;----- Java Heap -----&gt;             &lt;--- Native Memory ---&gt;
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>+------+----+----+-----+-----------+--------+--------------+
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>| Eden | S0 | S1 | Old | Permanent | C Heap | Thread Stack |
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>+------+----+----+-----+-----------+--------+--------------+
@@ -23274,10 +23273,11 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                       Permanent Heap
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>S0: Survivor 0
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>S1: Survivor 1
-</code></pre></div>
-    - Why Perm 대신 Metaspace?
-        - Metaspace는 JVM에 의해 관리되는 Heap이 아니라 OS 레벨에서 관리되는 native 메모리 영역
-        - Metaspace가 Native 메모리 이용함으로써 개발자는 영역 확보의 상한 의식 안해도 됨</li>
+</code></pre></div></p>
+<p>- Why Perm 대신 Metaspace?
+      - Metaspace는 JVM에 의해 관리되는 Heap이 아니라 OS 레벨에서 관리되는 native 메모리 영역
+      - Metaspace가 Native 메모리 이용함으로써 개발자는 영역 확보의 상한 의식 안해도 됨</p>
+</li>
 </ul>
 <ul>
 <li><strong>Select GC</strong>

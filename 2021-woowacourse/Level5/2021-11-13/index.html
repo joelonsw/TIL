@@ -22997,13 +22997,13 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;abc&#39;</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;abc&#39;</span><span class="p">;</span>
-</code></pre></div>
-    - 데이터 저장 방법
-        - 실제로 해당 위치에 문자열 'abc'를 저장하진 않음
-        - 데이터를 저장하기 위한 별도의 메모리 공간 확보하여 문자열 'abc'를 저장하고, 그 주소 변수 영역에 저장하는 방식
-        - 문자열 데이터의 변환을 효율적으로 처리하기 위해 "변수"(변수명과 데이터 주소값 저장), "데이터"(실제 값 저장) 각각 저장
-            - 변환하면 그냥 새로 만들어서 주소만 갈아끼워
-    - 변수 영역(참조값 담는 곳) &amp; 데이터 영역(실제값 담는 곳) 각각 있음을 기억!</li>
+</code></pre></div><p>- 데이터 저장 방법
+      - 실제로 해당 위치에 문자열 'abc'를 저장하진 않음
+      - 데이터를 저장하기 위한 별도의 메모리 공간 확보하여 문자열 'abc'를 저장하고, 그 주소 변수 영역에 저장하는 방식
+      - 문자열 데이터의 변환을 효율적으로 처리하기 위해 "변수"(변수명과 데이터 주소값 저장), "데이터"(실제 값 저장) 각각 저장
+          - 변환하면 그냥 새로 만들어서 주소만 갈아끼워
+  - 변수 영역(참조값 담는 곳) &amp; 데이터 영역(실제값 담는 곳) 각각 있음을 기억!</p>
+</li>
 </ul>
 <ul>
 <li><strong>4. 기본형 데이터와 참조형 데이터</strong>
@@ -23014,22 +23014,24 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 기본형 데이터는 모두 불변값 
+  - 변경은 새로 만드는 동작을 통해서만 이뤄짐
+  - 한번 만들어진 값은 GC되지 않는 한 영원히 변하지 않음
 </code></pre></div>
-        - 기본형 데이터는 모두 불변값 
-        - 변경은 새로 만드는 동작을 통해서만 이뤄짐
-        - 한번 만들어진 값은 GC되지 않는 한 영원히 변하지 않음
-    - 가변값
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;bbb&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+<p>- 가변값
+      <code>javascript
+      var obj1 = {
+          a: 1, 
+          b: 'bbb'
+      }</code></p>
+<div class="highlight"><pre><span></span><code>  - 여기서는 obj1.a = 2; 와 같이 변경가할 수 있음
+      - 이 과정에서 obj1 의 참조값은 당연히 안 변함 
+  - 그래서 안의 데이터는 바꿀수있는데 obj1의 참조값 재할당 안하니 가변값이라 부름
+  - 참조형 데이터가 &quot;가변값&quot;이라고 설명할 때의 &quot;가변&quot;은
+      - 참조형 데이터 자체를 변경할 경우 X
+      - 그 내부의 프로퍼티를 변경할 때 O
 </code></pre></div>
-        - 여기서는 obj1.a = 2; 와 같이 변경가할 수 있음
-            - 이 과정에서 obj1 의 참조값은 당연히 안 변함 
-        - 그래서 안의 데이터는 바꿀수있는데 obj1의 참조값 재할당 안하니 가변값이라 부름
-        - 참조형 데이터가 "가변값"이라고 설명할 때의 "가변"은
-            - 참조형 데이터 자체를 변경할 경우 X
-            - 그 내부의 프로퍼티를 변경할 때 O</li>
+</li>
 </ul>
 <ul>
 <li><strong>5. 불변 객체</strong>
@@ -23107,29 +23109,30 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/*...*/</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nx">c</span><span class="p">();</span><span class="w">    </span><span class="c1">// 실행 OK!, 변수  =&gt; </span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nx">d</span><span class="p">();</span><span class="w">    </span><span class="c1">// 얜 그냥 에러</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 실습!
+      ```javascript
+      console.log(mult(2,3));
+      var mult = function test (a,b) {
+          return a*b;
+      }
+      `Uncaught TypeError: mult is not a function =&gt; 변수로 선언된 mult, 선언만 위로 올라가서 console.log 절에서 뇌절`
+
+      console.log(mult2(2,3));
+      function mult2 (a,b) {
+          return a*b;
+      }
+      `6 =&gt; 함수로 선언된 mult2, 싹다 위로 올라가서 정상 동작`
+      ```
 </code></pre></div>
-        - 실습!
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">mult</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">));</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">mult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="o">*</span><span class="nx">b</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sb">`Uncaught TypeError: mult is not a function =&gt; 변수로 선언된 mult, 선언만 위로 올라가서 console.log 절에서 뇌절`</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">mult2</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">));</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="kd">function</span><span class="w"> </span><span class="nx">mult2</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="o">*</span><span class="nx">b</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">}</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="sb">`6 =&gt; 함수로 선언된 mult2, 싹다 위로 올라가서 정상 동작`</span>
-</code></pre></div>
-    - <strong>[스코프, 스코프 체인, outerEnvironmentReference]</strong>
-        - 스코프 체인: '식별자의 유효범위'를 안에서부터 바깥으로 검색해나가는 것
-        - outerEnvironmentReference: 스코프 체인을 가능케 하는 것!
-        - 스코프 체인
-            - 현재 호출된 함수가 "선언될 당시"의 LexicalEnvironment를 참조
-            - 연결리스트 형식으로 선언 시점의 LexicalEnvironment를 가지고 있음
-            - 이런 구조적 특성 때문에 여러 스코프에서 동일한 식별자 선언한 경우, <strong>무조건 스코프 체인 상에서 가장 먼저 발견된 식별자에 접근!</strong>
-        - 실습
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<p>- <strong>[스코프, 스코프 체인, outerEnvironmentReference]</strong>
+      - 스코프 체인: '식별자의 유효범위'를 안에서부터 바깥으로 검색해나가는 것
+      - outerEnvironmentReference: 스코프 체인을 가능케 하는 것!
+      - 스코프 체인
+          - 현재 호출된 함수가 "선언될 당시"의 LexicalEnvironment를 참조
+          - 연결리스트 형식으로 선언 시점의 LexicalEnvironment를 가지고 있음
+          - 이런 구조적 특성 때문에 여러 스코프에서 동일한 식별자 선언한 경우, <strong>무조건 스코프 체인 상에서 가장 먼저 발견된 식별자에 접근!</strong>
+      - 실습
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">outer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
@@ -23149,9 +23152,11 @@
 <a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="mf">1</span>
 <a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="mf">1</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 전역 변수 == 전역 공간에서 선언한 변수
+  - 지역 변수 == 함수 내부에서 선언한 변수
 </code></pre></div>
-        - 전역 변수 == 전역 공간에서 선언한 변수
-        - 지역 변수 == 함수 내부에서 선언한 변수</li>
+</li>
 </ul>
 <ul>
 <li><strong>this</strong>

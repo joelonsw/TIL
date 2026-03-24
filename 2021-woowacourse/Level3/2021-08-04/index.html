@@ -22996,38 +22996,43 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyEvent</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ApplicationEvent</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyEvent</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 이런 이벤트를 퍼블리싱 하는게 어플리케이션 컨텍스트한테 있어
+      - 자~ 이거 주입받자 (ApplicationEventPublisher)
+      - ApplicationEventPublisher.publishEvent(new MyEvent());
+  - 이제 이걸 받을 친구를 만들어주자
+      ```java
+      class MyEventHandler implements ApplicationListener&lt;MyEvent&gt; {
+          public void onApplicationEvent(MyEvent); // 뚝딱받아서 처리
+      }
+      ```
 </code></pre></div>
-        - 이런 이벤트를 퍼블리싱 하는게 어플리케이션 컨텍스트한테 있어
-            - 자~ 이거 주입받자 (ApplicationEventPublisher)
-            - ApplicationEventPublisher.publishEvent(new MyEvent());
-        - 이제 이걸 받을 친구를 만들어주자
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">MyEventHandler</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ApplicationListener</span><span class="o">&lt;</span><span class="n">MyEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onApplicationEvent</span><span class="p">(</span><span class="n">MyEvent</span><span class="p">);</span><span class="w"> </span><span class="c1">// 뚝딱받아서 처리</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</code></pre></div>
-    - 스프링 4.2 이후
-        - 필요없는 상속 멈춰!
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyEvent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//빈 아니야</span>
+<p>- 스프링 4.2 이후
+      - 필요없는 상속 멈춰!
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyEvent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//빈 아니야</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyEvent</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">//그냥 이렇게!</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - POJO 기반!
+  ```java
+  @Component //빈등록
+  class MyEventHandler {
+      //@EventListener //듣자!
+      public void onApplicationEvent(MyEvent); // 뚝딱받아서 처리
+  }
+  ```
+
+  - 이벤트 핸들러 여러가지
+      - 이벤트 발생시 리스닝하고 있는거 다 실행
+      - 순차적으로 실행됨 (뭐가 먼전진 모르겠어)
+      - 순서 중요하면 `@Order()`로 순서 지정하자
+  - `@Async` 각각의 쓰레드 풀에서 따로 돌아
+      - 따라서 `@Order`가 무의미해
+      - 메인에서 `@EnableAsync`로 뚝딱 해주자
 </code></pre></div>
-        - POJO 기반!
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Component</span><span class="w"> </span><span class="c1">//빈등록</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">class</span> <span class="nc">MyEventHandler</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">//@EventListener //듣자!</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onApplicationEvent</span><span class="p">(</span><span class="n">MyEvent</span><span class="p">);</span><span class="w"> </span><span class="c1">// 뚝딱받아서 처리</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
-</code></pre></div>
-        - 이벤트 핸들러 여러가지
-            - 이벤트 발생시 리스닝하고 있는거 다 실행
-            - 순차적으로 실행됨 (뭐가 먼전진 모르겠어)
-            - 순서 중요하면 <code>@Order()</code>로 순서 지정하자
-        - <code>@Async</code> 각각의 쓰레드 풀에서 따로 돌아
-            - 따라서 <code>@Order</code>가 무의미해
-            - 메인에서 <code>@EnableAsync</code>로 뚝딱 해주자
-    - 스프링이 기본으로 제공하는 이벤트들
-        - ContextRefreshedEvent() 
-        - ContextClosedEvent() </li>
+<p>- 스프링이 기본으로 제공하는 이벤트들
+      - ContextRefreshedEvent() 
+      - ContextClosedEvent() </p>
+</li>
 </ul>
 <h2 id="transactionaleventlistener"><code>@TransactionalEventListener</code><a class="headerlink" href="#transactionaleventlistener" title="Permanent link">&para;</a></h2>
 <h2 id="cascade">CASCADE<a class="headerlink" href="#cascade" title="Permanent link">&para;</a></h2>

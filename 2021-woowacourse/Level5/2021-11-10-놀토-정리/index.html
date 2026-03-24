@@ -23164,10 +23164,11 @@
 <a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">        </span><span class="n">entityManager</span><span class="p">.</span><span class="na">createNativeQuery</span><span class="p">(</span><span class="s">&quot;SET REFERENTIAL_INTEGRITY TRUE&quot;</span><span class="p">).</span><span class="na">executeUpdate</span><span class="p">();</span>
 <a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 최상단 AcceptanceTest의 `@BeforeEach`에서 databaseCleanup.execute(); 실행
 </code></pre></div>
-        - 최상단 AcceptanceTest의 <code>@BeforeEach</code>에서 databaseCleanup.execute(); 실행
-    - 공통된 로직은 AcceptanceTest로 올려버림
-    - static 메서드로 여기저기서 쓰일 수 있는 메서드들은 개방해줌</li>
+<p>- 공통된 로직은 AcceptanceTest로 올려버림
+  - static 메서드로 여기저기서 쓰일 수 있는 메서드들은 개방해줌</p>
+</li>
 </ul>
 <ul>
 <li><strong>아쉬운 점</strong>
@@ -23420,22 +23421,26 @@
 </code></pre></div></li>
 </ul>
 <h2 id="_4">놀토 인프라<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="" src="../../image/2021-11-10-%EB%86%80%ED%86%A0-%EC%9D%B8%ED%94%84%EB%9D%BC%EA%B5%AC%EC%84%B1.jpg" />
-1. Why replication?
+<p><img alt="" src="../../image/2021-11-10-%EB%86%80%ED%86%A0-%EC%9D%B8%ED%94%84%EB%9D%BC%EA%B5%AC%EC%84%B1.jpg" /></p>
+<ol>
+<li>
+<p>Why replication?
     - Read는 Slave, CUD는 master에서 처리
     - 어노테이션 기반으로 다른 데이터 소스를 사용하도록 설정함
     - 각각 다른 DB를 사용함으로써, 자연 스런 부하분산
     - Read가 아무래도 작업량이 많다보니까, 이걸 scale up 할 수 있는 구조로 설계하였음
         - 데이터 분석을 위한 DB 따로 등등,,,</p>
-<ol>
-<li>Why load-balancing?
+</li>
+<li>
+<p>Why load-balancing?
     - 부하 분산을 위한 로드 밸런싱 도입
         - WAS 인스턴스 두 대에서 돌리는 중
     - 상태를 가지는 Redis가 하나 있어서 각각 WAS에 Redis 설치
         - Redis에는 ip, userid에 대해 RefreshToken을 가지고 있음
         - 이를 저장하기 위해 도입함
     - 클라이언트의 ip에 따라 지정된 was에서 처리할 수 있도록 nginx에서 처리해줌
-        - ip_hash 옵션 활용</li>
+        - ip_hash 옵션 활용</p>
+</li>
 </ol>
 
 

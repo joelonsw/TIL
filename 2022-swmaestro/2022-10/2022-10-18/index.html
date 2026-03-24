@@ -23005,7 +23005,9 @@
 <li>메서드 참조를 활용하여 람다식을 간단히 표현 가능 (from Java8)</li>
 </ul>
 <ul>
-<li><strong>Connectable에서는?</strong><ul>
+<li>
+<p><strong>Connectable에서는?</strong></p>
+<ul>
 <li>DTO 변환해주는 로직. 메서드 참조를 통해 구현함. </li>
 <li>그냥 TicketMetadataAttribute를 받아 TicketMetadataAttributeResponse로 변환해주는 함수형 인터페이스를 매개변수로 받음.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">TicketMetadataAttributeResponse</span><span class="w"> </span><span class="nf">of</span><span class="p">(</span><span class="n">TicketMetadataAttribute</span><span class="w"> </span><span class="n">attribute</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23021,6 +23023,8 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>독특하게도 map은 다음과 같이 구현되어있음<ul>
 <li>왜 input은 super지?<ul>
 <li>해당 input은 본인과 부모 클래스만 인풋으로 받을 수 있다는 것인데...</li>

@@ -23020,29 +23020,33 @@
 </li>
 </ul>
 <ul>
-<li><strong>Redis Datatype</strong><ul>
+<li>
+<p><strong>Redis Datatype</strong></p>
+<ul>
 <li><em>참고: <a href="https://redis.io/docs/data-types/">https://redis.io/docs/data-types/</a></em></li>
-<li>[Strings]
+<li>
+<p>[Strings]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; SET user:1 salvatore
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>OK
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>&gt; GET user:1
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>&quot;salvatore&quot;
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>대부분 O(1)    </li>
-<li>SUBSTR, GETRANGE, SETRANCE 등의 명령어는 O(n)이 될수도</li>
+<li>SUBSTR, GETRANGE, SETRANCE 등의 명령어는 O(n)이 될수도<ul>
+<li>[LIST]</li>
 </ul>
 </li>
-<li>[LIST]<ul>
 <li>head/tail 접근 O(1)</li>
-<li>list 안에 들어있는 엘리멘트 조작 O(n)</li>
+<li>list 안에 들어있는 엘리멘트 조작 O(n)<ul>
+<li>[SET]</li>
 </ul>
 </li>
-<li>[SET]<ul>
 <li>Unoredered Collection of unique strings</li>
-<li>ADD/REMOVE/CHECK_ITEM_PRESENT =&gt; O(1)</li>
+<li>ADD/REMOVE/CHECK_ITEM_PRESENT =&gt; O(1)<ul>
+<li>[HASHES]</li>
 </ul>
 </li>
-<li>[HASHES]<ul>
 <li>field-value 페어</li>
 <li>자바 해시맵과 비슷
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; HSET user:123 username martina firstName Martina lastName Elisa country GB
@@ -23061,6 +23065,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>[SORTED SETS]</li>
 <li>[Streams]</li>
 <li>[Geospatial indexes]</li>

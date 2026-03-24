@@ -22949,39 +22949,39 @@
         --routines : 데이터뿐만 아니라 프로시저와 함수 함께 백업 (-R) (꼭 걸어주기!)
         --flush-logs : 백업 수행과 동시에 빈로그 지우기 (-F) (비우면 안되겠죠 근데?)
         --ingore-table &lt;table-name&gt; : 특정 테이블은 백업에서 제외하기
-        --verbose : 실행 시 모든 메시지 출력하기 (-v)</code>
-    - Incremental Backup (logfile)
-        - 전체 쓰기에 대한 로그 (binlog)
-        - 전체 백업 후 "증분량"에 대해서만 백업
-        - <code>mysqlbinlog</code> 활용
-        <code>shell script
-        $&gt; mysqlbinlog [options] (binlog-file1, ..) &gt; backupfile.sql
-        ---
-        options
-        --database="db-name" : 특정 스키마를 지정할 때 사용 (-d)
-        --no-defaults : 기본 옵션을 읽지 않고 수행
-        --verbose : 수행된 SQL 문까지 함께 추출 (-v | -vv: 어떤 데이터의 타입까지) 
-        --raw : 텍스트 형태가 아닌 바이너리 그대로 백업
-        --start-datetime="&lt;시작지점&gt;" : 연월일시 형태의 백업 받을 시작 시점
-        --stop-datetime="&lt;종료시점&gt;" : 연월일시 형태의 백업 받을 종료 시점
-        --start-postition=N : 시작 지점을 시간이 아닌 빈로그 위치로
-        --stop-postition=M : 종료 시점을 시간이 아닌 빈로그 위치로</code>
-    - Restore
-        - 전체 데이터 복구 (Full Recovery)
-        - 증분량에 대해서 복구 (Point In Time Recovery)
-    - 실제 사례 탐구
-        - <img alt="" src="../../image/2021-09-28-db-%EB%B0%B1%EC%97%85.PNG" />
-        1. Find Point in Last Binlog File
-            - <code>$&gt; mysqlbinlog --no-defaults -v binlog.000024 &gt; t.log</code>
-        2. Point in Time Backup (Full Backup이 안된 시점 ~ 장애가 난 시점까지)
-            - t.log 살펴보면서 빈로그 분석
-            - <code>$&gt; mysqlbinlog --no-defaults --start-datetime="63897" --stop-datetime="64430" -d testdb binlog.000024 &gt; t3.log</code>
-            - <code>$&gt; mysqlbinlog --no-defaults --start-datetime="2021-02-26 18:47:52" --stop-datetime="2021-02-26 18:50:09" -d testdb binlog.000024 &gt; t3.log</code>
-                - 아 살펴보니까 (#63897, 18:47:52 ~ #64430, 18:50:09) 가 장애 시점이구나!
-        3. Full Recovery (Full Backup 해둔거 채워넣고)
-            - <code>$&gt; mysql -u root -p testdb &lt; backup_testdb.sql</code>
-        4. Point in Time Recovery (그 이후 연산 수행한거 채워넣고)
-            - <code>$&gt; mysql -u root -p testdb &lt; t3.log</code></li>
+        --verbose : 실행 시 모든 메시지 출력하기 (-v)</code><p>- Incremental Backup (logfile)
+      - 전체 쓰기에 대한 로그 (binlog)
+      - 전체 백업 후 "증분량"에 대해서만 백업
+      - <code>mysqlbinlog</code> 활용
+      <code>shell script
+      $&gt; mysqlbinlog [options] (binlog-file1, ..) &gt; backupfile.sql
+      ---
+      options
+      --database="db-name" : 특정 스키마를 지정할 때 사용 (-d)
+      --no-defaults : 기본 옵션을 읽지 않고 수행
+      --verbose : 수행된 SQL 문까지 함께 추출 (-v | -vv: 어떤 데이터의 타입까지) 
+      --raw : 텍스트 형태가 아닌 바이너리 그대로 백업
+      --start-datetime="&lt;시작지점&gt;" : 연월일시 형태의 백업 받을 시작 시점
+      --stop-datetime="&lt;종료시점&gt;" : 연월일시 형태의 백업 받을 종료 시점
+      --start-postition=N : 시작 지점을 시간이 아닌 빈로그 위치로
+      --stop-postition=M : 종료 시점을 시간이 아닌 빈로그 위치로</code></p>
+<p>- Restore
+      - 전체 데이터 복구 (Full Recovery)
+      - 증분량에 대해서 복구 (Point In Time Recovery)
+  - 실제 사례 탐구
+      - <img alt="" src="../../image/2021-09-28-db-%EB%B0%B1%EC%97%85.PNG" />
+      1. Find Point in Last Binlog File
+          - <code>$&gt; mysqlbinlog --no-defaults -v binlog.000024 &gt; t.log</code>
+      2. Point in Time Backup (Full Backup이 안된 시점 ~ 장애가 난 시점까지)
+          - t.log 살펴보면서 빈로그 분석
+          - <code>$&gt; mysqlbinlog --no-defaults --start-datetime="63897" --stop-datetime="64430" -d testdb binlog.000024 &gt; t3.log</code>
+          - <code>$&gt; mysqlbinlog --no-defaults --start-datetime="2021-02-26 18:47:52" --stop-datetime="2021-02-26 18:50:09" -d testdb binlog.000024 &gt; t3.log</code>
+              - 아 살펴보니까 (#63897, 18:47:52 ~ #64430, 18:50:09) 가 장애 시점이구나!
+      3. Full Recovery (Full Backup 해둔거 채워넣고)
+          - <code>$&gt; mysql -u root -p testdb &lt; backup_testdb.sql</code>
+      4. Point in Time Recovery (그 이후 연산 수행한거 채워넣고)
+          - <code>$&gt; mysql -u root -p testdb &lt; t3.log</code></p>
+</li>
 </ul>
 <ul>
 <li><strong>DB Transfer</strong>
@@ -22999,23 +22999,26 @@
             <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo dnf install rsync-daemon -y
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo vi /etc/rsyncd.conf
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo systemctl --now enable rsyncd
+</code></pre></div><div class="highlight"><pre><span></span><code>  - rsync를 띄워주자
+      - `rsync -av h.txt 152.67.193.176:/home/opc/` =&gt; 퍼미션 디나이라면 rsync도 ssh를 사용
+          - authorizedKey에 넣어주자!
+      - 자동 로그인
+          ```
+          $ncloud&gt; ssh-keygen -t rsa
+          $ncloud&gt; cat ~/.ssh/id_rsa.pub
+          $ncloud&gt; vi .ssh/authorized_keys
+          ```
+
+  - 이제 진짜 좀 옮기자
+      1. 전체 데이터 백업 (Full Backup)
+          - `$&gt; mysqldump -u root -p -R testdb &gt; testdb_trans.sql`
+      2. 백업 파일을 목적지(ocloud)로 이동
+          - `$&gt; rsync -av testdb_trans.sql opc@152.67.193.176:/home/opc`
+      3. Import
+          - 이미 만들어진 스키마에다가 넣을 수 있어
+          - `$&gt; mysql -u mydeal -p testdb &lt; testdb_trans.sql`
 </code></pre></div>
-        - rsync를 띄워주자
-            - <code>rsync -av h.txt 152.67.193.176:/home/opc/</code> =&gt; 퍼미션 디나이라면 rsync도 ssh를 사용
-                - authorizedKey에 넣어주자!
-            - 자동 로그인
-                <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ncloud&gt; ssh-keygen -t rsa
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$ncloud&gt; cat ~/.ssh/id_rsa.pub
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$ncloud&gt; vi .ssh/authorized_keys
-</code></pre></div>
-        - 이제 진짜 좀 옮기자
-            1. 전체 데이터 백업 (Full Backup)
-                - <code>$&gt; mysqldump -u root -p -R testdb &gt; testdb_trans.sql</code>
-            2. 백업 파일을 목적지(ocloud)로 이동
-                - <code>$&gt; rsync -av testdb_trans.sql opc@152.67.193.176:/home/opc</code>
-            3. Import
-                - 이미 만들어진 스키마에다가 넣을 수 있어
-                - <code>$&gt; mysql -u mydeal -p testdb &lt; testdb_trans.sql</code></li>
+</li>
 </ul>
 <ul>
 <li><strong>백업 플랜</strong>
@@ -23055,12 +23058,13 @@
           - 맨뒤에 &amp; 붙여서 백그라운드로 실행하세요~ (그럴땐 패스워드 필수)
           <code>shell script
           $&gt; mysqlbinlog --read-from-remote-server --host=&lt;mysql-server-ip&gt; -u &lt;db-user&gt; -p [암호] --raw [--stop-never] &lt;binlog-file&gt;
-          $&gt; mysqlbinlog --read-from-remote-server --host=115.85.180.78 --raw --stop-never -u mydeal --password="password" binlog.000005 &amp;</code>
-      - &amp;로 데몬행은 조금 불안해 사실
-      - 이것도 쉘 스크립트 + crontab 설정을 통해서 할 수 있어
-          ```shell script
-          #!/bin/bash</p>
-<div class="highlight"><pre><span></span><code>      OUTDIR=&#39;/data/backup/ncloud-binlog&#39;
+          $&gt; mysqlbinlog --read-from-remote-server --host=115.85.180.78 --raw --stop-never -u mydeal --password="password" binlog.000005 &amp;</code></p>
+<div class="highlight"><pre><span></span><code>  - &amp;로 데몬행은 조금 불안해 사실
+  - 이것도 쉘 스크립트 + crontab 설정을 통해서 할 수 있어
+      ```shell script
+      #!/bin/bash
+
+      OUTDIR=&#39;/data/backup/ncloud-binlog&#39;
 
       P=`/usr/bin/ps -ef | grep mysqlbinlog | grep mydeal`
 
@@ -23102,13 +23106,14 @@
                         master_user="replicator",
                         master_password="password",
                         master_log_file="&lt;master-binlog-file&gt;",
-                        master_log_pos=&lt;master-position&gt;;</code>
-           3. Restart MySQL
-                - <code>$&gt; sudo systemctl restart mysqld</code>
-            4. Start slave
-                - <code>mysql&gt; start slave;</code>
-            5. Show status
-                - <code>mysql&gt; show slave status\G;</code></li>
+                        master_log_pos=&lt;master-position&gt;;</code><div class="highlight"><pre><span></span><code>     3. Restart MySQL
+          - `$&gt; sudo systemctl restart mysqld`
+      4. Start slave
+          - `mysql&gt; start slave;`
+      5. Show status
+          - `mysql&gt; show slave status\G;`
+</code></pre></div>
+</li>
 </ul>
 
 

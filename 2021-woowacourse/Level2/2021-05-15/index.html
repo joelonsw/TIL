@@ -23219,9 +23219,9 @@
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="nd">@Autowired</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">db</span><span class="p">;</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">}</span>
-</code></pre></div>
-    - SpringBoot에서는 안 보이던데?
-        - @SpringBootApplication으로 @EnableAutoConfiguration을 설정해줌</li>
+</code></pre></div><p>- SpringBoot에서는 안 보이던데?
+      - @SpringBootApplication으로 @EnableAutoConfiguration을 설정해줌</p>
+</li>
 </ul>
 <ul>
 <li><strong>사용법</strong>
@@ -23246,9 +23246,8 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.url=jdbc:mysql://localhost:13306/chess_db?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.username=root</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="l l-Scalar l-Scalar-Plain">spring.datasource.password=root</span>
-</code></pre></div>
-    - atdd-subway-map 같은 경우...
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">spring</span><span class="p">:</span>
+</code></pre></div><p>- atdd-subway-map 같은 경우...
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">spring</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w"> </span><span class="c1"># datasource 설정</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">driver-class-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.h2.Driver</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:h2:mem:testdb</span>
@@ -23257,7 +23256,8 @@
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">h2</span><span class="p">:</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">console</span><span class="p">:</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">     </span><span class="c1"># h2 console 설정</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>필요성</strong>
@@ -23408,26 +23408,27 @@
     <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>^  : 문자열 시작  
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$  : 문자열 종료
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>.  : 임의의 한 문자
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>*  : 앞 문자가 없을 수도, 무한정 많을 수도 있음
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>+  : 앞 문자가 하나 이상
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>?  : 앞 문자가 없거나 하나 있음
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>[] : 문자 집합이나 범위
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>{} : 횟수 혹은 범위
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>() : 소괄호 안의 문자를 하나의 문자로 인식
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>|  : or 연산
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>\  : 확장 문자
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>\b : 단어의 경계
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>\B : 단어가 아닌 것에 대한 경계
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>\A : 입력의 시작 부분
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>\G : 이전 매치의 끝
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>\Z : 입력의 끝이지만 종결자가 있는 경우
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>\z : 입력의 끝
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>\s : 공백 문자
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>\S : 공백 문자가 아닌 나머지 문자
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>\w : 알파벳이나 숫자
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>\W : 알파벳이나 숫자 빼고
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>\d : 숫자 [0-9]와 동일
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>\D : 숫자를 제외한 모든 문자
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>*  : 앞 문자가 없을 수도, 무한정 많을 수도 있음
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>+  : 앞 문자가 하나 이상
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>?  : 앞 문자가 없거나 하나 있음
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>[] : 문자 집합이나 범위
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>{} : 횟수 혹은 범위
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>() : 소괄호 안의 문자를 하나의 문자로 인식
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>|  : or 연산
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>\  : 확장 문자
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>\b : 단어의 경계
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>\B : 단어가 아닌 것에 대한 경계
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>\A : 입력의 시작 부분
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>\G : 이전 매치의 끝
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>\Z : 입력의 끝이지만 종결자가 있는 경우
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>\z : 입력의 끝
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>\s : 공백 문자
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>\S : 공백 문자가 아닌 나머지 문자
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>\w : 알파벳이나 숫자
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>\W : 알파벳이나 숫자 빼고
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>\d : 숫자 [0-9]와 동일
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>\D : 숫자를 제외한 모든 문자
 </code></pre></div></li>
 </ul>
 

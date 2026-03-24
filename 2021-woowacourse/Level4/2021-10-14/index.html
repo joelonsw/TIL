@@ -23127,16 +23127,16 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">TokenResponse</span><span class="w"> </span><span class="n">tokenResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">oAuthSignIn</span><span class="p">(</span><span class="n">socialType</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getRemoteAddr</span><span class="p">());</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">tokenResponse</span><span class="p">);</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
-</code></pre></div>
-    - 여기서 이게 이렇게 뜨네...?
-        - getLocalAddr(): 172.17.0.1
-        - getRemoteAddr(): 172.17.0.3
-    - 내가 원하는건 요청한 클라이언트의 IP 인데?
-    - 참고
-        - getLocalAddr() 
-            - 요청 받은 인터페이스의 IP 주소 반환
-        - getRemoteAddr() 
-            - 요청을 보낸 클라이언트나 마지막 프록시의 IP 주소를 반환</li>
+</code></pre></div><p>- 여기서 이게 이렇게 뜨네...?
+      - getLocalAddr(): 172.17.0.1
+      - getRemoteAddr(): 172.17.0.3
+  - 내가 원하는건 요청한 클라이언트의 IP 인데?
+  - 참고
+      - getLocalAddr() 
+          - 요청 받은 인터페이스의 IP 주소 반환
+      - getRemoteAddr() 
+          - 요청을 보낸 클라이언트나 마지막 프록시의 IP 주소를 반환</p>
+</li>
 </ul>
 <ul>
 <li><strong>뭐가 문제냐면</strong>
@@ -23161,13 +23161,15 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        proxy_pass http://127.0.0.1:8080;
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    }
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>}
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 이후 스프링에서 &quot;x-forwarded-for&quot; 헤더를 까자
+  ```java
+  public String getIp(HttpServletRequest request) {
+      String ip = request.getHeader(&quot;x-forwarded-for&quot;);
+      return ip != null ? ip : request.getRemoteAddr();
+  }
+  ```
 </code></pre></div>
-        - 이후 스프링에서 "x-forwarded-for" 헤더를 까자
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getIp</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getHeader</span><span class="p">(</span><span class="s">&quot;x-forwarded-for&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ip</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">ip</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getRemoteAddr</span><span class="p">();</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
-</code></pre></div></li>
+</li>
 </ul>
 <ul>
 <li><strong>X-Forwarded-For는 뭐지?</strong>

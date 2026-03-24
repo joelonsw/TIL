@@ -23053,11 +23053,15 @@
 </li>
 </ul>
 <ul>
-<li><strong>해보기</strong><ul>
+<li>
+<p><strong>해보기</strong></p>
+<ul>
 <li>gradle에 디펜던스 넣기
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>compile &#39;io.sentry:sentry-logback:1.7.30&#39;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>compile &#39;io.sentry:sentry-spring-boot-starter:1.7.30&#39;
 </code></pre></div></li>
+</ul>
+<ul>
 <li>logback-spring.xml에 추가하기
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">&lt;configuration&gt;</span>
@@ -23161,7 +23165,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>logback</strong><ul>
+<li>
+<p><strong>logback</strong></p>
+<ul>
 <li><code>logback.xml</code>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">&lt;configuration</span><span class="w"> </span><span class="na">scan=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">debug=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
@@ -23185,6 +23191,8 @@
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="nt">&lt;/configuration&gt;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>Trace and Span Identifier: TraceID랑 SpanID를 뚝딱 기록해두자
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&lt;configuration</span><span class="w"> </span><span class="na">scan=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">debug=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="cm">&lt;!-- all conversion rules from above --&gt;</span>

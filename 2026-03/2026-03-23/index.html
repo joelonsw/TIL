@@ -22985,15 +22985,25 @@
 </li>
 </ul>
 <h2 id="react-rendering">React Rendering<a class="headerlink" href="#react-rendering" title="Permanent link">&para;</a></h2>
-<p><em>참고: <a href="https://ko.react.dev/learn/render-and-commit">https://ko.react.dev/learn/render-and-commit</a></em><br />
-1. 렌더링 트리거
-   - 컴포넌트의 초기 렌더링인 경우 / 컴포넌트의 state가 업데이트 된 경우 =&gt; 컴포넌트 렌더링이 일어남
-     - 초기 렌더링)
-       - <code>createRoot</code>를 호출한 다음, 해당 첨포넌트로 <code>render</code> 메서드를 호출하면 이 작업 완료
-     - state 업데이트시 리렌더링)
-       - <code>set</code> 함수를 통해 상태 업데이트하여 추가적인 렌더링 트리거
-       - 컴포넌트의 상태 업데이트 하면 자동으로 렌더링 대기열에 추가</p>
+<p><em>참고: <a href="https://ko.react.dev/learn/render-and-commit">https://ko.react.dev/learn/render-and-commit</a></em>  </p>
 <ol>
+<li>
+<p>렌더링 트리거</p>
+<ul>
+<li>컴포넌트의 초기 렌더링인 경우 / 컴포넌트의 state가 업데이트 된 경우 =&gt; 컴포넌트 렌더링이 일어남<ul>
+<li>초기 렌더링)<ul>
+<li><code>createRoot</code>를 호출한 다음, 해당 첨포넌트로 <code>render</code> 메서드를 호출하면 이 작업 완료</li>
+</ul>
+</li>
+<li>state 업데이트시 리렌더링)<ul>
+<li><code>set</code> 함수를 통해 상태 업데이트하여 추가적인 렌더링 트리거</li>
+<li>컴포넌트의 상태 업데이트 하면 자동으로 렌더링 대기열에 추가</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>
 <p>React 컴포넌트 렌더링</p>
 <ul>

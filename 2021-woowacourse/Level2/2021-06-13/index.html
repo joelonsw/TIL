@@ -22960,13 +22960,14 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span> <span class="nc">Request</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 이렇게 래퍼 클래스를 쓴다면 NPE에 대한 사항을 고려해줄 것
+  - 기본형은 default로 0이 할당되기에 그에 대한 처리를 고려해줄 것
+  - 래퍼타입으로 사용하고 Bean Validation으로 `@NotNull`붙여주는 것이 좋아보임
 </code></pre></div>
-        - 이렇게 래퍼 클래스를 쓴다면 NPE에 대한 사항을 고려해줄 것
-        - 기본형은 default로 0이 할당되기에 그에 대한 처리를 고려해줄 것
-        - 래퍼타입으로 사용하고 Bean Validation으로 <code>@NotNull</code>붙여주는 것이 좋아보임
-    - 예상치 못한 Exception을 위한 <code>@ExceptionHandler</code> 필요한가?
-        - 새롭게 정의한 Exception이 여기로 흘러들어갈 수 있음
-        - 너무 범용적으로 에러를 다 잡아서 오히려 개발자 입장에서 디버깅하기 어려울 수도</li>
+<p>- 예상치 못한 Exception을 위한 <code>@ExceptionHandler</code> 필요한가?
+      - 새롭게 정의한 Exception이 여기로 흘러들어갈 수 있음
+      - 너무 범용적으로 에러를 다 잡아서 오히려 개발자 입장에서 디버깅하기 어려울 수도</p>
+</li>
 </ul>
 <ul>
 <li><strong>우기</strong>

@@ -23138,10 +23138,10 @@
     - 톰캣 홈페이지(<a href="http://tomcat.apache.org/">http://tomcat.apache.org/</a>) 에 방문하여 다운로드할 톰캣 URL 가져옴
     - wget 명령어로 설치
         <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>wget<span class="w"> </span>https://mirror.navercorp.com/apache/tomcat/tomcat-10/v10.0.7/bin/apache-tomcat-10.0.7.tar.gz
-</code></pre></div>
-    - 이후 압축 풀기
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tar<span class="w"> </span>-zvxf<span class="w"> </span>apache-tomcat-10.0.7.tar.gz
-</code></pre></div></li>
+</code></pre></div><p>- 이후 압축 풀기
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tar<span class="w"> </span>-zvxf<span class="w"> </span>apache-tomcat-10.0.7.tar.gz
+</code></pre></div></p>
+</li>
 </ul>
 <ol>
 <li>
@@ -23149,8 +23149,8 @@
     - apache-tomcat-10.0.7/bin의 startup.sh 로 톰캣 실행
         - 기본적으로 8080 포트에 잡혀있음
         - <a href="http://EC2-public-ip:8080">http://EC2-public-ip:8080</a> 로 들어가면 톰캣 웰컴 페이지 나옴
-        <img alt="" src="../../image/2021-06-18-default-tomcat.PNG" />
-    - apache-tomcat-10.0.7/bin의 shutdown.sh로 톰캣 종료</p>
+        <img alt="" src="../../image/2021-06-18-default-tomcat.PNG" /></p>
+<p>- apache-tomcat-10.0.7/bin의 shutdown.sh로 톰캣 종료</p>
 </li>
 <li>
 <p>HelloServlet.java 만들기
@@ -23184,8 +23184,8 @@
 <a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;destroy!&quot;</span><span class="p">);</span>
 <a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="p">}</span>
-</code></pre></div>
-    - 필수적으로 정의해줘야 하는 init(), destroy()와 doGet()으로 Get메서드 오버라이딩 해준 것 볼 수 있다</p>
+</code></pre></div></p>
+<p>- 필수적으로 정의해줘야 하는 init(), destroy()와 doGet()으로 Get메서드 오버라이딩 해준 것 볼 수 있다</p>
 </li>
 <li>
 <p>HelloServlet.class 만들기
@@ -23193,8 +23193,8 @@
         - 해당 클래스 파일은 apache-tomcat-10.0.7/webapps/ROOT/WEB-INF/classes에 저장해둘 것
     - 톰캣의 servlet-api.jar가 컴파일할때 필요함! 다음과 같이 classpath 지정해주자
         <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w"> </span>javac<span class="w"> </span>-d<span class="w"> </span>../classes<span class="w"> </span>HelloServlet.java<span class="w"> </span>-cp<span class="w"> </span>../../../../lib/servlet-api.jar
-</code></pre></div>
-    - 이제 apache-tomcat-10.0.7/webapps/ROOT/WEB-INF/classes에 "HelloServlet.class"가 생긴 것을 알 수 있음</p>
+</code></pre></div></p>
+<p>- 이제 apache-tomcat-10.0.7/webapps/ROOT/WEB-INF/classes에 "HelloServlet.class"가 생긴 것을 알 수 있음</p>
 </li>
 <li>
 <p>web.xml에 HelloServlet 등록해주기
@@ -23238,15 +23238,15 @@
 <a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">  </span><span class="nt">&lt;/servlet-mapping&gt;</span>
 <a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>
 <a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="nt">&lt;/web-app&gt;</span>
-</code></pre></div>
-    - "servlet"에서 서블릿의 이름을 지정해주고, 서블릿의 클래스 파일을 지정해준듯?
-    - "servlet-mapping"에서 서블릿의 이름에 대응하는 url-pattern을 정의해준듯?</p>
+</code></pre></div></p>
+<p>- "servlet"에서 서블릿의 이름을 지정해주고, 서블릿의 클래스 파일을 지정해준듯?
+  - "servlet-mapping"에서 서블릿의 이름에 대응하는 url-pattern을 정의해준듯?</p>
 </li>
 <li>
 <p>이제 진짜 Tomcat 실행해보기 
     - <a href="http://EC2-public-ip:8080/HelloServlet으로">http://EC2-public-ip:8080/HelloServlet으로</a> 들어가보자!
-    <img alt="" src="../../image/2021-06-18-servlet-hello.PNG" />
-    - 짜잔 잘 된다!!!!!</p>
+    <img alt="" src="../../image/2021-06-18-servlet-hello.PNG" /></p>
+<p>- 짜잔 잘 된다!!!!!</p>
 </li>
 </ol>
 

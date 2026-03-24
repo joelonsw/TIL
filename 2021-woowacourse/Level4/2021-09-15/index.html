@@ -23092,14 +23092,14 @@
 <ul>
 <li><em>참고: <a href="https://velog.io/@hsw0194/Spring-MVC-HandlerMapping%EC%9D%98-%EB%8F%99%EC%9E%91%EB%B0%A9%EC%8B%9D-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1%ED%8E%B8">https://velog.io/@hsw0194/Spring-MVC-HandlerMapping%EC%9D%98-%EB%8F%99%EC%9E%91%EB%B0%A9%EC%8B%9D-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1%ED%8E%B8</a></em></li>
 <li>Spring MVC Request flow
-    <img alt="" src="https://media.vlpt.us/images/hsw0194/post/8e1df081-c5d5-4c7c-8a33-699b3d6f6e9e/image.png" />
-    1. 먼저 DispatcherServlet이 요청을 받음
-    2. DispatcherServlet은 HandlerMapping에게 적절한 controller를 선택하도록 요청
-    3. HandlerMapping은 적합한 controller 선택
-    4. DispatcherServlet은 선택된 controller의 로직 실행작업을 HandlerAdapter에게 위임
-    5. HandlerAdapter가 controller의 비즈니스 로직 호출하고 결과를 ModelAndView 객체에 담아 이를 리턴
-    6. DispatcherServlet이 ViewResolver를 이용해 결과를 보여줄 View를 가져옴
-    7. View 객체에게 DispatcherServlet이 응답 결과 생성 요청</li>
+    <img alt="" src="https://media.vlpt.us/images/hsw0194/post/8e1df081-c5d5-4c7c-8a33-699b3d6f6e9e/image.png" /><p>1. 먼저 DispatcherServlet이 요청을 받음
+  2. DispatcherServlet은 HandlerMapping에게 적절한 controller를 선택하도록 요청
+  3. HandlerMapping은 적합한 controller 선택
+  4. DispatcherServlet은 선택된 controller의 로직 실행작업을 HandlerAdapter에게 위임
+  5. HandlerAdapter가 controller의 비즈니스 로직 호출하고 결과를 ModelAndView 객체에 담아 이를 리턴
+  6. DispatcherServlet이 ViewResolver를 이용해 결과를 보여줄 View를 가져옴
+  7. View 객체에게 DispatcherServlet이 응답 결과 생성 요청</p>
+</li>
 </ul>
 
 

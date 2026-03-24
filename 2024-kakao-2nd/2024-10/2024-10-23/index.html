@@ -23197,7 +23197,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Transaction Management</strong><ul>
+<li>
+<p><strong>Transaction Management</strong></p>
+<ul>
 <li>스프링은 트랜잭션 처리 TransactionManager 객체를 통해 처리</li>
 <li>구현체는 갈아 끼울 수 있는 PlatformTransactionManager 주입되어 사용
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">PlatformTransactionManager</span><span class="w"> </span><span class="p">{</span>
@@ -23208,6 +23210,8 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">rollback</span><span class="p">(</span><span class="n">TransactionStatus</span><span class="w"> </span><span class="n">var1</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">TransactionException</span><span class="p">;</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li><img alt="" src="../../images/2024-10-23-txManager.png" /></li>
 <li>구현체마다 동일한 부분이 있을 수 있어 AbstractPlatformTxManager가 있기도 하다<ul>
 <li>기본 구현체는 DataSourceTxManager, SpringDataJPA - JpaTxManager. </li>

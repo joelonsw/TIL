@@ -22978,14 +22978,14 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPlaying</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chessGame</span><span class="p">.</span><span class="na">isPlaying</span><span class="p">();</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChessGameDTO</span><span class="p">(</span><span class="n">piecePositionToString</span><span class="p">,</span><span class="w"> </span><span class="n">currentTurnTeam</span><span class="p">,</span><span class="w"> </span><span class="n">whiteTeamScore</span><span class="p">,</span><span class="w"> </span><span class="n">blackTeamScore</span><span class="p">,</span><span class="w"> </span><span class="n">isPlaying</span><span class="p">);</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
-</code></pre></div>
-    - 흐음...
-    - 뭐 우선 generateChessGameDTO 메서드는 말그대로 ChessGameDTO를 만드는 메서드인데...
-    - 사실 이건 ChessGameDTO를 만드는거라서 크게 문제가 되나 싶긴하네...
-        - 물론 만드는 도중에 chessGame이 변한다면 문제긴 하지
-        - synchronized를 써야할까?
-            - 그게 뭔데? 아래 참고
-        - 흐음 그러면 synchronized를 체스게임의 정보를 바꾸는 때에 사용하는게 좋을 것 같지...?</li>
+</code></pre></div><p>- 흐음...
+  - 뭐 우선 generateChessGameDTO 메서드는 말그대로 ChessGameDTO를 만드는 메서드인데...
+  - 사실 이건 ChessGameDTO를 만드는거라서 크게 문제가 되나 싶긴하네...
+      - 물론 만드는 도중에 chessGame이 변한다면 문제긴 하지
+      - synchronized를 써야할까?
+          - 그게 뭔데? 아래 참고
+      - 흐음 그러면 synchronized를 체스게임의 정보를 바꾸는 때에 사용하는게 좋을 것 같지...?</p>
+</li>
 </ul>
 <ul>
 <li>쓰레드의 동기화

@@ -23035,7 +23035,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Netflix Hystrix</strong><ul>
+<li>
+<p><strong>Netflix Hystrix</strong></p>
+<ul>
 <li>라이브러리 추가하면 회로 차단기 패턴을 구현할 수 있음 ㄷㄷ</li>
 <li>원격 서비스 의존 메서드에 <code>@HystrixCommand</code> 활용하면 회로 차단기 패턴 적용 가능</li>
 <li>여러 설정을 줌으로써 차단을 걸고, 차단 해제할 수 있음
@@ -23051,6 +23053,8 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="c1">// Some works</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>회로 차단기 별로 격리된 쓰레드 풀을 지정할 수 있음 (Bulkhead)
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@HystrixCommand</span><span class="p">(</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">fallbackMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;myFallbackMethod&quot;</span><span class="p">,</span>

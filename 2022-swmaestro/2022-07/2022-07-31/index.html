@@ -22982,13 +22982,17 @@
 </li>
 </ul>
 <ul>
-<li><strong>어노테이션으로 접근 권한 조절</strong><ul>
+<li>
+<p><strong>어노테이션으로 접근 권한 조절</strong></p>
+<ul>
 <li>어노테이션 만들기
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Retention</span><span class="p">(</span><span class="n">RUNTIME</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nd">@Target</span><span class="p">(</span><span class="n">METHOD</span><span class="p">)</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">Auth</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>인터셉터 만들기
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthInterceptor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HandlerInterceptorAdapter</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nd">@Override</span>
@@ -23014,6 +23018,8 @@
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>WebMvcConfigurer 등록
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@RequiredArgsConstructor</span>

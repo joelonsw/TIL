@@ -23053,7 +23053,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Fixture &amp; Mock</strong><ul>
+<li>
+<p><strong>Fixture &amp; Mock</strong></p>
+<ul>
 <li>배달 -&gt; 주문 -&gt; 창고</li>
 <li>Fixture<ul>
 <li>픽스쳐를 사용하게 되면 앞에 사전에 준비해야할 것이 많다.
@@ -23073,6 +23075,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>Mock<ul>
 <li>직접적인 협력을 맺고 있는 메서드만 미리 설정해주면 됨
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// given</span>
@@ -23092,11 +23096,15 @@
 </li>
 </ul>
 <ul>
-<li><strong>비결정적인 테스트</strong><ul>
+<li>
+<p><strong>비결정적인 테스트</strong></p>
+<ul>
 <li>결제 시스템에서와 같이 외부의 신용카드 정보와 결제 시스템을 활용하는 상황에서는 어떻게 테스트를 해야할까? (테스트하기 어려운 상황)</li>
 <li>시나리오</li>
 <li>배달 =&gt; 주문 =&gt; 창고
       =&gt; 결제</li>
+</ul>
+<ul>
 <li>테스트하기 어려운 상황에서도 테스트 더블의 종류와 상관없이 활용할 수 있다. <ul>
 <li>객체간의 협력 관계에서 테스트하기 어려운 부분이 있다면 클래시스트라도 테스트 더블 사용가능</li>
 <li>외부 API써도 안정적이라면 더블 없이도 가능</li>

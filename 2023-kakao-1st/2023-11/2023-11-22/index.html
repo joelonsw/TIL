@@ -23123,14 +23123,20 @@
 </li>
 </ul>
 <ul>
-<li><strong>Virtual DOM의 동작 원리</strong><ul>
-<li>사실 DOM 처럼 생겼는데, js object에 불과해<ul>
+<li>
+<p><strong>Virtual DOM의 동작 원리</strong></p>
+<ul>
+<li>
+<p>사실 DOM 처럼 생겼는데, js object에 불과해</p>
+<ul>
 <li>요렇게 생겼다고 생각했던 html은 사실
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;items&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Item 1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Item 2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>그저 요런 js야
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">domNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nx">tagName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ul&quot;</span><span class="p">,</span>
@@ -23149,6 +23155,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>메모리에서 도니까 비용도 적고</li>
 <li>모든 변화 한번에 묶어서 한큐에 뚝딱 적용</li>
 <li><strong>Virtual DOM: DOM fragment의 변화를 묶어서 적용한 다음, 기존 DOM에 던져주는 과정</strong></li>
@@ -23158,7 +23166,9 @@
 <h4 id="3-react-virtual-dom">3. React의 Virtual DOM<a class="headerlink" href="#3-react-virtual-dom" title="Permanent link">&para;</a></h4>
 <ul>
 <li>리액트에게 Virtual DOM이란... "UI의 가상적인 표현을 메모리에 저장하고, ReactDOM과 같은 라이브러리에 의해 실제 DOM과 동기화"</li>
-<li><strong>JSX &amp; React의 Virtual DOM</strong><ul>
+<li>
+<p><strong>JSX &amp; React의 Virtual DOM</strong></p>
+<ul>
 <li>js 확장 문법으로 html 처럼 생겼지만 js object 작성의 또다른 방법
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">component</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
@@ -23188,6 +23198,8 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>리액트가 <code>ReactDOM.render(element, document.getElementById('kakao'))</code> 이렇게 꽂아줄 때 변경됨!</li>
 </ul>
 </li>

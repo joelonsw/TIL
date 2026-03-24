@@ -23009,39 +23009,46 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">      </span><span class="k">WHERE</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - ![](../image/2021-10-20-query-where.PNG)
+  - 테이블의 왼쪽 id, name이 hospital의 테이블, 그 뒤가 covid 테이블
+  - hospital_id 가 1인 레코드들이 where절에서 필터링되어 결과값으로 보여준다 (총 5249 row 반환)
+  ```SQL
+  SELECT * FROM hospital 
+      LEFT JOIN covid ON hospital.id = covid.hospital_id
+        AND hospital.id = 1;
+  ```
+
+  - ![](../image/2021-10-20-query-on.PNG)
+  - hospital을 기반으로 left join을 진행한다. 
+      - hospital의 해당 id가 hospital.id = 1이 아닌 hospital 튜플들은 covid 테이블이 null인 튜플들로 join된다. (총 hospital.id=1 인 5249 row + hospital.id=1아닌 31 row 반환)
 </code></pre></div>
-        - <img alt="" src="../../image/2021-10-20-query-where.PNG" />
-        - 테이블의 왼쪽 id, name이 hospital의 테이블, 그 뒤가 covid 테이블
-        - hospital_id 가 1인 레코드들이 where절에서 필터링되어 결과값으로 보여준다 (총 5249 row 반환)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">      </span><span class="k">AND</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div>
-        - <img alt="" src="../../image/2021-10-20-query-on.PNG" />
-        - hospital을 기반으로 left join을 진행한다. 
-            - hospital의 해당 id가 hospital.id = 1이 아닌 hospital 튜플들은 covid 테이블이 null인 튜플들로 join된다. (총 hospital.id=1 인 5249 row + hospital.id=1아닌 31 row 반환)</li>
-<li>왜 이러지...?
-    - 나의 생각
-        - 우선 WHERE과 AND의 용도 자체가 다르다고 생각
-            - WHERE는 조인해놓은 테이블을 조건걸어 필터링할 때 사용
-            - AND는 JOIN의 조건인 ON 절에서 조건을 더 걸어준 것이라 생각
-        - 근거로는 괄호로 묶었을때 하나는 에러나고, 하나는 에러나지 않는 쿼리들!!
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="w"> </span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="w"> </span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span><span class="p">)</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">syntax</span><span class="w"> </span><span class="n">error</span><span class="o">!</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1">--------------------------------------------------------</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">syntax</span><span class="w"> </span><span class="n">error</span><span class="o">!</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span>
-</code></pre></div></li>
+<ul>
+<li>왜 이러지...?<ul>
+<li>나의 생각
+    - 우선 WHERE과 AND의 용도 자체가 다르다고 생각
+        - WHERE는 조인해놓은 테이블을 조건걸어 필터링할 때 사용
+        - AND는 JOIN의 조건인 ON 절에서 조건을 더 걸어준 것이라 생각
+    - 근거로는 괄호로 묶었을때 하나는 에러나고, 하나는 에러나지 않는 쿼리들!!
+    <code>sql
+    SELECT * FROM (hospital 
+        LEFT JOIN covid ON hospital.id = covid.hospital_id)
+            WHERE hospital.id = 1;
+
+    SELECT * FROM (hospital 
+        LEFT JOIN covid ON hospital.id = covid.hospital_id)
+            AND hospital.id = 1; =&gt; syntax error!
+    --------------------------------------------------------
+    SELECT * FROM hospital 
+        LEFT JOIN covid ON (hospital.id = covid.hospital_id
+            WHERE hospital.id = 1); =&gt; syntax error!
+
+    SELECT * FROM hospital 
+        LEFT JOIN covid ON (hospital.id = covid.hospital_id
+            AND hospital.id = 1);</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li>inner join 이라면 같은 결과값을 받아볼 것이다.
@@ -23070,53 +23077,64 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">userno</span><span class="p">),</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="p">(</span><span class="n">chgdate</span><span class="p">)</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">)</span><span class="w"> </span><span class="n">engine</span><span class="o">=</span><span class="n">innodb</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 커버링 인덱스 (select)
+  ```sql
+  select chgdate , userno
+  from usertest
+  limit 100000, 100
+  ```
+
+      - Extra 필드: Using index
+      - 인덱스만으로 원하는 데이터 추출하였음을 뜻함
+  - 커버링 인덱스 (where)
+  ```sql
+  select *
+  from usertest
+  where chgdate like &#39;2010%&#39;
+  limit 100000, 100
+  ```
+
+      - Extra 필드: Using where
+      - Range 검색 이후 직접 데이터 필드에 접근하여 추출
+  - 커버링 인덱스 쿼리
+  ```sql
+  select a.*
+  from (
+        select userno
+        from usertest
+        where chgdate like &#39;2012%&#39;
+        limit 100000, 100
+  ) b join usertest a on b.userno = a.userno
+  ```
+
+      - Extra 필드: Using where; Using index
+      - Where로 처리된 결과 셋이 일정 범위 추출되나, 추출되는게 pk값인 userno
+          - innodb에서는 모든 인덱스값에는 pk를 값으로 가짐
+  - 커버링 인덱스 (order by)                
+      - 이미 정렬되어 있기에 full scan 방지 가능
+      1. 일반 쿼리
+      ```sql
+      select *
+      from usertest
+      order by chgdate
+      limit 400000, 100
+      ```
+
+          - 인덱스 태워서 거기서 블록 읽는 것 보다, 무지성 풀스캔이 더 빨라!
+      2. 커버링 인덱스 쿼리
+      ```sql
+      select a.*
+      from (
+            select userno
+            from usertest
+            order by chgdate
+            limit 400000, 100
+      ) b join usertest a on b.userno = a.userno
+      ```
+
+          - 이렇게 진짜 인덱스의 정보만 요청할 경우 뚝딱 커버링 인덱스로 커버 가능
 </code></pre></div>
-        - 커버링 인덱스 (select)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">select</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">userno</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">limit</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-</code></pre></div>
-            - Extra 필드: Using index
-            - 인덱스만으로 원하는 데이터 추출하였음을 뜻함
-        - 커버링 인덱스 (where)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">where</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;2010%&#39;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">limit</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-</code></pre></div>
-            - Extra 필드: Using where
-            - Range 검색 이후 직접 데이터 필드에 접근하여 추출
-        - 커버링 인덱스 쿼리
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="o">*</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">from</span><span class="w"> </span><span class="p">(</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">      </span><span class="k">select</span><span class="w"> </span><span class="n">userno</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="k">where</span><span class="w"> </span><span class="n">chgdate</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;2012%&#39;</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="k">limit</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">usertest</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">userno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">userno</span>
-</code></pre></div>
-            - Extra 필드: Using where; Using index
-            - Where로 처리된 결과 셋이 일정 범위 추출되나, 추출되는게 pk값인 userno
-                - innodb에서는 모든 인덱스값에는 pk를 값으로 가짐
-        - 커버링 인덱스 (order by)              <br />
-            - 이미 정렬되어 있기에 full scan 방지 가능
-            1. 일반 쿼리
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">chgdate</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">limit</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-</code></pre></div>
-                - 인덱스 태워서 거기서 블록 읽는 것 보다, 무지성 풀스캔이 더 빨라!
-            2. 커버링 인덱스 쿼리
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="o">*</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">from</span><span class="w"> </span><span class="p">(</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">      </span><span class="k">select</span><span class="w"> </span><span class="n">userno</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="k">from</span><span class="w"> </span><span class="n">usertest</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">chgdate</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="k">limit</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">usertest</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">userno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">userno</span>
-</code></pre></div>
-                - 이렇게 진짜 인덱스의 정보만 요청할 경우 뚝딱 커버링 인덱스로 커버 가능</li>
+</li>
 </ul>
 <ul>
 <li><strong>InnoDB는 뭐야?</strong>
@@ -23178,20 +23196,20 @@
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">from</span><span class="w"> </span><span class="n">temp_ad_offset</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">where</span><span class="w"> </span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">offset_type</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%LIST&#39;</span><span class="p">;</span>
-</code></pre></div>
-    - Using Index Condition
-        - Extra: Using where
-            - 이렇게 스토리지 엔진 &amp; MySQL 엔진을 둘 다 타게되면 
-            - customer_id = 7인 데이터를 테이블에서 모두 찾아 MySQL 엔진에 줌 &lt;= by InnoDB
-            - MySQL 엔진에서 하나하나 <code>offset_type like '%LIST'</code> 확인
-        - <code>ALTER TABLE temp_ad_offset ADD INDEX idx_temp_ad_offset_2 (customer_id, offset_type);</code>
-            - 근데 customer_id = 7를 통해 인덱스 읽은 상태인데 offset_type 비교를 테이블에서 또하는거 좀 비효율적이자나?
-        - Extra: Using Index Condition
-            - 인덱스 혜택을 못보더라도 InnoDB한테 조건 넘겨!
-            - 최대한 InnoDB에서 걸르고 걸러 MySQL 엔진에게 전달되도록 개선되었음
-            - 이게 인덱스 푸시 다운
-            - MariaDB 5.3 이상, MySQL 5.6 이상 부터 돔
-            - MariaDB 10.x 버전이면 기본 옵션 ON</li>
+</code></pre></div><p>- Using Index Condition
+      - Extra: Using where
+          - 이렇게 스토리지 엔진 &amp; MySQL 엔진을 둘 다 타게되면 
+          - customer_id = 7인 데이터를 테이블에서 모두 찾아 MySQL 엔진에 줌 &lt;= by InnoDB
+          - MySQL 엔진에서 하나하나 <code>offset_type like '%LIST'</code> 확인
+      - <code>ALTER TABLE temp_ad_offset ADD INDEX idx_temp_ad_offset_2 (customer_id, offset_type);</code>
+          - 근데 customer_id = 7를 통해 인덱스 읽은 상태인데 offset_type 비교를 테이블에서 또하는거 좀 비효율적이자나?
+      - Extra: Using Index Condition
+          - 인덱스 혜택을 못보더라도 InnoDB한테 조건 넘겨!
+          - 최대한 InnoDB에서 걸르고 걸러 MySQL 엔진에게 전달되도록 개선되었음
+          - 이게 인덱스 푸시 다운
+          - MariaDB 5.3 이상, MySQL 5.6 이상 부터 돔
+          - MariaDB 10.x 버전이면 기본 옵션 ON</p>
+</li>
 </ul>
 
 

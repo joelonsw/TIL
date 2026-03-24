@@ -23234,8 +23234,12 @@
 </li>
 </ul>
 <ul>
-<li><strong>인증/인가 예외처리 방식</strong><ol>
-<li>인증<ul>
+<li>
+<p><strong>인증/인가 예외처리 방식</strong></p>
+<ol>
+<li>
+<p>인증</p>
+<ul>
 <li>인증 예외가 생기면 <strong>AuthenticationException</strong>을 호출시킴</li>
 <li>AuthenticationEntryPoint 인터페이스로 커스텀이 가능함
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Component</span>
@@ -23261,7 +23265,9 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>인가<ul>
+<li>
+<p>인가</p>
+<ul>
 <li>인가 예외가 생기면 <strong>AccessDeniedException</strong>을 호출시킴</li>
 <li>AccessDeniedHandler 인터페이스로 커스텀 가능
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Component</span>

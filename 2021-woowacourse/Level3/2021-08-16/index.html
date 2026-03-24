@@ -22960,50 +22960,51 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">commit</span><span class="p">(</span><span class="n">TransactionStatus</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">rollback</span><span class="p">(</span><span class="n">TransactionStatus</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - commit~rollback 사이가 경계 설정
 </code></pre></div>
-        - commit~rollback 사이가 경계 설정
-    - 구현체: DataSourceTransactionManager(JDBC), JpaTransactionManager(JPA), JtaTransactionManager(하나 이상 DB)
-    - AOP를 이용한 선언적 트랜잭션
-        - tx namespace
-            - transaction 매니저 빈설정
-        - 어노테이션
-            - 메서드, 클래스, 인터페이스
-    - 트랜잭션 어노테이션
-        - propagation : 전파 레벨 설정
-            - required
-            - supports
-            - mandatory
-            - requires_new
-            - not_supported
-            - never
-            - nested
-        - isolation : 트랜잭션 격리 수준 (동시 여러 트랜잭션 시작시, 트랜잭션 작업 내용을 다른 트랜잭션에게 보여줄지 말지... 동시에 많은 트랜잭션 진행하면서 문제가 안생기게 할라고)
-            - DEFAULT: DB가 쓰는 놈으로 따른다 (거의 READ_COMMITTED)
-            - READ_UNCOMMITED: 아직 커밋 안된 데이터 다른 트랜잭션이 읽을 수 있음
-            - READ_COMMITTED: 커밋되지 않은 정보 읽을 수 없음!
-            - REPEATABLE_READ: 하나의 트랜잭션이 읽은 로우를 다른 트랜잭션이 수정할 수 없게!
-            - SERIALIZABLE: 동시 같은 테이블 접근 X
-        - timeout : 초로 시간 제한
-        - readOnly: 해당 트랜잭션에서는 CUD 멈춰! (JPA 더티체킹 무시)
-        - rollbackFor: 해당 체크예외를 롤백 대상으로 삼기
-        - noRollbackFor: 해당 체크예외 발생해도 그냥 커밋해부려!</li>
+<p>- 구현체: DataSourceTransactionManager(JDBC), JpaTransactionManager(JPA), JtaTransactionManager(하나 이상 DB)
+  - AOP를 이용한 선언적 트랜잭션
+      - tx namespace
+          - transaction 매니저 빈설정
+      - 어노테이션
+          - 메서드, 클래스, 인터페이스
+  - 트랜잭션 어노테이션
+      - propagation : 전파 레벨 설정
+          - required
+          - supports
+          - mandatory
+          - requires_new
+          - not_supported
+          - never
+          - nested
+      - isolation : 트랜잭션 격리 수준 (동시 여러 트랜잭션 시작시, 트랜잭션 작업 내용을 다른 트랜잭션에게 보여줄지 말지... 동시에 많은 트랜잭션 진행하면서 문제가 안생기게 할라고)
+          - DEFAULT: DB가 쓰는 놈으로 따른다 (거의 READ_COMMITTED)
+          - READ_UNCOMMITED: 아직 커밋 안된 데이터 다른 트랜잭션이 읽을 수 있음
+          - READ_COMMITTED: 커밋되지 않은 정보 읽을 수 없음!
+          - REPEATABLE_READ: 하나의 트랜잭션이 읽은 로우를 다른 트랜잭션이 수정할 수 없게!
+          - SERIALIZABLE: 동시 같은 테이블 접근 X
+      - timeout : 초로 시간 제한
+      - readOnly: 해당 트랜잭션에서는 CUD 멈춰! (JPA 더티체킹 무시)
+      - rollbackFor: 해당 체크예외를 롤백 대상으로 삼기
+      - noRollbackFor: 해당 체크예외 발생해도 그냥 커밋해부려!</p>
+</li>
 </ul>
 <ul>
 <li><strong>트랜잭션은 어떻게 동작하는가?</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">BEGIN</span><span class="w"> </span><span class="n">TRAN</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="o">~~~</span><span class="err">쿼리들</span><span class="o">~~~</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">COMMIT</span><span class="w"> </span><span class="n">TRAN</span>
-</code></pre></div>
-    - <img alt="" src="../../image/2021-08-16-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98.PNG" />
-    - 로그 캐시
-        - Redo 로그: 변경 후 값 기록
-            - 예상치 못한 예외 (OS단 등) 데이터를 다시 일관성있게 만들어주고 Undo 필요없는거 복구
-        - Undo 로그: 변경 전 값 기록
-            - Rollback 발생하면 Undo 로그 역순으로 따라가면서 원복
-    - 동시 접근 허용시
-        - Lock을 통해 트랜잭션 시작되면 끝날때까지 점유함
-        - <img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC1.PNG" />
-        - <img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC2.PNG" /></li>
+</code></pre></div><p>- <img alt="" src="../../image/2021-08-16-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98.PNG" />
+  - 로그 캐시
+      - Redo 로그: 변경 후 값 기록
+          - 예상치 못한 예외 (OS단 등) 데이터를 다시 일관성있게 만들어주고 Undo 필요없는거 복구
+      - Undo 로그: 변경 전 값 기록
+          - Rollback 발생하면 Undo 로그 역순으로 따라가면서 원복
+  - 동시 접근 허용시
+      - Lock을 통해 트랜잭션 시작되면 끝날때까지 점유함
+      - <img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC1.PNG" />
+      - <img alt="" src="../../image/2021-08-16-%EB%8F%99%EC%8B%9C%EC%A0%91%EA%B7%BC2.PNG" /></p>
+</li>
 </ul>
 <ul>
 <li><strong>전파 설정 활용 예시</strong>

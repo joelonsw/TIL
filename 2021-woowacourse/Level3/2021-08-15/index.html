@@ -23002,10 +23002,10 @@
         1. 컨테이너는 namespace로 격리, 통신을 위한 네트워크 인터페이스(eth0)를 할당받음
         2. host의 veth interface가 생성되고 컨테이너 내의 eth0와 연결
         3. host의 veth interface는 docker0라는 다른 veth interface와 연결
-        <img alt="" src="https://blog.kakaocdn.net/dn/bbz2B1/btqCF734kDK/E4w8EeBj3vZ1UHmNq1TdY1/img.png" />
-    - docker-compose로 띄우면 다른 네트워크 대역을 가짐
-        - docker-compose로 컨테이너 띄우면 compose로 묶은 범위에 맞춰 브릿지 하나 더 생성함
-        - 서로 경유하는 브릿지가 다르기에 docker-compose로 띄운 컨테이너와 일반 컨테이너 통신 X</li>
+        <img alt="" src="https://blog.kakaocdn.net/dn/bbz2B1/btqCF734kDK/E4w8EeBj3vZ1UHmNq1TdY1/img.png" /><p>- docker-compose로 띄우면 다른 네트워크 대역을 가짐
+      - docker-compose로 컨테이너 띄우면 compose로 묶은 범위에 맞춰 브릿지 하나 더 생성함
+      - 서로 경유하는 브릿지가 다르기에 docker-compose로 띄운 컨테이너와 일반 컨테이너 통신 X</p>
+</li>
 </ul>
 <ul>
 <li><strong>도커 볼륨</strong> 

@@ -23077,7 +23077,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>OSIV를 알아보기</strong><ul>
+<li>
+<p><strong>OSIV를 알아보기</strong></p>
+<ul>
 <li>Spring Boot에서 자동으로 Bean 설정해주는 Configuration<ul>
 <li>OpenEntityManagerInViewIinterceptor를 인터셉터로 등록하여 OSIV 등록 함
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
@@ -23108,6 +23110,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>Spring에서 웹 요청 처리과정에서는 Filter를 제외한 대부분의 영역에서 <code>@Transactional</code>없어도 EntityManager의 관리를 받게 된다<ul>
 <li>왜냐하면 OSIV는 디폴트 true이기 때문!</li>
 </ul>

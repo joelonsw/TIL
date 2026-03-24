@@ -22960,12 +22960,16 @@
 </li>
 </ul>
 <ul>
-<li><strong>TypeTag 용도</strong><ul>
+<li>
+<p><strong>TypeTag 용도</strong></p>
+<ul>
 <li>다음과 같이 리플렉션과 곁들여서 함께 사용
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">private</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">accessors</span><span class="p">[</span><span class="nc">T</span><span class="p">](</span><span class="n">tag</span><span class="p">:</span><span class="w"> </span><span class="nc">TypeTag</span><span class="p">[</span><span class="nc">T</span><span class="p">]):</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">MethodSymbol</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tag</span><span class="p">.</span><span class="n">tpe</span><span class="p">.</span><span class="n">members</span><span class="p">.</span><span class="n">collect</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">m</span><span class="p">:</span><span class="w"> </span><span class="nc">MethodSymbol</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">isPublic</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">isCaseAccessor</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">m</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}.</span><span class="n">toList</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>직렬화/역직렬화 라이브러리에서도 많이 사용. JSON을 어떤 Case class로 바꿀까요?</li>
 <li>고급 타입 안정성 및 DSL에서도 쓰임</li>
 </ul>

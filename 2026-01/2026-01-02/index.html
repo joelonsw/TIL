@@ -22931,7 +22931,9 @@
 <h3 id="2026-01-02">2026-01-02<a class="headerlink" href="#2026-01-02" title="Permanent link">&para;</a></h3>
 <h2 id="es">ES에서 한 번 인덱스된 필드는 고정된다<a class="headerlink" href="#es" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>문제 상황</strong><ul>
+<li>
+<p><strong>문제 상황</strong></p>
+<ul>
 <li>body.contents를 로깅하는데, body.contents가 포맷이 다양함
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;contents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -22952,6 +22954,8 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>맨 처음 contents를 ES에서 text 포맷이라고 인지하고 text로 저장했는데, (이미 ES 매핑 고정됨) 타 포맷의 타입이 들어와서 충돌 -&gt; 해당 문서 무시</li>
 </ul>
 </li>

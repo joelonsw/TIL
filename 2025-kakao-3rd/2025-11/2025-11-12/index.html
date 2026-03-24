@@ -23063,10 +23063,12 @@
 </li>
 </ul>
 <ul>
-<li><strong>collation에 ci가 박혀있으면 결과가 똑같이 나와</strong>
+<li>
+<p><strong>collation에 ci가 박혀있으면 결과가 똑같이 나와</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">receipt_user</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;joel.jo1@test.kakao.com&#39;</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">receipt_user</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Joel.jo1@test.Kakao.com&#39;</span><span class="p">;</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>Collation 때문에 결과는 같아도, account에 인덱스 없으면 풀스캔 탐 (당연한 얘기)</li>
 </ul>
 </li>

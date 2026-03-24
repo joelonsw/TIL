@@ -23048,9 +23048,10 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SingletonHelper</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">;</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>          - Lazy Loading 가능
+          - Thread Safe
 </code></pre></div>
-                - Lazy Loading 가능
-                - Thread Safe<p>- 정적 클래스: 모든 메소드가 static인 클래스
+<p>- 정적 클래스: 모든 메소드가 static인 클래스
       - 장점
           - 상태 안가지고, global access 제공시 유용
           - Static은 컴파일 때 static binding으로 싱글턴 보다 조금 더 빠름
@@ -23102,10 +23103,11 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Net</span><span class="p">::</span><span class="n">getFishes</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="p">.</span><span class="na">flatMap</span><span class="p">(</span><span class="n">List</span><span class="p">::</span><span class="n">stream</span><span class="p">)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - reduce
+      - 요소를 하나씩 가져와서 람다식 처리
+          - 스트림의 요소는 소모된다!
 </code></pre></div>
-        - reduce
-            - 요소를 하나씩 가져와서 람다식 처리
-                - 스트림의 요소는 소모된다!</li>
+</li>
 </ul>
 <h2 id="optional">Optional<a class="headerlink" href="#optional" title="Permanent link">&para;</a></h2>
 <ul>

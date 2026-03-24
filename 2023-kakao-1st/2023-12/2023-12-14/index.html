@@ -22973,7 +22973,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Implicit JOIN</strong><ul>
+<li>
+<p><strong>Implicit JOIN</strong></p>
+<ul>
 <li>Slick이 다음과 같은 쿼리를 만들어줌 (난 Join으로 썻는데, 최적화를 이렇게 함)
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">select</span><span class="w"> </span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">category_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">title</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">content</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">status</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">pin</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">popup</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">popup_start_at</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">popup_end_at</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">display_start_at</span><span class="o">`</span><span class="p">,</span><span class="w"> </span>
@@ -22985,6 +22987,8 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">pin</span><span class="o">`</span><span class="w"> </span><span class="k">desc</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">.</span><span class="o">`</span><span class="n">display_start_at</span><span class="o">`</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">limit</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>이때, <code>from 'bulletin' x2, 'bulletin_display_service_type_mapping' x3</code>에서 카테시안 곱이 발생함</li>
 <li>하지만 where 절을 보면 <code>x2.id = x3.bulletin_id</code> 조건이 있는데...<ul>
 <li>이게 JOIN의 ON절과 동일한 역할을 해</li>

@@ -22992,7 +22992,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Pagination은?</strong><ul>
+<li>
+<p><strong>Pagination은?</strong></p>
+<ul>
 <li>단일 테이블에 대해서 페이지네이션
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
@@ -23001,6 +23003,8 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kd">val</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">TableQuery</span><span class="p">[</span><span class="nc">PersonTable</span><span class="p">].</span><span class="n">sortBy</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">id</span><span class="p">).</span><span class="n">drop</span><span class="p">(</span><span class="n">offset</span><span class="p">).</span><span class="n">take</span><span class="p">(</span><span class="n">pageSize</span><span class="p">)</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>join 하고 난 뒤 페이지네이션
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">pageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>

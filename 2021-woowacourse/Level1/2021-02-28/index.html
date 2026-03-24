@@ -22987,13 +22987,13 @@
     - merge: 브랜치 작업 내역을 합치기
         - 합치는 과정 모두 history에 남김
         &gt; $ git switch step1 <br>
-        $ git merge bugFix
-    - rebase: 기존 커밋을 복사해서 올려놓음
-        - 합치는 과정 새롭게 history 씀
-        - log의 정돈, but history의 삭제
-        &gt; $ git rebase step1 <br>
-        $ git switch step1 <br>
-        $ git rebase bugFix</li>
+        $ git merge bugFix<p>- rebase: 기존 커밋을 복사해서 올려놓음
+      - 합치는 과정 새롭게 history 씀
+      - log의 정돈, but history의 삭제
+      &gt; $ git rebase step1 <br>
+      $ git switch step1 <br>
+      $ git rebase bugFix</p>
+</li>
 </ul>
 <ul>
 <li><strong>HEAD</strong>
@@ -23009,19 +23009,19 @@
     - 참고: <a href="https://velog.io/@sonypark/git-reset-vs-git-revert-%EC%B0%A8%EC%9D%B4">https://velog.io/@sonypark/git-reset-vs-git-revert-%EC%B0%A8%EC%9D%B4</a>
     - reset: 완전히 기록을 지우는 방법
         - history를 지우기 때문에, 원격 브랜치에서는 안 쓰는 방식
-        &gt; $ git reset HEAD~1 //최근 커밋 하나 지우기 <br>
-    - revert: 이전 커밋 내역을 그대로 남겨둔 채 새로운 커밋 생성
-        - 새로 생성된 커밋은 이전 내역을 지우는 커밋
-        &gt; $ git revert HEAD
-    - 복구도 reset으로 가능
-        &gt; $ git reset --hard [돌릴 커밋 Hash 값]</li>
+        &gt; $ git reset HEAD~1 //최근 커밋 하나 지우기 <br><p>- revert: 이전 커밋 내역을 그대로 남겨둔 채 새로운 커밋 생성
+      - 새로 생성된 커밋은 이전 내역을 지우는 커밋
+      &gt; $ git revert HEAD</p>
+<p>- 복구도 reset으로 가능
+      &gt; $ git reset --hard [돌릴 커밋 Hash 값]</p>
+</li>
 </ul>
 <ul>
 <li><strong>Remote</strong>
     - clone: origin으로 저장소 추가
-        &gt; $ git clone <a href="https://my-repo.com">https://my-repo.com</a>
-    - remote add: 다른 원격 저장소 별명으로 추가
-        &gt; $ git remote add [별명] <a href="https://mission-repo.com">https://mission-repo.com</a></li>
+        &gt; $ git clone <a href="https://my-repo.com">https://my-repo.com</a><p>- remote add: 다른 원격 저장소 별명으로 추가
+      &gt; $ git remote add [별명] <a href="https://mission-repo.com">https://mission-repo.com</a></p>
+</li>
 </ul>
 <ul>
 <li><strong>Cherry-pick</strong>

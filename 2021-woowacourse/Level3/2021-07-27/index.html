@@ -22955,11 +22955,11 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="nt">&lt;appender-ref</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;FILE&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">&lt;/root&gt;</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nt">&lt;/included&gt;</span>
-</code></pre></div>
-    - <code>&lt;include ~~defaults.xml/&gt;</code> : console log pattern, file log pattern의 기본값 정의됨, tomcat/hibernate의 모듈 log level 설정
-    - <code>&lt;property ~~&gt;</code> : application.yml의 설정 읽어옴
-    - <code>&lt;include ~~/console-appender.xml&gt;</code> : console appender 설정 읽어옴
-    - <code>&lt;include ~~/file-appender.xml&gt;</code> : file appender 설정 읽어옴</li>
+</code></pre></div><p>- <code>&lt;include ~~defaults.xml/&gt;</code> : console log pattern, file log pattern의 기본값 정의됨, tomcat/hibernate의 모듈 log level 설정
+  - <code>&lt;property ~~&gt;</code> : application.yml의 설정 읽어옴
+  - <code>&lt;include ~~/console-appender.xml&gt;</code> : console appender 설정 읽어옴
+  - <code>&lt;include ~~/file-appender.xml&gt;</code> : file appender 설정 읽어옴</p>
+</li>
 </ul>
 <ul>
 <li><strong>application.yml의 프로퍼티 가져오기</strong>
@@ -22996,18 +22996,18 @@
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">&lt;appender-ref</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;REMOTE_LOG_SERVER&quot;</span><span class="nt">/&gt;</span>
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">  </span><span class="nt">&lt;/springProfile&gt;</span>
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="nt">&lt;/root&gt;</span>
-</code></pre></div>
-    - 조합을 뚝딱하여 배포환경에 맞게 필요한 설정 갖다 쓰자
-        - spring.profiles.include
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="l l-Scalar l-Scalar-Plain">application-dev.yml</span>
+</code></pre></div><p>- 조합을 뚝딱하여 배포환경에 맞게 필요한 설정 갖다 쓰자
+      - spring.profiles.include
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="l l-Scalar l-Scalar-Plain">application-dev.yml</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.profiles.include</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">console-logging</span>
 </code></pre></div>
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="l l-Scalar l-Scalar-Plain">application-alpha.yml</span>
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="l l-Scalar l-Scalar-Plain">application-alpha.yml</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.profiles.include</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file-logging</span>
 </code></pre></div>
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="l l-Scalar l-Scalar-Plain">application-beta.yml</span>
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="l l-Scalar l-Scalar-Plain">application-beta.yml</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="l l-Scalar l-Scalar-Plain">spring.profiles.include</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file-logging,remote-logging</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 
 

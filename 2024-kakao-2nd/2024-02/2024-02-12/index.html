@@ -23034,7 +23034,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Java =&gt; Kotlin</strong><ul>
+<li>
+<p><strong>Java =&gt; Kotlin</strong></p>
+<ul>
 <li>Java
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sayHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -23046,6 +23048,8 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Person</span><span class="p">.</span><span class="na">sayHello</span><span class="p">());</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>Kotlin
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
@@ -23063,17 +23067,23 @@
 </li>
 </ul>
 <h2 id="jpa-spring-batch-jparepository-delete">JPA + Spring Batch - JpaRepository delete 쿼리가 안나감<a class="headerlink" href="#jpa-spring-batch-jparepository-delete" title="Permanent link">&para;</a></h2>
-<p><em>참고: <a href="https://myvelop.tistory.com/116">https://myvelop.tistory.com/116</a></em>
-1. Select 쿼리만 나감 =&gt; JPA 대량 데이터 삭제 글 후술
+<p><em>참고: <a href="https://myvelop.tistory.com/116">https://myvelop.tistory.com/116</a></em></p>
+<ol>
+<li>
+<p>Select 쿼리만 나감 =&gt; JPA 대량 데이터 삭제 글 후술
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">NoticeRepository</span><span class="p">:</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Notice</span><span class="p">,</span><span class="w"> </span><span class="kt">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">deleteByIdBetween</span><span class="p">(</span><span class="n">startId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w"> </span><span class="n">endId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
-</code></pre></div>
-  - 이건 Transactional 이 없어서 그래 
-  - DB에 변경이 가해지려면 트랜잭션 안에서 이루어져야겠지?
-  - 현재 메서드에 트랜잭션을 열어주는 공간이 없다면, 변경에 대해서 DB에 커밋이 어려워
-    - 주로 Spring Boot에서는 Service에서 해줬지만,,, 배치에서는 레포단이나 그냥 전체에서 해도 괜찮을 듯</p>
-<ol>
+</code></pre></div></p>
+<ul>
+<li>이건 Transactional 이 없어서 그래 </li>
+<li>DB에 변경이 가해지려면 트랜잭션 안에서 이루어져야겠지?</li>
+<li>현재 메서드에 트랜잭션을 열어주는 공간이 없다면, 변경에 대해서 DB에 커밋이 어려워<ul>
+<li>주로 Spring Boot에서는 Service에서 해줬지만,,, 배치에서는 레포단이나 그냥 전체에서 해도 괜찮을 듯</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>
 <p><code>@Transactional</code> 붙임
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">NoticeRepository</span><span class="p">:</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Notice</span><span class="p">,</span><span class="w"> </span><span class="kt">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -23237,7 +23247,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>클라이언트 처리</strong><ul>
+<li>
+<p><strong>클라이언트 처리</strong></p>
+<ul>
 <li>axios
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// 1. axios 전역 설정</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">axios</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">withCredentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// withCredentials 전역 설정</span>
@@ -23252,6 +23264,8 @@
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="p">})</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>fetch
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;https://example.com:1234/users/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>

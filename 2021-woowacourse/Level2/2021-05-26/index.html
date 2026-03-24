@@ -22991,18 +22991,20 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;userRepository&quot;</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;userRepository&quot;</span><span class="nt">/&gt;</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">&lt;/bean&gt;</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nt">&lt;/beans&gt;</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - Annotation-based configuration
+      - `@AutoWired`
+  - Java-based Configuration
+      ```java
+      @Configuration
+      public class AppConfig {
+          @Bean
+          public MyService myService() {
+              return new MyService();
+          }
+      }
+      ```
 </code></pre></div>
-        - Annotation-based configuration
-            - <code>@AutoWired</code>
-        - Java-based Configuration
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Configuration</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nd">@Bean</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="nf">myService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyService</span><span class="p">();</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
-</code></pre></div></li>
+</li>
 </ul>
 <ul>
 <li><strong>Java-based Configuration</strong>
@@ -23019,10 +23021,10 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuthenticationPrincipalArgumentResolver</span><span class="p">(</span><span class="n">authService</span><span class="p">());</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
-</code></pre></div>
-    - 생성하는 authService()와 주입 받는 authService()는 동일하다!
-    - 빈 등록시 의존이 필요하면 먼저 생성하고 의존한다
-        - Singleton으로 하나씩만 생성하자!</li>
+</code></pre></div><p>- 생성하는 authService()와 주입 받는 authService()는 동일하다!
+  - 빈 등록시 의존이 필요하면 먼저 생성하고 의존한다
+      - Singleton으로 하나씩만 생성하자!</p>
+</li>
 </ul>
 <ul>
 <li><strong>외부 파일의 값을 이용하기</strong>

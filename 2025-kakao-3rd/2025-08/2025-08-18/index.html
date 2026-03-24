@@ -22957,20 +22957,28 @@
 <ul>
 <li><strong>Play Framework</strong><ul>
 <li><code>sbt dist</code>로 배포할 파일 빌드하면 전통적인 방식의 배포판 구조 사용</li>
-<li><code>bin/</code>: 실행 스크립트 포함<ol>
+<li>
+<p><code>bin/</code>: 실행 스크립트 포함</p>
+<ol>
 <li>스크립트는 실행환경 보고 (ex. OS, java 위치)</li>
-<li>스크립트 내부에서 lib/ 하위 JAR 파일 경로 : 으로 이어붙여 매우 긴 classpath로 만듦
+<li>
+<p>스크립트 내부에서 lib/ 하위 JAR 파일 경로 : 으로 이어붙여 매우 긴 classpath로 만듦
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>declare -r script_conf_file=&quot;${app_home}/../conf/application.ini&quot;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>declare -r app_classpath=&quot;$lib_dir/../conf/:$lib_dir/til-api.til-api-1.0-SNAPSHOT-sans-externalized.jar
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>:$lib_dir/org.scala-lang.scala-library-2.13.10.jar:$lib_dir/com.typesafe.play.twirl-api_2.13-1.5.1.jar
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>:$lib_dir/com.typesafe.play.play-server_2.13-2.8.8.jar:$lib_dir/com.typesafe.play.play-logback_2.13-2.8.8.jar
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>:$lib_dir/com.typesafe.play.play-akka-http-server_2.13-2.8.8.jar:$lib_dir/com.typesafe.play.filters-helpers_2.13-2.8.8.jar:...
-</code></pre></div></li>
-<li>최종적으로 <code>java -cp [엄청나게 긴 클래스패스] play.core.server.ProdServerStart</code> 형태로 명령어 만들어 실행</li>
-</ol>
+</code></pre></div></p>
 </li>
+<li>
+<p>최종적으로 <code>java -cp [엄청나게 긴 클래스패스] play.core.server.ProdServerStart</code> 형태로 명령어 만들어 실행</p>
+<ul>
 <li><code>lib/</code>: 어플리케이션 코드 JAR와 모든 의존성 라이브러리 JAR들이 각각 파일로 들어있음</li>
 <li><code>conf/</code>: 설정 파일(application.conf, routes)</li>
+</ul>
+</li>
+</ol>
+</li>
 </ul>
 </li>
 </ul>

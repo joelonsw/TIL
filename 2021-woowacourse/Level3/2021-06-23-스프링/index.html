@@ -23149,8 +23149,8 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getAge</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">1L</span><span class="p">);</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">}</span>
-</code></pre></div>
-    - 또한 해당 객체 자체를 <code>@Mock</code> 어노테이션을 통해 모킹하여 테스트를 자체적으로 실행할 수 있다고 들었는데 사용해본적은 없다</li>
+</code></pre></div><p>- 또한 해당 객체 자체를 <code>@Mock</code> 어노테이션을 통해 모킹하여 테스트를 자체적으로 실행할 수 있다고 들었는데 사용해본적은 없다</p>
+</li>
 </ul>
 <ul>
 <li><strong>언제 Mocking을 해봤나요?</strong>
@@ -23160,8 +23160,9 @@
             - Session 검증로직
         - 이때 잘 Service 클래스를 <code>@MockBean</code>으로 Bean 자체를 mockBean으로 덮어씌웠고, 다음과 같이 when, thenReturn으로 행동을 지정해줌
             <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">userService</span><span class="p">.</span><span class="na">validateUser</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 이렇게 함으로써 Controller에서 검증하려고 하는 로직을 수행할 수 있었음
 </code></pre></div>
-        - 이렇게 함으로써 Controller에서 검증하려고 하는 로직을 수행할 수 있었음</li>
+</li>
 </ul>
 <ul>
 <li><strong>Mocking의 장점과 단점에 대해 알려주세요</strong>
@@ -23202,12 +23203,12 @@
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">());</span>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="p">}</span>
-</code></pre></div>
-    - MockMvc는 DispatcherServlet에 요청을 보냄 (테스트 용으로 확장된 TestDispatcherServlet)
-        - DispatcherServlet에 요청을 보냈으니, 매핑 정보를 보고 그에 맞는 핸들러 메서드 호출
-        - 테스트 케이스 메서드는 MockMvc가 반환하는 실행결과 받아 맞는지 검증
-    - 완벽히 이해하고 쓰진 못한것 같음
-        - 오히려 통합테스트 마냥 <code>@SpringBootTest</code>를 쓴 것 같아 마음이 아픔</li>
+</code></pre></div><p>- MockMvc는 DispatcherServlet에 요청을 보냄 (테스트 용으로 확장된 TestDispatcherServlet)
+      - DispatcherServlet에 요청을 보냈으니, 매핑 정보를 보고 그에 맞는 핸들러 메서드 호출
+      - 테스트 케이스 메서드는 MockMvc가 반환하는 실행결과 받아 맞는지 검증
+  - 완벽히 이해하고 쓰진 못한것 같음
+      - 오히려 통합테스트 마냥 <code>@SpringBootTest</code>를 쓴 것 같아 마음이 아픔</p>
+</li>
 </ul>
 <ul>
 <li><strong>RestAssured와는 어떻게 다른가요?</strong>
@@ -23267,12 +23268,13 @@
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>for example, by modifying the state of a singleton bean, 
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>modifying the state of an &quot;embedded database&quot;, etc. 
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Subsequent tests that request the same context will be supplied a new context.
+</code></pre></div><div class="highlight"><pre><span></span><code>  - `@Transactional`
+      - 테스트에 해당 어노테이션을 붙이면 DB에 저장했다가 rollback하게 됨
+  - `@Sql(&quot;~~.sql&quot;)`
+      - 테스트-resources에 수행할 SQL 쿼리들을 등록해둠
+      - &quot;classpath:~~.sql&quot;을 통해 테스트 수행 전 쿼리문을 실행함
 </code></pre></div>
-        - <code>@Transactional</code>
-            - 테스트에 해당 어노테이션을 붙이면 DB에 저장했다가 rollback하게 됨
-        - <code>@Sql("~~.sql")</code>
-            - 테스트-resources에 수행할 SQL 쿼리들을 등록해둠
-            - "classpath:~~.sql"을 통해 테스트 수행 전 쿼리문을 실행함</li>
+</li>
 </ul>
 <ul>
 <li><strong>본인이 생각했을 때 유지보수하기 좋은 테스트는 무엇인가요?</strong>
@@ -23433,15 +23435,15 @@
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">Assert</span><span class="p">.</span><span class="na">notNull</span><span class="p">(</span><span class="n">dataSource</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DataSource must not be null&quot;</span><span class="p">);</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">classicJdbcTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="p">(</span><span class="n">dataSource</span><span class="p">);</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
-</code></pre></div>
-    - 다음과 같이 생성
-    - JdbcTemplate으로는 ?를 사용하여 사용자가 넣을 데이터를 처리
-        - 순서가 강제되고, 가독성을 떨어뜨리고, 휴먼 에러 발생 가능성이 올라감
-        - 이를 방지시켜줌
-    - NamedParamJdbcTemplate을 통해서, 
-        - 들어가야할 변수에 ":변수" 로 표현이 가능
-        - 해당 변수들을 ParameterSource Map으로 처리 가능
-    - 객체 자체를 매핑시켜 저장할 수 있다고 하는데, 미션에서 적용해 본적은 없다</li>
+</code></pre></div><p>- 다음과 같이 생성
+  - JdbcTemplate으로는 ?를 사용하여 사용자가 넣을 데이터를 처리
+      - 순서가 강제되고, 가독성을 떨어뜨리고, 휴먼 에러 발생 가능성이 올라감
+      - 이를 방지시켜줌
+  - NamedParamJdbcTemplate을 통해서, 
+      - 들어가야할 변수에 ":변수" 로 표현이 가능
+      - 해당 변수들을 ParameterSource Map으로 처리 가능
+  - 객체 자체를 매핑시켜 저장할 수 있다고 하는데, 미션에서 적용해 본적은 없다</p>
+</li>
 </ul>
 <ul>
 <li><strong>SimpleJdbcInsert는 뭔가요?</strong>
@@ -23452,17 +23454,17 @@
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">            </span><span class="p">.</span><span class="na">usingGeneratedKeyColumns</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">);</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">}</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1">//(insert into {TABLE_NAME} value ~~) -&gt; id가 keyColumn</span>
-</code></pre></div>
-    - 데이터를 간단하게 저장하기 위해 만들어진 구현체
-    - BeanPropertySqlParameterSource를 통해 객체에서 필드를 뽑아 파라미터로 지정하여 저장할 수 있음
-    - executeAndReturnKey를 통해 칼럼 id 가져오기도 가능
-    - SQL 굳이 안써줘도 됨
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">Station</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Station</span><span class="w"> </span><span class="n">station</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div><p>- 데이터를 간단하게 저장하기 위해 만들어진 구현체
+  - BeanPropertySqlParameterSource를 통해 객체에서 필드를 뽑아 파라미터로 지정하여 저장할 수 있음
+  - executeAndReturnKey를 통해 칼럼 id 가져오기도 가능
+  - SQL 굳이 안써줘도 됨
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">Station</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Station</span><span class="w"> </span><span class="n">station</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">SqlParameterSource</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BeanPropertySqlParameterSource</span><span class="p">(</span><span class="n">station</span><span class="p">);</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">insertAction</span><span class="p">.</span><span class="na">executeAndReturnKey</span><span class="p">(</span><span class="n">params</span><span class="p">).</span><span class="na">longValue</span><span class="p">();</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Station</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">station</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>셋 중에 뭘 언제 쓸건가요?</strong>
@@ -23486,8 +23488,8 @@
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">stationId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">keyHolder</span><span class="p">.</span><span class="na">getKey</span><span class="p">()).</span><span class="na">longValue</span><span class="p">();</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Station</span><span class="p">(</span><span class="n">stationId</span><span class="p">,</span><span class="w"> </span><span class="n">stationName</span><span class="p">);</span>
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div>
-    - NamedParameterJdbcTemplate과 SimpleJdbcInsert 혼용할 생각</li>
+</code></pre></div><p>- NamedParameterJdbcTemplate과 SimpleJdbcInsert 혼용할 생각</p>
+</li>
 </ul>
 <h2 id="annotation">Annotation<a class="headerlink" href="#annotation" title="Permanent link">&para;</a></h2>
 <ul>

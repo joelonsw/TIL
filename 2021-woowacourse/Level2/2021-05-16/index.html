@@ -23117,17 +23117,17 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nd">@Autowired</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserDao</span><span class="w"> </span><span class="n">dao</span><span class="p">;</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
-</code></pre></div>
-    - 테스트에서도 인터페이스를 사용해 애플리케이션 코드와 느슨하게 연결해두자
-    - @DirtiesContext
-        - 스프링의 테스트 컨텍스트 프레임워크에게 해당 클래스의 테스트에서 애플리케이션 컨텍스트의 상태 변경한다는 것을 알려줌
-        - 해당 어노테이션이 붙으면 애플리케이션 컨텍스트 공유를 허용하지 않음
-            - 따라서 뒤에 테스트 영향 X
-    - 테스트 방법 선택 시 고려할 사항
-        1. 스프링 컨테이너 없이 테스트 가능하다면 그렇게 하자
-        2. 테스트에서 애플리케이션 컨텍스트 사용한다면 테스트 전용 설정 파일을 만들어두자
-        3. 예외 적인 의존 관계를 강제로 구성해야 한다면... 
-            - 컨텍스트에서 DI 받은 오브젝트에 다시 테스트 코드로 수동 DI 해서 테스트하도록 하자</li>
+</code></pre></div><p>- 테스트에서도 인터페이스를 사용해 애플리케이션 코드와 느슨하게 연결해두자
+  - @DirtiesContext
+      - 스프링의 테스트 컨텍스트 프레임워크에게 해당 클래스의 테스트에서 애플리케이션 컨텍스트의 상태 변경한다는 것을 알려줌
+      - 해당 어노테이션이 붙으면 애플리케이션 컨텍스트 공유를 허용하지 않음
+          - 따라서 뒤에 테스트 영향 X
+  - 테스트 방법 선택 시 고려할 사항
+      1. 스프링 컨테이너 없이 테스트 가능하다면 그렇게 하자
+      2. 테스트에서 애플리케이션 컨텍스트 사용한다면 테스트 전용 설정 파일을 만들어두자
+      3. 예외 적인 의존 관계를 강제로 구성해야 한다면... 
+          - 컨텍스트에서 DI 받은 오브젝트에 다시 테스트 코드로 수동 DI 해서 테스트하도록 하자</p>
+</li>
 </ul>
 <h4 id="_2">추가 공부 부분<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <ul>

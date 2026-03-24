@@ -23106,13 +23106,17 @@
 </li>
 </ul>
 <ul>
-<li><strong>Contravariance</strong><ul>
+<li>
+<p><strong>Contravariance</strong></p>
+<ul>
 <li>A가 B의 하위 타입이면, Class[B]는 Class[A]의 하위타입...?</li>
 <li>유연하게 사용될 경우가 있다네...
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">[</span><span class="o">-</span><span class="nc">A</span><span class="p">]</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">[</span><span class="nc">Any</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">[</span><span class="nc">Any</span><span class="p">]</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="c1">// MyClass[Any]가 MyClass[String]의 상위타입</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>Comparator가 대표적
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">[</span><span class="o">-</span><span class="nc">T</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">T</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span>

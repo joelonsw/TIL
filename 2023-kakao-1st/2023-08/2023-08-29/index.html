@@ -23088,7 +23088,9 @@
 </li>
 </ul>
 <ul>
-<li>[Scala]<ul>
+<li>
+<p>[Scala]</p>
+<ul>
 <li>scala로 직접 시뮬레이션을 위한 테스트 코드 작성<ul>
 <li>백엔드 API를 직접 호출하는 경우 (<a href="https://gatling.io/docs/gatling/reference/current/http/request/">https://gatling.io/docs/gatling/reference/current/http/request/</a> 참고하여 작성)</li>
 </ul>
@@ -23116,21 +23118,24 @@
           .exec(http("작성한 글 확인").get(s"/v1/board/post/${postId}"))</p>
 <p>setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
 }
-<code>- 다음과 같이 setup하여 부하를 늘릴 수 있음 =&gt; 시나리오 만들고, 이를 어떻게 몇명이나 부하보낼지는 setUp에서 결정</code>scala
-setUp(
-  scn.inject(
-    nothingFor(4 seconds),                                      // 일정시간 대기
-    atOnceUsers(10),                                            // 지정된 수의 사용자를 한번에 주입
-    rampUsers(10) during (5 seconds),                           // 주어진 지속시간에 걸쳐 주어진 수의 사용자를 선형적으로 늘려가며 주입 
-    constantUsersPerSec(20) during (15 seconds),                // 주어진 지속시간에 걸쳐 사용자를 일정한 비율로 증가시키며 주입. 일정한 간격 주입. 
-    constantUsersPerSec(20) during (15 seconds) randomized,     // 주어진 지속시간에 걸쳐 사용자를 일정한 비유로 증가시키며 주입. 랜덤한 간격 주입. 
-    rampUsersPerSec(10) to 20 during (10 minutes),              // 주어진 지속시간 동안 사용자를 시작 비율 -&gt; 목표 비율까지 증가시키며 주입. 일정한 간격 주입
-    rampUsersPerSec(10) to 20 during (10 minutes) randomized,   // 주어진 지속시간 동안 사용자를 시작 비율 -&gt; 목표 비율까지 증가시키며 주입. 랜덤한 간격 주입
-    heavisideUser(1000) during (20 seconds)                     // 단위 계단 함수로 주어진 지속시간 동안 사용자를 주입. 
-  ).protocols(httpProtocol)
-)
 ```</p>
 </li>
+</ul>
+<ul>
+<li>다음과 같이 setup하여 부하를 늘릴 수 있음 =&gt; 시나리오 만들고, 이를 어떻게 몇명이나 부하보낼지는 setUp에서 결정
+  <code>scala
+  setUp(
+    scn.inject(
+      nothingFor(4 seconds),                                      // 일정시간 대기
+      atOnceUsers(10),                                            // 지정된 수의 사용자를 한번에 주입
+      rampUsers(10) during (5 seconds),                           // 주어진 지속시간에 걸쳐 주어진 수의 사용자를 선형적으로 늘려가며 주입 
+      constantUsersPerSec(20) during (15 seconds),                // 주어진 지속시간에 걸쳐 사용자를 일정한 비율로 증가시키며 주입. 일정한 간격 주입. 
+      constantUsersPerSec(20) during (15 seconds) randomized,     // 주어진 지속시간에 걸쳐 사용자를 일정한 비유로 증가시키며 주입. 랜덤한 간격 주입. 
+      rampUsersPerSec(10) to 20 during (10 minutes),              // 주어진 지속시간 동안 사용자를 시작 비율 -&gt; 목표 비율까지 증가시키며 주입. 일정한 간격 주입
+      rampUsersPerSec(10) to 20 during (10 minutes) randomized,   // 주어진 지속시간 동안 사용자를 시작 비율 -&gt; 목표 비율까지 증가시키며 주입. 랜덤한 간격 주입
+      heavisideUser(1000) during (20 seconds)                     // 단위 계단 함수로 주어진 지속시간 동안 사용자를 주입. 
+    ).protocols(httpProtocol)
+  )</code></li>
 </ul>
 </li>
 </ul>

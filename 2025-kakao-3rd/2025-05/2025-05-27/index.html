@@ -22991,11 +22991,13 @@
 </li>
 </ul>
 <ul>
-<li><strong>결정</strong>
+<li>
+<p><strong>결정</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Module</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AbstractModule</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">AkkaGuiceSupport</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">bindActor</span><span class="p">[</span><span class="nc">TestActor</span><span class="p">](</span><span class="s">&quot;testActor&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 기본 설정 따르도록</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</code></pre></div><ol>
+</code></pre></div></p>
+<ol>
 <li>consumingActor의 nr-of-instances 설정은 액터를 그 갯수 만큼 만들어서 MQ 컨슈머 쪽수 자체를 늘리는 현상이 발생한다.</li>
 <li>위와 같이 기본 설정이라면, 라우터는 안쓰게 되는거니, 액터는 딱 한개만 만들어짐. <ul>
 <li>이러면 인스턴스당 컨슈머는 한 개로 동작하게 된다.</li>

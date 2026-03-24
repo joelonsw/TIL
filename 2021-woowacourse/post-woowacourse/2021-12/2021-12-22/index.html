@@ -22944,12 +22944,12 @@
     - DNS의 TXT레코드 추가하자
     - 원하는 정책을 수립하여 DNS 레코드에 추가하면 됨
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>_dmarc IN TXT &quot;v=DMARC1;p=reject;adkim=s;aspf=s;sp=reject;rua=mailto:cstoday@cstoday.me&quot;
-</code></pre></div>
-    - p=reject: 도메인에서 의심스러운 메일 처리방법. 메일 거부하도록 수신 서버에 요청
-    - adkim=s: 메일 정보가 DKIM 서명과 어느정도 정확히 일치해야하는지 정의. s는 strict
-    - aspf=s: 메일의 정보가 SPF 서명과 어느정도 정확히 일치해야하는지 정의 s는 strict
-    - sp=s: 메인 도메인의 하위 도메인에서 전송된 메일에 대한 정책. 수신 서버에서 메일 거부하도록 요청
-    - rua=mailto: DMARC 검사 통과 못한 메일에 대한 일일 보고서를 메일 주소로 전송하기</li>
+</code></pre></div><p>- p=reject: 도메인에서 의심스러운 메일 처리방법. 메일 거부하도록 수신 서버에 요청
+  - adkim=s: 메일 정보가 DKIM 서명과 어느정도 정확히 일치해야하는지 정의. s는 strict
+  - aspf=s: 메일의 정보가 SPF 서명과 어느정도 정확히 일치해야하는지 정의 s는 strict
+  - sp=s: 메인 도메인의 하위 도메인에서 전송된 메일에 대한 정책. 수신 서버에서 메일 거부하도록 요청
+  - rua=mailto: DMARC 검사 통과 못한 메일에 대한 일일 보고서를 메일 주소로 전송하기</p>
+</li>
 </ul>
 <ul>
 <li><strong>감동적인 설정사항</strong>

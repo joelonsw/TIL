@@ -22962,7 +22962,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>K6</strong><ul>
+<li>
+<p><strong>K6</strong></p>
+<ul>
 <li>서비스 사용자의 사용 패턴에 따라 시나리오를 작성하기
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">stages</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">{</span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">NUMBER_OF_MAX_VUS</span><span class="o">/</span><span class="mf">4</span><span class="p">},</span>
@@ -22973,6 +22975,8 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">{</span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">}</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">]</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>그래프로 시각화하여 병목 API에 대해 개선을 진행!<ul>
 <li>Cache + Redis -&gt; 거의 이걸로 해결</li>
 <li>ElasticSearch? -&gt; 많은 테이블 정보 Aggregate -&gt; source에서 뭐가 바뀌면 push 해줌</li>

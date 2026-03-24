@@ -23015,12 +23015,11 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">}</span>
-</code></pre></div>
-    - [필드 주입]
-        - 빈 생성후, 필요할 때 주입하려는 빈 찾아 주입
-        - 불변성 보장 안됨
-        - 의존성이 클래스 안으로 숨어버림
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Service</span>
+</code></pre></div><p>- [필드 주입]
+      - 빈 생성후, 필요할 때 주입하려는 빈 찾아 주입
+      - 불변성 보장 안됨
+      - 의존성이 클래스 안으로 숨어버림
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Service</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StationFieldService</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nd">@Autowired</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">StationRepository</span><span class="w"> </span><span class="n">stationRepository</span><span class="p">;</span>
@@ -23036,12 +23035,12 @@
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">;</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">}</span>
-</code></pre></div>
-    - [Setter 주입]
-        - 빈 생성후, 필요할 때 주입하려는 빈 찾아 주입
-        - 현재 인스턴스 필드에 지정된 콘크리트 클래스가 없는대도 객체가 인스턴스화 될 수 있음
-        - NPE 발생!
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Service</span>
+</code></pre></div></p>
+<p>- [Setter 주입]
+      - 빈 생성후, 필요할 때 주입하려는 빈 찾아 주입
+      - 현재 인스턴스 필드에 지정된 콘크리트 클래스가 없는대도 객체가 인스턴스화 될 수 있음
+      - NPE 발생!
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Service</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StationSetterService</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">StationRepository</span><span class="w"> </span><span class="n">stationRepository</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -23061,7 +23060,8 @@
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">;</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>스프링 빈으로 등록하는 여러 방식 간의 차이점?</strong>

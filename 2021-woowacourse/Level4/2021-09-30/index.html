@@ -23136,35 +23136,46 @@
 <h2 id="full-backup">Full Backup 원격 전송 타임<a class="headerlink" href="#full-backup" title="Permanent link">&para;</a></h2>
 <ol>
 <li>백업용 EC2 하나 파자</li>
-<li>본래 DB EC2 --ssh--&gt; 백업용 EC2
+<li>
+<p>본래 DB EC2 --ssh--&gt; 백업용 EC2
     - 본래 DB EC2에서 키 생성
     <code>shell script
     $ ssh-keygen -t rsa
-    $ cat ~/.ssh/id_rsa.pub</code></li>
-<li>백업용 EC2에 만든 공개키 등록
+    $ cat ~/.ssh/id_rsa.pub</code></p>
+</li>
+<li>
+<p>백업용 EC2에 만든 공개키 등록
     <code>shell script
-    $ vi ~/.ssh/authorized_keys</code></li>
-<li>이제 본래 DB EC2에서 백업용 EC2로 ssh 접속해봐
+    $ vi ~/.ssh/authorized_keys</code></p>
+</li>
+<li>
+<p>이제 본래 DB EC2에서 백업용 EC2로 ssh 접속해봐
     - Client: DB EC2 
     - Server: 백업용 EC2
         - DB EC2: "어이! 백업 EC2! 나 private key 있는데 니 갖고 있는(내가 준) public key랑 대칭해서 맞는지 확인좀해봐라야"
     <code>shell script
-    $ ssh ubuntu@백업용_EC2_IP</code></li>
-<li>ssh를 통해 본래 EC2 --&gt; 백업 EC2 통로 뚫어준 건, ssh 프로토콜을 활용하는 scp를 통한 파일 전송할라고
+    $ ssh ubuntu@백업용_EC2_IP</code></p>
+</li>
+<li>
+<p>ssh를 통해 본래 EC2 --&gt; 백업 EC2 통로 뚫어준 건, ssh 프로토콜을 활용하는 scp를 통한 파일 전송할라고
     - 자 scp로 백업 EC2에 파일 전송해주는 과정 추가해주자!
     ```shell script
     ubuntu@ip-192-168-1-46:~/database_backup/script$ cat full-backup.sh
-    #!/bin/bash<p>DATE=$(date +%Y%m%d)
+    #!/bin/bash</p>
+<p>DATE=$(date +%Y%m%d)
   BACKUP_DIR=/home/ubuntu/database_backup/backup/
   sudo mysqldump -uroot -proot --all-databases &gt; $BACKUP_DIR"full-backup_"$DATE.sql
   cd $BACKUP_DIR
   scp "full-backup_"$DATE.sql ubuntu@192.168.2.179:/home/ubuntu/full-backup</p>
 <p>find $BACKUP_DIR -ctime +3 -exec rm -f {} \;
   ubuntu@ip-192-168-1-46:~/database_backup/script$
-  <code>6. 백업 EC2에 full-backup된 파일 두둥등장</code>shell script
-  ubuntu@ip-192-168-2-179:~/full-backup$ ls
-  full-backup_20210930.sql
   ```</p>
+</li>
+<li>
+<p>백업 EC2에 full-backup된 파일 두둥등장
+    <code>shell script
+    ubuntu@ip-192-168-2-179:~/full-backup$ ls
+    full-backup_20210930.sql</code></p>
 </li>
 </ol>
 <h2 id="ssh">SSH<a class="headerlink" href="#ssh" title="Permanent link">&para;</a></h2>

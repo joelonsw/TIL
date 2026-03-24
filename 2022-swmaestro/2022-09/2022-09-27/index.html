@@ -23232,9 +23232,11 @@
 </li>
 </ul>
 <ul>
-<li><strong>The connection observed an error, the request cannot be retried as the headers/body were sent
+<li>
+<p><strong>The connection observed an error, the request cannot be retried as the headers/body were sent
   io.netty.channel.unix.Errors$NativeIoException: 
-  readAddress(..) failed: Connection reset by peer</strong><ul>
+  readAddress(..) failed: Connection reset by peer</strong></p>
+<ul>
 <li><em>참고: <a href="https://stackoverflow.com/questions/55233216/spring-webflux-webclient-logs-connection-reset-by-peer">https://stackoverflow.com/questions/55233216/spring-webflux-webclient-logs-connection-reset-by-peer</a></em><ul>
 <li>문제: Client goes away after connecting to it once and the next request fails - then retries<ul>
 <li>클라이언트가 한번 커넥트 시도하고 그다음 리퀘스트가 fail 한 경우 사라짐</li>
@@ -23254,6 +23256,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li><em>참고: <a href="https://github.com/reactor/reactor-netty/issues/388">https://github.com/reactor/reactor-netty/issues/388</a></em><ul>
 <li>약간 고질적인 문제같은데...?</li>
 </ul>
@@ -23375,7 +23379,8 @@
 <h2 id="webclient-timeout-connection-pool">WebClient Timeout &amp; Connection Pool<a class="headerlink" href="#webclient-timeout-connection-pool" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: <a href="https://yangbongsoo.tistory.com/30">https://yangbongsoo.tistory.com/30</a></em></li>
-<li><strong>WebClient Timeout</strong>
+<li>
+<p><strong>WebClient Timeout</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">new</span><span class="w"> </span><span class="n">ReactorClientHttpConnector</span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">reactorResourceFactory</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">httpClient</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">httpClient</span>
@@ -23385,7 +23390,8 @@
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="p">).</span><span class="na">addHandlerLast</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">WriteTimeoutHandler</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="p">).</span><span class="na">responseTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">);</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>ChannelOption.CONNECT_TIMEOUT_MILLIS<ul>
 <li>서버와 커넥션 맺는데 기다리는 시간. http client level</li>
 </ul>
@@ -23405,7 +23411,8 @@
 </li>
 </ul>
 <ul>
-<li><strong>WebClient Connection Pool</strong>
+<li>
+<p><strong>WebClient Connection Pool</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">ConnectionProvider</span><span class="w"> </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConnectionProvider</span><span class="p">.</span><span class="na">builder</span><span class="p">(</span><span class="s">&quot;ybs-pool&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="p">.</span><span class="na">maxConnections</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="p">.</span><span class="na">pendingAcquireTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
@@ -23413,7 +23420,8 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="p">.</span><span class="na">maxIdleTime</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">8000L</span><span class="p">))</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="p">.</span><span class="na">maxLifeTime</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">8000L</span><span class="p">))</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>maxLifeTime: 커넥션 풀에서 살아있을 수 있는 커넥션의 최대 수명시간</li>
 <li>maxIdleTime: 커넥션 풀에서 idle 상태의 커넥션 유지하는 시간</li>
 <li>PendingAcquireTimeout: 커넥션 풀에서 커넥션 얻기위해 기다리는 최대 시간</li>

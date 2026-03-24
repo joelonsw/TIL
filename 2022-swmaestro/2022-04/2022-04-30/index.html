@@ -22956,7 +22956,9 @@
 <h2 id="sessionattribute"><code>@SessionAttribute</code><a class="headerlink" href="#sessionattribute" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: <a href="https://sun-22.tistory.com/53">https://sun-22.tistory.com/53</a></em></li>
-<li><strong>Session</strong><ul>
+<li>
+<p><strong>Session</strong></p>
+<ul>
 <li>Session은 여러 화면이나 여러 요청에서 사용해야하는 객체를 공유할 때 사용 가능
 1. HttpSession을 사용하여 Session 추가
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Controller</span>
@@ -22972,8 +22974,10 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;/events/form&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">}</span>
-</code></pre></div>
-2. <code>@SessionAttributes</code>를 통해 추상화<ul>
+</code></pre></div></li>
+</ul>
+<ol>
+<li><code>@SessionAttributes</code>를 통해 추상화<ul>
 <li>해당 컨트롤러 내에서 동작하며, </li>
 <li>해당 컨트롤러 안에서 다루는 특정 모델 객체를 세션에 넣고 공유할 때 사용
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Controller</span>
@@ -22992,11 +22996,13 @@
 </code></pre></div></li>
 </ul>
 </li>
-</ul>
+</ol>
 </li>
 </ul>
 <ul>
-<li><strong>SessionAttribute</strong><ul>
+<li>
+<p><strong>SessionAttribute</strong></p>
+<ul>
 <li>컨트롤러 밖 (인터셉터/필터 등)에서 만들어 준 세션 데이터에 접근할 때 사용
 1. HttpSession을 사용해 세션값 받아오기
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@GetMapping</span>
@@ -23004,14 +23010,16 @@
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">visitTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">LocalDateTime</span><span class="p">)</span><span class="w"> </span><span class="n">httpSession</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&quot;visitTime&quot;</span><span class="p">);</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">visitTime</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
-</code></pre></div>
-2. <code>@SessionAttribute</code> 사용
+</code></pre></div></li>
+</ul>
+<ol>
+<li><code>@SessionAttribute</code> 사용
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@GetMapping</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">sessionTest</span><span class="p">(</span><span class="nd">@SessionAttribute</span><span class="p">(</span><span class="s">&quot;visitTime&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">visitTime</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">visitTime</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
 </code></pre></div></li>
-</ul>
+</ol>
 </li>
 </ul>
 <h2 id="samesite-cors">SameSite Cors 개삽질<a class="headerlink" href="#samesite-cors" title="Permanent link">&para;</a></h2>

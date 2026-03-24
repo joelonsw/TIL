@@ -22980,7 +22980,9 @@
 </ul>
 <h2 id="actor-future">Actor &amp; Future<a class="headerlink" href="#actor-future" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Actor + Future 조합에서 sender()</strong><ul>
+<li>
+<p><strong>Actor + Future 조합에서 sender()</strong></p>
+<ul>
 <li>Future 콜백은 다른 스레드에서 추후 처리됨</li>
 <li>이 시점에서 액터가 타 메시지를 처리하고 있다면, sender가 예상과 다를 수 있음
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">private</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">processUpdate</span><span class="p">(</span><span class="n">testData</span><span class="p">:</span><span class="w"> </span><span class="nc">TestData</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
@@ -22993,6 +22995,8 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="c1">// 2. 즉시 리턴 (Future 완료를 기다리지 않음)</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>따라서 sender를 캡쳐하거나, pipe 패턴 사용을 권장
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">case</span><span class="w"> </span><span class="nc">SomeMessage</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">originalSender</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sender</span><span class="p">()</span><span class="w">  </span><span class="c1">// 미리 저장</span>

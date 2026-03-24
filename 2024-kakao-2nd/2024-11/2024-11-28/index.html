@@ -22960,13 +22960,17 @@
 </li>
 </ul>
 <ul>
-<li><strong>해결책 Styled Components</strong>
-<a href="https://www.daleseo.com/react-styled-components/">https://www.daleseo.com/react-styled-components/</a>  <ul>
+<li>
+<p><strong>해결책 Styled Components</strong>
+<a href="https://www.daleseo.com/react-styled-components/">https://www.daleseo.com/react-styled-components/</a>  </p>
+<ul>
 <li>[CCS in JS]<ul>
 <li>스타일 정의를 CSS가 아닌 JS로 작성된 컴포넌트에 바로 삽입하는 것</li>
 </ul>
 </li>
-<li>[문법]<ul>
+<li>
+<p>[문법]</p>
+<ul>
 <li><code>styled</code> 함수를 임포트하여 원하는 스타일 적용
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">styles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;!raw-loader!./../../scss/style_v2.scss&#39;</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="nx">cstyles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;!raw-loader!./../../scss/custom.css&#39;</span><span class="p">;</span>
@@ -22976,6 +22980,8 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sb">    </span><span class="si">${</span><span class="nx">cstyles</span><span class="si">}</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="sb">`</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>이런식으로 Styled Components를 사용해 JS 코드안에 삽입된 CSS 코드는 글로벌 네임스페이스 사용 X</li>
 <li>각 JS마다 고유한 CSS 네임 스페이스를 부여하여 각 리액트 컴포넌트에 완전히 격리된 스타일 적용 가능</li>
 <li>해당 컴포넌트를 쓰는 페이지에 접속했을 때 <code>&lt;style&gt;</code> 시트가 도입됨</li>
@@ -22986,8 +22992,10 @@
 </li>
 </ul>
 <ul>
-<li><strong>장단점</strong>
-<a href="https://junghan92.medium.com/%EB%B2%88%EC%97%AD-%EC%9A%B0%EB%A6%AC%EA%B0%80-css-in-js%EC%99%80-%ED%97%A4%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0-a2e726d6ace6">https://junghan92.medium.com/%EB%B2%88%EC%97%AD-%EC%9A%B0%EB%A6%AC%EA%B0%80-css-in-js%EC%99%80-%ED%97%A4%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0-a2e726d6ace6</a>  <ul>
+<li>
+<p><strong>장단점</strong>
+<a href="https://junghan92.medium.com/%EB%B2%88%EC%97%AD-%EC%9A%B0%EB%A6%AC%EA%B0%80-css-in-js%EC%99%80-%ED%97%A4%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0-a2e726d6ace6">https://junghan92.medium.com/%EB%B2%88%EC%97%AD-%EC%9A%B0%EB%A6%AC%EA%B0%80-css-in-js%EC%99%80-%ED%97%A4%EC%96%B4%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0-a2e726d6ace6</a>  </p>
+<ul>
 <li>[장점]<ol>
 <li>지역 스코프 스타일</li>
 <li>Co-location: 관련된 스타일을 JS/CSS 한곳에 모을 수 있다. </li>

@@ -23033,7 +23033,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>함수형 기반 생명주기 - UseEffect 쓰자!</strong><ul>
+<li>
+<p><strong>함수형 기반 생명주기 - UseEffect 쓰자!</strong></p>
+<ul>
 <li>클래스는 커포넌트에 생명주기가 맞춰져있었어</li>
 <li>리액트 17 부터는 componentWillMount, componentWillUpdate, componentWillReceiveProps 라이프사이클 없어짐!</li>
 <li>함수형은 <strong>특정 데이터</strong>에 대해서 라이프사이클이 진행된다!</li>
@@ -23046,6 +23048,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>[componentWillUnmount 까지 포함하기 - 마운트 끝날때 이거 호출해주세요]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hidden changed&quot;</span><span class="p">);</span>
@@ -23054,6 +23058,8 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">hidden</span><span class="p">])</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[빈배열을 넣어 마운트 될 때, 언마운트 될 때 한번씩!]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;mount&quot;</span><span class="p">);</span>
@@ -23062,6 +23068,8 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">},</span><span class="w"> </span><span class="p">[])</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[리렌더링 될 때마다 한번씩! - 빈배열도 넣지마~]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;mount&quot;</span><span class="p">);</span>

@@ -23144,7 +23144,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>구현 방법</strong><ul>
+<li>
+<p><strong>구현 방법</strong></p>
+<ul>
 <li>JdkDynamic의 InvocationHandler 역할을 CGLIB에서는 <strong>MethodInterceptor</strong>가 담당</li>
 <li>Enhancer : CGLIB은 Enhancer를 통해 프록시 생성
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ConcreteService</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConcreteService</span><span class="p">();</span>
@@ -23153,6 +23155,8 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">enhancer</span><span class="p">.</span><span class="na">setCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TimeMethodInterceptor</span><span class="p">(</span><span class="n">target</span><span class="p">));</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">ConcreteService</span><span class="w"> </span><span class="n">proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ConcreteService</span><span class="p">)</span><span class="w"> </span><span class="n">enhancer</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>실행은 요렇게
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Test</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">cglib</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -23208,7 +23212,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>ProxyFactory</strong><ul>
+<li>
+<p><strong>ProxyFactory</strong></p>
+<ul>
 <li>스프링에서 동적으로 프록시를 만들어주는 기능을 제공</li>
 <li>ProxyFactory에 Advice 적용해주는 감성
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Test</span>
@@ -23226,6 +23232,8 @@
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">AopUtils</span><span class="p">.</span><span class="na">isCglibProxy</span><span class="p">(</span><span class="n">proxy</span><span class="p">)).</span><span class="na">isFalse</span><span class="p">();</span>
 <a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>인터페이스 타입이 존재하는 인터페이스/구체클래스 타입을 target으로 넘겨주면 jdk 동적 프록시, </li>
 <li>구체클래스 타입을 target으로 넘겨주면 CGLIB으로 프록시 생성</li>
 <li>만약 <code>proxy.setProxyTargetClass(true)</code> 를 활용하면 무조건 cglib으로 프록시 생성</li>
@@ -23365,7 +23373,8 @@
 <li><img alt="" src="../../images/2022-10-17-after-proxied.png" /></li>
 </ul>
 </li>
-<li>그래서 해당 프록시에서 메서드 호출할 땐 아래의 로직을 거침
+<li>
+<p>그래서 해당 프록시에서 메서드 호출할 땐 아래의 로직을 거침
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// General purpose AOP callback. Used when the target is dynamic or when the proxy is not frozen.</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">// AOP의 제네럴한 목적을 구현한다. 타겟이 다이나믹하거나, 프록시가 얼려져있지 않으면 해당 로직 사용(?)</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DynamicAdvisedInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">MethodInterceptor</span><span class="p">,</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="p">{</span>
@@ -23417,8 +23426,11 @@
 <a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a><span class="w">            </span><span class="p">}</span>
 <a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div></li>
-<li>DynamicAdvisedInterceptor에서 MethodInterceptor를 구현하고 있다는건? -&gt; CGLIB을 활용하여 지지고 볶는다는 것</li>
+</code></pre></div></p>
+</li>
+<li>
+<p>DynamicAdvisedInterceptor에서 MethodInterceptor를 구현하고 있다는건? -&gt; CGLIB을 활용하여 지지고 볶는다는 것</p>
+</li>
 <li>this.advised.getTargetSource()를 통해 TargetSource를 받아와 -&gt; 여기서 우리의 Bean을 가져옴<ul>
 <li>스프링 빈에 둘다 등록되는건가...? 아니지 상속받아서 cglib 객체로 만들어두고 컴포넌트로 방식으로 들고있는거를 Bean으로 등록했을거야</li>
 <li><img alt="" src="../../images/2022-10-17-target-in-cglib.png" /></li>

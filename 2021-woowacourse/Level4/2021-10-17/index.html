@@ -22950,27 +22950,27 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">   </span>└─<span class="w"> </span>TodoListFooter
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span>├─<span class="w"> </span>TodosButtonClear
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span>└─<span class="w"> </span>TodoListStatistics
-</code></pre></div>
-    - Data, Method 등 쓸 수 있음
-    - Instance의 Lifecycle Hook
-        - 각각의 vue 인스턴스는 일련의 initialization step으로 생성되게 됨
-            - 데이터 관찰, 템플릿 컴파일, DOM에 연결, DOM 업데이트 등의 과정을 거치게 됨
-        - Vue는 lifecycle hook에서 function을 제공해 사용자로부터 특정 단계에서 특정 코드를 실행시킬 수 있도록 지원함
-        - <img alt="" src="https://vuejs.org/images/lifecycle.png" />      <br />
-        - 순서대로 한번 따라가 보자면...
-            1. new Vue()
-            2. Events와 LifeCycle Init
-            3. beforeCreate 코드 실행
-            4. Injection과 Reactivity Init
-            5. created 코드 실행
-            6. <code>&lt;template&gt;&lt;/template&gt;</code> 와 같은 코드 있다면 컴파일을 하는듯
-            7. beforeMount 코드 실행
-            8. el 관련 코드가 있다면 뭐 하는 듯
-            9. mounted 코드 실행
-                - 재렌더링시 beforeUpdate, updated 코드 실행
-            10. vm.$destroy로 소멸 타임
-            11. beforeDestroy 코드 실행
-            12. destroyed 코드 실행</li>
+</code></pre></div><p>- Data, Method 등 쓸 수 있음
+  - Instance의 Lifecycle Hook
+      - 각각의 vue 인스턴스는 일련의 initialization step으로 생성되게 됨
+          - 데이터 관찰, 템플릿 컴파일, DOM에 연결, DOM 업데이트 등의 과정을 거치게 됨
+      - Vue는 lifecycle hook에서 function을 제공해 사용자로부터 특정 단계에서 특정 코드를 실행시킬 수 있도록 지원함
+      - <img alt="" src="https://vuejs.org/images/lifecycle.png" />      <br />
+      - 순서대로 한번 따라가 보자면...
+          1. new Vue()
+          2. Events와 LifeCycle Init
+          3. beforeCreate 코드 실행
+          4. Injection과 Reactivity Init
+          5. created 코드 실행
+          6. <code>&lt;template&gt;&lt;/template&gt;</code> 와 같은 코드 있다면 컴파일을 하는듯
+          7. beforeMount 코드 실행
+          8. el 관련 코드가 있다면 뭐 하는 듯
+          9. mounted 코드 실행
+              - 재렌더링시 beforeUpdate, updated 코드 실행
+          10. vm.$destroy로 소멸 타임
+          11. beforeDestroy 코드 실행
+          12. destroyed 코드 실행</p>
+</li>
 </ul>
 <ul>
 <li><strong>Props</strong>
@@ -22984,12 +22984,12 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nx">callback</span><span class="o">:</span><span class="w"> </span><span class="nb">Function</span><span class="p">,</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nx">contactsPromise</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="w"> </span><span class="c1">// or any other constructor</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
-</code></pre></div>
-    - 만약 잘못해서 넘겨줬다면 브라우저 측에서 wrong type 던져줬다고 뭐라할 것임
-    - 부모 -&gt; 자식 간의 단방향 바인딩 형성
-        - 자식 요소에서 부모의 상태 변경할 수 없음
-        - Custom Event를 통해 넘겨주자
-            - 참고로 이벤트 이름에는 케밥 케이스를 활용할 것 (kebab-case)</li>
+</code></pre></div><p>- 만약 잘못해서 넘겨줬다면 브라우저 측에서 wrong type 던져줬다고 뭐라할 것임
+  - 부모 -&gt; 자식 간의 단방향 바인딩 형성
+      - 자식 요소에서 부모의 상태 변경할 수 없음
+      - Custom Event를 통해 넘겨주자
+          - 참고로 이벤트 이름에는 케밥 케이스를 활용할 것 (kebab-case)</p>
+</li>
 </ul>
 <ul>
 <li><strong>Vuex</strong>

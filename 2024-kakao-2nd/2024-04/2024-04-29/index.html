@@ -23057,17 +23057,25 @@
 </ul>
 </li>
 <li>[Standard Exchange Type]<ul>
-<li>대부분의 MQ에서 가능한 여러 상황에 대해 정의한 표준 라우팅 알고리즘
-1) Direct Exchange<ul>
+<li>
+<p>대부분의 MQ에서 가능한 여러 상황에 대해 정의한 표준 라우팅 알고리즘
+1) Direct Exchange</p>
+<ul>
 <li>메시지의 라우팅 키를 1:N으로 매칭</li>
 <li><img alt="" src="../../images/2024-04-29-direct-exchange.png" />
-2) Topic Exchange</li>
+      2) Topic Exchange</li>
+</ul>
+<ul>
 <li>와일드 카드를 통해 메시지를 큐에 매핑</li>
 <li><img alt="" src="../../images/2024-04-29-topic-exchange.png" />
-3) Fanout Exchange</li>
+      3) Fanout Exchange</li>
+</ul>
+<ul>
 <li>모든 메시지를 모든 큐로 라우팅</li>
 <li><img alt="" src="../../images/2024-04-29-fanout-exchange.png" />
-4) Headers Exchange</li>
+      4) Headers Exchange</li>
+</ul>
+<ul>
 <li>key-value로 정의된 헤더에 의해 라우팅 결정</li>
 <li>Queue에 정의된 x-match:all/any로 라우팅 받을지 결정</li>
 <li><img alt="" src="../../images/2024-04-29-headers-exchange.png" /></li>

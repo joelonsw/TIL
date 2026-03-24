@@ -23055,13 +23055,17 @@
 </li>
 </ul>
 <ul>
-<li><strong>Multi Key Operation</strong><ul>
+<li>
+<p><strong>Multi Key Operation</strong></p>
+<ul>
 <li>한번의 명령에 여러 키 동시 전달 처리
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>MGET key1 key2 key3
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>MSET key1 val1 key2 val2
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>SINTER setKey1 setKey2
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>SUNION setKey1 setKey2
 </code></pre></div></li>
+</ul>
+<ul>
 <li>단일 노드 문제 없음</li>
 <li>클러스터에서는 키들이 서로 다른 노드에 있으면 한번에 처리 어려움</li>
 <li>Redis Cluster는 키들을 슬롯 단위로 나눠 각 노드에 분산 저장</li>

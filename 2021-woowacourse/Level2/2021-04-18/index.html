@@ -23019,22 +23019,22 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>GET  /members/insert/2  (X)
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>POST /members/2         (O)
-</code></pre></div>
-    - 작성 규칙
-        - "/"는 계층 관계를 나타낼 때 쓰자
-        - URI 마지막에 "/" 쓰지말자
-        - "-"를 통해 가독성 높이자
-        - "_"는 URI에 쓰지말자
-        - URI는 소문자로 쓰자
-        - 파일 확장자는 URI에 쓰지말자
-    - 리소스 끼리 연관 관계가 있다면...
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/리소스명/리소스 ID/관계있는 다른 리소스명
+</code></pre></div><p>- 작성 규칙
+      - "/"는 계층 관계를 나타낼 때 쓰자
+      - URI 마지막에 "/" 쓰지말자
+      - "-"를 통해 가독성 높이자
+      - "_"는 URI에 쓰지말자
+      - URI는 소문자로 쓰자
+      - 파일 확장자는 URI에 쓰지말자
+  - 리소스 끼리 연관 관계가 있다면...
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/리소스명/리소스 ID/관계있는 다른 리소스명
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>GET : /users/{userid}/devices
-</code></pre></div>
-    - Collection(집합)과 Document(객체)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/sports/soccer
+</code></pre></div></p>
+<p>- Collection(집합)과 Document(객체)
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/sports/soccer
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>/sports/soccer/players/13
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <h2 id="spring">김영한님 Spring 입문 강의 복습<a class="headerlink" href="#spring" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23045,20 +23045,20 @@
 </ul>
 <ul>
 <li><strong>@ResponseBody</strong>
-<img alt="responseBody" src="../../image/responseBody_2021_04_18.PNG" />
-    - 이거 붙이면 viewResolver 사용 X
-        - HttpMessageConverter 사용 O
-    - HTTP BODY에...
-        - String이면, 문자 내용 반환 (StringHttpMessageConverter)
-        - Object면, JSON 변환 반환 (MappingJackson2HttpMessageConverter)</li>
+<img alt="responseBody" src="../../image/responseBody_2021_04_18.PNG" /><p>- 이거 붙이면 viewResolver 사용 X
+      - HttpMessageConverter 사용 O
+  - HTTP BODY에...
+      - String이면, 문자 내용 반환 (StringHttpMessageConverter)
+      - Object면, JSON 변환 반환 (MappingJackson2HttpMessageConverter)</p>
+</li>
 </ul>
 <ul>
 <li><strong>웹 애플리케이션 계층 구조</strong>
-<img alt="webStructure" src="../../image/webStructure_2021_04_18.PNG" />
-    - 컨트롤러: 웹 MVC 컨트롤러 역할
-    - 서비스: 핵심 비즈니스 로직 구현
-    - 리포지토리: DB에 접근, 도메인 객체를 DB에 저장하고 관리
-    - 도메인: 비즈니스 도메인 객체</li>
+<img alt="webStructure" src="../../image/webStructure_2021_04_18.PNG" /><p>- 컨트롤러: 웹 MVC 컨트롤러 역할
+  - 서비스: 핵심 비즈니스 로직 구현
+  - 리포지토리: DB에 접근, 도메인 객체를 DB에 저장하고 관리
+  - 도메인: 비즈니스 도메인 객체</p>
+</li>
 </ul>
 <ul>
 <li><strong>스프링 빈과 의존관계</strong>

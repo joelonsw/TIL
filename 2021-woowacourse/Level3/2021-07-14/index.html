@@ -23030,15 +23030,16 @@
             <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;number1&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </code></pre></div>
             <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;이미지 URL&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;상세 설명&quot;</span><span class="p">&gt;</span> //상세 설명에 똑바로 정보 제공해줘야 음성으로 읽어주면 알아들을 수 있음
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 색맹인 분들을 위해 버튼에 아웃라인을 넣는 것이 좋지 않을까?
+  - 장애인 분들을 배려한 마크업이 필요하다
+      - 시각: 전맹, 저시력, 색맹
+      - 청각: 중증, 경증
+      - 손 운동: 손 떨림 및 한 손 사용자
+      - 중증 운동: 몸을 움직이기 어려운 사용자
 </code></pre></div>
-        - 색맹인 분들을 위해 버튼에 아웃라인을 넣는 것이 좋지 않을까?
-        - 장애인 분들을 배려한 마크업이 필요하다
-            - 시각: 전맹, 저시력, 색맹
-            - 청각: 중증, 경증
-            - 손 운동: 손 떨림 및 한 손 사용자
-            - 중증 운동: 몸을 움직이기 어려운 사용자
-    - 기획/디자인/개발 모두 올바른 접근성을 제공해야 한다!
-        - FE/BE: UI 개발자가 제공한 의미있는 마크없을 될 수 있으면 그대로 적용하여 모든 사용자가 웹을 원활히 사용하도록 하자!</li>
+<p>- 기획/디자인/개발 모두 올바른 접근성을 제공해야 한다!
+      - FE/BE: UI 개발자가 제공한 의미있는 마크없을 될 수 있으면 그대로 적용하여 모든 사용자가 웹을 원활히 사용하도록 하자!</p>
+</li>
 </ul>
 <ul>
 <li><strong>UI 개발자간의 협업 방식</strong>
@@ -23144,13 +23145,13 @@
 <a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a> docker-init:
 <a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>  Version:          0.19.0
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>  GitCommit:        de40ad0
-</code></pre></div>
-    - 도커는 클라이언트와 서버로 나뉨
-        - 도커는 하나의 실행파일이지만 클라이언트와 서버의 역할 둘다 할 수 있음
-            1. 사용자가 명령 input
-            2. docker client가 명령 input 보냄
-            3. docker server가 명령에 따른 처리 진행 후 응답값 보냄
-            4. docker client가 응답값 출력</li>
+</code></pre></div><p>- 도커는 클라이언트와 서버로 나뉨
+      - 도커는 하나의 실행파일이지만 클라이언트와 서버의 역할 둘다 할 수 있음
+          1. 사용자가 명령 input
+          2. docker client가 명령 input 보냄
+          3. docker server가 명령에 따른 처리 진행 후 응답값 보냄
+          4. docker client가 응답값 출력</p>
+</li>
 </ul>
 <ul>
 <li><strong>도커 이미지 받아서 컨테이너 설치</strong>
@@ -23194,13 +23195,13 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>mysql                       5.7       09361feeb475   3 weeks ago   447MB
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>ubuntu                      16.04     065cf14a189c   3 weeks ago   135MB
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>teamlab/pydata-tensorflow   0.1       7bdf5d7e0191   5 years ago   3.08GB
-</code></pre></div>
-    - 도커 이미지 다운로드
-        - <code>docker pull [OPTIONS] NAME[:TAG|@DIGEST]</code>
-    - 도커 이미지 삭제하기
-        - <code>docker rmi [OPTIONS] IMAGE [IMAGE...]</code>
-    - 중지된 도커 이미지 한번에 삭제하기
-        - <code>docker rm -v $(docker ps -a -q -f status=exited)</code></li>
+</code></pre></div><p>- 도커 이미지 다운로드
+      - <code>docker pull [OPTIONS] NAME[:TAG|@DIGEST]</code>
+  - 도커 이미지 삭제하기
+      - <code>docker rmi [OPTIONS] IMAGE [IMAGE...]</code>
+  - 중지된 도커 이미지 한번에 삭제하기
+      - <code>docker rm -v $(docker ps -a -q -f status=exited)</code></p>
+</li>
 </ul>
 <ul>
 <li><strong>컨테이너 업데이트</strong>

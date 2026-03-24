@@ -23059,18 +23059,19 @@
             - BeanNameHandlerMapping: Bean이름과 URL 매핑
             - ControllerClassNameHandlerMapping: 
             - SimpleUrlHandlerMapping: 
-            = DefaultAnnotationHandlerMapping: @RequestMapping("경로")
-        - 서블릿을 등록하면 서블릿이 사용할 설정 파일이 자동으로 등록됨
-    - 이거 없으면...
-        - URL 마다 서블릿 생성해서 Web.xml로 서블릿 관리
-        - Servlet은 DispatcherServlet 한 개로 처리할 수 있음</li>
-<li>웹 서버 VS 애플리케이션 서버 VS 서블릿 컨테이너
-    - 웹 서버
-        - 정적인 페이지 제공하는 서버
-    - 애플리케이션 서버
-        - 서버 사이드 코드를 이용해 동적인 컨텐츠 만드는 서버
-    - 서블릿 컨테이너 (웹 컨테이너 || 서블릿 엔진)
-        - 톰캣, 제티</li>
+            = DefaultAnnotationHandlerMapping: @RequestMapping("경로")<div class="highlight"><pre><span></span><code>  - 서블릿을 등록하면 서블릿이 사용할 설정 파일이 자동으로 등록됨
+</code></pre></div>
+<p>- 이거 없으면...
+      - URL 마다 서블릿 생성해서 Web.xml로 서블릿 관리
+      - Servlet은 DispatcherServlet 한 개로 처리할 수 있음
+- 웹 서버 VS 애플리케이션 서버 VS 서블릿 컨테이너
+  - 웹 서버
+      - 정적인 페이지 제공하는 서버
+  - 애플리케이션 서버
+      - 서버 사이드 코드를 이용해 동적인 컨텐츠 만드는 서버
+  - 서블릿 컨테이너 (웹 컨테이너 || 서블릿 엔진)
+      - 톰캣, 제티</p>
+</li>
 </ul>
 
 

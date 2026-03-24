@@ -23036,16 +23036,19 @@
 <li><strong>Pattern &amp; Matcher</strong>
     - Pattern: 정규식을 정의하는데 사용
         - compile 메서드에 정규식을 매개변수로 넘겨 Pattern 객체 획득 <br>
-            <em>ex) Pattern p = Pattern.compile("c[a-z]*");</em>
-    - Matcher: 정규식을 데이터와 비교하는 역할
-        - 정규식으로 비교할 대상을 매개변수로, Pattern 클래스의 matcher를 호출해 Matcher 객체 획득 <br>
-            <em>ex) Matcher m = p.matcher(data[i]);</em>
-        - Matcher 객체에 boolean matches() 호출해 정규식에 부합하는지 확인 <br>
-            <em>ex) if(m.matches())</em>
-        - find()를 통해 패턴과 일치하는 부분 찾을 시 true, 다시 find() 호출을 통해 이전 패턴 발견 지점부터 매칭 시작 <br>
-            <em>ex) while(m.find())</em>
-        - 반면 group(int index) 같은 경우는 패턴 발견 지점을 그룹화하여 index=1 부터 순서대로 접근 가능 <br>
-            <em>group(0) 이나 group()은 전체 문자열 반환</em></li>
+            <em>ex) Pattern p = Pattern.compile("c[a-z]*");</em><p>- Matcher: 정규식을 데이터와 비교하는 역할
+      - 정규식으로 비교할 대상을 매개변수로, Pattern 클래스의 matcher를 호출해 Matcher 객체 획득 <br>
+          <em>ex) Matcher m = p.matcher(data[i]);</em></p>
+<div class="highlight"><pre><span></span><code>  - Matcher 객체에 boolean matches() 호출해 정규식에 부합하는지 확인 &lt;br&gt;
+      *ex) if(m.matches())*
+
+  - find()를 통해 패턴과 일치하는 부분 찾을 시 true, 다시 find() 호출을 통해 이전 패턴 발견 지점부터 매칭 시작 &lt;br&gt;
+      *ex) while(m.find())*
+
+  - 반면 group(int index) 같은 경우는 패턴 발견 지점을 그룹화하여 index=1 부터 순서대로 접근 가능 &lt;br&gt;
+      *group(0) 이나 group()은 전체 문자열 반환*
+</code></pre></div>
+</li>
 </ul>
 <ul>
 <li><strong>정규 표현식 정리표</strong>

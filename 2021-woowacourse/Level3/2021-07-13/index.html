@@ -23045,14 +23045,14 @@
         - Dashboard -&gt; 젠킨스 관리 -&gt; 플러그인 관리 -&gt; "Publish Over SSH" -&gt; Restart로 설정 추가해줌
     - Publish Over SSH 설정해주기
         - Dashboard -&gt; 젠킨스 관리 -&gt; 시스템 관리 -&gt; Publish Over SSH 창 생김 -&gt; Public pem key 작성<br />
-            -&gt; EC2 Name, hostname(ip), username(ubuntu), remoteDirectory(home/ubuntu) 작성
-    - 빌드 후 조치 변경해주자!
-        - Dashboard -&gt; 구성
-        - Transfers
-            - source files: build/libs/*.jar
-            - remove prefix: build/libs (jar 파일 앞에 붙은 말 제거)
-            - application directory: /application (/home/ubuntu 뒤에 붙음)
-            - Exec command: 배포할 EC2 에서 실행할 쉘 스크립트 저장</li>
+            -&gt; EC2 Name, hostname(ip), username(ubuntu), remoteDirectory(home/ubuntu) 작성<p>- 빌드 후 조치 변경해주자!
+      - Dashboard -&gt; 구성
+      - Transfers
+          - source files: build/libs/*.jar
+          - remove prefix: build/libs (jar 파일 앞에 붙은 말 제거)
+          - application directory: /application (/home/ubuntu 뒤에 붙음)
+          - Exec command: 배포할 EC2 에서 실행할 쉘 스크립트 저장</p>
+</li>
 </ul>
 
 

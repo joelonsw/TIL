@@ -22969,7 +22969,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Proxy로 동작중이라면...</strong><ul>
+<li>
+<p><strong>Proxy로 동작중이라면...</strong></p>
+<ul>
 <li>리버스 프록시로 구성된 nginx에서는 proxy_set_header 로 여러가지 헤더를 설정할 수 있음
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:8080</span><span class="p">;</span>
@@ -22979,6 +22981,8 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Proto</span><span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>여기서 기본적으로 설정안한 헤더는 요청의 것을 그대로 넘김</li>
 <li>Host를 내맘대로 여기서 바꿔주면 proxy_pass 에서 요청받은 친구의 server_name과 Host가 일치하지 않으면 403 에러가 날 수 있어</li>
 </ul>

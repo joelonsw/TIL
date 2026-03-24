@@ -22955,17 +22955,17 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;author&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Feed</span><span class="o">&gt;</span><span class="w"> </span><span class="n">feeds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
-</code></pre></div>
-    - Feed 여러개가 User 하나로 매핑될 거에요
-    - Feed
-        - User author가 외래키 관리자
-        - <code>@ManyToOne</code>으로 User에게 매핑
-        - FetchType.LAZY로 LAZY-LOADING
-        - <code>@JoinColumn(foreignKey = @ForeignKey(name = "~~~"))</code>
-            - "~~~"로 fk 제약조건 명명!
-    - User
-        - Lis<Feed>가 <code>@OneToMany</code>의 관계라고 명시
-        - "mappedBy"를 통해 해당 필드의 외래키 관리자는 author 라고 명시</li>
+</code></pre></div><p>- Feed 여러개가 User 하나로 매핑될 거에요
+  - Feed
+      - User author가 외래키 관리자
+      - <code>@ManyToOne</code>으로 User에게 매핑
+      - FetchType.LAZY로 LAZY-LOADING
+      - <code>@JoinColumn(foreignKey = @ForeignKey(name = "~~~"))</code>
+          - "~~~"로 fk 제약조건 명명!
+  - User
+      - Lis<Feed>가 <code>@OneToMany</code>의 관계라고 명시
+      - "mappedBy"를 통해 해당 필드의 외래키 관리자는 author 라고 명시</p>
+</li>
 </ul>
 <ul>
 <li><strong>뇌절 포인트</strong>
@@ -22985,10 +22985,9 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nd">@JoinColumn</span><span class="p">(</span><span class="n">foreignKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@ForeignKey</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fk_tech_to_feed&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Feed</span><span class="w"> </span><span class="n">feed</span><span class="p">;</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="p">}</span>
-</code></pre></div>
-    - 그것은 Feed에서 List<Tech>를 필요로 하기 때문이야
-        - {Tech 다수 --- Feed 하나} 매핑 관계이기 때문에 외래키는 Tech에서 관리해
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Entity</span>
+</code></pre></div><p>- 그것은 Feed에서 List<Tech>를 필요로 하기 때문이야
+      - {Tech 다수 --- Feed 하나} 매핑 관계이기 때문에 외래키는 Tech에서 관리해
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Entity</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Feed</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nd">@Id</span>
@@ -22998,8 +22997,9 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;feed&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Tech</span><span class="o">&gt;</span><span class="w"> </span><span class="n">techs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">}</span>
-</code></pre></div>
-    - <img alt="" src="../../image/2021-07-07-tables.PNG" /></li>
+</code></pre></div></p>
+<p>- <img alt="" src="../../image/2021-07-07-tables.PNG" /></p>
+</li>
 </ul>
 
 

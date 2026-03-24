@@ -22971,19 +22971,19 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>정보: Starting Servlet engine: [Apache Tomcat/10.0.10]
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>9월 09, 2021 10:59:27 오후 org.apache.catalina.startup.ContextConfig getDefaultWebXmlFragment
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>정보: No global web.xml found
-</code></pre></div>
-    - 카탈리나가 자주 나오네
-        - <em>참고: <a href="https://gogoonbuntu.tistory.com/63">https://gogoonbuntu.tistory.com/63</a></em>
-        - 톰캣의 코어 컴포넌트
-        - 톰캣 서블릿의 실질적인 구동 제공
-        - 해당 동작은 config 파일을 통해 구현/제어 가능
-            - catalina.policy: 자바 클래스의 톰캣 보안 정책
-            - catalina.properties: 카탈리나 클래스를 위한 표준 자바 프로퍼티
-            - logging.properties: 임계값, 로그값의 위치와 같은 카탈리나의 로깅 기능을 구성하는 방법
-            - context.xml: 톰캣에 구동되는 웹앱에 대해 로드될 정보
-            - server.xml: 톰캣의 메인 config 파일
-            - tomcat-users.xml: 톰캣 서버의 많은 유저 정보
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[위키피디아]
+</code></pre></div></p>
+<p>- 카탈리나가 자주 나오네
+      - <em>참고: <a href="https://gogoonbuntu.tistory.com/63">https://gogoonbuntu.tistory.com/63</a></em>
+      - 톰캣의 코어 컴포넌트
+      - 톰캣 서블릿의 실질적인 구동 제공
+      - 해당 동작은 config 파일을 통해 구현/제어 가능
+          - catalina.policy: 자바 클래스의 톰캣 보안 정책
+          - catalina.properties: 카탈리나 클래스를 위한 표준 자바 프로퍼티
+          - logging.properties: 임계값, 로그값의 위치와 같은 카탈리나의 로깅 기능을 구성하는 방법
+          - context.xml: 톰캣에 구동되는 웹앱에 대해 로드될 정보
+          - server.xml: 톰캣의 메인 config 파일
+          - tomcat-users.xml: 톰캣 서버의 많은 유저 정보
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[위키피디아]
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Catalina is Tomcat&#39;s servlet container. 
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Catalina implements Sun Microsystems&#39; specifications for servlet and JavaServer Pages (JSP). 
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>In Tomcat, a Realm element represents a &quot;database&quot; of usernames, passwords, and roles (similar to Unix groups) assigned to those users. 
@@ -23014,11 +23014,12 @@
     - <code>CharacterEncodingFilter</code>: UTF-8로 요청을 처리할 수 있도록 설정
     - <code>ResourceFilter</code>: 정적 파일들을 RequestDispatcher를 통해 요청 처리
         <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[RequestDispatcher 설명]
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>* Defines an object that receives requests from the client and sends them to
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>* any resource (such as a servlet, HTML file, or JSP file) on the server. The
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>* servlet container creates the &lt;code&gt;RequestDispatcher&lt;/code&gt; object, which is
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>* used as a wrapper around a server resource located at a particular path or
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>* given by a particular name.
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>* Defines an object that receives requests from the client and sends them to
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>* any resource (such as a servlet, HTML file, or JSP file) on the server. The
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>* servlet container creates the &lt;code&gt;RequestDispatcher&lt;/code&gt; object, which is
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>* used as a wrapper around a server resource located at a particular path or
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>* given by a particular name.
 </code></pre></div></p>
 </li>
 <li>
@@ -23028,9 +23029,9 @@
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">handlerMappings</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">HandlerMapping</span><span class="p">::</span><span class="n">initialize</span><span class="p">);</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
-</code></pre></div>
-    - 핸들러 매핑 촤르르
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>22:59:44.695 [INFO ] [main] [com.techcourse.ManualHandlerMapping] - Initialized Handler Mapping!
+</code></pre></div></p>
+<p>- 핸들러 매핑 촤르르
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>22:59:44.695 [INFO ] [main] [com.techcourse.ManualHandlerMapping] - Initialized Handler Mapping!
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>22:59:44.695 [INFO ] [main] [com.techcourse.ManualHandlerMapping] - Path : /login, Controller : class com.techcourse.controller.LoginController
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>22:59:44.695 [INFO ] [main] [com.techcourse.ManualHandlerMapping] - Path : /login/view, Controller : class com.techcourse.controller.LoginViewController
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>22:59:44.695 [INFO ] [main] [com.techcourse.ManualHandlerMapping] - Path : /logout, Controller : class com.techcourse.controller.LogoutController

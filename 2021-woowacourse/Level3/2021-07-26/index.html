@@ -23062,9 +23062,9 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span><span class="w">       </span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
-</code></pre></div>
-    - 로거 팩토리에서 getLogger =&gt; 찐 로그하는 클래스가 어디인지
-        - SLF4J를 사용합니다</li>
+</code></pre></div><p>- 로거 팩토리에서 getLogger =&gt; 찐 로그하는 클래스가 어디인지
+      - SLF4J를 사용합니다</p>
+</li>
 </ul>
 <ul>
 <li>Log Level 설정!
@@ -23097,8 +23097,8 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>2014-03-05 10:57:51.253  INFO 45469 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1358 ms
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>2014-03-05 10:57:51.698  INFO 45469 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: &#39;dispatcherServlet&#39; to [/]
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>2014-03-05 10:57:51.702  INFO 45469 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: &#39;hiddenHttpMethodFilter&#39; to: [/*]
-</code></pre></div>
-    - 시간 / 로그레벨 / 프로세스ID / --- / 쓰레드 이름 / 발생한 클래스 이름 / 로그 메시지</li>
+</code></pre></div><p>- 시간 / 로그레벨 / 프로세스ID / --- / 쓰레드 이름 / 발생한 클래스 이름 / 로그 메시지</p>
+</li>
 </ul>
 <ul>
 <li><strong>파일 출력</strong>
@@ -23138,9 +23138,8 @@
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="nt">&lt;appender-ref</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;STDOUT&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">&lt;/root&gt;</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nt">&lt;/configuration&gt;</span>
-</code></pre></div>
-    - main 메서드에서 logger쳐보기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div><p>- main 메서드에서 logger쳐보기
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">Example</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
@@ -23149,10 +23148,11 @@
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Example log from {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Example</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getSimpleName</span><span class="p">());</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
-</code></pre></div>
-    - console output
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>20:34:22.136 [main] INFO Example - Example log from Example
-</code></pre></div></li>
+</code></pre></div></p>
+<p>- console output
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>20:34:22.136 [main] INFO Example - Example log from Example
+</code></pre></div></p>
+</li>
 </ul>
 
 

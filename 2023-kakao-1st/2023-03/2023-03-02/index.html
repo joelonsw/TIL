@@ -23057,7 +23057,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>스칼라 Collections</strong><ul>
+<li>
+<p><strong>스칼라 Collections</strong></p>
+<ul>
 <li>[List]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">firstElem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aList</span><span class="p">.</span><span class="n">head</span><span class="w"> </span><span class="c1">// 1</span>
@@ -23065,10 +23067,14 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">aPrependList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">aList</span><span class="w"> </span><span class="c1">// (0, 1, 2, 3, 4, 5)</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kd">val</span><span class="w"> </span><span class="n">anExtendedList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+:</span><span class="w"> </span><span class="n">aList</span><span class="w"> </span><span class="o">:+</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="c1">// (0, 1, 2, 3, 4, 5, 6)</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[Sequence]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">aSequence</span><span class="p">:</span><span class="w"> </span><span class="nc">Seq</span><span class="p">[</span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">getIndexOne</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aSequence</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// .apply(1) 과 동치 - 결과값 2</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[Vector]<ul>
 <li>Sequence를 빠르게 접근할 수 있는 자료구조</li>
 <li>아마 내부적으로 배열을 쓰는 것 같긴함.. (확실치 않음)</li>
@@ -23080,6 +23086,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>[Range]<ul>
 <li><code>val aRange = 1 to 1000</code></li>
 </ul>
@@ -23093,6 +23101,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>[Map]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">phoneBook</span><span class="p">:</span><span class="w"> </span><span class="nc">Map</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">(</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="s">&quot;joel&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span>

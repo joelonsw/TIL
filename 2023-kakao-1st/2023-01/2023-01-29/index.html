@@ -23083,12 +23083,16 @@
 <h3 id="dependency">[의존성 (Dependency)]<a class="headerlink" href="#dependency" title="Permanent link">&para;</a></h3>
 <ul>
 <li>같이 변경되는 코드를 같이 넣으세요</li>
-<li><strong>클래스 사이의 Dependency</strong><ul>
+<li>
+<p><strong>클래스 사이의 Dependency</strong></p>
+<ul>
 <li>연관관계: 협력을 위해 필요한 영구적인 탐색구조
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>의존관계: 협력을 위해 일시적으로 필요한 의존성
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23096,10 +23100,14 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>상속관계
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>실체화관계
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">}</span>
@@ -23138,7 +23146,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>중간 객체를 이용한 의존성 사이클 끊기</strong><ul>
+<li>
+<p><strong>중간 객체를 이용한 의존성 사이클 끊기</strong></p>
+<ul>
 <li>상황<ul>
 <li>shop 패키지: <code>Shop</code>, <code>Menu</code>, <code>OptionGroupSpecification</code>, <code>OptionSpecification</code></li>
 <li>order 패키지: <code>Order</code>, <code>OrderLineItem</code>, <code>OrderOptionGroup</code>, <code>OrderOption</code></li>
@@ -23157,6 +23167,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>중간객체 생성    <ul>
 <li>shop 패키지: <code>Shop</code>, <code>Menu</code>, <code>OptionGroupSpecification</code>, <code>OptionGroup</code>, <code>OptionSpecification</code>, <code>Option</code></li>
 <li>order 패키지: <code>Order</code>, <code>OrderLineItem</code>, <code>OrderOptionGroup</code>, <code>OrderOption</code></li>

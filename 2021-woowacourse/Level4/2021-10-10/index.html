@@ -23049,26 +23049,26 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">})</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">store</span>
-</code></pre></div>
-    2. store.js를 main.js에 등록
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./store.js&#39;</span>
+</code></pre></div><p>2. store.js를 main.js에 등록
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./store.js&#39;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">store</span><span class="p">).</span><span class="nx">mount</span><span class="p">(</span><span class="s1">&#39;#app&#39;</span><span class="p">)</span>
-</code></pre></div>
-    - [mutations]
-        - vuex 안의 state는 mutations 항목에서 데이터 수정방법 정의하고 변경한다
-        - mutations 안에 함수를 정의해두자
-        - 순수하게 state 변경되는 로직만 넣자
-        - ajax는 actions에서 처리
-    - [actions]
-        - ajax는 여기서 처리하자
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">actions</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></p>
+<p>- [mutations]
+      - vuex 안의 state는 mutations 항목에서 데이터 수정방법 정의하고 변경한다
+      - mutations 안에 함수를 정의해두자
+      - 순수하게 state 변경되는 로직만 넣자
+      - ajax는 actions에서 처리
+  - [actions]
+      - ajax는 여기서 처리하자
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">actions</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">getDataFromServer</span><span class="p">(</span><span class="nx">context</span><span class="p">){</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(()=&gt;{</span><span class="w"> </span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nx">context</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="s1">&#39;mutations함수명&#39;</span><span class="p">)</span><span class="w"> </span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p">})</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>Computed</strong>
@@ -23126,17 +23126,17 @@
 <a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="o">|</span><span class="w"> </span><span class="n">wsrep_thread_count</span><span class="w">                       </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="w">      </span><span class="o">|</span>
 <a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="o">+------------------------------------------+--------+</span>
 <a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="mi">13</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="p">(</span><span class="mf">0.00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
-</code></pre></div>
-    - [caching]
-        - 내부적으로 mysqld에서 하나만 확보되는 "Global Buffer"와 Thread 별로 확보되는 "Thread Buffer"
-        - Thread Buffer에 메모리 많이 할당하면 성능 Up
-            - 하지만 Connection이 갑자기 늘어나면 메모리 부족해서 swap 발생
-    - [커넥션 튜닝]
-        - connect_timeout: MySQL이 클라이언트로부터 접속 요청을 받는 경우 몇 초까지 기다릴지
-        - interactive_timeout: <code>mysql&gt;</code>과 같은 콘솔이나 터미널 유지시간
-        - wait_timeout: 접속한 후 쿼리가 들어올 때까지 기다리는 시간. 
-        - max_connections: 서버가 허용하는 최대한의 커넥션 수
-        - back_log: 얼마만큼의 커넥션을 큐에 보관할지에 대한 설정값</li>
+</code></pre></div><p>- [caching]
+      - 내부적으로 mysqld에서 하나만 확보되는 "Global Buffer"와 Thread 별로 확보되는 "Thread Buffer"
+      - Thread Buffer에 메모리 많이 할당하면 성능 Up
+          - 하지만 Connection이 갑자기 늘어나면 메모리 부족해서 swap 발생
+  - [커넥션 튜닝]
+      - connect_timeout: MySQL이 클라이언트로부터 접속 요청을 받는 경우 몇 초까지 기다릴지
+      - interactive_timeout: <code>mysql&gt;</code>과 같은 콘솔이나 터미널 유지시간
+      - wait_timeout: 접속한 후 쿼리가 들어올 때까지 기다리는 시간. 
+      - max_connections: 서버가 허용하는 최대한의 커넥션 수
+      - back_log: 얼마만큼의 커넥션을 큐에 보관할지에 대한 설정값</p>
+</li>
 </ul>
 <h2 id="_1">실행 계획과 인덱스<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>

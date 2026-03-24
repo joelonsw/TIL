@@ -22969,10 +22969,10 @@
     - 의도
         - 객체를 필요로 하는 클래스 내에 직접 객체 생성하는 것 == 클래스를 특정 객체에 커밋하는 것<br />
             == 클래스로 부터 독립적으로 인스턴스의 생성을 변경하는 것이 불가능
-            == 유연하지 않음
-    - 특징
-        - 결합도를 느슨하게 만든다
-        - 의존관계 역전 원칙 (Dependency Inversion Principle), 단일 책임 원칙 (Single Responsibility Principle) 따르도록 함</li>
+            == 유연하지 않음<p>- 특징
+      - 결합도를 느슨하게 만든다
+      - 의존관계 역전 원칙 (Dependency Inversion Principle), 단일 책임 원칙 (Single Responsibility Principle) 따르도록 함</p>
+</li>
 </ul>
 <ul>
 <li><strong>DI</strong>
@@ -23045,9 +23045,10 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="n">whiteInitPiecePosition</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Position</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">WHITE_PIECE_COLUMN</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Knight</span><span class="p">());</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="n">whiteInitPiecePosition</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Position</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="n">WHITE_PIECE_COLUMN</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rook</span><span class="p">());</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 다음과 같이 캐싱해 두었음
+  - 그래서 테스트 코드를 돌렸더니 뻑이남
 </code></pre></div>
-        - 다음과 같이 캐싱해 두었음
-        - 그래서 테스트 코드를 돌렸더니 뻑이남<p>- 문제이유
+<p>- 문제이유
       - 내가 캐싱해둔 것은, 각 기물들의 초기생성시 위치정보와 그에 대응하는 기물 객체이다. 
       - 근데 게임을 진행한 후, 또 다시 해당 캐싱된 친구들을 받으면 발생하는 문제는...
       - 이미 저번 게임에서 Pawn 객체는 마르고 닳도록 쓴 객체인 것이다. 

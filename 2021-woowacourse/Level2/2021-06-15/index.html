@@ -23036,36 +23036,38 @@
                 &gt; 사실 JWT의 큰 장점 중 하나가 토큰 자체에 정보를 담을 수 있다는 건데, <br />
                 민감 정보 다 빼고 나면 결국 토큰이 담은 정보만으로는 부족해서 검증 시마다 인증 서버 또는 DB 조회가 불가피해질 수도 있죠<br />
                 서비스 특성에 따라 트레이드오프를 고려해 어떤 정보를 담을지, 만료 기간은 어떻게 가져갈지, <br />
-                리프레시는 어떻게 할지 등을 잘 결정해서 사용하는 게 중요한 것 같아요.<br />
-        - 해당 사이트에서 <a href="https://jwt.io/">https://jwt.io/</a> 내가 발급 받은 토큰 + signature 돌리는데 왜 안되냐... 😅
-    - Interceptor에서 토큰에 양식에 대해서만 Validation을 진행했지, 따로 토큰 필드를 통해 DB 조회를 하지는 않았음
-        - JWT 토큰 validation에서 중요한 건 secretKey와 만료 날짜 (Payload를 추출하여 DB 조회를 따로 해주지 않았음)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">validateToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="n">Jws</span><span class="o">&lt;</span><span class="n">Claims</span><span class="o">&gt;</span><span class="w"> </span><span class="n">claims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Jwts</span><span class="p">.</span><span class="na">parser</span><span class="p">().</span><span class="na">setSigningKey</span><span class="p">(</span><span class="n">secretKey</span><span class="p">).</span><span class="na">parseClaimsJws</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="n">claims</span><span class="p">.</span><span class="na">getBody</span><span class="p">().</span><span class="na">getExpiration</span><span class="p">().</span><span class="na">before</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">());</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">JwtException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
+                리프레시는 어떻게 할지 등을 잘 결정해서 사용하는 게 중요한 것 같아요.  <div class="highlight"><pre><span></span><code>  - 해당 사이트에서 https://jwt.io/ 내가 발급 받은 토큰 + signature 돌리는데 왜 안되냐... 😅
 </code></pre></div>
-        - 만약 이렇다면, 회원가입 바로 하고 토큰 받고 탈퇴하면 이건 유효한 토큰으로 간주되겠지?
-        - 인가된 사용자에 한에서만 서버에 자원 생성등의 요청을 허락해줄라고 했는데...
-            - 탈퇴한 사용자가 이전에 발급받은 토큰을 가지고 서버의 자원에 접근하고 CRUD 로직 수행하면 안될텐데 말이야
-    - 커스텀 예외를 만들 때, 알맞는 Layer의 예외를 상속받을 것
-        - Service Layer에서 던져줄 커스텀 예외를 <code>org.springframework.dao.EmptyResultDataAccessException</code> 이걸 상속받음
-    - 예외 자체에 <code>@ResponseStatus</code>를 정의하는 것 보다 <code>@ExceptionHandler</code>를 통해 예외 잡고 ResponseEntity 반환하는 것 추천
-        - <code>@ResponseStatus</code>를 사용하면 HttpServletResponse.sendError 메서드가 사용됨
-            - <em>참고: <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html">https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html</a></em>
-            - 해당 메서드를 호출한다는 것은 Response가 완료되었다 간주하고 더 이상 추가적인 정보를 부여할 수 없다는 뜻
-            - 또한 Servlet Container는 HTML 에러 페이지를 반환하기 때문에 REST API 설계와 어울리지 않는 예외처리 방식임
-    - <code>@SQLException</code>에 대한 처리를 <code>@ControllerAdvice</code>에서 하는게 맞을까?
-        - Dao에서 발생할 수 있는 예외를 Service에서 잡아, 의미있는 RuntimeException으로 변경해주는 것이 좋을 듯 하다
-    - 기타 사항
-        - 도메인을 응집도 높게 처리하자
-        - 객체에 메시지를 보내 로직 구현할 것
-        - 메서드를 만들 떄 오버로딩을 통해 구분하지 말고, 메서드 명으로 확실히 드러내자
-        - validation을 통해 필요한 필드를 검사했다면 이를 반환하도록 변경해볼 것</li>
+<p>- Interceptor에서 토큰에 양식에 대해서만 Validation을 진행했지, 따로 토큰 필드를 통해 DB 조회를 하지는 않았음
+      - JWT 토큰 validation에서 중요한 건 secretKey와 만료 날짜 (Payload를 추출하여 DB 조회를 따로 해주지 않았음)
+      <code>java
+      public boolean validateToken(String token) {
+          try {
+              Jws&lt;Claims&gt; claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+              return !claims.getBody().getExpiration().before(new Date());
+          } catch (JwtException | IllegalArgumentException e) {
+              return false;
+          }
+      }</code></p>
+<div class="highlight"><pre><span></span><code>  - 만약 이렇다면, 회원가입 바로 하고 토큰 받고 탈퇴하면 이건 유효한 토큰으로 간주되겠지?
+  - 인가된 사용자에 한에서만 서버에 자원 생성등의 요청을 허락해줄라고 했는데...
+      - 탈퇴한 사용자가 이전에 발급받은 토큰을 가지고 서버의 자원에 접근하고 CRUD 로직 수행하면 안될텐데 말이야
+</code></pre></div>
+<p>- 커스텀 예외를 만들 때, 알맞는 Layer의 예외를 상속받을 것
+      - Service Layer에서 던져줄 커스텀 예외를 <code>org.springframework.dao.EmptyResultDataAccessException</code> 이걸 상속받음
+  - 예외 자체에 <code>@ResponseStatus</code>를 정의하는 것 보다 <code>@ExceptionHandler</code>를 통해 예외 잡고 ResponseEntity 반환하는 것 추천
+      - <code>@ResponseStatus</code>를 사용하면 HttpServletResponse.sendError 메서드가 사용됨
+          - <em>참고: <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html">https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html</a></em>
+          - 해당 메서드를 호출한다는 것은 Response가 완료되었다 간주하고 더 이상 추가적인 정보를 부여할 수 없다는 뜻
+          - 또한 Servlet Container는 HTML 에러 페이지를 반환하기 때문에 REST API 설계와 어울리지 않는 예외처리 방식임
+  - <code>@SQLException</code>에 대한 처리를 <code>@ControllerAdvice</code>에서 하는게 맞을까?
+      - Dao에서 발생할 수 있는 예외를 Service에서 잡아, 의미있는 RuntimeException으로 변경해주는 것이 좋을 듯 하다
+  - 기타 사항
+      - 도메인을 응집도 높게 처리하자
+      - 객체에 메시지를 보내 로직 구현할 것
+      - 메서드를 만들 떄 오버로딩을 통해 구분하지 말고, 메서드 명으로 확실히 드러내자
+      - validation을 통해 필요한 필드를 검사했다면 이를 반환하도록 변경해볼 것</p>
+</li>
 </ul>
 <ul>
 <li><strong>개선될 포인트</strong>
@@ -23137,21 +23139,21 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;delete from STATION where id = :id&quot;</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">namedParameterJdbcTemplate</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">singletonMap</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">));</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
-</code></pre></div>
-    - Line등의 도메인의 이름을 따로 객체로 포장하기
-        - 원시값 포장
-        - 분리될 만큼의 책임이 있다고 생각 안했음
-            - 근데 오히려 분리하고 나니 Line의 로직들이 깔끔해져서 보기 좋음
-            - 분리될 만큼의 책임 != 로직이 있어야 함
-                - 유지보수확장에 유리한 코드를 짜기 위해 객체지향 설계 하는 거면, 잘게 나누는 것이 좋을 수도 있겠다 생각함
-    - RequestDto에 primitive type이 있으면 누락 시 default 0이 들어갈 수도
-        - 애초에 Null을 받을 수 있는 래퍼 클래스를 사용하고 + <code>@NotNull</code> 및 <code>@PositiveOrZero</code>등의 Bean Validation 추가해주자
-    - update 로직을 처리할 때 특정 필드만 바꾼 새로운 객체를 만들지 VS 기존 객체의 값들을 바꿔줄지
-        - 전자: 도메인 객체의 불변을 보장, but 도메인에 필드가 추가되면 유지보수해줘야할 포인트들이 줄줄이 생김
-        - 후자: 기존 객체를 조금 더 존중하는 느낌, 너가 바뀌니까 너의 필드값을 바꿔줄게 but 불변성을 보장할 수 없음
-    - 기타 사항
-        - 매직넘버 상수화
-        - 디미터 법칙 준수</li>
+</code></pre></div><p>- Line등의 도메인의 이름을 따로 객체로 포장하기
+      - 원시값 포장
+      - 분리될 만큼의 책임이 있다고 생각 안했음
+          - 근데 오히려 분리하고 나니 Line의 로직들이 깔끔해져서 보기 좋음
+          - 분리될 만큼의 책임 != 로직이 있어야 함
+              - 유지보수확장에 유리한 코드를 짜기 위해 객체지향 설계 하는 거면, 잘게 나누는 것이 좋을 수도 있겠다 생각함
+  - RequestDto에 primitive type이 있으면 누락 시 default 0이 들어갈 수도
+      - 애초에 Null을 받을 수 있는 래퍼 클래스를 사용하고 + <code>@NotNull</code> 및 <code>@PositiveOrZero</code>등의 Bean Validation 추가해주자
+  - update 로직을 처리할 때 특정 필드만 바꾼 새로운 객체를 만들지 VS 기존 객체의 값들을 바꿔줄지
+      - 전자: 도메인 객체의 불변을 보장, but 도메인에 필드가 추가되면 유지보수해줘야할 포인트들이 줄줄이 생김
+      - 후자: 기존 객체를 조금 더 존중하는 느낌, 너가 바뀌니까 너의 필드값을 바꿔줄게 but 불변성을 보장할 수 없음
+  - 기타 사항
+      - 매직넘버 상수화
+      - 디미터 법칙 준수</p>
+</li>
 </ul>
 <ul>
 <li><strong>개선될 포인트</strong></li>
@@ -23221,16 +23223,16 @@
 <a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">cause</span><span class="p">);</span>
 <a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="p">}</span>
-</code></pre></div>
-    - 기능별 패키지가 MSA 구조로의 변경이 수월함
-        - Exception도 패키지 별로 가지는 게 좋을 듯함
-    - Fare라는 기능이 어느 패키지에 들어가야 할 지 애매하다고 느낌
-        - 그냥 따로 Fare 패키지로 분리함
-    - <code>@Transactional(readOnly=true)</code>
-        - JPA 구현체로 Hibernate 사용시 트랜잭션 readOnly 사용추천
-        - flush 모드를 NEVER로 설정해 해당 트랜잭션 안의 더티 체킹 X
-            - 더티체킹: JPA가 트랜잭션 끝나는 시점에 변화가 있는 모든 엔티티 DB에 자동반영
-            - 데이터베이스와 sync를 맞춰주지 않아도 되나본데...?</li>
+</code></pre></div><p>- 기능별 패키지가 MSA 구조로의 변경이 수월함
+      - Exception도 패키지 별로 가지는 게 좋을 듯함
+  - Fare라는 기능이 어느 패키지에 들어가야 할 지 애매하다고 느낌
+      - 그냥 따로 Fare 패키지로 분리함
+  - <code>@Transactional(readOnly=true)</code>
+      - JPA 구현체로 Hibernate 사용시 트랜잭션 readOnly 사용추천
+      - flush 모드를 NEVER로 설정해 해당 트랜잭션 안의 더티 체킹 X
+          - 더티체킹: JPA가 트랜잭션 끝나는 시점에 변화가 있는 모든 엔티티 DB에 자동반영
+          - 데이터베이스와 sync를 맞춰주지 않아도 되나본데...?</p>
+</li>
 </ul>
 <ul>
 <li><strong>우기</strong>

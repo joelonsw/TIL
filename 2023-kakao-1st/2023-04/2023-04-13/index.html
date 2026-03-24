@@ -23040,7 +23040,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Modules</strong><ul>
+<li>
+<p><strong>Modules</strong></p>
+<ul>
 <li>app.js 에서 제어하고자 하는 모듈을 만들어보자
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 각각 모듈의 이름, 모듈의 디펜던시를 나타냄</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">joelApp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;joelApp&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[]);</span>
@@ -23054,6 +23056,8 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">// 컨트롤러 제어는 여기서 할 수 있음</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nx">joelApp</span><span class="p">.</span><span class="nx">controller</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>html 페이지에서 모듈로 제어될 친구들을 설정하여 지정해보자
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">ng-app</span><span class="o">=</span><span class="s">&quot;joel-app&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="cm">&lt;!-- joel app~~ --&gt;</span>
@@ -23063,7 +23067,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Controllers</strong><ul>
+<li>
+<p><strong>Controllers</strong></p>
+<ul>
 <li>app.js에서 controller를 만들 수 있음</li>
 <li>여기에서 MVC 패턴을 적용하자<ul>
 <li>View: HTML</li>
@@ -23078,6 +23084,8 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">$scope</span><span class="p">.</span><span class="nx">ninjas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}]);</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>이후에 저장된 js 객체를 화면에 띄워주자
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">ng-controller</span><span class="o">=</span><span class="s">&quot;NinjaController&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{message}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
@@ -23122,7 +23130,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>ng-submit</strong><ul>
+<li>
+<p><strong>ng-submit</strong></p>
+<ul>
 <li>form 만들고 submit 할 수 있도록 지원할 것!
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">ng-submit</span><span class="o">=</span><span class="s">&quot;addNinja()&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">ng-model</span><span class="o">=</span><span class="s">&quot;newninja.name&quot;</span> <span class="p">/&gt;</span>
@@ -23131,12 +23141,16 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Add new ninja&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>단! ng-controller 스코프 안에서 지지고 볶을 수 있도록 기억하자...!</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li><strong>views &amp; routes</strong><ul>
+<li>
+<p><strong>views &amp; routes</strong></p>
+<ul>
 <li>app.js 에서 컨피그를 정의해주자~
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">myNinjaApp</span><span class="p">.</span><span class="nx">config</span><span class="p">([</span><span class="s1">&#39;$routeProvider&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">$routeProvider</span><span class="p">){</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nx">$routeProvider</span>
@@ -23152,6 +23166,8 @@
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span><span class="p">})</span>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="p">}]);</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>이때, when 절에서 controller를 정의해주면, 해당 (컴포넌트라 해야하나...)는 컨트롤러에 자동 매핑되어 ng-controller 안써줘도 됨!</li>
 </ul>
 </li>

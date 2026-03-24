@@ -23021,7 +23021,9 @@
 </li>
 </ol>
 <ul>
-<li><strong>문제 상황</strong><ul>
+<li>
+<p><strong>문제 상황</strong></p>
+<ul>
 <li>요건 되는데
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">div</span><span class="p">.</span><span class="nc">content-article</span><span class="p">.</span><span class="nc">fixed-btm-padding</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">;</span>
@@ -23029,12 +23031,16 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="nf">env</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">);</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>요건 안됨
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">div</span><span class="p">.</span><span class="nc">content-article</span><span class="p">.</span><span class="nc">fixed-btm-padding</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="nf">constant</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">);</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">padding-bottom</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="nf">env</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">78</span><span class="kt">px</span><span class="p">);</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>이유<ul>
 <li>이는 CSS가 스타일을 프로세싱하는 방법에 따름</li>
 <li>첫번째를 보면 <code>padding-bottom: 78px</code>가 베이스 패딩을 딱 지정하고<ul>

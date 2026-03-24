@@ -23028,7 +23028,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>변경된 사용 방법</strong><ul>
+<li>
+<p><strong>변경된 사용 방법</strong></p>
+<ul>
 <li>ActorSystem 주입 예시
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyActor</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Actor</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
@@ -23046,7 +23048,10 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>Actor 바인딩을 위한 Guice Module (AkkaGuideSupport 활용)
+</ul>
+<ul>
+<li>
+<p>Actor 바인딩을 위한 Guice Module (AkkaGuideSupport 활용)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Module</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">AbstractModule</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">AkkaGuiceSupport</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">configure</span><span class="p">():</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">bindActor</span><span class="p">[</span><span class="nc">MyActor</span><span class="p">](</span><span class="s">&quot;myActor&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;myActor&quot;라는 이름으로 MyActor 바인딩</span>
@@ -23059,7 +23064,8 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="n">myActor</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="n">msg</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
-</code></pre></div><ol>
+</code></pre></div></p>
+<ol>
 <li>단일 ActorSystem 사용<ul>
 <li>일반적으로 Play에는 단일 <code>ActorSystem</code>이 생성되어 DI 컨테이너에 바인딩. 어플리케이션 전체에서 액터 생성/관리</li>
 </ul>

@@ -22984,11 +22984,16 @@
 </li>
 </ul>
 <ul>
-<li><strong>실습</strong><ol>
-<li>개인키 생성
+<li>
+<p><strong>실습</strong></p>
+<ol>
+<li>
+<p>개인키 생성
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ openssl genrsa -out myuser.key 2048
-</code></pre></div></li>
-<li>CSR 생성
+</code></pre></div></p>
+</li>
+<li>
+<p>CSR 생성
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ openssl req -new -key myuser.key -out myuser.csr
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>You are about to be asked to enter information that will be incorporated
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>into your certificate request.
@@ -23011,12 +23016,16 @@
 <a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>String too short, must be at least 4 bytes long
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>A challenge password []:123sjsj
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>An optional company name []:joelonsw
-</code></pre></div></li>
-<li>생성한 CSR 파일 base64 인코딩
+</code></pre></div></p>
+</li>
+<li>
+<p>생성한 CSR 파일 base64 인코딩
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ cat myuser.csr | base64 | tr -d &quot;\n&quot;
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0...
-</code></pre></div></li>
-<li>kubernetes에서 CertificateSigningRequest Manifest 작성, apply
+</code></pre></div></p>
+</li>
+<li>
+<p>kubernetes에서 CertificateSigningRequest Manifest 작성, apply
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>apiVersion: certificates.k8s.io/v1
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kind: CertificateSigningRequest
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>metadata:
@@ -23026,41 +23035,57 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    signerName: kubernetes.io/kube-apiserver-client   # Certificates By API Server, Never auto-approve by kube-controller-manager
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    expirationSeconds: 86400
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    usages:
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    - client auth
-</code></pre></div></li>
-<li>인증서 서명 요청 승인
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    - client auth
+</code></pre></div></p>
+</li>
+<li>
+<p>인증서 서명 요청 승인
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ kubectl get csr
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>$ kubectl certificate approve myuser
-</code></pre></div></li>
-<li>Role 생성 및 Role 바인딩<ul>
+</code></pre></div></p>
+</li>
+<li>
+<p>Role 생성 및 Role 바인딩</p>
+<ul>
 <li>해당 사용자가 쿠버 클러스터에 접근할 수 있도록 Role 및 Role 바인딩 필요</li>
 <li>Role
   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ kubectl create role developer --verb=create \
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>--verb=list --verb=get --verb=update --verb=delete \
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>--resources=pods
 </code></pre></div></li>
+</ul>
+<ul>
 <li>RoleBinding
   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ kubectl create rolebinding developer-binding-myuser \
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>--role=developer --user=myuser
 </code></pre></div></li>
 </ul>
 </li>
-<li>kubeconfig 추가<ul>
+<li>
+<p>kubeconfig 추가</p>
+<ul>
 <li>새로운 credential 추가 (myuser라는 이름의 사용자 자격증명을 kubeconfig에 등록)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ kubectl config set-credentials myuser --client-key=myuser.key \
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>--client-certificate=myuser.crt --embed-certs=true
 </code></pre></div></li>
+</ul>
+<ul>
 <li>context 추가 (어떤 클러스터와 어떤 사용자 정보를 쓸지 묶어서 저장)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ kubectl config set-context myuser --cluster=kubernetes --user=myuser
 </code></pre></div></li>
+</ul>
+<ul>
 <li>현재 사용할 컨텍스트 지정
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ kubectl config use-context myuser
 </code></pre></div></li>
 </ul>
 </li>
-<li>테스트
+<li>
+<p>테스트
   <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ kubectl auth can-i create pods --as=myuser -n=namespace
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ol>
 </li>
 </ul>

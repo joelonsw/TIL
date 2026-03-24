@@ -23019,23 +23019,26 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">println</span><span class="p">(</span><span class="n">forCompTest</span><span class="p">)</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1">// List((1,4,7), (1,4,8), (1,4,9), (1,5,7), (1,5,8), (1,5,9), (1,6,7), (1,6,8), (1,6,9), (2,4,7), (2,4,8), (2,4,9), (2,5,7), (2,5,8), (2,5,9), (2,6,7), (2,6,8), (2,6,9), (3,4,7), (3,4,8), (3,4,9), (3,5,7), (3,5,8), (3,5,9), (3,6,7), (3,6,8), (3,6,9))</span>
-</code></pre></div>
-    - for-comprehension은 최종 연산에 <code>map</code>을 사용하여 결과 처리하고, 그 전엔 줄줄이 <code>flatMap</code>을 사용하여 처리해
-        - 요런 감성이야
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div><p>- for-comprehension은 최종 연산에 <code>map</code>을 사용하여 결과 처리하고, 그 전엔 줄줄이 <code>flatMap</code>을 사용하여 처리해
+      - 요런 감성이야
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">operation1</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">operation2</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">operation3</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">operation1</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">operation2</span><span class="p">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">operation3</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">expression</span><span class="p">)))</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - `flatMap`을 통해서 중간중간 스텝에서 flatten 처리해서 모나드형식(?)으로 잘 변경해줬다가
+  - `map`을 통해서 마지막에 트랜스폼을 뚝딱 해주는 겨
+  - 이를 통해 monadic nature를 달성할 수 있는겨
 </code></pre></div>
-        - <code>flatMap</code>을 통해서 중간중간 스텝에서 flatten 처리해서 모나드형식(?)으로 잘 변경해줬다가
-        - <code>map</code>을 통해서 마지막에 트랜스폼을 뚝딱 해주는 겨
-        - 이를 통해 monadic nature를 달성할 수 있는겨</li>
+</li>
 </ul>
 <ul>
-<li><strong>Future FlatMap &amp; Promise chaining</strong><ul>
+<li>
+<p><strong>Future FlatMap &amp; Promise chaining</strong></p>
+<ul>
 <li>약간 콜백 지옥과도 비슷한 느낌이 드는데...<ul>
 <li>스칼라에서 for-comprehension 중첩 오퍼레이션에 대해 가독성이 좋을 수 있도록 문법적으로 지원을 해주는거야</li>
 <li>JS의 <code>async/await</code> 감성처럼</li>
@@ -23056,6 +23059,8 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">step2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Future</span><span class="p">(</span><span class="n">doSomethinsElse</span><span class="p">(</span><span class="n">step1</span><span class="p">))</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="n">step2</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>JS
   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">eventualResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step1</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">doSomethingElse</span><span class="p">(</span><span class="nx">step1</span><span class="p">));</span>

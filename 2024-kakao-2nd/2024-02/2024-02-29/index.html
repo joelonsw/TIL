@@ -22994,23 +22994,29 @@
 <ul>
 <li><strong>이유</strong><ul>
 <li><code>Option</code>과 <code>Some</code>/<code>None</code>은 스칼라에서 다르게 동작</li>
-<li><code>Option</code><ul>
+<li>
+<p><code>Option</code></p>
+<ul>
 <li><code>Option(LocalDateTime.now)</code>는 <code>Option.apply</code>를 통해 <code>Some</code> 혹은 <code>None</code>을 반환
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">):</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nc">Some</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </code></pre></div></li>
-<li>이는 <code>Option</code>이 자체적으로 null-check를 해주고 있다는 것</li>
+</ul>
+<ul>
+<li>이는 <code>Option</code>이 자체적으로 null-check를 해주고 있다는 것<ul>
+<li><code>Some</code></li>
 </ul>
 </li>
-<li><code>Some</code><ul>
 <li>반면, <code>Some(LocalDateTime.now)</code>는 직빵으로 <code>Some()</code>으로 감싸는데, 이는 null-check 할 여지를 주지 않음
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">final</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Some</span><span class="p">[</span><span class="o">+</span><span class="nc">A</span><span class="p">](</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
 </code></pre></div></li>
-<li>이때 <code>LocalDateTime.now</code>가 null이라면, 직빵으로 NPE가 터짐</li>
+</ul>
+<ul>
+<li>이때 <code>LocalDateTime.now</code>가 null이라면, 직빵으로 NPE가 터짐<ul>
+<li><code>None</code></li>
 </ul>
 </li>
-<li><code>None</code><ul>
 <li><code>None</code>도 마찬가지
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="nc">None</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">Nothing</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">:</span><span class="w"> </span><span class="nc">Nothing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">NoSuchElementException</span><span class="p">(</span><span class="s">&quot;None.get&quot;</span><span class="p">)</span>
@@ -23121,7 +23127,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Future</strong><ul>
+<li>
+<p><strong>Future</strong></p>
+<ul>
 <li>백그라운드 작업을 개시하는 컬렉션</li>
 <li>기본적으로 스칼라 코드는 JVM의 메인 쓰레드에서 동작하나, <code>Future</code>의 사용은 별도 쓰레드에서 백그라운드 작업이 가능케 한다<ul>
 <li>다만 백그라운드로 돌리기 위해서는 실행하기 위한 <code>Context</code>를 지정해야 함</li>
@@ -23138,6 +23146,8 @@
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="p">}(</span><span class="n">global</span><span class="p">)</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>묵시적으로 <code>context</code> 지정
   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="p">.</span><span class="nc">Implicits</span><span class="p">.</span><span class="n">global</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">concurrent</span><span class="p">.</span><span class="nc">Future</span>

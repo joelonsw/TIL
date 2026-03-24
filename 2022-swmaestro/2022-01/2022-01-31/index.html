@@ -23010,7 +23010,9 @@
 <li><strong>ArrayList</strong><ul>
 <li>배열을 인스턴스 변수로 들고 있음</li>
 <li>따라서 접근에 O(1)</li>
-<li>원소를 add할 때 배열 용량을 넘어버리면 grow 함수를 호출하게 됨 (자동으로 배열의 사이즈 증가)<ul>
+<li>
+<p>원소를 add할 때 배열 용량을 넘어버리면 grow 함수를 호출하게 됨 (자동으로 배열의 사이즈 증가)</p>
+<ul>
 <li>기존의 용량의 1/2을 추가하여 용량을 키우는 걸 알 수 있음
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minCapacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">        </span><span class="c1">// overflow-conscious code</span>
@@ -23024,11 +23026,13 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="n">elementData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">elementData</span><span class="p">,</span><span class="w"> </span><span class="n">newCapacity</span><span class="p">);</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">}</span>
 </code></pre></div></li>
-<li>add(object)는 O(1), add(index, object)는 O(n)으로 동작함</li>
+</ul>
+<ul>
+<li>add(object)는 O(1), add(index, object)는 O(n)으로 동작함<ul>
+<li>Thread Unsafe. 여러 쓰레드가 접근하면 뇌절. <code>Collections.synchronizedList(new ArrayList(...))</code> 사용 요망</li>
+<li>정리</li>
 </ul>
 </li>
-<li>Thread Unsafe. 여러 쓰레드가 접근하면 뇌절. <code>Collections.synchronizedList(new ArrayList(...))</code> 사용 요망</li>
-<li>정리<ul>
 <li>추가: add(object) - O(1), add(index, object) - O(n)</li>
 <li>삭제: remove() - O(1), remove(index) - O(n)</li>
 <li>탐색: contains(object) - O(n)</li>

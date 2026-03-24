@@ -23019,8 +23019,10 @@
 </li>
 </ul>
 <ul>
-<li><strong>Play에 Kamon 설치</strong><br />
-<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/play-framework/">https://kamon.io/docs/latest/instrumentation/play-framework/</a></em><ul>
+<li>
+<p><strong>Play에 Kamon 설치</strong><br />
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/play-framework/">https://kamon.io/docs/latest/instrumentation/play-framework/</a></em></p>
+<ul>
 <li><code>kamon-play-2.5</code></li>
 <li>Context Propagation &amp; Distributed tracing</li>
 <li>Client/Server HTTP Request Span은 자동으로 생성/전파, HTTP metric (<code>span.processing-time</code>)도 생성</li>
@@ -23028,8 +23030,10 @@
 </li>
 </ul>
 <ul>
-<li><strong>Kamon-Akka</strong><br />
-<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/akka/">https://kamon.io/docs/latest/instrumentation/akka/</a></em><ul>
+<li>
+<p><strong>Kamon-Akka</strong><br />
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/akka/">https://kamon.io/docs/latest/instrumentation/akka/</a></em></p>
+<ul>
 <li><code>kamon-akka-2.4</code></li>
 <li>메트릭 수집: 액터 시스템, 액터, 라우터, 디스패터, 액터그룹, 리모팅/클러스터 컴포넌트</li>
 <li>메시지 트레이싱: span을 만들어 선택된 시스템 내 액터에서 process</li>
@@ -23039,18 +23043,22 @@
 </li>
 </ul>
 <ul>
-<li><strong>Kamon-Scala-Future</strong><br />
-<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/futures/">https://kamon.io/docs/latest/instrumentation/futures/</a></em><ul>
+<li>
+<p><strong>Kamon-Scala-Future</strong><br />
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/futures/">https://kamon.io/docs/latest/instrumentation/futures/</a></em></p>
+<ul>
 <li><code>kamon-scala-future</code></li>
 <li>같은 Context를 Future 생성/map/flatMap 등에 적용되도 사용하도록</li>
 <li>body of future가 <code>ExecutionContext</code> 내에서 돌아갈때, Kamon이 Context 캡쳐해서 이를 내부에서 사용할 수 있음. </li>
-<li>Kamon.span
+<li>
+<p>Kamon.span
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">kamon</span><span class="p">.</span><span class="nc">Kamon</span><span class="p">.</span><span class="n">span</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">span</span><span class="p">(</span><span class="s">&quot;myOperationName&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="c1">// 여기에 작업을 수행합니다.</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>주요 기능<ul>
 <li>Span 생성: 코드 블록을 감싸고 그 안의 작업을 하나의 Span으로 만듭니다.</li>
 <li>자동 시작 및 종료: Span은 블록이 시작될 때 자동으로 시작되고, 블록이 끝나면 자동으로 종료됩니다.</li>
@@ -23064,8 +23072,10 @@
 </li>
 </ul>
 <ul>
-<li><strong>Kamon-executors</strong><br />
-<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/executors/">https://kamon.io/docs/latest/instrumentation/executors/</a></em><ul>
+<li>
+<p><strong>Kamon-executors</strong><br />
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/executors/">https://kamon.io/docs/latest/instrumentation/executors/</a></em></p>
+<ul>
 <li><code>kamon-executors</code></li>
 <li>ExecutorService (ThreadPoolExecutor/ForkJoinPool) 에서 발생한 메트릭 수집</li>
 <li>Option: Tracking time in queue</li>
@@ -23080,8 +23090,10 @@
 </li>
 </ul>
 <ul>
-<li><strong>Kamon-logback</strong><br />
-<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/logback/">https://kamon.io/docs/latest/instrumentation/logback/</a></em><ul>
+<li>
+<p><strong>Kamon-logback</strong><br />
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/logback/">https://kamon.io/docs/latest/instrumentation/logback/</a></em></p>
+<ul>
 <li><code>kamon-logback</code></li>
 <li>AsyncAppender 사용함에도 Context 보존</li>
 <li>4개의 컨버터를 활용해 Context Information 도와줌<ol>
@@ -23095,8 +23107,10 @@
 </li>
 </ul>
 <ul>
-<li><strong>Kamon-elasticsearch</strong><br />
-<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/elasticsearch/">https://kamon.io/docs/latest/instrumentation/elasticsearch/</a></em><ul>
+<li>
+<p><strong>Kamon-elasticsearch</strong><br />
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/elasticsearch/">https://kamon.io/docs/latest/instrumentation/elasticsearch/</a></em></p>
+<ul>
 <li>자동으로 span 생성해 Java Rest Client 보조</li>
 </ul>
 </li>

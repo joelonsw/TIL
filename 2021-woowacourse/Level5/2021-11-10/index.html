@@ -22991,10 +22991,11 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">cellPhoneRepository</span><span class="p">.</span><span class="na">deleteAll</span><span class="p">();</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">deleteAll</span><span class="p">();</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 그러면 테스트코드에서 `@Transactional` 쓰지마?
+      - `@DataJpaTest`엔 이미 붙어있기도 해
+      - 서비스 레이어에서 테스트하고자하는게 서비스의 코드면, `@Transactional`은 의도와 빗겨나갈 수도 있다~
 </code></pre></div>
-        - 그러면 테스트코드에서 <code>@Transactional</code> 쓰지마?
-            - <code>@DataJpaTest</code>엔 이미 붙어있기도 해
-            - 서비스 레이어에서 테스트하고자하는게 서비스의 코드면, <code>@Transactional</code>은 의도와 빗겨나갈 수도 있다~</li>
+</li>
 </ul>
 <h2 id="open-session-in-view">Open Session In View<a class="headerlink" href="#open-session-in-view" title="Permanent link">&para;</a></h2>
 <ul>

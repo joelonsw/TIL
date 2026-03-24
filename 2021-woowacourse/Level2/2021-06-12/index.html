@@ -22975,24 +22975,24 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>GET: /startNewGame --&gt; GET: /game/new
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>GET: /loadPrevGame --&gt; GET: /game/saved
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>POST: /move --&gt; POST: /game/move
-</code></pre></div>
-    - <code>@GetMapping</code>, <code>@PostMapping</code> 어노테이션의 필드값을 채워 넣을 때, 필요한 것만 넣자!
-        - 굳이 중복된 의미를 가진 것을 쓰지 말자
-            - <code>@RestController</code>와 produces/consumes은 같은 의미!
-        - 어노테이션에 같은 것 써주는 것도 중복이겠구나
-            - 런타임 코드상에서도 중복일까??
-                - 스프링 어노테이션은 언제 해당 필드를 추출해 값을 설정해두는 걸까?
-    - Dao를 얇게 유지할 것 <em>(최소한의 DB Access만 할 것!)</em>
-        - Dao 내부에서 비즈니스 로직을 가지면 안댐
-            - 생성로직을 가지지 말라고 피드백을 가졌음
-            - 근데 이후 미션에서 Dao에서 Domain 객체를 생성해서 반환했었음
-            - 해당 미션에서는 한 번에 효율적으로 DB에 접근해서 온전한 도메인을 못만들었음
-                - Dao 내부에서 DB 여러번 찔러서 온전한 도메인을 생성하여 반환하도록 코드를 짰었음
-                - 테이블 하나 당 Dao를 작성했으면 이런 일 없었을 텐데!
-    - 기타 문법적인 사항
-        - final, 공백 적절한 활용
-        - Map에서 entrySet을 활용해 key-value를 동시에 접근
-        - Jackson의 ObjectMapper를 통해 JSON을 생성하여 테스트하기</li>
+</code></pre></div><p>- <code>@GetMapping</code>, <code>@PostMapping</code> 어노테이션의 필드값을 채워 넣을 때, 필요한 것만 넣자!
+      - 굳이 중복된 의미를 가진 것을 쓰지 말자
+          - <code>@RestController</code>와 produces/consumes은 같은 의미!
+      - 어노테이션에 같은 것 써주는 것도 중복이겠구나
+          - 런타임 코드상에서도 중복일까??
+              - 스프링 어노테이션은 언제 해당 필드를 추출해 값을 설정해두는 걸까?
+  - Dao를 얇게 유지할 것 <em>(최소한의 DB Access만 할 것!)</em>
+      - Dao 내부에서 비즈니스 로직을 가지면 안댐
+          - 생성로직을 가지지 말라고 피드백을 가졌음
+          - 근데 이후 미션에서 Dao에서 Domain 객체를 생성해서 반환했었음
+          - 해당 미션에서는 한 번에 효율적으로 DB에 접근해서 온전한 도메인을 못만들었음
+              - Dao 내부에서 DB 여러번 찔러서 온전한 도메인을 생성하여 반환하도록 코드를 짰었음
+              - 테이블 하나 당 Dao를 작성했으면 이런 일 없었을 텐데!
+  - 기타 문법적인 사항
+      - final, 공백 적절한 활용
+      - Map에서 entrySet을 활용해 key-value를 동시에 접근
+      - Jackson의 ObjectMapper를 통해 JSON을 생성하여 테스트하기</p>
+</li>
 </ul>
 <ul>
 <li><strong>개선될 포인트</strong>

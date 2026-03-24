@@ -22948,17 +22948,21 @@
 <li><strong>ArgumentResolver의 사용</strong><ul>
 <li><code>HandlerMethodArgumentResolver</code>를 구현</li>
 <li>원하는 ArgumentResolver가 실행되길 원하는 Parameter 앞에 특정 어노테이션 생성해 붙임</li>
-<li>해당 인터페이스를 구현해야 함
+<li>
+<p>해당 인터페이스를 구현해야 함
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">boolean</span><span class="w"> </span><span class="nf">supportsParameter</span><span class="p">(</span><span class="n">MethodParameter</span><span class="w"> </span><span class="n">parameter</span><span class="p">);</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nd">@Nullable</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">Object</span><span class="w"> </span><span class="nf">resolveArgument</span><span class="p">(</span><span class="n">MethodParameter</span><span class="w"> </span><span class="n">parameter</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">ModelAndViewContainer</span><span class="w"> </span><span class="n">mavContainer</span><span class="p">,</span><span class="w"> </span><span class="n">NativeWebRequest</span><span class="w"> </span><span class="n">webRequest</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">WebDataBinderFactory</span><span class="w"> </span><span class="n">binderFactory</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="p">;</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li><code>supportsParameter</code> : 요청 받은 메서드의 인자에 원하는 어노테이션이 붙어 있는지 확인, 그렇다면 true 반환</li>
-<li><code>resolveArgument</code> : <code>supportsParameter</code>에서 true 받은 경우, Parameter 원하는 형태로 정보 바인딩하여 반환</li>
+<li><code>resolveArgument</code> : <code>supportsParameter</code>에서 true 받은 경우, Parameter 원하는 형태로 정보 바인딩하여 반환<ul>
+<li>검증의 책임을 Controller에서 위임시킬 수 있다</li>
 </ul>
 </li>
-<li>검증의 책임을 Controller에서 위임시킬 수 있다</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

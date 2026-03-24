@@ -23105,10 +23105,10 @@
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">주문_테이블2</span><span class="p">.</span><span class="na">setTableGroup</span><span class="p">(</span><span class="n">테이블_그룹1</span><span class="p">);</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="n">orderTableRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">주문_테이블2</span><span class="p">);</span>
-</code></pre></div>
-    - 사실 이러면 되긴함.
-    - 다만 주문_테이블.setTableGroup()은 굳이 할 필요 없음 (테이블_그룹1의 생성로직에 setTableGroup(this) 해줘서)
-    - 쨋든 테이블 그룹을 만들고, save를 한번 더 해주면 되긴함.</li>
+</code></pre></div><p>- 사실 이러면 되긴함.
+  - 다만 주문_테이블.setTableGroup()은 굳이 할 필요 없음 (테이블_그룹1의 생성로직에 setTableGroup(this) 해줘서)
+  - 쨋든 테이블 그룹을 만들고, save를 한번 더 해주면 되긴함.</p>
+</li>
 </ul>
 <ul>
 <li>CASE3. 그러면 이런식으로 저장하면 괜찮지 않을까?
@@ -23125,16 +23125,15 @@
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">tableGroupRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">테이블_그룹1</span><span class="p">);</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="n">orderTableRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">주문_테이블1</span><span class="p">);</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">orderTableRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">주문_테이블2</span><span class="p">);</span>
-</code></pre></div>
-    - 여기서 외래키 관리자는 OrderTable임.
-        - 이말인 즉슨, OrderTable에서만 table_group_id 필드 속성을 가지고 놀 수 있다는 뜻
-        - TableGroup에서는 해당 외래키를 그냥 조회해올때만 쓸 수 있음.
-    - 따라서 TableGroup을 만들면서 OrderTable들의 tableGroup을 지정해주고,
-        - 테이블_그룹1을 저장, 이후에 주문_테이블1/2를 저장하는 순서가 맞음
-    - TableGroup의 경우 쿼리가 이렇게 밖에 안나가
-        - (이 테이블이 OrderTable에 대해 알 길이 없음)
-        - 왜냐하면 OrderTable이 외래키를 담당하는 관리자라서!
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Hibernate:
+</code></pre></div><p>- 여기서 외래키 관리자는 OrderTable임.
+      - 이말인 즉슨, OrderTable에서만 table_group_id 필드 속성을 가지고 놀 수 있다는 뜻
+      - TableGroup에서는 해당 외래키를 그냥 조회해올때만 쓸 수 있음.
+  - 따라서 TableGroup을 만들면서 OrderTable들의 tableGroup을 지정해주고,
+      - 테이블_그룹1을 저장, 이후에 주문_테이블1/2를 저장하는 순서가 맞음
+  - TableGroup의 경우 쿼리가 이렇게 밖에 안나가
+      - (이 테이블이 OrderTable에 대해 알 길이 없음)
+      - 왜냐하면 OrderTable이 외래키를 담당하는 관리자라서!
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Hibernate:
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    insert
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    into
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        table_group
@@ -23142,7 +23141,8 @@
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    values
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        (null, ?)
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>2021-10-31 11:10:34.351 TRACE 18148 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2021-10-31T11:10:34.290]
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <h2 id="jpa_1">JPA 변경 감지 (미션 뇌절 기록)<a class="headerlink" href="#jpa_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23192,11 +23192,11 @@
 <a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="w">        </span><span class="n">em</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span>
 <a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="w">        </span><span class="n">em</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
 <a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="w">    </span><span class="p">}</span>
-</code></pre></div>
-    - 드디어 나온 반가운 변경감지 엉엉
-    - em.flush(), em.clear()를 하면서 해당 엔티티 매니저를 플러쉬해주면 변경감지가 일어나서 update 쿼리가 날라간다.
-    - 아마 <strong>하나의 영속성 컨텍스트</strong> 를 사용해야 변경감지가 일어날텐데 그 전 코드에서는,,,
-        - 매번 엔티티 save해버리고, 트랜잭션 끝내고, 영속성 컨텍스트 폐기되어서 발생하는 일이 아닌가 싶음</li>
+</code></pre></div><p>- 드디어 나온 반가운 변경감지 엉엉
+  - em.flush(), em.clear()를 하면서 해당 엔티티 매니저를 플러쉬해주면 변경감지가 일어나서 update 쿼리가 날라간다.
+  - 아마 <strong>하나의 영속성 컨텍스트</strong> 를 사용해야 변경감지가 일어날텐데 그 전 코드에서는,,,
+      - 매번 엔티티 save해버리고, 트랜잭션 끝내고, 영속성 컨텍스트 폐기되어서 발생하는 일이 아닌가 싶음</p>
+</li>
 </ul>
 <h2 id="_1">트랜잭션, 엔티티매니저, 영속성 컨텍스트<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23281,20 +23281,21 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">EntityManagerFactory</span><span class="w"> </span><span class="n">emf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="c1">// fetched from somewhere</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">EntityManager</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emf</span><span class="p">.</span><span class="na">createEntityManager</span><span class="p">();</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">// use it in the current thread</span>
-</code></pre></div>
-    - Container-Managed에서는 직관에서 조금 벗어남
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@Service</span>
+</code></pre></div><p>- Container-Managed에서는 직관에서 조금 벗어남
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@Service</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MovieService</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nd">@Autowired</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">EntityManager</span><span class="w"> </span><span class="n">entityManager</span><span class="p">;</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 어라...? 쓰레드별로 entityManager있는거 아니였누?
+  - 사실 Spring에서는 EntityManger 대신 특별한 프록시를 넣어줘.
+      - SharedEntityManagerCreater 타입의 프록시임
+  - 즉, 엔티티매니저 쓸 때마다, 이 프록시가 존재하는 엔티티매니저를 재사용하거나 (쓰레드풀 갬성이네), 혹은 새로운 엔티티 매니저 생성
+  - 어떤 방법으로든, 컨테이너는 하나의 쓰레드별로 하나의 엔티티매니저 할당하도록 함
 </code></pre></div>
-        - 어라...? 쓰레드별로 entityManager있는거 아니였누?
-        - 사실 Spring에서는 EntityManger 대신 특별한 프록시를 넣어줘.
-            - SharedEntityManagerCreater 타입의 프록시임
-        - 즉, 엔티티매니저 쓸 때마다, 이 프록시가 존재하는 엔티티매니저를 재사용하거나 (쓰레드풀 갬성이네), 혹은 새로운 엔티티 매니저 생성
-        - 어떤 방법으로든, 컨테이너는 하나의 쓰레드별로 하나의 엔티티매니저 할당하도록 함</li>
+</li>
 </ul>
 <ul>
 <li><strong>엔티티매니저 API는 영속성컨텍스트/DB에 접근 가능</strong>

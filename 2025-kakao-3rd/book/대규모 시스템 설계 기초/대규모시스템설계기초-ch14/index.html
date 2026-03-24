@@ -23207,7 +23207,8 @@
 </li>
 </ul>
 <ul>
-<li><strong>쿠팡플레이 예시 w. GEMINI</strong>
+<li>
+<p><strong>쿠팡플레이 예시 w. GEMINI</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[Request]
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Request URL       https://vod02-cosmos.coupangstreaming.com/output/drm/2025/08/1a00cde8-5b71-4455-a294-39462a2fa9a3/avc/dash/1755266791/1b8a3f23415886d5c88918a77554201c08ff57aa-video-384_000000441.mp4
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Request Method    GET
@@ -23236,7 +23237,8 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>x-amz-meta-mediaconvert-jobid   1755266791252-2x5jis
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>x-amz-server-side-encryption    AES256
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>x-cache                         Miss from cloudfront
-</code></pre></div><ol>
+</code></pre></div></p>
+<ol>
 <li>DRM (Digital Rights Management): 핵심적인 이유 🔒<ul>
 <li>영상 암호화: 쿠팡플레이의 원본 영상은 암호화된 상태로 서버(Amazon S3)에 저장됩니다. 요청 예시에서 받은 .mp4 파일은 단순한 영상 조각이 아니라, 암호가 걸려있는 영상 조각입니다.</li>
 <li>재생 허가 및 복호화 키: 쿠팡플레이 앱이나 웹 플레이어에서 영상을 재생하면, 플레이어는 쿠팡플레이의 DRM 라이선스 서버에 "나 정식 사용자인데, 이 영상 재생하게 해줘"라고 요청을 보냅니다.</li>

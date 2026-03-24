@@ -22991,19 +22991,18 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1">#tiltext.bin을 decryptedtiltext.txt로 복호화 (이때 대칭키 입력해줘야함)</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>$<span class="w"> </span>openssl<span class="w"> </span>enc<span class="w"> </span>-d<span class="w"> </span>-des3<span class="w"> </span>-in<span class="w"> </span>tiltext.bin<span class="w"> </span>-out<span class="w"> </span>decryptedtiltext.txt<span class="p">;</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>enter<span class="w"> </span>des-ede3-cbc<span class="w"> </span>decryption<span class="w"> </span>password:<span class="w"> </span>대칭키
-</code></pre></div>
-    - 비대칭키
-        - 공개키와 개인키로 구성
-        - 공개키는 그냥 누구나 볼 수 있도록 대중에 공개
-        - 다음과 같은 방식으로 네트워크를 통해 전송할 내용을 암호/복호화 가능
-            - Text --공개키로 암호화--&gt; 암호화 된 Text --개인키로 복호화--&gt; Text
-            - Text --개인키로 암호화--&gt; 암호화 된 Text --공개키로 복호화--&gt; Text
-        - 다음과 같은 방식으로 믿을만한 사이트인지 판별
-            - Client가 Server에 사이트 요청
-            - Server의 개인키로 암호화 된 내용 Client에게 전송
-            - Client는 공개키로 Server의 내용을 복호화해서 볼 수 있음
-        - openssl을 통한 실습
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 개인키 생성</span>
+</code></pre></div><p>- 비대칭키
+      - 공개키와 개인키로 구성
+      - 공개키는 그냥 누구나 볼 수 있도록 대중에 공개
+      - 다음과 같은 방식으로 네트워크를 통해 전송할 내용을 암호/복호화 가능
+          - Text --공개키로 암호화--&gt; 암호화 된 Text --개인키로 복호화--&gt; Text
+          - Text --개인키로 암호화--&gt; 암호화 된 Text --공개키로 복호화--&gt; Text
+      - 다음과 같은 방식으로 믿을만한 사이트인지 판별
+          - Client가 Server에 사이트 요청
+          - Server의 개인키로 암호화 된 내용 Client에게 전송
+          - Client는 공개키로 Server의 내용을 복호화해서 볼 수 있음
+      - openssl을 통한 실습
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 개인키 생성</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$<span class="w"> </span>openssl<span class="w"> </span>genrsa<span class="w"> </span>-out<span class="w"> </span>privatetil.pem<span class="w"> </span><span class="m">1024</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Generating<span class="w"> </span>RSA<span class="w"> </span>private<span class="w"> </span>key,<span class="w"> </span><span class="m">1024</span><span class="w"> </span>bit<span class="w"> </span>long<span class="w"> </span>modulus<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="w"> </span>primes<span class="o">)</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>.........................+++++
@@ -23048,7 +23047,8 @@
 <a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>$<span class="s2"> openssl rsautl -decrypt -inkey privatetil.pem -in tiltext.ssl -out decrypted.txt;</span>
 <a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>$<span class="s2"> cat decrypted.txt</span>
 <a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="s2">tiltil</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>SSL</strong>

@@ -23131,11 +23131,13 @@
 <li><em>참고 1: <a href="https://github.com/ParkJiwoon/PrivateStudy/blob/master/database/redis.md">https://github.com/ParkJiwoon/PrivateStudy/blob/master/database/redis.md</a></em></li>
 <li><em>참고 2: <a href="https://bcp0109.tistory.com/328">https://bcp0109.tistory.com/328</a></em></li>
 <li><em>참고 3: <a href="https://velog.io/@devsh/Redis-8-Spring-Boot-Redis-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0">https://velog.io/@devsh/Redis-8-Spring-Boot-Redis-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0</a></em></li>
-<li><strong>redis 설치</strong>
+<li>
+<p><strong>redis 설치</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>redis
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>nolto-redis<span class="w"> </span>-p<span class="w"> </span><span class="m">6379</span>:6379<span class="w"> </span>-d<span class="w"> </span>redis
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nolto-redis<span class="w"> </span>redis-cli
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>명령어<ul>
 <li>keys, flushall, flushdb, getall</li>
 </ul>
@@ -23144,7 +23146,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Spring Boot에서 사용하기</strong><ul>
+<li>
+<p><strong>Spring Boot에서 사용하기</strong></p>
+<ul>
 <li>RedisRepository<ul>
 <li>간편하게 Domain Entity를 Redis Hash로 만들 수 있음</li>
 </ul>
@@ -23185,6 +23189,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>여기서 StringRedisTemplate은 <code>public class StringRedisTemplate extends RedisTemplate&lt;String, String&gt;</code><ul>
 <li>Key-Value 형태로 저장하는 꼴</li>
 </ul>

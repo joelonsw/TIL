@@ -23150,15 +23150,15 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="s">&quot;group by ft.tech.id &quot;</span><span class="w"> </span><span class="o">+</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="s">&quot;order by count(ft.feed.id) DESC &quot;</span><span class="p">)</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">Tech</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findTrendTech</span><span class="p">(</span><span class="n">Pageable</span><span class="w"> </span><span class="n">pageable</span><span class="p">);</span>
-</code></pre></div>
-    - 댓글과 대댓글을 같은 자기참조 테이블에서 관리함
-        - 그러다보니 쿼리를 통해 댓글/대댓글을 필터링할 필요 생김
-    - 또한 필요한 정보를 한 번에 가져올 수 있도록 fetchJoin을 활용해야할 경우도 생김
-    - 트렌드 테크 같은 경우 FeedTech에서 몇번 사용되었는지가 검색되어야함 =&gt; JPQL로 해결
-    - 정리하자면, 
-        1. 자기참조 테이블의 댓글/대댓글에서 둘을 구분하기 위해 검색조건을 줬어야 했음
-        2. LAZY 로딩의 추가적인 쿼리를 막기 위해서 fetchJoin 사용
-        3. 트렌드 테크 검색 기능을 JPQL의 쿼리를 작성하여 해결</li>
+</code></pre></div><p>- 댓글과 대댓글을 같은 자기참조 테이블에서 관리함
+      - 그러다보니 쿼리를 통해 댓글/대댓글을 필터링할 필요 생김
+  - 또한 필요한 정보를 한 번에 가져올 수 있도록 fetchJoin을 활용해야할 경우도 생김
+  - 트렌드 테크 같은 경우 FeedTech에서 몇번 사용되었는지가 검색되어야함 =&gt; JPQL로 해결
+  - 정리하자면, 
+      1. 자기참조 테이블의 댓글/대댓글에서 둘을 구분하기 위해 검색조건을 줬어야 했음
+      2. LAZY 로딩의 추가적인 쿼리를 막기 위해서 fetchJoin 사용
+      3. 트렌드 테크 검색 기능을 JPQL의 쿼리를 작성하여 해결</p>
+</li>
 </ul>
 <h2 id="jpa-n1">JPA N+1 문제<a class="headerlink" href="#jpa-n1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23177,13 +23177,12 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">findHostingHTML</span><span class="p">().</span><span class="na">getFilePath</span><span class="p">())</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
-</code></pre></div>
-    - 조엘스 웹 호스팅에서 모든 사용자들의 HTML 파일 이름을 추출하는 코드
-    - 우선 List\<User> 로 모든 유저들을 긁어옴 ("1 쿼리")
-    - List\<User>를 돌면서 그 안의 List\<HostingFile> 내의 HTML 파일 이름을 가져오는 코드
-        - 각 User 별로 HostingFile 긁어오는 쿼리 한번씩 더나감 ("N 쿼리")
-    - 처참한 N+1 쿼리의 현장
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>2021-08-26 11:38:11.584 DEBUG 13300 --- [    Test worker] org.hibernate.SQL                        : 
+</code></pre></div><p>- 조엘스 웹 호스팅에서 모든 사용자들의 HTML 파일 이름을 추출하는 코드
+  - 우선 List\<User> 로 모든 유저들을 긁어옴 ("1 쿼리")
+  - List\<User>를 돌면서 그 안의 List\<HostingFile> 내의 HTML 파일 이름을 가져오는 코드
+      - 각 User 별로 HostingFile 긁어오는 쿼리 한번씩 더나감 ("N 쿼리")
+  - 처참한 N+1 쿼리의 현장
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>2021-08-26 11:38:11.584 DEBUG 13300 --- [    Test worker] org.hibernate.SQL                        : 
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    select
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        user0_.id as id1_1_,
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        user0_.image_url as image_ur2_1_,
@@ -23328,52 +23327,57 @@
 <a id="__codelineno-2-143" name="__codelineno-2-143" href="#__codelineno-2-143"></a>2021-08-26 11:38:11.758  INFO 13300 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 <a id="__codelineno-2-144" name="__codelineno-2-144" href="#__codelineno-2-144"></a>4 actionable tasks: 3 executed, 1 up-to-date
 <a id="__codelineno-2-145" name="__codelineno-2-145" href="#__codelineno-2-145"></a>오전 11:38:12: Task execution finished &#39;:test --tests &quot;webhosting.webhosting.user.service.UserServiceTest.findAllFilePath&quot;&#39;.
-</code></pre></div>
-    - 자 Join Fetch 드가자!
-        - UserRepository에 다음과 같은 JPQL 코드 추가
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;select distinct u from User u join fetch u.hostingFiles&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>- 자 Join Fetch 드가자!
+      - UserRepository에 다음과 같은 JPQL 코드 추가
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;select distinct u from User u join fetch u.hostingFiles&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAllWithFetchJoin</span><span class="p">();</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - innerJoin 쓰기에 중복 조심 (카데시안 곱) distinct나 Set으로 해결
+  - 다음과 같이 코드 변경
+  ```java
+  @Transactional(readOnly = true)
+  public List&lt;String&gt; findAllUserHTMLFileName() {
+      final List&lt;User&gt; users = userRepository.findAllWithFetchJoin();
+      log.info(&quot;&gt;&gt;&gt;&gt;&gt;&gt;[유저의 리소스를 추출해봅시다]&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;);
+      log.info(&quot;User Size : {}&quot;, users.size());
+
+      return users.stream()
+              .map(user -&gt; user.findHostingHTML().getFilePath())
+              .collect(Collectors.toList());
+  }
+  ```
+
+  - 아름다운 한방쿼리!
+  ```
+  2021-08-26 11:51:13.792 DEBUG 19096 --- [    Test worker] org.hibernate.SQL                        : 
+      select
+          distinct user0_.id as id1_1_0_,
+          hostingfil1_.id as id1_0_1_,
+          user0_.image_url as image_ur2_1_0_,
+          user0_.name as name3_1_0_,
+          user0_.social_id as social_i4_1_0_,
+          hostingfil1_.file_path as file_pat2_0_1_,
+          hostingfil1_.file_type as file_typ3_0_1_,
+          hostingfil1_.fk_user as fk_user4_0_1_,
+          hostingfil1_.fk_user as fk_user4_0_0__,
+          hostingfil1_.id as id1_0_0__ 
+      from
+          user user0_ 
+      inner join
+          hosting_file hostingfil1_ 
+              on user0_.id=hostingfil1_.fk_user
+  2021-08-26 11:51:13.803  INFO 19096 --- [    Test worker] w.webhosting.user.service.UserService    : &gt;&gt;&gt;&gt;&gt;&gt;[유저의 리소스를 추출해봅시다]&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+  2021-08-26 11:51:13.803  INFO 19096 --- [    Test worker] w.webhosting.user.service.UserService    : User Size : 10
+  2021-08-26 11:51:13.897  INFO 19096 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit &#39;default&#39;
+  2021-08-26 11:51:13.900  INFO 19096 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+  2021-08-26 11:51:13.904  INFO 19096 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+  BUILD SUCCESSFUL in 10s
+  4 actionable tasks: 3 executed, 1 up-to-date
+  오전 11:51:14: Task execution finished &#39;:test --tests &quot;webhosting.webhosting.user.service.UserServiceTest.findAllFilePath&quot;&#39;.
+  ```
 </code></pre></div>
-        - innerJoin 쓰기에 중복 조심 (카데시안 곱) distinct나 Set으로 해결
-        - 다음과 같이 코드 변경
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Transactional</span><span class="p">(</span><span class="n">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAllUserHTMLFileName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findAllWithFetchJoin</span><span class="p">();</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;&gt;&gt;&gt;&gt;&gt;&gt;[유저의 리소스를 추출해봅시다]&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;</span><span class="p">);</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;User Size : {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">findHostingHTML</span><span class="p">().</span><span class="na">getFilePath</span><span class="p">())</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
-</code></pre></div>
-        - 아름다운 한방쿼리!
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>2021-08-26 11:51:13.792 DEBUG 19096 --- [    Test worker] org.hibernate.SQL                        : 
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    select
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        distinct user0_.id as id1_1_0_,
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        hostingfil1_.id as id1_0_1_,
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        user0_.image_url as image_ur2_1_0_,
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        user0_.name as name3_1_0_,
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        user0_.social_id as social_i4_1_0_,
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        hostingfil1_.file_path as file_pat2_0_1_,
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        hostingfil1_.file_type as file_typ3_0_1_,
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        hostingfil1_.fk_user as fk_user4_0_1_,
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        hostingfil1_.fk_user as fk_user4_0_0__,
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        hostingfil1_.id as id1_0_0__ 
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    from
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        user user0_ 
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    inner join
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        hosting_file hostingfil1_ 
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>            on user0_.id=hostingfil1_.fk_user
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>2021-08-26 11:51:13.803  INFO 19096 --- [    Test worker] w.webhosting.user.service.UserService    : &gt;&gt;&gt;&gt;&gt;&gt;[유저의 리소스를 추출해봅시다]&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>2021-08-26 11:51:13.803  INFO 19096 --- [    Test worker] w.webhosting.user.service.UserService    : User Size : 10
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>2021-08-26 11:51:13.897  INFO 19096 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit &#39;default&#39;
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>2021-08-26 11:51:13.900  INFO 19096 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>2021-08-26 11:51:13.904  INFO 19096 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>BUILD SUCCESSFUL in 10s
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>4 actionable tasks: 3 executed, 1 up-to-date
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>오전 11:51:14: Task execution finished &#39;:test --tests &quot;webhosting.webhosting.user.service.UserServiceTest.findAllFilePath&quot;&#39;.
-</code></pre></div></li>
+</li>
 </ul>
 <h2 id="_1">자기참조 테이블<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23430,9 +23434,9 @@
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="nd">@OneToMany</span><span class="p">(</span><span class="n">mappedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;parentComment&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cascade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CascadeType</span><span class="p">.</span><span class="na">REMOVE</span><span class="p">,</span><span class="w"> </span><span class="n">orphanRemoval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Comment</span><span class="o">&gt;</span><span class="w"> </span><span class="n">replies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="p">}</span>
-</code></pre></div>
-    - 약간 요런 갬성?
-        - parentComment를 두고 댓글이면 해당 필드 null, 대댓글이면 댓글 채워넣기</li>
+</code></pre></div><p>- 약간 요런 갬성?
+      - parentComment를 두고 댓글이면 해당 필드 null, 대댓글이면 댓글 채워넣기</p>
+</li>
 </ul>
 <h2 id="db-migration">DB Migration<a class="headerlink" href="#db-migration" title="Permanent link">&para;</a></h2>
 <ul>

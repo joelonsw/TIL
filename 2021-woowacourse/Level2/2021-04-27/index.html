@@ -22994,17 +22994,19 @@
     - Session ID: 어떤 사용자의 Session인지를 식별하는 고유한 ID
     - 과정
         1. Client가 Http Request를 서버에 보냄
-        2-1. Session ID가 Server 저장소에 존재하지 않음
-            - Session과 Session ID를 생성/저장 
-            - setcookie 함수 통해 Cookie에 "session ID"를 담아 Response로 돌려줌
-        2-2. Session ID가 Server 저장소에 존재함
-            - setcookie 함수 통해 Cookie에 "session ID"를 담아 Response로 돌려줌
-        3. Client가 Request를 할 때 Session ID를 Cookie에 담아서 보냄
-            - Server는 저장소에서 Session ID로 Session을 찾음
-            - 필요한 정보를 Response에 담아서 보냄
-    - 로그인 ~ 로그아웃 할 때 까지의 생애주기
-        - 세션 없이 로그인 하면 다른 페이지에서 회원에 대한 고유 id 필요하면 데이터 계속 전달하는 비효율 적인 방법 적용
-        - 세션 사용해서 계속 서버에 유지하고 있으면서, 각 사용자의 "브라우저에 고유한 id를 할당"해 작업 안정성 보장해줘야 함</li>
+        2-1. Session ID가 Server 저장소에 존재하지 않음<div class="highlight"><pre><span></span><code>      - Session과 Session ID를 생성/저장 
+      - setcookie 함수 통해 Cookie에 &quot;session ID&quot;를 담아 Response로 돌려줌
+  2-2. Session ID가 Server 저장소에 존재함
+
+      - setcookie 함수 통해 Cookie에 &quot;session ID&quot;를 담아 Response로 돌려줌
+  3. Client가 Request를 할 때 Session ID를 Cookie에 담아서 보냄
+      - Server는 저장소에서 Session ID로 Session을 찾음
+      - 필요한 정보를 Response에 담아서 보냄
+</code></pre></div>
+<p>- 로그인 ~ 로그아웃 할 때 까지의 생애주기
+      - 세션 없이 로그인 하면 다른 페이지에서 회원에 대한 고유 id 필요하면 데이터 계속 전달하는 비효율 적인 방법 적용
+      - 세션 사용해서 계속 서버에 유지하고 있으면서, 각 사용자의 "브라우저에 고유한 id를 할당"해 작업 안정성 보장해줘야 함</p>
+</li>
 </ul>
 <h2 id="_1">인증과 인가<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>

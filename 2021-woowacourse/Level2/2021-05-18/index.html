@@ -23083,10 +23083,10 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="n">registration</span><span class="p">.</span><span class="na">addMapping</span><span class="p">(</span><span class="s">&quot;/app/*&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
-</code></pre></div>
-    - Spring Configuration을 사용하여 Request Mapping, View Resolution, Exception Handle 등에 필요한 deletgate components 검색
-    - 스프링 부트에서는 다른 초기화 순서를 따른다!
-        - 서블릿 컨테이너의 라이프 사이클에 연결하는 대신 "스프링 configuration"을 사용해 자체 내장된 서블릿 컨테이너를 부트 스트랩</li>
+</code></pre></div><p>- Spring Configuration을 사용하여 Request Mapping, View Resolution, Exception Handle 등에 필요한 deletgate components 검색
+  - 스프링 부트에서는 다른 초기화 순서를 따른다!
+      - 서블릿 컨테이너의 라이프 사이클에 연결하는 대신 "스프링 configuration"을 사용해 자체 내장된 서블릿 컨테이너를 부트 스트랩</p>
+</li>
 </ul>
 <ul>
 <li><strong>Context Hierarchy</strong>
@@ -23139,18 +23139,18 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">HandlerMapping</span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">HandlerExecutionChain</span><span class="w"> </span><span class="nf">getHandler</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
-</code></pre></div>
-    - 스프링이 제공 HandlerMapping
-        - <em>BeanNameUrlHandlerMapping</em>
-            - 이게 Default
-        - <em>ControllerBeanBameHandlerMapping</em>
-        - <em>ControllerClassNameHandlerMapping</em>
-        - <em>SimpleUrlHandlerMapping</em>
-        - <em>DefaultAnnotationHandlerMapping</em>
-            - jdk1.5 이상이면 이것도 Default
-            - method/parameter/header등의 정보로도 매핑 가능
-            - @RequestMapping등을 사용해 매핑전략 형성
-            - Spring boot 사용 시 추가로 뭐 설정할 것도 없음</li>
+</code></pre></div><p>- 스프링이 제공 HandlerMapping
+      - <em>BeanNameUrlHandlerMapping</em>
+          - 이게 Default
+      - <em>ControllerBeanBameHandlerMapping</em>
+      - <em>ControllerClassNameHandlerMapping</em>
+      - <em>SimpleUrlHandlerMapping</em>
+      - <em>DefaultAnnotationHandlerMapping</em>
+          - jdk1.5 이상이면 이것도 Default
+          - method/parameter/header등의 정보로도 매핑 가능
+          - @RequestMapping등을 사용해 매핑전략 형성
+          - Spring boot 사용 시 추가로 뭐 설정할 것도 없음</p>
+</li>
 </ul>
 <ul>
 <li><strong>HandlerAdapter</strong>
@@ -23163,15 +23163,15 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="nf">getLastModified</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">);</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
-</code></pre></div>
-    - 스프링 제공 HandlerAdapter
-        - <em>SimpleControllerHandlerAdapter</em>
-        - <em>HttpRequestHandlerAdapter</em>
-        - <em>SimpleServletHandlerAdapter</em>
-        - <em>AnnotationMethodHandlerAdapter</em>
-            - DefaultAnnotationHandlerMapping과 대응되는 매핑 전략
-            - 어떤 메서드를 호출할지 리플렉션을 이용하여 결정
-            - 클래스와 메서드에 붙은 어노테이션/메서드 이름/파라미터/리턴타입에 대한 규칙등을 조합하고 분석해 컨트롤러 선별</li>
+</code></pre></div><p>- 스프링 제공 HandlerAdapter
+      - <em>SimpleControllerHandlerAdapter</em>
+      - <em>HttpRequestHandlerAdapter</em>
+      - <em>SimpleServletHandlerAdapter</em>
+      - <em>AnnotationMethodHandlerAdapter</em>
+          - DefaultAnnotationHandlerMapping과 대응되는 매핑 전략
+          - 어떤 메서드를 호출할지 리플렉션을 이용하여 결정
+          - 클래스와 메서드에 붙은 어노테이션/메서드 이름/파라미터/리턴타입에 대한 규칙등을 조합하고 분석해 컨트롤러 선별</p>
+</li>
 </ul>
 <ul>
 <li><strong>HandlerInterceptor</strong>

@@ -22976,8 +22976,8 @@
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    }
 <a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>  }
 <a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>}
-</code></pre></div>
-    - 이제 해당 엔진엑스는 "172.17.0.1:10000" 이랑 "172.17.0.1:12000" 에 요청 번갈아가면서 보냄</li>
+</code></pre></div><p>- 이제 해당 엔진엑스는 "172.17.0.1:10000" 이랑 "172.17.0.1:12000" 에 요청 번갈아가면서 보냄</p>
+</li>
 </ul>
 <ul>
 <li><strong>Jar 파일 돌릴 도커 이미지 만들기</strong>
@@ -22994,16 +22994,16 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>run.sh
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;./run.sh&quot;</span><span class="p">]</span>
-</code></pre></div>
-    - 해당 run.sh에는 port 10000번으로 jar 돌리게 설정함
-    ```shell script
-    #!/bin/sh<p>exec java -jar -Dspring.config.location=classpath:/application.yml,application-oauth.yml 
+</code></pre></div><p>- 해당 run.sh에는 port 10000번으로 jar 돌리게 설정함
+  ```shell script
+  #!/bin/sh</p>
+<p>exec java -jar -Dspring.config.location=classpath:/application.yml,application-oauth.yml 
       -Dspring.profiles.active=prod -Dserver.port=10000 app.jar
-  <code>``
-  - 해당 도커파일을 통해</code>webhosting-first-was     latest    aa2363a96ca3   2 hours ago         566MB<code>이미지 생성
-  - 비슷한 방식으로</code>webhosting-second-was    latest    9481c0c6a12e   2 hours ago         566MB<code>이미지 생성
+  ```</p>
+<p>- 해당 도커파일을 통해 <code>webhosting-first-was     latest    aa2363a96ca3   2 hours ago         566MB</code> 이미지 생성
+  - 비슷한 방식으로 <code>webhosting-second-was    latest    9481c0c6a12e   2 hours ago         566MB</code> 이미지 생성
       - 이건 12000번 포트에서 듣도록
-  - DB와의 연결이 까다로워 해당 이미지 컨테이너 run 돌릴떈</code>--net host` 옵션 줘서 돌림
+  - DB와의 연결이 까다로워 해당 이미지 컨테이너 run 돌릴떈 <code>--net host</code> 옵션 줘서 돌림
       - 다행히도 로드 밸런싱 적용 잘됨!!!</p>
 </li>
 </ul>

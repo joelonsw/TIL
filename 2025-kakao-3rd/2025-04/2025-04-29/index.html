@@ -23003,11 +23003,14 @@
 </ul>
 <h2 id="netstat-curl-netcat">netstat, curl, netcat<a class="headerlink" href="#netstat-curl-netcat" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>netstat (network status)</strong><br />
-<em>참고: <a href="https://semtul79.tistory.com/6">https://semtul79.tistory.com/6</a></em>  <ul>
+<li>
+<p><strong>netstat (network status)</strong><br />
+<em>참고: <a href="https://semtul79.tistory.com/6">https://semtul79.tistory.com/6</a></em>  </p>
+<ul>
 <li>네트워크 연결, 라우팅 테이블, 인터페이스 통계, 포트 상태 등 네트워크 관련 정보 출력</li>
 <li>현재 서버에서 열린 포트, 연결된 클라이언트, 서버 listen 중인 포트, 네트워크 상태 진단 등에 사용</li>
-<li>예시)
+<li>
+<p>예시)
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ netstat -ant
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Active Internet connections (servers and established)
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -23019,7 +23022,8 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>tcp          0        0   172.31.22.162:22        13.209.1.57:48444       ESTABLISHED
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>tcp6         0        0   :::22                   :::*                    LISTEN      
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>tcp          0        0   172.31.22.162:53484     142.251.42.142:443      ESTABLISHED
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>모든 ip (0.0.0.0:22) 로 LISTEN 되며, 외부 컴퓨터는 아무 ip/port와 가능</li>
 <li>현재 컴퓨터의 주소는 ifconfig의 eth0 =&gt; 172.31.22.162</li>
 <li>142.251.42.142는 https로 접속 (클라이언트)</li>
@@ -23038,8 +23042,10 @@
 </li>
 </ul>
 <ul>
-<li><strong>netcat</strong><br />
-<em>참고: <a href="https://feccle.tistory.com/253">https://feccle.tistory.com/253</a></em>  <ul>
+<li>
+<p><strong>netcat</strong><br />
+<em>참고: <a href="https://feccle.tistory.com/253">https://feccle.tistory.com/253</a></em>  </p>
+<ul>
 <li>TCP/UDP 사용해 네트워크 연결 읽고 쓰는데 사용</li>
 <li>네트워크 디버깅, 파일전송, 포트 스캐닝, 원격 제어 등 다양한 용도 사용 가능
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kakao@joel-MacBook-Pro  ~  nc -zv 1.1.1.1 53

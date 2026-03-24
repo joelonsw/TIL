@@ -23109,19 +23109,19 @@
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="c1">// 3. 실행 명령어 (명령창에서 grunt 명령으로 실행)</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;uglify&#39;</span><span class="p">]);</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">};</span>
-</code></pre></div>
-    1. 프로젝트 구성
-       - 외부에서 실행할 수 있게 되어있음
-       - 이에 따라 <code>node.js</code> 명령어창에서 명령어로 cli 실행 가능해짐]
-       - Task(플러그인) 를 하나하나 명시하고 구성을 정의
-         - 파일 참조, 처리, 처리 결과물 저장 등
-    2. 사용한 플러그인 로딩
-       - 플러그인 불러옴
-    3. 실행 명령어
-       - 플러그인을 순서대로 실행시키는 명령어 뭉치 작성
-       - 순서대로 실행됨
-         - <code>grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);</code>
-         - concat -&gt; uglify -&gt; cssmin</li>
+</code></pre></div><p>1. 프로젝트 구성
+     - 외부에서 실행할 수 있게 되어있음
+     - 이에 따라 <code>node.js</code> 명령어창에서 명령어로 cli 실행 가능해짐]
+     - Task(플러그인) 를 하나하나 명시하고 구성을 정의
+       - 파일 참조, 처리, 처리 결과물 저장 등
+  2. 사용한 플러그인 로딩
+     - 플러그인 불러옴
+  3. 실행 명령어
+     - 플러그인을 순서대로 실행시키는 명령어 뭉치 작성
+     - 순서대로 실행됨
+       - <code>grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);</code>
+       - concat -&gt; uglify -&gt; cssmin</p>
+</li>
 </ul>
 
 

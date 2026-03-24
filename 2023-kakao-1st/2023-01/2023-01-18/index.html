@@ -23289,7 +23289,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Scala 타입 캐스팅</strong><ul>
+<li>
+<p><strong>Scala 타입 캐스팅</strong></p>
+<ul>
 <li>Byte -&gt; Short -&gt; Int -&gt; Long -&gt; Float -&gt; Double</li>
 <li>Char -&gt; Int</li>
 <li>정상적인 타입 변환 방향
@@ -23299,6 +23301,8 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">face</span><span class="p">:</span><span class="w"> </span><span class="nc">Char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;😊&#39;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">val</span><span class="w"> </span><span class="n">number</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="c1">// 9876</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>비정상적인 타입 변환 방향
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">987654321</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">toFloat</span>
@@ -23329,7 +23333,9 @@
 <h2 id="scala_1">Scala 클래스<a class="headerlink" href="#scala_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: <a href="https://docs.scala-lang.org/tour/classes.html">https://docs.scala-lang.org/tour/classes.html</a></em></li>
-<li><strong>class 정의하기</strong><ul>
+<li>
+<p><strong>class 정의하기</strong></p>
+<ul>
 <li>class 키워드로 만들어주세요</li>
 <li>class 이름은 대문자로 시작해주세요
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">User</span>
@@ -23337,6 +23343,8 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">val</span><span class="w"> </span><span class="n">user2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="p">()</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kd">val</span><span class="w"> </span><span class="n">user3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">User</span><span class="p">()</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>Point 클래스 만들어보기
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// 4개의 멤버 : x, y, move, toString</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1">// 기본 생성자가 클래스 시그니처에 붙어서 정의됨</span>
@@ -23370,7 +23378,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Private Member와 게터/세터</strong><ul>
+<li>
+<p><strong>Private Member와 게터/세터</strong></p>
+<ul>
 <li>default public</li>
 <li>세터 문법이 독특함<ul>
 <li><code>_=</code> : getter로 쓴 친구의 이름과 동일한 이름으로 지정해야해
@@ -23402,6 +23412,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>기본 생성자의 인자는 val/var로 지정해서 생성할 수 있어. 다만 val/var 써주면 public이 기본이긴 해<ul>
 <li>하지만 val이 불변이니, 세터로 주입할 생각 X
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
@@ -23411,6 +23423,8 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>그냥 아무것도 안쓰면, val + private이 기본이야!
   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
@@ -23470,7 +23484,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Trait 사용법</strong><ul>
+<li>
+<p><strong>Trait 사용법</strong></p>
+<ul>
 <li><code>trait</code> 예약어</li>
 <li>generic, abstract method를 통해서 확장성을 노려보세요
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Iterator</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
@@ -23478,6 +23494,8 @@
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">next</span><span class="p">():</span><span class="w"> </span><span class="nc">A</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li><code>extend</code>, <code>override</code>를 통해 구현해주세요</li>
 <li>제네릭이 있다면 확정지어주세요
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">Iterator</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>

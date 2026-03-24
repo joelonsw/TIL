@@ -22955,7 +22955,9 @@
 </ul>
 <p>Qs) logstash에서 파싱된 필드 &gt; ES 중에 누락된 건을 보충하려면?  </p>
 <ul>
-<li><strong>방법1 - 기존 인덱스에 누락된 필드 추가하기</strong><ul>
+<li>
+<p><strong>방법1 - 기존 인덱스에 누락된 필드 추가하기</strong></p>
+<ul>
 <li>PUT Mapping으로 새 필드 추가하고 업데이트 하기</li>
 <li>장점 : 인덱스 이름 안바뀜</li>
 <li>단점 : 오류 발생하면 복구하기 어려움.
@@ -22971,8 +22973,10 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    }  
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  }
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>}
-</code></pre></div>
-2. 업데이트 쿼리 수행
+</code></pre></div></li>
+</ul>
+<ol>
+<li>업데이트 쿼리 수행
    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>POST http://es.com/index-joel-*/_update_by_query
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>{  
@@ -22987,11 +22991,13 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  }
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>}
 </code></pre></div></li>
-</ul>
+</ol>
 </li>
 </ul>
 <ul>
-<li><strong>방법2 - Reindex</strong><ul>
+<li>
+<p><strong>방법2 - Reindex</strong></p>
+<ul>
 <li>POST _reindex &gt; script 써서 누락되었던 필드 인덱싱...<ul>
 <li>누락된 필드 추출하는 pipeline 같은 걸 만들고 해당 pipeline 을 통해서 재색인할 수도 있음</li>
 <li>파이프라인을 끼워서 리인덱싱할때 이걸 태우고 리인덱싱하게 도움을 주는 장치</li>
@@ -23053,14 +23059,21 @@
 <a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>    }
 <a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>  ]
 <a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>}
-</code></pre></div>
-2. 신규 인덱스 생성
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PUT http://es.com/joel-pipeline
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>
+<p>신규 인덱스 생성
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PUT http://es.com/joel-pipeline
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>{ 기존 매핑... }
-</code></pre></div>
-3. 리인덱스
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>POST http://bzm-moa-dev.es.onkakao.net:9200/_reindex
+</code></pre></div></p>
+</li>
+<li>
+<p>리인덱스
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>POST http://bzm-moa-dev.es.onkakao.net:9200/_reindex
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>{
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  &quot;source&quot;: {
@@ -23071,10 +23084,9 @@
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    &quot;pipeline&quot;: &quot;joel_test&quot;
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  }
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>}
-</code></pre></div></li>
-</ul>
+</code></pre></div></p>
 </li>
-</ul>
+</ol>
 </li>
 </ul>
 

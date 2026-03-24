@@ -23168,7 +23168,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>GraphQL 유튜브</strong><ul>
+<li>
+<p><strong>GraphQL 유튜브</strong></p>
+<ul>
 <li>GraphQL = Query Language</li>
 <li>Query를 보내서 정확히 필요한 데이터만 받아오는 것</li>
 <li>요청
@@ -23182,6 +23184,8 @@
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    }
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>}
 </code></pre></div></li>
+</ul>
+<ul>
 <li>응답
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    &quot;upcoming&quot;: [
@@ -23196,6 +23200,8 @@
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    ]
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>}
 </code></pre></div></li>
+</ul>
+<ul>
 <li>POST 요청 하나로도 유연하게 주문이 가능함<ul>
 <li>CUD 모두 POST 요청 </li>
 <li>U,D는 함수명으로 뚝딱 요청</li>
@@ -23238,7 +23244,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Rest API =&gt; GraphQL</strong><ul>
+<li>
+<p><strong>Rest API =&gt; GraphQL</strong></p>
+<ul>
 <li>RestAPI
   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    &quot;title&quot;: &quot;Romance of the Three Kingdoms&quot;,
@@ -23248,7 +23256,11 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    }
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>}
 </code></pre></div></li>
-<li>GraphQL<ul>
+</ul>
+<ul>
+<li>
+<p>GraphQL</p>
+<ul>
 <li>우선 타입 정의<ul>
 <li>리소스의 유형과 리소스를 가져오는 방식이 분리되어 있음</li>
 <li>Client에서 데이터를 어떻게 요청할 수 있는지 정보 X
@@ -23266,19 +23278,23 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>Book &amp; Author에 접근하도록 <code>Query</code> 타입 필요
   <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>type Query {
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    book(id: ID!): Book
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    author(id: ID!): Author
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>}
 </code></pre></div></li>
+</ul>
+<ul>
 <li>이후 쿼리는 다음과 같은 방식<ul>
 <li><code>POST: /graphql?query={book(id:"1") {title, author {firstName}}}</code></li>
-</ul>
-</li>
-</ul>
-</li>
 <li>Rest와 다르게 /books 와 같이 Resource에 대한 엔드포인트 존재 x</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23335,8 +23351,12 @@
 </code></pre></div></li>
 </ul>
 <ul>
-<li><strong>SpringBoot에 적용하기</strong><ol>
-<li>의존성 주입하기<ul>
+<li>
+<p><strong>SpringBoot에 적용하기</strong></p>
+<ol>
+<li>
+<p>의존성 주입하기</p>
+<ul>
 <li>graphql-spring-boot-starter
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>dependencies {
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    // GraphQL
@@ -23346,11 +23366,15 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>스키마 파일 작성하기<ul>
+<li>
+<p>스키마 파일 작성하기</p>
+<ul>
 <li><code>.graphqls</code> 라는 확장자로 저장</li>
 </ul>
 </li>
-<li>루트 쿼리 처리를 위한 bean 설정 (GraphQLQueryResolver 구현)<ul>
+<li>
+<p>루트 쿼리 처리를 위한 bean 설정 (GraphQLQueryResolver 구현)</p>
+<ul>
 <li><code>query</code> 타입의 메서드를 GraphQLQueryResolver 인터페이스로 구현</li>
 <li>스키마에 있는 필드가 클래스의 메소드로써 모두 존재해야 함
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nd">@Component</span>
@@ -23365,7 +23389,8 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>GraphQL 타입 나타내기
+<li>
+<p>GraphQL 타입 나타내기
   <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Post</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
@@ -23380,8 +23405,11 @@
 <a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">category</span><span class="p">;</span>
 <a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Author</span><span class="w"> </span><span class="n">author</span><span class="p">;</span>
 <a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>Mutation<ul>
+</code></pre></div></p>
+</li>
+<li>
+<p>Mutation</p>
+<ul>
 <li>GraphQL은 서버에 저장된 데이터를 업데이트 하기 위한 행위
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyMutation</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">GraphQLMutationResolver</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PostRepository</span><span class="w"> </span><span class="n">postRepository</span><span class="p">;</span>

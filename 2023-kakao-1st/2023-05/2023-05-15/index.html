@@ -22981,16 +22981,21 @@
 <li><code>libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.3"</code></li>
 </ul>
 </li>
-<li>DB Config 파일 추가
+<li>
+<p>DB Config 파일 추가
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">slick</span><span class="p">.</span><span class="nn">jdbc</span><span class="p">.</span><span class="nc">JdbcProfile</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DatabaseConfig</span><span class="p">(</span><span class="n">driver</span><span class="p">:</span><span class="w"> </span><span class="nc">JdbcProfile</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
-</code></pre></div></li>
-<li>Slick Driver 인스턴스 생성
+</code></pre></div></p>
+</li>
+<li>
+<p>Slick Driver 인스턴스 생성
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">DatabaseConfig</span><span class="p">(</span><span class="nc">Driver</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;jdbc:mysql://localhost/mydatabase&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;password&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">driver</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="nc">Database</span><span class="p">.</span><span class="n">forURL</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">password</span><span class="p">)</span>
-</code></pre></div></li>
-<li>테이블 스키마 작성
+</code></pre></div></p>
+</li>
+<li>
+<p>테이블 스키마 작성
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">slick</span><span class="p">.</span><span class="nn">jdbc</span><span class="p">.</span><span class="nc">MySQLProfile</span><span class="p">.</span><span class="nn">api</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span>
@@ -23004,11 +23009,14 @@
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="kd">val</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">TableQuery</span><span class="p">[</span><span class="nc">Users</span><span class="p">]</span>
-</code></pre></div></li>
-<li>슬릭 쿼리 날리기
+</code></pre></div></p>
+</li>
+<li>
+<p>슬릭 쿼리 날리기
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">allUsersQuery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">result</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="n">allUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">allUsersQuery</span><span class="p">)</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ol>
 <h2 id="webpack">Webpack<a class="headerlink" href="#webpack" title="Permanent link">&para;</a></h2>
 <p><em>참고: <a href="https://tecoble.techcourse.co.kr/post/2021-06-30-webpack-intro/">https://tecoble.techcourse.co.kr/post/2021-06-30-webpack-intro/</a></em>
@@ -23061,7 +23069,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>웹팩 구성요소</strong><ul>
+<li>
+<p><strong>웹팩 구성요소</strong></p>
+<ul>
 <li>webpack &amp;&amp; webpack-cli 설치</li>
 <li>root 폴더에 webpack.config.js를 만들자
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -23079,6 +23089,8 @@
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[Entry]<ul>
 <li>어플리케이션에 필요한 모듈 찾기</li>
 <li>번들링 시작하기 위한 "최초 진입점"<ul>

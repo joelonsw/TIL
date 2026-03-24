@@ -23044,9 +23044,10 @@
 </li>
 </ul>
 <h4 id="_3">해결 방법<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
-<p><em>참고: <a href="https://betterstack.com/community/questions/how-to-force-nginx-to-resolve-dns-every-proxy-pass/">https://betterstack.com/community/questions/how-to-force-nginx-to-resolve-dns-every-proxy-pass/</a></em><br />
-1. 도메인의 A record 변경 후 nginx reload를 통한 재시작 (자주 IP가 변경되지 않는다면 이 방법으로 해결)
-2. resolver와 set을 통해 nginx 설정
+<p><em>참고: <a href="https://betterstack.com/community/questions/how-to-force-nginx-to-resolve-dns-every-proxy-pass/">https://betterstack.com/community/questions/how-to-force-nginx-to-resolve-dns-every-proxy-pass/</a></em>  </p>
+<ol>
+<li>도메인의 A record 변경 후 nginx reload를 통한 재시작 (자주 IP가 변경되지 않는다면 이 방법으로 해결)</li>
+<li>resolver와 set을 통해 nginx 설정
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">http</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="c1"># 30초에 한번씩 DNS를 조회하도록 설정</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="kn">resolver</span><span class="w"> </span><span class="s">&lt;DNS_IP&gt;</span><span class="w"> </span><span class="s">valid=30s</span><span class="p">;</span>
@@ -23062,7 +23063,8 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ol>
 
 
 

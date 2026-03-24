@@ -23263,12 +23263,16 @@
 </li>
 </ul>
 <ul>
-<li><strong>*</strong>  <ul>
+<li>
+<p><strong>*</strong>  </p>
+<ul>
 <li><em>참고: <a href="https://dojang.io/mod/page/view.php?id=275">https://dojang.io/mod/page/view.php?id=275</a></em></li>
 <li>"*"는 포인터 변수
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>자료형 * 포인터;
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>포인터 = &amp;변수;
 </code></pre></div></li>
+</ul>
+<ul>
 <li>변수의 주소를 저장할 수 있는 변수!
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>int* numPtr;
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>numPtr = &amp;num1;
@@ -23278,7 +23282,8 @@
 </ul>
 <ul>
 <li><strong>-&gt;</strong><ul>
-<li>구조체 포인터에서의 포인터 연산
+<li>
+<p>구조체 포인터에서의 포인터 연산
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>#include&lt;stdio.h&gt;
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>struct Data {
@@ -23296,10 +23301,11 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>  return 0;
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>}
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>int가 4byte이니, 구조체의 크기는 총 8byte</li>
 <li>ptr+1 하면 8byte씩 추가된대 (음... 뭐지? 연산자에서 뚝딱 처리해주는건가 같은 자료형에 +1 연산을?)
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>#include&lt;stdio.h&gt;
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>#include&lt;stdio.h&gt;
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>#include&lt;stdlib.h&gt;
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>#include&lt;string.h&gt;
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>

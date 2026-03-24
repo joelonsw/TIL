@@ -23160,28 +23160,36 @@
 <li><strong>Be specific</strong><ul>
 <li>모델에게 무엇을 원하는지 명확한 가이드라인을 주세요. </li>
 <li>명확한 절차를 모델에게 제공하여 방황을 줄여주세요. </li>
-<li>가이드라인 타입 : 혼합해서도 쓰임. 상용에서 많이 쓰이는 프롬프트<ol>
-<li>결과물이 갖춰야할 퀄리티를 제공하기<ul>
+<li>
+<p>가이드라인 타입 : 혼합해서도 쓰임. 상용에서 많이 쓰이는 프롬프트</p>
+<ol>
+<li>
+<p>결과물이 갖춰야할 퀄리티를 제공하기</p>
+<ul>
 <li>대다수의 경우 이렇게 만족해야할 퀄리티를 제공하는 것이 유용
  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Write a short story about a character who discovers a hidden talent. 
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Guidelines: 
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>1. Keep the story under 1,000 words
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2. Include a clear action that reveals the character&#39;s talent
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>3. Include at least one supporting character
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>1. Keep the story under 1,000 words
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>2. Include a clear action that reveals the character&#39;s talent
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>3. Include at least one supporting character
 </code></pre></div></li>
 </ul>
 </li>
-<li>모델이 지켜야할 절차를 제공하기<ul>
+<li>
+<p>모델이 지켜야할 절차를 제공하기</p>
+<ul>
 <li>complex problem, force claude to get wider view. </li>
 <li>즉각적으로 고려하기 어려운 것이 있다면 알려주세요. 
  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Write a short story about a character who discovers a hidden talent. 
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Guidelines: 
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>1. Brainstorm 3 talents that would create dramatic tension
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>2. Pick the most interesting talent
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>3. Outline a pivotal scene that reveals the talent
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>4. Brainstorm 3 supporting characters types that could increase the impact of this discovery
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>1. Brainstorm 3 talents that would create dramatic tension
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>2. Pick the most interesting talent
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>3. Outline a pivotal scene that reveals the talent
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>4. Brainstorm 3 supporting characters types that could increase the impact of this discovery
 </code></pre></div></li>
 </ul>
 </li>
@@ -23191,12 +23199,16 @@
 </li>
 </ul>
 <ul>
-<li><strong>Structure with XML tags</strong><ul>
+<li>
+<p><strong>Structure with XML tags</strong></p>
+<ul>
 <li>claude에게 지시사항과 분석하려는 데이터를 구분하여 넣어줄 수 있도록, 가라 태그라도 괜찮으니 구분해주세요.</li>
 <li>asis)
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Debug my code
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>println(&quot;Hello World&quot;)
 </code></pre></div></li>
+</ul>
+<ul>
 <li>tobe)
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Debug my code
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -23208,7 +23220,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Providing Examples</strong><ul>
+<li>
+<p><strong>Providing Examples</strong></p>
+<ul>
 <li>One-shot/Few-shot 기법</li>
 <li>Make SUPER CLEAR for claude to get what I really mean. 
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Categorize the sentiment of the below tweet:
@@ -23235,6 +23249,8 @@
 <a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>Negative
 <a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>&lt;/ideal_output&gt;
 </code></pre></div></li>
+</ul>
+<ul>
 <li>프롬프트 채점기를 통해서 10점을 받은 친구가 있을거야. 그러면 그걸 one-shot/few-shot으로 활용하여 이거랑 비슷하게 출력하도록 하면 좋겠지?!</li>
 <li>추가로 왜 이게 좋은 점수를 받았는지까지 곁들여주세요. 그러면 클로드가 더 감을 잡기 좋아요. </li>
 </ul>

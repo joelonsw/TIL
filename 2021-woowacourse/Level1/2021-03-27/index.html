@@ -23005,48 +23005,54 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>host_summary.frm
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>init
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sb">`</span>--<span class="w"> </span>docker-compose.yml
+</code></pre></div><p>- 이제 Docker를 깔았으니(?) MySQL을 펼쳐보자
+  - MySQL Workbench를 켜본다
+  - docker-compose.yml에 입력한 연결 정보를 입력해 연결(?)을 해본다
+      - localhost에 13306 포트를 docker가 listening하고 있는 것 같은데...?
+      - 잠깐만 그러면 Docker를 통해 설치한 db 디렉토리가 SQL의 서버가 되는거고, 
+      - workbench로 SQL명령을 보내는게 SQL의 클라이언트가 되는건가?
+          - workbench의 역할이 뭐야?
+  - localhost:13306으로 연결이 되었다면 이제 SQL 구문들을 입력해 RDBMS인 MySQL과 소통을 시도해보자!
+      1) 유저 생성
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>      - 무슨 유저인 것이여 이게...?
+  2) 생성한 유저에게 모든 db 및 테이블에 접근권한 부여
+      ``` sql
+      grant all privileges on *.* to &#39;username&#39;@&#39;localhost&#39;;
+      ```
+
+      - 아 DB에 접근하려면 권한이 있는 유저가 필요한가봐?
+  3) 설정한 권한 적용
+      ``` sql
+      flush privileges;
+      ```
+  4) 데이터베이스 생성 (utf8 설정을 해줘야 한글과 관련한 문제가 발생하지 않습니다.)
+      ``` sql
+      CREATE DATABASE joelDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+      ```
+
+      - 왜 utf8 문자 인코딩이 문제가 없는걸까? utf-16, euc-kr은? unicode는 또 뭐지?
+  5) user 테이블 생성/데이터 삽입/데이터 조회
+      ``` sql
+      USE joelDB;  
+
+      CREATE TABLE user (  
+          user_id VARCHAR(12) NOT NULL,  
+          name VARCHAR(64) NOT NULL,  
+          PRIMARY KEY (user_id)  
+      );  
+
+      INSERT INTO user (user_id, name) VALUES   
+          (&#39;eastjun&#39;, &#39;jun&#39;),  
+          (&#39;pobiconan&#39;, &#39;pobi&#39;),  
+          (&#39;sugarbrown&#39;, &#39;brwon&#39;);  
+
+      SELECT * FROM user;  
+      ```
 </code></pre></div>
-    - 이제 Docker를 깔았으니(?) MySQL을 펼쳐보자
-    - MySQL Workbench를 켜본다
-    - docker-compose.yml에 입력한 연결 정보를 입력해 연결(?)을 해본다
-        - localhost에 13306 포트를 docker가 listening하고 있는 것 같은데...?
-        - 잠깐만 그러면 Docker를 통해 설치한 db 디렉토리가 SQL의 서버가 되는거고, 
-        - workbench로 SQL명령을 보내는게 SQL의 클라이언트가 되는건가?
-            - workbench의 역할이 뭐야?
-    - localhost:13306으로 연결이 되었다면 이제 SQL 구문들을 입력해 RDBMS인 MySQL과 소통을 시도해보자!
-        1) 유저 생성
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
-</code></pre></div>
-            - 무슨 유저인 것이여 이게...?
-        2) 생성한 유저에게 모든 db 및 테이블에 접근권한 부여
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
-</code></pre></div>
-            - 아 DB에 접근하려면 권한이 있는 유저가 필요한가봐?
-        3) 설정한 권한 적용
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">flush</span><span class="w"> </span><span class="k">privileges</span><span class="p">;</span>
-</code></pre></div>
-        4) 데이터베이스 생성 (utf8 설정을 해줘야 한글과 관련한 문제가 발생하지 않습니다.)
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">joelDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8_general_ci</span><span class="p">;</span>
-</code></pre></div>
-            - 왜 utf8 문자 인코딩이 문제가 없는걸까? utf-16, euc-kr은? unicode는 또 뭐지?
-        5) user 테이블 생성/데이터 삽입/데이터 조회
-            <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">USE</span><span class="w"> </span><span class="n">joelDB</span><span class="p">;</span><span class="w">  </span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="p">(</span><span class="w">  </span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w">  </span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">);</span><span class="w">  </span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w">   </span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="p">(</span><span class="s1">&#39;eastjun&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;jun&#39;</span><span class="p">),</span><span class="w">  </span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="p">(</span><span class="s1">&#39;pobiconan&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;pobi&#39;</span><span class="p">),</span><span class="w">  </span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="p">(</span><span class="s1">&#39;sugarbrown&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brwon&#39;</span><span class="p">);</span><span class="w">  </span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="p">;</span><span class="w">  </span>
-</code></pre></div>
-    - 오호 그랬더니만 joelDB라는 DB(?)가 생긴듯하네! user라는 아마 내가 넣은 테이블 정보들이 .frm? .ibd? 이런건가본데?
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">|</span>--<span class="w"> </span>db
+<p>- 오호 그랬더니만 joelDB라는 DB(?)가 생긴듯하네! user라는 아마 내가 넣은 테이블 정보들이 .frm? .ibd? 이런건가본데?
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">|</span>--<span class="w"> </span>db
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>mysql
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>data
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>auto.cnf
@@ -23070,12 +23076,12 @@
 <a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>host_summary.frm
 <a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>init
 <a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="sb">`</span>--<span class="w"> </span>docker-compose.yml
-</code></pre></div>
-    - 이제 새로운 Java Gradle Project를 생성해 JDBC 드라이버를 통해 DB와 연결해보자
-        - 아니 JDBC는 또 뭐야?
-        - implementation("mysql:mysql-connector-java:8.0.16") // 우선 의존성 주입해주고...
-    - UserDAO 클래스에서 DB 커넥션 진행한다.
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+</code></pre></div></p>
+<p>- 이제 새로운 Java Gradle Project를 생성해 JDBC 드라이버를 통해 DB와 연결해보자
+      - 아니 JDBC는 또 뭐야?
+      - implementation("mysql:mysql-connector-java:8.0.16") // 우선 의존성 주입해주고...
+  - UserDAO 클래스에서 DB 커넥션 진행한다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.PreparedStatement</span><span class="p">;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.SQLException</span><span class="p">;</span>
@@ -23127,7 +23133,8 @@
 <a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a><span class="w">        </span><span class="n">pstmt</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span>
 <a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a><span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <h2 id="_1">수업 들으면서 몰랐던 용어<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23149,19 +23156,19 @@
     - 참고: <a href="https://www.atlassian.com/git/tutorials/git-bash">https://www.atlassian.com/git/tutorials/git-bash</a>
     - Git
         - 오픈소스계의 영원한 아이돌 리누스 토발즈는 리눅스 커널을 관리하는 기존 툴이 엉망인 것에 너무 빡친 바람에 git이라는 소스관리 툴을 만든다.<br />
-          리누스는 하도 빡친 나머지, 단 2주만에 완성하는 기염을 토했다.
-    - 등장 배경
-        - Git은 Unix 스타일 command line 환경에서 set of command line utility program을 실행하게 해줌
-        - macOS, Linux에는 기본적으로 command line terminal이 탑재
-            - 따라서 자동적으로 Git 사용이 가능
-        - 하지만 윈도우는 기본적으로 Windows command prompt 사용
-            - 이는 unix-terminal이 아니라 자동 Git 사용X
-        - 따라서 윈도우에서 git 쓸라면, GUI 앱을 썼어야함
-            - 근데 이게 한계가 있어서 git bash 등장
-    - 그래서 Git Bash란?
-        - 윈도우에게 Git command line 경험을 모방한 어플리케이션
-        - Bash는 Bourne Again Shell의 줄임말로, Shell은 CLI를 통해 OS와 소통하는 역할을 하는 사용자가 OS와 소통할 수 있는 최밑단의 SW
-            - 참고로 Bash는 리눅스의 기본 쉘이다. </li>
+          리누스는 하도 빡친 나머지, 단 2주만에 완성하는 기염을 토했다.<p>- 등장 배경
+      - Git은 Unix 스타일 command line 환경에서 set of command line utility program을 실행하게 해줌
+      - macOS, Linux에는 기본적으로 command line terminal이 탑재
+          - 따라서 자동적으로 Git 사용이 가능
+      - 하지만 윈도우는 기본적으로 Windows command prompt 사용
+          - 이는 unix-terminal이 아니라 자동 Git 사용X
+      - 따라서 윈도우에서 git 쓸라면, GUI 앱을 썼어야함
+          - 근데 이게 한계가 있어서 git bash 등장
+  - 그래서 Git Bash란?
+      - 윈도우에게 Git command line 경험을 모방한 어플리케이션
+      - Bash는 Bourne Again Shell의 줄임말로, Shell은 CLI를 통해 OS와 소통하는 역할을 하는 사용자가 OS와 소통할 수 있는 최밑단의 SW
+          - 참고로 Bash는 리눅스의 기본 쉘이다. </p>
+</li>
 </ul>
 <ul>
 <li><strong>MySQL Workbench</strong>

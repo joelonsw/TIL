@@ -22997,7 +22997,9 @@
 <em>참고: <a href="https://www.zerocho.com/category/JavaScript/post/57433645a48729787807c3fd">https://www.zerocho.com/category/JavaScript/post/57433645a48729787807c3fd</a></em>
 <em>참고: <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply</a></em></p>
 <ul>
-<li><strong>call</strong><ul>
+<li>
+<p><strong>call</strong></p>
+<ul>
 <li>js 함수 호출 방법으로 함수뒤에 () 붙이기, call, apply 하기
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">c</span><span class="p">;</span>
@@ -23007,6 +23009,8 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nx">example</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nx">example</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">]);</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>여기서 null 인자는 this 를 대체하는 용도
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">string</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;zero&#39;</span><span class="p">,</span>
@@ -23022,6 +23026,8 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nx">obj</span><span class="p">.</span><span class="nx">yell</span><span class="p">();</span><span class="w"> </span><span class="c1">// &#39;zero&#39;</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nx">obj</span><span class="p">.</span><span class="nx">yell</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj2</span><span class="p">);</span><span class="w"> </span><span class="c1">// &#39;what&#39; obj2가 this가 되버림</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>call을 써서 this를 정의해준다면, 타 객체의 파라미터나 메서드를 본인 것 마냥 쓸 수 있음</li>
 <li>원래 기본빵으로 this는 전역객체의 <strong>window</strong><ul>
 <li>이를 바꾸는 방법 중 하나가 call, apply, bind의 첫 인자 넣어주는 것

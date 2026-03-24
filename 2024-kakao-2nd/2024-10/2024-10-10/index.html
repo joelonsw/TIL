@@ -23142,16 +23142,22 @@
 </li>
 </ul>
 <h2 id="play">Play 빌드 방식<a class="headerlink" href="#play" title="Permanent link">&para;</a></h2>
-<p><em>참고: <a href="https://www.playframework.com/documentation/3.0.x/BuildOverview">https://www.playframework.com/documentation/3.0.x/BuildOverview</a></em>
-1. <code>sbt clean compile stage</code> 명령을 통해 빌드하면...
-2. <code>/target/universal/stage/</code> 안에 <code>bin</code>, <code>lib</code> 등등이 생성
-3. <code>/target/universal/stage/bin/project</code>,<code>/target/universal/stage/bin/project.bat</code> 둘이 생성되는데 각각 unix shell script, window batch file
-   - 이는 다음과 같은 행동 수행
-     - 환경 변수 셋업
-     - Java Runtime 환경 설정
-     - Classpath 정의
-     - Play Application 띄움
-4. <code>/target/universal/stage/lib</code> 하위에 여러가지 jar 파일들이 존재해, 디펜던시 필요한 친구들 참조</p>
+<p><em>참고: <a href="https://www.playframework.com/documentation/3.0.x/BuildOverview">https://www.playframework.com/documentation/3.0.x/BuildOverview</a></em></p>
+<ol>
+<li><code>sbt clean compile stage</code> 명령을 통해 빌드하면...</li>
+<li><code>/target/universal/stage/</code> 안에 <code>bin</code>, <code>lib</code> 등등이 생성</li>
+<li><code>/target/universal/stage/bin/project</code>,<code>/target/universal/stage/bin/project.bat</code> 둘이 생성되는데 각각 unix shell script, window batch file<ul>
+<li>이는 다음과 같은 행동 수행<ul>
+<li>환경 변수 셋업</li>
+<li>Java Runtime 환경 설정</li>
+<li>Classpath 정의</li>
+<li>Play Application 띄움</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>/target/universal/stage/lib</code> 하위에 여러가지 jar 파일들이 존재해, 디펜던시 필요한 친구들 참조</li>
+</ol>
 <h2 id="scala-option-either">Scala Option &amp; Either<a class="headerlink" href="#scala-option-either" title="Permanent link">&para;</a></h2>
 <p><em>참고: <a href="https://hamait.tistory.com/649">https://hamait.tistory.com/649</a></em></p>
 <ul>
@@ -23195,7 +23201,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Either 활용하기</strong><ul>
+<li>
+<p><strong>Either 활용하기</strong></p>
+<ul>
 <li>isRight / isLeft
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eitherTest</span><span class="p">(</span><span class="nc">Some</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="p">.</span><span class="n">isRight</span><span class="p">)</span><span class="w"> </span>
@@ -23203,6 +23211,8 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="p">.</span><span class="n">isLeft</span><span class="p">)</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;error </span><span class="si">${</span><span class="n">test</span><span class="p">.</span><span class="n">left</span><span class="p">.</span><span class="n">get</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>pattern matching
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eitherExample</span><span class="p">(</span><span class="nc">Some</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Right</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">num</span>
@@ -23323,7 +23333,7 @@
 </li>
 </ul>
 <h2 id="nginx">Nginx 설정 톺아보기<a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h2>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">server</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="kn">listen</span><span class="w">                </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="w"> </span><span class="s">http2</span><span class="p">;</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="kn">listen</span><span class="w">                </span><span class="s">[::]:443</span><span class="w"> </span><span class="s">ssl</span><span class="w"> </span><span class="s">http2</span><span class="p">;</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="kn">server_name</span><span class="w">        </span><span class="s">lounge.com</span><span class="p">;</span>
@@ -23342,10 +23352,14 @@
 <a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="p">}</span>
 </code></pre></div>
-1. <code>/api</code>로 시작하는 요청은 <code>http://lounge</code>로 proxy 됨
-2. 다른 요청들에 대해서는 
-  - 2-1. Nginx가 처음 URI를 보고 매칭되는 static file이 root(<code>/home/lounge/current/public</code>)에 있나 보고 있으면 주고
-  - 2-2. 그게 아니라면, <code>/home/lounge/current/public/index.html</code>을 반환한다!</p>
+<ol>
+<li><code>/api</code>로 시작하는 요청은 <code>http://lounge</code>로 proxy 됨</li>
+<li>다른 요청들에 대해서는 <ul>
+<li>2-1. Nginx가 처음 URI를 보고 매칭되는 static file이 root(<code>/home/lounge/current/public</code>)에 있나 보고 있으면 주고</li>
+<li>2-2. 그게 아니라면, <code>/home/lounge/current/public/index.html</code>을 반환한다!</li>
+</ul>
+</li>
+</ol>
 <ul>
 <li>쿠버 옮길때, ingress에 nginx-server-snippet에 이런 설정 똑같이 하면 제대로 안될거야<ul>
 <li>그 전에, nginx &lt;-&gt; was 분리해서 설정 먹여도 이거 설정 그대로하면 안될거야. </li>

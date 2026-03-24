@@ -22962,7 +22962,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>1. BaseController</strong><ul>
+<li>
+<p><strong>1. BaseController</strong></p>
+<ul>
 <li>Play에서 Controller가 가져야 할 기본 동작(Action 생성, request/response 헬퍼 메서드) 모아둔 트레이트<ul>
 <li>Controller의 가장 기본 베이스가 되는 트레이트</li>
 </ul>
@@ -22980,6 +22982,8 @@
 </code></pre></div></li>
 </ol>
 </li>
+</ul>
+<ul>
 <li>특징<ul>
 <li>Play 제공 액션 메서드 사용 가능 (<code>Action</code>, <code>Action.async</code>)</li>
 <li>DI를 통해 <code>ControllerComponents</code> 받아올 것</li>
@@ -22990,11 +22994,15 @@
 </li>
 </ul>
 <ul>
-<li><strong>2. AbstractController</strong><ul>
+<li>
+<p><strong>2. AbstractController</strong></p>
+<ul>
 <li>BaseController 상속 받고, 필요한 헬퍼들을 믹스인한 추상 클래스. </li>
 <li>생성자에서 <code>ControllerComponents</code> 주입 받아 보관
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AbstractController</span><span class="p">(</span><span class="k">protected</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">controllerComponents</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseController</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>특징<ul>
 <li><code>ControllerComponents</code> 생성자에서 직접 주입받아 내부 필드로 보관. DI 간편</li>
 <li>Play 제공 헬퍼 메서드(<code>OK</code>, <code>NotFound</code>, <code>Redirect</code> 등) 바로 사용 가능</li>
@@ -23030,44 +23038,52 @@
 <ul>
 <li><strong>정리</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/**</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm">  * Defines utility methods to generate `Action` and `Results` types.</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm">  *</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cm">  * This is intended to provide the idiomatic Play API for actions, allowing you to use &quot;Action&quot; for the default</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="cm">  * action builder and &quot;parse&quot; to access Play&#39;s default body parsers. You may want to extend this to provide your own</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="cm">  * base controller class, or write your own version with similar code.</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="cm">  */</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="k">trait</span><span class="w"> </span><span class="nc">BaseController</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseControllerHelpers</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="cm">/**</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="cm">   * The default ActionBuilder. Used to construct an action, for example:</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="cm">   * This is meant to be a replacement for the now-deprecated Action object, and can be used in the same way.</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="cm">   */</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">Action</span><span class="p">:</span><span class="w"> </span><span class="nc">ActionBuilder</span><span class="p">[</span><span class="nc">Request</span><span class="p">,</span><span class="w"> </span><span class="nc">AnyContent</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controllerComponents</span><span class="p">.</span><span class="n">actionBuilder</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">}</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="cm">/**</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="cm"> * An abstract implementation of [[BaseController]] to make it slightly easier to use.</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="cm"> */</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AbstractController</span><span class="p">(</span><span class="k">protected</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">controllerComponents</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseController</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm">  * Defines utility methods to generate `Action` and `Results` types.</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cm">  *</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="cm">  * This is intended to provide the idiomatic Play API for actions, allowing you to use &quot;Action&quot; for the default</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="cm">  * action builder and &quot;parse&quot; to access Play&#39;s default body parsers. You may want to extend this to provide your own</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="cm">  * base controller class, or write your own version with similar code.</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="cm">  */</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">trait</span><span class="w"> </span><span class="nc">BaseController</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseControllerHelpers</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="cm">/**</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="cm">   * The default ActionBuilder. Used to construct an action, for example:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="cm">   * This is meant to be a replacement for the now-deprecated Action object, and can be used in the same way.</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="cm">   */</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">Action</span><span class="p">:</span><span class="w"> </span><span class="nc">ActionBuilder</span><span class="p">[</span><span class="nc">Request</span><span class="p">,</span><span class="w"> </span><span class="nc">AnyContent</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controllerComponents</span><span class="p">.</span><span class="n">actionBuilder</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="cm">/**</span>
 <a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="cm">/**</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="cm"> * A variation of [[BaseController]] that gets its components via method injection.</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="cm"> */</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="k">trait</span><span class="w"> </span><span class="nc">InjectedController</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseController</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="k">private</span><span class="p">[</span><span class="bp">this</span><span class="p">]</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">_components</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="cm"> * An abstract implementation of [[BaseController]] to make it slightly easier to use.</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="cm"> */</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AbstractController</span><span class="p">(</span><span class="k">protected</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">controllerComponents</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseController</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="cm">/**</span>
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="cm">/**</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="cm">      * Call this method to set the [[ControllerComponents]] instance.</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="cm">      */</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="nd">@Inject</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">setControllerComponents</span><span class="p">(</span><span class="n">components</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="n">_components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">components</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="p">}</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="cm"> * A variation of [[BaseController]] that gets its components via method injection.</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="cm"> */</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="k">trait</span><span class="w"> </span><span class="nc">InjectedController</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">BaseController</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="k">private</span><span class="p">[</span><span class="bp">this</span><span class="p">]</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">_components</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">    </span><span class="cm">/**</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="cm">      * Call this method to set the [[ControllerComponents]] instance.</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="cm">      */</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">    </span><span class="nd">@Inject</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">setControllerComponents</span><span class="p">(</span><span class="n">components</span><span class="p">:</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">        </span><span class="n">_components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">components</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="p">}</span>
 </code></pre></div></li>
 </ul>
 <ul>
-<li><strong>ControllerComponents</strong><ul>
+<li>
+<p><strong>ControllerComponents</strong></p>
+<ul>
 <li>컨트롤러를 구성할 때 필요한 핵심 컴포넌트를 담은 객체</li>
 <li>컨트롤러가 HTTP 요청/응답을 처리하는데 필요한 다양한 요소를 한데 묶어, DI 방식으로 쉽게 전달 받을 수 있도록 함.
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">ControllerComponents</span><span class="w"> </span><span class="p">{</span>
@@ -23079,6 +23095,8 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">executionContext</span><span class="p">:</span><span class="w"> </span><span class="n">scala</span><span class="p">.</span><span class="n">concurrent</span><span class="p">.</span><span class="nc">ExecutionContext</span><span class="w">  </span><span class="c1">// 비동기 로직 실행 시 필요한 ExecutionContext. Play 논블로킹 I/O. 컨트롤러 내부에서 비동기 처리 시 필요</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>역할<ol>
 <li><code>ActionBuilder</code>, <code>PlayBodyParsers</code> 등은 HTTP 요청을 실제로 처리하기 위한 필수 구성 요소<ul>
 <li><code>Action { implicit request =&gt; ... }</code> 형태에 대한 처리에서 내부적으로 <code>ActionBuilder</code>, <code>BodyParser</code>가 모두 필요함</li>
@@ -23130,7 +23148,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>Custom Action</strong><ul>
+<li>
+<p><strong>Custom Action</strong></p>
+<ul>
 <li>인증/인가 등의 로직을 커스텀 액션으로 만들어 여러 컨트롤러 메서드에 손쉽게 적용 가능</li>
 <li><code>ActionBuilder</code>를 활용하여 구현하는 방식 사용
 1. 커스텀 Request 타입 정의<ul>
@@ -23140,18 +23160,22 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">import</span><span class="w"> </span><span class="nn">play</span><span class="p">.</span><span class="nn">api</span><span class="p">.</span><span class="nn">mvc</span><span class="p">.</span><span class="n">_</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">case</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">UserRequest</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">username</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">:</span><span class="w"> </span><span class="nc">Request</span><span class="p">[</span><span class="nc">A</span><span class="p">])</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">WrappedRequest</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">request</span><span class="p">)</span>
-</code></pre></div>
-2. 커스텀 ActionBuilder 구현</li>
-<li><code>ActionBuilder</code>를 상속받아 원하는 인증/인가 로직을 invokeBlock 메서드 안에 구현
-3. 컨트롤러에서 사용</li>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
+<ol>
+<li>커스텀 ActionBuilder 구현<ul>
+<li><code>ActionBuilder</code>를 상속받아 원하는 인증/인가 로직을 invokeBlock 메서드 안에 구현</li>
+</ul>
+</li>
+<li>컨트롤러에서 사용</li>
+</ol>
 </li>
 </ul>
 <h2 id="slick-versions">Slick Versions<a class="headerlink" href="#slick-versions" title="Permanent link">&para;</a></h2>
-<p><em>play-slick 버전 참고 : <a href="https://github.com/playframework/play-slick">https://github.com/playframework/play-slick</a></em>
-  - 예전 센터 : slick 2.1.0 | play 2.5.19 | scala 2.11.7
+<p><em>play-slick 버전 참고 : <a href="https://github.com/playframework/play-slick">https://github.com/playframework/play-slick</a></em></p>
+<p>- 예전 센터 : slick 2.1.0 | play 2.5.19 | scala 2.11.7
   - 신규 센터 : play-slick 5.0.2 | play 2.8.x | slick 3.3.2 + | Scala 2.12.x, 2.13.x</p>
 <ul>
 <li><strong>Slick 2.x</strong><ul>

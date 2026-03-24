@@ -22933,7 +22933,9 @@
 <h3 id="2023-05-17">2023-05-17<a class="headerlink" href="#2023-05-17" title="Permanent link">&para;</a></h3>
 <h2 id="typescript">TypeScript<a class="headerlink" href="#typescript" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>기본 타입</strong><ul>
+<li>
+<p><strong>기본 타입</strong></p>
+<ul>
 <li>string : 문자열</li>
 <li>boolean : t/f</li>
 <li>number : 숫자</li>
@@ -22949,6 +22951,8 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nx">Android</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;and&#39;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>null</li>
 <li>undefined</li>
 <li>object</li>
@@ -22960,7 +22964,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>인터페이스</strong><ul>
+<li>
+<p><strong>인터페이스</strong></p>
+<ul>
 <li>object에는 없는 속성들을 컴파일 타임에 잡아내고 휘뚜루마뚜루 할 수 있도록 인터페이스를 정의해두자
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">type</span><span class="w"> </span><span class="nx">Score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;C&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;F&#39;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -22980,6 +22986,8 @@
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="mf">2</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;a&#39;</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>함수도 인터페이스로 추출할 수 있다!
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">Add</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p">(</span><span class="nx">num1</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">num2</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
@@ -23001,6 +23009,8 @@
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="nx">a</span><span class="p">(</span><span class="mf">33</span><span class="p">)</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>클래스도 인터페이스로 휘뚜루 마뚜루
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">Car</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
@@ -23059,7 +23069,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>클래스</strong><ul>
+<li>
+<p><strong>클래스</strong></p>
+<ul>
 <li>접근 제한자<ul>
 <li>public: 자식 클래스, 클래스 인스턴스 모두 접근 가능 - default</li>
 <li>protected: 자식 클래스에서 접근 가능</li>
@@ -23090,12 +23102,16 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<ul>
 <li>추상 클래스도 있어 <code>abstract</code> 클래스 + <code>abstract</code> 메서드 넣어주세요~</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li><strong>제네릭</strong><ul>
+<li>
+<p><strong>제네릭</strong></p>
+<ul>
 <li>타입이 달라도 공통된 로직 휘뚜루 마뚜루 처리할 수 있어야겠지?
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">getSize</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arr</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
@@ -23113,6 +23129,8 @@
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="kd">const</span><span class="w"> </span><span class="nx">arr4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{},</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Tim&quot;</span><span class="w"> </span><span class="p">}]</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="nx">getSize</span><span class="p">(</span><span class="nx">arr4</span><span class="p">)</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>extends 도 가능하겠지?
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>

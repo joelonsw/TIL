@@ -23094,18 +23094,18 @@
 <li><strong>포트 포워딩</strong>
     - <em>참고: <a href="https://lamanus.kr/59">https://lamanus.kr/59</a></em>
     - 컴퓨터 네트워크에서 패킷이 라우터나 방화벽과 같은 네트워크 게이트웨이를 가로지르는 동안, <br />
-      하나의 IP 주소와 포트 번호 결합의 통신 요청을 다른 곳으로 넘겨주는 네트워크 주소 변환의 응용
-    - 공유기 &lt;-&gt; 사설 네트워크
-        - 인터넷 사용을 위해서 고유한 IP 주소 필요 (공인 IP)
-        - 네트워크가 딱히 필요하지 않은 장비들에 대해서는 별도의 사설 네트워크 구축함
-            - 10.x.x.x, 172.16~31.x.x, 192.168.x.x 대역
-        - 공유기가 사설 IP 딱 대줘
-        - <img alt="" src="../../image/2021-09-23-%EA%B3%B5%EC%9C%A0%EA%B8%B0.png" />
-    - 포트 포워딩이 필요한 이유
-        - 내가 웹 서버를 내 노트북에서 열어봤자 외부에서 접근을 못하자나?
-        - 그 이유가 바로 공유기까지만 연결 시도하고 연결된 노드에는 연결을 못해서 그래
-            - 어디로 가야하죠 아저씨
-            - <img alt="" src="../../image/2021-09-23-%EA%B3%B5%EC%9C%A0%EA%B8%B0-%ED%8F%AC%ED%8A%B8%ED%8F%AC%EC%9B%8C%EB%94%A9.png" /></li>
+      하나의 IP 주소와 포트 번호 결합의 통신 요청을 다른 곳으로 넘겨주는 네트워크 주소 변환의 응용<p>- 공유기 &lt;-&gt; 사설 네트워크
+      - 인터넷 사용을 위해서 고유한 IP 주소 필요 (공인 IP)
+      - 네트워크가 딱히 필요하지 않은 장비들에 대해서는 별도의 사설 네트워크 구축함
+          - 10.x.x.x, 172.16~31.x.x, 192.168.x.x 대역
+      - 공유기가 사설 IP 딱 대줘
+      - <img alt="" src="../../image/2021-09-23-%EA%B3%B5%EC%9C%A0%EA%B8%B0.png" />
+  - 포트 포워딩이 필요한 이유
+      - 내가 웹 서버를 내 노트북에서 열어봤자 외부에서 접근을 못하자나?
+      - 그 이유가 바로 공유기까지만 연결 시도하고 연결된 노드에는 연결을 못해서 그래
+          - 어디로 가야하죠 아저씨
+          - <img alt="" src="../../image/2021-09-23-%EA%B3%B5%EC%9C%A0%EA%B8%B0-%ED%8F%AC%ED%8A%B8%ED%8F%AC%EC%9B%8C%EB%94%A9.png" /></p>
+</li>
 </ul>
 <ul>
 <li><strong>포워드 vs 리다이렉트</strong>
@@ -23164,17 +23164,17 @@
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    server_name example.com www.example.com;
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    ...
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>}
-</code></pre></div>
-    - 요청의 "Host" 헤더값으로 어떤 서버로 라우팅이 되어야 하는지 지정함
-        - server_name에 알맞은 host가 없다면 default_server로 라우팅됨
-        - default_server 지정이 없다면 맨 처음께 default_server
-        - 아래와 같이 지정 가능
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>server {
+</code></pre></div><p>- 요청의 "Host" 헤더값으로 어떤 서버로 라우팅이 되어야 하는지 지정함
+      - server_name에 알맞은 host가 없다면 default_server로 라우팅됨
+      - default_server 지정이 없다면 맨 처음께 default_server
+      - 아래와 같이 지정 가능
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>server {
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    listen      80 default_server;
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    server_name example.net www.example.net;
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    ...
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>}
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>정적 컨텐츠 제공하기</strong>
@@ -23202,9 +23202,8 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    location / {
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    }
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>}
-</code></pre></div>
-    - 이미지 확장자에 대한 요청은 /data/images에서 처리하고, 나머지는 proxy_pass (localhost:8080에서 돌고 있는 프로그램에서 처리하도록)
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>server {
+</code></pre></div><p>- 이미지 확장자에 대한 요청은 /data/images에서 처리하고, 나머지는 proxy_pass (localhost:8080에서 돌고 있는 프로그램에서 처리하도록)
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>server {
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    location / {
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        proxy_pass http://localhost:8080;
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    }
@@ -23213,7 +23212,8 @@
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        root /data/images;
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    }
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>}
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>origin vs referer</strong>

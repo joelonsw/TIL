@@ -22959,7 +22959,8 @@
 </li>
 </ul>
 <ul>
-<li><strong>코드</strong>
+<li>
+<p><strong>코드</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">lastElementRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCallback</span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">(</span><span class="nx">node</span><span class="o">:</span><span class="w"> </span><span class="nx">HTMLLIElement</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">loading</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
@@ -22973,7 +22974,8 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">},</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">[</span><span class="nx">hasNext</span><span class="p">]</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">);</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>다음과 같이 콜백 함수가 hasNext에 대해서만 최신화됨. <ul>
 <li>이러다 보니 fetch 안의 여러 변수들의 값이 이미 정의된 대로 주구장창 사용중 (stale closure)</li>
 <li>dependency array에 getList 함수에 들어갈 변수들을 함께 정의해두자. </li>

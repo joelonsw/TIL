@@ -22966,15 +22966,15 @@
     - 최신 기능 "Feature Branch"
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; git branch feature/new-function
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&gt; git checkout feature/new-function
-</code></pre></div>
-    - 에러 제보 "Hotfix Branch"
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; git checkout -b hotfix/server-error
-</code></pre></div>
-    - 작업 통합 후 푸시
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt; git checkout main
+</code></pre></div><p>- 에러 제보 "Hotfix Branch"
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt; git checkout -b hotfix/server-error
+</code></pre></div></p>
+<p>- 작업 통합 후 푸시
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt; git checkout main
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt; git merge hotfix/server-error
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&gt; git push
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>태그 관리</strong>
@@ -22983,8 +22983,9 @@
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&gt; git tag -a v0.1.1 1e2098 -m &quot;지난 커밋의 해시값에 태그 붙임&quot;
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>&gt; git show v0.1 
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>&gt; git push origin v0.1:v0.1
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 버전 명시하면 release note 작성 가능
 </code></pre></div>
-        - 버전 명시하면 release note 작성 가능</li>
+</li>
 </ul>
 <ul>
 <li><strong>깃 브랜치 전략 정하기</strong>

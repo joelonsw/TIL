@@ -22967,11 +22967,12 @@
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">StatementStrategy</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="nf">makePreparedStatement</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>  - 해당 인터페이스를 구현하여 구체적인 SQLStatement를 작성
+  - 하지만 전략 사용자가 직접 전략을 선택해야함
+      - 전략 패턴 정신에 위배
+  - 익명 클래스를 통한 리팩토링 적용
 </code></pre></div>
-      - 해당 인터페이스를 구현하여 구체적인 SQLStatement를 작성
-      - 하지만 전략 사용자가 직접 전략을 선택해야함
-          - 전략 패턴 정신에 위배
-      - 익명 클래스를 통한 리팩토링 적용</p>
 <p>- [스프링 DI]
       - DI의 근본... 인터페이스를 사이에 두고 클래스 레벨에서는 의존 관계 고정 X, 런타임 주입 O
       - 하지만 UserDao와 JdbcContext는 각각 클래스임에도 DI 구조를 가져도 괜찮다
@@ -23018,13 +23019,13 @@
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
 <a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">    </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">br</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">br</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
 <a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="p">}</span>
-</code></pre></div>
-    - 실행 순서
-        1. calcSum에서 sumCallback이라는, LineCallback 인터페이스의 클래스 구현체를 생성
-        2. lineReadTemplate으로 sumCallback을 전달
-        3. lineReadTemplate에서는 자원 할당을 하며 필요한 작업 시작
-        4. sumCallback을 호출하여 익명 클래스에서 doSomethingWithLine에 대응하는 작업 수행
-        5. 모든 처리가 끝나면 Template 작업 결과 반환</li>
+</code></pre></div><p>- 실행 순서
+      1. calcSum에서 sumCallback이라는, LineCallback 인터페이스의 클래스 구현체를 생성
+      2. lineReadTemplate으로 sumCallback을 전달
+      3. lineReadTemplate에서는 자원 할당을 하며 필요한 작업 시작
+      4. sumCallback을 호출하여 익명 클래스에서 doSomethingWithLine에 대응하는 작업 수행
+      5. 모든 처리가 끝나면 Template 작업 결과 반환</p>
+</li>
 </ul>
 <ul>
 <li><strong>JdbcTemplate 살펴보기</strong>

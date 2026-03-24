@@ -22960,12 +22960,12 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">})</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">router</span><span class="p">;</span>
-</code></pre></div>
-    3. main.js에 라우터 쓴다고 말해줌
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./router&#39;</span>
+</code></pre></div><p>3. main.js에 라우터 쓴다고 말해줌
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./router&#39;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nx">createApp</span><span class="p">(</span><span class="nx">app</span><span class="p">).</span><span class="nx">use</span><span class="p">(</span><span class="nx">router</span><span class="p">).</span><span class="nx">mount</span><span class="p">(</span><span class="s1">&#39;#app&#39;</span><span class="p">)</span>
-</code></pre></div>
-    4. 라우터를 통해 보여졌으면 하는 공간에 <router-view></router-view> 추가해줌</li>
+</code></pre></div></p>
+<p>4. 라우터를 통해 보여졌으면 하는 공간에 <router-view></router-view> 추가해줌</p>
+</li>
 </ul>
 <ul>
 <li><strong>URL 파라미터</strong>
@@ -22977,10 +22977,9 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="nx">Detail</span><span class="p">,</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">},</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">];</span>
-</code></pre></div>
-    - 컴포넌트 안에서 URL 파라미터 추출해서 쓸라면, <code>{{ $route.params.파라미터명 }}</code>
-    - Nested Routes
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</code></pre></div><p>- 컴포넌트 안에서 URL 파라미터 추출해서 쓸라면, <code>{{ $route.params.파라미터명 }}</code>
+  - Nested Routes
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">path</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/detail/:id&#39;</span><span class="p">,</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nx">component</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">Detail</span><span class="p">,</span>
@@ -22990,13 +22989,14 @@
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="p">]</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">]</span>
-</code></pre></div>
-    - 페이지 이동
-        - <code>$router.push('detail/0')</code> 를 통해 @click으로 이동 액션을 클릭 액션으로 줄 수 있음
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;$router.push(&quot;</span><span class="na">detail</span><span class="err">/</span><span class="na">0</span><span class="err">&#39;)&quot;</span><span class="p">&gt;</span>
+</code></pre></div></p>
+<p>- 페이지 이동
+      - <code>$router.push('detail/0')</code> 를 통해 @click으로 이동 액션을 클릭 액션으로 줄 수 있음
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&quot;$router.push(&quot;</span><span class="na">detail</span><span class="err">/</span><span class="na">0</span><span class="err">&#39;)&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    움직여라 얍
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>내비게이션 가드</strong>
@@ -23012,17 +23012,17 @@
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="p">];</span>
-</code></pre></div>
-    - 여러가지 Route에 네비게이션 가드를 추가할라면
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">({</span><span class="w"> </span><span class="nx">어쩌구</span><span class="w"> </span><span class="p">})</span>
+</code></pre></div><p>- 여러가지 Route에 네비게이션 가드를 추가할라면
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">({</span><span class="w"> </span><span class="nx">어쩌구</span><span class="w"> </span><span class="p">})</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">router</span><span class="p">.</span><span class="nx">beforeEach</span><span class="p">((</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="kr">from</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="c1">//페이지 변경 전에 실행할 코드</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">})</span>
-</code></pre></div>
-    - 그냥 컴포넌트 자체에서 메서드 선언해서 사용도 가능. lifecycle hook 쓰는 위치에 쓰자
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>beforeRouteEnter(){}
+</code></pre></div></p>
+<p>- 그냥 컴포넌트 자체에서 메서드 선언해서 사용도 가능. lifecycle hook 쓰는 위치에 쓰자
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>beforeRouteEnter(){}
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>beforeRouteUpdate(){}
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 
 

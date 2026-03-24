@@ -22998,9 +22998,11 @@
 </ul>
 <ul>
 <li><strong>Search</strong><ul>
-<li><code>location.search = data</code>
+<li>
+<p><code>location.search = data</code>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>이러면 현재 페이지에서 ?hello가 붙은 url로 이동</li>
 </ul>
 </li>
@@ -23041,10 +23043,12 @@
 </li>
 </ul>
 <ul>
-<li><strong>서브쿼리</strong>
+<li>
+<p><strong>서브쿼리</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">receipts</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>SQL문의 from 절에서 서브커리가 하나의 뷰 역할을 한다고 해서 인라인 뷰라는 이름을 붙이기도 함</li>
 <li>장점: SQL 구문 안에서 유연하게 또 다른 SQL문을 만들어 활용할 수 있음</li>
 <li>단점: 연산 비용이 추가됨. <strong>최적화를 받을 수 없음</strong>. 쿼리가 복잡해짐</li>

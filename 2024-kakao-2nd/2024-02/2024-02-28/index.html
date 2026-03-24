@@ -22934,12 +22934,16 @@
 <h2 id="scala-replace-vs-replaceall">Scala replace vs replaceAll<a class="headerlink" href="#scala-replace-vs-replaceall" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>replace</code>, <code>replaceAll</code> 모두 <code>java.lang.String</code>의 것을 사용</li>
-<li><strong><code>replace</code></strong><ul>
+<li>
+<p><strong><code>replace</code></strong></p>
+<ul>
 <li>특정한 캐릭터, 혹은 문자열이 타겟에 포함되어 있다면, 전부 대체</li>
 <li>regex를 지원하진 않음
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, World&quot;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Scala&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;Hello, Scala&quot;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>시간복잡도 O(n) - n: 문자열 길이</li>
 </ul>
 </li>

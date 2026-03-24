@@ -22994,24 +22994,34 @@
 </ul>
 </li>
 </ul>
-<p><em>참고: <a href="https://www.youtube.com/watch?v=cLgzqc_hwIg&amp;list=PL1mta2YyMpPWItLT-9XCaSsdF_EysOS4Z">https://www.youtube.com/watch?v=cLgzqc_hwIg&amp;list=PL1mta2YyMpPWItLT-9XCaSsdF_EysOS4Z</a></em><br />
-1. <strong>컨셉</strong>
-   - 사용자는 쿠버에 배포할 리소스를 git에 push
-   - ArgoCD는 git에 있는 내용(현재 상태와 차이가 있는 내용) 을 쿠버에 동기화
-   - GitOps 외 운영을 위한 유틸리티 다수 지원
-     - 멀티 쿠버네티스 클러스터 연계
-     - SSO 연동
-     - 권한 제어 (RBAC)
-     - Hook 지원
-     - 알림 기능
-     - Helm/Kustomize 지원
-   - 단점
-     - 쿠버에서만 동작
-     - 많은 지식 필요
-     - 빌드 파이프라인은 별도 구축 (빌드 파이프라인은 별도 구축해서 ArgoCD에 연동 필요)
-   - git에 있는 쿠버 리소스 yaml 읽어서 argoCD가 동기화 하는구나</p>
+<p><em>참고: <a href="https://www.youtube.com/watch?v=cLgzqc_hwIg&amp;list=PL1mta2YyMpPWItLT-9XCaSsdF_EysOS4Z">https://www.youtube.com/watch?v=cLgzqc_hwIg&amp;list=PL1mta2YyMpPWItLT-9XCaSsdF_EysOS4Z</a></em>  </p>
 <ol>
-<li><strong>Sync</strong><ul>
+<li>
+<p><strong>컨셉</strong></p>
+<ul>
+<li>사용자는 쿠버에 배포할 리소스를 git에 push</li>
+<li>ArgoCD는 git에 있는 내용(현재 상태와 차이가 있는 내용) 을 쿠버에 동기화</li>
+<li>GitOps 외 운영을 위한 유틸리티 다수 지원<ul>
+<li>멀티 쿠버네티스 클러스터 연계</li>
+<li>SSO 연동</li>
+<li>권한 제어 (RBAC)</li>
+<li>Hook 지원</li>
+<li>알림 기능</li>
+<li>Helm/Kustomize 지원</li>
+</ul>
+</li>
+<li>단점<ul>
+<li>쿠버에서만 동작</li>
+<li>많은 지식 필요</li>
+<li>빌드 파이프라인은 별도 구축 (빌드 파이프라인은 별도 구축해서 ArgoCD에 연동 필요)</li>
+</ul>
+</li>
+<li>git에 있는 쿠버 리소스 yaml 읽어서 argoCD가 동기화 하는구나</li>
+</ul>
+</li>
+<li>
+<p><strong>Sync</strong></p>
+<ul>
 <li>Refresh Period: 기본으로 3분에 한번씩 비교해서 동기화 (polling)</li>
 <li>Refresh: Manual/Auto</li>
 <li>Self Healing (Auto): Git과 무조건 동일하게 보장. 누가 클러스터에 명령어 날려도 다시 복구</li>

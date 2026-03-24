@@ -23032,14 +23032,20 @@
 </li>
 </ul>
 <ul>
-<li><strong>ExecutionContext</strong><ol>
-<li>두 개의 추상메서드가 있어요: execute, reportFailure
+<li>
+<p><strong>ExecutionContext</strong></p>
+<ol>
+<li>
+<p>두 개의 추상메서드가 있어요: execute, reportFailure
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">trait</span><span class="w"> </span><span class="nc">ExecutionContext</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">runnable</span><span class="p">:</span><span class="w"> </span><span class="nc">Runnable</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">reportFailure</span><span class="p">(</span><span class="nd">@deprecatedName</span><span class="p">(</span><span class="s">&quot;t&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">cause</span><span class="p">:</span><span class="w"> </span><span class="nc">Throwable</span><span class="p">):</span><span class="w"> </span><span class="nc">Unit</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
-</code></pre></div></li>
-<li>ExecutorContext에는 Java Executor/ExecutorService에서 ExecutorContext 인스턴스를 만들 companion 객체가 있다</li>
+</code></pre></div></p>
+</li>
+<li>
+<p>ExecutorContext에는 Java Executor/ExecutorService에서 ExecutorContext 인스턴스를 만들 companion 객체가 있다</p>
+</li>
 <li>ExecutorContext companion 객체에서 내부적으로 ForkJoinPool 인스턴스 사용하는 global 기본 시랭 컨텍스트 포함</li>
 </ol>
 </li>

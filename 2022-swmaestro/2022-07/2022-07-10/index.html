@@ -23077,7 +23077,8 @@
 </code></pre></div></li>
 </ul>
 <ul>
-<li><strong>시큐리티 로그인</strong>
+<li>
+<p><strong>시큐리티 로그인</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Configuration</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nd">@EnableWebSecurity</span><span class="w"> </span><span class="c1">// 스프링 시큐리티 필터가 스프링 필터체인에 등록됨</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nd">@EnableGlobalMethodSecurity</span><span class="p">(</span><span class="n">securedEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// @Secured 어노테이션 활성화! Controller에서 @Secured(&quot;ROLE_ADMIN&quot;)</span>
@@ -23102,7 +23103,8 @@
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">                </span><span class="p">.</span><span class="na">defaultSuccessUrl</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">);</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="p">}</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>시큐리티 /login 주소 요청이 오면 낚아채서 로그인을 진행시킴</li>
 <li>로그인을 진행이 완료가 되면 시큐리티 session을 만들어줍니다</li>
 <li>오브젝트 =&gt; Authentication 타입 객체 =&gt; Authentication 안에 User 정보가 있어야 함<ul>
@@ -23143,6 +23145,8 @@
 <a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="c1">// 기타 등등... 활성화 여부, expire 여부 등등...</span>
 <a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>자, 이번엔 authentication 객체는 어떻게 만드는가?
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 시큐리티 설정에서 loginProcessingUrl(&quot;/login&quot;);</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">// login 요청이 오면 자동으로 UserDetailsService 타입으로 IoC 되어있는 loadUserByUsername 함수 실행</span>

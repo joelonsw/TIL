@@ -23097,8 +23097,9 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BufferedInputStream</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">FilterInputStream</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DEFAULT_BUFFER_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8192</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 속도를 중요시한다면 사용할 것!
 </code></pre></div>
-        - 속도를 중요시한다면 사용할 것!</li>
+</li>
 </ul>
 <ul>
 <li><strong>OutputStream</strong>
@@ -23147,8 +23148,9 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="p">(</span><span class="n">inputStream</span><span class="p">);</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">bufferedReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 그러다 보니 해당 학습테스트에서 개행이 일어날 때마다 한줄씩 읽어올 수 있었구나!
 </code></pre></div>
-        - 그러다 보니 해당 학습테스트에서 개행이 일어날 때마다 한줄씩 읽어올 수 있었구나!</li>
+</li>
 </ul>
 <ul>
 <li><strong>try-with-resources</strong>
@@ -23285,16 +23287,16 @@
 <a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">        </span><span class="n">executor</span><span class="p">.</span><span class="na">shutdownNow</span><span class="p">();</span>
 <a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="p">}</span>
-</code></pre></div>
-    - execute()
-        - Runnable 전달 (return 값 없음)
-    - Execute과 Callback
-        1. 작업 후 종료 (execute)
-            - void execute(Runnable command);
-        2. 작업 후 결과 보고 (callback)
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Future</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">submit</span><span class="p">(</span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">task</span><span class="p">);</span>
+</code></pre></div><p>- execute()
+      - Runnable 전달 (return 값 없음)
+  - Execute과 Callback
+      1. 작업 후 종료 (execute)
+          - void execute(Runnable command);
+      2. 작업 후 결과 보고 (callback)
+      <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Future</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">submit</span><span class="p">(</span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">task</span><span class="p">);</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">Future</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="nf">submit</span><span class="p">(</span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>CountDownLatch</strong>
@@ -23318,11 +23320,11 @@
 <a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;latch.getCount() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">latch</span><span class="p">.</span><span class="na">getCount</span><span class="p">());</span><span class="w"> </span><span class="c1">// 0</span>
 <a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">counter</span><span class="p">.</span><span class="na">getCount</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">numberOfThreads</span><span class="p">);</span>
 <a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="p">}</span>
-</code></pre></div>
-    - await()
-        - latch를 통해서 병행성 파악
-        - await()을 통해서 해당 카운트가 다 떨어져 0으로 가는지 파악
-    - <img alt="" src="https://t1.daumcdn.net/cfile/tistory/2255A741540409FF21" /></li>
+</code></pre></div><p>- await()
+      - latch를 통해서 병행성 파악
+      - await()을 통해서 해당 카운트가 다 떨어져 0으로 가는지 파악
+  - <img alt="" src="https://t1.daumcdn.net/cfile/tistory/2255A741540409FF21" /></p>
+</li>
 </ul>
 
 

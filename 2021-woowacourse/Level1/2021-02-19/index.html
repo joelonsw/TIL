@@ -23117,8 +23117,9 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">newCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">oldCapacity</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">//기존 사이즈의 50%를 추가해 새로운 크기 산정</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">...</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><span></span><code>  - 삭제: 삭제하는 index 다음부터 복붙, 마지막 데이터 null 처리
 </code></pre></div>
-        - 삭제: 삭제하는 index 다음부터 복붙, 마지막 데이터 null 처리<p>- LinkedList: 논리적으로 순차적, 물리적으론 안 순차적
+<p>- LinkedList: 논리적으로 순차적, 물리적으론 안 순차적
       - 삽입: 앞과 뒤는 빨리 찾음 <em>(처음, 끝 내부적으로 저장 해둠)</em>, 중간 인덱스 오래걸림
       - 삭제: 걸리는 시간은 삽입과 같음. 자기자신을 null 처리</p>
 <p>- List<Integer> integers = new ArrayList&lt;&gt;();
@@ -23209,12 +23210,12 @@
     - 참조 변수와 생성자에 대입된 Type이 일치해야 한다!
     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">Box</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// Compile Error! Apple이 Fruit을 상속해도 안 됨  </span>
-</code></pre></div>
-    - 모든 객체에 동일하게 동작하는 static에서 타입 변수 T는 사용할 수 없다!
-        - 대입된 타입의 종류에 관계없이 동일한 것이여야 하기 때문
-    - 제네릭 타입의 배열 생성, instanceof 연산도 X
-        - new 연산자 때문... new 연산자는 컴파일 시점에 정확히 타입 T가 뭔지 알아야 함
-        - newInstance()와 같은 동적으로 객체를 생성하는 메서드를 고려해볼 것</li>
+</code></pre></div><p>- 모든 객체에 동일하게 동작하는 static에서 타입 변수 T는 사용할 수 없다!
+      - 대입된 타입의 종류에 관계없이 동일한 것이여야 하기 때문
+  - 제네릭 타입의 배열 생성, instanceof 연산도 X
+      - new 연산자 때문... new 연산자는 컴파일 시점에 정확히 타입 T가 뭔지 알아야 함
+      - newInstance()와 같은 동적으로 객체를 생성하는 메서드를 고려해볼 것</p>
+</li>
 </ul>
 <ul>
 <li><strong>제한된 제네릭</strong>
@@ -23245,14 +23246,14 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="n">MyClass</span><span class="p">.</span><span class="na">printList</span><span class="p">(</span><span class="n">fruits</span><span class="p">);</span><span class="w"> </span><span class="c1">//에러!!! 정확히 Object형의 요소만 받아요!!!</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="n">MyClass</span><span class="p">.</span><span class="na">printListWithWildCard</span><span class="p">(</span><span class="n">fruits</span><span class="p">);</span><span class="w"> </span><span class="c1">// 정상 작동!</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">}</span>
-</code></pre></div>
-    - 하나의 참조 변수로 대입된 타입이 다른 객체를 참조 가능
-    - &lt;? extends T&gt; : T와 그 자손들만 가능
-    - &lt;? super T&gt; : T와 그 조상들만 가능
-    - &lt;?&gt; : 제한 없음 모든 타입이 가능
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ArrayList</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Tv</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK!</span>
+</code></pre></div><p>- 하나의 참조 변수로 대입된 타입이 다른 객체를 참조 가능
+  - &lt;? extends T&gt; : T와 그 자손들만 가능
+  - &lt;? super T&gt; : T와 그 조상들만 가능
+  - &lt;?&gt; : 제한 없음 모든 타입이 가능
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ArrayList</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Tv</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK!</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">ArrayList</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Product</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Audio</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK!</span>
-</code></pre></div></li>
+</code></pre></div></p>
+</li>
 </ul>
 <ul>
 <li><strong>제이슨과 함께하는 와일드 카드</strong>
@@ -23324,9 +23325,9 @@
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">Plus</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">),</span><span class="w">      </span><span class="c1">// public static final Operator Plus = new Operator(&quot;+&quot;) 와 동일</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">Minus</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// public static final Operator Minus = new Operator(&quot;-&quot;) 와 동일</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">}</span><span class="w"> </span>
-</code></pre></div>
-    - 모든 enum은 java.lang.Enum 클래스를 상속받음
-        - 따라서 또다른 클래스를 enum에 상속할 수는 없다!<p>- 생성자는 항상 private!</p>
+</code></pre></div><p>- 모든 enum은 java.lang.Enum 클래스를 상속받음
+      - 따라서 또다른 클래스를 enum에 상속할 수는 없다!</p>
+<p>- 생성자는 항상 private!</p>
 <p>- Setter는 쓰지말자
       - 컴파일 시에 필요한 상수를 모두 모았다는 전제하에 enum을 쓰는 것인데, 런타임에 수정할 구멍을 주면 의미가 없어서 그런 듯 하다.</p>
 </li>

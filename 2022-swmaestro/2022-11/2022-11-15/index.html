@@ -23091,17 +23091,23 @@
 </li>
 </ul>
 <ul>
-<li><strong>Repeatable Read vs Read Committed</strong><ul>
+<li>
+<p><strong>Repeatable Read vs Read Committed</strong></p>
+<ul>
 <li>현재 테이블에 13, 17 투입됨</li>
 <li>[Transaction A]
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">COMMIT</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[Transaction B]
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">COMMIT</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[A, B 순서]
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">(</span><span class="n">B</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
@@ -23109,6 +23115,8 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">COMMIT</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>Read Committed 라면 레코드 락만 걸기때문에...<ul>
 <li>처음보는 15가 A-2에서 튀어나옴</li>
 </ul>

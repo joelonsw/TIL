@@ -22933,12 +22933,16 @@
 <h3 id="2023-03-13">2023-03-13<a class="headerlink" href="#2023-03-13" title="Permanent link">&para;</a></h3>
 <h2 id="scala">Scala 함수 컴비네이터<a class="headerlink" href="#scala" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>foldLeft(), foldRight()</strong><ul>
+<li>
+<p><strong>foldLeft(), foldRight()</strong></p>
+<ul>
 <li>컬렉션에 있는 여러 요소를 한 쪽 방향으로 접어서 새로운 단 하나의 요소로 변경</li>
 <li>두 개의 요소를 가져다가 하나로 만드는 연속적인 과정
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">foldLeft</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">B</span><span class="p">,</span><span class="w"> </span><span class="nc">A</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">foldRight</span><span class="p">[</span><span class="nc">B</span><span class="p">](</span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">B</span><span class="p">)(</span><span class="n">op</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="w"> </span><span class="nc">B</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">B</span><span class="p">):</span><span class="w"> </span><span class="nc">B</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>foldLeft() 예시<ul>
 <li>각각의 요소를 i와 j로 받아, 둘을 더해 하나의 값으로 만든다</li>
 <li>초기값 z는 0을 줬고, 결과적으로 컬렉션에 속한 모든 요소를 더한 값인 10을 출력

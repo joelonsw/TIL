@@ -23100,7 +23100,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>CJS (CommonJS)</strong><ul>
+<li>
+<p><strong>CJS (CommonJS)</strong></p>
+<ul>
 <li>CommonJS: JS를 브라우저뿐만이 아니라 범용언어로 사용하고자 만들어진 그룹</li>
 <li>[코드 예제]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">lib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;package/lib&#39;</span><span class="p">);</span>
@@ -23117,6 +23119,8 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nx">foo</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;It is foo&#39;</span><span class="p">);</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nx">bar</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;It is bar&#39;</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[특징]<ul>
 <li>동기적으로 동작</li>
 <li>서버사이드에서 사용하기 용이함</li>
@@ -23127,7 +23131,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>AMD (Asynchronous Module Definition)</strong><ul>
+<li>
+<p><strong>AMD (Asynchronous Module Definition)</strong></p>
+<ul>
 <li>CommonJS는 모든 파일이 로컬디스크에 있어서 바로 불러올 수 있어야 해</li>
 <li>동기적으로 동작이 가능한 서버사이드 JS 환경을 전제로 함</li>
 <li>브라우저에서는 이게 다운 못 받으면 암것도 못하는 상황으로 치닫음</li>
@@ -23147,6 +23153,8 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nx">myModule</span><span class="p">.</span><span class="nx">foobar</span><span class="p">();</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">});</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[특징]<ul>
 <li>비동기</li>
 <li>네트워크를 통해 모듈을 내려받는 브라우저이기에, 비동기로 동작해야 함</li>
@@ -23157,7 +23165,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>UMD (Universal Module Definition)</strong><ul>
+<li>
+<p><strong>UMD (Universal Module Definition)</strong></p>
+<ul>
 <li>AMD, CommonJS 호환을 위해 해결<ul>
 <li>AMD, CommonJS, window에 추가하는 방식까지 모두 가능한 모듈 작성 방식</li>
 </ul>
@@ -23183,6 +23193,8 @@
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nx">exports</span><span class="p">.</span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}));</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[특징]<ul>
 <li>여러 모듈 로더에서 사용 가능</li>
 <li>AMD/CommonJS 모두 사용가능</li>
@@ -23192,7 +23204,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>ESM (ECMAScript Module)</strong><ul>
+<li>
+<p><strong>ESM (ECMAScript Module)</strong></p>
+<ul>
 <li>ES6에 JS 모듈 기능이 추가됨</li>
 <li>[코드 예제]
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">lib</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;package/lib&#39;</span><span class="p">;</span>
@@ -23203,6 +23217,8 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">export</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">foobar</span><span class="o">:</span><span class="w"> </span><span class="nx">foo</span><span class="w"> </span><span class="p">};</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>[특징]<ul>
 <li>ECMAScript에서 지원하는 JS 자체 모듈 시스템</li>
 <li>브라우저에서는 <code>import</code>, <code>export</code>를 지원하지 않아 번들러를 함께 사용해야 함</li>
@@ -23466,9 +23482,13 @@
 const promise1 = new Promise((resolve, reject) =&gt; {
    // 비동기 작업 
 });</code></li>
+</ul>
+<ul>
 <li><code>resolve</code>: 비동기 작업이 성공했어요!</li>
-<li><code>reject</code>: 비동기 작업이 실패했어요...</li>
+<li><code>reject</code>: 비동기 작업이 실패했어요...<ul>
 <li>Promise 선언된 순간 비동기 작업 시작됨</li>
+</ul>
+</li>
 <li>new Promise()를 통해 기다리지 않고 바로 호출해버림!</li>
 </ul>
 </li>
@@ -23571,7 +23591,9 @@ function setTimeoutPromise(delay) {
 </li>
 </ul>
 <ul>
-<li><strong>Promise.all</strong><ul>
+<li>
+<p><strong>Promise.all</strong></p>
+<ul>
 <li>
 <p>다음과 같은 끔찍한 코드 =&gt; 10초가 걸린다!!
   ```js
@@ -23598,7 +23620,7 @@ function setTimeoutPromise(delay) {
   );
 }</p>
 <p>startAsyncJobs();</p>
-<p>/<em>
+<p>/*
 0 사원 데이터 받아오기 완료!
 1 사원 데이터 받아오기 완료!
 2 사원 데이터 받아오기 완료!
@@ -23609,12 +23631,20 @@ function setTimeoutPromise(delay) {
 7 사원 데이터 받아오기 완료!
 8 사원 데이터 받아오기 완료!
 9 사원 데이터 받아오기 완료!
-평균 나이는? ==&gt; 33
-* </em>/
-<code>- 정상적인 비동기로...</code>js
-function setTimeoutPromise(delay) {
-  return new Promise((resolve) =&gt; setTimeout(resolve, delay));
-}</p>
+평균 나이는? ==&gt; 33</p>
+<ul>
+<li>*/
+```</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>정상적인 비동기로...
+  ```js
+  function setTimeoutPromise(delay) {
+    return new Promise((resolve) =&gt; setTimeout(resolve, delay));
+  }</p>
 <p>async function fetchAge(id) {
   await setTimeoutPromise(1000);
   console.log(<code>${id} 사원 데이터 받아오기 완료!</code>);
@@ -23631,9 +23661,11 @@ function setTimeoutPromise(delay) {
   );
 }</p>
 <p>startAsyncJobs();
-<code>``
-  - 이를 통해 map 함수에다가 async 함수 넣으면 Promise 배열 얻는데 -&gt; 이걸</code>Promise.all()` 로 뚝!딱! 한큐에 처리가능</p>
+```</p>
 </li>
+</ul>
+<ul>
+<li>이를 통해 map 함수에다가 async 함수 넣으면 Promise 배열 얻는데 -&gt; 이걸 <code>Promise.all()</code> 로 뚝!딱! 한큐에 처리가능</li>
 </ul>
 </li>
 </ul>

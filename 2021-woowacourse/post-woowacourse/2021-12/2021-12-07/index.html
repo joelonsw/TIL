@@ -23049,9 +23049,9 @@
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="n">emailService</span><span class="p">.</span><span class="na">sendEmail</span><span class="p">(</span><span class="n">member</span><span class="p">.</span><span class="na">getEmail</span><span class="p">());</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">}</span>
-</code></pre></div>
-    - 해당 이벤트를 발행하는 친구가 <code>@Transactional</code> 어노테이션이 있어야해
-        - 아마 트랜잭션 종료시점에 applicationContext가 뚝딱 처리하는데 <code>@Transcational</code> 이 없으면 그 타이밍을 감지 못하는거 아닐까?   </li>
+</code></pre></div><p>- 해당 이벤트를 발행하는 친구가 <code>@Transactional</code> 어노테이션이 있어야해
+      - 아마 트랜잭션 종료시점에 applicationContext가 뚝딱 처리하는데 <code>@Transcational</code> 이 없으면 그 타이밍을 감지 못하는거 아닐까?   </p>
+</li>
 </ul>
 <ul>
 <li><strong>비동기 처리 이후 단축된 시간</strong>

@@ -23166,10 +23166,14 @@
 </li>
 </ul>
 <ul>
-<li><strong>하나의 쓰레드는 여러개의 소켓 커넥션을 들고 있을 수 있다</strong><ul>
+<li>
+<p><strong>하나의 쓰레드는 여러개의 소켓 커넥션을 들고 있을 수 있다</strong></p>
+<ul>
 <li>Netty 서버가 소켓 커넥션을 다룸</li>
 <li>Client가 요청 보냄 -&gt; Netty Worker Thread가 요청을 받음 -&gt; Play에게 Request 넘겨줌 -&gt; <br />
   Play 할일 하고 Netty Worker Thread에게 응답 줌 -&gt; Client에게 응답 줌</li>
+</ul>
+<ul>
 <li>이 과정에서 Netty Worker Thread는 socket connection을 여전히 들고 있으면서 플레이의 응답을 기다림<ul>
 <li>그러면서 non-blocking/async니까 딴일도 딴일 나름대로 처리 중</li>
 <li>Netty Worker Thread가 요청 받으면, 해당 요청 처리를 Akka와 같은 non-blocking 라이브러리에 넘길 수 있음</li>
@@ -23230,12 +23234,16 @@
 </li>
 </ul>
 <ul>
-<li><strong>예시 2. Request =&gt; Result</strong><ul>
+<li>
+<p><strong>예시 2. Request =&gt; Result</strong></p>
+<ul>
 <li><code>Request =&gt; Result</code>를 아규먼트로 받아 반환하는 친구가 있음
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nc">Action</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nc">Ok</span><span class="p">(</span><span class="s">&quot;Got Request [ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>여기서 request를 implicit으로 받으면, 다른 API에서 받아서 처리할 수 있음
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nc">Action</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">implicit</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nc">Ok</span><span class="p">(</span><span class="s">&quot;Got Request [ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">)</span>

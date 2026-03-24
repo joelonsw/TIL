@@ -22956,7 +22956,9 @@
 <h2 id="spring-security">Spring Security 테스팅<a class="headerlink" href="#spring-security" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>참고: <a href="https://tecoble.techcourse.co.kr/post/2020-09-30-spring-security-test/">https://tecoble.techcourse.co.kr/post/2020-09-30-spring-security-test/</a></em></li>
-<li><strong>개요</strong><ul>
+<li>
+<p><strong>개요</strong></p>
+<ul>
 <li>Spring Security 테스트 하려면 인증 정보를 미리 주입해야 하는 경우 종종 발생</li>
 <li>SecurityContext에 직접 Authentication 주입하는 방법도 있음
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@BeforeEach</span>
@@ -22967,6 +22969,8 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">setAuthentication</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsernamePasswordAuthenticationToken</span><span class="p">());</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>Spring Security가 인증 정보를 관리하는 방법<ul>
 <li>인증 정보를 담은 Authentication 객체</li>
 <li>해당 정보를 SecurityContext에 보관</li>

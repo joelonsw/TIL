@@ -22932,15 +22932,23 @@
 
 <h3 id="2024-12-18">2024-12-18<a class="headerlink" href="#2024-12-18" title="Permanent link">&para;</a></h3>
 <h2 id="mysql-unique-key">MySQL Unique Key 단점<a class="headerlink" href="#mysql-unique-key" title="Permanent link">&para;</a></h2>
-<p><em>참고: <a href="https://sheerheart.tistory.com/entry/MySQL-%ED%95%98%EA%B8%B0-%EC%89%AC%EC%9A%B4-%EC%8B%A4%EC%88%98%EC%99%80-Tip%EC%97%90-%EB%8C%80%ED%95%9C-%EC%86%8C%EA%B0%9C">https://sheerheart.tistory.com/entry/MySQL-%ED%95%98%EA%B8%B0-%EC%89%AC%EC%9A%B4-%EC%8B%A4%EC%88%98%EC%99%80-Tip%EC%97%90-%EB%8C%80%ED%95%9C-%EC%86%8C%EA%B0%9C</a></em><br />
-1. 다중 INSERT/UPDATE 성능 이슈
-   - 인덱스 유지 비용 증가
-     - 다량의 데이터를 빈번하게 갱신하는 경우, 성능 저하로 이어질 수 있음
-   - 잠금(Lock) 충돌 가능성
-     - UNIQUE KEY 검사를 위해 해당 인덱스 페이지를 잠감함. 
-     - 동시에 여러 트랜잭션이 INSERT/UPDATE 하면, 경합이 일어날 가능성이 커짐
-     - 병목 구간이 발생할 수 있음</p>
+<p><em>참고: <a href="https://sheerheart.tistory.com/entry/MySQL-%ED%95%98%EA%B8%B0-%EC%89%AC%EC%9A%B4-%EC%8B%A4%EC%88%98%EC%99%80-Tip%EC%97%90-%EB%8C%80%ED%95%9C-%EC%86%8C%EA%B0%9C">https://sheerheart.tistory.com/entry/MySQL-%ED%95%98%EA%B8%B0-%EC%89%AC%EC%9A%B4-%EC%8B%A4%EC%88%98%EC%99%80-Tip%EC%97%90-%EB%8C%80%ED%95%9C-%EC%86%8C%EA%B0%9C</a></em>  </p>
 <ol>
+<li>
+<p>다중 INSERT/UPDATE 성능 이슈</p>
+<ul>
+<li>인덱스 유지 비용 증가<ul>
+<li>다량의 데이터를 빈번하게 갱신하는 경우, 성능 저하로 이어질 수 있음</li>
+</ul>
+</li>
+<li>잠금(Lock) 충돌 가능성<ul>
+<li>UNIQUE KEY 검사를 위해 해당 인덱스 페이지를 잠감함. </li>
+<li>동시에 여러 트랜잭션이 INSERT/UPDATE 하면, 경합이 일어날 가능성이 커짐</li>
+<li>병목 구간이 발생할 수 있음</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>
 <p>중복 예외 처리 필요</p>
 </li>
@@ -22972,7 +22980,8 @@
 </li>
 <li>InnoDB의 레코드 락은 레코드를 잠그는 것이 아니라, 인덱스를 잠금 (넥스트 키 락)<ul>
 <li>Update/Delete 시, 변경해야 할 레코드를 찾기 위해 검색한 인덱스의 레코드가 모두 잠김</li>
-<li>예시)
+<li>
+<p>예시)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">emp_no</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -22984,14 +22993,17 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">hire_date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">first_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Joel&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">last_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Jo&#39;</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li>해당 경우 <code>first_name = 'Joel'</code>인 모든 레코드가 잠기게 된다</li>
-<li>심지어 idx_first_name도 없다면, 테이블 풀 스캔 하면서 Update 함 -&gt; 테이블의 모든 레코드 잠김</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>심지어 idx_first_name도 없다면, 테이블 풀 스캔 하면서 Update 함 -&gt; 테이블의 모든 레코드 잠김<ul>
 <li>MySQL의 Group By는 기본적으로 그룹핑 컬럼 순서대로 정렬</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

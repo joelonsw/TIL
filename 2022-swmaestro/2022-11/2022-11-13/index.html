@@ -22962,18 +22962,24 @@
 </li>
 </ul>
 <ul>
-<li><strong>Connection Timeout</strong><ul>
+<li>
+<p><strong>Connection Timeout</strong></p>
+<ul>
 <li>클라이언트-서버 간 커넥션이 필수적으로 수립되어야 하는 기간</li>
 <li>다양한 채널 옵션으로 configuration 가능
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">HttpClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="na">create</span><span class="p">()</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="n">ChannelOption</span><span class="p">.</span><span class="na">CONNECT_TIMEOUT_MILLIS</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>네티는 기본적으로 30초를 수립시간으로 설정</li>
 <li>keep-alive 옵션으로 Connection Idle 검사
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">HttpClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="na">create</span><span class="p">()</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="n">ChannelOption</span><span class="p">.</span><span class="na">SO_KEEPALIVE</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="n">EpollChannelOption</span><span class="p">.</span><span class="na">TCP_KEEPIDLE</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>해당 시간에 given time 안에 못했으면 ConnectionTimeoutException 던져짐</li>
 </ul>
 </li>
@@ -22986,7 +22992,9 @@
 </li>
 </ul>
 <ul>
-<li><strong>SSL/TLS Timeout</strong><ul>
+<li>
+<p><strong>SSL/TLS Timeout</strong></p>
+<ul>
 <li>SSL 커넥션 수립시 시간
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">HttpClient</span><span class="p">.</span><span class="na">create</span><span class="p">()</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="p">.</span><span class="na">secure</span><span class="p">(</span><span class="n">spec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">spec</span><span class="p">.</span><span class="na">sslContext</span><span class="p">(</span><span class="n">SslContextBuilder</span><span class="p">.</span><span class="na">forClient</span><span class="p">()))</span>
@@ -22995,6 +23003,8 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="p">.</span><span class="na">closeNotifyFlushTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="p">.</span><span class="na">closeNotifyReadTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>SslHandshakeTimeoutException 발</li>
 </ul>
 </li>
