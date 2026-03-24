@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22931,8 +22955,8 @@
 <h3 id="2021-10-23">2021-10-23<a class="headerlink" href="#2021-10-23" title="Permanent link">&para;</a></h3>
 <h2 id="keep-alive">Keep-Alive<a class="headerlink" href="#keep-alive" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고 1: https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive</em></li>
-<li><em>참고 2: https://developer.mozilla.org/ko/docs/Web/HTTP/Connection_management_in_HTTP_1.x</em></li>
+<li><em>참고 1: <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive">https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive</a></em></li>
+<li><em>참고 2: <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Connection_management_in_HTTP_1.x">https://developer.mozilla.org/ko/docs/Web/HTTP/Connection_management_in_HTTP_1.x</a></em></li>
 <li>Keep-Alive?
     - 송신자가 연결에 대한 "타임아웃 요청"과 "최대 갯수"를 어떻게 정했는지 알려줌
     - Keep-Alive: parameters
@@ -22960,17 +22984,17 @@
     - 영속적인 커넥션을 통해 응답을 기다리지 않고 연속적으로 보내는 기능
         - 커넥션의 지연 회피
     - GET, HEAD, PUT, DELETE 등의 <code>멱등성</code>을 가진 요청만 허용
-        - <em>참고: https://developer.mozilla.org/ko/docs/Glossary/Idempotent</em>
+        - <em>참고: <a href="https://developer.mozilla.org/ko/docs/Glossary/Idempotent">https://developer.mozilla.org/ko/docs/Glossary/Idempotent</a></em>
         - <code>멱등성</code>: 동일한 요청을 한 번 보내는 것과 여러번 연속으로 보내는 것이 같은 효과. 
     - HTTP/1.1 호환 프록시들과 서버는 파이프라이닝 지원해야 하지만, 실제로는 많은 프록시와 서버들은 제한 O
         - 따라서 모든 브라우저가 디폴트 기능으로 활성화 X</li>
 </ul>
 <h2 id="mime-type">MIME type<a class="headerlink" href="#mime-type" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고: https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types</em></li>
+<li><em>참고: <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types">https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types</a></em></li>
 <li>클라이언트에게 전송된 문서의 다양성을 알려주기 위한 메커니즘</li>
 <li>각 문서와 함께 올바른 MIME 타입을 전송하도록, 서버가 정확히 설치해야함. 
-    - MIME 타입 전체 목록: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types</li>
+    - MIME 타입 전체 목록: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types</a></li>
 <li>웹에서는 MIME 타입으로 파일의 확장자를 판단
     - 조심스럽게 설정해야함! 요런 감성!
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>text/plain

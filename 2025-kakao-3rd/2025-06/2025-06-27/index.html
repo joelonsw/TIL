@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22974,15 +22998,21 @@
 
 <h3 id="2025-06-27">2025-06-27<a class="headerlink" href="#2025-06-27" title="Permanent link">&para;</a></h3>
 <h2 id="k8s-networkpolicy">k8s networkPolicy<a class="headerlink" href="#k8s-networkpolicy" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://kubernetes.io/ko/docs/concepts/services-networking/network-policies/</em>
-- <strong>개요</strong>
-  - NetworkPolicy를 통해 Pod가 네트워크 상 "엔티티"와 통신할 수 있도록 허용하는 방법 지정
-  - NetworkPolicy 한쪽-양쪽 종단인 파드인 연결에만 적용됨
-  - 파드가 통신할 수 있는 엔티티는 다음 3가지 조합을 통해 식별
-    1. 허용되는 다른 파드
-    2. 허용되는 네임스페이스
-    3. IP 블록 (CIDR 범위 기반)
-  - <code>selector</code>를 사용하여 <code>pod-</code>/<code>namespace-</code> 기반의 네트워크 폴리시 정의 가능</p>
+<p><em>참고: <a href="https://kubernetes.io/ko/docs/concepts/services-networking/network-policies/">https://kubernetes.io/ko/docs/concepts/services-networking/network-policies/</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>NetworkPolicy를 통해 Pod가 네트워크 상 "엔티티"와 통신할 수 있도록 허용하는 방법 지정</li>
+<li>NetworkPolicy 한쪽-양쪽 종단인 파드인 연결에만 적용됨</li>
+<li>파드가 통신할 수 있는 엔티티는 다음 3가지 조합을 통해 식별<ol>
+<li>허용되는 다른 파드</li>
+<li>허용되는 네임스페이스</li>
+<li>IP 블록 (CIDR 범위 기반)</li>
+</ol>
+</li>
+<li><code>selector</code>를 사용하여 <code>pod-</code>/<code>namespace-</code> 기반의 네트워크 폴리시 정의 가능</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Pod 격리의 2가지 종류</strong><ol>
 <li>Egress에 대한 격리/비격리<ul>

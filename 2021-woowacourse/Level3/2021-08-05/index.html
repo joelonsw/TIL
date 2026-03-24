@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23019,7 +23043,7 @@
 <h3 id="2021-08-05">2021-08-05<a class="headerlink" href="#2021-08-05" title="Permanent link">&para;</a></h3>
 <h2 id="emflush-emclear">em.flush(), em.clear()<a class="headerlink" href="#emflush-emclear" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고: https://apalsl.github.io/2019/11/14/SpringJpaFlushClear/</em></li>
+<li><em>참고: <a href="https://apalsl.github.io/2019/11/14/SpringJpaFlushClear/">https://apalsl.github.io/2019/11/14/SpringJpaFlushClear/</a></em></li>
 <li>하는 일: DB에 데이터를 반영하고, 영속성 컨텍스트 지움</li>
 <li>springboot에서 persist(), flush(), clear() 가능
     - 트랜잭션 시작되고 끝나기 직전가지 내가 날린 데이터는 영속성 컨텍스트에 저장</li>
@@ -23031,8 +23055,8 @@
 </ul>
 <h2 id="saveandflush">saveAndFlush()<a class="headerlink" href="#saveandflush" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고 1: https://ramees.tistory.com/36</em></li>
-<li><em>참고 2: https://www.baeldung.com/spring-data-jpa-save-saveandflush</em></li>
+<li><em>참고 1: <a href="https://ramees.tistory.com/36">https://ramees.tistory.com/36</a></em></li>
+<li><em>참고 2: <a href="https://www.baeldung.com/spring-data-jpa-save-saveandflush">https://www.baeldung.com/spring-data-jpa-save-saveandflush</a></em></li>
 <li><strong><code>@Transactional</code>없이 save() vs saveAndFlush()</strong>
     - 둘 모두 save/saveAndFlush 이후에 .setName() 한 것 반영 안 됨</li>
 </ul>
@@ -23067,12 +23091,14 @@
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">member</span><span class="p">;</span><span class="w">  </span>
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">}</span><span class="w">   </span><span class="c1">//UPDATE QUERY 출력 &amp; DB 뚝딱 변경</span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>saveAndFlush()는 우리의 비즈니스로직에서 변경된 점을 사용해야하기 때문</li>
 </ul>
 <h2 id="_1">영속성 컨텍스트<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고 1: https://lollolzkk.tistory.com/27</em></li>
-<li><em>참고 2: https://stackoverflow.com/questions/14581865/hibernate-flush-and-commit</em></li>
+<li><em>참고 1: <a href="https://lollolzkk.tistory.com/27">https://lollolzkk.tistory.com/27</a></em></li>
+<li><em>참고 2: <a href="https://stackoverflow.com/questions/14581865/hibernate-flush-and-commit">https://stackoverflow.com/questions/14581865/hibernate-flush-and-commit</a></em></li>
 <li><strong>영속성 컨텍스트</strong>
     - Entity를 영구적으로 저장하는 환경
     - Entity Manager를 하나 생성할 때 영속성 컨텍스트 하나가 생성됨

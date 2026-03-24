@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22908,13 +22932,14 @@
 
 <h3 id="2024-10-24">2024-10-24<a class="headerlink" href="#2024-10-24" title="Permanent link">&para;</a></h3>
 <h2 id="mysql-unionunion-all">MySQL UNION/UNION ALL<a class="headerlink" href="#mysql-unionunion-all" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://mooonstar.tistory.com/entry/MySQLUNION-UNION-ALL%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%91%ED%95%A9-%EA%B5%AC%EB%AC%B8-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0</em><br />
-<em>참고: https://priming.tistory.com/115</em><br />
-<em>참고: https://jmkim.tistory.com/50</em><br />
-<em>참고: https://intomysql.blogspot.com/2011/01/union-union-all.html</em>
-- <strong>개요</strong>
-  - 두 개 이상의 조회 결과를 병합하는 경우
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>table: MEMBER
+<p><em>참고: <a href="https://mooonstar.tistory.com/entry/MySQLUNION-UNION-ALL%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%91%ED%95%A9-%EA%B5%AC%EB%AC%B8-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0">https://mooonstar.tistory.com/entry/MySQLUNION-UNION-ALL%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%91%ED%95%A9-%EA%B5%AC%EB%AC%B8-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0</a></em><br />
+<em>참고: <a href="https://priming.tistory.com/115">https://priming.tistory.com/115</a></em><br />
+<em>참고: <a href="https://jmkim.tistory.com/50">https://jmkim.tistory.com/50</a></em><br />
+<em>참고: <a href="https://intomysql.blogspot.com/2011/01/union-union-all.html">https://intomysql.blogspot.com/2011/01/union-union-all.html</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>두 개 이상의 조회 결과를 병합하는 경우
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>table: MEMBER
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|   MEM_ID  |   MEM_NAME   |    MEM_EMAIL   |   MEM_ADDRESS  |
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>--------------------------------------------------------------
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>|   100004  |   joel.jo    |   joel@jo.com  |    addrees2    |
@@ -22925,11 +22950,16 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>--------------------------------------------------------------
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>|   100004  |   joelonsw   |   joel@jo.com  |    addrees3    |
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>|   100006  |   illit      |   cherish@j.co |    address4    |
-</code></pre></div>
-  - UNION/UNION ALL을 사용하려면...
-    1. 각 쿼리의 SELECT 절 칼럼의 갯수 및 데이터 타입이 일치할 것
-    2. 대응하는 칼럼 명이 같아야 함 (별칭 사용 가능)
-    3. ORDER BY 절은 마지막에 한 번 사용 가능</p>
+</code></pre></div></li>
+<li>UNION/UNION ALL을 사용하려면...<ol>
+<li>각 쿼리의 SELECT 절 칼럼의 갯수 및 데이터 타입이 일치할 것</li>
+<li>대응하는 칼럼 명이 같아야 함 (별칭 사용 가능)</li>
+<li>ORDER BY 절은 마지막에 한 번 사용 가능</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>UNION</strong><ul>
 <li>UNION은 구문을 병합하는 과정에서 중복 데이터가 사라짐</li>

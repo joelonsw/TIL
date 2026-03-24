@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22952,17 +22976,23 @@
 
 <h3 id="2023-07-06">2023-07-06<a class="headerlink" href="#2023-07-06" title="Permanent link">&para;</a></h3>
 <h2 id="react-strictmode">React StrictMode<a class="headerlink" href="#react-strictmode" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.youtube.com/watch?v=MXSuOR2yRvQ</em>
-<em>참고: https://velog.io/@jay/you-might-need-useEffect-diet</em>
-- 컴포넌트 마운트 -&gt; 언마운트 -&gt; 마운트
-- Connecting -&gt; Disconnected -&gt; Connecting 순서
-- API 한번만 호출하려면 첫 마운트에만 가져오도록 useRef() boolean 으로 flag 걸어두자</p>
+<p><em>참고: <a href="https://www.youtube.com/watch?v=MXSuOR2yRvQ">https://www.youtube.com/watch?v=MXSuOR2yRvQ</a></em>
+<em>참고: <a href="https://velog.io/@jay/you-might-need-useEffect-diet">https://velog.io/@jay/you-might-need-useEffect-diet</a></em></p>
+<ul>
+<li>컴포넌트 마운트 -&gt; 언마운트 -&gt; 마운트</li>
+<li>Connecting -&gt; Disconnected -&gt; Connecting 순서</li>
+<li>API 한번만 호출하려면 첫 마운트에만 가져오도록 useRef() boolean 으로 flag 걸어두자</li>
+</ul>
 <h2 id="react">React 생명주기<a class="headerlink" href="#react" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.zerocho.com/category/React/post/579b5ec26958781500ed9955</em>
-<em>참고: https://www.zerocho.com/category/React/post/5f9a6ef507be1d0004347305</em>
-- <strong>리액트 생명주기</strong>
-  - 컴포넌트가 실행/업데이트/제거시 이런 이벤트들이 발생
-  - 근데 클래스기반 컴포넌트랑 함수형 기반 컴포넌트랑 생명주기가 조금 다르다네?</p>
+<p><em>참고: <a href="https://www.zerocho.com/category/React/post/579b5ec26958781500ed9955">https://www.zerocho.com/category/React/post/579b5ec26958781500ed9955</a></em>
+<em>참고: <a href="https://www.zerocho.com/category/React/post/5f9a6ef507be1d0004347305">https://www.zerocho.com/category/React/post/5f9a6ef507be1d0004347305</a></em></p>
+<ul>
+<li><strong>리액트 생명주기</strong><ul>
+<li>컴포넌트가 실행/업데이트/제거시 이런 이벤트들이 발생</li>
+<li>근데 클래스기반 컴포넌트랑 함수형 기반 컴포넌트랑 생명주기가 조금 다르다네?</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>클래스 기반 컴포넌트 생명주기</strong><ul>
 <li><img alt="" src="../../images/2023-07-06-react-lifecycle.jpeg" /> </li>
@@ -23041,16 +23071,20 @@
 </li>
 </ul>
 <h2 id="_1">브라우저 캐시<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://toss.tech/article/smart-web-service-cache</em>
-<em>참고: https://sarc.io/index.php/miscellaneous/1565-browser-cache</em>
-<em>참고: https://hahahoho5915.tistory.com/33</em>
-- <strong>개요</strong>
-  - 브라우저가 웹 서버의 일부 컨텐츠를 요청
-  - 컨텐츠가 브라우저 캐시에 없으면 웹 서버에서 직접 검색
-  - 컨텐츠가 이전에 캐시되었다면 브라우저는 서버를 우회하여 캐시에서 직접 컨텐츠 로드
-  - 브라우저 캐싱은 특정 HTTP 헤더를 사용해 웹 개발자와 관리자가 활용할 수 있음
-  - 자원을 언제 캐시할 지, 얼마나 오래 캐시할지 웹 브라우저에 지시
-  - 웹 프록시, 오래된 브라우저, 충돌 캐싱 정책 등을 고려해야 함</p>
+<p><em>참고: <a href="https://toss.tech/article/smart-web-service-cache">https://toss.tech/article/smart-web-service-cache</a></em>
+<em>참고: <a href="https://sarc.io/index.php/miscellaneous/1565-browser-cache">https://sarc.io/index.php/miscellaneous/1565-browser-cache</a></em>
+<em>참고: <a href="https://hahahoho5915.tistory.com/33">https://hahahoho5915.tistory.com/33</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>브라우저가 웹 서버의 일부 컨텐츠를 요청</li>
+<li>컨텐츠가 브라우저 캐시에 없으면 웹 서버에서 직접 검색</li>
+<li>컨텐츠가 이전에 캐시되었다면 브라우저는 서버를 우회하여 캐시에서 직접 컨텐츠 로드</li>
+<li>브라우저 캐싱은 특정 HTTP 헤더를 사용해 웹 개발자와 관리자가 활용할 수 있음</li>
+<li>자원을 언제 캐시할 지, 얼마나 오래 캐시할지 웹 브라우저에 지시</li>
+<li>웹 프록시, 오래된 브라우저, 충돌 캐싱 정책 등을 고려해야 함</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Cache-Control</strong><ul>
 <li>No-cache<ul>

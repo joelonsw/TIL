@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22930,11 +22954,15 @@
 
 <h3 id="2024-10-07">2024-10-07<a class="headerlink" href="#2024-10-07" title="Permanent link">&para;</a></h3>
 <h2 id="mysql-column">MySQL column 제한<a class="headerlink" href="#mysql-column" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://dev.mysql.com/doc/mysql-reslimits-excerpt/8.0/en/column-count-limit.html</em>
-<em>참고: https://stackoverflow.com/questions/15410604/maximum-number-of-columns-in-mysql-table</em>
-<em>참고: https://www.percona.com/blog/understanding-the-maximum-number-of-columns-in-a-mysql-table/</em>
-- <strong>개요</strong>
-  - 최대 4,096개의 열을 가질 수 있으나, 실제로는 여러 요인으로 인해 이보다 적은 수의 열만 사용 가능</p>
+<p><em>참고: <a href="https://dev.mysql.com/doc/mysql-reslimits-excerpt/8.0/en/column-count-limit.html">https://dev.mysql.com/doc/mysql-reslimits-excerpt/8.0/en/column-count-limit.html</a></em>
+<em>참고: <a href="https://stackoverflow.com/questions/15410604/maximum-number-of-columns-in-mysql-table">https://stackoverflow.com/questions/15410604/maximum-number-of-columns-in-mysql-table</a></em>
+<em>참고: <a href="https://www.percona.com/blog/understanding-the-maximum-number-of-columns-in-a-mysql-table/">https://www.percona.com/blog/understanding-the-maximum-number-of-columns-in-a-mysql-table/</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>최대 4,096개의 열을 가질 수 있으나, 실제로는 여러 요인으로 인해 이보다 적은 수의 열만 사용 가능</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>제약</strong><ol>
 <li>최대 행 크기 : Row 하나에 최대 크기는 65,535 byte</li>
@@ -22959,14 +22987,20 @@
 </li>
 </ul>
 <h2 id="db">DB 성능 개선을 위한 테이블 분할<a class="headerlink" href="#db" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://khdscor.tistory.com/56</em>
-<em>참고: https://khdscor.tistory.com/46</em>
-- <strong>개요</strong>
-  - Target: 대용량이면서 성능 이슈가 있는 테이블
-  - 수직 분할/수평 분할로 나눌 수 있음
-    - 수직 분할 : 컬럼을 기준으로 테이블을 분리하는 것
-    - 수평 분할 : 로우를 기준으로 테이블을 분리하는 것
-  - 테이블의 컬럼 수가 많을 수록 I/O 부하 up</p>
+<p><em>참고: <a href="https://khdscor.tistory.com/56">https://khdscor.tistory.com/56</a></em>
+<em>참고: <a href="https://khdscor.tistory.com/46">https://khdscor.tistory.com/46</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>Target: 대용량이면서 성능 이슈가 있는 테이블</li>
+<li>수직 분할/수평 분할로 나눌 수 있음<ul>
+<li>수직 분할 : 컬럼을 기준으로 테이블을 분리하는 것</li>
+<li>수평 분할 : 로우를 기준으로 테이블을 분리하는 것</li>
+</ul>
+</li>
+<li>테이블의 컬럼 수가 많을 수록 I/O 부하 up</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>I/O 성능 개선을 위한 수직분할</strong><ul>
 <li>한 테이블에 컬럼이 매우 많다면 -&gt; 한 Row가 매우 김 -&gt; 데이터 저장 시, 디스크의 여러 블록에 데이터가 저장됨 -&gt; I/O 성능 저하<ul>

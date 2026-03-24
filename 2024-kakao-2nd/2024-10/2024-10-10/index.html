@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23096,9 +23120,13 @@
 
 <h3 id="2024-10-10">2024-10-10<a class="headerlink" href="#2024-10-10" title="Permanent link">&para;</a></h3>
 <h2 id="k8s-ingress-configuration-snippet-vs-server-snippet">k8s Ingress : configuration-snippet vs server-snippet<a class="headerlink" href="#k8s-ingress-configuration-snippet-vs-server-snippet" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://skasha.tistory.com/103</em>
-- <strong>개요</strong>
-  - 쿠버네티스 어노테이션을 활용해 커스텀 행동 지정 가능</p>
+<p><em>참고: <a href="https://skasha.tistory.com/103">https://skasha.tistory.com/103</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>쿠버네티스 어노테이션을 활용해 커스텀 행동 지정 가능</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>configuration-snippet</strong><ul>
 <li>Nginx location에 redirect/rewrite를 포함한 다양한 설정 추가적으로 지정 가능</li>
@@ -23114,7 +23142,7 @@
 </li>
 </ul>
 <h2 id="play">Play 빌드 방식<a class="headerlink" href="#play" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.playframework.com/documentation/3.0.x/BuildOverview</em>
+<p><em>참고: <a href="https://www.playframework.com/documentation/3.0.x/BuildOverview">https://www.playframework.com/documentation/3.0.x/BuildOverview</a></em>
 1. <code>sbt clean compile stage</code> 명령을 통해 빌드하면...
 2. <code>/target/universal/stage/</code> 안에 <code>bin</code>, <code>lib</code> 등등이 생성
 3. <code>/target/universal/stage/bin/project</code>,<code>/target/universal/stage/bin/project.bat</code> 둘이 생성되는데 각각 unix shell script, window batch file
@@ -23125,16 +23153,24 @@
      - Play Application 띄움
 4. <code>/target/universal/stage/lib</code> 하위에 여러가지 jar 파일들이 존재해, 디펜던시 필요한 친구들 참조</p>
 <h2 id="scala-option-either">Scala Option &amp; Either<a class="headerlink" href="#scala-option-either" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://hamait.tistory.com/649</em>
-- <strong>Option</strong>
-  - 값이 있거나/없거나 한 상태를 나타냄
-  - Option의 하위 타입
-    - 값이 있으면 Some[T]
-    - 값이 없으면 None
-  - Try/Future와 함꼐 Monadic Collection
-  - 특징
-    1. null을 대체하여 안전하게 사용
-    2. 연속 체인에서 안정적인 사용</p>
+<p><em>참고: <a href="https://hamait.tistory.com/649">https://hamait.tistory.com/649</a></em></p>
+<ul>
+<li><strong>Option</strong><ul>
+<li>값이 있거나/없거나 한 상태를 나타냄</li>
+<li>Option의 하위 타입<ul>
+<li>값이 있으면 Some[T]</li>
+<li>값이 없으면 None</li>
+</ul>
+</li>
+<li>Try/Future와 함꼐 Monadic Collection</li>
+<li>특징<ol>
+<li>null을 대체하여 안전하게 사용</li>
+<li>연속 체인에서 안정적인 사용</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Option + Map</strong><ul>
 <li>map은 Option 타입을 스스로 변경하여 적용</li>
@@ -23177,12 +23213,18 @@
 </li>
 </ul>
 <h2 id="scala-either">Scala Either<a class="headerlink" href="#scala-either" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.baeldung.com/scala/either-type</em>
-- <strong>Either를 쓰는 이유</strong>
-  - 스칼라에서는 Exception을 던지는게 실패를 리포트하는 좋은 방법이 아님. 
-    - Scala에서 Exception은 function signature가 아니기 때문
-    - compiler가 이를 트래킹 하는데 별다른 도움이 되지 않기 때문
-  - 더 좋은 대안은 <code>Either[A, B]</code> 타입을 사용하는 것</p>
+<p><em>참고: <a href="https://www.baeldung.com/scala/either-type">https://www.baeldung.com/scala/either-type</a></em></p>
+<ul>
+<li><strong>Either를 쓰는 이유</strong><ul>
+<li>스칼라에서는 Exception을 던지는게 실패를 리포트하는 좋은 방법이 아님. <ul>
+<li>Scala에서 Exception은 function signature가 아니기 때문</li>
+<li>compiler가 이를 트래킹 하는데 별다른 도움이 되지 않기 때문</li>
+</ul>
+</li>
+<li>더 좋은 대안은 <code>Either[A, B]</code> 타입을 사용하는 것</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Either Type에 대해서...</strong><ul>
 <li><code>Either[A, B]</code>는 타입 A나 타입 B를 가질 수 있는 것<ul>
@@ -23204,7 +23246,7 @@
 </code></pre></div></li>
 </ul>
 <h2 id="scala">Scala의 예외처리<a class="headerlink" href="#scala" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://wonyong-jang.github.io/scala/2021/04/29/Scala-Option-Either-Try.html</em></p>
+<p><em>참고: <a href="https://wonyong-jang.github.io/scala/2021/04/29/Scala-Option-Either-Try.html">https://wonyong-jang.github.io/scala/2021/04/29/Scala-Option-Either-Try.html</a></em></p>
 <h3 id="1-option">1. Option<a class="headerlink" href="#1-option" title="Permanent link">&para;</a></h3>
 <ul>
 <li><img alt="" src="../../images/2024-10-10-option.png" /><ul>

@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23013,7 +23037,7 @@
                 민감 정보 다 빼고 나면 결국 토큰이 담은 정보만으로는 부족해서 검증 시마다 인증 서버 또는 DB 조회가 불가피해질 수도 있죠<br />
                 서비스 특성에 따라 트레이드오프를 고려해 어떤 정보를 담을지, 만료 기간은 어떻게 가져갈지, <br />
                 리프레시는 어떻게 할지 등을 잘 결정해서 사용하는 게 중요한 것 같아요.<br />
-        - 해당 사이트에서 https://jwt.io/ 내가 발급 받은 토큰 + signature 돌리는데 왜 안되냐... 😅
+        - 해당 사이트에서 <a href="https://jwt.io/">https://jwt.io/</a> 내가 발급 받은 토큰 + signature 돌리는데 왜 안되냐... 😅
     - Interceptor에서 토큰에 양식에 대해서만 Validation을 진행했지, 따로 토큰 필드를 통해 DB 조회를 하지는 않았음
         - JWT 토큰 validation에서 중요한 건 secretKey와 만료 날짜 (Payload를 추출하여 DB 조회를 따로 해주지 않았음)
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">validateToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -23032,7 +23056,7 @@
         - Service Layer에서 던져줄 커스텀 예외를 <code>org.springframework.dao.EmptyResultDataAccessException</code> 이걸 상속받음
     - 예외 자체에 <code>@ResponseStatus</code>를 정의하는 것 보다 <code>@ExceptionHandler</code>를 통해 예외 잡고 ResponseEntity 반환하는 것 추천
         - <code>@ResponseStatus</code>를 사용하면 HttpServletResponse.sendError 메서드가 사용됨
-            - <em>참고: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html</em>
+            - <em>참고: <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html">https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html</a></em>
             - 해당 메서드를 호출한다는 것은 Response가 완료되었다 간주하고 더 이상 추가적인 정보를 부여할 수 없다는 뜻
             - 또한 Servlet Container는 HTML 에러 페이지를 반환하기 때문에 REST API 설계와 어울리지 않는 예외처리 방식임
     - <code>@SQLException</code>에 대한 처리를 <code>@ControllerAdvice</code>에서 하는게 맞을까?
@@ -23048,7 +23072,7 @@
     - [PathService에 SubwayMap 도메인 객체를 위한 전처리 로직이 있음]
     - [Spring Web MVC 요청 절차에 대한 정리하기]
     - [JWT 토큰 정리하기]
-        - 참고: https://blog.outsider.ne.kr/1160?commentId=570298#comment570298
+        - 참고: <a href="https://blog.outsider.ne.kr/1160?commentId=570298#comment570298">https://blog.outsider.ne.kr/1160?commentId=570298#comment570298</a>
         - 토큰 자체가 정보를 들고 있어, 서버를 무상태로 유지할 수 있음
         - Header와 Payload는 Base64 Encoding만 되어있어 탈취당한다면 그냥 까볼수 있음
             - 중요한 정보가 들어가면 안되는 이유 <em>(최소한의 claim set만 담을것)</em>
@@ -23057,7 +23081,7 @@
         - 토큰을 강제로 만료시킬 방법이 없음
             - 클라이언트가 로그아웃 하더라도, 해당 토큰 자체가 만료되는 것은 아님 <em>(내가 로컬 스토리지에서 지워주더라도)</em>
     - [xss, csrf 등 웹 보안 조금 공부하기]
-        - https://velog.io/@0307kwon/JWT%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C-localStorage-vs-cookie</li>
+        - <a href="https://velog.io/@0307kwon/JWT%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C-localStorage-vs-cookie">https://velog.io/@0307kwon/JWT%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C-localStorage-vs-cookie</a></li>
 </ul>
 <h2 id="atdd-subway-fare">atdd-subway-fare 복습하기<a class="headerlink" href="#atdd-subway-fare" title="Permanent link">&para;</a></h2>
 <ul>
@@ -23221,7 +23245,7 @@
 <ul>
 <li><strong>완태</strong>
     - 도커와 PC가 동신할 때 Docker0를 통해 통신함
-        - <em>참고: https://phantasmicmeans.tistory.com/entry/Docker-Container-Network%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4</em>
+        - <em>참고: <a href="https://phantasmicmeans.tistory.com/entry/Docker-Container-Network%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4">https://phantasmicmeans.tistory.com/entry/Docker-Container-Network%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9D%B4%ED%95%B4</a></em>
         - Nginx가 도커 내에서 돌아가고 있어 local에 있는 8080 찌르라면 172.17.0.1
             - 도커 내의 로컬호스트가 172.17.0.1
     - 데코레이터 패턴을 통해 거리/나이 금액 산정 처리

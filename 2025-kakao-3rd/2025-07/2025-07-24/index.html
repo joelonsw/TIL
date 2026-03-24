@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22952,23 +22976,31 @@
 
 <h3 id="2025-07-24">2025-07-24<a class="headerlink" href="#2025-07-24" title="Permanent link">&para;</a></h3>
 <h2 id="delayed-mq">Delayed MQ<a class="headerlink" href="#delayed-mq" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://blog.leocat.kr/notes/2018/07/31/rabbitmq-delayed-queue</em><br />
-- RabbitMQ에서 Delayed MQ를 구현할 수 있는 방법 2가지
-1. Delayed Queue 설정
-   - https://www.rabbitmq.com/community-plugins
-   - 커뮤니티 플러그인으로 <code>rabbitmq_delayed_message_exchange</code> 가 있음. 
-     - <code>x-delayed-type</code> 을 넣어 exchange 생성하면 사용 가능
-   - 해당 플러그인은 Erlang Mnesia 테이블에 메시지 저장 + 타이머 기반 라우팅 시점 결정
-   - 싱글 카피로 구성되기 때문에 클러스터의 한 개 노드에만 디스크 장애가 발생해도 지연중인 메시지가 유실됨
-   - RabbitMQ가 Mirror/Quorom 으로 장애에 대처하는 것과 다르게, RabbitMQ 입장에서 라우팅 기다리는 메시지의 HA 보장할 수 없음
-   - 또한 15분으로 <code>x-delay</code>를 설정했으나 3일 후 라우팅되는 이슈도 있었음. 
-     - https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/issues/72
-   - 프로덕션에서 쓰기 부적절할 수 있음
-2. RabbitMQ-native Delayed Queue
-   - 이후 처리되길 바라는 시간만큼 ttl 설정하여 queue에 넣음
-   - ttl 만료되어 해당 메시지 DLX로 이전
-   - DLX를 컨슈밍하여 처리하면, 기다리는 것과 같은 효과
-   - 해당 방식 추천</p>
+<p><em>참고: <a href="https://blog.leocat.kr/notes/2018/07/31/rabbitmq-delayed-queue">https://blog.leocat.kr/notes/2018/07/31/rabbitmq-delayed-queue</a></em>  </p>
+<ul>
+<li>RabbitMQ에서 Delayed MQ를 구현할 수 있는 방법 2가지
+1. Delayed Queue 설정<ul>
+<li><a href="https://www.rabbitmq.com/community-plugins">https://www.rabbitmq.com/community-plugins</a></li>
+<li>커뮤니티 플러그인으로 <code>rabbitmq_delayed_message_exchange</code> 가 있음. <ul>
+<li><code>x-delayed-type</code> 을 넣어 exchange 생성하면 사용 가능</li>
+</ul>
+</li>
+<li>해당 플러그인은 Erlang Mnesia 테이블에 메시지 저장 + 타이머 기반 라우팅 시점 결정</li>
+<li>싱글 카피로 구성되기 때문에 클러스터의 한 개 노드에만 디스크 장애가 발생해도 지연중인 메시지가 유실됨</li>
+<li>RabbitMQ가 Mirror/Quorom 으로 장애에 대처하는 것과 다르게, RabbitMQ 입장에서 라우팅 기다리는 메시지의 HA 보장할 수 없음</li>
+<li>또한 15분으로 <code>x-delay</code>를 설정했으나 3일 후 라우팅되는 이슈도 있었음. <ul>
+<li><a href="https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/issues/72">https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/issues/72</a></li>
+</ul>
+</li>
+<li>프로덕션에서 쓰기 부적절할 수 있음
+2. RabbitMQ-native Delayed Queue</li>
+<li>이후 처리되길 바라는 시간만큼 ttl 설정하여 queue에 넣음</li>
+<li>ttl 만료되어 해당 메시지 DLX로 이전</li>
+<li>DLX를 컨슈밍하여 처리하면, 기다리는 것과 같은 효과</li>
+<li>해당 방식 추천</li>
+</ul>
+</li>
+</ul>
 <h2 id="akka-actor-rabbitmq">Akka actor 대신 RabbitMQ<a class="headerlink" href="#akka-actor-rabbitmq" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Akka Actor에서 초당 100건 처리하면 어려울까?</strong><ul>

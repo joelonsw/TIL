@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23008,12 +23032,16 @@
 
 <h3 id="2024-10-23">2024-10-23<a class="headerlink" href="#2024-10-23" title="Permanent link">&para;</a></h3>
 <h2 id="batch">Batch 성능 끌어올리기<a class="headerlink" href="#batch" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://velog.io/@gongmeda/ifkakaodev2022-Batch-Performance-%EA%B7%B9%ED%95%9C%EC%9C%BC%EB%A1%9C-%EB%81%8C%EC%96%B4%EC%98%AC%EB%A6%AC%EA%B8%B0-1%EC%96%B5-%EA%B1%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B2%98%EB%A6%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%85%B8%EB%A0%A5-%EC%9A%94%EC%95%BD</em><br />
-<em>참고: https://velog.io/@ddongh1122/MySQL-%ED%8E%98%EC%9D%B4%EC%A7%95-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0</em>
-- <strong>배치로 개발이 필요할 때</strong>
-  - 일괄 생성
-  - 일괄 수정
-  - 통계</p>
+<p><em>참고: <a href="https://velog.io/@gongmeda/ifkakaodev2022-Batch-Performance-%EA%B7%B9%ED%95%9C%EC%9C%BC%EB%A1%9C-%EB%81%8C%EC%96%B4%EC%98%AC%EB%A6%AC%EA%B8%B0-1%EC%96%B5-%EA%B1%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B2%98%EB%A6%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%85%B8%EB%A0%A5-%EC%9A%94%EC%95%BD">https://velog.io/@gongmeda/ifkakaodev2022-Batch-Performance-%EA%B7%B9%ED%95%9C%EC%9C%BC%EB%A1%9C-%EB%81%8C%EC%96%B4%EC%98%AC%EB%A6%AC%EA%B8%B0-1%EC%96%B5-%EA%B1%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B2%98%EB%A6%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%85%B8%EB%A0%A5-%EC%9A%94%EC%95%BD</a></em><br />
+<em>참고: <a href="https://velog.io/@ddongh1122/MySQL-%ED%8E%98%EC%9D%B4%EC%A7%95-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0">https://velog.io/@ddongh1122/MySQL-%ED%8E%98%EC%9D%B4%EC%A7%95-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0</a></em></p>
+<ul>
+<li><strong>배치로 개발이 필요할 때</strong><ul>
+<li>일괄 생성</li>
+<li>일괄 수정</li>
+<li>통계</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>배치 성능 개선 방법 - 대량 데이터 READ</strong><ul>
 <li>배치 성능 개선은 Reader의 비중이 높다</li>
@@ -23045,12 +23073,18 @@
 </li>
 </ul>
 <h2 id="jdbctemplate-batchupdate">JdbcTemplate batchUpdate()<a class="headerlink" href="#jdbctemplate-batchupdate" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://inkyu-yoon.github.io/docs/Language/Spring/JdbcBatchUpdate</em>
-- <strong>JPA에서의 batch Insert 한계</strong>
-  - Spring Data JPA에 정의된 saveAll()은 기본적으로 개별 insert
-  - 대량의 엔티티 insert 경우, batch insert 사용해야 함
-  - DB를 MySQL로 사용, 엔티티 기본키 전략이 <code>IDENTITY</code> 인 경우 Hibernate에서 Batch Insert 비활성화 하여 사용 못함
-    - <code>IDENTITY</code>는 DB에 입력이 되면서 기본키 값이 부여되는 전략</p>
+<p><em>참고: <a href="https://inkyu-yoon.github.io/docs/Language/Spring/JdbcBatchUpdate">https://inkyu-yoon.github.io/docs/Language/Spring/JdbcBatchUpdate</a></em></p>
+<ul>
+<li><strong>JPA에서의 batch Insert 한계</strong><ul>
+<li>Spring Data JPA에 정의된 saveAll()은 기본적으로 개별 insert</li>
+<li>대량의 엔티티 insert 경우, batch insert 사용해야 함</li>
+<li>DB를 MySQL로 사용, 엔티티 기본키 전략이 <code>IDENTITY</code> 인 경우 Hibernate에서 Batch Insert 비활성화 하여 사용 못함<ul>
+<li><code>IDENTITY</code>는 DB에 입력이 되면서 기본키 값이 부여되는 전략</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Batch Insert</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- 개별</span>
@@ -23102,16 +23136,22 @@
 </code></pre></div></li>
 </ul>
 <h4 id="toss-spring-jdbc">TOSS - Spring JDBC 성능 문제<a class="headerlink" href="#toss-spring-jdbc" title="Permanent link">&para;</a></h4>
-<p><em>참고: https://toss.tech/article/engineering-note-7</em>
-- JDBC에서 사용하는 데이터 타입을 정의 =&gt; <code>SqlType</code>
-- 근데 <code>null</code> 값이 setValue로 넘어가면, <code>preparedStatement</code>에서 해당 값을 어떻게 세팅하는지 알 수 없어 직접 DB에서 타입 정보가져오느라 SELECT 발생</p>
+<p><em>참고: <a href="https://toss.tech/article/engineering-note-7">https://toss.tech/article/engineering-note-7</a></em></p>
+<ul>
+<li>JDBC에서 사용하는 데이터 타입을 정의 =&gt; <code>SqlType</code></li>
+<li>근데 <code>null</code> 값이 setValue로 넘어가면, <code>preparedStatement</code>에서 해당 값을 어떻게 세팅하는지 알 수 없어 직접 DB에서 타입 정보가져오느라 SELECT 발생</li>
+</ul>
 <h2 id="mysql-pk-insert">MYSQL PK 조건 무시한 INSERT<a class="headerlink" href="#mysql-pk-insert" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://dev.mysql.com/doc/refman/8.4/en/insert-on-duplicate.html</em><br />
-<em>참고: https://bamdule.tistory.com/112</em>
-- <strong>INSERT INTO ... ON DUPLICATE UPDATE</strong>
-  - 데이터 삽입 시, PK/Unique Key 중복된 경우, 지정한 데이터만 UPDATE 하는 명령어 
-  - 중복된 키가 없다면 INSERT
-  - 중복 키 오류 발생 시, 사용자가 UPDATE 될 값을 지정할 수 있음</p>
+<p><em>참고: <a href="https://dev.mysql.com/doc/refman/8.4/en/insert-on-duplicate.html">https://dev.mysql.com/doc/refman/8.4/en/insert-on-duplicate.html</a></em><br />
+<em>참고: <a href="https://bamdule.tistory.com/112">https://bamdule.tistory.com/112</a></em></p>
+<ul>
+<li><strong>INSERT INTO ... ON DUPLICATE UPDATE</strong><ul>
+<li>데이터 삽입 시, PK/Unique Key 중복된 경우, 지정한 데이터만 UPDATE 하는 명령어 </li>
+<li>중복된 키가 없다면 INSERT</li>
+<li>중복 키 오류 발생 시, 사용자가 UPDATE 될 값을 지정할 수 있음</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>INSERT IGNORE</strong><ul>
 <li>중복 키 에러가 발생했을 때, 신규로 입력되는 레코드 무시하는 방법</li>
@@ -23127,8 +23167,9 @@
 </li>
 </ul>
 <h2 id="spring-transactionmanager">Spring TransactionManager<a class="headerlink" href="#spring-transactionmanager" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://jiwondev.tistory.com/154</em>
-- <strong>JDBC에서 사용하는 트랜잭션</strong>
+<p><em>참고: <a href="https://jiwondev.tistory.com/154">https://jiwondev.tistory.com/154</a></em></p>
+<ul>
+<li><strong>JDBC에서 사용하는 트랜잭션</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Connection connection = dataSource.getConnection();
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>try (connection) {
@@ -23138,7 +23179,8 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>} catch (SQLException e) {
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    connection.rollback();
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>}
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
 <ul>
 <li><strong>Spring의 <code>@Transactional</code></strong><ul>
 <li>추상화해서 위의 JDBC 트랜잭션을 관리</li>

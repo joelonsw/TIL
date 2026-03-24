@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23008,20 +23032,30 @@
 
 <h3 id="2023-11-22">2023-11-22<a class="headerlink" href="#2023-11-22" title="Permanent link">&para;</a></h3>
 <h2 id="dom-document-object-model">DOM (Document Object Model)<a class="headerlink" href="#dom-document-object-model" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://dev.to/lyndsiwilliams/real-dom-virtual-dom-shadow-dom-whats-the-difference-32ni</em>
-<em>참고: https://www.youtube.com/watch?v=7Tok22qxPzQ</em>
-<em>참고: https://wit.nts-corp.com/2019/03/27/5552</em>
-- <strong>DOM</strong>
-  - HTML tree 웹사이트는 <code>document</code>로 지칭됨
-  - dot notation을 통해서 접근 가능함
-    - <code>document.head</code> =&gt; <code>&lt;head&gt;&lt;/head&gt;</code>
-    - <code>document.body</code> =&gt; <code>&lt;body&gt;&lt;/body&gt;</code>
-  - DOM이 바뀌었을 경우, 전체 DOM을 동시에 변경함 =&gt; 굉장히 비싼 연산이라 Virtual DOM 등장
-  - HTML 문서의 구조화된 표현
-    - 브라우저가 페이지에 무엇을 렌더링할지 결정하기 위해
-    - 혹은 자바스크립트 프로그램이 페이지의 컨텐츠/구조/스타일을 수정하기 위해 사용됨
-  - DOM은 싹 다 글로벌임
-    - document.queryS</p>
+<p><em>참고: <a href="https://dev.to/lyndsiwilliams/real-dom-virtual-dom-shadow-dom-whats-the-difference-32ni">https://dev.to/lyndsiwilliams/real-dom-virtual-dom-shadow-dom-whats-the-difference-32ni</a></em>
+<em>참고: <a href="https://www.youtube.com/watch?v=7Tok22qxPzQ">https://www.youtube.com/watch?v=7Tok22qxPzQ</a></em>
+<em>참고: <a href="https://wit.nts-corp.com/2019/03/27/5552">https://wit.nts-corp.com/2019/03/27/5552</a></em></p>
+<ul>
+<li><strong>DOM</strong><ul>
+<li>HTML tree 웹사이트는 <code>document</code>로 지칭됨</li>
+<li>dot notation을 통해서 접근 가능함<ul>
+<li><code>document.head</code> =&gt; <code>&lt;head&gt;&lt;/head&gt;</code></li>
+<li><code>document.body</code> =&gt; <code>&lt;body&gt;&lt;/body&gt;</code></li>
+</ul>
+</li>
+<li>DOM이 바뀌었을 경우, 전체 DOM을 동시에 변경함 =&gt; 굉장히 비싼 연산이라 Virtual DOM 등장</li>
+<li>HTML 문서의 구조화된 표현<ul>
+<li>브라우저가 페이지에 무엇을 렌더링할지 결정하기 위해</li>
+<li>혹은 자바스크립트 프로그램이 페이지의 컨텐츠/구조/스타일을 수정하기 위해 사용됨</li>
+</ul>
+</li>
+<li>DOM은 싹 다 글로벌임<ul>
+<li>document.queryS</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Virtual DOM</strong><ul>
 <li>virtual DOM은 메모리에 있고, 진짜 DOM과 싱크를 맞추고 있음</li>
@@ -23039,7 +23073,7 @@
 <ul>
 <li><strong>Shadow DOM</strong><ul>
 <li>숨겨진 DOM 트리인데, 진짜 DOM 트리에 착붙</li>
-<li>이건 진짜 오로지 shadow DOM만이 혼자 컨트롤함 (https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)</li>
+<li>이건 진짜 오로지 shadow DOM만이 혼자 컨트롤함 (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements</a>)</li>
 <li>video 태그 같은 건데... 이게 그냥 video 태그인데 사실 그 안에 플레이버튼, 시간 표시, 음량 조절, 등등 별에별게 다 있자나?<ul>
 <li>누군가는 이걸 구현해줬을거란 말이지?</li>
 <li>그게 Shadow DOM이야</li>
@@ -23052,7 +23086,7 @@
 </li>
 </ul>
 <h2 id="virtual-dom">Virtual DOM<a class="headerlink" href="#virtual-dom" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.youtube.com/watch?v=PN_WmsgbQCo</em></p>
+<p><em>참고: <a href="https://www.youtube.com/watch?v=PN_WmsgbQCo">https://www.youtube.com/watch?v=PN_WmsgbQCo</a></em></p>
 <h4 id="1">1. 브라우저의 동작<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>브라우저 렌더링 과정</strong><ol>

@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22996,13 +23020,17 @@
 
 <h3 id="2023-08-21">2023-08-21<a class="headerlink" href="#2023-08-21" title="Permanent link">&para;</a></h3>
 <h2 id="sentry-with-logback">Sentry with logback<a class="headerlink" href="#sentry-with-logback" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://zorba91.tistory.com/311</em>
-- <strong>필자의 상황</strong>
-  - <code>Sentry.capture()</code> 를 통해 확인하고 싶은 부분만 메서드로 선언해서 보는 방식
-  - 전역적으로 센트리를 적용하고자 했음</p>
+<p><em>참고: <a href="https://zorba91.tistory.com/311">https://zorba91.tistory.com/311</a></em></p>
+<ul>
+<li><strong>필자의 상황</strong><ul>
+<li><code>Sentry.capture()</code> 를 통해 확인하고 싶은 부분만 메서드로 선언해서 보는 방식</li>
+<li>전역적으로 센트리를 적용하고자 했음</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Sentry 공홈에서 추천하는 적용방식 4가지</strong><ul>
-<li><em>참고: https://docs.sentry.io/platforms/java/configuration/</em>
+<li><em>참고: <a href="https://docs.sentry.io/platforms/java/configuration/">https://docs.sentry.io/platforms/java/configuration/</a></em>
 1. <code>sentry.properties</code>: <code>dsn={dsn}</code>
 2. 시스템 환경변수 적용
 3. 자바 시스템 프로퍼티에 적용: <code>java -Dsentry.dsn={clientKey} -jar app.jar</code>
@@ -23058,19 +23086,27 @@
 </li>
 </ul>
 <h2 id="sdk">SDK<a class="headerlink" href="#sdk" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://doozi0316.tistory.com/entry/SDK-API%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%B0%A8%EC%9D%B4%EC%A0%90</em>
-<em>참고: https://reinvite.tistory.com/116</em>
-<em>참고: https://change-words.tistory.com/entry/API-SDK-%EC%B0%A8%EC%9D%B4</em>
-- <strong>SDK</strong>
-  - Software Development Kit
-    - 다른 프로그램을 추가하거나 연결할 수 있는 커스텀 앱을 제작할 수 있는 기능을 제공하는 도구
-  - API, IDE, 문서, 라이브러리, 코드 샘플, 기타 유틸리티, 디버깅 프로그램 포함
-  - SDK는 프로그램 및 응용 프로그램 개발의 복잡성을 줄이는 강력한 기능 집합
-  - 미리 만들어진 도구를 제공함으로써 개발 과정을 쉽게
-  - examples
-    - iOS SDK: iOS 어플리케이션을 만드는데 필요한 모든 도구가 제공됨
-    - JDK: 자바 개발자를 대상으로 한 오라클에서 제공하는 도구
-    - Andriod SDK: 안드로이드용 앱 개발을 위한 도구</p>
+<p><em>참고: <a href="https://doozi0316.tistory.com/entry/SDK-API%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%B0%A8%EC%9D%B4%EC%A0%90">https://doozi0316.tistory.com/entry/SDK-API%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%B0%A8%EC%9D%B4%EC%A0%90</a></em>
+<em>참고: <a href="https://reinvite.tistory.com/116">https://reinvite.tistory.com/116</a></em>
+<em>참고: <a href="https://change-words.tistory.com/entry/API-SDK-%EC%B0%A8%EC%9D%B4">https://change-words.tistory.com/entry/API-SDK-%EC%B0%A8%EC%9D%B4</a></em></p>
+<ul>
+<li><strong>SDK</strong><ul>
+<li>Software Development Kit<ul>
+<li>다른 프로그램을 추가하거나 연결할 수 있는 커스텀 앱을 제작할 수 있는 기능을 제공하는 도구</li>
+</ul>
+</li>
+<li>API, IDE, 문서, 라이브러리, 코드 샘플, 기타 유틸리티, 디버깅 프로그램 포함</li>
+<li>SDK는 프로그램 및 응용 프로그램 개발의 복잡성을 줄이는 강력한 기능 집합</li>
+<li>미리 만들어진 도구를 제공함으로써 개발 과정을 쉽게</li>
+<li>examples<ul>
+<li>iOS SDK: iOS 어플리케이션을 만드는데 필요한 모든 도구가 제공됨</li>
+<li>JDK: 자바 개발자를 대상으로 한 오라클에서 제공하는 도구</li>
+<li>Andriod SDK: 안드로이드용 앱 개발을 위한 도구</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>SDK vs API</strong><ul>
 <li>SDK: 망치, 팬치, 니퍼 등이 들어있는 하나의 공구박스<ul>
@@ -23089,16 +23125,24 @@
 </li>
 </ul>
 <h2 id="kamon">kamon<a class="headerlink" href="#kamon" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://github.com/kamon-io/Kamon</em>
-<em>참고: https://kamon.io/</em>
-<em>참고: https://kamon.io/docs/latest/core/tracing/</em>
-<em>참고: https://kamon.io/docs/latest/guides/how-to/log-trace-id-and-context-info/</em>
-- <strong>개요</strong>
-  - 개발자를 위한 관찰 툴
-    - akka, play 등에 많이 쓰이는갑네
-  - 기존의 로깅은 전반적인 응답 시간을 보여주는데 어려움을 겪는다
-    - DB가 순차적으로 or 병렬적으로 시행되기에
-  - 해결방법은 로깅을 보완하여 level, trace 뚝딱</p>
+<p><em>참고: <a href="https://github.com/kamon-io/Kamon">https://github.com/kamon-io/Kamon</a></em>
+<em>참고: <a href="https://kamon.io/">https://kamon.io/</a></em>
+<em>참고: <a href="https://kamon.io/docs/latest/core/tracing/">https://kamon.io/docs/latest/core/tracing/</a></em>
+<em>참고: <a href="https://kamon.io/docs/latest/guides/how-to/log-trace-id-and-context-info/">https://kamon.io/docs/latest/guides/how-to/log-trace-id-and-context-info/</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>개발자를 위한 관찰 툴<ul>
+<li>akka, play 등에 많이 쓰이는갑네</li>
+</ul>
+</li>
+<li>기존의 로깅은 전반적인 응답 시간을 보여주는데 어려움을 겪는다<ul>
+<li>DB가 순차적으로 or 병렬적으로 시행되기에</li>
+</ul>
+</li>
+<li>해결방법은 로깅을 보완하여 level, trace 뚝딱</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>TraceID</strong><ul>
 <li>logback-common.xml 에 kamon.TraceIDConverter 로 traceID를 기록한다</li>
@@ -23160,13 +23204,17 @@
 </li>
 </ul>
 <h2 id="slf4j-vs-log4j-vs-logback-vs-log4j2">slf4j vs log4j vs logback vs log4j2<a class="headerlink" href="#slf4j-vs-log4j-vs-logback-vs-log4j2" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://shplab.tistory.com/entry/log4j-vs-logback-vs-log4j2</em>
-<em>참고: https://stackify.com/compare-java-logging-frameworks/</em>
-- <strong>로깅이 해결할 문제</strong>
-  1. 로그 메시지는 어플리케이션 내부적으로 수행하는 작업을 이해하는데 필요한 정보를 제공할 것
-  2. 로그 메시지 작성은 어플리케이션 성능에 영향을 주지 않을 것
-  3. 다른 배포 환경/상황에 맞는 로깅을 남길 수 있을 것
-  - 다행히도 2/3 번에 대한 이슈는 로깅 프레임워크가 최대한 해결해준다!</p>
+<p><em>참고: <a href="https://shplab.tistory.com/entry/log4j-vs-logback-vs-log4j2">https://shplab.tistory.com/entry/log4j-vs-logback-vs-log4j2</a></em>
+<em>참고: <a href="https://stackify.com/compare-java-logging-frameworks/">https://stackify.com/compare-java-logging-frameworks/</a></em></p>
+<ul>
+<li><strong>로깅이 해결할 문제</strong><ol>
+<li>로그 메시지는 어플리케이션 내부적으로 수행하는 작업을 이해하는데 필요한 정보를 제공할 것</li>
+<li>로그 메시지 작성은 어플리케이션 성능에 영향을 주지 않을 것</li>
+<li>다른 배포 환경/상황에 맞는 로깅을 남길 수 있을 것
+- 다행히도 2/3 번에 대한 이슈는 로깅 프레임워크가 최대한 해결해준다!</li>
+</ol>
+</li>
+</ul>
 <ul>
 <li><strong>slf4j</strong><ul>
 <li>Simple logging facade for Java</li>

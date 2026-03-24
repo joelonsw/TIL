@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22952,12 +22976,16 @@
 
 <h3 id="2023-05-23">2023-05-23<a class="headerlink" href="#2023-05-23" title="Permanent link">&para;</a></h3>
 <h2 id="slick-transaction">Slick Transaction<a class="headerlink" href="#slick-transaction" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://effectivesquid.tistory.com/entry/Slick%EC%9D%84-%ED%86%B5%ED%95%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%81%EC%9A%A9</em>
-<em>참고: https://scala-slick.org/doc/3.3.1/database.html#the-cake-pattern</em>
-- <strong>Cake Pattern</strong>
-  1. slick은 DBIOAction을 통해 쿼리를 실행 (보통은 type alias된 DBIO 사용)
-  2. future는 DBIOAction으로 바꾸고 싶다면 DBIO.from(...) 통해 간단하게 바꿀 수 있음
-  3. for comprehension을 활용해 여러 DBIOAction을 트랜잭션으로 묶자</p>
+<p><em>참고: <a href="https://effectivesquid.tistory.com/entry/Slick%EC%9D%84-%ED%86%B5%ED%95%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%81%EC%9A%A9">https://effectivesquid.tistory.com/entry/Slick%EC%9D%84-%ED%86%B5%ED%95%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%81%EC%9A%A9</a></em>
+<em>참고: <a href="https://scala-slick.org/doc/3.3.1/database.html#the-cake-pattern">https://scala-slick.org/doc/3.3.1/database.html#the-cake-pattern</a></em></p>
+<ul>
+<li><strong>Cake Pattern</strong><ol>
+<li>slick은 DBIOAction을 통해 쿼리를 실행 (보통은 type alias된 DBIO 사용)</li>
+<li>future는 DBIOAction으로 바꾸고 싶다면 DBIO.from(...) 통해 간단하게 바꿀 수 있음</li>
+<li>for comprehension을 활용해 여러 DBIOAction을 트랜잭션으로 묶자</li>
+</ol>
+</li>
+</ul>
 <ul>
 <li><strong><code>transactionally</code></strong> 를 통해 감싸주자
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">dbAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
@@ -22972,15 +23000,23 @@
 </code></pre></div></li>
 </ul>
 <h2 id="slick-dbio-actions">Slick DBIO Actions<a class="headerlink" href="#slick-dbio-actions" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://scala-slick.org/doc/3.0.0/dbio.html#transactions-and-pinned-sessions</em>
-- <strong>개요</strong>
-  - 아래와 같은 DB 접근 행위는 DBIOAction의 인스턴스로 구성됨
-    - <code>myQuery.result</code>
-    - <code>myTable.schema.create</code>
-    - <code>myTable += item</code>
-  - DBIO Action은 여러개의 몇가지 컴비네이터로 조합할 수 있음
-    - 순서에 맞게 항상 수행될 것이며,
-    - 하나의 데이터베이스 세션을 사용할 것이다</p>
+<p><em>참고: <a href="https://scala-slick.org/doc/3.0.0/dbio.html#transactions-and-pinned-sessions">https://scala-slick.org/doc/3.0.0/dbio.html#transactions-and-pinned-sessions</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>아래와 같은 DB 접근 행위는 DBIOAction의 인스턴스로 구성됨<ul>
+<li><code>myQuery.result</code></li>
+<li><code>myTable.schema.create</code></li>
+<li><code>myTable += item</code></li>
+</ul>
+</li>
+<li>DBIO Action은 여러개의 몇가지 컴비네이터로 조합할 수 있음<ul>
+<li>순서에 맞게 항상 수행될 것이며,</li>
+<li>하나의 데이터베이스 세션을 사용할 것이다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li>
 <p><strong>DBIO 실행하는 법</strong></p>
@@ -23038,10 +23074,14 @@
 </li>
 </ul>
 <h2 id="transactionally">transactionally<a class="headerlink" href="#transactionally" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://github.com/slick/slick/issues/1425</em>
-- <strong>개요</strong>
-  - multiple databases operation을 다루기 위함
-  - DBIO 타입에 있다는데 (사실 변환하는 듯)</p>
+<p><em>참고: <a href="https://github.com/slick/slick/issues/1425">https://github.com/slick/slick/issues/1425</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>multiple databases operation을 다루기 위함</li>
+<li>DBIO 타입에 있다는데 (사실 변환하는 듯)</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Implicit Conversions</strong><ul>
 <li>JdbcActionComponent<ul>

@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23029,8 +23053,8 @@
 </ul>
 <h2 id="http-io">HTTP 서버 구현하기 학습테스트 [입출력(I/O) 스트림]<a class="headerlink" href="#http-io" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고 1: https://develop-im.tistory.com/54</em></li>
-<li><em>참고 2: https://lannstark.tistory.com/34</em></li>
+<li><em>참고 1: <a href="https://develop-im.tistory.com/54">https://develop-im.tistory.com/54</a></em></li>
+<li><em>참고 2: <a href="https://lannstark.tistory.com/34">https://lannstark.tistory.com/34</a></em></li>
 <li><strong>자바에서는 Stream을 통해 데이터 입출력</strong>
     - 데이터 입력 받을 때: InputStream
     - 데이터 출력할 때: OutputStream
@@ -23064,7 +23088,7 @@
     - ByteArrayInputStream
         - 바이트를 내부 버퍼에 보관/유지
     - BufferedInputStream
-        - <em>참고: https://m.blog.naver.com/highkrs/220510982995</em>
+        - <em>참고: <a href="https://m.blog.naver.com/highkrs/220510982995">https://m.blog.naver.com/highkrs/220510982995</a></em>
         - 바이트 단위로 파일을 읽어올때 사용
         - 버퍼..?
             - 프로그램이 기억장치에 접근해서 파일 가져오는 건 속도 느려져
@@ -23128,7 +23152,7 @@
 </ul>
 <ul>
 <li><strong>try-with-resources</strong>
-    - <em>참고: https://ryan-han.com/post/java/try_with_resources/</em>
+    - <em>참고: <a href="https://ryan-han.com/post/java/try_with_resources/">https://ryan-han.com/post/java/try_with_resources/</a></em>
     - try에 자원 객체 전달하면, try 블록 끝나면 자동으로 자원 close() 해주는 기능
     - try에 전달할 객체는 AutoClosable 인터페이스 구현했어야함
     - 스트림 기반 객체들은 해당 방식으로 자원 해제 가능
@@ -23159,7 +23183,7 @@
 </ul>
 <ul>
 <li><strong>File</strong>
-    - <em>참고: http://www.devkuma.com/books/pages/82</em>
+    - <em>참고: <a href="http://www.devkuma.com/books/pages/82">http://www.devkuma.com/books/pages/82</a></em>
     - 자바는 플랫폼 독립적: OS에 상관없이 구동되기에 OS에 따라 동작해야함
         - 경로 및 파일 간의 구분자가 다르기에 문자열 직접 입력하기 보다는 File 클래스 변수를 사용해야 함
     - File 생성자
@@ -23183,7 +23207,7 @@
 </ul>
 <ul>
 <li><strong>Files</strong>
-    - <em>참고: https://codevang.tistory.com/159</em>
+    - <em>참고: <a href="https://codevang.tistory.com/159">https://codevang.tistory.com/159</a></em>
     - Static 메서드로 구성된 클래스
     - Path 객체를 사용해 피일 시스템 작업 수행
     - 메서드
@@ -23216,7 +23240,7 @@
 </ul>
 <h2 id="http_1">HTTP 서버 구현하기 학습테스트 [쓰레드]<a class="headerlink" href="#http_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고: https://codechacha.com/ko/java-executors/</em></li>
+<li><em>참고: <a href="https://codechacha.com/ko/java-executors/">https://codechacha.com/ko/java-executors/</a></em></li>
 <li>"java.util.concurrent.Executors"와 "java.util.concurrent.ExecutorService"를 활용하면 간단히 쓰레드풀을 생성해 병렬처리 가능</li>
 <li><strong>ExecutorService</strong>
     - Executors는 ExecutorService 객체를 생성

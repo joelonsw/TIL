@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22996,13 +23020,19 @@
 
 <h3 id="2024-02-12">2024-02-12<a class="headerlink" href="#2024-02-12" title="Permanent link">&para;</a></h3>
 <h2 id="kotlin-companion-object">Kotlin Companion Object<a class="headerlink" href="#kotlin-companion-object" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://lannstark.tistory.com/141</em>
-<em>참고: https://onlyfor-me-blog.tistory.com/441</em>
-- <strong>개요</strong>
-  - 자바의 static 필드/메서드를 코틀린에서 쓰려면...?
-  - 코틀린 문법에서는 클래스 안에 이걸 둘 수는 없어 (static 없음)
-  - companion object 사용하세요! (오 Scala 같아!)
-    - 하나의 클래스에 하나의 Companion Object 사용 가능</p>
+<p><em>참고: <a href="https://lannstark.tistory.com/141">https://lannstark.tistory.com/141</a></em>
+<em>참고: <a href="https://onlyfor-me-blog.tistory.com/441">https://onlyfor-me-blog.tistory.com/441</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>자바의 static 필드/메서드를 코틀린에서 쓰려면...?</li>
+<li>코틀린 문법에서는 클래스 안에 이걸 둘 수는 없어 (static 없음)</li>
+<li>companion object 사용하세요! (오 Scala 같아!)<ul>
+<li>하나의 클래스에 하나의 Companion Object 사용 가능</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Java =&gt; Kotlin</strong><ul>
 <li>Java
@@ -23033,7 +23063,7 @@
 </li>
 </ul>
 <h2 id="jpa-spring-batch-jparepository-delete">JPA + Spring Batch - JpaRepository delete 쿼리가 안나감<a class="headerlink" href="#jpa-spring-batch-jparepository-delete" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://myvelop.tistory.com/116</em>
+<p><em>참고: <a href="https://myvelop.tistory.com/116">https://myvelop.tistory.com/116</a></em>
 1. Select 쿼리만 나감 =&gt; JPA 대량 데이터 삭제 글 후술
   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">NoticeRepository</span><span class="p">:</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Notice</span><span class="p">,</span><span class="w"> </span><span class="kt">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">deleteByIdBetween</span><span class="p">(</span><span class="n">startId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w"> </span><span class="n">endId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">)</span>
@@ -23086,12 +23116,18 @@
 </li>
 </ol>
 <h2 id="jpa">JPA 대량 데이터 삭제 주의할 점<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://jojoldu.tistory.com/235</em>
-- <strong>delete 문제점</strong>
-  - Spring Data JPA에서 <code>deleteByXXX</code> 메서드는
-    - 삭제 대상을 전부 조회하는 쿼리 1번 발생 (위에 서술한 select만 나갔던 이유. 트랜잭션 없으니 지울라니까 뇌절)
-    - 삭제 대상은 <strong>1건씩</strong> 삭제된다
-    - <code>cascase = CascadeType.DELETE</code>로 하위 엔티티와 관계가 있다면 1건씩 삭제됨</p>
+<p><em>참고: <a href="https://jojoldu.tistory.com/235">https://jojoldu.tistory.com/235</a></em></p>
+<ul>
+<li><strong>delete 문제점</strong><ul>
+<li>Spring Data JPA에서 <code>deleteByXXX</code> 메서드는<ul>
+<li>삭제 대상을 전부 조회하는 쿼리 1번 발생 (위에 서술한 select만 나갔던 이유. 트랜잭션 없으니 지울라니까 뇌절)</li>
+<li>삭제 대상은 <strong>1건씩</strong> 삭제된다</li>
+<li><code>cascase = CascadeType.DELETE</code>로 하위 엔티티와 관계가 있다면 1건씩 삭제됨</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>해결책</strong><ul>
 <li>delete의 경우 직접 범위 조건의 삭제 쿼리를 생성하자!
@@ -23104,11 +23140,15 @@
 </li>
 </ul>
 <h2 id="jpa-spring-batch-saveall">JPA + Spring Batch - saveAll()이 벌크로 동작 안 하는 이유<a class="headerlink" href="#jpa-spring-batch-saveall" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://imksh.com/113</em>
-<em>참고: https://sabarada.tistory.com/220</em>
-<em>참고: https://medium.com/@tmdghk502/springdata-jpa-bulk-insert-4a3e58d883ad</em>
-- <strong>개요</strong>
-  - saveAll 메서드의 Entity는 왜 벌크로 동작하지 않는가?</p>
+<p><em>참고: <a href="https://imksh.com/113">https://imksh.com/113</a></em>
+<em>참고: <a href="https://sabarada.tistory.com/220">https://sabarada.tistory.com/220</a></em>
+<em>참고: <a href="https://medium.com/@tmdghk502/springdata-jpa-bulk-insert-4a3e58d883ad">https://medium.com/@tmdghk502/springdata-jpa-bulk-insert-4a3e58d883ad</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>saveAll 메서드의 Entity는 왜 벌크로 동작하지 않는가?</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>saveAll() &amp; save()</strong><ul>
 <li>saveAll()에 List<Entity> 넣게 되면 반복문 돌면서 결국 save()</li>
@@ -23177,11 +23217,15 @@
 </li>
 </ul>
 <h2 id="access-control-allow-credentials">Access-Control-Allow-Credentials<a class="headerlink" href="#access-control-allow-credentials" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://inpa.tistory.com/entry/AXIOS-%F0%9F%93%9A-CORS-%EC%BF%A0%ED%82%A4-%EC%A0%84%EC%86%A1withCredentials-%EC%98%B5%EC%85%98</em>
-- <strong>개요</strong>
-  - Credentials: 쿠키, Authorization 인증 헤더, TLS 증명서 내포하는 자격 인증 정보
-  - 브라우저의 요청 API들은 별도 옵션 없이 브라우저 쿠키와 같은 인증 데이터 함부로 담지 않음
-  - 요청과 응답에 쿠키를 허용하고자 한다면, <strong>withCredentials</strong> 옵션으로 해결해보자!</p>
+<p><em>참고: <a href="https://inpa.tistory.com/entry/AXIOS-%F0%9F%93%9A-CORS-%EC%BF%A0%ED%82%A4-%EC%A0%84%EC%86%A1withCredentials-%EC%98%B5%EC%85%98">https://inpa.tistory.com/entry/AXIOS-%F0%9F%93%9A-CORS-%EC%BF%A0%ED%82%A4-%EC%A0%84%EC%86%A1withCredentials-%EC%98%B5%EC%85%98</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>Credentials: 쿠키, Authorization 인증 헤더, TLS 증명서 내포하는 자격 인증 정보</li>
+<li>브라우저의 요청 API들은 별도 옵션 없이 브라우저 쿠키와 같은 인증 데이터 함부로 담지 않음</li>
+<li>요청과 응답에 쿠키를 허용하고자 한다면, <strong>withCredentials</strong> 옵션으로 해결해보자!</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>withCredentials</strong><ul>
 <li>다른 도메인에 요청을 보낼 때 요청에 인증 정보를 담아서 보낼지를 결정하는 항목<ul>

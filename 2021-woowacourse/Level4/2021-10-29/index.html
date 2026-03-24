@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22952,23 +22976,25 @@
 
 <h3 id="2021-10-29">2021-10-29<a class="headerlink" href="#2021-10-29" title="Permanent link">&para;</a></h3>
 <h2 id="cicd">놀토 CI/CD<a class="headerlink" href="#cicd" title="Permanent link">&para;</a></h2>
-<p><img alt="" src="../../image/2021-10-29-nolto-cicd.png" />
-- 도커 위에 젠킨스를 띄워서 사용 중
-- Freestyle Job으로 배포 프로세스 구성
-- 깃헙 웹훅을 활용하여, 지정한 브랜치에 커밋 발생 시 젠킨스에서 해당 브랜치 Pull 땡겨서 자동 빌드하도록 구성
-    - 사용자의 깃헙이 맞다는 것을 인증하기 위해, 깃헙 ID/PW를 사용하거나, token등을 발급받아 인가 과정을 거칠 수 있음
-- 빌드가 끝난 배포 파일은 지정된 인스턴스로 <code>publish over ssh</code>를 통해 전달
-    - 빌드 파일 전달 후, 지정된 shell script를 돌려 배포 자동화
-- 슬랙과 연동하여 젠킨스 빌드 성공 여부를 전달</p>
+<p><img alt="" src="../../image/2021-10-29-nolto-cicd.png" /></p>
+<ul>
+<li>도커 위에 젠킨스를 띄워서 사용 중</li>
+<li>Freestyle Job으로 배포 프로세스 구성</li>
+<li>깃헙 웹훅을 활용하여, 지정한 브랜치에 커밋 발생 시 젠킨스에서 해당 브랜치 Pull 땡겨서 자동 빌드하도록 구성
+    - 사용자의 깃헙이 맞다는 것을 인증하기 위해, 깃헙 ID/PW를 사용하거나, token등을 발급받아 인가 과정을 거칠 수 있음</li>
+<li>빌드가 끝난 배포 파일은 지정된 인스턴스로 <code>publish over ssh</code>를 통해 전달
+    - 빌드 파일 전달 후, 지정된 shell script를 돌려 배포 자동화</li>
+<li>슬랙과 연동하여 젠킨스 빌드 성공 여부를 전달</li>
+</ul>
 <h2 id="_1">놀토 로그인 과정<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>최초 로그인 과정</strong>
     1. 클라이언트가 구글/깃헙 로그인 버튼을 누름
     2. 클라이언트는 구글/깃헙 OAuth 창으로 이동
-        - 이동된 URL 예시: https://accounts.google.com/o/oauth2/v2/auth?client_id=277965090927-qqsrt756196gpb9h1a2ehp1gfc3hm21n.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fnolto.app%2Fgoogle%2Fcallback&amp;scope=profile&amp;response_type=code
+        - 이동된 URL 예시: <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=277965090927-qqsrt756196gpb9h1a2ehp1gfc3hm21n.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fnolto.app%2Fgoogle%2Fcallback&amp;scope=profile&amp;response_type=code">https://accounts.google.com/o/oauth2/v2/auth?client_id=277965090927-qqsrt756196gpb9h1a2ehp1gfc3hm21n.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fnolto.app%2Fgoogle%2Fcallback&amp;scope=profile&amp;response_type=code</a>
             - 쿼리 파라미터로 놀토의 client_id, 로그인 성공 이후 redirect할 redirect_uri, 어느 정도의 정보를 받아올지 scope, code를 통해 추후 사용자 검증을 처리할 것을 명시하고 있다.
         - 구글/깃헙에서 로그인 후에 백엔드에 다음과 같이 요청 
-            - 요청 예시: https://nolto.app/google/callback?code=4%2F0AX4XfWhsIyMhhfeXAYm_66uxcxG4ri3PU9cqa3zfW9F5BuCCUeO8pL6jqD7ooDks5Ap1xg&amp;scope=profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile
+            - 요청 예시: <a href="https://nolto.app/google/callback?code=4%2F0AX4XfWhsIyMhhfeXAYm_66uxcxG4ri3PU9cqa3zfW9F5BuCCUeO8pL6jqD7ooDks5Ap1xg&amp;scope=profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile">https://nolto.app/google/callback?code=4%2F0AX4XfWhsIyMhhfeXAYm_66uxcxG4ri3PU9cqa3zfW9F5BuCCUeO8pL6jqD7ooDks5Ap1xg&amp;scope=profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile</a>
                 - 구글로 부터 받아온 코드를 백엔드로 넘겨준다
     3. 백엔드에서 구글 측에 해당 코드를 담아 토큰 발급 요청을 보낸다.
         - 구글측에서 코드의 유효성을 검사하고, access_token을 발급해줌
@@ -22995,15 +23021,17 @@
     1. 그냥 SSR 서버에서 로그인 요청 HTML 내려줌</li>
 </ul>
 <h2 id="_2">놀토 인프라 구조<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><img alt="" src="../../image/2021-10-29-nolto-infra.png" />
-- <strong>프론트</strong>
+<p><img alt="" src="../../image/2021-10-29-nolto-infra.png" /></p>
+<ul>
+<li><strong>프론트</strong>
     - 클라이언트가 최초로 페이지 접속 시 SSR된 HTML 페이지를 내려받음
         - HTML 태그에서 요청한 CSS/JS/Image 정적 자원들을 네트워크 요청으로 내려받음
-    - 이후 클라이언트의 페이지 이동은 ReactJS 기반으로 페이지 이동없이 처리됨</p>
+    - 이후 클라이언트의 페이지 이동은 ReactJS 기반으로 페이지 이동없이 처리됨</li>
+</ul>
 <ul>
 <li><strong>백엔드</strong>
     - [Web Server]
-        - 주소: https://nolto.kro.kr 
+        - 주소: <a href="https://nolto.kro.kr">https://nolto.kro.kr</a> 
         - 도커 위의 nginx로 구성된 웹서버
         - 리버스 프록시의 역할수행
         - ssl termination

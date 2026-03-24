@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22930,20 +22954,28 @@
 
 <h3 id="2023-06-15">2023-06-15<a class="headerlink" href="#2023-06-15" title="Permanent link">&para;</a></h3>
 <h2 id="messagedigest">MessageDigest<a class="headerlink" href="#messagedigest" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/security/MessageDigest.html</em>
-<em>참고: https://m.blog.naver.com/puri8467/221429417229</em>
-<em>참고: https://kshman94.tistory.com/84</em>
-- <strong>개요</strong>
-  - 단방향 해시 함수값을 구할 때 사용
-    - 비밀번호를 해시화하여 저장하고 싶은 경우
-    - 파일의 유효성을 해시 값을 통해 확인하고 싶은 경우
-    - 특정 정보를 암호화하고 싶은 경우
-  - Java에서 MD5, SHA를 이용한 알고리즘 사용하려면 MessageDigest 클래스를 사용하자
-  - 랜덤 길이의 데이터 사이즈를 고정된 해시값으로 변경 시켜줄 때 사용
-    - 데이터는 <code>update</code> 메서드를 통해 프로세싱이 된다
-    - <code>reset</code>을 통해 원복 시킬 수 있다
-    - <code>update</code>가 완료되면, <code>digest</code> 메서드가 수행되어 hash 계산을 완수한다
-    - <code>digest</code>가 실행되면, MessageDigest는 초기화 상태로 돌아간다</p>
+<p><em>참고: <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/security/MessageDigest.html">https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/security/MessageDigest.html</a></em>
+<em>참고: <a href="https://m.blog.naver.com/puri8467/221429417229">https://m.blog.naver.com/puri8467/221429417229</a></em>
+<em>참고: <a href="https://kshman94.tistory.com/84">https://kshman94.tistory.com/84</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>단방향 해시 함수값을 구할 때 사용<ul>
+<li>비밀번호를 해시화하여 저장하고 싶은 경우</li>
+<li>파일의 유효성을 해시 값을 통해 확인하고 싶은 경우</li>
+<li>특정 정보를 암호화하고 싶은 경우</li>
+</ul>
+</li>
+<li>Java에서 MD5, SHA를 이용한 알고리즘 사용하려면 MessageDigest 클래스를 사용하자</li>
+<li>랜덤 길이의 데이터 사이즈를 고정된 해시값으로 변경 시켜줄 때 사용<ul>
+<li>데이터는 <code>update</code> 메서드를 통해 프로세싱이 된다</li>
+<li><code>reset</code>을 통해 원복 시킬 수 있다</li>
+<li><code>update</code>가 완료되면, <code>digest</code> 메서드가 수행되어 hash 계산을 완수한다</li>
+<li><code>digest</code>가 실행되면, MessageDigest는 초기화 상태로 돌아간다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>메서드</strong><ul>
 <li><code>getInstance(String algorithm)</code><ul>

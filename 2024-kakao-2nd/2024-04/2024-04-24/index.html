@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22952,30 +22976,39 @@
 
 <h3 id="2024-04-24">2024-04-24<a class="headerlink" href="#2024-04-24" title="Permanent link">&para;</a></h3>
 <h2 id="index-merge">Index Merge<a class="headerlink" href="#index-merge" title="Permanent link">&para;</a></h2>
-<p><em>참고: http://www.gurubee.net/lecture/4197</em>
-<em>참고: https://karisma3s.tistory.com/entry/SQL%ED%8A%9C%EB%8B%9D3-indexindex-merge-scan-index-bitmap-merge-scan-index-join-index-uniqe-scan-table-random-access-%EB%B6%80%ED%95%98</em>
-- 두개의 인덱스를 동시에 사용해서 하나의 인덱스를 사용했을 때 보다 더 큰 시너지 효과를 보겠금하는 스캔 방법
-  - table access 줄일 수 있음
-- 대부분 인덱스 하나만 사용하여 테이블을 읽는데, 인덱스 머지로는 하나의 테이블에 대해 2개 이상의 인덱스 사용
-  - <code>sort_intersection</code>
-- 2개의 이퀄 조건 OR로 연결 &gt; index_merge
-  - 정렬된 결과를 한건씩 비교하면서 중복 제거하는 PQ에서 처리</p>
+<p><em>참고: <a href="http://www.gurubee.net/lecture/4197">http://www.gurubee.net/lecture/4197</a></em>
+<em>참고: <a href="https://karisma3s.tistory.com/entry/SQL%ED%8A%9C%EB%8B%9D3-indexindex-merge-scan-index-bitmap-merge-scan-index-join-index-uniqe-scan-table-random-access-%EB%B6%80%ED%95%98">https://karisma3s.tistory.com/entry/SQL%ED%8A%9C%EB%8B%9D3-indexindex-merge-scan-index-bitmap-merge-scan-index-join-index-uniqe-scan-table-random-access-%EB%B6%80%ED%95%98</a></em></p>
+<ul>
+<li>두개의 인덱스를 동시에 사용해서 하나의 인덱스를 사용했을 때 보다 더 큰 시너지 효과를 보겠금하는 스캔 방법<ul>
+<li>table access 줄일 수 있음</li>
+</ul>
+</li>
+<li>대부분 인덱스 하나만 사용하여 테이블을 읽는데, 인덱스 머지로는 하나의 테이블에 대해 2개 이상의 인덱스 사용<ul>
+<li><code>sort_intersection</code></li>
+</ul>
+</li>
+<li>2개의 이퀄 조건 OR로 연결 &gt; index_merge<ul>
+<li>정렬된 결과를 한건씩 비교하면서 중복 제거하는 PQ에서 처리</li>
+</ul>
+</li>
+</ul>
 <h2 id="js-call-apply-bind">JS call, apply, bind<a class="headerlink" href="#js-call-apply-bind" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-Call-Bind-Apply#apply</em>
-<em>참고: https://www.zerocho.com/category/JavaScript/post/57433645a48729787807c3fd</em>
-<em>참고: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply</em>
-- <strong>call</strong>
-  - js 함수 호출 방법으로 함수뒤에 () 붙이기, call, apply 하기
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<p><em>참고: <a href="https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-Call-Bind-Apply#apply">https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-Call-Bind-Apply#apply</a></em>
+<em>참고: <a href="https://www.zerocho.com/category/JavaScript/post/57433645a48729787807c3fd">https://www.zerocho.com/category/JavaScript/post/57433645a48729787807c3fd</a></em>
+<em>참고: <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply</a></em></p>
+<ul>
+<li><strong>call</strong><ul>
+<li>js 함수 호출 방법으로 함수뒤에 () 붙이기, call, apply 하기
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">c</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nx">example</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nx">example</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nx">example</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">]);</span>
-</code></pre></div>
-  - 여기서 null 인자는 this 를 대체하는 용도
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></li>
+<li>여기서 null 인자는 this 를 대체하는 용도
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">string</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;zero&#39;</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nx">yell</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">string</span><span class="p">);</span>
@@ -22988,16 +23021,21 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nx">obj</span><span class="p">.</span><span class="nx">yell</span><span class="p">();</span><span class="w"> </span><span class="c1">// &#39;zero&#39;</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nx">obj</span><span class="p">.</span><span class="nx">yell</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj2</span><span class="p">);</span><span class="w"> </span><span class="c1">// &#39;what&#39; obj2가 this가 되버림</span>
-</code></pre></div>
-  - call을 써서 this를 정의해준다면, 타 객체의 파라미터나 메서드를 본인 것 마냥 쓸 수 있음
-  - 원래 기본빵으로 this는 전역객체의 <strong>window</strong>
-    - 이를 바꾸는 방법 중 하나가 call, apply, bind의 첫 인자 넣어주는 것
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">];</span>
+</code></pre></div></li>
+<li>call을 써서 this를 정의해준다면, 타 객체의 파라미터나 메서드를 본인 것 마냥 쓸 수 있음</li>
+<li>원래 기본빵으로 this는 전역객체의 <strong>window</strong><ul>
+<li>이를 바꾸는 방법 중 하나가 call, apply, bind의 첫 인자 넣어주는 것
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">];</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">items</span><span class="p">.</span><span class="nx">join</span><span class="p">();</span><span class="w">                       </span><span class="c1">// &quot;1,4&quot;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">join</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span><span class="w">   </span><span class="c1">// &quot;1,4&quot;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">[].</span><span class="nx">join</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span><span class="w">                </span><span class="c1">// &quot;1,4&quot;</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>apply</strong><ul>
 <li>주어진 <code>this</code> 값과 배열(또는 유사 배열 객체)로 제공되는 <code>arguments</code>로 함수를 호출</li>

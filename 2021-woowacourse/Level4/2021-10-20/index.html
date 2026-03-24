@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22954,7 +22978,7 @@
 <h2 id="sql">SQL 최적화 미션 피드백<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>레코드의 문자열은 대소문자를 구분하지 않는다!</strong>
-    - <em>참고: https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql/56283818</em>
+    - <em>참고: <a href="https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql/56283818">https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql/56283818</a></em>
     - 구분하려면 <code>BINARY</code> 키워드를 사용해라!
     - ex. SELECT * FROM <code>table</code> WHERE BINARY <code>column</code> = <code>value</code></li>
 </ul>
@@ -22979,7 +23003,7 @@
 </ul>
 <h2 id="join-on-and-vs-join-on-where">JOIN ON + AND vs JOIN ON + WHERE<a class="headerlink" href="#join-on-and-vs-join-on-where" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고: https://stackoverflow.com/questions/354070/sql-join-where-clause-vs-on-clause</em></li>
+<li><em>참고: <a href="https://stackoverflow.com/questions/354070/sql-join-where-clause-vs-on-clause">https://stackoverflow.com/questions/354070/sql-join-where-clause-vs-on-clause</a></em></li>
 <li>left/right join의 경우, 둘의 결과값은 다르다. 
     - 두 가지 쿼리의 결과를 비교해보자. 
         <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hospital</span><span class="w"> </span>
@@ -23018,13 +23042,15 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">covid</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">(</span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">covid</span><span class="p">.</span><span class="n">hospital_id</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="n">hospital</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span>
 </code></pre></div></li>
+</ul>
+<ul>
 <li>inner join 이라면 같은 결과값을 받아볼 것이다.
     - 두 테이블의 교집합만 살아남으니 교집합으로 join 후 테이블 필터링을 하던, 조건을 걸어 이를 바탕으로 join을 하던 같은 결과값!</li>
 </ul>
 <h2 id="sql_1">다시 한 번 SQL 공부<a class="headerlink" href="#sql_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>커버링 인덱스란?</strong>
-    - <em>참고: https://gywn.net/2012/04/mysql-covering-index/</em>
+    - <em>참고: <a href="https://gywn.net/2012/04/mysql-covering-index/">https://gywn.net/2012/04/mysql-covering-index/</a></em>
     - 원하는 데이터를 인덱스에서만 추출할 수 있는 인덱스
         - BTree 스캔만으로 원하는 데이터를 가져올 수 있다. 
         - 굳이 칼럼 읽기 위해 데이터 블록 볼 필요 X
@@ -23126,7 +23152,7 @@
 </ul>
 <ul>
 <li><strong>Explain의 filtered가 무엇인지?</strong>
-    - <em>참고: https://dba.stackexchange.com/questions/164251/what-is-the-meaning-of-filtered-in-mysql-explain</em>
+    - <em>참고: <a href="https://dba.stackexchange.com/questions/164251/what-is-the-meaning-of-filtered-in-mysql-explain">https://dba.stackexchange.com/questions/164251/what-is-the-meaning-of-filtered-in-mysql-explain</a></em>
     - <code>filter</code>란 row의 set에 조건을 적용해, 해당 조건을 만족시키는 row만 남기는 것
         - MySQL은 인덱스를 먼저 쓸 거고 range 스캔등을 통해 해당 조건을 만족시키는 row를 추출할 거야
     - <code>filtered</code>란 추출된 row들에 where 절등의 최종 조건을 통해 찐으로 남은 것의 비율이야 

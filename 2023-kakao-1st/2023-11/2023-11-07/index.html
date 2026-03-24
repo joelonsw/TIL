@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23096,7 +23120,7 @@
 
 <h3 id="2023-11-07">2023-11-07<a class="headerlink" href="#2023-11-07" title="Permanent link">&para;</a></h3>
 <h2 id="_1">쿼리 튜닝하기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://techcourse.woowahan.com/s/O1qsxIcH/ls/wKz4Q505</em></p>
+<p><em>참고: <a href="https://techcourse.woowahan.com/s/O1qsxIcH/ls/wKz4Q505">https://techcourse.woowahan.com/s/O1qsxIcH/ls/wKz4Q505</a></em></p>
 <h3 id="1">1. 인덱스<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>인덱스 칼럼은 가공해서 쿼리 날리거나 그런짓 하지 마세요</strong></li>
@@ -23140,35 +23164,43 @@
 </li>
 <li><strong>모수 테이블 크기를 줄일 것</strong></li>
 <li><strong>서브쿼리보다 조인문 쓸 것</strong><ul>
-<li><em>참고: https://stackoverflow.com/questions/2577174/join-vs-sub-query</em></li>
+<li><em>참고: <a href="https://stackoverflow.com/questions/2577174/join-vs-sub-query">https://stackoverflow.com/questions/2577174/join-vs-sub-query</a></em></li>
 <li>주로 조인이 성능 좋음</li>
 <li>서브쿼리는 A로 부터 이걸 가져오고 B로 부터 조건적으로 이걸 가져오는 느낌</li>
 </ul>
 </li>
 </ul>
 <h2 id="driving-table-driven-table">Driving Table &amp; Driven Table<a class="headerlink" href="#driving-table-driven-table" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://tlstjscjswo.tistory.com/entry/Nested-Loop-%EC%A1%B0%EC%9D%B8</em>
-<em>참고: https://programming-workspace.tistory.com/67</em>
-<em>참고: https://devlog.changhee.me/posts/Join%EA%B8%B0%EB%B2%95_%EC%A0%95%EB%A6%AC/</em>
-- <strong>드라이빙 테이블</strong>
-  - 조인시 먼저 액세스 되는 쪽을 드라이빙 테이블
-  - 나중에 액세스 되는 쪽을 드리븐 테이블로 지정
-  - 인덱스의 존재 및 우선 순위, FROM 절에서의 Table 지정 순서에 따라 영향을 받음
-  - 어느 테이블이 먼저 액세스 되느냐는 속도 차이가 크기에, 많은 양의 데이터 다룰시 드라이빙 테이블은 매우 중요
-  - 결정 규칙
-    - Cost-Based Optimizer
-    - 소요되는 예상 비용을 바탕을 실행계획 생성
-    - 통계정보, DBMS 설정정보, DBMS 버전에 따라 서로 다른 실행계획
-    1. 두 칼럼 모두 인덱스가 있다
-       - 옵티마이저 판단으로 레코드 건수에 따라 드라이빙/드리븐 결정
-    2. 한쪽 컬럼에만 인덱스가 있다
-       - 드리븐 테이블에 인덱스가 없다면 조인 과정에서 "드리븐 테이블을 매번 풀스캔하는 불상사"
-       - 인덱스가 없는 테이블이 드라이빙 테이블이 되어버림
-    3. 두 칼럼 모두 인덱스가 없음
-       - 어느 테이블을 드라이빙으로 해도 풀스캔 발생
-       - 스캔되는 레코드 수에 따라 옵티마이저가 드라이빙 테이블 선택
-       - 조인이 수행될 때 양쪽 테이블 컬럼에 모두 인덱스 업어야 드리븐 테이블 풀스캔
-       - 왠만해선 옵티마이저가 드리븐 테이블 풀 스캔으로 접근 안해</p>
+<p><em>참고: <a href="https://tlstjscjswo.tistory.com/entry/Nested-Loop-%EC%A1%B0%EC%9D%B8">https://tlstjscjswo.tistory.com/entry/Nested-Loop-%EC%A1%B0%EC%9D%B8</a></em>
+<em>참고: <a href="https://programming-workspace.tistory.com/67">https://programming-workspace.tistory.com/67</a></em>
+<em>참고: <a href="https://devlog.changhee.me/posts/Join%EA%B8%B0%EB%B2%95_%EC%A0%95%EB%A6%AC/">https://devlog.changhee.me/posts/Join%EA%B8%B0%EB%B2%95_%EC%A0%95%EB%A6%AC/</a></em></p>
+<ul>
+<li><strong>드라이빙 테이블</strong><ul>
+<li>조인시 먼저 액세스 되는 쪽을 드라이빙 테이블</li>
+<li>나중에 액세스 되는 쪽을 드리븐 테이블로 지정</li>
+<li>인덱스의 존재 및 우선 순위, FROM 절에서의 Table 지정 순서에 따라 영향을 받음</li>
+<li>어느 테이블이 먼저 액세스 되느냐는 속도 차이가 크기에, 많은 양의 데이터 다룰시 드라이빙 테이블은 매우 중요</li>
+<li>결정 규칙<ul>
+<li>Cost-Based Optimizer</li>
+<li>소요되는 예상 비용을 바탕을 실행계획 생성</li>
+<li>통계정보, DBMS 설정정보, DBMS 버전에 따라 서로 다른 실행계획
+1. 두 칼럼 모두 인덱스가 있다<ul>
+<li>옵티마이저 판단으로 레코드 건수에 따라 드라이빙/드리븐 결정
+2. 한쪽 컬럼에만 인덱스가 있다</li>
+<li>드리븐 테이블에 인덱스가 없다면 조인 과정에서 "드리븐 테이블을 매번 풀스캔하는 불상사"</li>
+<li>인덱스가 없는 테이블이 드라이빙 테이블이 되어버림
+3. 두 칼럼 모두 인덱스가 없음</li>
+<li>어느 테이블을 드라이빙으로 해도 풀스캔 발생</li>
+<li>스캔되는 레코드 수에 따라 옵티마이저가 드라이빙 테이블 선택</li>
+<li>조인이 수행될 때 양쪽 테이블 컬럼에 모두 인덱스 업어야 드리븐 테이블 풀스캔</li>
+<li>왠만해선 옵티마이저가 드리븐 테이블 풀 스캔으로 접근 안해</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>왜 드라이빙 테이블의 모수를 작게 가져가야하는걸까?</strong><ul>
 <li>A 테이블이 5000만건, B 테이블이 1000만건일 경우... </li>
@@ -23202,19 +23234,27 @@
 </li>
 </ul>
 <h2 id="hash-join-vs-nested-loop-join">Hash Join vs Nested Loop Join<a class="headerlink" href="#hash-join-vs-nested-loop-join" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://jojoldu.tistory.com/173</em>
-<em>참고: https://blog.naver.com/parkjy76/221069454499</em>
-<em>참고: https://hoing.io/archives/14457</em>
-- <strong>Nested Loop Join</strong>
-  - 오라클에서는 여러 조인 알고리즘을 지원하지만 MySQL에서는 Nested Loop Join만 지원
-  - 중첩반복을 사용하는 조인 알고리즘
-    1. Table A에서 row 하나씩 반복해나가며 스캔 (Driving Table)
-    2. Driving Table의 row 하나마다 내부 테이블의 레코드 하나씩 스캔해 Join 조건에 맞으면 리턴
-    3. 1~2를 Driving Table의 모든 row에 반복
-  - Nested Loop의 실행시간 = <code>R(A) * R(B)</code>
-  - 여기서 대전제!
-    - <strong>Inner Table의 조인키에는 인덱스가 걸려있어야 한다</strong>
-  - Row가 적은 Driving Table을 쓰고 + Driven Table의 조인키에는 인덱스가 걸려있을 것</p>
+<p><em>참고: <a href="https://jojoldu.tistory.com/173">https://jojoldu.tistory.com/173</a></em>
+<em>참고: <a href="https://blog.naver.com/parkjy76/221069454499">https://blog.naver.com/parkjy76/221069454499</a></em>
+<em>참고: <a href="https://hoing.io/archives/14457">https://hoing.io/archives/14457</a></em></p>
+<ul>
+<li><strong>Nested Loop Join</strong><ul>
+<li>오라클에서는 여러 조인 알고리즘을 지원하지만 MySQL에서는 Nested Loop Join만 지원</li>
+<li>중첩반복을 사용하는 조인 알고리즘<ol>
+<li>Table A에서 row 하나씩 반복해나가며 스캔 (Driving Table)</li>
+<li>Driving Table의 row 하나마다 내부 테이블의 레코드 하나씩 스캔해 Join 조건에 맞으면 리턴</li>
+<li>1~2를 Driving Table의 모든 row에 반복</li>
+</ol>
+</li>
+<li>Nested Loop의 실행시간 = <code>R(A) * R(B)</code></li>
+<li>여기서 대전제!<ul>
+<li><strong>Inner Table의 조인키에는 인덱스가 걸려있어야 한다</strong></li>
+</ul>
+</li>
+<li>Row가 적은 Driving Table을 쓰고 + Driven Table의 조인키에는 인덱스가 걸려있을 것</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Block Nested-Loop</strong><ul>
 <li>결국... Nested Loop 조인만 지원하다보면 조인 칼럼 인덱스가 없으면 뇌절의 지름길</li>

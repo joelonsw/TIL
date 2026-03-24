@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22973,19 +22997,26 @@
 </ul>
 </li>
 </ul>
-<p>[비교 분석]
-- <strong>Queue별로 Channel 만들기 (멀티 채널)</strong>
-  - 구조)
-    - <code>Queue A &lt;-&gt; Channel A &lt;-&gt; Consumer A</code>
-    - <code>Queue B &lt;-&gt; Channel B &lt;-&gt; Consumer B</code>
-  - 장점)
-    - Isolation: 특정 채널에 오류 발생하더라도, 해당 큐만 영향 받음
-    - 독립적 QoS 설정: prefetch_count 독립적으로 설정 가능
-    - 명확한 흐름 관리: 하나의 큐 구독은 하나의 채널
-  - 단점)
-    - Connection 하나를 추가하여 만드는 약간의 추가 자원
-  - channel을 Map으로 관리
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">channels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ConcurrentHashMap</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Channel</span><span class="p">]</span>
+<p>[비교 분석]</p>
+<ul>
+<li><strong>Queue별로 Channel 만들기 (멀티 채널)</strong><ul>
+<li>구조)<ul>
+<li><code>Queue A &lt;-&gt; Channel A &lt;-&gt; Consumer A</code></li>
+<li><code>Queue B &lt;-&gt; Channel B &lt;-&gt; Consumer B</code></li>
+</ul>
+</li>
+<li>장점)<ul>
+<li>Isolation: 특정 채널에 오류 발생하더라도, 해당 큐만 영향 받음</li>
+<li>독립적 QoS 설정: prefetch_count 독립적으로 설정 가능</li>
+<li>명확한 흐름 관리: 하나의 큐 구독은 하나의 채널</li>
+</ul>
+</li>
+<li>단점)<ul>
+<li>Connection 하나를 추가하여 만드는 약간의 추가 자원</li>
+</ul>
+</li>
+<li>channel을 Map으로 관리
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">channels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">ConcurrentHashMap</span><span class="p">[</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Channel</span><span class="p">]</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">createChannel</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span><span class="w"> </span><span class="nc">Connection</span><span class="p">,</span><span class="w"> </span><span class="n">prefetchCount</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">channelKey</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">channels</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">channelKey</span><span class="p">)</span>
@@ -22996,7 +23027,10 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">channel</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>동일 Channel, Queue별 Consumer 만들기</strong><ul>
 <li>구조)<ul>
@@ -23035,26 +23069,44 @@
 </li>
 </ul>
 <h2 id="rabbitmq-clustering-mirroring">RabbitMQ Clustering &amp; Mirroring<a class="headerlink" href="#rabbitmq-clustering-mirroring" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://yonghyn.tistory.com/29</em>
-- <strong>Clustering</strong>
-  - 다수의 RabbitMQ를 하나의 RabbitMQ로 묶어서 사용
-  - Cluster 안의 RabbitMQ들은 Queue를 제외한 모든 정보를 공유함
-    - Cluster 안의 모든 RabbitMQ는 동일한 Exchange를 가진다
-  - Cluster 안에는 Queue가 하나만 존재할 수 있음. Queue의 Rounting Key/Header 정보가 동일한 Queue가 Cluster 안에서 생성될 수 없기 때문
-    - 이를 극복하고자 Mirroring 기법이 등장
-  - Cluster 안의 모든 RabbitMQ는 Erlang Cookie라는 비밀키를 공유. 해당 키를 통해 상대 RabbitMQ가 Cluster 구성원인지 파악
-  - Client(Pub/Sub)는 RabbitMQ 중 하나의 RabbitMQ와 Connection을 맺음
-    - 단 연결한 MQ에 문제 발생시, 타 RabbitMQ 연결할 수 있도록 환경 구성 필요
-      1. Client &lt;-&gt; Cluster 사이 LB 구성해 Client가 Cluster안의 모든 MQ 접속할 수 있는 환경 구성 필요
-      2. Client에서 Cluster MQ IP/Port 모두 가지고 있어 이상 감지 시 갈아끼우기
-  - Cluster 구성 MQ는 Disk모드/RAM모드 사용 가능 (기본은 Disk 모드)
-    - 클러스터 구성시 최소 하나는 Disk 모드여야 함
-  - Cluster 동작 중에 RabbitMQ 추가 가능
-    - Peer Discovery Plugin 활용
-  - 한계
-    - Client가 Cluster의 모든 RabbitMQ 접근 가능해도, Queue는 Cluster 안에서 하나만 존재
-    - 해당 Queue를 가진 RabbitMQ에 장애 발생 시 손실 무조건 발생
-    - 이를 막고자 Mirroring</p>
+<p><em>참고: <a href="https://yonghyn.tistory.com/29">https://yonghyn.tistory.com/29</a></em></p>
+<ul>
+<li><strong>Clustering</strong><ul>
+<li>다수의 RabbitMQ를 하나의 RabbitMQ로 묶어서 사용</li>
+<li>Cluster 안의 RabbitMQ들은 Queue를 제외한 모든 정보를 공유함<ul>
+<li>Cluster 안의 모든 RabbitMQ는 동일한 Exchange를 가진다</li>
+</ul>
+</li>
+<li>Cluster 안에는 Queue가 하나만 존재할 수 있음. Queue의 Rounting Key/Header 정보가 동일한 Queue가 Cluster 안에서 생성될 수 없기 때문<ul>
+<li>이를 극복하고자 Mirroring 기법이 등장</li>
+</ul>
+</li>
+<li>Cluster 안의 모든 RabbitMQ는 Erlang Cookie라는 비밀키를 공유. 해당 키를 통해 상대 RabbitMQ가 Cluster 구성원인지 파악</li>
+<li>Client(Pub/Sub)는 RabbitMQ 중 하나의 RabbitMQ와 Connection을 맺음<ul>
+<li>단 연결한 MQ에 문제 발생시, 타 RabbitMQ 연결할 수 있도록 환경 구성 필요<ol>
+<li>Client &lt;-&gt; Cluster 사이 LB 구성해 Client가 Cluster안의 모든 MQ 접속할 수 있는 환경 구성 필요</li>
+<li>Client에서 Cluster MQ IP/Port 모두 가지고 있어 이상 감지 시 갈아끼우기</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>Cluster 구성 MQ는 Disk모드/RAM모드 사용 가능 (기본은 Disk 모드)<ul>
+<li>클러스터 구성시 최소 하나는 Disk 모드여야 함</li>
+</ul>
+</li>
+<li>Cluster 동작 중에 RabbitMQ 추가 가능<ul>
+<li>Peer Discovery Plugin 활용</li>
+</ul>
+</li>
+<li>한계<ul>
+<li>Client가 Cluster의 모든 RabbitMQ 접근 가능해도, Queue는 Cluster 안에서 하나만 존재</li>
+<li>해당 Queue를 가진 RabbitMQ에 장애 발생 시 손실 무조건 발생</li>
+<li>이를 막고자 Mirroring</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Mirroring</strong><ul>
 <li>Cluster 안에 Message를 다수 RabbitMQ Queue안에 저장하는 기법</li>

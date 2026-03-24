@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22911,14 +22935,14 @@
 <ul>
 <li><strong>Spring</strong>
     - @SpringBootApplication
-        - <em>참고: https://velog.io/@yhh1056/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B6%80%ED%8A%B8-SpringBootApplication</em>
+        - <em>참고: <a href="https://velog.io/@yhh1056/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B6%80%ED%8A%B8-SpringBootApplication">https://velog.io/@yhh1056/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B6%80%ED%8A%B8-SpringBootApplication</a></em>
         - @ComponentScan: 자동 Scan 후 내가 만든 빈 등록
         - @SpringBootConfiguration: 빈에 대해 Context 추가, 특정 클래스 참조
         - @EnableAutoConfiguration: 읽어 온 빈들을 다시 등록 + 외부에 있는 빈 주입
             - Spring Boot의 메타 데이터를 빈으로 등록
             - 이거 없으면 "to missing ServletWebServerFactoryBean" 에러
     - @RestController VS @Controller?
-        - <em>참고: https://mangkyu.tistory.com/49</em>
+        - <em>참고: <a href="https://mangkyu.tistory.com/49">https://mangkyu.tistory.com/49</a></em>
         - 둘의 가장 큰 차이점은 HTTP Response Body가 생성되는 방식
         - @Controller
             1. View 반환하기
@@ -22933,7 +22957,7 @@
                     - String 반환 시: StringHttpMessageConverter
                     - 객체 반환 시: MappingJackson2HttpMessageConverter
     - @RequestBody &amp; @ResponseBody
-        - <em>참고: https://devbox.tistory.com/entry/Spring-RequestBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EA%B3%BC-ReponseBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EC%9D%98-%EC%82%AC%EC%9A%A9</em>
+        - <em>참고: <a href="https://devbox.tistory.com/entry/Spring-RequestBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EA%B3%BC-ReponseBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EC%9D%98-%EC%82%AC%EC%9A%A9">https://devbox.tistory.com/entry/Spring-RequestBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EA%B3%BC-ReponseBody-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98%EC%9D%98-%EC%82%AC%EC%9A%A9</a></em>
         - 각각 HTTP 요청 몸체 &lt;-&gt; 자바 객체 역할
         - HttpMessageConverter로 변환 수행
             - ByteArrayHttpMessageConverter
@@ -22950,7 +22974,7 @@
                 - Jackson 라이브러리로 Json --&gt; 자바 객체
         - 적당한 HttpMessageConverter는 HTTP의 Content-Type과 Accpet 헤더 기반으로 적당한 HttpMessageConverter 구현체를 선택해 변환한다
     - @RequestParam vs @PathVariable 
-        - <em>참고: https://velog.io/@shson/%EC%8A%A4%ED%94%84%EB%A7%81-controller%EC%97%90%EC%84%9C-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%EB%A5%BC-%EB%B0%9B%EB%8A%94-%EB%8B%A4%EC%96%91%ED%95%9C-%EB%B0%A9%EB%B2%95-RequestParam-RequestBody-PathVariable</em>
+        - <em>참고: <a href="https://velog.io/@shson/%EC%8A%A4%ED%94%84%EB%A7%81-controller%EC%97%90%EC%84%9C-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%EB%A5%BC-%EB%B0%9B%EB%8A%94-%EB%8B%A4%EC%96%91%ED%95%9C-%EB%B0%A9%EB%B2%95-RequestParam-RequestBody-PathVariable">https://velog.io/@shson/%EC%8A%A4%ED%94%84%EB%A7%81-controller%EC%97%90%EC%84%9C-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%EB%A5%BC-%EB%B0%9B%EB%8A%94-%EB%8B%A4%EC%96%91%ED%95%9C-%EB%B0%A9%EB%B2%95-RequestParam-RequestBody-PathVariable</a></em>
         - @RequestParam
             - GET 방식으로 넘어온 URI의 queryString을 받기 좋음
             <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 요청: http://localhost:8080/reservation/api/reservations?reservationEmail=test@naver.com</span>
@@ -22981,7 +23005,7 @@
 </ul>
 <ul>
 <li><strong>Jackson 라이브러리</strong>
-    - <em>참고: https://mommoo.tistory.com/83</em>
+    - <em>참고: <a href="https://mommoo.tistory.com/83">https://mommoo.tistory.com/83</a></em>
     - Jackson?
         - JSON 데이터 구조를 처리해주는 라이브러리
     - 어떻게 매핑되는지?
@@ -22992,7 +23016,7 @@
 <ul>
 <li><strong>DB 접근</strong>
     - Persistence Layer?
-        - <em>참고: https://stackoverflow.com/questions/16016023/what-is-the-use-of-a-persistence-layer-in-any-application</em>
+        - <em>참고: <a href="https://stackoverflow.com/questions/16016023/what-is-the-use-of-a-persistence-layer-in-any-application">https://stackoverflow.com/questions/16016023/what-is-the-use-of-a-persistence-layer-in-any-application</a></em>
         - 데이터 처리를 담당하는 계층
             - 데이터의 CRUD 연산 수행
             - DB에서 처리됨
@@ -23003,7 +23027,7 @@
                 - 만약 MySQL 쓰고 있으면, 그거에 대응하는 거 쓰시고, 
                 - 나중에 MongoDB 쓸라하면, 비즈니스 로직 건드는게 아니라, 퍼시스턴스 레이어에서 MongoDB 관련한 코드 작성하고 갈아끼우도록!
     - Dao란?
-        - <em>참고: https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%A0%91%EA%B7%BC_%EA%B0%9D%EC%B2%B4</em>
+        - <em>참고: <a href="https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%A0%91%EA%B7%BC_%EA%B0%9D%EC%B2%B4">https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%A0%91%EA%B7%BC_%EA%B0%9D%EC%B2%B4</a></em>
         - DB에 접근 로직을 추상화한 인터페이스
         - Specific Data Operation without exposing details of DB
         - Data persistence의 추상화
@@ -23016,11 +23040,11 @@
         - Get(id), Find(), Add() 등의 연산으로 객체를 찾고 추가 할 수 있어야 함
         - Update는 오히려 Dao에 더 잘어울림
     - Dao VS Repository?
-        - https://stackoverflow.com/questions/8550124/what-is-the-difference-between-dao-and-repository-patterns</li>
+        - <a href="https://stackoverflow.com/questions/8550124/what-is-the-difference-between-dao-and-repository-patterns">https://stackoverflow.com/questions/8550124/what-is-the-difference-between-dao-and-repository-patterns</a></li>
 </ul>
 <ul>
 <li><strong>웹 어플리케이션 계층 구조</strong>
-    - <em>참고: https://www.altexsoft.com/blog/engineering/web-application-architecture-how-the-web-works/</em>
+    - <em>참고: <a href="https://www.altexsoft.com/blog/engineering/web-application-architecture-how-the-web-works/">https://www.altexsoft.com/blog/engineering/web-application-architecture-how-the-web-works/</a></em>
     1. Presentation Layer
         - 사용자가 브라우저로 접근 가능
         - 사용자 UI 제공
@@ -23036,7 +23060,7 @@
 <ul>
 <li><strong>테스트 관련</strong>
     - MockMvc
-        - <em>참고: https://shinsunyoung.tistory.com/52</em>
+        - <em>참고: <a href="https://shinsunyoung.tistory.com/52">https://shinsunyoung.tistory.com/52</a></em>
         - 서버에 배포 하지 않고도 스프링 MVC의 동작을 재현할 수 있음
         - get,post,put,delete 요청 수행 가능
         - perform()
@@ -23048,7 +23072,7 @@
         - andExpect()
             - 응답 검증
     - @MockBean 
-        - <em>참고: https://jojoldu.tistory.com/226</em>
+        - <em>참고: <a href="https://jojoldu.tistory.com/226">https://jojoldu.tistory.com/226</a></em>
         - 기존 통합테스트는 여러 레파지토리와 비즈니스 로직이 함께 있음
             - 불필요한 데이터 생성 많음
             - 테스트 대상 범위 너무 넓어짐
@@ -23062,12 +23086,12 @@
             - Bean의 껍데기만 가져오고, 내부 구현 부분은 모두 개발자에게 위임
             - 해당 어노테이션으로 기존 선언된 Bean 객체를 덮어씀
             - Spring의 ApplicationContext는 Mock 객체를 주입
-            - 읽어보기: https://github.com/mockito/mockito/wiki/Mockito-features-in-Korean
+            - 읽어보기: <a href="https://github.com/mockito/mockito/wiki/Mockito-features-in-Korean">https://github.com/mockito/mockito/wiki/Mockito-features-in-Korean</a>
     - @AutoConfigureMockMvc
-        - <em>참고: https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/AutoConfigureMockMvc.html</em>
+        - <em>참고: <a href="https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/AutoConfigureMockMvc.html">https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/AutoConfigureMockMvc.html</a></em>
     - @SpringBootTest
-        - <em>참고 1: https://goddaehee.tistory.com/211</em>
-        - <em>참고 2: https://meetup.toast.com/posts/124</em>
+        - <em>참고 1: <a href="https://goddaehee.tistory.com/211">https://goddaehee.tistory.com/211</a></em>
+        - <em>참고 2: <a href="https://meetup.toast.com/posts/124">https://meetup.toast.com/posts/124</a></em>
         - 단위 테스트: (@WebMvcTest, @DataJpaTest, @RestClientTest, @JsonTest)
         - "spring-boot-starter-test" 제공
             - JUnit5
@@ -23088,7 +23112,7 @@
             - 다만, RANDOM_PORT나 DEFINED_PORT로 테스트를 설정하면 별도의 스레드에서 실행해서 rollback 안됨
                 - 옛날에 컨트롤러 DB 반영되었던 거!
     - 기타 테스트 방법
-        - <em>참고: https://meetup.toast.com/posts/124</em>
+        - <em>참고: <a href="https://meetup.toast.com/posts/124">https://meetup.toast.com/posts/124</a></em>
         - TestRestTemplate
             - RestTemplate의 테스트
             - 컨트롤러 테스트가 가능
@@ -23105,7 +23129,7 @@
                 - MockMvc에 관한 설정을 자동으로 수행
                 - @Controller, @ControllerAdvice, @JsonComponent, @Filter, WebMvcConfigurer, HandlerMethodArgumentResolver 등을 스캔
         - @JdbcTest &amp;&amp; 테스트용 DB
-            - <em>참고: https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/jdbc/JdbcTest.html</em>
+            - <em>참고: <a href="https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/jdbc/JdbcTest.html">https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/jdbc/JdbcTest.html</a></em>
             - 순수 JDBC 테스트 지원
             - in-memory embedded DB 설정되며, 테스트를 위한 jdbcTemplate이 생성된다 ?!
             - focuses "only" on JDBC-based components

@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://joelonsw.github.io/TIL/2026-03/2026-03-23/">
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../2026-03-24/">
       
       
         <link rel="next" href="../2026-03-18/">
@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -311,6 +307,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22928,12 +22952,16 @@
 
 <h3 id="2026-03-23">2026-03-23<a class="headerlink" href="#2026-03-23" title="Permanent link">&para;</a></h3>
 <h2 id="useeffect-uselayouteffect">useEffect, useLayoutEffect<a class="headerlink" href="#useeffect-uselayouteffect" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://f-lab.kr/insight/understanding-useeffect-and-uselayouteffect-in-react-20240618?gad_source=1</em><br />
-<em>참고: https://medium.com/@jnso5072/react-useeffect-%EC%99%80-uselayouteffect-%EC%9D%98-%EC%B0%A8%EC%9D%B4%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-e1a13adf1cd5</em><br />
-- <strong>개념</strong>
-  - Render: <code>DOM Tree</code>를 구성하기 위해 각 엘리먼트 스타일의 속성을 계산
-  - Paint: 실제 스크린에 Layout 표시하고 업데이트
-  - <img alt="" src="../../images/2026-03-23-ue-ule.png" /></p>
+<p><em>참고: <a href="https://f-lab.kr/insight/understanding-useeffect-and-uselayouteffect-in-react-20240618?gad_source=1">https://f-lab.kr/insight/understanding-useeffect-and-uselayouteffect-in-react-20240618?gad_source=1</a></em><br />
+<em>참고: <a href="https://medium.com/@jnso5072/react-useeffect-%EC%99%80-uselayouteffect-%EC%9D%98-%EC%B0%A8%EC%9D%B4%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-e1a13adf1cd5">https://medium.com/@jnso5072/react-useeffect-%EC%99%80-uselayouteffect-%EC%9D%98-%EC%B0%A8%EC%9D%B4%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-e1a13adf1cd5</a></em>  </p>
+<ul>
+<li><strong>개념</strong><ul>
+<li>Render: <code>DOM Tree</code>를 구성하기 위해 각 엘리먼트 스타일의 속성을 계산</li>
+<li>Paint: 실제 스크린에 Layout 표시하고 업데이트</li>
+<li><img alt="" src="../../images/2026-03-23-ue-ule.png" /></li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>useEffect</strong><ul>
 <li>Render와 Paint된 후에 실행</li>
@@ -22957,7 +22985,7 @@
 </li>
 </ul>
 <h2 id="react-rendering">React Rendering<a class="headerlink" href="#react-rendering" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://ko.react.dev/learn/render-and-commit</em><br />
+<p><em>참고: <a href="https://ko.react.dev/learn/render-and-commit">https://ko.react.dev/learn/render-and-commit</a></em><br />
 1. 렌더링 트리거
    - 컴포넌트의 초기 렌더링인 경우 / 컴포넌트의 state가 업데이트 된 경우 =&gt; 컴포넌트 렌더링이 일어남
      - 초기 렌더링)

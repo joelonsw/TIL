@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22910,13 +22934,13 @@
 <h2 id="sql">SQL 미션하면서 궁금증<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Duration vs Fetch?</strong>
-    - <em>참고: https://stackoverflow.com/questions/9425134/mysql-duration-and-fetch-time</em>
+    - <em>참고: <a href="https://stackoverflow.com/questions/9425134/mysql-duration-and-fetch-time">https://stackoverflow.com/questions/9425134/mysql-duration-and-fetch-time</a></em>
     - Duration Time: 쿼리가 실행되는데 걸리는 시간. 쿼리 튜닝시 이걸 최소화 하려고 노력할 것
     - Fetch Time: 쿼리 실행과 아무런 관련이 없는, 네트워크 환경에 따라 달라지는 결과를 전송하는데 걸리는 시간. 이게 병목이면 아마 네트워크 문제</li>
 </ul>
 <ul>
 <li><strong>pk 인덱스 vs 그냥 인덱스</strong>
-    - <em>참고: https://goodgid.github.io/Index-vs-Primary-Key/</em>
+    - <em>참고: <a href="https://goodgid.github.io/Index-vs-Primary-Key/">https://goodgid.github.io/Index-vs-Primary-Key/</a></em>
     - PK
         - RDBMS에서는 PK가 자동으로 Index
         - 개념적인 값으로, 여러 Tuple 중 유일한 Tuple임을 보장
@@ -22950,18 +22974,18 @@
 <ul>
 <li><strong>foreign key면 index를 만드나?</strong>
     - MySQL 8.0 기준, FK 생성시 인덱스 생성 O
-        - 참고: https://dev.mysql.com/doc/refman/8.0/en/constraint-foreign-key.html</li>
+        - 참고: <a href="https://dev.mysql.com/doc/refman/8.0/en/constraint-foreign-key.html">https://dev.mysql.com/doc/refman/8.0/en/constraint-foreign-key.html</a></li>
 </ul>
 <ul>
 <li><strong>unique를 설정하면 얻는 이점?</strong>
     - 값이 중복되지 않아, 조회 성능에서 한번에 조회할 수 있음 (인덱스 생성)
-    - 참고: https://stackoverflow.com/questions/9764120/does-a-unique-constraint-automatically-create-an-index-on-the-fields
+    - 참고: <a href="https://stackoverflow.com/questions/9764120/does-a-unique-constraint-automatically-create-an-index-on-the-fields">https://stackoverflow.com/questions/9764120/does-a-unique-constraint-automatically-create-an-index-on-the-fields</a>
     - unique key = special case of index
         - acting like a regular index with added checking for uniqueness    </li>
 </ul>
 <ul>
 <li><strong>커버링 인덱스?</strong>
-    - 참고: https://jojoldu.tistory.com/476
+    - 참고: <a href="https://jojoldu.tistory.com/476">https://jojoldu.tistory.com/476</a>
     - 쿼리를 충족시키는데 모든 데이터를 가지고 있는 인덱스
         - MySQL의 경우, 인덱스에 포함된 데이터를 사용할 수 있으므로, 실제 데이터까지 접근할 필요 X</li>
 </ul>

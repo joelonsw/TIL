@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22908,23 +22932,33 @@
 
 <h3 id="2022-10-27">2022-10-27<a class="headerlink" href="#2022-10-27" title="Permanent link">&para;</a></h3>
 <h2 id="connectable">Connectable 수료까지<a class="headerlink" href="#connectable" title="Permanent link">&para;</a></h2>
-<p>[인프라 모니터링]
-- CPU, Memory, Network, Disk 등 인프라 전반에 대한 모니터링
-- 개인적으로는 https://monitor.connectable.fans 로 들어갈 수 있으면 좋을 듯
-- <strong>Cloudwatch</strong>
-  - *참고: https://labs.brandi.co.kr/2019/05/30/kwakjs.html8
-  - 개요
-    - AWS 리소스 실시간 모니터링
-    - 임계값 넘어가면 경보 및 대처 ex) 인스턴스 중지, auto scaling 등
-    - Events, Logs, Metrics, Alarms
-  - 장점
-    - 편함. 세팅도 쉬웠던걸로 기억. 지금도 모니터링 갖춰져있긴 할 거임(개선만 하면 됨). 알람도 잘 보내주고
-  - 단점
-    - AWS 락인됨. 우테코에서 쓸때는 매번 로그인해야해서 귀찮아서 잘 안보게 된 듯</p>
+<p>[인프라 모니터링]</p>
+<ul>
+<li>CPU, Memory, Network, Disk 등 인프라 전반에 대한 모니터링</li>
+<li>개인적으로는 <a href="https://monitor.connectable.fans">https://monitor.connectable.fans</a> 로 들어갈 수 있으면 좋을 듯</li>
+<li><strong>Cloudwatch</strong><ul>
+<li>*참고: <a href="https://labs.brandi.co.kr/2019/05/30/kwakjs.html8">https://labs.brandi.co.kr/2019/05/30/kwakjs.html8</a></li>
+<li>개요<ul>
+<li>AWS 리소스 실시간 모니터링</li>
+<li>임계값 넘어가면 경보 및 대처 ex) 인스턴스 중지, auto scaling 등</li>
+<li>Events, Logs, Metrics, Alarms</li>
+</ul>
+</li>
+<li>장점<ul>
+<li>편함. 세팅도 쉬웠던걸로 기억. 지금도 모니터링 갖춰져있긴 할 거임(개선만 하면 됨). 알람도 잘 보내주고</li>
+</ul>
+</li>
+<li>단점<ul>
+<li>AWS 락인됨. 우테코에서 쓸때는 매번 로그인해야해서 귀찮아서 잘 안보게 된 듯</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>그라파나 &amp; 프로메테우스</strong><ul>
-<li><em>참고: https://essem-dev.medium.com/%ED%94%84%EB%A1%9C%EB%A9%94%ED%85%8C%EC%9A%B0%EC%8A%A4%EC%99%80-%EA%B7%B8%EB%9D%BC%ED%8C%8C%EB%82%98%EB%A1%9C-%EA%B0%9C%EB%B0%9C-%EC%84%9C%EB%B2%84-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%98%EA%B8%B0-8942aea724b3</em></li>
-<li><em>참고: https://benlee73.tistory.com/60</em></li>
+<li><em>참고: <a href="https://essem-dev.medium.com/%ED%94%84%EB%A1%9C%EB%A9%94%ED%85%8C%EC%9A%B0%EC%8A%A4%EC%99%80-%EA%B7%B8%EB%9D%BC%ED%8C%8C%EB%82%98%EB%A1%9C-%EA%B0%9C%EB%B0%9C-%EC%84%9C%EB%B2%84-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%98%EA%B8%B0-8942aea724b3">https://essem-dev.medium.com/%ED%94%84%EB%A1%9C%EB%A9%94%ED%85%8C%EC%9A%B0%EC%8A%A4%EC%99%80-%EA%B7%B8%EB%9D%BC%ED%8C%8C%EB%82%98%EB%A1%9C-%EA%B0%9C%EB%B0%9C-%EC%84%9C%EB%B2%84-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%98%EA%B8%B0-8942aea724b3</a></em></li>
+<li><em>참고: <a href="https://benlee73.tistory.com/60">https://benlee73.tistory.com/60</a></em></li>
 <li>개요<ul>
 <li>개발 서버에는 <strong>익스포터</strong> 설치해 지표 노출시킴</li>
 <li><strong>프로메테우스</strong>에서 해당 지표를 모아서 저장함</li>
@@ -22945,48 +22979,68 @@
 </ul>
 </li>
 </ul>
-<p>[JVM 모니터링]
-- GC 모니터링 및 어플리케이션 쓰레드 등 리소스 검토
-- Thread Dump도 한 번 떠보자
-- <em>참고: https://d2.naver.com/helloworld/6043</em>
-- <em>참고: https://d2.naver.com/helloworld/37111</em>
-- <strong>VisualVM + VisualGC</strong>
-  - Oracle JDK가 제공하는 GUI 프로파일링/모니터링 툴
-  - <em>참고: https://developer111.tistory.com/35</em>
-  - 설치하고 포트열어서 소켓통신 가능해보임
-- <strong>JConsole</strong>
-  - <em>참고: https://deveric.tistory.com/84</em>
-- <strong>HPJMeter</strong></p>
-<p>[로깅 백업]
-- 현재 인스턴스 터지면 로그 다 날라감 =&gt; 백업해둘 필요가 있어보임
-- <strong>S3 백업</strong>
-  - 그냥 우리 EC2의 로깅 파일들을 Crontab 활용하여 Script 써서 매일 S3로 보내도 괜찮을 듯
-  - 장점: 편함
-  - 단점: 시각화 안됨
-- 그라파나 &amp; 프로메테우스에서 로깅 시각화도 지원하나?</p>
-<p>[인프라 구조 개선]
-- <strong>무중단 배포</strong>
-  - <em>참고: https://www.samsungsds.com/kr/insights/1256264_4627.html</em>
-  - Rolling
-    - 새 버전을 점진적으로 배포하기
-    - 라우팅 멈췄다가 바꾸고 다시 라우팅해주고
-    - 인스턴스마다 차례로 배포해서 롤백도 쉬움
-    - 인스턴스 배포할 때 쪽수 모자라지기 때문에 트래픽 고려해서 처리해야함
-    - 배포 진행되는 동안 구버전/신버전 공존하기에 호환성 문제 발생할수도
-  - Blue-Green
-    - 블루: 구버전, 그린: 신버전
-    - 구버전과 동일하게 신버전 인스턴스 구성 =&gt; 이후 모든 트래픽 전환
-    - 빠른 롤백 가능 but 시스템 자원 2배로 필요
-  - Canary
-    - 신버전 제공 범위를 늘려가면서 확장
-    - 신버전 배포 전에 실제 운영환경에서 미리 테스트함
-    - 특정 사용자만 선택해서 새로운 기능 쓰게할 수 있
-  - ECS 쓸거 아니면 젠킨스 + 코드레벨에서 관리/제어가 필요할 듯?</p>
+<p>[JVM 모니터링]</p>
+<ul>
+<li>GC 모니터링 및 어플리케이션 쓰레드 등 리소스 검토</li>
+<li>Thread Dump도 한 번 떠보자</li>
+<li><em>참고: <a href="https://d2.naver.com/helloworld/6043">https://d2.naver.com/helloworld/6043</a></em></li>
+<li><em>참고: <a href="https://d2.naver.com/helloworld/37111">https://d2.naver.com/helloworld/37111</a></em></li>
+<li><strong>VisualVM + VisualGC</strong><ul>
+<li>Oracle JDK가 제공하는 GUI 프로파일링/모니터링 툴</li>
+<li><em>참고: <a href="https://developer111.tistory.com/35">https://developer111.tistory.com/35</a></em></li>
+<li>설치하고 포트열어서 소켓통신 가능해보임</li>
+</ul>
+</li>
+<li><strong>JConsole</strong><ul>
+<li><em>참고: <a href="https://deveric.tistory.com/84">https://deveric.tistory.com/84</a></em></li>
+</ul>
+</li>
+<li><strong>HPJMeter</strong></li>
+</ul>
+<p>[로깅 백업]</p>
+<ul>
+<li>현재 인스턴스 터지면 로그 다 날라감 =&gt; 백업해둘 필요가 있어보임</li>
+<li><strong>S3 백업</strong><ul>
+<li>그냥 우리 EC2의 로깅 파일들을 Crontab 활용하여 Script 써서 매일 S3로 보내도 괜찮을 듯</li>
+<li>장점: 편함</li>
+<li>단점: 시각화 안됨</li>
+</ul>
+</li>
+<li>그라파나 &amp; 프로메테우스에서 로깅 시각화도 지원하나?</li>
+</ul>
+<p>[인프라 구조 개선]</p>
+<ul>
+<li><strong>무중단 배포</strong><ul>
+<li><em>참고: <a href="https://www.samsungsds.com/kr/insights/1256264_4627.html">https://www.samsungsds.com/kr/insights/1256264_4627.html</a></em></li>
+<li>Rolling<ul>
+<li>새 버전을 점진적으로 배포하기</li>
+<li>라우팅 멈췄다가 바꾸고 다시 라우팅해주고</li>
+<li>인스턴스마다 차례로 배포해서 롤백도 쉬움</li>
+<li>인스턴스 배포할 때 쪽수 모자라지기 때문에 트래픽 고려해서 처리해야함</li>
+<li>배포 진행되는 동안 구버전/신버전 공존하기에 호환성 문제 발생할수도</li>
+</ul>
+</li>
+<li>Blue-Green<ul>
+<li>블루: 구버전, 그린: 신버전</li>
+<li>구버전과 동일하게 신버전 인스턴스 구성 =&gt; 이후 모든 트래픽 전환</li>
+<li>빠른 롤백 가능 but 시스템 자원 2배로 필요</li>
+</ul>
+</li>
+<li>Canary<ul>
+<li>신버전 제공 범위를 늘려가면서 확장</li>
+<li>신버전 배포 전에 실제 운영환경에서 미리 테스트함</li>
+<li>특정 사용자만 선택해서 새로운 기능 쓰게할 수 있</li>
+</ul>
+</li>
+<li>ECS 쓸거 아니면 젠킨스 + 코드레벨에서 관리/제어가 필요할 듯?</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>DB Replication</strong><ul>
 <li>하면 좋을 듯!</li>
-<li>RDS 참고: https://developer88.tistory.com/317</li>
-<li>코드레벨 참고: https://parkadd.tistory.com/128<ul>
+<li>RDS 참고: <a href="https://developer88.tistory.com/317">https://developer88.tistory.com/317</a></li>
+<li>코드레벨 참고: <a href="https://parkadd.tistory.com/128">https://parkadd.tistory.com/128</a><ul>
 <li>코드레벨에서도 신경써줄것 많았던걸로 기억</li>
 <li>그래도 RoutingDatasource 등을 써보면 좋을 듯</li>
 </ul>
@@ -22994,16 +23048,26 @@
 </ul>
 </li>
 </ul>
-<p>[팀 문화]
-- <strong>회고하기</strong>
-  - 제품, 운영, 협업, 프로젝트 진행 관점에 대한 회고
-  - 잘한거, 못한거, 개선포인트에 대한 회고</p>
-<p>[블록체인]
-- 멀티체인 지원
-  - 로그인을 하면 알아서 체인별 지갑 만들어주고 private/public key 관리 방안 고안
-- Smart Contract 이전
-  - KIP17 컨트랙트 작성
-- 블록체인 노드 운영하며 통신하는 인프라 구축</p>
+<p>[팀 문화]</p>
+<ul>
+<li><strong>회고하기</strong><ul>
+<li>제품, 운영, 협업, 프로젝트 진행 관점에 대한 회고</li>
+<li>잘한거, 못한거, 개선포인트에 대한 회고</li>
+</ul>
+</li>
+</ul>
+<p>[블록체인]</p>
+<ul>
+<li>멀티체인 지원<ul>
+<li>로그인을 하면 알아서 체인별 지갑 만들어주고 private/public key 관리 방안 고안</li>
+</ul>
+</li>
+<li>Smart Contract 이전<ul>
+<li>KIP17 컨트랙트 작성</li>
+</ul>
+</li>
+<li>블록체인 노드 운영하며 통신하는 인프라 구축</li>
+</ul>
 
 
 

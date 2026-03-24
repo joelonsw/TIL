@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22952,12 +22976,18 @@
 
 <h3 id="2024-01-29">2024-01-29<a class="headerlink" href="#2024-01-29" title="Permanent link">&para;</a></h3>
 <h2 id="_1">파티셔닝 테이블<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://coding-factory.tistory.com/840</em>
-- <strong>개요</strong>
-  - 논리적으로는 하나의 테이블이지만, 물리적으로는 여러개의 파티션으로 나뉘어 데이터들이 각각에 세그먼트에 저장되는 테이블
-  - 파티션 테이블에는 <strong>Pruning</strong> 이라는 기능을 통해 특정 데이터 조회 시, 그 데이터가 속한 세그먼트만 빠르게 조회할 수 있음
-  - 논리적으로는 하나의 테이블이기에, 조회 쿼리문을 특별히 수정할 필요 X
-    - 그 와중에 데이터는 물리적으로 다른 세그먼트에 저장되어 관리 측면 굿</p>
+<p><em>참고: <a href="https://coding-factory.tistory.com/840">https://coding-factory.tistory.com/840</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>논리적으로는 하나의 테이블이지만, 물리적으로는 여러개의 파티션으로 나뉘어 데이터들이 각각에 세그먼트에 저장되는 테이블</li>
+<li>파티션 테이블에는 <strong>Pruning</strong> 이라는 기능을 통해 특정 데이터 조회 시, 그 데이터가 속한 세그먼트만 빠르게 조회할 수 있음</li>
+<li>논리적으로는 하나의 테이블이기에, 조회 쿼리문을 특별히 수정할 필요 X<ul>
+<li>그 와중에 데이터는 물리적으로 다른 세그먼트에 저장되어 관리 측면 굿</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>장점</strong><ul>
 <li>Select Query 퍼포먼스 향상 (Full Table Scan의 범위가 작아짐)</li>
@@ -23030,9 +23060,10 @@
 </li>
 </ul>
 <h2 id="scala-foldleft">Scala foldLeft (마음에 와닿게)<a class="headerlink" href="#scala-foldleft" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://knight76.tistory.com/entry/foldLeft%EC%99%80-foldRight-%EC%82%AC%EC%9A%A9%EB%B2%95-%EB%94%94%EB%B2%84%EA%B7%B8-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95</em>
-- <strong>개요</strong>
-  - 왼쪽 항부터 마지막 항까지 계산되는 것
+<p><em>참고: <a href="https://knight76.tistory.com/entry/foldLeft%EC%99%80-foldRight-%EC%82%AC%EC%9A%A9%EB%B2%95-%EB%94%94%EB%B2%84%EA%B7%B8-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">https://knight76.tistory.com/entry/foldLeft%EC%99%80-foldRight-%EC%82%AC%EC%9A%A9%EB%B2%95-%EB%94%94%EB%B2%84%EA%B7%B8-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>왼쪽 항부터 마지막 항까지 계산되는 것
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">println</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="n">foldLeft</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="c1">// 18</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -23048,7 +23079,10 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="cm">x: 9, y: 9</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="cm">18</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="cm">***/</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h2 id="scala-fold">Scala Fold<a class="headerlink" href="#scala-fold" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>개요</strong><ul>

@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22930,12 +22954,18 @@
 
 <h3 id="2025-04-29">2025-04-29<a class="headerlink" href="#2025-04-29" title="Permanent link">&para;</a></h3>
 <h2 id="es-refresh-policy">ES Refresh Policy<a class="headerlink" href="#es-refresh-policy" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://wave1994.tistory.com/187</em>
-- <strong>개요</strong>
-  - 색인, 업데이트, 삭제 등 데이터 변경 작업이 언제 검색 결과에 반영될지 제어하는 정책
-  - ES 기본: near real-time
-    - 데이터 색인되자마자 검색 X
-    - 내부적으로 일정 주기 (기본 1초)마다 refresh 작업을 통해서만 새 데이터가 검색에 노출</p>
+<p><em>참고: <a href="https://wave1994.tistory.com/187">https://wave1994.tistory.com/187</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>색인, 업데이트, 삭제 등 데이터 변경 작업이 언제 검색 결과에 반영될지 제어하는 정책</li>
+<li>ES 기본: near real-time<ul>
+<li>데이터 색인되자마자 검색 X</li>
+<li>내부적으로 일정 주기 (기본 1초)마다 refresh 작업을 통해서만 새 데이터가 검색에 노출</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Refresh 동작 원리</strong><ul>
 <li>변경된 문서를 메모리 버퍼, 트랜잭션 로그 (translog)에 저장</li>
@@ -22974,7 +23004,7 @@
 <h2 id="netstat-curl-netcat">netstat, curl, netcat<a class="headerlink" href="#netstat-curl-netcat" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>netstat (network status)</strong><br />
-<em>참고: https://semtul79.tistory.com/6</em>  <ul>
+<em>참고: <a href="https://semtul79.tistory.com/6">https://semtul79.tistory.com/6</a></em>  <ul>
 <li>네트워크 연결, 라우팅 테이블, 인터페이스 통계, 포트 상태 등 네트워크 관련 정보 출력</li>
 <li>현재 서버에서 열린 포트, 연결된 클라이언트, 서버 listen 중인 포트, 네트워크 상태 진단 등에 사용</li>
 <li>예시)
@@ -23009,7 +23039,7 @@
 </ul>
 <ul>
 <li><strong>netcat</strong><br />
-<em>참고: https://feccle.tistory.com/253</em>  <ul>
+<em>참고: <a href="https://feccle.tistory.com/253">https://feccle.tistory.com/253</a></em>  <ul>
 <li>TCP/UDP 사용해 네트워크 연결 읽고 쓰는데 사용</li>
 <li>네트워크 디버깅, 파일전송, 포트 스캐닝, 원격 제어 등 다양한 용도 사용 가능
   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kakao@joel-MacBook-Pro  ~  nc -zv 1.1.1.1 53

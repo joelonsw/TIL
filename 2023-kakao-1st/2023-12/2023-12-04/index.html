@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22930,11 +22954,15 @@
 
 <h3 id="2023-12-04">2023-12-04<a class="headerlink" href="#2023-12-04" title="Permanent link">&para;</a></h3>
 <h2 id="cors">CORS<a class="headerlink" href="#cors" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.youtube.com/watch?v=-2TgkKYmJt4</em>
-<em>참고: https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-CORS-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%F0%9F%91%8F#%F0%9F%A4%94_%EA%B7%B8%EB%9F%BC_%EC%A3%84%EB%8B%A4_%EC%B0%A8%EB%8B%A8%ED%95%98%EB%A9%B4_%EC%9D%B8%ED%84%B0%EB%84%B7%EC%9D%B4_%EB%90%98%EB%8A%94%EA%B0%80?</em>
-- <strong>개요</strong>
-  - 교차 출처 리소스 공유(CORS)는 <strong>추가 HTTP 헤더</strong>를 사용하여
-  - 한 출처에서 실행중인 웹 어플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 <strong>브라우저</strong>에 알려주는 체제</p>
+<p><em>참고: <a href="https://www.youtube.com/watch?v=-2TgkKYmJt4">https://www.youtube.com/watch?v=-2TgkKYmJt4</a></em>
+<em>참고: <a href="https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-CORS-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%F0%9F%91%8F#%F0%9F%A4%94_%EA%B7%B8%EB%9F%BC_%EC%A3%84%EB%8B%A4_%EC%B0%A8%EB%8B%A8%ED%95%98%EB%A9%B4_%EC%9D%B8%ED%84%B0%EB%84%B7%EC%9D%B4_%EB%90%98%EB%8A%94%EA%B0%80">https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-CORS-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%F0%9F%91%8F#%F0%9F%A4%94_%EA%B7%B8%EB%9F%BC_%EC%A3%84%EB%8B%A4_%EC%B0%A8%EB%8B%A8%ED%95%98%EB%A9%B4_%EC%9D%B8%ED%84%B0%EB%84%B7%EC%9D%B4_%EB%90%98%EB%8A%94%EA%B0%80</a>?</em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>교차 출처 리소스 공유(CORS)는 <strong>추가 HTTP 헤더</strong>를 사용하여</li>
+<li>한 출처에서 실행중인 웹 어플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 <strong>브라우저</strong>에 알려주는 체제</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>같은 출처란?</strong><ul>
 <li>Protocol, Host, Port 가 다 같아야함<ul>
@@ -23034,14 +23062,15 @@
 </li>
 </ul>
 <h2 id="play-framework-cors">Play Framework에서 CORS<a class="headerlink" href="#play-framework-cors" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.playframework.com/documentation/2.8.x/CorsFilter#Enabling-the-CORS-filter</em>
-<em>참고: https://www.playframework.com/documentation/2.8.x/resources/confs/filters-helpers/reference.conf</em>
-<em>참고: https://coderunch.wordpress.com/2016/05/09/first-blog-post/</em>
-<em>참고: https://discuss.lightbend.com/t/cors-and-preflight-calls/225/10</em>
-<em>참고: https://matthew.kr/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-play-framework-2-4-angularjs-%EA%B0%84%EC%97%90-cors-%ED%95%84%ED%84%B0-%ED%97%88%EC%9A%A9%ED%95%98%EA%B8%B0/</em>
-- <strong>공식문서</strong>
-  - Filter를 기반으로 CORSFilter를 활성화하려고 했는데... 아무리해도 안먹힘 (진짜 삽질 너무함)
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>play.filters.enabled += &quot;play.filters.cors.CORSFilter&quot;
+<p><em>참고: <a href="https://www.playframework.com/documentation/2.8.x/CorsFilter#Enabling-the-CORS-filter">https://www.playframework.com/documentation/2.8.x/CorsFilter#Enabling-the-CORS-filter</a></em>
+<em>참고: <a href="https://www.playframework.com/documentation/2.8.x/resources/confs/filters-helpers/reference.conf">https://www.playframework.com/documentation/2.8.x/resources/confs/filters-helpers/reference.conf</a></em>
+<em>참고: <a href="https://coderunch.wordpress.com/2016/05/09/first-blog-post/">https://coderunch.wordpress.com/2016/05/09/first-blog-post/</a></em>
+<em>참고: <a href="https://discuss.lightbend.com/t/cors-and-preflight-calls/225/10">https://discuss.lightbend.com/t/cors-and-preflight-calls/225/10</a></em>
+<em>참고: <a href="https://matthew.kr/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-play-framework-2-4-angularjs-%EA%B0%84%EC%97%90-cors-%ED%95%84%ED%84%B0-%ED%97%88%EC%9A%A9%ED%95%98%EA%B8%B0/">https://matthew.kr/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-play-framework-2-4-angularjs-%EA%B0%84%EC%97%90-cors-%ED%95%84%ED%84%B0-%ED%97%88%EC%9A%A9%ED%95%98%EA%B8%B0/</a></em></p>
+<ul>
+<li><strong>공식문서</strong><ul>
+<li>Filter를 기반으로 CORSFilter를 활성화하려고 했는데... 아무리해도 안먹힘 (진짜 삽질 너무함)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>play.filters.enabled += &quot;play.filters.cors.CORSFilter&quot;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>play.filters.cors {
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  pathPrefixes = [&quot;/some/path&quot;, ...]
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  allowedOrigins = [&quot;http://www.example.com&quot;, ...]
@@ -23049,11 +23078,15 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  allowedHttpHeaders = [&quot;Accept&quot;]
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  preflightMaxAge = 3 days
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>}
-</code></pre></div>
-- <strong>결국 CORS의 해결방법은 서버에서 http 헤더 적당한거 내려주는거야</strong>
-  - 그러면 Action에서 내려주자. 
-  - 스프링으로 따지면 Interceptor에서 Response 처리해주는 역할
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">invokeBlock</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">request</span><span class="p">:</span><span class="w"> </span><span class="nc">Request</span><span class="p">[</span><span class="nc">A</span><span class="p">],</span><span class="w"> </span><span class="n">block</span><span class="p">:</span><span class="w"> </span><span class="nc">Request</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Result</span><span class="p">]):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Result</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>결국 CORS의 해결방법은 서버에서 http 헤더 적당한거 내려주는거야</strong><ul>
+<li>그러면 Action에서 내려주자. </li>
+<li>스프링으로 따지면 Interceptor에서 Response 처리해주는 역할
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">invokeBlock</span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">request</span><span class="p">:</span><span class="w"> </span><span class="nc">Request</span><span class="p">[</span><span class="nc">A</span><span class="p">],</span><span class="w"> </span><span class="n">block</span><span class="p">:</span><span class="w"> </span><span class="nc">Request</span><span class="p">[</span><span class="nc">A</span><span class="p">]</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Result</span><span class="p">]):</span><span class="w"> </span><span class="nc">Future</span><span class="p">[</span><span class="nc">Result</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">block</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="n">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="n">withHeaders</span><span class="p">(</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">            </span><span class="nc">HeaderNames</span><span class="p">.</span><span class="nc">ACCESS_CONTROL_ALLOW_ORIGIN</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;Origin&quot;</span><span class="p">).</span><span class="n">getOrElse</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">),</span>
@@ -23063,7 +23096,10 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="p">)</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 
 
 

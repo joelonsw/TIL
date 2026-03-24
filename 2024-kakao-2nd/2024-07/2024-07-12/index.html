@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22908,19 +22932,27 @@
 
 <h3 id="2024-07-12">2024-07-12<a class="headerlink" href="#2024-07-12" title="Permanent link">&para;</a></h3>
 <h2 id="akka-dispatcher">Akka Dispatcher<a class="headerlink" href="#akka-dispatcher" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://blog.naver.com/kbh3983/221142958800</em>
-<em>참고: https://helloino.tistory.com/93</em>
-<em>참고: https://velog.io/@leesomyoung/Akka-Classic-Dispatchers</em>
-- <strong>디스패처란?</strong>
-  - 쓰레드풀에서 실행가능한 스레드를 가져다가 처리할 메시지와 함께 액터에게 전달해 액터가 동작하도록 하는 엔진
-  - 디스패처 설정을 통해 쓰레드 풀, 메일박스 관련 설정 가능
-  - 디스패처 종류도 쓰레드/메일박스 처리 방식에 따라 나뉨
-    1. Dispatcher
-    2. Pinned Dispatcher
-    3. Balancing Dispatcher
-  - 모든 Dispatcher는 ExecutionContext를 상속받음 (Future 실행 가능)
-  - 모든 ActorSystem은 디폴트 디스패쳐를 가지고, 특별한 지정 아니면 이걸 사용 (akka.actor.default-dispatcher.executor)
-    - executor가 선택되지 않았다면, "fork-join-executor"가 선택됨</p>
+<p><em>참고: <a href="https://blog.naver.com/kbh3983/221142958800">https://blog.naver.com/kbh3983/221142958800</a></em>
+<em>참고: <a href="https://helloino.tistory.com/93">https://helloino.tistory.com/93</a></em>
+<em>참고: <a href="https://velog.io/@leesomyoung/Akka-Classic-Dispatchers">https://velog.io/@leesomyoung/Akka-Classic-Dispatchers</a></em></p>
+<ul>
+<li><strong>디스패처란?</strong><ul>
+<li>쓰레드풀에서 실행가능한 스레드를 가져다가 처리할 메시지와 함께 액터에게 전달해 액터가 동작하도록 하는 엔진</li>
+<li>디스패처 설정을 통해 쓰레드 풀, 메일박스 관련 설정 가능</li>
+<li>디스패처 종류도 쓰레드/메일박스 처리 방식에 따라 나뉨<ol>
+<li>Dispatcher</li>
+<li>Pinned Dispatcher</li>
+<li>Balancing Dispatcher</li>
+</ol>
+</li>
+<li>모든 Dispatcher는 ExecutionContext를 상속받음 (Future 실행 가능)</li>
+<li>모든 ActorSystem은 디폴트 디스패쳐를 가지고, 특별한 지정 아니면 이걸 사용 (akka.actor.default-dispatcher.executor)<ul>
+<li>executor가 선택되지 않았다면, "fork-join-executor"가 선택됨</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>설정 방법</strong><ul>
 <li>클래스 패스 아래 application.conf 설정 파일 읽음</li>

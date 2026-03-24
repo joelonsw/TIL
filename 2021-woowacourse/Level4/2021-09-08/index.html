@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22990,8 +23014,8 @@
     - 서블릿 컨테이너는 각 서블릿 객체를 하나씩만 만듦
         - 서블릿 객체는 thread-safe 보장해야함
     - 서블릿 컨테이너는 쓰레드 풀을 사용해 쓰레드 만들어두고 재사용
-    - <em>참고 1: https://tomcat.apache.org/tomcat-8.5-doc/config/executor.html</em>
-    - <em>참고 2: https://tomcat.apache.org/tomcat-8.5-doc/config/http.html</em>
+    - <em>참고 1: <a href="https://tomcat.apache.org/tomcat-8.5-doc/config/executor.html">https://tomcat.apache.org/tomcat-8.5-doc/config/executor.html</a></em>
+    - <em>참고 2: <a href="https://tomcat.apache.org/tomcat-8.5-doc/config/http.html">https://tomcat.apache.org/tomcat-8.5-doc/config/http.html</a></em>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;Connector</span><span class="w"> </span><span class="na">port=</span><span class="s">&quot;8080&quot;</span><span class="w"> </span><span class="na">protocol=</span><span class="s">&quot;HTTP/1.1&quot;</span><span class="w"> </span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">           </span><span class="na">connectionTimeout=</span><span class="s">&quot;10000&quot;</span><span class="w"> </span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">           </span><span class="na">redirectPort=</span><span class="s">&quot;8443&quot;</span><span class="w">  </span>
@@ -23020,9 +23044,9 @@
 <h2 id="_2">도커 디비를 디비로 이전하기<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>디비는 도커에 띄우면 안 좋지?</strong>
-    - <em>참고 1: https://this-programmer.tistory.com/entry/%EA%B3%BC%EC%97%B0-%EB%8F%84%EC%BB%A4Docker-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EB%A5%BC-%ED%86%B5%ED%95%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EC%9A%B4%EC%98%81%ED%95%98%EB%8A%94-%EA%B2%8C-%EC%A2%8B%EC%9D%80-%EB%B0%A9%EB%B2%95%EC%9D%BC%EA%B9%8C</em>
-    - <em>참고 2: https://patrobinson.github.io/2016/11/07/thou-shalt-not-run-a-database-inside-a-container/</em>
-    - <em>참고 3: https://vsupalov.com/database-in-docker/</em>
+    - <em>참고 1: <a href="https://this-programmer.tistory.com/entry/%EA%B3%BC%EC%97%B0-%EB%8F%84%EC%BB%A4Docker-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EB%A5%BC-%ED%86%B5%ED%95%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EC%9A%B4%EC%98%81%ED%95%98%EB%8A%94-%EA%B2%8C-%EC%A2%8B%EC%9D%80-%EB%B0%A9%EB%B2%95%EC%9D%BC%EA%B9%8C">https://this-programmer.tistory.com/entry/%EA%B3%BC%EC%97%B0-%EB%8F%84%EC%BB%A4Docker-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EB%A5%BC-%ED%86%B5%ED%95%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EC%9A%B4%EC%98%81%ED%95%98%EB%8A%94-%EA%B2%8C-%EC%A2%8B%EC%9D%80-%EB%B0%A9%EB%B2%95%EC%9D%BC%EA%B9%8C</a></em>
+    - <em>참고 2: <a href="https://patrobinson.github.io/2016/11/07/thou-shalt-not-run-a-database-inside-a-container/">https://patrobinson.github.io/2016/11/07/thou-shalt-not-run-a-database-inside-a-container/</a></em>
+    - <em>참고 3: <a href="https://vsupalov.com/database-in-docker/">https://vsupalov.com/database-in-docker/</a></em>
     - Docker 볼륨 관리는 불안정한 요소가 있어 디비 활용이 힘듦
         - 볼륨 관리가 잘 안되었을 경우 문제 큼!
         - 굳이 도커라는 중간 관리가 필요한가? 
@@ -23034,7 +23058,7 @@
 </ul>
 <ul>
 <li><strong>어떻게 옮기지?</strong>
-    - <em>참고: https://mariadb.com/kb/en/mysqldump/</em>
+    - <em>참고: <a href="https://mariadb.com/kb/en/mysqldump/">https://mariadb.com/kb/en/mysqldump/</a></em>
     - <strong>mysqldump</strong>
         - It can be used to dump a database or a collection of databases for backup or transfer to another database server (not necessarily MariaDB or MySQL). 
         - The dump typically contains SQL statements to create the table, populate it, or both. 
@@ -23053,7 +23077,7 @@
 </ul>
 <h2 id="apt-advanced-packaging-tool">apt (Advanced Packaging Tool)<a class="headerlink" href="#apt-advanced-packaging-tool" title="Permanent link">&para;</a></h2>
 <ul>
-<li><em>참고: https://coding-groot.tistory.com/90</em></li>
+<li><em>참고: <a href="https://coding-groot.tistory.com/90">https://coding-groot.tistory.com/90</a></em></li>
 <li>우분투 포함 데비안 계열의 리눅스에서 쓰이는 패키지 관리 명령어 도구</li>
 <li>apt vs apt-get
     - apt-get은 더 많은 옵션을 제공!

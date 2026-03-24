@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22908,19 +22932,27 @@
 
 <h3 id="2025-03-14">2025-03-14<a class="headerlink" href="#2025-03-14" title="Permanent link">&para;</a></h3>
 <h2 id="kamon">Kamon<a class="headerlink" href="#kamon" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://kamon.io/</em><br />
-<em>참고: https://kamon.io/docs/latest/core/</em><br />
-<em>참고: https://kamon.io/docs/latest/reporters/</em><br />
-<em>참고: https://kamon.io/docs/latest/reporters/influxdb/</em><br />
-<em>참고: https://jennifersoft.com/ko/blog/tech/what-is-application-performance-monitoring/</em><br />
-- <strong>APM</strong>
-  - APM (Application Performance Monitoring)
-    - 어플리케이션 성능 모니터링, 장애 감지 -&gt; 대응의 시스템 관리 체계
-  - 응답 시간에 영향을 주는 액션들을 추적하게 도와줌
-    - HTTP 요청 ~ DB 까지 프로파일링을 통해 뭐가 병목인지
-    - backend가 느려지면 노티 받기
-    - 한곳에서 메트릭 영향 주는 것 관리하기
-    - public endpoint/internal operation 한눈에 모니터링</p>
+<p><em>참고: <a href="https://kamon.io/">https://kamon.io/</a></em><br />
+<em>참고: <a href="https://kamon.io/docs/latest/core/">https://kamon.io/docs/latest/core/</a></em><br />
+<em>참고: <a href="https://kamon.io/docs/latest/reporters/">https://kamon.io/docs/latest/reporters/</a></em><br />
+<em>참고: <a href="https://kamon.io/docs/latest/reporters/influxdb/">https://kamon.io/docs/latest/reporters/influxdb/</a></em><br />
+<em>참고: <a href="https://jennifersoft.com/ko/blog/tech/what-is-application-performance-monitoring/">https://jennifersoft.com/ko/blog/tech/what-is-application-performance-monitoring/</a></em>  </p>
+<ul>
+<li><strong>APM</strong><ul>
+<li>APM (Application Performance Monitoring)<ul>
+<li>어플리케이션 성능 모니터링, 장애 감지 -&gt; 대응의 시스템 관리 체계</li>
+</ul>
+</li>
+<li>응답 시간에 영향을 주는 액션들을 추적하게 도와줌<ul>
+<li>HTTP 요청 ~ DB 까지 프로파일링을 통해 뭐가 병목인지</li>
+<li>backend가 느려지면 노티 받기</li>
+<li>한곳에서 메트릭 영향 주는 것 관리하기</li>
+<li>public endpoint/internal operation 한눈에 모니터링</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>개요</strong><ul>
 <li>JVM 위의 모니터링 툴킷</li>
@@ -22988,7 +23020,7 @@
 </ul>
 <ul>
 <li><strong>Play에 Kamon 설치</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/play-framework/</em><ul>
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/play-framework/">https://kamon.io/docs/latest/instrumentation/play-framework/</a></em><ul>
 <li><code>kamon-play-2.5</code></li>
 <li>Context Propagation &amp; Distributed tracing</li>
 <li>Client/Server HTTP Request Span은 자동으로 생성/전파, HTTP metric (<code>span.processing-time</code>)도 생성</li>
@@ -22997,7 +23029,7 @@
 </ul>
 <ul>
 <li><strong>Kamon-Akka</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/akka/</em><ul>
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/akka/">https://kamon.io/docs/latest/instrumentation/akka/</a></em><ul>
 <li><code>kamon-akka-2.4</code></li>
 <li>메트릭 수집: 액터 시스템, 액터, 라우터, 디스패터, 액터그룹, 리모팅/클러스터 컴포넌트</li>
 <li>메시지 트레이싱: span을 만들어 선택된 시스템 내 액터에서 process</li>
@@ -23008,7 +23040,7 @@
 </ul>
 <ul>
 <li><strong>Kamon-Scala-Future</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/futures/</em><ul>
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/futures/">https://kamon.io/docs/latest/instrumentation/futures/</a></em><ul>
 <li><code>kamon-scala-future</code></li>
 <li>같은 Context를 Future 생성/map/flatMap 등에 적용되도 사용하도록</li>
 <li>body of future가 <code>ExecutionContext</code> 내에서 돌아갈때, Kamon이 Context 캡쳐해서 이를 내부에서 사용할 수 있음. </li>
@@ -23033,7 +23065,7 @@
 </ul>
 <ul>
 <li><strong>Kamon-executors</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/executors/</em><ul>
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/executors/">https://kamon.io/docs/latest/instrumentation/executors/</a></em><ul>
 <li><code>kamon-executors</code></li>
 <li>ExecutorService (ThreadPoolExecutor/ForkJoinPool) 에서 발생한 메트릭 수집</li>
 <li>Option: Tracking time in queue</li>
@@ -23049,7 +23081,7 @@
 </ul>
 <ul>
 <li><strong>Kamon-logback</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/logback/</em><ul>
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/logback/">https://kamon.io/docs/latest/instrumentation/logback/</a></em><ul>
 <li><code>kamon-logback</code></li>
 <li>AsyncAppender 사용함에도 Context 보존</li>
 <li>4개의 컨버터를 활용해 Context Information 도와줌<ol>
@@ -23064,7 +23096,7 @@
 </ul>
 <ul>
 <li><strong>Kamon-elasticsearch</strong><br />
-<em>참고: https://kamon.io/docs/latest/instrumentation/elasticsearch/</em><ul>
+<em>참고: <a href="https://kamon.io/docs/latest/instrumentation/elasticsearch/">https://kamon.io/docs/latest/instrumentation/elasticsearch/</a></em><ul>
 <li>자동으로 span 생성해 Java Rest Client 보조</li>
 </ul>
 </li>

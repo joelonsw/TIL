@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -23040,13 +23064,19 @@
 
 <h3 id="2023-12-15">2023-12-15<a class="headerlink" href="#2023-12-15" title="Permanent link">&para;</a></h3>
 <h2 id="js-cjs-amd-umd-esm">JS 모듈 시스템 - CJS, AMD, UMD, ESM<a class="headerlink" href="#js-cjs-amd-umd-esm" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://beomy.github.io/tech/javascript/cjs-amd-umd-esm/</em>
-<em>참고: https://betterprogramming.pub/what-are-cjs-amd-umd-esm-system-and-iife-3633a112db62</em>
-- <strong>개요</strong>
-  - 현대 JS 프로젝트는 번들러를 통해서 작은 조각의 코드를 하나의 뭉텅이로 뭉쳐서 내보내야 함 (라이브러리/어플리케이션 구축)
-    - webpack, Rollup, Parcel, RequireJS, Browserify
-  - JS 모듈을 가져오거나 내보내는 방법이 없었음 =&gt; 하나의 파일에 모든 기능들이 들어가야 함
-  - CJS,AMD,UMD,ESM이 등장 후에 모듈로 개발/배포할 수 있게 됨</p>
+<p><em>참고: <a href="https://beomy.github.io/tech/javascript/cjs-amd-umd-esm/">https://beomy.github.io/tech/javascript/cjs-amd-umd-esm/</a></em>
+<em>참고: <a href="https://betterprogramming.pub/what-are-cjs-amd-umd-esm-system-and-iife-3633a112db62">https://betterprogramming.pub/what-are-cjs-amd-umd-esm-system-and-iife-3633a112db62</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>현대 JS 프로젝트는 번들러를 통해서 작은 조각의 코드를 하나의 뭉텅이로 뭉쳐서 내보내야 함 (라이브러리/어플리케이션 구축)<ul>
+<li>webpack, Rollup, Parcel, RequireJS, Browserify</li>
+</ul>
+</li>
+<li>JS 모듈을 가져오거나 내보내는 방법이 없었음 =&gt; 하나의 파일에 모든 기능들이 들어가야 함</li>
+<li>CJS,AMD,UMD,ESM이 등장 후에 모듈로 개발/배포할 수 있게 됨</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>번들러</strong> <ul>
 <li>하나의 파일로 뭉텅이 지어서 사용하는것은 간단한 경우에는 괜찮은데...<ul>
@@ -23199,10 +23229,14 @@
 </li>
 </ul>
 <h2 id="iife-immediately-invoked-function-expression">IIFE (Immediately Invoked Function Expression)<a class="headerlink" href="#iife-immediately-invoked-function-expression" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://developer.mozilla.org/ko/docs/Glossary/IIFE</em>
-<em>참고: https://mine-it-record.tistory.com/339</em>
-- <strong>개요</strong>
-  - 정의되자마자 즉시 실행되는 JS Function</p>
+<p><em>참고: <a href="https://developer.mozilla.org/ko/docs/Glossary/IIFE">https://developer.mozilla.org/ko/docs/Glossary/IIFE</a></em>
+<em>참고: <a href="https://mine-it-record.tistory.com/339">https://mine-it-record.tistory.com/339</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>정의되자마자 즉시 실행되는 JS Function</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>형식</strong><ul>
 <li>크게 두 부분으로 나뉨<ol>
@@ -23245,12 +23279,16 @@
 </li>
 </ul>
 <h2 id="js">JS 코드 축소<a class="headerlink" href="#js" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://www.cloudflare.com/ko-kr/learning/performance/why-minify-javascript-code</em>
-- <strong>최소화?</strong>
-  - JS에서 기능을 변경하지 않고 불필요한 문자를 모두 제거하는 프로세스
-  - 공백/주석/세미콜론 제거/더 짧은 함수-변수 이름 사용
-  - 코드 재사용, 캐시 적용, CDN 사용
-  - 코드의 압축</p>
+<p><em>참고: <a href="https://www.cloudflare.com/ko-kr/learning/performance/why-minify-javascript-code">https://www.cloudflare.com/ko-kr/learning/performance/why-minify-javascript-code</a></em></p>
+<ul>
+<li><strong>최소화?</strong><ul>
+<li>JS에서 기능을 변경하지 않고 불필요한 문자를 모두 제거하는 프로세스</li>
+<li>공백/주석/세미콜론 제거/더 짧은 함수-변수 이름 사용</li>
+<li>코드 재사용, 캐시 적용, CDN 사용</li>
+<li>코드의 압축</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>압축(minify)</strong><ul>
 <li>전체 소스코드 중 아래의 경우를 제거하는 작업<ul>
@@ -23281,13 +23319,17 @@
 </li>
 </ul>
 <h2 id="iot-index-organized-table-">IOT (Index Organized Table) - 인덱스 일체형 테이블<a class="headerlink" href="#iot-index-organized-table-" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://blog.naver.com/geartec82/220954857049</em>
-<em>참고: http://gurubee.net/lecture/2601</em>
-<img alt="" src="../../images/2023-12-15-iot.jpeg" />
-- <strong>일반 테이블</strong>
-  - 키값 -&gt; 인덱스 -&gt; ROW_ID -&gt; ROW_ID로 테이블 데이터 읽기
-  - 키 칼럼이 인덱스와 테이블 양쪽에 중복해서 저장되기에, 키 값이 큰 경우에는 중복된 인덱스 크기가 할당됨.
-  - 테이블 구조 기본하에 인덱스가 참조하는 방식</p>
+<p><em>참고: <a href="https://blog.naver.com/geartec82/220954857049">https://blog.naver.com/geartec82/220954857049</a></em>
+<em>참고: <a href="http://gurubee.net/lecture/2601">http://gurubee.net/lecture/2601</a></em>
+<img alt="" src="../../images/2023-12-15-iot.jpeg" /></p>
+<ul>
+<li><strong>일반 테이블</strong><ul>
+<li>키값 -&gt; 인덱스 -&gt; ROW_ID -&gt; ROW_ID로 테이블 데이터 읽기</li>
+<li>키 칼럼이 인덱스와 테이블 양쪽에 중복해서 저장되기에, 키 값이 큰 경우에는 중복된 인덱스 크기가 할당됨.</li>
+<li>테이블 구조 기본하에 인덱스가 참조하는 방식</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>IOT</strong><ul>
 <li>인덱스 구조 하에 테이블 데이터 저장 구조를 가진 것</li>
@@ -23391,11 +23433,17 @@
 </li>
 </ul>
 <h2 id="promise-resolvereject-awaitasync">Promise resolve/reject &amp; await/async<a class="headerlink" href="#promise-resolvereject-awaitasync" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://springfall.cc/article/2022-11/easy-promise-async-await</em>
-- <strong>개요</strong>
-  - JS에서는 함수를 전달할 수 있음
-  - function a에 인자로 function b를 전달하더라도, b는 바로 실행되지 않음. b 함수는 a에서 언젠간~ 실행이 될것이다 하고 넘김
-    - 이걸 <code>콜백 함수</code>라고 지칭</p>
+<p><em>참고: <a href="https://springfall.cc/article/2022-11/easy-promise-async-await">https://springfall.cc/article/2022-11/easy-promise-async-await</a></em></p>
+<ul>
+<li><strong>개요</strong><ul>
+<li>JS에서는 함수를 전달할 수 있음</li>
+<li>function a에 인자로 function b를 전달하더라도, b는 바로 실행되지 않음. b 함수는 a에서 언젠간~ 실행이 될것이다 하고 넘김<ul>
+<li>이걸 <code>콜백 함수</code>라고 지칭</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>비동기</strong><ol>
 <li>흐름을 예측하기 어려움</li>
@@ -23590,8 +23638,8 @@ function setTimeoutPromise(delay) {
 </li>
 </ul>
 <h2 id="js_1">JS가 싱글쓰레드임에도 비동기로 처리할 수 있는 이유<a class="headerlink" href="#js_1" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://chanyeong.com/blog/post/44</em>
-<em>참고: https://stitchcoding.tistory.com/44</em>
+<p><em>참고: <a href="https://chanyeong.com/blog/post/44">https://chanyeong.com/blog/post/44</a></em>
+<em>참고: <a href="https://stitchcoding.tistory.com/44">https://stitchcoding.tistory.com/44</a></em>
 <img alt="" src="../../images/2023-12-15-js-single-thread.png" /></p>
 
 

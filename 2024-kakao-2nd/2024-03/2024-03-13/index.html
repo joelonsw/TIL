@@ -45,13 +45,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -69,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -127,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -137,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -309,6 +305,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2026-03/2026-03-24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 03 24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -22930,11 +22954,15 @@
 
 <h3 id="2024-03-13">2024-03-13<a class="headerlink" href="#2024-03-13" title="Permanent link">&para;</a></h3>
 <h2 id="mysql-durationfetch-time">MySQL Duration/Fetch Time<a class="headerlink" href="#mysql-durationfetch-time" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://enterone.tistory.com/216</em>
-<em>참고: https://stackoverflow.com/questions/9425134/mysql-duration-and-fetch-time</em>
-- <strong>Duration Time</strong>
-  - 쿼리를 실행하는 시간
-  - SQL 쿼리 성능 최적화 타겟 대상</p>
+<p><em>참고: <a href="https://enterone.tistory.com/216">https://enterone.tistory.com/216</a></em>
+<em>참고: <a href="https://stackoverflow.com/questions/9425134/mysql-duration-and-fetch-time">https://stackoverflow.com/questions/9425134/mysql-duration-and-fetch-time</a></em></p>
+<ul>
+<li><strong>Duration Time</strong><ul>
+<li>쿼리를 실행하는 시간</li>
+<li>SQL 쿼리 성능 최적화 타겟 대상</li>
+</ul>
+</li>
+</ul>
 <ul>
 <li><strong>Fetch Time</strong><ul>
 <li>페치 된 결과를 전송하는데 걸리는 시간</li>
@@ -22945,17 +22973,27 @@
 </li>
 </ul>
 <h2 id="mysql-ngram-boolean-mode">MySQL ngram boolean mode<a class="headerlink" href="#mysql-ngram-boolean-mode" title="Permanent link">&para;</a></h2>
-<p><em>참고: https://blog.naver.com/PostView.nhn?blogId=jjdo1994&amp;logNo=222348191751</em>
-- <strong>IN BOOLEAN MODE</strong>
-  1. Full text index 만들기 : MySQL은 토크나이징을 통해 텍스트를 단어로 잘게 자르고, 인덱스와 해당 단어를 저장
-  2. Tokenization : 토큰 만들 때, 불용어는 제한다
-  3. N-grams : CJK 언어의 경우, 단어를 연속된 문자 시퀀스로 분할하는 N-gram 토큰화 사용
-  4. 인덱스 저장 : 풀 텍스트 인덱스를 별도로 마련한 InnoDB 공간에 저장
-  5. 검색 : 전체 텍스트 검색시, 해당 인덱스를 통해 행 검색
-  6. Boolean Full-Text 검색 : 검색 구문의 단어를 Boolean으로 취급
-     - 엔진은 논치규칙을 통해 AND, NOT, OR 등의 연산 사용가능
-     - * 등을 통해 와일드카드 일치도 가능
-  7. 랭킹 : 검색 순위는 매겨지지 않음. 주어진 부울 쿼리 일치하는 모든 레코드 반환</p>
+<p><em>참고: <a href="https://blog.naver.com/PostView.nhn?blogId=jjdo1994&amp;logNo=222348191751">https://blog.naver.com/PostView.nhn?blogId=jjdo1994&amp;logNo=222348191751</a></em></p>
+<ul>
+<li><strong>IN BOOLEAN MODE</strong><ol>
+<li>Full text index 만들기 : MySQL은 토크나이징을 통해 텍스트를 단어로 잘게 자르고, 인덱스와 해당 단어를 저장</li>
+<li>Tokenization : 토큰 만들 때, 불용어는 제한다</li>
+<li>N-grams : CJK 언어의 경우, 단어를 연속된 문자 시퀀스로 분할하는 N-gram 토큰화 사용</li>
+<li>인덱스 저장 : 풀 텍스트 인덱스를 별도로 마련한 InnoDB 공간에 저장</li>
+<li>검색 : 전체 텍스트 검색시, 해당 인덱스를 통해 행 검색</li>
+<li>Boolean Full-Text 검색 : 검색 구문의 단어를 Boolean으로 취급<ul>
+<li>엔진은 논치규칙을 통해 AND, NOT, OR 등의 연산 사용가능</li>
+<li>
+<ul>
+<li>등을 통해 와일드카드 일치도 가능</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>랭킹 : 검색 순위는 매겨지지 않음. 주어진 부울 쿼리 일치하는 모든 레코드 반환</li>
+</ol>
+</li>
+</ul>
 
 
 
