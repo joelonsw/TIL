@@ -8,16 +8,17 @@ site_dir: site
 theme:
   name: material
   language: ko
+  font: false
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: white
+      accent: blue
       toggle:
         icon: material/brightness-7
         name: 다크 모드로 전환
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: black
+      accent: blue
       toggle:
         icon: material/brightness-4
         name: 라이트 모드로 전환
@@ -29,6 +30,13 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
+  custom_dir: overrides
+
+extra_css:
+  - stylesheets/custom.css
+
+hooks:
+  - hooks/fix_markdown.py
 
 plugins:
   - search:
@@ -45,6 +53,7 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.superfences
   - pymdownx.inlinehilite
+  - pymdownx.magiclink
   - toc:
       permalink: true
   - sane_lists
