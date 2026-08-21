@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://joelonsw.github.io/TIL/2026-08/2026-08-19/">
+        <link rel="canonical" href="https://joelonsw.github.io/TIL/2026-08/2026-08-21/">
       
       
         <link rel="prev" href="../2026-08-04/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>2026 08 19 - Joel's TIL</title>
+        <title>2026 08 21 - Joel's TIL</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2026-08-19" class="md-skip">
+        <a href="#2026-08-21" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2026 08 19
+              2026 08 21
             
           </span>
         </div>
@@ -357,7 +357,7 @@
   <span class="md-ellipsis">
     
   
-    2026 08 19
+    2026 08 21
   
 
     
@@ -375,7 +375,7 @@
   <span class="md-ellipsis">
     
   
-    2026 08 19
+    2026 08 21
   
 
     
@@ -399,10 +399,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#2026-08-19" class="md-nav__link">
+  <a href="#2026-08-21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2026-08-19
+        2026-08-21
       
     </span>
   </a>
@@ -421,10 +421,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#graph-rag" class="md-nav__link">
+  <a href="#retrieval-evaluation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Graph RAG
+        Retrieval Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retrieval의 종류
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reranker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reranker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context Engineering
       
     </span>
   </a>
@@ -23211,10 +23244,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#2026-08-19" class="md-nav__link">
+  <a href="#2026-08-21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2026-08-19
+        2026-08-21
       
     </span>
   </a>
@@ -23233,10 +23266,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#graph-rag" class="md-nav__link">
+  <a href="#retrieval-evaluation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Graph RAG
+        Retrieval Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retrieval의 종류
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reranker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reranker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context Engineering
       
     </span>
   </a>
@@ -23260,12 +23326,233 @@
 
 
 
-  <h1>2026 08 19</h1>
+  <h1>2026 08 21</h1>
 
-<h3 id="2026-08-19">2026-08-19<a class="headerlink" href="#2026-08-19" title="Permanent link">&para;</a></h3>
+<h3 id="2026-08-21">2026-08-21<a class="headerlink" href="#2026-08-21" title="Permanent link">&para;</a></h3>
 <h2 id="vectordb">왜 VectorDB지?<a class="headerlink" href="#vectordb" title="Permanent link">&para;</a></h2>
-<p>sortKey/shardKey comment &lt;- 싱글스토어</p>
-<h2 id="graph-rag">Graph RAG<a class="headerlink" href="#graph-rag" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Vector: 순서가 있는 숫자의 나열<ul>
+<li>임베딩 모델이 정확히 이 출력</li>
+<li>이 점들 사이의 각도를 cosine similarity로 측정</li>
+</ul>
+</li>
+<li>VectorDB는 저장하고 인덱싱하는 자료형의 이름에서 따옴. <ul>
+<li>벡터라는 타입을 1급 시민으로 다루고, 벡터간 유사도 검색에 최적화된 DB</li>
+<li>Relational DB 가 오히려 자료 사이의 관계에서 출발한 이름</li>
+<li>DocumentDB, GraphDB 생각해보면, 자료형 기반의 DB 이름도 많음</li>
+</ul>
+</li>
+</ul>
+<h2 id="retrieval-evaluation">Retrieval Evaluation<a class="headerlink" href="#retrieval-evaluation" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>필요한 이유</strong><ul>
+<li>RAG을 올바르게 설계하고 평가했는가? -&gt; 필요한 자료를 올바르게 추출했을까?</li>
+<li>Golden Dataset -&gt; Retrieval 단계 수치화</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>RAG에서 Retrieval 품질 따로 평가하는 법</strong><ul>
+<li><code>[질문] -&gt; [Retrieval: 관련 문서 검색] -&gt; [Generation: LLM 답변 생성] -&gt; [답변]</code></li>
+<li>Retrieval 만 평가하기<ol>
+<li>상한선 문제: Retrieval이 정답 문서를 못가져 오면, Generation이 아무리 좋아도 정답 못만듦</li>
+<li>디버깅 분리: 문서를 못찾은건지, LLM이 잘못 해석한건지 확인해야 해<ul>
+<li>Retrieval 문제: embedding/chunking/reranking</li>
+<li>Generation 문제: 프롬프트나 모델</li>
+</ul>
+</li>
+<li>비용과 속도: Retrieval 평가는 LLM 호출 필요 없음. 비용 low</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Golden DataSet</strong><ul>
+<li>(질문, 이 질문에 답하기 이해 반드시 검색되어야 하는 문서 집합)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>*정답 문서 평가</strong><ul>
+<li><code>Recall@K</code> = (Top-K 안에 있는 정답 갯수) / (전체 정답 갯수)<ul>
+<li>LLM에게 필요한 재료를 다 줬는가?</li>
+</ul>
+</li>
+<li><code>Precision@K</code>= (Top-K 안에 있는 정답 갯수) / K<ul>
+<li>context에 쓰레기가 얼마나 섞였는가?</li>
+</ul>
+</li>
+<li><code>MRR(Mean Reciprocal Rank)</code>: 첫 정답이 얼마나 앞에 있는가<ul>
+<li><code>질문 하나의 RR = 1 / (첫 정답의 순위)</code> -&gt; <code>MRR = 전체 질문의 RR 평균</code></li>
+</ul>
+</li>
+<li><code>NDCG(Normalized Discounted Cumulative Gain)</code><ul>
+<li>모든 정답의 순위를 반영</li>
+<li>정답의 등급 지원</li>
+<li>순위 페널티 로그 스케일</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="retrieval">Retrieval의 종류<a class="headerlink" href="#retrieval" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Dense Retrieval</strong><ul>
+<li>질문과 문서를 각각 고정길이 실수 벡터로 변환. </li>
+<li>벡터 공간에서의 거리(유사도)로 관련성 판단하는 검색 방식</li>
+<li>장점)<ul>
+<li>표현에 다양한 개념적 질문이 있다면 이를 매칭 (일상어 &lt;-&gt; 전문어)</li>
+</ul>
+</li>
+<li>단점)<ul>
+<li>Exact match에 약점</li>
+<li>부정/미세 의미 차이 해석</li>
+<li>모델 교체시 재인덱싱 발생</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>BM25</strong><ul>
+<li>질문의 단어들이 문서에 얼마나 의미 있게 등장하는지<ul>
+<li>score(query, document) -&gt; 점수</li>
+<li>질문을 단어로 쪼개고, 각 단어가 문서에서 얼마나 중요하게 등장하는지 점수내서 합산</li>
+<li>문서 전체의 의미 이해하려는 시도 X, 순수 단어 통계 -&gt; 자주 나오는 단어 + 희귀한 단어 기반으로 추출</li>
+</ul>
+</li>
+<li>장점)<ul>
+<li>Exact Match 실패 해결</li>
+<li>도메인 용어 문자열 일치로 찾기</li>
+</ul>
+</li>
+<li>단점)<ul>
+<li>형태소 분석이 필수... 조사를 분리하지 않으면 오염됨 (ex. 배송비를, 배송비는, 배송비가...)<ul>
+<li>ES Nori 등으로 한번 정제해야한다고 함</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong>Hybrid Search</strong></p>
+<ul>
+<li>Qdrant에서 Dense/BM25 동시에 쓸 수 있음 (서로의 약점 보완)</li>
+<li>둘의 점수 체계가 달라서, 각각 알고리즘으로 회수한 문서를 어떻게 합해서 top-k를 뽑는지 정해야함</li>
+<li>RRF (Reciprocal Rank Fusion) - 순위 기반 융합<ul>
+<li>점수를 버리고 순위만 씀: 두 시스템 모두의 상위권이 유리해짐</li>
+<li><code>RRF_score(d) = Σ  1 / (c + rank_i(d))</code><ul>
+<li>c는 관례적으로 60. 경험적으로 양쪽 합의를 중시하되 단독 1등도 살아남는 구조</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>아키텍쳐)
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                Query
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                  ↓
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      ┌───────────┴───────────┐
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      │                       │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Dense Retrieval             BM25 Search
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>(Vector DB, ANN)         (Inverted Index)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Top-N (예: 50)            Top-N (예: 50)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      │                       │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      └───────────┬───────────┘
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                  ↓
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            Fusion (RRF)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>          두 랭킹 → 하나의 랭킹
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                  ↓
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>          후보 Top-M (예: 20)
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                  ↓
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>              Reranker            ← 다음 시간 주제
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>      (cross-encoder가 query-chunk
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>       쌍을 직접 읽고 재채점)
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                  ↓
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            최종 Top-K (예: 5)
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                  ↓
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>             LLM Context
+</code></pre></div></li>
+</ul>
+<ul>
+<li>
+<p>실습</p>
+<ol>
+<li>
+<p>컬렉션 스키마 새롭게 정의
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>client.create_collection(
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    collection_name="new_collection",
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    vectors_config={"dense": VectorParams(size=3072, distance=Distance.COSINE)},
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    sparse_vectors_config={"bm25": SparseVectorParams(modifier=Modifier.IDF)},
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>)
+</code></pre></div></p>
+</li>
+<li>
+<p>적재 - 포인트마다 dense + sparse 둘다
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PointStruct(
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    id=...,
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    vector={
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        "dense": embedding,                                # 기존 그대로
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>           # SparseVector는 라틴어 기준이라, 한국어 조사/어미에 맥락 사라질수도. 형태소 분석기 필요할 수 있음
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        "bm25": SparseVector(indices=[...], values=[...]), # 토큰 해시 → TF
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    },
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    payload=...,
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>)
+</code></pre></div></p>
+</li>
+<li>
+<p>검색 - 서버사이드에서 RRF, FusionQuery
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>client.query_points(
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    collection_name=...,
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    prefetch=[
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        Prefetch(query=dense_embedding, using="dense", limit=20),
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        Prefetch(query=sparse_query, using="bm25", limit=20),
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    ],
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    query=FusionQuery(fusion=Fusion.RRF),
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    limit=5,
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>)
+</code></pre></div></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="reranker">Reranker<a class="headerlink" href="#reranker" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>개요</strong><ul>
+<li>많이 가져와서, 다시 정밀하게 재채점 -&gt; 앞에 몇개만 남긴다</li>
+<li>Retriever가 준 후보 군 중에서 순위를 재채점</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>방식</strong><ul>
+<li><strong>Cross-Encoder</strong><ul>
+<li>BERT급의 작은 전용 모델. 쿼리-문서 한쌍으로 넣어 관련도 점수 추출</li>
+<li>cross-encoder는 쿼리와 문서를 함께 보기 때문에 정확.</li>
+<li>다만 느려서 앞의 Retrieval에서 뽑은 친구들 대상으로만</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="context-engineering">Context Engineering<a class="headerlink" href="#context-engineering" title="Permanent link">&para;</a></h2>
+<ul>
+<li>컨텍스트 엔지니어링은 RAG에만 한정되지 않고, LLM에게 어떤 정보를 어떤 형태와 순서로 제공할지 전체 입력 컨텍스트를 설계하는 것 <ul>
+<li>Retrieval, Reranking뿐 아니라 선택, 변환, 압축, 메타데이터, 순서, 토큰 예산 관리 등을 포함</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>기본적인 RAG: 질문 → Retrieval → LLM</li>
+<li>컨텍스트 엔지니어링: 질문 → Retrieval → Reranking → 선택 → 변환 → 압축 → 메타데이터/순서 조정 → Token Budget → Context → LLM<ul>
+<li>LLM에게 들어가는 최종 컨텍스트를 적극적으로 설계하는 구조가 된다.</li>
+</ul>
+</li>
+</ul>
 
 
 
