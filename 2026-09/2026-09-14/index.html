@@ -23385,6 +23385,50 @@
 
 <h3 id="2026-09-14">2026-09-14<a class="headerlink" href="#2026-09-14" title="Permanent link">&para;</a></h3>
 <h2 id="qdrant-point">qdrant point<a class="headerlink" href="#qdrant-point" title="Permanent link">&para;</a></h2>
+<p><em>참고: <a href="https://qdrant.tech/documentation/manage-data/storage/">https://qdrant.tech/documentation/manage-data/storage/</a></em>
+<em>참고: <a href="https://qdrant.tech/articles/immutable-data-structures/">https://qdrant.tech/articles/immutable-data-structures/</a></em></p>
+<p><strong>문제</strong></p>
+<ul>
+<li>Qdrant point에 key-value 하나 넣는건데 왜 이렇게 오래걸리지?</li>
+</ul>
+<p><strong>용어 정리</strong></p>
+<ul>
+<li>컬렉션: 저장하는 테이블 같은거</li>
+<li>샤드: 컬렉션의 포인트를 수평적으로 분산</li>
+<li>세그먼트: 하나의 컬렉션 안에 있는 데이터는 세그먼트로 나눈다 (그 자체로 완결된 작은 벡터 DB)<ul>
+<li>vector, payload, index, id mapper, relationship, internal/external id</li>
+<li>벡터 저장소, 페이로드 저장소, HNSW 인덱스, payload 인덱스, 외부id-내부번호매칭표 가짐<ul>
+<li>HNSW(Hierarchical Navigable Small World): 고차원 벡터 데이터에서 근사 최근접 이웃 빠르게 찾기 위한 알고리즘</li>
+<li>이건 한건씩 고치기 어려워서, 세그먼트 단위로 통째로 다시 빌드</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>사유</strong></p>
+<ul>
+<li>Qdrant에는 세그먼트라는 개념이 있다. 스토리지나 인덱스 사용하는 것에 따라, <code>appendable</code> / <code>non-appendable</code> 이 있다<ul>
+<li><code>appendable</code>: 더하고, 삭제하는게 자유로움</li>
+<li><code>non-appendable</code>: 읽고, 삭제만 가능</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>따라서, <code>non-appendable</code>에 갱신 요청이 오면 복사해서 옮기고, 예전 point는 삭제 표시<ul>
+<li>내부적으로 qdrant는 이 경우에, copy-on-write 오퍼레이션을 한다. </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>내부적으로 불변 구조를 차용함으로써 Qdrant는 메모리 usage를 낮추고, 캐싱, prefetching, prediction 같은것을 최적화함</li>
+</ul>
+<p><strong>링크 구조</strong></p>
+<ul>
+<li>ID tracker)<ul>
+<li>Qdrant에서는 외부 pointId와 세그먼트 내부 offset 매핑하는 테이블을 따로 둠</li>
+</ul>
+</li>
+</ul>
 
 
 
