@@ -338,6 +338,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#function-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function Calling
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -23389,6 +23400,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#function-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function Calling
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -23455,6 +23477,40 @@
 </ul>
 <ul>
 <li>marketplace add -&gt; plugin install</li>
+</ul>
+<h2 id="function-calling">Function Calling<a class="headerlink" href="#function-calling" title="Permanent link">&para;</a></h2>
+<p><strong>표준 Function Calling</strong></p>
+<ol>
+<li>요청: <code>messages + tools=[{type:"function", function:{name, description, parameters(JSON Schema), strict: true}}]</code>
+    - tool_choice = "auto"</li>
+<li>응답: assistant 메시지에 tool_calls=[{id, name, arguments}]</li>
+<li>앱이 함수를 실행</li>
+<li>요청: 이전 <code>messages + assistant(tool_calls) + {role:"tool", tool_call_id, content: 결과}</code></li>
+<li>응답: 최종 답변 또는 tool_calls 또 요청 -&gt; 필요할 때까지 반복
+- 특징)<ul>
+<li>도구 정의가 tools 파라미터로 들어감</li>
+<li>부를지말지를 모델이 정함 (<code>tool_choice=auto</code>)</li>
+<li>인자는 함수별 JSON Schema로 정의. (strict를 켜면 필수값/타입/enum 강제)</li>
+<li>결과는 <code>role:"tool"</code> + <code>tool_call_id</code> 이력에 이어붙임</li>
+<li>결과보고 추가 조회 필요하면 루프 다시돔</li>
+</ul>
+</li>
+</ol>
+<p><strong>API를 호출하도록 Function Calling</strong></p>
+<ul>
+<li>함수 목록, 설명, 인자 설명은 <code>required_tools</code>의 description 문자열 하나에 이어 붙여 전달
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{ "answerable": bool, "refusal_reason": ..., "core_answer": ..., "final_answer": ...,
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  "required_tools": [ { "name": enum[함수명들],
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>                        "arguments": [ {"key": enum[모든 함수 인자 key의 합집합], "value": string} ] } ] }
+</code></pre></div>
+<code>1차: 답변 전략 × LLM 호출
+     → 답변 + answerable + required_tools 가 한 JSON 으로 동시에 나옴
+   ↓
+코드 게이트: answerable=false 및 required_tools 확인
+   ↓
+코드레벨에서 HTTP 호출 (DB의 url/method/paramLocation 으로 조립)
+   ↓
+2차: 대화를 잇지 않고 System + Human(["조회 결과"] 블록 + 1차 검색 문서 + 질문) 으로 새로 호출</code></li>
 </ul>
 
 
